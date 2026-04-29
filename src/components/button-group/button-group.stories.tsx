@@ -240,6 +240,7 @@ export const Vertical: Story = {
   name: 'Orientation / Vertical',
   args: {
     orientation: 'vertical',
+    size: 'iconMedium',
   },
   render: (args) => (
     <ButtonGroup {...args}>

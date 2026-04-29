@@ -15,7 +15,7 @@ export const ScrollArea = ({
     <BaseScrollArea.Root
       className={cn(
         className,
-        `overflow-hidden rounded-3xl bg-surface-low`,
+        `overflow-hidden rounded-xl bg-surface-low`,
         orientation === 'horizontal' && 'h-full',
       )}
       ref={ref}
@@ -26,7 +26,7 @@ export const ScrollArea = ({
     >
       <BaseScrollArea.Viewport
         className={cn(
-          'flex h-full gap-xs overscroll-contain rounded-3xl bg-surface-low py-xs pr-md inset-shadow-2xs before:pointer-events-none before:absolute before:top-0 before:left-0 before:block before:h-[min(40px,var(--scroll-area-overflow-y-start))] before:w-full before:bg-linear-to-b before:from-shadow before:to-transparent before:transition-[height] before:duration-100 before:ease-out before:content-[""] before:[--scroll-area-overflow-y-start:inherit] after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:block after:h-[min(40px,var(--scroll-area-overflow-y-end,40px))] after:w-full after:bg-linear-to-t after:from-shadow after:to-transparent after:transition-[height] after:duration-100 after:ease-out after:content-[""] after:[--scroll-area-overflow-y-end:inherit]',
+          'flex h-full gap-xs overscroll-contain rounded-xl bg-surface-low py-xs pr-md inset-shadow-2xs before:pointer-events-none before:absolute before:top-0 before:left-0 before:block before:h-[min(40px,var(--scroll-area-overflow-y-start))] before:w-full before:bg-linear-to-b before:from-shadow before:to-transparent before:transition-[height] before:duration-100 before:ease-out before:content-[""] before:[--scroll-area-overflow-y-start:inherit] after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:block after:h-[min(40px,var(--scroll-area-overflow-y-end,40px))] after:w-full after:bg-linear-to-t after:from-shadow after:to-transparent after:transition-[height] after:duration-100 after:ease-out after:content-[""] after:[--scroll-area-overflow-y-end:inherit]',
           orientation === 'horizontal' && 'flex-row pb-md pl-sm',
           orientation === 'vertical' && 'flex-col pl-sm',
         )}

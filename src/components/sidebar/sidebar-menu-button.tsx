@@ -16,7 +16,7 @@ export const SidebarMenuButton = ({
   return (
     <button
       className={cn(
-        'inline-flex cursor-pointer items-center gap-2xs rounded-xl border border-transparent style-text-default-0 whitespace-nowrap transition-all duration-200 ease-out select-none active:scale-95 disabled:pointer-events-none disabled:opacity-50 [&>svg]:shrink-0',
+        'inline-flex cursor-pointer items-center gap-2xs rounded-full border border-transparent style-text-default-0 whitespace-nowrap transition-all duration-200 ease-out select-none active:scale-95 disabled:pointer-events-none disabled:opacity-50 [&>svg]:shrink-0',
         isActive
           ? 'pointer-events-none bg-surface text-on-surface shadow-2xs'
           : 'text-neutral-default hover:bg-neutral-container hover:text-neutral-on-container',

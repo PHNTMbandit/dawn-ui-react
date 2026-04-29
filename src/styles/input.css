@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap');
 @import url('https://utopia.fyi/type/calculator?c=360,12,1.2,1240,16,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12');
 @import 'tailwindcss';
 @import 'tw-animate-css';
@@ -508,8 +507,8 @@
   --dawn-shadow: light-dark(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.25));
   --dawn-shadow-strong: light-dark(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
 
-  --dawn-font-heading: 'Montserrat', sans-serif;
-  --dawn-font-body: 'Noto Sans JP', sans-serif;
+  --dawn-font-heading: 'Manrope', sans-serif;
+  --dawn-font-body: 'Inter', sans-serif;
 
   --dawn-text-xs: clamp(0.5208rem, 0.4721rem + 0.2167vw, 0.64rem);
   --dawn-text-sm: clamp(0.625rem, 0.5534rem + 0.3182vw, 0.8rem);

@@ -87,7 +87,7 @@ export const NumberField = ({ label, size, className, ref, ...props }: NumberFie
               tone="error"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0 rounded-r-none'}
+              className={'shrink-0'}
             >
               <MinusIcon weight="bold" />
             </Button>
@@ -101,7 +101,7 @@ export const NumberField = ({ label, size, className, ref, ...props }: NumberFie
               tone="success"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0 rounded-l-none'}
+              className={'shrink-0'}
             >
               <PlusIcon weight="bold" />
             </Button>

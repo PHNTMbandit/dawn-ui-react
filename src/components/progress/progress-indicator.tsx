@@ -17,6 +17,7 @@ export const ProgressIndicator = ({
           'flex size-md shrink-0 flex-col items-center justify-center rounded-full border border-neutral-border bg-neutral-container text-center style-text-default--2 text-accent-default transition-colors ease-in-out [&>svg]:size-xs',
           className,
         )}
+        data-slot="progress-indicator"
         ref={ref}
         {...props}
       >

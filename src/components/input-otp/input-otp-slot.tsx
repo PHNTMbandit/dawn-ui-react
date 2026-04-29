@@ -6,7 +6,7 @@ export const InputOTPSlot = ({ isActive, ...props }: InputOTPSlotProps) => {
   return (
     <div
       className={cn(
-        'group relative flex h-lg w-md items-center justify-center rounded-md bg-surface style-text-default-0 outline outline-transparent transition-colors hover:outline-border-strong',
+        'group relative flex h-lg w-md items-center justify-center rounded-md bg-surface style-text-default-0 shadow-2xs outline outline-transparent transition-colors hover:outline-border-strong',
         isActive && 'outline-brand-border-strong',
       )}
       {...props}

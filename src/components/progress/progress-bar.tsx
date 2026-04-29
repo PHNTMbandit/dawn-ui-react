@@ -10,6 +10,7 @@ export const ProgressBar = ({ className, children, ref, ...props }: ProgressBarP
           'h-3xs w-full grow rounded-full bg-accent-default/20 transition-colors ease-in-out',
           className,
         )}
+        data-slot="progress-bar"
         ref={ref}
         {...props}
       >
