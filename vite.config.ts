@@ -26,7 +26,7 @@ export default defineConfig({
     lib: {
       entry: resolve(import.meta.dirname, 'src/index.ts'),
       name: 'dawnUIReact',
-      fileName: 'dawn-ui',
+      fileName: 'dawn-ui-react',
     },
     rollupOptions: {
       external: (id) => {

@@ -1,10 +1,10 @@
 {
-  "name": "dawn-ui",
+  "name": "dawn-ui-react",
   "version": "1.0.0-alpha",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PHNTMbandit/dawn-ui.git"
+    "url": "https://github.com/PHNTMbandit/dawn-ui-react.git"
   },
   "files": [
     "dist"
@@ -14,13 +14,13 @@
     "**/*.css",
     "./dist/styles.css"
   ],
-  "main": "./dist/dawn-ui.umd.cjs",
+  "main": "./dist/dawn-ui-react.umd.cjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/dawn-ui.js",
-      "require": "./dist/dawn-ui.umd.cjs"
+      "import": "./dist/dawn-ui-react.js",
+      "require": "./dist/dawn-ui-react.umd.cjs"
     },
     "./styles.css": "./dist/styles.css"
   },
