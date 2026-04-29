@@ -1,0 +1,40 @@
+name: Test before merge and release
+
+on:
+  pull_request:
+    branches:
+      - main
+      - alpha
+      - beta
+      - rc
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint code
+        run: pnpm run lint
+
+      - name: Format code
+        run: pnpm run fmt
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install
+
+      - name: Run tests
+        run: pnpm test

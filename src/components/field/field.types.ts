@@ -1,0 +1,24 @@
+import type { Checkbox } from '../checkbox'
+import type { Input } from '../input'
+import type { InputGroup, InputGroupInput } from '../input-group'
+import type { RadioGroup } from '../radio-group'
+import type { Select } from '../select'
+import type { Slider } from '../slider'
+import type { Switch } from '../switch'
+import type { TextArea } from '../text-area'
+import type { Toggle } from '../toggle'
+
+export type FieldDescriptionProps = React.ComponentProps<'p'>
+export type FieldErrorProps = React.ComponentProps<'ul'>
+export type FieldInputGroupProps = React.ComponentProps<typeof InputGroup>
+export type FieldInputGroupInputProps = React.ComponentProps<typeof InputGroupInput>
+export type FieldInputProps = React.ComponentProps<typeof Input>
+export type FieldLabelProps = React.ComponentProps<'div'>
+export type FieldSelectProps = React.ComponentProps<typeof Select>
+export type FieldSliderProps = React.ComponentProps<typeof Slider>
+export type FieldTextAreaProps = React.ComponentProps<typeof TextArea>
+export type FieldCheckboxProps = React.ComponentProps<typeof Checkbox>
+export type FieldRadioGroupProps = React.ComponentProps<typeof RadioGroup>
+export type FieldSwitchProps = React.ComponentProps<typeof Switch>
+export type FieldToggleProps = React.ComponentProps<typeof Toggle>
+export type FieldProps = React.ComponentProps<'div'>

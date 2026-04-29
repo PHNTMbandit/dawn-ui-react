@@ -1,0 +1,92 @@
+name: Publish to NPM
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+      - alpha
+      - beta
+      - rc
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint code
+        run: pnpm run lint
+
+      - name: Format code
+        run: pnpm run fmt
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Build project
+        run: pnpm build
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    if: |
+      github.ref_name == 'main' ||
+      github.ref_name == 'alpha' ||
+      github.ref_name == 'beta' ||
+      github.ref_name == 'rc'
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref_name }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install
+
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
+
+      - name: Release
+        run: pnpm exec semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
