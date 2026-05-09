@@ -3,7 +3,13 @@ import { cn } from '@/utils/cn'
 
 import type { LayerTreeRowProps } from './layer-tree.types'
 
-export const LayerTreeRow = ({ row, className, children, ref, ...props }: LayerTreeRowProps) => {
+export const LayerTreeRow = <TData,>({
+  row,
+  className,
+  children,
+  ref,
+  ...props
+}: LayerTreeRowProps<TData>) => {
   return (
     <div
       className={cn('flex items-center justify-between gap-3xs', className)}

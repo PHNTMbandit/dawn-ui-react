@@ -1,19 +1,16 @@
+import { OTPFieldPreview as OTPField } from '@base-ui/react/otp-field'
 import { cn } from '@/utils/cn'
 
 import type { InputOTPSlotProps } from './input-otp.types'
 
-export const InputOTPSlot = ({ isActive, ...props }: InputOTPSlotProps) => {
+export const InputOTPSlot = ({ className, ...props }: InputOTPSlotProps) => {
   return (
-    <div
+    <OTPField.Input
       className={cn(
-        'group relative flex h-lg w-md items-center justify-center rounded-md bg-surface style-text-default-0 shadow-2xs outline outline-transparent transition-colors hover:outline-border-strong',
-        isActive && 'outline-brand-border-strong',
+        'relative h-lg w-md rounded-md bg-surface text-center style-text-default-0 shadow-2xs outline outline-transparent transition-colors hover:outline-border-strong focus:outline-brand-border-strong',
+        className,
       )}
       {...props}
-    >
-      <div className="transition-colors group-has-[input[data-input-otp-placeholder-shown]]:text-on-surface-variant group-has-[input[data-input-otp-placeholder-shown]]:opacity-70">
-        {props.char ?? props.placeholderChar}
-      </div>
-    </div>
+    />
   )
 }
