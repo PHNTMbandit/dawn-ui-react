@@ -19,7 +19,9 @@ export const ContextMenuRadioItem = ({
       ref={ref}
       {...props}
     >
-      <span className="col-start-1 min-w-3xl">{children}</span>
+      <span className="col-start-1 flex min-w-3xl items-center gap-2xs [&>svg]:size-sm">
+        {children}
+      </span>
       <BaseContextMenu.RadioItemIndicator className="col-start-2 flex items-center justify-center place-self-end self-center">
         <CheckIcon className="size-sm" weight="bold" />
       </BaseContextMenu.RadioItemIndicator>

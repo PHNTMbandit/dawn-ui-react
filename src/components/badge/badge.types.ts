@@ -7,6 +7,14 @@ export const badgeVariants = cva(
   'inline-flex h-md items-center justify-center gap-3xs rounded-full px-xs style-text-default--2 font-bold whitespace-nowrap transition-all select-none [&>svg]:size-xs',
   {
     variants: {
+      size: {
+        small: 'h-sm [&>svg]:size-2xs',
+        medium: 'h-md [&>svg]:size-xs',
+        large: 'h-lg [&>svg]:size-sm',
+        iconSmall: 'size-sm [&>svg]:size-2xs',
+        iconMedium: 'size-md [&>svg]:size-xs',
+        iconLarge: 'size-lg [&>svg]:size-sm',
+      },
       tone: {
         brand: '',
         accent: '',
@@ -23,6 +31,7 @@ export const badgeVariants = cva(
       },
     },
     defaultVariants: {
+      size: 'medium',
       tone: 'brand',
       variant: 'fill',
     },

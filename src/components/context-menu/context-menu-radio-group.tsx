@@ -10,7 +10,7 @@ export const ContextMenuRadioGroup = ({
   ...props
 }: ContextMenuRadioGroupProps) => {
   return (
-    <BaseContextMenu.RadioGroup className={cn('', className)} ref={ref} {...props}>
+    <BaseContextMenu.RadioGroup className={cn('mx-3xs', className)} ref={ref} {...props}>
       {children}
     </BaseContextMenu.RadioGroup>
   )

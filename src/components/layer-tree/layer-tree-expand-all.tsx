@@ -18,7 +18,7 @@ export const LayerTreeExpandAll = ({ className, ref, ...props }: LayerTreeExpand
 
   return (
     <Button
-      size={'iconSmall'}
+      size={'iconMedium'}
       tone="neutral"
       variant={'ghost'}
       onClick={handleClick}
@@ -26,11 +26,7 @@ export const LayerTreeExpandAll = ({ className, ref, ...props }: LayerTreeExpand
       ref={ref}
       {...props}
     >
-      {table.getIsSomeRowsExpanded() ? (
-        <FolderSimpleIcon weight="bold" />
-      ) : (
-        <FolderOpenIcon weight="bold" />
-      )}
+      {table.getIsSomeRowsExpanded() ? <FolderSimpleIcon /> : <FolderOpenIcon />}
     </Button>
   )
 }

@@ -15,7 +15,7 @@ export const AlertDialogPopup = ({
       <BaseAlertDialog.Portal>
         <BaseAlertDialog.Backdrop
           className={
-            'fixed inset-[0px] min-h-dvh bg-scrim transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute'
+            'fixed inset-[0px] min-h-dvh bg-scrim/30 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute'
           }
         />
         <BaseAlertDialog.Popup
