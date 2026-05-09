@@ -1,3 +1,11 @@
+# [1.0.0-alpha.3](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2026-05-09)
+
+
+### Features
+
+* add badge size variants ([96468b7](https://github.com/PHNTMbandit/dawn-ui-react/commit/96468b7bfc4a6aa5e079001535de8dcd29a979de))
+* add drawer component ([85c8522](https://github.com/PHNTMbandit/dawn-ui-react/commit/85c852272aa8d1bf30b1ff0262f93e7be8982417))
+
 # [1.0.0-alpha.2](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2026-04-29)
 
 ### Bug Fixes
