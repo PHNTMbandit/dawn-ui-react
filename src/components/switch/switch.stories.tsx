@@ -149,7 +149,7 @@ export const CompositionFeatureFlags: Story = {
         <div className="space-y-md">
           <div className="flex items-center justify-between border-b border-surface-3 pb-md">
             <div>
-              <p className="style-text-default-0 font-semibold">New Dashboard</p>
+              <p className="style-text-default-0">New Dashboard</p>
               <p className="style-text-prose--1 text-on-surface-variant">
                 Try the redesigned dashboard
               </p>
@@ -158,7 +158,7 @@ export const CompositionFeatureFlags: Story = {
           </div>
           <div className="flex items-center justify-between border-b border-surface-3 pb-md">
             <div>
-              <p className="style-text-default-0 font-semibold">Advanced Analytics</p>
+              <p className="style-text-default-0">Advanced Analytics</p>
               <p className="style-text-prose--1 text-on-surface-variant">
                 Access detailed insights
               </p>
@@ -167,7 +167,7 @@ export const CompositionFeatureFlags: Story = {
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <p className="style-text-default-0 font-semibold">Experimental Mode</p>
+              <p className="style-text-default-0">Experimental Mode</p>
               <p className="style-text-prose--1 text-on-surface-variant">
                 Enable cutting-edge features
               </p>

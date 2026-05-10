@@ -12,7 +12,7 @@ export const ContextMenuGroupLabel = ({
   return (
     <BaseContextMenu.GroupLabel
       className={cn(
-        'cursor-default px-2xs py-3xs style-text-default--2 leading-xs text-on-surface-variant select-none',
+        'cursor-default px-2xs py-3xs style-text-default--2 text-on-surface-variant select-none',
         className,
       )}
       ref={ref}

@@ -8,7 +8,7 @@ export const ComboboxItem = ({ className, children, ref, ...props }: ComboboxIte
   return (
     <BaseCombobox.Item
       className={cn(
-        'mr-2xs grid cursor-default grid-cols-[1fr_0.75rem] items-center gap-xs rounded-md px-2xs py-3xs style-text-default-0 leading-md select-none group-data-[side=none]:pr-xs group-data-[side=none]:leading-lg first-of-type:mt-2xs last-of-type:mb-2xs hover:cursor-pointer data-highlighted:relative data-highlighted:z-0 data-highlighted:bg-neutral-container-high data-highlighted:text-neutral-on-container data-highlighted:before:absolute data-highlighted:before:inset-x-3xs data-highlighted:before:inset-y-[0px] data-highlighted:before:z-[-1] data-highlighted:before:rounded-sm data-selected:bg-neutral-default data-selected:text-neutral-on-default pointer-coarse:py-xs',
+        'mr-2xs grid cursor-default grid-cols-[1fr_0.75rem] items-center gap-xs rounded-md px-2xs py-3xs style-text-default-0 select-none group-data-[side=none]:pr-xs group-data-[side=none]:leading-lg first-of-type:mt-2xs last-of-type:mb-2xs hover:cursor-pointer data-highlighted:relative data-highlighted:z-0 data-highlighted:bg-neutral-container-high data-highlighted:text-neutral-on-container data-highlighted:before:absolute data-highlighted:before:inset-x-3xs data-highlighted:before:inset-y-[0px] data-highlighted:before:z-[-1] data-highlighted:before:rounded-sm data-selected:bg-neutral-default data-selected:text-neutral-on-default pointer-coarse:py-xs',
         className,
       )}
       ref={ref}
