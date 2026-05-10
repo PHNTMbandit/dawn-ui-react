@@ -31,7 +31,7 @@
     "build": "tsc -b && vite build && pnpm run build:css",
     "build-storybook": "pnpm build:tailwind && storybook build",
     "build:css": "node -e \"require('fs').copyFileSync('src/styles/input.css', 'dist/styles.css')\"",
-    "build:tailwind": "pnpx @tailwindcss/cli -i ./src/styles/input.css -o ./dist/styles.css",
+    "build:tailwind": "pnpm dlx @tailwindcss/cli -i ./src/styles/input.css -o ./dist/styles.css",
     "commit": "git add . && git commit",
     "commit:skip": "git add . && git commit --no-verify",
     "cz": "cz",
@@ -44,7 +44,7 @@
     "storybook": "concurrently 'pnpm:watch:*'",
     "test": "vitest run",
     "watch:storybook": "storybook dev -p 6006",
-    "watch:tailwind": "pnpx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css --watch"
+    "watch:tailwind": "pnpm dlx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css --watch"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
