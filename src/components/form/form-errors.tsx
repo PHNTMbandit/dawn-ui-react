@@ -19,15 +19,26 @@ export const FormErrors = ({ className, children, ref, ...props }: FormErrorsPro
         const allMessages: string[] = []
 
         errors.forEach((errorObj) => {
-          Object.values(errorObj).forEach((fieldErrors) => {
-            if (Array.isArray(fieldErrors)) {
-              fieldErrors.forEach((err) => {
-                if (err?.message) {
-                  allMessages.push(err.message)
+          if (typeof errorObj === 'string') {
+            allMessages.push(errorObj)
+          } else if (errorObj?.message && typeof errorObj.message === 'string') {
+            allMessages.push(errorObj.message)
+          } else if (typeof errorObj === 'object' && errorObj !== null) {
+            const extractMessages = (obj: unknown): void => {
+              if (typeof obj === 'string') {
+                allMessages.push(obj)
+              } else if (Array.isArray(obj)) {
+                obj.forEach(extractMessages)
+              } else if (typeof obj === 'object' && obj !== null) {
+                if ('message' in obj && typeof (obj as any).message === 'string') {
+                  allMessages.push((obj as any).message)
+                } else {
+                  Object.values(obj).forEach(extractMessages)
                 }
-              })
+              }
             }
-          })
+            extractMessages(errorObj)
+          }
         })
 
         return (
