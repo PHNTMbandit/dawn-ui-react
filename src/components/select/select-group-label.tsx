@@ -7,7 +7,7 @@ export const SelectGroupLabel = ({ className, children, ref, ...props }: SelectG
   return (
     <BaseSelect.GroupLabel
       className={cn(
-        'sticky top-[0px] z-1 cursor-default bg-surface-2 px-2xs py-3xs style-text-default--2 leading-xs text-on-surface-variant select-none',
+        'sticky top-[0px] z-1 cursor-default bg-surface-2 px-2xs py-3xs style-text-default--2 text-on-surface-variant select-none',
         className,
       )}
       ref={ref}

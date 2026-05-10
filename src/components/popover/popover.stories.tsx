@@ -65,12 +65,12 @@ export const Animated: Story = {
           <BellIcon weight="bold" />
         </Button>
       </PopoverTrigger>
-      <PopoverTrigger handle={popoverHandle} payload={ProfilePanel}>
+      <PopoverTrigger handle={popoverHandle} payload={ProfilePanel} nativeButton={false}>
         <Button size="iconMedium" variant={'ghost'} tone="neutral">
           <UserIcon weight="bold" />
         </Button>
       </PopoverTrigger>
-      <PopoverTrigger handle={popoverHandle} payload={ActivityPanel}>
+      <PopoverTrigger handle={popoverHandle} payload={ActivityPanel} nativeButton={false}>
         <Button size="iconMedium" variant={'ghost'} tone="neutral">
           <ChartBarIcon weight="bold" />
         </Button>

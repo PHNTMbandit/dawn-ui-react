@@ -15,7 +15,7 @@ export type MenuSubmenuProps = React.ComponentProps<typeof BaseMenu.SubmenuRoot>
 export type MenuShortcutProps = React.ComponentProps<'div'>
 
 export const menuItemVariants = cva(
-  'flex cursor-default items-center px-sm py-3xs style-text-default-0 leading-md outline-none select-none before:outline before:outline-transparent hover:cursor-pointer data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-3xs data-highlighted:before:inset-y-[0px] data-highlighted:before:z-[-1] data-highlighted:before:rounded-md',
+  'flex cursor-default items-center px-sm py-3xs style-text-default-0 outline-none select-none before:outline before:outline-transparent hover:cursor-pointer data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-3xs data-highlighted:before:inset-y-[0px] data-highlighted:before:z-[-1] data-highlighted:before:rounded-md',
   {
     variants: {
       tone: {
@@ -41,7 +41,7 @@ export const menuItemVariants = cva(
 )
 
 export const menuSubmenuTriggerVariants = cva(
-  'grid cursor-default grid-cols-[1fr_2rem] items-center px-sm py-3xs style-text-default-0 leading-md outline-none select-none before:outline before:outline-transparent hover:cursor-pointer data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-3xs data-highlighted:before:inset-y-[0px] data-highlighted:before:z-[-1] data-highlighted:before:rounded-md data-popup-open:relative data-popup-open:z-0 data-popup-open:before:absolute data-popup-open:before:inset-x-3xs data-popup-open:before:inset-y-[0px] data-popup-open:before:z-[-1] data-popup-open:before:rounded-sm',
+  'grid cursor-default grid-cols-[1fr_2rem] items-center px-sm py-3xs style-text-default-0 outline-none select-none before:outline before:outline-transparent hover:cursor-pointer data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-3xs data-highlighted:before:inset-y-[0px] data-highlighted:before:z-[-1] data-highlighted:before:rounded-md data-popup-open:relative data-popup-open:z-0 data-popup-open:before:absolute data-popup-open:before:inset-x-3xs data-popup-open:before:inset-y-[0px] data-popup-open:before:z-[-1] data-popup-open:before:rounded-sm',
   {
     variants: {
       tone: {

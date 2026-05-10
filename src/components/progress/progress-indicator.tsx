@@ -26,7 +26,7 @@ export const ProgressIndicator = ({
       <div className="absolute top-full left-1/2 w-3xl -translate-x-1/2 translate-y-2xs">
         {title && <div className="text-center style-text-strong--2 text-on-surface">{title}</div>}
         {description && (
-          <div className="text-center style-text-prose--2 leading-sm text-on-surface-variant">
+          <div className="text-center style-text-prose--2 text-on-surface-variant">
             {description}
           </div>
         )}

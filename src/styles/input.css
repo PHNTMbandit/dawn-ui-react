@@ -610,170 +610,194 @@
   box-shadow: --value(--shadow-*) var(--dawn-shadow);
 }
 
-@utility style-text-* {
-  font-family: var(--text-font);
-  font-weight: var(--text-weight);
-  font-size: var(--text-size);
-  line-height: var(--text-leading, normal);
+@utility style-text-default-5 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-4xl);
+  line-height: normal;
   letter-spacing: normal;
 }
 
-@utility style-text-default-5 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-4xl);
-}
-
 @utility style-text-default-4 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-3xl);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-3xl);
+  line-height: normal;
+  letter-spacing: normal;
 }
 
 @utility style-text-default-3 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-2xl);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-2xl);
+  line-height: normal;
+  letter-spacing: normal;
 }
 
 @utility style-text-default-2 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-xl);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: normal;
+  letter-spacing: normal;
 }
 
 @utility style-text-default-1 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-lg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-lg);
+  line-height: normal;
+  letter-spacing: normal;
 }
 
 @utility style-text-default-0 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-base);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-base);
+  line-height: normal;
+  letter-spacing: normal;
 }
 
 @utility style-text-default--1 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  line-height: normal;
+  letter-spacing: normal;
 }
 
 @utility style-text-default--2 {
-  --text-font: var(--font-body);
-  --text-weight: 500;
-  --text-size: var(--text-xs);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-xs);
+  line-height: normal;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose-5 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-4xl);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-4xl);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose-4 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-3xl);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-3xl);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose-3 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-2xl);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-2xl);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose-2 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-xl);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-xl);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose-1 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-lg);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose-0 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-base);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose--1 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-sm);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-prose--2 {
-  --text-font: var(--font-body);
-  --text-weight: 400;
-  --text-size: var(--text-xs);
-  --text-leading: 160%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-xs);
+  line-height: 160%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong-5 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-4xl);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-4xl);
+  line-height: 120%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong-4 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-3xl);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  line-height: 120%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong-3 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-2xl);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  line-height: 120%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong-2 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-xl);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  line-height: 120%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong-1 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-lg);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  line-height: 120%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong-0 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-base);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-base);
+  line-height: 120%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong--1 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-sm);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  line-height: 120%;
+  letter-spacing: normal;
 }
 
 @utility style-text-strong--2 {
-  --text-font: var(--font-heading);
-  --text-weight: 700;
-  --text-size: var(--text-xs);
-  --text-leading: 120%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  line-height: 120%;
+  letter-spacing: normal;
 }
