@@ -1,3 +1,15 @@
+# [1.0.0-alpha.6](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2026-05-12)
+
+
+### Bug Fixes
+
+* restore dialog content component ([db2b6eb](https://github.com/PHNTMbandit/dawn-ui-react/commit/db2b6eb7e37b6baec842149ea29a39fda9124a14))
+
+
+### Features
+
+* add separator label ([39a4920](https://github.com/PHNTMbandit/dawn-ui-react/commit/39a49206384b687aaf9348edeaeb2ddc54781399))
+
 # [1.0.0-alpha.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2026-05-10)
 
 ### Bug Fixes
