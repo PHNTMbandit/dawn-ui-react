@@ -205,3 +205,37 @@ export const VerticalMenuDivider: Story = {
     },
   },
 }
+
+export const WithLabel: Story = {
+  name: 'Composition / With Label',
+  args: {
+    orientation: 'horizontal',
+    weight: 'thin',
+    variant: 'default',
+    style: 'rounded',
+  },
+  render: (args) => (
+    <div className="w-[500px] space-y-sm bg-surface p-md">
+      <Separator {...args} weight={'thinnest'} labelClassName="bg-surface">
+        Section Label
+      </Separator>
+      <Separator {...args} labelClassName="bg-surface">
+        Section Label
+      </Separator>
+      <Separator {...args} weight={'medium'} labelClassName="bg-surface">
+        Section Label
+      </Separator>
+      <Separator {...args} weight={'thick'} labelClassName="bg-surface">
+        Section Label
+      </Separator>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Separators can also include centered labels for additional context within sections.',
+      },
+    },
+  },
+}

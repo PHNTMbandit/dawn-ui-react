@@ -1,18 +1,16 @@
 # [1.0.0-alpha.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2026-05-10)
 
-
 ### Bug Fixes
 
-* fix missing text styles ([325ddb7](https://github.com/PHNTMbandit/dawn-ui-react/commit/325ddb776a90bf901c9761ae552743486de552b7))
-* fix tooltip trigger hydration error ([38646d4](https://github.com/PHNTMbandit/dawn-ui-react/commit/38646d4396a18ed5794a717082f3182f12af8e97))
-* remove conflicting text styles ([974202f](https://github.com/PHNTMbandit/dawn-ui-react/commit/974202ff4ce5b75f147e06a84a45e35bdbd49f85))
+- fix missing text styles ([325ddb7](https://github.com/PHNTMbandit/dawn-ui-react/commit/325ddb776a90bf901c9761ae552743486de552b7))
+- fix tooltip trigger hydration error ([38646d4](https://github.com/PHNTMbandit/dawn-ui-react/commit/38646d4396a18ed5794a717082f3182f12af8e97))
+- remove conflicting text styles ([974202f](https://github.com/PHNTMbandit/dawn-ui-react/commit/974202ff4ce5b75f147e06a84a45e35bdbd49f85))
 
 # [1.0.0-alpha.4](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2026-05-10)
 
-
 ### Features
 
-* improve form and field errors ([a664a24](https://github.com/PHNTMbandit/dawn-ui-react/commit/a664a2432c2442d6be70cfd5713deb92708f7dbb))
+- improve form and field errors ([a664a24](https://github.com/PHNTMbandit/dawn-ui-react/commit/a664a2432c2442d6be70cfd5713deb92708f7dbb))
 
 # [1.0.0-alpha.3](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2026-05-09)
 

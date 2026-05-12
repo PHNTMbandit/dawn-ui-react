@@ -430,7 +430,7 @@
   --dawn-accent-shadow: light-dark(#197c4b40, #4fd99466);
 
   --dawn-neutral-default: light-dark(var(--neutral-700), var(--neutral-100));
-  --dawn-neutral-muted: light-dark(var(--neutral-800), var(--neutral-300));
+  --dawn-neutral-muted: light-dark(var(--neutral-800), var(--neutral-400));
   --dawn-neutral-subtle: light-dark(var(--neutral-200), var(--neutral-800));
   --dawn-neutral-on-default: light-dark(var(--white), var(--neutral-950));
   --dawn-neutral-container: light-dark(var(--neutral-200), var(--neutral-800));
