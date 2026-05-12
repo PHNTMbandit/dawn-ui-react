@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 import type { Separator as BaseSeparator } from '@base-ui/react/separator'
 import type { VariantProps } from 'class-variance-authority'
 
-export const separatorVariants = cva('shrink-0 rounded-full', {
+export const separatorVariants = cva('relative shrink-0 rounded-full', {
   variants: {
     orientation: {
       horizontal: 'w-full',
@@ -18,10 +18,10 @@ export const separatorVariants = cva('shrink-0 rounded-full', {
       strong: 'bg-neutral-border-strong',
     },
     weight: {
-      thick: '',
-      medium: '',
-      thin: '',
-      thinnest: '',
+      thick: '[&_[data-label]]:style-text-prose-0',
+      medium: '[&_[data-label]]:style-text-prose--1',
+      thin: '[&_[data-label]]:style-text-prose--2',
+      thinnest: '[&_[data-label]]:style-text-prose--2',
     },
   },
   defaultVariants: {
@@ -75,4 +75,6 @@ export const separatorVariants = cva('shrink-0 rounded-full', {
 })
 
 export type SeparatorProps = Omit<React.ComponentProps<typeof BaseSeparator>, 'style'> &
-  VariantProps<typeof separatorVariants>
+  VariantProps<typeof separatorVariants> & {
+    labelClassName?: string
+  }
