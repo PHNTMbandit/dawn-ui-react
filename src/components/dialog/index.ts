@@ -8,6 +8,7 @@ export type {
   DialogProps,
   DialogTitleProps,
   DialogTriggerProps,
+  DialogContentProps,
 } from './dialog.types'
 export { DialogClose } from './dialog-close'
 export { DialogContent } from './dialog-content'
