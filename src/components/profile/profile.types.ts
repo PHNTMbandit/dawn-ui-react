@@ -1,18 +1,9 @@
-import type { AvatarBadgeProps, AvatarProps } from '../avatar'
 import type { ComponentProps } from 'react'
-import type { ReactNode } from 'react'
 
-export type ProfileProps = ComponentProps<'div'> & {
-  imageUrl?: string
-  fallbackText?: string
-  profileName: string
-  profileEmail?: string
+export type ProfileProps = ComponentProps<'div'>
+export type ProfileContentProps = React.ComponentProps<'div'> & {
   compact?: boolean
-  hideEmail?: boolean
-  avatarAlt?: string
-  avatarSize?: AvatarProps['size']
-  showBadge?: boolean
-  badgeTone?: AvatarBadgeProps['tone']
-  badgePosition?: AvatarBadgeProps['position']
-  badgeContent?: ReactNode
 }
+export type ProfileActionProps = React.ComponentProps<'div'>
+export type ProfileNameProps = React.ComponentProps<'span'>
+export type ProfileSubnameProps = React.ComponentProps<'span'>

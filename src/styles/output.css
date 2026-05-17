@@ -1051,10 +1051,6 @@
     --tw-translate-x: var(--active-tab-left);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
-  .translate-x-1\/2 {
-    --tw-translate-x: calc(1 / 2 * 100%);
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
   .translate-x-2xs {
     --tw-translate-x: var(--spacing-2xs);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -1484,9 +1480,6 @@
   .bg-info-default {
     background-color: var(--color-info-default);
   }
-  .bg-inherit {
-    background-color: inherit;
-  }
   .bg-neutral-border {
     background-color: var(--color-neutral-border);
   }
@@ -1541,15 +1534,8 @@
   .bg-warning-default {
     background-color: var(--color-warning-default);
   }
-  .bg-conic {
-    --tw-gradient-position: in oklab;
-    background-image: conic-gradient(var(--tw-gradient-stops));
-  }
   .bg-clip-padding {
     background-clip: padding-box;
-  }
-  .bg-clip-text {
-    background-clip: text;
   }
   .object-cover {
     object-fit: cover;
@@ -2419,6 +2405,12 @@
     &:is(:where(.group\/avatar)[data-size='medium'] *) {
       width: var(--spacing-sm);
       height: var(--spacing-sm);
+    }
+  }
+  .group-data-\[size\=medium\]\/avatar\:size-xs {
+    &:is(:where(.group\/avatar)[data-size='medium'] *) {
+      width: var(--spacing-xs);
+      height: var(--spacing-xs);
     }
   }
   .group-data-\[size\=small\]\/avatar\:size-xs {
@@ -3899,11 +3891,6 @@
   .data-highlighted\:bg-accent-default {
     &[data-highlighted] {
       background-color: var(--color-accent-default);
-    }
-  }
-  .data-highlighted\:bg-neutral-container {
-    &[data-highlighted] {
-      background-color: var(--color-neutral-container);
     }
   }
   .data-highlighted\:bg-neutral-container-high {
@@ -5751,10 +5738,22 @@
       }
     }
   }
+  .\[\&_svg\]\:size-2xs {
+    & svg {
+      width: var(--spacing-2xs);
+      height: var(--spacing-2xs);
+    }
+  }
   .\[\&_svg\]\:size-sm {
     & svg {
       width: var(--spacing-sm);
       height: var(--spacing-sm);
+    }
+  }
+  .\[\&_svg\]\:size-xs {
+    & svg {
+      width: var(--spacing-xs);
+      height: var(--spacing-xs);
     }
   }
   .\[\&_svg\]\:text-accent-default {
@@ -5827,8 +5826,32 @@
       color: var(--color-warning-on-container);
     }
   }
+  .group-data-\[size\=large\]\/avatar\:\[\&_svg\]\:size-md {
+    &:is(:where(.group\/avatar)[data-size='large'] *) {
+      & svg {
+        width: var(--spacing-md);
+        height: var(--spacing-md);
+      }
+    }
+  }
   .group-data-\[size\=large\]\/avatar\:\[\&_svg\]\:size-sm {
     &:is(:where(.group\/avatar)[data-size='large'] *) {
+      & svg {
+        width: var(--spacing-sm);
+        height: var(--spacing-sm);
+      }
+    }
+  }
+  .group-data-\[size\=medium\]\/avatar\:\[\&_svg\]\:size-md {
+    &:is(:where(.group\/avatar)[data-size='medium'] *) {
+      & svg {
+        width: var(--spacing-md);
+        height: var(--spacing-md);
+      }
+    }
+  }
+  .group-data-\[size\=medium\]\/avatar\:\[\&_svg\]\:size-sm {
+    &:is(:where(.group\/avatar)[data-size='medium'] *) {
       & svg {
         width: var(--spacing-sm);
         height: var(--spacing-sm);
@@ -5848,6 +5871,14 @@
       & svg {
         width: var(--spacing-2xs);
         height: var(--spacing-2xs);
+      }
+    }
+  }
+  .group-data-\[size\=small\]\/avatar\:\[\&_svg\]\:size-xs {
+    &:is(:where(.group\/avatar)[data-size='small'] *) {
+      & svg {
+        width: var(--spacing-xs);
+        height: var(--spacing-xs);
       }
     }
   }
@@ -6284,33 +6315,6 @@
         --tw-content: '';
         content: var(--tw-content);
       }
-    }
-  }
-  .\[\&\>\[data-label\]\]\:style-text-prose--1 {
-    & > [data-label] {
-      font-family: var(--font-body);
-      font-weight: 400;
-      font-size: var(--text-sm);
-      line-height: 160%;
-      letter-spacing: normal;
-    }
-  }
-  .\[\&\>\[data-label\]\]\:style-text-prose--2 {
-    & > [data-label] {
-      font-family: var(--font-body);
-      font-weight: 400;
-      font-size: var(--text-xs);
-      line-height: 160%;
-      letter-spacing: normal;
-    }
-  }
-  .\[\&\>\[data-label\]\]\:style-text-prose-0 {
-    & > [data-label] {
-      font-family: var(--font-body);
-      font-weight: 400;
-      font-size: var(--text-base);
-      line-height: 160%;
-      letter-spacing: normal;
     }
   }
   .\[\&\>button\]\:size-2xl {

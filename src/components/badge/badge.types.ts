@@ -4,13 +4,13 @@ import type { VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 
 export const badgeVariants = cva(
-  'inline-flex h-md items-center justify-center gap-3xs rounded-full px-xs style-text-default--2 whitespace-nowrap transition-all select-none [&>svg]:size-xs',
+  'inline-flex items-center justify-center gap-3xs rounded-full style-text-default--2 whitespace-nowrap transition-all select-none',
   {
     variants: {
       size: {
-        small: 'h-sm [&>svg]:size-2xs',
-        medium: 'h-md [&>svg]:size-xs',
-        large: 'h-lg [&>svg]:size-sm',
+        small: 'h-sm px-xs [&>svg]:size-2xs',
+        medium: 'h-md px-xs [&>svg]:size-xs',
+        large: 'h-lg px-xs [&>svg]:size-sm',
         iconSmall: 'size-sm [&>svg]:size-2xs',
         iconMedium: 'size-md [&>svg]:size-xs',
         iconLarge: 'size-lg [&>svg]:size-sm',

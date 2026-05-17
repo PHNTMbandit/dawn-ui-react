@@ -13,7 +13,7 @@ import {
 } from '@phosphor-icons/react'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
 import { Avatar, AvatarFallback } from '../avatar'
-import { Profile } from '../profile'
+import { Profile, ProfileName } from '../profile'
 import { Sidebar } from './sidebar'
 import { SidebarContent } from './sidebar-content'
 import { SidebarFooter } from './sidebar-footer'
@@ -145,11 +145,8 @@ const SidebarShell = ({
         <SidebarFooter>
           {(isExpanded) =>
             isExpanded ? (
-              <Profile
-                fallbackText="DP"
-                profileEmail="domenic@example.com"
-                profileName="Domenic Pittari"
-              >
+              <Profile>
+                <ProfileName>Demo User</ProfileName>
                 <CaretUpDownIcon />
               </Profile>
             ) : (

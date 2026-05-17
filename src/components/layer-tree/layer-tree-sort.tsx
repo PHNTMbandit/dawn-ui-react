@@ -1,5 +1,4 @@
 import { ArrowsDownUpIcon, SortAscendingIcon, SortDescendingIcon } from '@phosphor-icons/react'
-import React from 'react'
 import { MenuSubmenuTrigger } from '..'
 import { Button } from '../button'
 import {
@@ -15,9 +14,8 @@ import {
 import { useLayerTree } from './layer-tree'
 import { cn } from '@/utils/cn'
 
+import type { LayerTreeSortProps } from './layer-tree.types'
 import type { Column } from '@tanstack/react-table'
-
-type LayerTreeSortProps = React.ComponentProps<'button'>
 
 export const LayerTreeSort = <TData,>({
   className,

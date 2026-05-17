@@ -93,7 +93,7 @@ export const LayerTree = <TData,>({
           draggingNodeId,
         }}
       >
-        <div className={cn('flex flex-col gap-sm', className)} ref={ref} {...props}>
+        <div className={cn('flex flex-col justify-between', className)} ref={ref} {...props}>
           {children}
           <DragOverlay>
             {(source) => (

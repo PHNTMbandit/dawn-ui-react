@@ -1,3 +1,5 @@
+import { InputGroup } from '../input-group'
+
 import type { Button } from '../button'
 import type { Row, Table as TanstackTable } from '@tanstack/react-table'
 
@@ -31,7 +33,10 @@ export type LayerTreeNodeProps<TData> = React.ComponentProps<'button'> & {
   icon?: React.ElementType
   dndDisabled?: boolean
 }
-export type LayerTreeSearchProps = React.ComponentProps<'input'>
+export type LayerTreeSearchProps = React.ComponentProps<typeof InputGroup> & {
+  placeholder?: string
+}
 export type LayerTreeExpandAllProps = React.ComponentProps<'button'>
 export type LayerTreeNodeActionProps = React.ComponentProps<'button'>
 export type LayerTreeFooterProps = React.ComponentProps<'div'>
+export type LayerTreeSortProps = React.ComponentProps<'button'>
