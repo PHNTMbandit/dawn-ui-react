@@ -5,20 +5,24 @@ import { cn } from '@/utils/cn'
 
 import type { LayerTreeSearchProps } from './layer-tree.types'
 
-export const LayerTreeSearch = ({ className, children, ref, ...props }: LayerTreeSearchProps) => {
+export const LayerTreeSearch = ({
+  placeholder,
+  className,
+  children,
+  ref,
+  ...props
+}: LayerTreeSearchProps) => {
   const { table } = useLayerTree()
 
   return (
-    <InputGroup>
+    <InputGroup className={cn('', className)} ref={ref} {...props}>
       <InputGroupAddon>
         <MagnifyingGlassIcon weight="bold" />
       </InputGroupAddon>
       <InputGroupInput
+        placeholder={placeholder}
         onChange={(event) => table.setGlobalFilter(event.target.value)}
         value={table.getState().globalFilter ?? ''}
-        className={cn('', className)}
-        ref={ref}
-        {...props}
       />
       {children}
     </InputGroup>

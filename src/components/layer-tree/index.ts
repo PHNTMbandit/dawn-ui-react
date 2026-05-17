@@ -9,6 +9,7 @@ export type {
   LayerTreeDataSet,
   LayerTreeNodeActionProps,
   LayerTreeFooterProps,
+  LayerTreeSortProps,
 } from './layer-tree.types'
 
 export type { LayerTreeNodeData } from './layer-tree-utils'
@@ -28,3 +29,4 @@ export { LayerTreeNodeToggle } from './layer-tree-node-toggle'
 export { LayerTreeRow } from './layer-tree-row'
 export { LayerTreeSearch } from './layer-tree-search'
 export { LayerTreeFooter } from './layer-tree-footer'
+export { LayerTreeSort } from './layer-tree-sort'

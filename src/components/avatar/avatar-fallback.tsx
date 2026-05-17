@@ -7,7 +7,7 @@ export const AvatarFallback = ({ className, ref, ...props }: AvatarFallbackProps
   return (
     <BaseAvatar.Fallback
       className={cn(
-        'flex size-full items-center justify-center rounded-full bg-surface-2 align-middle shadow-2xs select-none',
+        'flex size-full items-center justify-center rounded-full bg-surface-3 align-middle shadow-2xs select-none',
         className,
       )}
       data-slot="avatar-fallback"

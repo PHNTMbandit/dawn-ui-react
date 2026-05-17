@@ -423,6 +423,7 @@ export const Playground: Story = {
       columnHelper.accessor('locked', {
         header: 'Locked',
         enableMultiSort: false,
+        enableSorting: false,
         sortingFn: (rowA, rowB) => {
           const a = rowA.original.locked
           const b = rowB.original.locked
