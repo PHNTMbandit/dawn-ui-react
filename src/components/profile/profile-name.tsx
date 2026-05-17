@@ -1,4 +1,4 @@
-import { cn } from 'dawn-ui-react'
+import { cn } from '@/utils/cn'
 
 import type { ProfileNameProps } from './profile.types'
 
