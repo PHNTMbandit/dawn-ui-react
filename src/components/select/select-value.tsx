@@ -7,7 +7,10 @@ export const SelectValue = ({ className, children, ref, ...props }: SelectValueP
   return (
     <BaseSelect.Value
       data-value
-      className={cn('flex items-center justify-start data-placeholder:opacity-70', className)}
+      className={cn(
+        'flex items-center justify-start gap-2xs data-placeholder:opacity-70',
+        className,
+      )}
       ref={ref}
       {...props}
     >
