@@ -1,3 +1,10 @@
+# [1.0.0-alpha.8](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2026-05-22)
+
+
+### Features
+
+* add popover button ([1ba8959](https://github.com/PHNTMbandit/dawn-ui-react/commit/1ba8959bdbc275030e20a6a89367b415f12d160e))
+
 # [1.0.0-alpha.7](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2026-05-17)
 
 
