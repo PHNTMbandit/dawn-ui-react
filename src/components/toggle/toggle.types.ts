@@ -21,7 +21,7 @@ export const toggleVariants = cva(
         accent:
           'hover:not-disabled:bg-accent-container hover:not-disabled:text-accent-on-container data-pressed:text-accent-default',
         neutral:
-          'hover:not-disabled:bg-neutral-container-high hover:not-disabled:text-neutral-on-container data-pressed:text-neutral-default',
+          'hover:not-disabled:bg-surface-low hover:not-disabled:text-neutral-on-container data-pressed:text-neutral-default',
         error:
           'hover:not-disabled:bg-error-container hover:not-disabled:text-error-on-container data-pressed:text-error-default',
         info: 'hover:not-disabled:bg-info-container hover:not-disabled:text-info-on-container data-pressed:text-info-default',

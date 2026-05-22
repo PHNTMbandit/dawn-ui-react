@@ -10,7 +10,7 @@ export const SidebarFooter = ({ className, children, ref, ...props }: SidebarFoo
     <div
       className={cn(
         'flex shrink-0 animate-in items-center truncate p-3xs transition-all duration-300 ease-in-out',
-        open ? 'justify-start fade-in-0' : 'justify-center fade-out-0',
+        open ? 'justify-start fade-in-0' : 'justify-center self-center fade-out-0',
         className,
       )}
       ref={ref}

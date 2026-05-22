@@ -6,7 +6,7 @@ export const DrawerProvider = ({ children, ...props }: DrawerProviderProps) => {
   return (
     <BaseDrawer.Provider {...props}>
       <BaseDrawer.IndentBackground />
-      <BaseDrawer.Indent>{children}</BaseDrawer.Indent>
+      <BaseDrawer.Indent className={'size-full'}>{children}</BaseDrawer.Indent>
     </BaseDrawer.Provider>
   )
 }
