@@ -1,28 +1,24 @@
 # [1.0.0-alpha.7](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2026-05-17)
 
-
 ### Bug Fixes
 
-* **field-errors:** fix SSR error catching ([d8f8e6d](https://github.com/PHNTMbandit/dawn-ui-react/commit/d8f8e6da41e640741ecd78c7d1468a7bb96ca176))
-* fix Internal server error with profile components ([c3549c2](https://github.com/PHNTMbandit/dawn-ui-react/commit/c3549c26a9e49029870dea910eaeea77a902eb82))
-
+- **field-errors:** fix SSR error catching ([d8f8e6d](https://github.com/PHNTMbandit/dawn-ui-react/commit/d8f8e6da41e640741ecd78c7d1468a7bb96ca176))
+- fix Internal server error with profile components ([c3549c2](https://github.com/PHNTMbandit/dawn-ui-react/commit/c3549c26a9e49029870dea910eaeea77a902eb82))
 
 ### Features
 
-* **input.css:** update brand and accent colour tokens ([0368c9d](https://github.com/PHNTMbandit/dawn-ui-react/commit/0368c9dd69f98ecf9f3b750765834b4823dd265f))
-* refactor profile component ([91c0828](https://github.com/PHNTMbandit/dawn-ui-react/commit/91c0828aeb9ec4a4cf18a079c352e875f4ab693c))
+- **input.css:** update brand and accent colour tokens ([0368c9d](https://github.com/PHNTMbandit/dawn-ui-react/commit/0368c9dd69f98ecf9f3b750765834b4823dd265f))
+- refactor profile component ([91c0828](https://github.com/PHNTMbandit/dawn-ui-react/commit/91c0828aeb9ec4a4cf18a079c352e875f4ab693c))
 
 # [1.0.0-alpha.6](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2026-05-12)
 
-
 ### Bug Fixes
 
-* restore dialog content component ([db2b6eb](https://github.com/PHNTMbandit/dawn-ui-react/commit/db2b6eb7e37b6baec842149ea29a39fda9124a14))
-
+- restore dialog content component ([db2b6eb](https://github.com/PHNTMbandit/dawn-ui-react/commit/db2b6eb7e37b6baec842149ea29a39fda9124a14))
 
 ### Features
 
-* add separator label ([39a4920](https://github.com/PHNTMbandit/dawn-ui-react/commit/39a49206384b687aaf9348edeaeb2ddc54781399))
+- add separator label ([39a4920](https://github.com/PHNTMbandit/dawn-ui-react/commit/39a49206384b687aaf9348edeaeb2ddc54781399))
 
 # [1.0.0-alpha.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2026-05-10)
 
