@@ -454,9 +454,6 @@
   .top-lg {
     top: var(--spacing-lg);
   }
-  .top-xs {
-    top: var(--spacing-xs);
-  }
   .-right-xs {
     right: calc(var(--spacing-xs) * -1);
   }
@@ -474,9 +471,6 @@
   }
   .right-\[1rem\] {
     right: 1rem;
-  }
-  .right-xs {
-    right: var(--spacing-xs);
   }
   .bottom-0 {
     bottom: var(--spacing-0);
@@ -565,14 +559,8 @@
   .m-0 {
     margin: var(--spacing-0);
   }
-  .m-2xs {
-    margin: var(--spacing-2xs);
-  }
   .m-3xs {
     margin: var(--spacing-3xs);
-  }
-  .m-xs {
-    margin: var(--spacing-xs);
   }
   .-mx-2xs {
     margin-inline: calc(var(--spacing-2xs) * -1);
@@ -586,6 +574,9 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .mx-md {
+    margin-inline: var(--spacing-md);
+  }
   .mx-xs {
     margin-inline: var(--spacing-xs);
   }
@@ -594,6 +585,9 @@
   }
   .my-\[0px\] {
     margin-block: 0px;
+  }
+  .my-sm {
+    margin-block: var(--spacing-sm);
   }
   .my-xs {
     margin-block: var(--spacing-xs);
@@ -624,9 +618,6 @@
   }
   .mr-\[0px\] {
     margin-right: 0px;
-  }
-  .mb-2xs {
-    margin-bottom: var(--spacing-2xs);
   }
   .mb-\[-3rem\] {
     margin-bottom: -3rem;
@@ -1112,11 +1103,6 @@
       var(--tw-animation-delay, 0s) var(--tw-animation-iteration-count, 1)
       var(--tw-animation-direction, normal) var(--tw-animation-fill-mode, none);
   }
-  .animate-out {
-    animation: exit var(--tw-animation-duration, var(--tw-duration, 0.15s)) var(--tw-ease, ease)
-      var(--tw-animation-delay, 0s) var(--tw-animation-iteration-count, 1)
-      var(--tw-animation-direction, normal) var(--tw-animation-fill-mode, none);
-  }
   .animate-ping {
     animation: var(--animate-ping);
   }
@@ -1377,10 +1363,6 @@
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
   }
-  .border-b-2 {
-    border-bottom-style: var(--tw-border-style);
-    border-bottom-width: 2px;
-  }
   .border-l {
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
@@ -1608,9 +1590,6 @@
   .py-3xs {
     padding-block: var(--spacing-3xs);
   }
-  .py-lg {
-    padding-block: var(--spacing-lg);
-  }
   .py-md {
     padding-block: var(--spacing-md);
   }
@@ -1695,14 +1674,8 @@
   .text-start {
     text-align: start;
   }
-  .align-bottom {
-    vertical-align: bottom;
-  }
   .align-middle {
     vertical-align: middle;
-  }
-  .align-text-bottom {
-    vertical-align: text-bottom;
   }
   .style-text-default--1 {
     font-family: var(--font-body);
@@ -1819,10 +1792,6 @@
   }
   .text-xs {
     font-size: var(--text-xs);
-  }
-  .leading-0 {
-    --tw-leading: var(--spacing-0);
-    line-height: var(--spacing-0);
   }
   .leading-none {
     --tw-leading: 1;
@@ -2082,6 +2051,34 @@
       var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,)
       var(--tw-drop-shadow,);
   }
+  .transition {
+    transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      text-decoration-color,
+      fill,
+      stroke,
+      --tw-gradient-from,
+      --tw-gradient-via,
+      --tw-gradient-to,
+      opacity,
+      box-shadow,
+      transform,
+      translate,
+      scale,
+      rotate,
+      filter,
+      -webkit-backdrop-filter,
+      backdrop-filter,
+      display,
+      content-visibility,
+      overlay,
+      pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
   .transition-\[left\] {
     transition-property: left;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -2224,9 +2221,6 @@
     --tw-enter-scale: calc(95 * 1%);
     --tw-enter-scale: 0.95;
   }
-  .-spin-out {
-    --tw-exit-rotate: -30deg;
-  }
   .\[--backdrop-opacity\:0\.2\] {
     --backdrop-opacity: 0.2;
   }
@@ -2266,12 +2260,6 @@
       opacity 0.5s,
       height 0.15s;
   }
-  .fade-in {
-    --tw-enter-opacity: 0;
-  }
-  .fade-out {
-    --tw-exit-opacity: 0;
-  }
   .ring-inset {
     --tw-ring-inset: inset;
   }
@@ -2280,9 +2268,6 @@
   }
   .zoom-in {
     --tw-enter-scale: 0;
-  }
-  .zoom-out {
-    --tw-exit-scale: 0;
   }
   .\*\:hidden {
     :is(& > *) {
@@ -5597,11 +5582,6 @@
       background-color: var(--color-brand-default);
     }
   }
-  .\[\&_\[role\=tab\]\]\:h-lg {
-    & [role='tab'] {
-      height: var(--spacing-lg);
-    }
-  }
   .\[\&_\[role\=tab\]\]\:h-xl {
     & [role='tab'] {
       height: var(--spacing-xl);
@@ -5648,16 +5628,6 @@
       &[data-active] {
         color: var(--color-brand-on-default);
       }
-    }
-  }
-  .\[\&_\[role\=tablist\]\]\:h-2xl {
-    & [role='tablist'] {
-      height: var(--spacing-2xl);
-    }
-  }
-  .\[\&_\[role\=tablist\]\]\:h-full {
-    & [role='tablist'] {
-      height: 100%;
     }
   }
   .\[\&_\[role\=tablist\]\]\:h-xl {
@@ -5709,16 +5679,6 @@
   .\[\&_\[role\=tablist\]\]\:p-3xs {
     & [role='tablist'] {
       padding: var(--spacing-3xs);
-    }
-  }
-  .\[\&_\[role\=tablist\]\]\:pb-2xs {
-    & [role='tablist'] {
-      padding-bottom: var(--spacing-2xs);
-    }
-  }
-  .\[\&_\[role\=tablist\]\]\:pb-xs {
-    & [role='tablist'] {
-      padding-bottom: var(--spacing-xs);
     }
   }
   .\[\&_button\]\:shrink-0 {

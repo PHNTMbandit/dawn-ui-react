@@ -1,4 +1,5 @@
 import { FileCssIcon, FileJsIcon, FileTsIcon } from '@phosphor-icons/react'
+import { codeToHtml } from 'shiki/bundle/web'
 import { CodeBlock } from './code-block'
 import { CodeBlockActions } from './code-block-actions'
 import { CodeBlockCopy } from './code-block-copy'
@@ -11,26 +12,92 @@ import { CodeBlockWindow } from './code-block-window'
 
 import type { CodeBlockValue } from './code-block.types'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { BundledLanguage } from 'shiki/bundle/web'
+
+async function highlightCode(code: string, lang: BundledLanguage): Promise<string> {
+  return await codeToHtml(code, {
+    lang: lang,
+    themes: {
+      light: 'github-light',
+      dark: 'github-dark',
+    },
+    transformers: [
+      {
+        pre: (node) => {
+          node.properties.style = ''
+          return node
+        },
+      },
+    ],
+  })
+}
 
 const data: CodeBlockValue[] = [
   {
     id: '1',
     icon: <FileJsIcon weight="bold" />,
-    content: 'console.log("Hello, World!");',
+    content: await highlightCode(
+      `const fetchUserData = async (userId) => {
+  try {
+    const response = await fetch(\`/api/users/\${userId}\`);
+    const data = await response.json();
+    console.log('User data:', data);
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw error;
+  }
+};`,
+      'javascript',
+    ),
     label: 'JavaScript',
-    name: 'hello.js',
+    name: 'api.js',
   },
   {
     id: '2',
     icon: <FileTsIcon weight="bold" />,
-    content: 'function greet(name: string) {\n  return `Hello, ${name}!`;\n}',
+    content: await highlightCode(
+      `interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'user';
+}
+
+async function fetchUserData(userId: string): Promise<User> {
+  const response = await fetch(\`/api/users/\${userId}\`);
+  if (!response.ok) throw new Error('User not found');
+  return response.json();
+}`,
+      'typescript',
+    ),
     label: 'TypeScript',
-    name: 'greet.ts',
+    name: 'types.ts',
   },
   {
     id: '3',
     icon: <FileCssIcon weight="bold" />,
-    content: 'body {\n  background-color: #f0f0f0;\n}',
+    content: await highlightCode(
+      `.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.button {
+  background-color: #0066cc;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0052a3;
+}`,
+      'css',
+    ),
     label: 'CSS',
     name: 'styles.css',
   },

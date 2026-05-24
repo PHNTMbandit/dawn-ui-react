@@ -7,16 +7,9 @@ export const CodeBlockWindow = ({ className, children, ref, ...props }: CodeBloc
   const { currentValue } = useCodeBlock()
 
   return (
-    <div
-      className={cn(
-        'relative rounded-lg px-md py-sm style-text-prose-0 text-on-surface',
-        className,
-      )}
-      ref={ref}
-      {...props}
-    >
+    <div className={cn('relative rounded-lg px-md py-sm', className)} ref={ref} {...props}>
       {children}
-      {currentValue.content}
+      <div dangerouslySetInnerHTML={{ __html: currentValue.content }} />
     </div>
   )
 }
