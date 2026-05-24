@@ -1,3 +1,11 @@
+# [1.0.0-alpha.9](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2026-05-24)
+
+
+### Features
+
+* add code block component ([65793c3](https://github.com/PHNTMbandit/dawn-ui-react/commit/65793c3fa7d073c2f1c8916e0a188d9470d14324))
+* add shiki highlighting ([99f0c68](https://github.com/PHNTMbandit/dawn-ui-react/commit/99f0c6869cb30495e83908af4a337fa145eef2a6))
+
 # [1.0.0-alpha.8](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2026-05-22)
 
 
