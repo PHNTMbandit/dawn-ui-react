@@ -20,7 +20,7 @@ const viewportClassName = cn(
 
 const popupClassName = cn(
   // Base styles (shared by all directions)
-  'touch-auto overflow-y-auto overscroll-contain bg-surface-3 p-md outline outline-border-strong transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*0.4s)] data-swiping:select-none',
+  'touch-auto overflow-y-auto overscroll-contain bg-surface-2 p-md outline outline-border-strong transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*0.4s)] data-swiping:select-none',
 
   // down (bottom sheet) - default, shadow goes up
   'mb-[-3rem] max-h-[calc(80vh+3rem)] w-full transform-[translateY(var(--drawer-swipe-movement-y))] rounded-t-2xl pb-[calc(1.5rem+env(safe-area-inset-bottom,0)+3rem)] shadow-[0_-8px_24px_var(--color-shadow)] data-ending-style:transform-[translateY(calc(100%-3rem+2px))] data-starting-style:transform-[translateY(calc(100%-3rem+2px))]',

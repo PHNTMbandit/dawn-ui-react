@@ -598,11 +598,18 @@
 
 @layer base {
   body {
+    margin: 0;
     background-color: theme(--color-surface-background);
     color: theme(--color-on-surface);
     font-family: var(--font-body);
     font-size: var(--text-base);
     scrollbar-color: theme(--color-accent-default) theme(--color-surface-2);
+  }
+  button {
+    line-height: 0;
+  }
+  input {
+    line-height: 0;
   }
 }
 
