@@ -1,3 +1,10 @@
+# [1.0.0-alpha.11](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2026-05-26)
+
+
+### Bug Fixes
+
+* add missing code block exports ([279fbe6](https://github.com/PHNTMbandit/dawn-ui-react/commit/279fbe6b4d1b6c6cf8a5fee57178c0a64861d3aa))
+
 # [1.0.0-alpha.10](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2026-05-26)
 
 
