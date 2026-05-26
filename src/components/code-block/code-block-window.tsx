@@ -1,7 +1,7 @@
 import { useCodeBlock } from './code-block'
 import { cn } from '@/utils/cn'
 
-type CodeBlockWindowProps = React.ComponentProps<'div'>
+import type { CodeBlockWindowProps } from './code-block.types'
 
 export const CodeBlockWindow = ({ className, children, ref, ...props }: CodeBlockWindowProps) => {
   const { currentValue } = useCodeBlock()
