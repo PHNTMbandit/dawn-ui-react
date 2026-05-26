@@ -1,3 +1,10 @@
+# [1.0.0-alpha.10](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2026-05-26)
+
+
+### Features
+
+* add nested dialogs ([b632538](https://github.com/PHNTMbandit/dawn-ui-react/commit/b6325380c757bd8fd32199b59e5cf81a6ef9d93a))
+
 # [1.0.0-alpha.9](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2026-05-24)
 
 
