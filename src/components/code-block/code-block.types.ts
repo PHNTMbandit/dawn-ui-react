@@ -26,6 +26,6 @@ export type CodeBlockCopyProps = React.ComponentProps<'button'>
 export type CodeBlockNameProps = React.ComponentProps<'div'>
 export type CodeBlockSelectProps = React.ComponentProps<typeof SelectTrigger>
 export type CodeBlockHeaderGroupProps = React.ComponentProps<'div'>
-export type CodeBlockTitleProps = React.ComponentProps<'div'>
 export type CodeBlockDownloadProps = React.ComponentProps<'button'>
 export type CodeBlockActionsProps = React.ComponentProps<'div'>
+export type CodeBlockWindowProps = React.ComponentProps<'div'>
