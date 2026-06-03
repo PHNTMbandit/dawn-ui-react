@@ -1,5 +1,5 @@
-import { cn } from 'dawn-ui-react'
 import { useChartTooltipPayload } from './chart-tooltip-payload'
+import { cn } from '@/utils/cn'
 
 type ChartTooltipValueProps = React.ComponentProps<'p'>
 
