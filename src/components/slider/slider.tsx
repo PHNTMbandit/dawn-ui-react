@@ -1,10 +1,11 @@
 import { Slider as BaseSlider } from '@base-ui/react'
 import { SliderThumb } from './slider-thumb'
+import { sliderVariants, type SliderProps } from './slider.types'
 import { cn } from '@/utils/cn'
 
-import type { SliderProps } from './slider.types'
-
 export const Slider = ({
+  size,
+  tone,
   defaultValue,
   description,
   label,
@@ -14,6 +15,7 @@ export const Slider = ({
   showMax = false,
   showMin = false,
   trailingIcon: TrailingIcon,
+  showThumbOnHover = true,
   value,
   className,
   ref,
@@ -26,15 +28,16 @@ export const Slider = ({
       : [min, max]
 
   return (
-    <div className="flex flex-col gap-xs">
+    <div className={cn(sliderVariants({ size, tone }), className)}>
       {label && <span className="style-text-default-0">{label}</span>}
       <BaseSlider.Root
         aria-label={label}
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={Array.isArray(value) ? value[0] : (value ?? defaultValue ?? min)}
-        className={cn('flex h-xs items-center gap-sm', className)}
+        className={cn('flex items-center gap-sm', className)}
         defaultValue={defaultValue}
+        data-slot="slider-root"
         max={max}
         min={min}
         ref={ref}
@@ -44,13 +47,21 @@ export const Slider = ({
       >
         {LeadingIcon && <LeadingIcon className="size-sm shrink-0" weight="fill" />}
         {showMin && <span className="style-text-default-0">{min}</span>}
-        <BaseSlider.Control className={'shrink-0 grow hover:cursor-pointer'}>
+        <BaseSlider.Control
+          className={
+            'shrink-0 hover:cursor-pointer data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full'
+          }
+        >
           <BaseSlider.Track
-            className={'relative h-2xs rounded-full bg-surface-low inset-shadow-2xs'}
+            data-slot="slider-track"
+            className={cn(
+              'relative size-full rounded-full',
+              !showThumbOnHover &&
+                "**:data-[slot='slider-thumb']:opacity-0 hover:**:data-[slot='slider-thumb']:opacity-100 active:**:data-[slot='slider-thumb']:opacity-100 data-dragging:**:data-[slot='slider-thumb']:opacity-100",
+            )}
           >
-            <BaseSlider.Indicator className={'rounded-full bg-brand-default'} />
+            <BaseSlider.Indicator data-slot="slider-indicator" className={'rounded-full'} />
             {Array.from({ length: _values.length }, (_, index) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: For simplicity in this case
               <SliderThumb index={index} key={index} />
             ))}
           </BaseSlider.Track>

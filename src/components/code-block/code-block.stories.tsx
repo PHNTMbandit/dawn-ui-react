@@ -253,3 +253,28 @@ export const NoHeader: Story = {
     </CodeBlock>
   ),
 }
+
+export const NoSelect: Story = {
+  name: 'Layout / No Select',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A minimal code block without a select. Use when displaying a single code snippet that does not   require navigation or labelling.',
+      },
+    },
+  },
+  render: (args) => (
+    <CodeBlock className="w-[800px]" {...args}>
+      <CodeBlockHeader>
+        <CodeBlockName />
+      </CodeBlockHeader>
+      <CodeBlockWindow>
+        <CodeBlockActions>
+          <CodeBlockDownload />
+          <CodeBlockCopy />
+        </CodeBlockActions>
+      </CodeBlockWindow>
+    </CodeBlock>
+  ),
+}
