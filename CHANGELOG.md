@@ -1,24 +1,21 @@
 # [1.0.0-alpha.10](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2026-05-26)
 
-
 ### Features
 
-* add nested dialogs ([b632538](https://github.com/PHNTMbandit/dawn-ui-react/commit/b6325380c757bd8fd32199b59e5cf81a6ef9d93a))
+- add nested dialogs ([b632538](https://github.com/PHNTMbandit/dawn-ui-react/commit/b6325380c757bd8fd32199b59e5cf81a6ef9d93a))
 
 # [1.0.0-alpha.9](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2026-05-24)
 
-
 ### Features
 
-* add code block component ([65793c3](https://github.com/PHNTMbandit/dawn-ui-react/commit/65793c3fa7d073c2f1c8916e0a188d9470d14324))
-* add shiki highlighting ([99f0c68](https://github.com/PHNTMbandit/dawn-ui-react/commit/99f0c6869cb30495e83908af4a337fa145eef2a6))
+- add code block component ([65793c3](https://github.com/PHNTMbandit/dawn-ui-react/commit/65793c3fa7d073c2f1c8916e0a188d9470d14324))
+- add shiki highlighting ([99f0c68](https://github.com/PHNTMbandit/dawn-ui-react/commit/99f0c6869cb30495e83908af4a337fa145eef2a6))
 
 # [1.0.0-alpha.8](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2026-05-22)
 
-
 ### Features
 
-* add popover button ([1ba8959](https://github.com/PHNTMbandit/dawn-ui-react/commit/1ba8959bdbc275030e20a6a89367b415f12d160e))
+- add popover button ([1ba8959](https://github.com/PHNTMbandit/dawn-ui-react/commit/1ba8959bdbc275030e20a6a89367b415f12d160e))
 
 # [1.0.0-alpha.7](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2026-05-17)
 

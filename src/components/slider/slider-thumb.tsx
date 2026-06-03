@@ -18,24 +18,22 @@ export const SliderThumb = ({ className, children, ref, ...props }: SliderThumbP
 
   return (
     <Tooltip open={isHovering || isDragging} trackCursorAxis="x">
-      <TooltipTrigger
-        delay={0}
-        render={
-          <BaseSlider.Thumb
-            className={cn(
-              'absolute aspect-square size-sm rounded-full border-2 border-brand-border-strong bg-surface shadow-xs transition-[width,height] outline-none hover:cursor-pointer data-dragging:size-md data-dragging:cursor-grabbing data-dragging:shadow-sm',
-              className,
-            )}
-            onPointerDown={() => setIsDragging(true)}
-            onPointerEnter={() => setIsHovering(true)}
-            onPointerLeave={() => setIsHovering(false)}
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </BaseSlider.Thumb>
-        }
-      />
+      <TooltipTrigger delay={0}>
+        <BaseSlider.Thumb
+          data-slot="slider-thumb"
+          className={cn(
+            'absolute aspect-square rounded-full bg-surface transition-[width,height,opacity] outline-none data-dragging:cursor-grabbing data-dragging:shadow-sm hover:[&:not([data-dragging])]:cursor-pointer',
+            className,
+          )}
+          onPointerDown={() => setIsDragging(true)}
+          onPointerEnter={() => setIsHovering(true)}
+          onPointerLeave={() => setIsHovering(false)}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </BaseSlider.Thumb>
+      </TooltipTrigger>
       <TooltipContent sideOffset={10}>
         <BaseSlider.Value />
       </TooltipContent>

@@ -119,7 +119,29 @@ export const Playground: Story = {
  */
 export const SingleValue: Story = {
   render: () => (
-    <Slider label="Brightness" defaultValue={RANGES.single} min={0} max={100} step={1} />
+    <Slider
+      label="Brightness"
+      defaultValue={RANGES.single}
+      min={0}
+      max={100}
+      step={1}
+      className={'w-[400px]'}
+    />
+  ),
+}
+
+export const VerticalOrientation: Story = {
+  render: () => (
+    <Slider
+      label="Vertical Slider"
+      description="This slider is oriented vertically."
+      defaultValue={50}
+      min={0}
+      max={100}
+      step={1}
+      orientation="vertical"
+      className={'h-[200px]'}
+    />
   ),
 }
 
@@ -236,5 +258,45 @@ export const CompositionImageSettings: Story = {
       <Slider label="Contrast" defaultValue={50} min={0} max={100} step={1} showMin showMax />
       <Slider label="Saturation" defaultValue={100} min={0} max={200} step={10} showMin showMax />
     </div>
+  ),
+}
+
+export const Tones: Story = {
+  render: () => (
+    <div className="w-[500px] space-y-lg">
+      <h3 className="style-text-strong-1">Slider Tones</h3>
+      <Slider label="Brand Tone" defaultValue={50} min={0} max={100} step={1} tone="brand" />
+      <Slider label="Accent Tone" defaultValue={50} min={0} max={100} step={1} tone="accent" />
+      <Slider label="Neutral Tone" defaultValue={50} min={0} max={100} step={1} tone="neutral" />
+      <Slider label="Error Tone" defaultValue={50} min={0} max={100} step={1} tone="error" />
+      <Slider label="Info Tone" defaultValue={50} min={0} max={100} step={1} tone="info" />
+      <Slider label="Success Tone" defaultValue={50} min={0} max={100} step={1} tone="success" />
+      <Slider label="Warning Tone" defaultValue={50} min={0} max={100} step={1} tone="warning" />
+    </div>
+  ),
+}
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="w-[500px] space-y-lg">
+      <h3 className="style-text-strong-1">Slider Sizes</h3>
+      <Slider label="Small Size" defaultValue={50} min={0} max={100} step={1} size="small" />
+      <Slider label="Medium Size" defaultValue={50} min={0} max={100} step={1} size="medium" />
+      <Slider label="Large Size" defaultValue={50} min={0} max={100} step={1} size="large" />
+    </div>
+  ),
+}
+
+export const HideThumb: Story = {
+  render: () => (
+    <Slider
+      label="Hidden Thumb"
+      description="The thumb is hidden until hover"
+      defaultValue={50}
+      min={0}
+      max={100}
+      step={1}
+      showThumbOnHover={false}
+    />
   ),
 }

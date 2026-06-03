@@ -24,7 +24,9 @@ export const Playground: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger className="hover:cursor-pointer hover:underline">Hover me</TooltipTrigger>
+        <TooltipTrigger>
+          <span className="hover:cursor-pointer hover:underline">Hover me</span>
+        </TooltipTrigger>
         <TooltipContent>Tooltip</TooltipContent>
       </Tooltip>
     </div>
@@ -35,8 +37,8 @@ export const PositionTop: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger className="hover:cursor-pointer hover:underline">
-          Top tooltip
+        <TooltipTrigger>
+          <span className="hover:cursor-pointer hover:underline">Top tooltip</span>
         </TooltipTrigger>
         <TooltipContent side="top">Shown above trigger</TooltipContent>
       </Tooltip>
@@ -48,8 +50,8 @@ export const PositionRight: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger className="hover:cursor-pointer hover:underline">
-          Right tooltip
+        <TooltipTrigger>
+          <span className="hover:cursor-pointer hover:underline">Right tooltip</span>
         </TooltipTrigger>
         <TooltipContent side="right">Shown on the right</TooltipContent>
       </Tooltip>
@@ -61,8 +63,8 @@ export const BehaviorWithOffset: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger className="hover:cursor-pointer hover:underline">
-          Offset tooltip
+        <TooltipTrigger>
+          <span className="hover:cursor-pointer hover:underline">Offset tooltip</span>
         </TooltipTrigger>
         <TooltipContent side="bottom" sideOffset={12} alignOffset={8}>
           Increased side and align offsets
