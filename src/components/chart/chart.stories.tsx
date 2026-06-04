@@ -1,5 +1,7 @@
 import { TrendDownIcon, TrendUpIcon } from '@phosphor-icons/react'
+import React from 'react'
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, LabelList, AreaChart, Area } from 'recharts'
+import { Tabs, TabsIndicator, TabsList } from '../tabs'
 import { ChartContainer } from './chart-container'
 import { ChartLegend } from './chart-legend'
 import { ChartLegendContent } from './chart-legend-content'
@@ -12,7 +14,9 @@ import { ChartTooltipLabel } from './chart-tooltip-label'
 import { ChartTooltipName } from './chart-tooltip-name'
 import { ChartTooltipPayload } from './chart-tooltip-payload'
 import { ChartTooltipValue } from './chart-tooltip-value'
+import { TabsTab } from '@/index'
 
+import type { TabsTabValue } from '../tabs/tabs.types'
 import type { ChartConfig } from './chart.types'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
@@ -411,7 +415,18 @@ export const BarChartStory: Story = {
           tickMargin={10}
           type="category"
         />
-        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent>
+              <ChartTooltipLabel />
+              <ChartTooltipPayload>
+                <ChartTooltipIndicator />
+                <ChartTooltipName />
+                <ChartTooltipValue />
+              </ChartTooltipPayload>
+            </ChartTooltipContent>
+          }
+        />
         <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.colour} />
       </BarChart>
     </ChartContainer>
@@ -468,7 +483,18 @@ export const BarChartHorizontalStory: Story = {
           tickMargin={10}
           type="category"
         />
-        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent>
+              <ChartTooltipLabel />
+              <ChartTooltipPayload>
+                <ChartTooltipIndicator />
+                <ChartTooltipName />
+                <ChartTooltipValue />
+              </ChartTooltipPayload>
+            </ChartTooltipContent>
+          }
+        />
         <Bar radius={4} dataKey="desktop" fill={chartConfig.desktop.colour} />
         <Bar radius={4} dataKey="mobile" fill={chartConfig.mobile.colour} />
       </BarChart>
@@ -491,7 +517,18 @@ export const BarChartStackedStory: Story = {
           type="category"
         />
         <ChartTooltip content={<ChartTooltipContent />} />
-        <ChartLegend content={<ChartLegendContent />} />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent>
+              <ChartTooltipLabel />
+              <ChartTooltipPayload>
+                <ChartTooltipIndicator />
+                <ChartTooltipName />
+                <ChartTooltipValue />
+              </ChartTooltipPayload>
+            </ChartTooltipContent>
+          }
+        />
         <Bar
           radius={[0, 0, 4, 4]}
           stackId={'a'}
@@ -523,7 +560,18 @@ export const BarChartLabelStory: Story = {
           tickMargin={10}
           type="category"
         />
-        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent>
+              <ChartTooltipLabel />
+              <ChartTooltipPayload>
+                <ChartTooltipIndicator />
+                <ChartTooltipName />
+                <ChartTooltipValue />
+              </ChartTooltipPayload>
+            </ChartTooltipContent>
+          }
+        />
         <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.colour}>
           <LabelList position="top" offset={12} fontSize={12} />
         </Bar>
@@ -548,7 +596,18 @@ export const BarChartCustomLabelStory: Story = {
           hide
         />
         <XAxis dataKey="desktop" type="number" hide />
-        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent>
+              <ChartTooltipLabel />
+              <ChartTooltipPayload>
+                <ChartTooltipIndicator />
+                <ChartTooltipName />
+                <ChartTooltipValue />
+              </ChartTooltipPayload>
+            </ChartTooltipContent>
+          }
+        />
         <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.colour}>
           <LabelList
             dataKey="month"
@@ -562,4 +621,55 @@ export const BarChartCustomLabelStory: Story = {
       </BarChart>
     </ChartContainer>
   ),
+}
+
+export const BarChartDataSwitch: Story = {
+  name: 'Bar / Data Switch',
+  render: (args) => {
+    const [activeChart, setActiveChart] = React.useState<keyof typeof chartConfig>('desktop')
+
+    const handleTabChange = (value: TabsTabValue) => {
+      setActiveChart(value)
+    }
+
+    return (
+      <div className="space-y-xl">
+        <Tabs fill={false} size="small" value={activeChart} onValueChange={handleTabChange}>
+          <TabsList>
+            <TabsTab value="desktop">Desktop</TabsTab>
+            <TabsTab value="mobile">Mobile</TabsTab>
+            <TabsIndicator />
+          </TabsList>
+        </Tabs>
+        <ChartContainer {...args} className="min-h-[400px] w-full">
+          <BarChart data={chartData}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              axisLine={false}
+              dataKey={'month'}
+              tickFormatter={(value) => value.slice(0, 3)}
+              tickLine={false}
+              tickMargin={10}
+              type="category"
+            />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent>
+                  <ChartTooltipLabel />
+                  <ChartTooltipPayload>
+                    <ChartTooltipIndicator />
+                    <ChartTooltipName />
+                    <ChartTooltipValue />
+                  </ChartTooltipPayload>
+                </ChartTooltipContent>
+              }
+            />
+            <Bar radius={8} dataKey={activeChart} fill={chartConfig[activeChart].colour}>
+              <LabelList position="top" offset={12} fontSize={12} />
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      </div>
+    )
+  },
 }

@@ -4,10 +4,10 @@ import { cn } from '@/utils/cn'
 
 import type { TabsProps } from '.'
 
-export const Tabs = ({ variant, fill, className, ref, ...props }: TabsProps) => {
+export const Tabs = ({ size, tone, variant, fill, className, ref, ...props }: TabsProps) => {
   return (
     <SwitchTabs.Root
-      className={cn(tabsVariants({ variant, fill }), className)}
+      className={cn(tabsVariants({ size, tone, variant, fill }), className)}
       ref={ref}
       {...props}
     />

@@ -19,16 +19,35 @@ export default {
     },
   },
   args: {
+    size: 'medium',
     variant: 'default',
     fill: true,
   },
   argTypes: {
+    size: {
+      control: { type: 'inline-radio' },
+      options: ['small', 'medium', 'large'],
+      description: 'Size of the tabs and indicator.',
+      table: {
+        type: { summary: 'small | medium | large' },
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    tone: {
+      control: { type: 'inline-radio' },
+      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
+      description: 'Color tone of the tabs.',
+      table: {
+        type: { summary: 'brand | accent | neutral | error | info | success | warning' },
+        defaultValue: { summary: 'brand' },
+      },
+    },
     variant: {
       control: { type: 'inline-radio' },
-      options: ['default', 'underline'],
+      options: ['default', 'ghost', 'underline'],
       description: 'Visual style of the tabs list.',
       table: {
-        type: { summary: 'default | underline' },
+        type: { summary: 'default | ghost | underline' },
         defaultValue: { summary: 'default' },
       },
     },
@@ -73,9 +92,29 @@ export const Playground: Story = {
   },
 }
 
+export const VariantDefault: Story = {
+  args: {
+    variant: 'default',
+    fill: true,
+  },
+  render: (args) => {
+    return BasicTemplate(args)
+  },
+}
+
 export const VariantUnderline: Story = {
   args: {
     variant: 'underline',
+    fill: true,
+  },
+  render: (args) => {
+    return BasicTemplate(args)
+  },
+}
+
+export const VariantGhost: Story = {
+  args: {
+    variant: 'ghost',
     fill: true,
   },
   render: (args) => {
