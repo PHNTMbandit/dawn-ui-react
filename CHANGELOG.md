@@ -1,3 +1,10 @@
+# [1.0.0-alpha.13](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2026-06-04)
+
+
+### Features
+
+* add tab tones ([18b2f5f](https://github.com/PHNTMbandit/dawn-ui-react/commit/18b2f5f1fcb7eb07e90d81f2cbbe555d13a830d5))
+
 # [1.0.0-alpha.12](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2026-06-03)
 
 ### Bug Fixes
