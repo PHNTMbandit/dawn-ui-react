@@ -978,6 +978,9 @@
   .w-xl {
     width: var(--spacing-xl);
   }
+  .w-xs {
+    width: var(--spacing-xs);
+  }
   .max-w-\(--available-width\) {
     max-width: var(--available-width);
   }
@@ -1041,6 +1044,9 @@
   .flex-shrink {
     flex-shrink: 1;
   }
+  .shrink {
+    flex-shrink: 1;
+  }
   .shrink-0 {
     flex-shrink: 0;
   }
@@ -1049,6 +1055,9 @@
   }
   .grow {
     flex-grow: 1;
+  }
+  .grow-0 {
+    flex-grow: 0;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -1284,6 +1293,13 @@
       margin-block-end: calc(var(--spacing-sm) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
+  .space-y-xl {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(var(--spacing-xl) * var(--tw-space-y-reverse));
+      margin-block-end: calc(var(--spacing-xl) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
   .space-y-xs {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -1313,6 +1329,9 @@
   }
   .self-center {
     align-self: center;
+  }
+  .self-end {
+    align-self: flex-end;
   }
   .truncate {
     overflow: hidden;
@@ -5959,9 +5978,75 @@
       top: calc(1 / 2 * 100%);
     }
   }
-  .\[\&_\[role\=presentation\]\]\:rounded-lg {
+  .\[\&_\[role\=presentation\]\]\:rounded-full {
     & [role='presentation'] {
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-full);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:rounded-md {
+    & [role='presentation'] {
+      border-radius: var(--radius-md);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border {
+    & [role='presentation'] {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-accent-border {
+    & [role='presentation'] {
+      border-color: var(--color-accent-border);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-brand-border {
+    & [role='presentation'] {
+      border-color: var(--color-brand-border);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-brand-border-strong {
+    & [role='presentation'] {
+      border-color: var(--color-brand-border-strong);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-error-border {
+    & [role='presentation'] {
+      border-color: var(--color-error-border);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-info-border {
+    & [role='presentation'] {
+      border-color: var(--color-info-border);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-neutral-border {
+    & [role='presentation'] {
+      border-color: var(--color-neutral-border);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-success-border {
+    & [role='presentation'] {
+      border-color: var(--color-success-border);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:border-warning-border {
+    & [role='presentation'] {
+      border-color: var(--color-warning-border);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-accent-container {
+    & [role='presentation'] {
+      background-color: var(--color-accent-container);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-accent-default {
+    & [role='presentation'] {
+      background-color: var(--color-accent-default);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-brand-container {
+    & [role='presentation'] {
+      background-color: var(--color-brand-container);
     }
   }
   .\[\&_\[role\=presentation\]\]\:bg-brand-default {
@@ -5969,9 +6054,79 @@
       background-color: var(--color-brand-default);
     }
   }
+  .\[\&_\[role\=presentation\]\]\:bg-error-container {
+    & [role='presentation'] {
+      background-color: var(--color-error-container);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-error-default {
+    & [role='presentation'] {
+      background-color: var(--color-error-default);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-info-container {
+    & [role='presentation'] {
+      background-color: var(--color-info-container);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-info-default {
+    & [role='presentation'] {
+      background-color: var(--color-info-default);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-neutral-container {
+    & [role='presentation'] {
+      background-color: var(--color-neutral-container);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-neutral-default {
+    & [role='presentation'] {
+      background-color: var(--color-neutral-default);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-success-container {
+    & [role='presentation'] {
+      background-color: var(--color-success-container);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-success-default {
+    & [role='presentation'] {
+      background-color: var(--color-success-default);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-warning-container {
+    & [role='presentation'] {
+      background-color: var(--color-warning-container);
+    }
+  }
+  .\[\&_\[role\=presentation\]\]\:bg-warning-default {
+    & [role='presentation'] {
+      background-color: var(--color-warning-default);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:h-2xl {
+    & [role='tab'] {
+      height: var(--spacing-2xl);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:h-lg {
+    & [role='tab'] {
+      height: var(--spacing-lg);
+    }
+  }
   .\[\&_\[role\=tab\]\]\:h-xl {
     & [role='tab'] {
       height: var(--spacing-xl);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:w-fit {
+    & [role='tab'] {
+      width: fit-content;
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:w-xs {
+    & [role='tab'] {
+      width: var(--spacing-xs);
     }
   }
   .\[\&_\[role\=tab\]\]\:grow {
@@ -5979,9 +6134,24 @@
       flex-grow: 1;
     }
   }
-  .\[\&_\[role\=tab\]\]\:rounded-lg {
+  .\[\&_\[role\=tab\]\]\:rounded-full {
     & [role='tab'] {
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-full);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:rounded-md {
+    & [role='tab'] {
+      border-radius: var(--radius-md);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:px-2xl {
+    & [role='tab'] {
+      padding-inline: var(--spacing-2xl);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:px-lg {
+    & [role='tab'] {
+      padding-inline: var(--spacing-lg);
     }
   }
   .\[\&_\[role\=tab\]\]\:px-md {
@@ -5994,6 +6164,40 @@
       padding-inline: var(--spacing-sm);
     }
   }
+  .\[\&_\[role\=tab\]\]\:px-xl {
+    & [role='tab'] {
+      padding-inline: var(--spacing-xl);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:px-xs {
+    & [role='tab'] {
+      padding-inline: var(--spacing-xs);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:pb-2xs {
+    & [role='tab'] {
+      padding-bottom: var(--spacing-2xs);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:pb-sm {
+    & [role='tab'] {
+      padding-bottom: var(--spacing-sm);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:pb-xs {
+    & [role='tab'] {
+      padding-bottom: var(--spacing-xs);
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:style-text-default--1 {
+    & [role='tab'] {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: var(--text-sm);
+      line-height: normal;
+      letter-spacing: normal;
+    }
+  }
   .\[\&_\[role\=tab\]\]\:style-text-default-0 {
     & [role='tab'] {
       font-family: var(--font-body);
@@ -6003,10 +6207,47 @@
       letter-spacing: normal;
     }
   }
+  .\[\&_\[role\=tab\]\]\:style-text-default-1 {
+    & [role='tab'] {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: var(--text-lg);
+      line-height: normal;
+      letter-spacing: normal;
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-accent-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-accent-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-accent-on-container {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-accent-on-container);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-accent-on-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-accent-on-default);
+      }
+    }
+  }
   .\[\&_\[role\=tab\]\]\:data-active\:text-brand-default {
     & [role='tab'] {
       &[data-active] {
         color: var(--color-brand-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-brand-on-container {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-brand-on-container);
       }
     }
   }
@@ -6015,6 +6256,121 @@
       &[data-active] {
         color: var(--color-brand-on-default);
       }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-error-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-error-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-error-on-container {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-error-on-container);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-error-on-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-error-on-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-info-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-info-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-info-on-container {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-info-on-container);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-info-on-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-info-on-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-neutral-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-neutral-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-neutral-on-container {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-neutral-on-container);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-neutral-on-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-neutral-on-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-success-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-success-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-success-on-container {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-success-on-container);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-success-on-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-success-on-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-warning-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-warning-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-warning-on-container {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-warning-on-container);
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:data-active\:text-warning-on-default {
+    & [role='tab'] {
+      &[data-active] {
+        color: var(--color-warning-on-default);
+      }
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:h-2xl {
+    & [role='tablist'] {
+      height: var(--spacing-2xl);
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:h-lg {
+    & [role='tablist'] {
+      height: var(--spacing-lg);
     }
   }
   .\[\&_\[role\=tablist\]\]\:h-xl {
@@ -6032,9 +6388,29 @@
       width: 100%;
     }
   }
+  .\[\&_\[role\=tablist\]\]\:gap-2xs {
+    & [role='tablist'] {
+      gap: var(--spacing-2xs);
+    }
+  }
   .\[\&_\[role\=tablist\]\]\:gap-lg {
     & [role='tablist'] {
       gap: var(--spacing-lg);
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:gap-md {
+    & [role='tablist'] {
+      gap: var(--spacing-md);
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:gap-sm {
+    & [role='tablist'] {
+      gap: var(--spacing-sm);
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:gap-xl {
+    & [role='tablist'] {
+      gap: var(--spacing-xl);
     }
   }
   .\[\&_\[role\=tablist\]\]\:gap-xs {
@@ -6042,15 +6418,37 @@
       gap: var(--spacing-xs);
     }
   }
+  .\[\&_\[role\=tablist\]\]\:self-start {
+    & [role='tablist'] {
+      align-self: flex-start;
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:rounded-full {
+    & [role='tablist'] {
+      border-radius: var(--radius-full);
+    }
+  }
   .\[\&_\[role\=tablist\]\]\:rounded-lg {
     & [role='tablist'] {
       border-radius: var(--radius-lg);
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:border-b-2 {
+    & [role='tablist'] {
+      border-bottom-style: var(--tw-border-style);
+      border-bottom-width: 2px;
     }
   }
   .\[\&_\[role\=tablist\]\]\:border-b-3 {
     & [role='tablist'] {
       border-bottom-style: var(--tw-border-style);
       border-bottom-width: 3px;
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:border-b-4 {
+    & [role='tablist'] {
+      border-bottom-style: var(--tw-border-style);
+      border-bottom-width: 4px;
     }
   }
   .\[\&_\[role\=tablist\]\]\:border-border {
@@ -6063,9 +6461,19 @@
       background-color: var(--color-surface-low);
     }
   }
+  .\[\&_\[role\=tablist\]\]\:p-2xs {
+    & [role='tablist'] {
+      padding: var(--spacing-2xs);
+    }
+  }
   .\[\&_\[role\=tablist\]\]\:p-3xs {
     & [role='tablist'] {
       padding: var(--spacing-3xs);
+    }
+  }
+  .\[\&_\[role\=tablist\]\]\:p-xs {
+    & [role='tablist'] {
+      padding: var(--spacing-xs);
     }
   }
   .\[\&_button\]\:shrink-0 {
@@ -6254,10 +6662,31 @@
       padding: var(--spacing-0);
     }
   }
+  .\*\*\:\[\[role\=presentation\]\]\:bottom-\[-3px\] {
+    :is(& *) {
+      &:is([role='presentation']) {
+        bottom: -3px;
+      }
+    }
+  }
   .\*\*\:\[\[role\=presentation\]\]\:bottom-\[-4px\] {
     :is(& *) {
       &:is([role='presentation']) {
         bottom: -4px;
+      }
+    }
+  }
+  .\*\*\:\[\[role\=presentation\]\]\:bottom-\[-5px\] {
+    :is(& *) {
+      &:is([role='presentation']) {
+        bottom: -5px;
+      }
+    }
+  }
+  .\*\*\:\[\[role\=presentation\]\]\:h-\[2px\] {
+    :is(& *) {
+      &:is([role='presentation']) {
+        height: 2px;
       }
     }
   }
@@ -6268,9 +6697,34 @@
       }
     }
   }
+  .\*\*\:\[\[role\=presentation\]\]\:h-\[4px\] {
+    :is(& *) {
+      &:is([role='presentation']) {
+        height: 4px;
+      }
+    }
+  }
+  .\*\*\:\[\[role\=presentation\]\]\:bg-\(--dawn-tabs-indicator-color\) {
+    :is(& *) {
+      &:is([role='presentation']) {
+        background-color: var(--dawn-tabs-indicator-color);
+      }
+    }
+  }
   .\[\&\:not\(\:has\(\[data-chips\]\)\)\>\[role\=separator\]\]\:hidden {
     &:not(:has([data-chips])) > [role='separator'] {
       display: none;
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-accent-default {
+    & [role='tab'] {
+      &:hover {
+        @media (hover: hover) {
+          &:not([data-active]) {
+            color: var(--color-accent-default);
+          }
+        }
+      }
     }
   }
   .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-brand-default {
@@ -6279,6 +6733,61 @@
         @media (hover: hover) {
           &:not([data-active]) {
             color: var(--color-brand-default);
+          }
+        }
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-error-default {
+    & [role='tab'] {
+      &:hover {
+        @media (hover: hover) {
+          &:not([data-active]) {
+            color: var(--color-error-default);
+          }
+        }
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-info-default {
+    & [role='tab'] {
+      &:hover {
+        @media (hover: hover) {
+          &:not([data-active]) {
+            color: var(--color-info-default);
+          }
+        }
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-neutral-default {
+    & [role='tab'] {
+      &:hover {
+        @media (hover: hover) {
+          &:not([data-active]) {
+            color: var(--color-neutral-default);
+          }
+        }
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-success-default {
+    & [role='tab'] {
+      &:hover {
+        @media (hover: hover) {
+          &:not([data-active]) {
+            color: var(--color-success-default);
+          }
+        }
+      }
+    }
+  }
+  .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-warning-default {
+    & [role='tab'] {
+      &:hover {
+        @media (hover: hover) {
+          &:not([data-active]) {
+            color: var(--color-warning-default);
           }
         }
       }

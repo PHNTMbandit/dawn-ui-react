@@ -1,21 +1,18 @@
 # [1.0.0-alpha.12](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2026-06-03)
 
-
 ### Bug Fixes
 
-* use utils cn ([bce3b04](https://github.com/PHNTMbandit/dawn-ui-react/commit/bce3b0421dbe6f66b1156a7a26f31b182eb540ad))
-
+- use utils cn ([bce3b04](https://github.com/PHNTMbandit/dawn-ui-react/commit/bce3b0421dbe6f66b1156a7a26f31b182eb540ad))
 
 ### Features
 
-* add chart component ([8095769](https://github.com/PHNTMbandit/dawn-ui-react/commit/8095769c6002d8fcba295410e55376bc63bfe531))
+- add chart component ([8095769](https://github.com/PHNTMbandit/dawn-ui-react/commit/8095769c6002d8fcba295410e55376bc63bfe531))
 
 # [1.0.0-alpha.11](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2026-05-26)
 
-
 ### Bug Fixes
 
-* add missing code block exports ([279fbe6](https://github.com/PHNTMbandit/dawn-ui-react/commit/279fbe6b4d1b6c6cf8a5fee57178c0a64861d3aa))
+- add missing code block exports ([279fbe6](https://github.com/PHNTMbandit/dawn-ui-react/commit/279fbe6b4d1b6c6cf8a5fee57178c0a64861d3aa))
 
 # [1.0.0-alpha.10](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2026-05-26)
 
