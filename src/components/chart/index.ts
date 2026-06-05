@@ -16,6 +16,7 @@ export type {
   ChartLegendIndicatorProps,
   ChartTooltipIconProps,
   ChartLegendPayloadProps,
+  ChartTooltipValueProps,
 } from './chart.types'
 
 export { ChartContainer } from './chart-container'
@@ -33,3 +34,6 @@ export { ChartLegendLabel } from './chart-legend-label'
 export { ChartLegendIndicator } from './chart-legend-indicator'
 export { ChartTooltipIcon } from './chart-tooltip-icon'
 export { getPayloadConfigFromPayload } from './chart.utils'
+export { ChartTooltipValue } from './chart-tooltip-value'
+export { useChart } from './chart-container'
+export { ChartContainerContext } from './chart-container'

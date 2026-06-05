@@ -1,14 +1,12 @@
 import React from 'react'
-import { ResponsiveContainer } from 'recharts'
 import { cn } from '@/utils/cn'
 
 import type { ChartContainerContextProps, ChartContainerProps } from './chart.types'
 
-const ChartContainerContext = React.createContext<ChartContainerContextProps | null>(null)
+export const ChartContainerContext = React.createContext<ChartContainerContextProps | null>(null)
 
 export const ChartContainer = ({
   id,
-  initialDimension = { width: 320, height: 200 },
   config,
   className,
   children,
@@ -30,7 +28,7 @@ export const ChartContainer = ({
         ref={ref}
         {...props}
       >
-        <ResponsiveContainer initialDimension={initialDimension}>{children}</ResponsiveContainer>
+        {children}
       </div>
     </ChartContainerContext.Provider>
   )
