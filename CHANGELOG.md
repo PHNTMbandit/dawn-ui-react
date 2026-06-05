@@ -1,3 +1,10 @@
+# [1.0.0-alpha.15](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2026-06-05)
+
+
+### Features
+
+* add virtualized combobox list ([ecc539d](https://github.com/PHNTMbandit/dawn-ui-react/commit/ecc539d1a660c23e2370ccf6eff3630a2911d70d))
+
 # [1.0.0-alpha.14](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2026-06-05)
 
 
