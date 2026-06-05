@@ -1,3 +1,10 @@
+# [1.0.0-alpha.14](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2026-06-05)
+
+
+### Bug Fixes
+
+* **rr:** add missing exports for chart component ([d2589e8](https://github.com/PHNTMbandit/dawn-ui-react/commit/d2589e85018a92a51928c7fbfc1c64003b3f9aaf))
+
 # [1.0.0-alpha.13](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2026-06-04)
 
 
