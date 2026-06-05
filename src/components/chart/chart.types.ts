@@ -47,3 +47,4 @@ export type ChartLegendLabelProps = React.ComponentProps<'p'>
 export type ChartLegendIndicatorProps = React.ComponentProps<'div'> & {
   shape?: 'circle' | 'square' | 'diamond' | 'triangle' | 'wye' | 'line'
 }
+export type ChartTooltipValueProps = React.ComponentProps<'p'>

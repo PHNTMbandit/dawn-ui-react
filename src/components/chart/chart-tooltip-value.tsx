@@ -1,7 +1,7 @@
 import { useChartTooltipPayload } from './chart-tooltip-payload'
 import { cn } from '@/utils/cn'
 
-type ChartTooltipValueProps = React.ComponentProps<'p'>
+import type { ChartTooltipValueProps } from './chart.types'
 
 export const ChartTooltipValue = ({
   className,
