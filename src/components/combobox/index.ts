@@ -14,6 +14,9 @@ export type {
   ComboboxStatusProps,
   ComboboxTriggerProps,
   ComboboxValueProps,
+  ComboboxVirtualizedListProps,
+  useFilteredItems,
+  useFilter,
 } from './combobox.types'
 export { ComboboxChip } from './combobox-chip'
 export { ComboboxChips } from './combobox-chips'
@@ -28,3 +31,4 @@ export { ComboboxPopup } from './combobox-popup'
 export { ComboboxStatus } from './combobox-status'
 export { ComboboxTrigger } from './combobox-trigger'
 export { ComboboxValue } from './combobox-value'
+export { ComboboxVirtualizedList } from './combobox-virtualized-list'

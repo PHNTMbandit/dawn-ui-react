@@ -14,9 +14,11 @@ import { ComboboxPopup } from './combobox-popup'
 import { ComboboxStatus } from './combobox-status'
 import { ComboboxTrigger } from './combobox-trigger'
 import { ComboboxValue } from './combobox-value'
+import { ComboboxVirtualizedList } from './combobox-virtualized-list'
 import { useFilter } from './combobox.types'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Virtualizer } from '@tanstack/react-virtual'
 
 interface Fruit {
   label: string
@@ -908,6 +910,51 @@ export const AsyncLoading: Story = {
               </ComboboxItem>
             )}
           </ComboboxList>
+        </ComboboxPopup>
+      </Combobox>
+    )
+  },
+}
+
+export const Virtualized: Story = {
+  args: {
+    items: countries,
+  },
+  render: (args) => {
+    const [open, setOpen] = React.useState(false)
+    const virtualizerRef = React.useRef<Virtualizer<HTMLDivElement, HTMLDivElement> | null>(null)
+
+    return (
+      <Combobox
+        {...args}
+        virtualized
+        items={countries}
+        open={open}
+        onOpenChange={setOpen}
+        onItemHighlighted={(item, { reason, index }) => {
+          const virtualizer = virtualizerRef.current
+
+          if (!item || !virtualizer) {
+            return
+          }
+
+          const isStart = index === 0
+          const isEnd = index === virtualizer.options.count - 1
+          const shouldScroll = reason === 'none' || (reason === 'keyboard' && (isStart || isEnd))
+
+          if (shouldScroll) {
+            queueMicrotask(() => {
+              virtualizer.scrollToIndex(index, { align: isEnd ? 'start' : 'end' })
+            })
+          }
+        }}
+      >
+        <ComboboxInput placeholder="Select a country" />
+        <ComboboxPopup align="start" sideOffset={4}>
+          <ComboboxEmpty>No options found</ComboboxEmpty>
+          <ComboboxVirtualizedList estimateSize={195} open={open} virtualizerRef={virtualizerRef}>
+            {(country: Country) => <>{country.label}</>}
+          </ComboboxVirtualizedList>
         </ComboboxPopup>
       </Combobox>
     )

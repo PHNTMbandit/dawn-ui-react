@@ -1,6 +1,7 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 
 import type { inputVariants } from '../input/input.types'
+import type { Virtualizer } from '@tanstack/react-virtual'
 import type { VariantProps } from 'class-variance-authority'
 
 export type ComboboxEmptyProps = React.ComponentProps<typeof BaseCombobox.Empty>
@@ -22,4 +23,12 @@ export type ComboboxGroupProps = React.ComponentProps<typeof BaseCombobox.Group>
 export type ComboboxGroupLabelProps = React.ComponentProps<typeof BaseCombobox.GroupLabel>
 export type ComboboxCollectionProps = React.ComponentProps<typeof BaseCombobox.Collection>
 export type ComboboxStatusProps = React.ComponentProps<typeof BaseCombobox.Status>
+export type ComboboxVirtualizedListProps<TItem> = Omit<React.ComponentProps<'div'>, 'children'> & {
+  open: boolean
+  virtualizerRef?: React.RefObject<Virtualizer<HTMLDivElement, HTMLDivElement> | null>
+  estimateSize?: number
+  overscan?: number
+  children?: React.ReactNode | ((item: TItem) => React.ReactNode)
+}
 export const useFilter = BaseCombobox.useFilter
+export const useFilteredItems = BaseCombobox.useFilteredItems
