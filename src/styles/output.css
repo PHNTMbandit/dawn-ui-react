@@ -789,6 +789,9 @@
   .h-\[800px\] {
     height: 800px;
   }
+  .h-\[min\(22\.5rem\,var\(--total-size\)\)\] {
+    height: min(22.5rem, var(--total-size));
+  }
   .h-full {
     height: 100%;
   }
@@ -978,9 +981,6 @@
   .w-xl {
     width: var(--spacing-xl);
   }
-  .w-xs {
-    width: var(--spacing-xs);
-  }
   .max-w-\(--available-width\) {
     max-width: var(--available-width);
   }
@@ -1044,9 +1044,6 @@
   .flex-shrink {
     flex-shrink: 1;
   }
-  .shrink {
-    flex-shrink: 1;
-  }
   .shrink-0 {
     flex-shrink: 0;
   }
@@ -1055,9 +1052,6 @@
   }
   .grow {
     flex-grow: 1;
-  }
-  .grow-0 {
-    flex-grow: 0;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -1198,6 +1192,9 @@
   .grid-cols-\[1fr_2rem\] {
     grid-template-columns: 1fr 2rem;
   }
+  .grid-cols-\[1rem_1fr\] {
+    grid-template-columns: 1rem 1fr;
+  }
   .grid-cols-\[auto_auto\] {
     grid-template-columns: auto auto;
   }
@@ -1329,9 +1326,6 @@
   }
   .self-center {
     align-self: center;
-  }
-  .self-end {
-    align-self: flex-end;
   }
   .truncate {
     overflow: hidden;
@@ -2875,9 +2869,24 @@
       border-bottom-right-radius: var(--radius-xl);
     }
   }
+  .first-of-type\:mt-0 {
+    &:first-of-type {
+      margin-top: var(--spacing-0);
+    }
+  }
+  .first-of-type\:mt-0\! {
+    &:first-of-type {
+      margin-top: var(--spacing-0) !important;
+    }
+  }
   .first-of-type\:mt-2xs {
     &:first-of-type {
       margin-top: var(--spacing-2xs);
+    }
+  }
+  .last-of-type\:mb-0 {
+    &:last-of-type {
+      margin-bottom: var(--spacing-0);
     }
   }
   .last-of-type\:mb-2xs {
@@ -4042,6 +4051,14 @@
       content: var(--tw-content);
       &[data-highlighted] {
         inset: 0px;
+      }
+    }
+  }
+  .data-highlighted\:before\:inset-0 {
+    &[data-highlighted] {
+      &::before {
+        content: var(--tw-content);
+        inset: var(--spacing-0);
       }
     }
   }
@@ -5983,11 +6000,6 @@
       border-radius: var(--radius-full);
     }
   }
-  .\[\&_\[role\=presentation\]\]\:rounded-md {
-    & [role='presentation'] {
-      border-radius: var(--radius-md);
-    }
-  }
   .\[\&_\[role\=presentation\]\]\:border {
     & [role='presentation'] {
       border-style: var(--tw-border-style);
@@ -6002,11 +6014,6 @@
   .\[\&_\[role\=presentation\]\]\:border-brand-border {
     & [role='presentation'] {
       border-color: var(--color-brand-border);
-    }
-  }
-  .\[\&_\[role\=presentation\]\]\:border-brand-border-strong {
-    & [role='presentation'] {
-      border-color: var(--color-brand-border-strong);
     }
   }
   .\[\&_\[role\=presentation\]\]\:border-error-border {
@@ -6119,16 +6126,6 @@
       height: var(--spacing-xl);
     }
   }
-  .\[\&_\[role\=tab\]\]\:w-fit {
-    & [role='tab'] {
-      width: fit-content;
-    }
-  }
-  .\[\&_\[role\=tab\]\]\:w-xs {
-    & [role='tab'] {
-      width: var(--spacing-xs);
-    }
-  }
   .\[\&_\[role\=tab\]\]\:grow {
     & [role='tab'] {
       flex-grow: 1;
@@ -6137,11 +6134,6 @@
   .\[\&_\[role\=tab\]\]\:rounded-full {
     & [role='tab'] {
       border-radius: var(--radius-full);
-    }
-  }
-  .\[\&_\[role\=tab\]\]\:rounded-md {
-    & [role='tab'] {
-      border-radius: var(--radius-md);
     }
   }
   .\[\&_\[role\=tab\]\]\:px-2xl {
@@ -6167,11 +6159,6 @@
   .\[\&_\[role\=tab\]\]\:px-xl {
     & [role='tab'] {
       padding-inline: var(--spacing-xl);
-    }
-  }
-  .\[\&_\[role\=tab\]\]\:px-xs {
-    & [role='tab'] {
-      padding-inline: var(--spacing-xs);
     }
   }
   .\[\&_\[role\=tab\]\]\:pb-2xs {
@@ -6418,19 +6405,9 @@
       gap: var(--spacing-xs);
     }
   }
-  .\[\&_\[role\=tablist\]\]\:self-start {
-    & [role='tablist'] {
-      align-self: flex-start;
-    }
-  }
   .\[\&_\[role\=tablist\]\]\:rounded-full {
     & [role='tablist'] {
       border-radius: var(--radius-full);
-    }
-  }
-  .\[\&_\[role\=tablist\]\]\:rounded-lg {
-    & [role='tablist'] {
-      border-radius: var(--radius-lg);
     }
   }
   .\[\&_\[role\=tablist\]\]\:border-b-2 {
@@ -6701,13 +6678,6 @@
     :is(& *) {
       &:is([role='presentation']) {
         height: 4px;
-      }
-    }
-  }
-  .\*\*\:\[\[role\=presentation\]\]\:bg-\(--dawn-tabs-indicator-color\) {
-    :is(& *) {
-      &:is([role='presentation']) {
-        background-color: var(--dawn-tabs-indicator-color);
       }
     }
   }
