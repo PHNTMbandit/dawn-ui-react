@@ -40,7 +40,10 @@ export const ComboboxInput = ({
   return (
     <InputGroup
       variant={variant}
-      className="flex h-full! max-w-[500px] flex-wrap py-xs [&:has([data-chips]:empty)>[role=separator]]:hidden [&:has([data-chips]:not(:empty))]:rounded-xl [&:not(:has([data-chips]))>[role=separator]]:hidden"
+      className={cn(
+        'flex flex-wrap py-xs [&:has([data-chips]:empty)>[role=separator]]:hidden [&:has([data-chips]:not(:empty))]:rounded-xl [&:not(:has([data-chips]))>[role=separator]]:hidden',
+        className,
+      )}
     >
       {children}
       <Separator weight={'thinnest'} />
@@ -57,7 +60,6 @@ export const ComboboxInput = ({
         <InputGroupAddon>
           <BaseCombobox.Clear
             aria-label="Clear selection"
-            className={cn(className)}
             keepMounted
             render={(e) => (
               <Button onClick={e.onClick} size={'iconExtraSmall'} variant="ghost" tone="error">
