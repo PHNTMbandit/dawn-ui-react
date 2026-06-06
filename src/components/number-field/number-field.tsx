@@ -5,7 +5,14 @@ import { Button } from '../button'
 import { numberFieldVariants, type NumberFieldTypesProps } from './number-field.types'
 import { cn } from '@/utils/cn'
 
-export const NumberField = ({ label, size, className, ref, ...props }: NumberFieldTypesProps) => {
+export const NumberField = ({
+  children,
+  label,
+  size,
+  className,
+  ref,
+  ...props
+}: NumberFieldTypesProps) => {
   const id = React.useId()
   const {
     min,
@@ -79,7 +86,7 @@ export const NumberField = ({ label, size, className, ref, ...props }: NumberFie
           <CursorGrowIcon />
         </BaseNumberField.ScrubAreaCursor>
       </BaseNumberField.ScrubArea>
-      <BaseNumberField.Group className="flex w-full items-center">
+      <BaseNumberField.Group className="relative flex w-full items-center gap-3xs">
         <BaseNumberField.Decrement
           render={(stepperProps) => (
             <Button
@@ -94,6 +101,9 @@ export const NumberField = ({ label, size, className, ref, ...props }: NumberFie
           )}
         />
         <BaseNumberField.Input className="w-full text-center style-text-default-0 focus:outline-none" />
+        <div className="absolute right-2xl style-text-default-0 text-on-surface-variant">
+          {children}
+        </div>
         <BaseNumberField.Increment
           render={(stepperProps) => (
             <Button

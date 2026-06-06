@@ -464,6 +464,9 @@
   .right-0 {
     right: var(--spacing-0);
   }
+  .right-2xl {
+    right: var(--spacing-2xl);
+  }
   .right-2xs {
     right: var(--spacing-2xs);
   }
@@ -475,6 +478,15 @@
   }
   .right-\[1rem\] {
     right: 1rem;
+  }
+  .right-lg {
+    right: var(--spacing-lg);
+  }
+  .right-xl {
+    right: var(--spacing-xl);
+  }
+  .right-xs {
+    right: var(--spacing-xs);
   }
   .bottom-0 {
     bottom: var(--spacing-0);
@@ -795,9 +807,6 @@
   .h-full {
     height: 100%;
   }
-  .h-full\! {
-    height: 100% !important;
-  }
   .h-lg {
     height: var(--spacing-lg);
   }
@@ -917,6 +926,12 @@
   }
   .w-\[18rem\] {
     width: 18rem;
+  }
+  .w-\[100px\] {
+    width: 100px;
+  }
+  .w-\[200px\] {
+    width: 200px;
   }
   .w-\[250px\] {
     width: 250px;
@@ -1191,9 +1206,6 @@
   }
   .grid-cols-\[1fr_2rem\] {
     grid-template-columns: 1fr 2rem;
-  }
-  .grid-cols-\[1rem_1fr\] {
-    grid-template-columns: 1rem 1fr;
   }
   .grid-cols-\[auto_auto\] {
     grid-template-columns: auto auto;
@@ -2869,11 +2881,6 @@
       border-bottom-right-radius: var(--radius-xl);
     }
   }
-  .first-of-type\:mt-0 {
-    &:first-of-type {
-      margin-top: var(--spacing-0);
-    }
-  }
   .first-of-type\:mt-0\! {
     &:first-of-type {
       margin-top: var(--spacing-0) !important;
@@ -2882,11 +2889,6 @@
   .first-of-type\:mt-2xs {
     &:first-of-type {
       margin-top: var(--spacing-2xs);
-    }
-  }
-  .last-of-type\:mb-0 {
-    &:last-of-type {
-      margin-bottom: var(--spacing-0);
     }
   }
   .last-of-type\:mb-2xs {
@@ -4051,14 +4053,6 @@
       content: var(--tw-content);
       &[data-highlighted] {
         inset: 0px;
-      }
-    }
-  }
-  .data-highlighted\:before\:inset-0 {
-    &[data-highlighted] {
-      &::before {
-        content: var(--tw-content);
-        inset: var(--spacing-0);
       }
     }
   }
@@ -6456,6 +6450,15 @@
   .\[\&_button\]\:shrink-0 {
     & button {
       flex-shrink: 0;
+    }
+  }
+  .\[\&_input\]\:style-text-default--1 {
+    & input {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: var(--text-sm);
+      line-height: normal;
+      letter-spacing: normal;
     }
   }
   .\[\&_input\]\:style-text-default-0 {

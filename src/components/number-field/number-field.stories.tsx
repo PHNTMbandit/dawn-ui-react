@@ -164,3 +164,17 @@ export const Invalid: Story = {
     },
   },
 }
+
+export const Suffix: Story = {
+  name: 'Appearance / Suffix',
+  args: {
+    label: 'Duration',
+    defaultValue: 60,
+    step: 30,
+  },
+  render: (args) => (
+    <NumberField {...args} id="number-field-suffix" className={'w-[200px]'}>
+      rem
+    </NumberField>
+  ),
+}

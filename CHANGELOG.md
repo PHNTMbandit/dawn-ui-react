@@ -1,30 +1,26 @@
 # [1.0.0-alpha.16](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2026-06-06)
 
-
 ### Bug Fixes
 
-* fix combobox input height ([6fefa2e](https://github.com/PHNTMbandit/dawn-ui-react/commit/6fefa2e63f43b91b12d03c11549f7411ab446c3c))
+- fix combobox input height ([6fefa2e](https://github.com/PHNTMbandit/dawn-ui-react/commit/6fefa2e63f43b91b12d03c11549f7411ab446c3c))
 
 # [1.0.0-alpha.15](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2026-06-05)
 
-
 ### Features
 
-* add virtualized combobox list ([ecc539d](https://github.com/PHNTMbandit/dawn-ui-react/commit/ecc539d1a660c23e2370ccf6eff3630a2911d70d))
+- add virtualized combobox list ([ecc539d](https://github.com/PHNTMbandit/dawn-ui-react/commit/ecc539d1a660c23e2370ccf6eff3630a2911d70d))
 
 # [1.0.0-alpha.14](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2026-06-05)
 
-
 ### Bug Fixes
 
-* **rr:** add missing exports for chart component ([d2589e8](https://github.com/PHNTMbandit/dawn-ui-react/commit/d2589e85018a92a51928c7fbfc1c64003b3f9aaf))
+- **rr:** add missing exports for chart component ([d2589e8](https://github.com/PHNTMbandit/dawn-ui-react/commit/d2589e85018a92a51928c7fbfc1c64003b3f9aaf))
 
 # [1.0.0-alpha.13](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2026-06-04)
 
-
 ### Features
 
-* add tab tones ([18b2f5f](https://github.com/PHNTMbandit/dawn-ui-react/commit/18b2f5f1fcb7eb07e90d81f2cbbe555d13a830d5))
+- add tab tones ([18b2f5f](https://github.com/PHNTMbandit/dawn-ui-react/commit/18b2f5f1fcb7eb07e90d81f2cbbe555d13a830d5))
 
 # [1.0.0-alpha.12](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2026-06-03)
 
