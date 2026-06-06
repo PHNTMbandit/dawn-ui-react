@@ -1,3 +1,10 @@
+# [1.0.0-alpha.17](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2026-06-06)
+
+
+### Features
+
+* add children functionality to number field ([12eabf8](https://github.com/PHNTMbandit/dawn-ui-react/commit/12eabf83bf5faedc0b1c51a09d255c9b0cd71fd5))
+
 # [1.0.0-alpha.16](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2026-06-06)
 
 ### Bug Fixes
