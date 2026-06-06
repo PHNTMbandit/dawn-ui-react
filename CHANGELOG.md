@@ -1,3 +1,10 @@
+# [1.0.0-alpha.16](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2026-06-06)
+
+
+### Bug Fixes
+
+* fix combobox input height ([6fefa2e](https://github.com/PHNTMbandit/dawn-ui-react/commit/6fefa2e63f43b91b12d03c11549f7411ab446c3c))
+
 # [1.0.0-alpha.15](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2026-06-05)
 
 
