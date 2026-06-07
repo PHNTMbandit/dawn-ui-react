@@ -1,3 +1,10 @@
+# [1.0.0-alpha.18](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2026-06-07)
+
+
+### Features
+
+* add colour variant for input component ([fa9a099](https://github.com/PHNTMbandit/dawn-ui-react/commit/fa9a099528dfdc856c8aa2495b7e2f9c6890fc10))
+
 # [1.0.0-alpha.17](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2026-06-06)
 
 ### Features
