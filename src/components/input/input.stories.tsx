@@ -14,6 +14,13 @@ export default {
         defaultValue: { summary: 'primary' },
       },
     },
+    compact: {
+      control: 'boolean',
+      description: 'When true, renders a compact color input trigger for the color type.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     size: {
       control: 'select',
       options: ['small', 'medium', 'large'],
@@ -48,6 +55,7 @@ export default {
     },
   },
   args: {
+    compact: false,
     variant: 'primary',
     size: 'medium',
     type: 'text',
