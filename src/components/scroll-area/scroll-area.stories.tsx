@@ -55,11 +55,18 @@ const works: Artwork[] = [
 const VerticalTemplate = ({
   orientation,
   defaultHeight,
+  variant,
 }: {
-  orientation?: 'vertical' | 'horizontal'
   defaultHeight?: number
+  orientation: 'vertical' | 'horizontal' | undefined | null
+  variant: 'default' | 'ghost' | 'outline' | undefined | null
 }) => (
-  <ScrollArea className="w-[400px]" defaultHeight={defaultHeight} orientation={orientation}>
+  <ScrollArea
+    className="w-[400px]"
+    defaultHeight={defaultHeight}
+    orientation={orientation}
+    variant={variant}
+  >
     <div className="space-y-sm px-2xs">
       <h4 className="style-text-strong--1 text-on-surface">Scrollable Article</h4>
       {ARTICLE_PARAGRAPHS.map((paragraph, index) => (
@@ -74,12 +81,14 @@ const VerticalTemplate = ({
 const HorizontalTemplate = ({
   orientation,
   defaultHeight,
+  variant,
 }: {
-  orientation?: 'vertical' | 'horizontal'
+  orientation: 'vertical' | 'horizontal' | undefined | null
   defaultHeight?: number
+  variant: 'default' | 'ghost' | 'outline' | undefined | null
 }) => (
   <div className="h-[220px] w-[640px]">
-    <ScrollArea defaultHeight={defaultHeight} orientation={orientation}>
+    <ScrollArea defaultHeight={defaultHeight} orientation={orientation} variant={variant}>
       {works.map((artwork, index) => (
         <figure className="shrink-0" key={`${artwork.artist}-${index}`}>
           <div className="overflow-hidden rounded-md">
@@ -119,6 +128,14 @@ export default {
         defaultValue: { summary: '200' },
       },
     },
+    variant: {
+      control: { type: 'select' },
+      options: ['default', 'ghost', 'outline'],
+      description: 'Visual style variants that adjust background and scrollbar chrome.',
+      table: {
+        defaultValue: { summary: 'default' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -132,9 +149,14 @@ export default {
   args: {
     orientation: 'vertical',
     defaultHeight: 200,
+    variant: 'default',
   },
   render: (args) => (
-    <VerticalTemplate defaultHeight={args.defaultHeight} orientation={args.orientation} />
+    <VerticalTemplate
+      defaultHeight={args.defaultHeight}
+      orientation={args.orientation}
+      variant={args.variant}
+    />
   ),
 } satisfies Meta<typeof ScrollArea>
 
@@ -161,7 +183,11 @@ export const Horizontal: Story = {
     defaultHeight: 150,
   },
   render: (args) => (
-    <HorizontalTemplate defaultHeight={args.defaultHeight} orientation={args.orientation} />
+    <HorizontalTemplate
+      defaultHeight={args.defaultHeight}
+      orientation={args.orientation}
+      variant={args.variant}
+    />
   ),
 }
 
@@ -177,7 +203,7 @@ export const ChatFeed: Story = {
       defaultHeight={args.defaultHeight}
       orientation={args.orientation}
     >
-      <div className="space-y-xs px-2xs">
+      <div className="space-y-xs">
         {CHAT_MESSAGES.map((message) => (
           <div key={`${message.user}-${message.text}`} className="rounded-lg bg-surface p-xs">
             <p className="style-text-strong--2 text-on-surface">{message.user}</p>
@@ -193,5 +219,26 @@ export const ChatFeed: Story = {
         story: 'A realistic message list where content grows over time inside a fixed-height area.',
       },
     },
+  },
+}
+
+export const DefaultVariant: Story = {
+  name: 'Variant / Default',
+  args: {
+    variant: 'default',
+  },
+}
+
+export const GhostVariant: Story = {
+  name: 'Variant / Ghost',
+  args: {
+    variant: 'ghost',
+  },
+}
+
+export const OutlineVariant: Story = {
+  name: 'Variant / Outline',
+  args: {
+    variant: 'outline',
   },
 }
