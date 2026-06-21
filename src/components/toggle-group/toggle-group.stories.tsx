@@ -16,6 +16,8 @@ export default {
   },
   args: {
     multiple: false,
+    size: 'medium',
+    variant: 'default',
   },
   argTypes: {
     multiple: {
@@ -24,6 +26,24 @@ export default {
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+      description: 'Size of the toggle group and its toggles.',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    variant: {
+      control: 'select',
+      options: ['default', 'ghost'],
+      description: 'Visual style of the toggle group.',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'default' },
       },
     },
   },
@@ -163,6 +183,95 @@ export const CompositionAutoSizing: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Large size</p>
         <ToggleGroup size="large" multiple>
+          <Toggle tone="brand">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+          <Toggle tone="accent">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+          <Toggle tone="info">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+        </ToggleGroup>
+      </div>
+    </div>
+  ),
+}
+
+export const GhostVariant: Story = {
+  render: () => (
+    <div className="w-[500px] space-y-lg">
+      <div className="space-y-xs">
+        <p className="style-text-default--1 text-on-surface-variant">
+          Small size (Toggles inherit from group)
+        </p>
+        <ToggleGroup size="small" variant="ghost" multiple>
+          <Toggle tone="brand">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+          <Toggle tone="accent">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+          <Toggle tone="info">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+        </ToggleGroup>
+      </div>
+
+      <div className="space-y-xs">
+        <p className="style-text-default--1 text-on-surface-variant">Medium size (default)</p>
+        <ToggleGroup size="medium" variant="ghost" multiple>
+          <Toggle tone="brand">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+          <Toggle tone="accent">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+          <Toggle tone="info">
+            {({ pressed }) => (
+              <>
+                <HeartIcon weight={pressed ? 'fill' : 'bold'} />
+              </>
+            )}
+          </Toggle>
+        </ToggleGroup>
+      </div>
+
+      <div className="space-y-xs">
+        <p className="style-text-default--1 text-on-surface-variant">Large size</p>
+        <ToggleGroup size="large" variant="ghost" multiple>
           <Toggle tone="brand">
             {({ pressed }) => (
               <>

@@ -5,6 +5,7 @@ import { cn } from '@/utils/cn'
 
 export const ToggleGroup = ({
   size = 'medium',
+  variant,
   className,
   children,
   ref,
@@ -14,7 +15,7 @@ export const ToggleGroup = ({
   return (
     <ToggleGroupContext.Provider value={{ size: displaySize }}>
       <BaseToggleGroup
-        className={cn(toggleGroupVariants({ size: displaySize, className }))}
+        className={cn(toggleGroupVariants({ size: displaySize, variant, className }))}
         data-size={displaySize}
         ref={ref}
         {...props}

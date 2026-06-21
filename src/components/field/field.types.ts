@@ -1,7 +1,7 @@
 import type { Checkbox } from '../checkbox'
 import type { Input } from '../input'
 import type { InputGroup, InputGroupInput } from '../input-group'
-import type { RadioGroup } from '../radio-group'
+import type { Radio, RadioGroup } from '../radio-group'
 import type { Select } from '../select'
 import type { Slider } from '../slider'
 import type { Switch } from '../switch'
@@ -18,7 +18,9 @@ export type FieldSelectProps = React.ComponentProps<typeof Select>
 export type FieldSliderProps = React.ComponentProps<typeof Slider>
 export type FieldTextAreaProps = React.ComponentProps<typeof TextArea>
 export type FieldCheckboxProps = React.ComponentProps<typeof Checkbox>
+export type FieldRadioProps = React.ComponentProps<typeof Radio>
 export type FieldRadioGroupProps = React.ComponentProps<typeof RadioGroup>
 export type FieldSwitchProps = React.ComponentProps<typeof Switch>
 export type FieldToggleProps = React.ComponentProps<typeof Toggle>
 export type FieldProps = React.ComponentProps<'div'>
+export type FieldSetProps = React.ComponentProps<'div'>

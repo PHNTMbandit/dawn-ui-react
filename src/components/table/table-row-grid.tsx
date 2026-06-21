@@ -3,7 +3,13 @@ import { cn } from '@/utils/cn'
 
 import type { TableRowGridProps } from './table.types'
 
-export const TableRowGrid = ({ row, className, children, ref, ...props }: TableRowGridProps) => {
+export const TableRowGrid = <TData,>({
+  row,
+  className,
+  children,
+  ref,
+  ...props
+}: TableRowGridProps<TData>) => {
   return (
     <tr
       className={cn('aspect-video min-h-2xl rounded-md bg-neutral-container p-xs', className)}

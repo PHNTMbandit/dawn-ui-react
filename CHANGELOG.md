@@ -1,9 +1,8 @@
 # [1.0.0-alpha.19](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2026-06-11)
 
-
 ### Features
 
-* **scroll-area:** add ghost and outline variants ([1e39303](https://github.com/PHNTMbandit/dawn-ui-react/commit/1e393033f535f5d8cbccb899c97555471cc0969d))
+- **scroll-area:** add ghost and outline variants ([1e39303](https://github.com/PHNTMbandit/dawn-ui-react/commit/1e393033f535f5d8cbccb899c97555471cc0969d))
 
 # [1.0.0-alpha.18](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2026-06-07)
 

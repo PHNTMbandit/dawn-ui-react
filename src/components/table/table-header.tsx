@@ -9,17 +9,17 @@ export const TableHeader = ({ className, children, ref, ...props }: TableHeaderP
   const { table } = useTable()
 
   return (
-    <thead className={cn('')} ref={ref} {...props}>
+    <thead className={cn('bg-neutral-container')} ref={ref} {...props}>
       {children}
       {table.getHeaderGroups().map((headerGroup) => (
-        <tr className="rounded-lg" key={headerGroup.id}>
+        <tr key={headerGroup.id}>
           {headerGroup.headers.map((header) => {
             return (
               <th
                 className={cn(
-                  'h-xl bg-neutral-container px-sm text-left style-text-default-0 text-neutral-on-container transition-colors first:rounded-l-xl last:rounded-r-xl',
+                  'container p-sm py-xs text-left style-text-default-0 text-neutral-on-container-muted transition-colors first:rounded-l-full last:rounded-r-full',
                   header.column.getCanSort() &&
-                    'hover:cursor-pointer hover:bg-neutral-container-high',
+                    'hover:cursor-pointer hover:bg-neutral-container-high hover:*:text-neutral-on-container',
                   header.isPlaceholder && 'cursor-default',
                   className,
                 )}
@@ -35,11 +35,13 @@ export const TableHeader = ({ className, children, ref, ...props }: TableHeaderP
                 {header.isPlaceholder ? null : (
                   <div
                     className={cn(
-                      'inline-flex items-center justify-center gap-2xs [&>svg]:size-sm',
+                      'flex items-center justify-between gap-2xs whitespace-nowrap [&_svg]:size-sm',
                       header.column.getCanSort() && 'select-none hover:cursor-pointer',
                     )}
                   >
-                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    <div className="flex items-center gap-2xs">
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </div>
                     {{
                       asc: <SortDescendingIcon weight="bold" />,
                       desc: <SortAscendingIcon weight="bold" />,

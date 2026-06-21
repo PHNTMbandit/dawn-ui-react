@@ -1,4 +1,5 @@
-import { Input } from '../input'
+import { MagnifyingGlassIcon } from '@phosphor-icons/react'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
 import { useTable } from './table'
 import { cn } from '@/utils/cn'
 
@@ -13,18 +14,19 @@ export const TableSearch = ({ className, children, ref, ...props }: TableSearchP
   }
 
   return (
-    <Input
-      className={cn('', className)}
-      onChange={handleChange}
-      placeholder={`Search by ${table
-        .getAllColumns()
-        .map((column) => column.id)
-        .join(', ')}`}
-      ref={ref}
-      value={table.getState().globalFilter ?? ''}
-      {...props}
-    >
-      {children}
-    </Input>
+    <InputGroup>
+      <InputGroupAddon>
+        <MagnifyingGlassIcon weight="bold" />
+      </InputGroupAddon>
+      <InputGroupInput
+        className={cn('', className)}
+        onChange={handleChange}
+        ref={ref}
+        value={table.getState().globalFilter ?? ''}
+        {...props}
+      >
+        {children}
+      </InputGroupInput>
+    </InputGroup>
   )
 }

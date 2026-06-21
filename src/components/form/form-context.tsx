@@ -41,6 +41,36 @@ const FieldSlider = lazy(() =>
     default: m.FieldSlider,
   })),
 )
+const FieldCheckbox = lazy(() =>
+  import('../field/field-checkbox').then((m) => ({
+    default: m.FieldCheckbox,
+  })),
+)
+const FieldRadio = lazy(() =>
+  import('../field/field-radio').then((m) => ({
+    default: m.FieldRadio,
+  })),
+)
+const FieldRadioGroup = lazy(() =>
+  import('../field/field-radio-group').then((m) => ({
+    default: m.FieldRadioGroup,
+  })),
+)
+const FieldSwitch = lazy(() =>
+  import('../field/field-switch').then((m) => ({
+    default: m.FieldSwitch,
+  })),
+)
+const FieldToggle = lazy(() =>
+  import('../field/field-toggle').then((m) => ({
+    default: m.FieldToggle,
+  })),
+)
+const FieldSet = lazy(() =>
+  import('../field/field-set').then((m) => ({
+    default: m.FieldSet,
+  })),
+)
 
 import { FormErrors } from './form-errors'
 import { FormReset } from './form-reset'
@@ -60,6 +90,12 @@ export const { useAppForm, withFieldGroup, withForm, useTypedAppFormContext } = 
     FieldLabel,
     FieldSelect,
     FieldSlider,
+    FieldCheckbox,
+    FieldRadio,
+    FieldRadioGroup,
+    FieldSwitch,
+    FieldToggle,
+    FieldSet,
   },
   formContext,
   formComponents: {

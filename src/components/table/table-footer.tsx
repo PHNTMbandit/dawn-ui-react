@@ -13,7 +13,7 @@ export const TableFooter = ({ className, children, ref, ...props }: TableFooterP
       {table.getFooterGroups().map((footerGroup) => (
         <tr key={footerGroup.id}>
           {footerGroup.headers.map((header) => (
-            <th colSpan={header.colSpan} key={header.id}>
+            <th colSpan={header.colSpan} key={header.id} className="px-xs text-left">
               {header.isPlaceholder
                 ? null
                 : flexRender(header.column.columnDef.footer, header.getContext())}

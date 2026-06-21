@@ -4,22 +4,22 @@ import { cn } from '@/utils/cn'
 
 import type { TableBodyProps } from './table.types'
 
-export const TableBody = ({
+export const TableBody = <TData,>({
   rowGridOverride: RowGridOverride,
   rowListOverride: RowListOverride,
   className,
   children,
   ref,
   ...props
-}: TableBodyProps) => {
+}: TableBodyProps<TData>) => {
   const { view, table } = useTable()
   const rows = table.getRowModel().rows
 
   return (
     <tbody
       className={cn(
-        'divide-y divide-border',
-        view === 'grid' && 'grid grid-cols-5 gap-sm',
+        '',
+        view === 'grid' ? 'grid grid-cols-5 gap-sm' : 'divide-y divide-border',
         className,
       )}
       ref={ref}

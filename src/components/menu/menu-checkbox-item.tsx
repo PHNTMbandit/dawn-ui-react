@@ -15,7 +15,7 @@ export const MenuCheckboxItem = ({ className, children, ref, ...props }: MenuChe
       ref={ref}
       {...props}
     >
-      <span className="col-start-1">{children}</span>
+      <span className="col-start-1 flex items-center gap-2xs">{children}</span>
       <BaseMenu.CheckboxItemIndicator className="col-start-2 flex items-center justify-center place-self-end self-center">
         <CheckIcon className="size-sm" weight="bold" />
       </BaseMenu.CheckboxItemIndicator>

@@ -4,7 +4,7 @@ import type { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
 import type { ComponentProps, ReactNode } from 'react'
 
 export const checkboxVariants = cva(
-  'group flex size-md items-center justify-center rounded-sm shadow-2xs outline outline-transparent transition-colors not-indeterminate:text-accent-on-default indeterminate:text-accent-default enabled:hover:cursor-pointer enabled:hover:outline-accent-border disabled:cursor-not-allowed disabled:hover:cursor-not-allowed data-checked:bg-accent-default [&:not([data-checked])]:enabled:hover:outline-border-strong',
+  'group flex size-sm items-center justify-center rounded-sm shadow-2xs outline-2 outline-transparent transition-colors not-indeterminate:text-accent-on-default indeterminate:text-accent-default hover:cursor-pointer hover:outline-accent-border disabled:cursor-not-allowed disabled:hover:cursor-not-allowed data-checked:bg-accent-default [&_svg]:size-xs [&:not([data-checked])]:hover:outline-border-strong',
   {
     variants: {
       variant: {
