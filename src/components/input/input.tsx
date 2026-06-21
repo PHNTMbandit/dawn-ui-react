@@ -3,6 +3,8 @@ import { useRef, useState } from 'react'
 import { inputVariants, type InputProps } from './input.types'
 import { cn } from '@/utils/cn'
 
+import type { BaseUIEvent } from '@base-ui/react'
+
 export const Input = ({ compact, variant, size, className, ref, ...props }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [uncontrolledColorValue, setUncontrolledColorValue] = useState<string>(
@@ -16,11 +18,16 @@ export const Input = ({ compact, variant, size, className, ref, ...props }: Inpu
     const { onChange, defaultValue: _defaultValue, value: _value, ...colorProps } = props
 
     const handleColorChange: NonNullable<typeof onChange> = (event) => {
+      console.log('Color changed to:', event.currentTarget.value)
       if (!isControlled) {
         setUncontrolledColorValue((event.currentTarget as HTMLInputElement).value)
       }
 
       onChange?.(event)
+    }
+
+    const handleInputChange = (event: BaseUIEvent<React.ChangeEvent<HTMLInputElement>>) => {
+      console.log('Input changed to:', event.currentTarget.value)
     }
 
     const handleColorRef = (node: HTMLInputElement | null) => {
@@ -41,7 +48,7 @@ export const Input = ({ compact, variant, size, className, ref, ...props }: Inpu
         <button
           aria-label="Open color picker"
           className={cn(
-            'relative rounded-full outline-2 outline-transparent transition-colors focus-within:outline-border hover:cursor-pointer',
+            'relative flex items-center justify-between rounded-full outline-2 outline-transparent transition-colors focus-within:outline-border hover:cursor-pointer',
             size === 'small' && 'size-lg -outline-offset-2',
             size === 'medium' && 'size-xl -outline-offset-4',
             size === 'large' && 'size-2xl -outline-offset-6',
@@ -60,7 +67,7 @@ export const Input = ({ compact, variant, size, className, ref, ...props }: Inpu
           <BaseInput
             className="peer pointer-events-none invisible absolute"
             defaultValue={!isControlled ? colorValue : undefined}
-            onChange={handleColorChange}
+            onBlur={handleColorChange}
             ref={handleColorRef}
             type="color"
             value={isControlled ? colorValue : undefined}
@@ -89,7 +96,7 @@ export const Input = ({ compact, variant, size, className, ref, ...props }: Inpu
         <BaseInput
           className="peer pointer-events-none invisible absolute top-lg"
           defaultValue={!isControlled ? colorValue : undefined}
-          onChange={handleColorChange}
+          onChange={(event) => handleInputChange(event)}
           ref={handleColorRef}
           type="color"
           value={isControlled ? colorValue : undefined}

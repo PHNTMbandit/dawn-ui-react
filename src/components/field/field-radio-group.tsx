@@ -9,7 +9,12 @@ export const FieldRadioGroup = ({ children, ...props }: FieldRadioGroupProps) =>
   return (
     <RadioGroup
       name={field.name}
-      onChange={(e) => field.handleChange((e.target as HTMLInputElement).value)}
+      onChange={(e) => {
+        const target = e.target as HTMLInputElement
+        if (target.type === 'radio') {
+          field.handleChange(target.value)
+        }
+      }}
       value={field.state.value}
       {...props}
     >

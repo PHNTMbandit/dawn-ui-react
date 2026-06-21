@@ -18,7 +18,6 @@ export const TableLastPage = ({ className, children, ref, ...props }: TableLastP
       disabled={!table.getCanNextPage()}
       onClick={handleClick}
       ref={ref}
-      size={'iconSmall'}
       variant="ghost"
       tone="neutral"
       {...props}

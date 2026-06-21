@@ -18,7 +18,6 @@ export const TableFirstPage = ({ className, children, ref, ...props }: TableFirs
       disabled={!table.getCanPreviousPage()}
       onClick={handleClick}
       ref={ref}
-      size={'iconSmall'}
       variant="ghost"
       tone="neutral"
       {...props}

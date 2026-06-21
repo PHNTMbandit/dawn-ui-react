@@ -18,7 +18,6 @@ export const TableNextPage = ({ className, children, ref, ...props }: TableNextP
       disabled={!table.getCanNextPage()}
       onClick={handleClick}
       ref={ref}
-      size={'iconSmall'}
       variant="ghost"
       tone="neutral"
       {...props}

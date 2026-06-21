@@ -23,7 +23,6 @@ export const TablePreviousPage = ({
       disabled={!table.getCanPreviousPage()}
       onClick={handleClick}
       ref={ref}
-      size={'iconSmall'}
       variant="ghost"
       tone="neutral"
       {...props}

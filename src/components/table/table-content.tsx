@@ -4,8 +4,8 @@ import type { TableContentProps } from './table.types'
 
 export const TableContent = ({ className, children, ref, ...props }: TableContentProps) => {
   return (
-    <table className={cn('', className)} ref={ref} {...props}>
+    <div className={cn('flex flex-col gap-3xs', className)} ref={ref} {...props}>
       {children}
-    </table>
+    </div>
   )
 }
