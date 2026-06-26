@@ -1,31 +1,29 @@
 import { InputGroup } from '../input-group'
 
 import type { Button } from '../button'
-import type { Row, Table as TanstackTable } from '@tanstack/react-table'
-
-export type LayerTreeDataSet<TData> = {
-  data: TData[]
-}
-
-export type LayerTreeProps<TData> = React.ComponentProps<'div'> & {
-  table: TanstackTable<TData>
-  dataSet?: LayerTreeDataSet<TData>
-  setDataSet?: React.Dispatch<React.SetStateAction<LayerTreeDataSet<TData>>>
-}
-
-export type LayerTreeBodyProps = React.ComponentProps<'div'>
-export type LayerTreeRowProps<TData> = React.ComponentProps<'div'> & {
-  row: Row<TData>
-}
+import type { DeepKeys, Row, Table as TanstackTable } from '@tanstack/react-table'
+import type React from 'react'
 
 export type LayerTreeNodeToggleProps<TData> = Omit<
   React.ComponentProps<typeof Button>,
   'value' | 'children'
 > & {
   value: boolean
-  columnId: { [K in keyof TData]: TData[K] extends boolean ? K : never }[keyof TData]
+  accessorKey: DeepKeys<TData>
   rows: Row<TData>[]
+  onToggle?: () => void
   children: (value: boolean) => React.ReactNode
+}
+
+export type LayerTreeProps<TData> = React.ComponentProps<'div'> & {
+  table: TanstackTable<TData>
+  onDNDStart?: (event: { nodeId: string }) => void
+  onDNDEnd?: (event: { sourceNodeId: string; targetNodeId: string | null }) => void
+}
+
+export type LayerTreeBodyProps = React.ComponentProps<'div'>
+export type LayerTreeRowProps<TData> = React.ComponentProps<'div'> & {
+  row: Row<TData>
 }
 
 export type LayerTreeNodeProps<TData> = React.ComponentProps<'button'> & {

@@ -16,6 +16,7 @@ export const TablePaging = ({
 }: TablePagingProps) => {
   const { table } = useTable()
 
+  const totalPages = table.getPageCount()
   const currentPageIndex = table.getState().pagination.pageIndex
   const isActive = (pageIndex: number) => pageIndex === currentPageIndex
 
@@ -26,43 +27,51 @@ export const TablePaging = ({
   return (
     <div className={cn('flex items-center gap-3xs', className)} ref={ref} {...props}>
       {children}
-      {Array.from({ length: min }).map((_, i) => (
-        <Button
-          key={i}
-          tone="neutral"
-          size="iconMedium"
-          variant={isActive(i) ? 'fill' : 'ghost'}
-          className={'shrink-0'}
-          onClick={() => handleClick(i)}
-        >
-          {i + 1}
-        </Button>
-      ))}
-      <Menu>
-        <MenuTrigger>
-          <Button tone="neutral" size="iconMedium" variant="ghost" className={'shrink-0'}>
-            <DotsThreeIcon weight="bold" />
-          </Button>
-        </MenuTrigger>
-        <MenuPopup align="center">
-          <MenuRadioGroup
-            value={currentPageIndex}
-            onValueChange={handleClick}
-            className="max-h-[200px] overflow-y-auto"
+      {Array.from({ length: min }).map((_, i) =>
+        i < totalPages ? (
+          <Button
+            key={i}
+            tone="neutral"
+            size="iconMedium"
+            variant={isActive(i) ? 'fill' : 'ghost'}
+            className={'shrink-0'}
+            onClick={() => handleClick(i)}
           >
-            {Array.from({ length: table.getPageCount() - min - max }).map((_, i) => {
-              const pageIndex = min + i
-              return (
-                <MenuRadioItem key={pageIndex} value={pageIndex} closeOnClick>
-                  {pageIndex + 1}
-                </MenuRadioItem>
-              )
-            })}
-          </MenuRadioGroup>
-        </MenuPopup>
-      </Menu>
+            {i + 1}
+          </Button>
+        ) : null,
+      )}
+      {totalPages > min + max && (
+        <Menu>
+          <MenuTrigger>
+            <Button tone="neutral" size="iconMedium" variant="ghost" className={'shrink-0'}>
+              <DotsThreeIcon weight="bold" />
+            </Button>
+          </MenuTrigger>
+          <MenuPopup align="center">
+            <MenuRadioGroup
+              value={currentPageIndex}
+              onValueChange={handleClick}
+              className="max-h-[200px] overflow-y-auto"
+            >
+              {Array.from({ length: table.getPageCount() - min - max }).map((_, i) => {
+                const pageIndex = min + i
+                return (
+                  <MenuRadioItem key={pageIndex} value={pageIndex} closeOnClick>
+                    {pageIndex + 1}
+                  </MenuRadioItem>
+                )
+              })}
+            </MenuRadioGroup>
+          </MenuPopup>
+        </Menu>
+      )}
       {Array.from({ length: max }).map((_, i) => {
         const pageIndex = table.getPageCount() - max + i
+        if (pageIndex < min) {
+          return null
+        }
+
         return (
           <Button
             key={i}

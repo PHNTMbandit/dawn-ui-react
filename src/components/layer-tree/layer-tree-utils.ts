@@ -1,7 +1,7 @@
 /**
  * Base constraint for tree node data types used by layer tree utilities.
  */
-export type LayerTreeNodeData = { id: string; children?: LayerTreeNodeData[] }
+export type LayerTreeNodeBase = { id: string; children?: LayerTreeNodeBase[] }
 
 /**
  * Recursively searches for a node by ID in a nested tree structure.
@@ -16,7 +16,7 @@ export type LayerTreeNodeData = { id: string; children?: LayerTreeNodeData[] }
  * if (node) console.log(node.name)
  * ```
  */
-export const findLayerTreeNode = <TData extends LayerTreeNodeData>(
+export const findLayerTreeNode = <TData extends LayerTreeNodeBase>(
   nodes: TData[],
   nodeId: string,
 ): TData | null => {
@@ -43,7 +43,7 @@ export const findLayerTreeNode = <TData extends LayerTreeNodeData>(
  * if (removedNode) setLayers(nextNodes)
  * ```
  */
-export const removeLayerTreeNode = <TData extends LayerTreeNodeData>(
+export const removeLayerTreeNode = <TData extends LayerTreeNodeBase>(
   nodes: TData[],
   nodeId: string,
 ): { nextNodes: TData[]; removedNode: TData | null } => {
@@ -80,7 +80,7 @@ export const removeLayerTreeNode = <TData extends LayerTreeNodeData>(
  * setLayers(newTree)
  * ```
  */
-export const insertLayerTreeNode = <TData extends LayerTreeNodeData>(
+export const insertLayerTreeNode = <TData extends LayerTreeNodeBase>(
   nodes: TData[],
   folderId: string,
   nodeToInsert: TData,
@@ -112,7 +112,7 @@ export const insertLayerTreeNode = <TData extends LayerTreeNodeData>(
  * setLayers(newTree)
  * ```
  */
-export const moveLayerTreeNode = <TData extends LayerTreeNodeData>(
+export const moveLayerTreeNode = <TData extends LayerTreeNodeBase>(
   nodes: TData[],
   sourceId: string,
   targetId: string,
@@ -146,7 +146,7 @@ export const moveLayerTreeNode = <TData extends LayerTreeNodeData>(
  * setLayers(newTree)
  * ```
  */
-export const moveLayerTreeNodeToRoot = <TData extends LayerTreeNodeData>(
+export const moveLayerTreeNodeToRoot = <TData extends LayerTreeNodeBase>(
   nodes: TData[],
   sourceId: string,
 ): TData[] => {

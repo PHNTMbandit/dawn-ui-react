@@ -28,7 +28,8 @@ import { Badge } from '../badge'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
 import { Table } from './table'
-import { TableBody } from './table-body'
+import { TableBodyGrid } from './table-body-grid'
+import { TableBodyList } from './table-body-list'
 import { TableChangeView } from './table-change-view'
 import { TableColumnToggle } from './table-column-toggle'
 import { TableContainer } from './table-container'
@@ -61,7 +62,8 @@ export default {
   title: 'Components/Table',
   component: Table,
   subcomponents: {
-    TableBody,
+    TableBodyGrid,
+    TableBodyList,
     TableChangeView,
     TableContent,
     TableFilter,
@@ -260,7 +262,7 @@ export const Simple: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
       </Table>
     )
@@ -308,7 +310,7 @@ export const WithFooter: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
           <TableFooter />
         </TableContainer>
       </Table>
@@ -357,7 +359,7 @@ export const HeaderGroups: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
       </Table>
     )
@@ -398,7 +400,7 @@ export const Sortable: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
         <TableNav>
           <TablePagination>
@@ -448,7 +450,7 @@ export const Searchable: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -515,7 +517,7 @@ export const Selectable: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
         <p className="mt-sm style-text-prose--1 text-on-surface-variant">
           {table.getSelectedRowModel().rows.length} of {table.getRowModel().rows.length} selected
@@ -561,7 +563,7 @@ export const Paginated: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -669,7 +671,7 @@ export const UserDirectory: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -755,7 +757,7 @@ export const TaskTracker: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -835,7 +837,7 @@ export const ProductInventory: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -930,7 +932,7 @@ export const DataDashboard: Story = {
     const [globalFilter, setGlobalFilter] = React.useState('')
     const [pagination, setPagination] = React.useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 10,
+      pageSize: 12,
     })
 
     const table = useReactTable({
@@ -982,7 +984,19 @@ export const DataDashboard: Story = {
         <TableFilters />
         <TableContainer>
           <TableHeader />
-          <TableBody />
+          <TableBodyList />
+          <TableBodyGrid<Person> className="auto-rows-fr grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
+            {(row) => (
+              <div className="flex aspect-square size-full flex-col items-start gap-xs rounded-xl bg-surface px-sm py-xs">
+                <span className="line-clamp-1">
+                  {row.original.firstName} {row.original.lastName}
+                </span>
+                <span className="style-text-prose--1 text-on-surface-variant">
+                  ${row.original.age} years old
+                </span>
+              </div>
+            )}
+          </TableBodyGrid>
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -1022,13 +1036,21 @@ export const GridView: Story = {
     const [globalFilter, setGlobalFilter] = React.useState('')
     const [pagination, setPagination] = React.useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 12,
+      pageSize: 24,
     })
 
     const columns: ColumnDef<Product>[] = [
-      { accessorKey: 'name', header: 'Product' },
-      { accessorKey: 'category', header: 'Category' },
-      { accessorKey: 'price', header: 'Price' },
+      {
+        accessorKey: 'name',
+        cell: ({ row }) => (
+          <div className="flex size-full flex-col items-start gap-xs rounded-xl bg-surface px-sm py-xs">
+            <span className="line-clamp-1">{row.original.name}</span>
+            <span className="style-text-prose--1 text-on-surface-variant">
+              ${row.original.price.toFixed(2)}
+            </span>
+          </div>
+        ),
+      },
     ]
 
     const table = useReactTable({
@@ -1043,94 +1065,20 @@ export const GridView: Story = {
     })
 
     return (
-      <Table {...args} table={table}>
+      <Table {...args} table={table} className="h-[500px] w-[800px]">
         <TableToolbar>
           <TableSearch placeholder="Search products..." />
           <TableChangeView />
         </TableToolbar>
-        <TableBody />
+        <TableContainer>
+          <TableBodyGrid className="auto-rows-[minmax(9rem,auto)] grid-cols-[repeat(auto-fill,minmax(300px,1fr))]" />
+        </TableContainer>
         <TableNav>
           <TableResults>
             {(_start, _end, total) => (
               <span className="text-on-surface-variant">{total} products</span>
             )}
           </TableResults>
-          <TablePagination>
-            <TablePreviousPage />
-            <TablePaging />
-            <TableNextPage />
-          </TablePagination>
-        </TableNav>
-      </Table>
-    )
-  },
-}
-
-export const CustomRowRendering: Story = {
-  name: 'View / Custom Rows',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Override default row rendering with custom list and grid components.',
-      },
-    },
-  },
-  render: (args) => {
-    const [pagination, setPagination] = React.useState<PaginationState>({
-      pageIndex: 0,
-      pageSize: 6,
-    })
-
-    const columns: ColumnDef<Product>[] = [
-      { accessorKey: 'name' },
-      { accessorKey: 'price' },
-      { accessorKey: 'status' },
-    ]
-
-    const table = useReactTable({
-      data: React.useMemo(() => makeProducts(30), []),
-      columns,
-      state: { pagination },
-      onPaginationChange: setPagination,
-      getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-    })
-
-    const CustomListRow: React.FC<{ row: any }> = ({ row }) => (
-      <tr className="border-b border-border">
-        <td className="p-sm">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="style-text-default-0">{row.original.name}</div>
-              <div className="style-text-prose--1 text-on-surface-variant">
-                ${row.original.price.toFixed(2)}
-              </div>
-            </div>
-            <StockBadge status={row.original.status} />
-          </div>
-        </td>
-      </tr>
-    )
-
-    const CustomGridRow: React.FC<{ row: any }> = ({ row }) => (
-      <div className="rounded-lg border border-border bg-surface p-md">
-        <div className="style-text-default-0">{row.original.name}</div>
-        <div className="mt-xs style-text-prose-0 text-on-surface-variant">
-          ${row.original.price.toFixed(2)}
-        </div>
-        <div className="mt-sm">
-          <StockBadge status={row.original.status} />
-        </div>
-      </div>
-    )
-
-    return (
-      <Table {...args} table={table}>
-        <TableToolbar>
-          <TableChangeView />
-        </TableToolbar>
-        <TableBody rowListOverride={CustomListRow} rowGridOverride={CustomGridRow} />
-        <TableNav>
           <TablePagination>
             <TablePreviousPage />
             <TablePaging />

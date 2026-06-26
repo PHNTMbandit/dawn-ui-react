@@ -28,9 +28,10 @@ export const LayerTreeNode = <TData,>({
     id: `folder:${row.id}`,
     data: {
       folderId: row.id,
+      nodeId: row.id,
       isFolder: hasChildren,
     },
-    disabled: dndDisabled,
+    disabled: dndDisabled || !hasChildren,
   })
 
   const indent = row.depth * 24
@@ -72,10 +73,9 @@ export const LayerTreeNode = <TData,>({
         onClick={handleClick}
         style={{
           marginLeft: indent,
-          width: `calc(100% - ${indent}px)`,
         }}
         className={cn(
-          'flex h-lg min-w-0 items-center justify-start gap-2xs truncate rounded-lg px-xs style-text-default-0 transition-all hover:cursor-pointer [&>svg]:size-sm [&>svg]:shrink-0',
+          'flex h-lg min-w-0 flex-1 items-center justify-start gap-2xs truncate rounded-lg px-xs style-text-default-0 transition-all hover:cursor-pointer [&>svg]:size-sm [&>svg]:shrink-0',
           hasChildren &&
             isDropTarget &&
             'bg-success-container text-success-on-container ring ring-success-border',

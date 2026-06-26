@@ -1,9 +1,8 @@
 # [1.0.0-alpha.20](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2026-06-21)
 
-
 ### Features
 
-* add table component ([b96e4bf](https://github.com/PHNTMbandit/dawn-ui-react/commit/b96e4bfee09362f7b63229aa2261788a773bf331))
+- add table component ([b96e4bf](https://github.com/PHNTMbandit/dawn-ui-react/commit/b96e4bfee09362f7b63229aa2261788a773bf331))
 
 # [1.0.0-alpha.19](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2026-06-11)
 

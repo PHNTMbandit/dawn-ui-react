@@ -3,7 +3,7 @@ import { Button } from '../button'
 import { useTable } from './table'
 import { cn } from '@/utils/cn'
 
-type TableChangeViewProps = React.ComponentProps<typeof Button>
+import type { TableChangeViewProps } from './table.types'
 
 export const TableChangeView = ({ className, children, ref, ...props }: TableChangeViewProps) => {
   const { view, setView } = useTable()

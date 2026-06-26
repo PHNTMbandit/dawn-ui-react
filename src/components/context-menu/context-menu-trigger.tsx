@@ -10,7 +10,7 @@ export const ContextMenuTrigger = ({
   ...props
 }: ContextMenuTriggerProps) => {
   return (
-    <BaseContextMenu.Trigger className={cn('', className)} ref={ref} {...props}>
+    <BaseContextMenu.Trigger className={cn('flex min-w-0 flex-1', className)} ref={ref} {...props}>
       {children}
     </BaseContextMenu.Trigger>
   )

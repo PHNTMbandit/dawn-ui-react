@@ -7,18 +7,11 @@ import {
 } from '@dnd-kit/react'
 import React from 'react'
 import { Badge } from '../badge'
-import {
-  moveLayerTreeNode,
-  moveLayerTreeNodeToRoot,
-  type LayerTreeNodeData,
-} from './layer-tree-utils'
 import { cn } from '@/utils/cn'
 
-import type { LayerTreeDataSet, LayerTreeProps } from './layer-tree.types'
+import type { LayerTreeProps } from './layer-tree.types'
 
 type LayerTreeContextType<TData> = LayerTreeProps<TData> & {
-  dataSet: LayerTreeDataSet<TData>
-  setDataSet: React.Dispatch<React.SetStateAction<LayerTreeDataSet<TData>>>
   draggingNodeId: string | null
 }
 
@@ -26,53 +19,31 @@ const LayerTreeContext = React.createContext<LayerTreeContextType<any> | null>(n
 
 export const LayerTree = <TData,>({
   table,
-  dataSet,
-  setDataSet,
+  onDNDStart: onDragStart,
+  onDNDEnd: onDragEnd,
   className,
   children,
   ref,
   ...props
 }: LayerTreeProps<TData>) => {
-  const [internalDataSet, setInternalDataSet] = React.useState<LayerTreeDataSet<TData>>({
-    data: [],
-  })
   const [draggingNodeId, setDraggingNodeId] = React.useState<string | null>(null)
-
-  const resolvedDataSet = dataSet ?? internalDataSet
-  const resolvedSetDataSet = setDataSet ?? setInternalDataSet
 
   const handleDragStart = ({ operation: { source } }: DragStartEvent) => {
     setDraggingNodeId(source?.data.nodeId ?? null)
+    if (onDragStart) {
+      onDragStart({ nodeId: source?.data.nodeId ?? '' })
+    }
   }
 
   const handleDragEnd = ({ operation: { source, target } }: DragEndEvent) => {
     setDraggingNodeId(null)
-    if (!target) return
-
-    const sourceId = source?.data.nodeId
-    const targetId = target.data.folderId
-
-    if (!sourceId || sourceId === targetId) return
-
-    if (targetId === 'root') {
-      resolvedSetDataSet((currentDataSet) => ({
-        ...currentDataSet,
-        data: moveLayerTreeNodeToRoot(
-          currentDataSet.data as LayerTreeNodeData[],
-          sourceId,
-        ) as TData[],
-      }))
-      return
+    if (onDragEnd) {
+      const targetNodeId = target?.data.folderId ?? target?.data.nodeId ?? null
+      onDragEnd({
+        sourceNodeId: source?.data.nodeId ?? '',
+        targetNodeId,
+      })
     }
-
-    resolvedSetDataSet((currentDataSet) => ({
-      ...currentDataSet,
-      data: moveLayerTreeNode(
-        currentDataSet.data as LayerTreeNodeData[],
-        sourceId,
-        targetId,
-      ) as TData[],
-    }))
   }
 
   return (
@@ -87,10 +58,8 @@ export const LayerTree = <TData,>({
           className,
           children,
           ref,
-          ...props,
-          dataSet: resolvedDataSet,
-          setDataSet: resolvedSetDataSet,
           draggingNodeId,
+          ...props,
         }}
       >
         <div className={cn('flex flex-col justify-between', className)} ref={ref} {...props}>
