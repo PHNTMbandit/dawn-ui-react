@@ -6,7 +6,11 @@ import { cn } from '@/utils/cn'
 import type { TableHeaderProps } from './table.types'
 
 export const TableHeader = ({ className, children, ref, ...props }: TableHeaderProps) => {
-  const { table } = useTable()
+  const { table, view } = useTable()
+
+  if (view === 'grid') {
+    return null
+  }
 
   return (
     <thead className={cn('bg-neutral-container')} ref={ref} {...props}>
@@ -17,7 +21,7 @@ export const TableHeader = ({ className, children, ref, ...props }: TableHeaderP
             return (
               <th
                 className={cn(
-                  'container p-sm py-xs text-left style-text-default-0 text-neutral-on-container-muted transition-colors first:rounded-l-full last:rounded-r-full',
+                  'container p-xs text-left style-text-default-0 text-neutral-on-container-muted transition-colors first:rounded-l-xl last:rounded-r-xl',
                   header.column.getCanSort() &&
                     'hover:cursor-pointer hover:bg-neutral-container-high hover:*:text-neutral-on-container',
                   header.isPlaceholder && 'cursor-default',

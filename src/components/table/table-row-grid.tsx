@@ -10,16 +10,21 @@ export const TableRowGrid = <TData,>({
   ref,
   ...props
 }: TableRowGridProps<TData>) => {
+  if (children) {
+    return (
+      <tr className={cn('size-full', className)} ref={ref} {...props}>
+        <td className="size-full" style={{ display: 'block' }}>
+          {children}
+        </td>
+      </tr>
+    )
+  }
+
   return (
-    <tr
-      className={cn('aspect-video min-h-2xl rounded-md bg-neutral-container p-xs', className)}
-      ref={ref}
-      {...props}
-    >
+    <tr className={cn('size-full', className)} ref={ref} {...props}>
       {row.getVisibleCells().map((cell) => {
         return (
-          <td key={cell.id}>
-            {children}
+          <td key={cell.id} className="size-full" style={{ display: 'block' }}>
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </td>
         )

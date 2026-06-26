@@ -81,10 +81,9 @@ export type TableColumnToggleProps = React.ComponentProps<typeof MenuTrigger>
 export type TableRowListProps<TData> = React.ComponentProps<'tr'> & {
   row: Row<TData>
 }
-export type TableBodyProps<TData> = Omit<React.ComponentProps<'tbody'>, 'children'> & {
+export type TableBodyListProps = React.ComponentProps<'tbody'>
+export type TableBodyGridProps<TData> = Omit<React.ComponentProps<'tbody'>, 'children'> & {
   children?: (row: Row<TData>) => React.ReactNode
-  rowGridOverride?: React.ComponentType<TableRowGridProps<TData>>
-  rowListOverride?: React.ComponentType<TableRowListProps<TData>>
 }
 export type TableRowGridProps<TData> = React.ComponentProps<'tr'> & {
   row: Row<TData>
@@ -129,3 +128,4 @@ export type TableDataSet<TData, TValue> = {
 export type TableView = 'grid' | 'list'
 export type TableDataSetSelectProps = React.ComponentProps<typeof SelectTrigger>
 export type TableDataSetTabsProps = React.ComponentProps<typeof Tabs>
+export type TableChangeViewProps = React.ComponentProps<typeof Button>

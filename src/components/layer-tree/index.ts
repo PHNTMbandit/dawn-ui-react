@@ -6,13 +6,12 @@ export type {
   LayerTreeProps,
   LayerTreeRowProps,
   LayerTreeSearchProps,
-  LayerTreeDataSet,
   LayerTreeNodeActionProps,
   LayerTreeFooterProps,
   LayerTreeSortProps,
 } from './layer-tree.types'
 
-export type { LayerTreeNodeData } from './layer-tree-utils'
+export type { LayerTreeNodeBase } from './layer-tree-utils'
 export {
   findLayerTreeNode,
   insertLayerTreeNode,

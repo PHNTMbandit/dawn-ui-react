@@ -1,6 +1,5 @@
 export { Table, useTable } from './table'
 export type {
-  TableBodyProps,
   FilterOperator,
   FilterType,
   FilterValue,
@@ -8,6 +7,9 @@ export type {
   NumberOperator,
   SelectFilterValue,
   SelectOperator,
+  TableBodyGridProps,
+  TableBodyListProps,
+  TableChangeViewProps,
   TableColumnToggleProps,
   TableContainerProps,
   TableContentProps,
@@ -38,7 +40,8 @@ export type {
   TextFilterValue,
   TextOperator,
 } from './table.types'
-export { TableBody } from './table-body'
+export { TableBodyList } from './table-body-list'
+export { TableBodyGrid } from './table-body-grid'
 export { TableColumnToggle } from './table-column-toggle'
 export { TableContainer } from './table-container'
 export { TableContent } from './table-content'
@@ -63,6 +66,7 @@ export { TableRowList } from './table-row-list'
 export { TableSearch } from './table-search'
 export { TableSort } from './table-sort'
 export { TableToolbar } from './table-toolbar'
+export { TableChangeView } from './table-change-view'
 export { textFilterFn, selectFilterFn } from './table.utils'
 export {
   defaultOperatorLabels,

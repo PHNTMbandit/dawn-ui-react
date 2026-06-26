@@ -16,9 +16,9 @@ export const LayerTreeBody = <TData,>({ className, children, ...props }: LayerTr
   })
 
   return (
-    <div className={cn('flex grow flex-col', className)} {...props}>
+    <div className={cn('flex w-full grow flex-col', className)} {...props}>
       {children}
-      <ul className="flex flex-col gap-xs">
+      <ul className="flex w-full flex-col gap-xs">
         {table.getRowModel().rows.map((row) => (
           <LayerTreeRow key={row.id} row={row} />
         ))}
