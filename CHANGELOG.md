@@ -1,3 +1,10 @@
+# [1.0.0-alpha.21](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2026-06-26)
+
+
+### Features
+
+* add table and layer tree improvements ([d05fb76](https://github.com/PHNTMbandit/dawn-ui-react/commit/d05fb764bbec37d735881102ee4b5dc651564eba))
+
 # [1.0.0-alpha.20](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2026-06-21)
 
 ### Features
