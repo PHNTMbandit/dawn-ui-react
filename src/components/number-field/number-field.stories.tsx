@@ -67,7 +67,7 @@ export default {
     disabled: false,
     'aria-invalid': false,
   },
-  render: (args) => <NumberField {...args} id="number-field" className={'w-[300px]'} />,
+  render: (args) => <NumberField {...args} id="number-field" className={'w-[200px]'} />,
 } satisfies Meta<typeof NumberField>
 
 type Story = StoryObj<typeof NumberField>
@@ -83,8 +83,25 @@ export const Playground: Story = {
   },
 }
 
-export const Default: Story = {
-  name: 'State / Default',
+export const Primary: Story = {
+  name: 'State / Primary',
+  args: {
+    variant: 'primary',
+  },
+}
+
+export const Secondary: Story = {
+  name: 'State / Secondary',
+  args: {
+    variant: 'secondary',
+  },
+}
+
+export const Ghost: Story = {
+  name: 'State / Ghost',
+  args: {
+    variant: 'ghost',
+  },
 }
 
 export const WithLabel: Story = {
@@ -173,7 +190,7 @@ export const Suffix: Story = {
     step: 30,
   },
   render: (args) => (
-    <NumberField {...args} id="number-field-suffix" className={'w-[200px]'}>
+    <NumberField {...args} id="number-field-suffix" className={'w-[300px]'}>
       rem
     </NumberField>
   ),

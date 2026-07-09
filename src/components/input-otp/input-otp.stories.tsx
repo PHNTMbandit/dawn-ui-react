@@ -379,7 +379,10 @@ export const OnValueComplete: Story = {
 
     return (
       <div className="flex flex-col gap-sm">
-        <InputOTP {...args} onValueComplete={(value) => setMessage(`Code submitted: ${value}`)}>
+        <InputOTP
+          {...args}
+          onValueComplete={(value: string) => setMessage(`Code submitted: ${value}`)}
+        >
           <InputOTPSlot />
           <InputOTPSlot aria-label="Character 2 of 6" />
           <InputOTPSlot aria-label="Character 3 of 6" />

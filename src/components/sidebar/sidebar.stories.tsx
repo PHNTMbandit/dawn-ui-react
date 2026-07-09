@@ -13,7 +13,7 @@ import {
 } from '@phosphor-icons/react'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
 import { Avatar, AvatarFallback } from '../avatar'
-import { Profile, ProfileName } from '../profile'
+import { Profile } from '../profile'
 import { Sidebar } from './sidebar'
 import { SidebarContent } from './sidebar-content'
 import { SidebarFooter } from './sidebar-footer'
@@ -33,7 +33,7 @@ import { SidebarToggle } from './sidebar-toggle'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const TONES = ['default', 'ghost'] as const
+const TONES = ['primary', 'secondary', 'ghost'] as const
 
 const APP_FRAME_CLASS = 'h-[70vh] w-[1100px] overflow-hidden rounded-2xl border border-border'
 
@@ -146,7 +146,6 @@ const SidebarShell = ({
           {(isExpanded) =>
             isExpanded ? (
               <Profile>
-                <ProfileName>Demo User</ProfileName>
                 <CaretUpDownIcon />
               </Profile>
             ) : (
@@ -197,7 +196,7 @@ export default {
       options: TONES,
       description: 'Visual surface treatment for the sidebar container.',
       table: {
-        defaultValue: { summary: 'default' },
+        defaultValue: { summary: 'primary' },
       },
     },
     width: {
@@ -209,7 +208,7 @@ export default {
     },
   },
   args: {
-    tone: 'default',
+    tone: 'primary',
     width: 400,
   },
   parameters: {

@@ -18,7 +18,7 @@ export type LayerTreeNodeToggleProps<TData> = Omit<
 export type LayerTreeProps<TData> = React.ComponentProps<'div'> & {
   table: TanstackTable<TData>
   onDNDStart?: (event: { nodeId: string }) => void
-  onDNDEnd?: (event: { sourceNodeId: string; targetNodeId: string | null }) => void
+  onDNDEnd?: (event: { sourceNodeId: string; targetNodeId: string }) => void
 }
 
 export type LayerTreeBodyProps = React.ComponentProps<'div'>

@@ -3,23 +3,26 @@ import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
 
 export const buttonGroupVariants = cva(
-  'inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full whitespace-nowrap transition-all select-none *:rounded-none *:bg-transparent disabled:pointer-events-none disabled:opacity-50 [&>button]:text-inherit',
+  'inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-lg whitespace-nowrap transition-all select-none *:rounded-none *:bg-transparent disabled:pointer-events-none disabled:opacity-50 [&>button]:text-inherit',
   {
     variants: {
       size: {
         large:
-          '*:style-text-default-2 [&>button]:h-2xl [&>button]:px-md [&>button]:[&>svg]:size-lg',
+          'rounded-2xl *:style-text-default-2 [&>button]:h-2xl [&>button]:px-md [&>button]:[&>svg]:size-md',
         medium:
-          '*:style-text-default-0 [&>button]:h-xl [&>button]:px-sm [&>button]:[&>svg]:size-md',
+          'rounded-xl *:style-text-default-0 [&>button]:h-xl [&>button]:px-sm [&>button]:[&>svg]:size-sm',
         small:
-          '*:style-text-default--1 [&>button]:h-lg [&>button]:px-xs [&>button]:[&>svg]:size-sm',
+          'rounded-lg *:style-text-default--1 [&>button]:h-lg [&>button]:px-xs [&>button]:[&>svg]:size-xs',
         extraSmall:
-          '*:style-text-default--2 [&>button]:h-md [&>button]:px-2xs [&>button]:[&>svg]:size-xs',
-        iconLarge: '*:size-2xl [&>button]:size-2xl [&>button]:p-[0px] [&>button]:[&>svg]:size-lg',
-        iconMedium: '*:size-xl [&>button]:size-xl [&>button]:p-[0px] [&>button]:[&>svg]:size-md',
-        iconSmall: '*:size-lg [&>button]:size-lg [&>button]:p-[0px] [&>button]:[&>svg]:size-sm',
+          'rounded-md *:style-text-default--2 [&>button]:h-md [&>button]:px-2xs [&>button]:[&>svg]:size-2xs',
+        iconLarge:
+          'rounded-2xl *:size-2xl [&>button]:size-2xl [&>button]:p-[0px] [&>button]:[&>svg]:size-md',
+        iconMedium:
+          'rounded-xl *:size-xl [&>button]:size-xl [&>button]:p-[0px] [&>button]:[&>svg]:size-sm',
+        iconSmall:
+          'rounded-lg *:size-lg [&>button]:size-lg [&>button]:p-[0px] [&>button]:[&>svg]:size-xs',
         iconExtraSmall:
-          '*:size-md [&>button]:size-md [&>button]:p-[0px] [&>button]:[&>svg]:size-xs',
+          'rounded-md *:size-md [&>button]:size-md [&>button]:p-[0px] [&>button]:[&>svg]:size-2xs',
       },
       variant: {
         fill: '',
@@ -228,7 +231,7 @@ export const buttonGroupVariants = cva(
         variant: 'elevated',
         tone: 'neutral',
         className:
-          'bg-surface text-on-surface [&>button]:not-active:hover:bg-neutral-container [&>button]:not-active:hover:text-neutral-on-container [&>button]:active:bg-surface',
+          'bg-surface-2 text-on-surface [&>button]:not-active:hover:bg-surface-3 [&>button]:not-active:hover:text-neutral-on-container [&>button]:active:bg-surface',
       },
       {
         variant: 'elevated',

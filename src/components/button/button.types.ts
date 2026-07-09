@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import type { Button as BaseButton } from '@base-ui/react'
 
 export const buttonVariants = cva(
-  'inline-flex cursor-pointer items-center justify-center rounded-full whitespace-nowrap transition-all select-none disabled:pointer-events-none disabled:opacity-50 [&>svg]:shrink-0',
+  'inline-flex cursor-pointer items-center justify-center whitespace-nowrap transition-all select-none disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       tone: {
@@ -21,16 +21,17 @@ export const buttonVariants = cva(
         ghost: 'active:scale-[0.98]',
         soft: 'border active:scale-[0.98]',
         elevated: 'shadow-xs not-active:hover:shadow-md',
+        link: 'size-fit! p-0! underline decoration-transparent underline-offset-2 [&>svg]:transition-colors',
       },
       size: {
-        large: 'h-2xl gap-xs px-md style-text-default-2 [&>svg]:size-md',
-        medium: 'h-xl gap-2xs px-sm style-text-default-0 [&>svg]:size-sm',
-        small: 'h-lg gap-3xs px-xs style-text-default--1 [&>svg]:size-xs',
-        extraSmall: 'h-md gap-3xs px-2xs style-text-default--2 [&>svg]:size-xs',
-        iconLarge: 'size-2xl p-[0px] [&>svg]:size-md',
-        iconMedium: 'size-xl p-[0px] [&>svg]:size-sm',
-        iconSmall: 'size-lg p-[0px] [&>svg]:size-xs',
-        iconExtraSmall: 'size-md p-[0px] [&>svg]:size-xs',
+        large: 'h-2xl gap-xs rounded-2xl px-md style-text-default-2 [&>svg]:size-md',
+        medium: 'h-xl gap-2xs rounded-xl px-sm style-text-default-0 [&>svg]:size-sm',
+        small: 'h-lg gap-3xs rounded-lg px-xs style-text-default--1 [&>svg]:size-xs',
+        extraSmall: 'h-md gap-3xs rounded-md px-2xs style-text-default--2 [&>svg]:size-xs',
+        iconLarge: 'size-2xl rounded-2xl p-[0px] [&>svg]:size-md',
+        iconMedium: 'size-xl rounded-xl p-[0px] [&>svg]:size-sm',
+        iconSmall: 'size-lg rounded-lg p-[0px] [&>svg]:size-xs',
+        iconExtraSmall: 'size-md rounded-md p-[0px] [&>svg]:size-xs',
       },
     },
     defaultVariants: {
@@ -233,6 +234,48 @@ export const buttonVariants = cva(
         tone: 'warning',
         className:
           'bg-warning-container text-warning-on-container not-active:hover:bg-warning-container-high',
+      },
+      {
+        variant: 'link',
+        tone: 'brand',
+        className:
+          'text-brand-default hover:decoration-brand-default [&>svg]:text-brand-default/50 hover:[&>svg]:text-brand-default',
+      },
+      {
+        variant: 'link',
+        tone: 'accent',
+        className:
+          'text-accent-default hover:decoration-accent-default [&>svg]:text-accent-default/50 hover:[&>svg]:text-accent-default',
+      },
+      {
+        variant: 'link',
+        tone: 'neutral',
+        className:
+          'text-neutral-default hover:decoration-neutral-default [&>svg]:text-neutral-default/50 hover:[&>svg]:text-neutral-default',
+      },
+      {
+        variant: 'link',
+        tone: 'error',
+        className:
+          'text-error-default hover:decoration-error-default [&>svg]:text-error-default/50 hover:[&>svg]:text-error-default',
+      },
+      {
+        variant: 'link',
+        tone: 'info',
+        className:
+          'text-info-default hover:decoration-info-default [&>svg]:text-info-default/50 hover:[&>svg]:text-info-default',
+      },
+      {
+        variant: 'link',
+        tone: 'success',
+        className:
+          'text-success-default hover:decoration-success-default [&>svg]:text-success-default/50 hover:[&>svg]:text-success-default',
+      },
+      {
+        variant: 'link',
+        tone: 'warning',
+        className:
+          'text-warning-default hover:decoration-warning-default [&>svg]:text-warning-default/50 hover:[&>svg]:text-warning-default',
       },
     ],
   },

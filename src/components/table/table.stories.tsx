@@ -1065,7 +1065,7 @@ export const GridView: Story = {
     })
 
     return (
-      <Table {...args} table={table} className="h-[500px] w-[800px]">
+      <Table {...args} table={table} className="max-h-[500px] w-[800px]">
         <TableToolbar>
           <TableSearch placeholder="Search products..." />
           <TableChangeView />

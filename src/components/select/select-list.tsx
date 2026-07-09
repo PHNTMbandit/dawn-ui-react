@@ -7,7 +7,7 @@ export const SelectList = ({ className, children, ref, ...props }: SelectListPro
   return (
     <BaseSelect.List
       className={cn(
-        'relative max-h-(--available-height) scroll-py-md space-y-xs overflow-y-auto',
+        'relative max-h-(--available-height) scroll-py-md space-y-3xs overflow-y-auto',
         className,
       )}
       ref={ref}

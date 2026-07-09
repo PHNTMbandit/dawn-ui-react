@@ -95,13 +95,12 @@ const AppleSelect = ({
     </SelectTrigger>
     <SelectPopup>
       <SelectList>
-        <SelectGroup>
-          {apples.map(({ label, value }) => (
-            <SelectItem key={label} value={value}>
-              {label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
+        {apples.map(({ label, value }) => (
+          <SelectItem key={label} value={value}>
+            <BowlFoodIcon />
+            {label}
+          </SelectItem>
+        ))}
       </SelectList>
     </SelectPopup>
   </Select>

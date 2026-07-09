@@ -8,7 +8,6 @@ export type {
   DialogProps,
   DialogTitleProps,
   DialogTriggerProps,
-  DialogContentProps,
 } from './dialog.types'
 export { DialogClose } from './dialog-close'
 export { DialogContent } from './dialog-content'
@@ -18,3 +17,4 @@ export { DialogHeader } from './dialog-header'
 export { DialogPopup } from './dialog-popup'
 export { DialogTitle } from './dialog-title'
 export { DialogTrigger } from './dialog-trigger'
+export { dialogHandle } from './dialog.types'

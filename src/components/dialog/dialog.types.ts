@@ -1,4 +1,5 @@
-import type { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+
 import type { ComponentProps } from 'react'
 
 export type DialogProps = ComponentProps<typeof BaseDialog.Root>
@@ -15,3 +16,4 @@ export type DialogCloseProps = ComponentProps<typeof BaseDialog.Close>
 export type DialogContentProps = React.ComponentProps<'div'>
 export type DialogHeaderProps = React.ComponentProps<'div'>
 export type DialogFooterProps = React.ComponentProps<'div'>
+export const dialogHandle = BaseDialog.createHandle()

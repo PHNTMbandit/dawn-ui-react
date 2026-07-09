@@ -129,7 +129,7 @@ export const IconAddons: Story = {
         <MagnifyingGlassIcon weight="bold" />
       </InputGroupAddon>
       <InputGroupInput placeholder="Search users" />
-      <InputGroupAddon>
+      <InputGroupAddon size={'large'}>
         <CheckIcon weight="bold" />
       </InputGroupAddon>
     </InputGroup>
@@ -142,7 +142,7 @@ export const TextAddons: Story = {
     <InputGroup {...args}>
       <InputGroupAddon>$</InputGroupAddon>
       <InputGroupInput placeholder="0.00" type="number" />
-      <InputGroupAddon>AUD</InputGroupAddon>
+      <InputGroupAddon size="small">AUD</InputGroupAddon>
     </InputGroup>
   ),
 }

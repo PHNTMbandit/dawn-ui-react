@@ -99,7 +99,7 @@ const DialogTemplate = ({ tone = 'brand' }: { tone?: Tone }) => {
           {TONE_TRIGGER_LABELS[tone]}
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogPopup tone={tone}>
+      <AlertDialogPopup tone={tone} className="w-[900px]">
         <AlertDialogHeader>
           {TONE_ICONS[tone]}
           <AlertDialogContent>

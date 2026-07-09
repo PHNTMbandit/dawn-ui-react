@@ -1,4 +1,4 @@
-import { OTPFieldPreview as OTPField } from '@base-ui/react/otp-field'
+import { OTPField } from '@base-ui/react'
 import { cn } from '@/utils/cn'
 
 import type { InputOTPProps } from './input-otp.types'

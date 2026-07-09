@@ -12,23 +12,19 @@ export const TableRowGrid = <TData,>({
 }: TableRowGridProps<TData>) => {
   if (children) {
     return (
-      <tr className={cn('size-full', className)} ref={ref} {...props}>
-        <td className="size-full" style={{ display: 'block' }}>
-          {children}
-        </td>
-      </tr>
+      <div role="row" className={cn('size-full', className)} ref={ref} {...props}>
+        {children}
+      </div>
     )
   }
 
   return (
-    <tr className={cn('size-full', className)} ref={ref} {...props}>
-      {row.getVisibleCells().map((cell) => {
-        return (
-          <td key={cell.id} className="size-full" style={{ display: 'block' }}>
-            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-          </td>
-        )
-      })}
-    </tr>
+    <div role="row" className={cn('size-full', className)} ref={ref} {...props}>
+      {row.getVisibleCells().map((cell) => (
+        <div key={cell.id} role="gridcell" className="size-full">
+          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        </div>
+      ))}
+    </div>
   )
 }

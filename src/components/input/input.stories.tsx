@@ -14,13 +14,6 @@ export default {
         defaultValue: { summary: 'primary' },
       },
     },
-    compact: {
-      control: 'boolean',
-      description: 'When true, renders a compact color input trigger for the color type.',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     size: {
       control: 'select',
       options: ['small', 'medium', 'large'],
@@ -55,7 +48,6 @@ export default {
     },
   },
   args: {
-    compact: false,
     variant: 'primary',
     size: 'medium',
     type: 'text',
@@ -203,6 +195,40 @@ export const Colour: Story = {
   },
 }
 
+export const File: Story = {
+  name: 'Type / File',
+  render: () => (
+    <div className="flex w-[720px] flex-col gap-sm">
+      <label className="style-text-default-0 text-on-surface" htmlFor="file-upload">
+        Upload file
+      </label>
+      <Input
+        id="file-upload"
+        type="file"
+        multiple
+        variant="secondary"
+        maxFiles={5}
+        maxFileSize={3000}
+        clearFilesLabel="Clear selected files"
+        filesSelectedLabel={(count) => `${count} files selected`}
+        fileUploadButtonLabel="Browse"
+        maxFileSizeErrorLabel={(fileName, maxFileSize) =>
+          `File "${fileName}" exceeds the maximum size of ${maxFileSize}.`
+        }
+        maxFilesErrorLabel={(maxFiles) => `You can only upload up to ${maxFiles} files.`}
+        placeholder="Upload up to 5 files, each with a max size of 2MB."
+      />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input configured for file selection with the secondary variant.',
+      },
+    },
+  },
+}
+
 export const FormRow: Story = {
   name: 'Composition / Form Row',
   render: () => (
@@ -236,6 +262,44 @@ export const SearchField: Story = {
     docs: {
       description: {
         story: 'Input configured for search interactions with the secondary variant.',
+      },
+    },
+  },
+}
+
+export const PasswordField: Story = {
+  name: 'Composition / Password Field',
+  render: () => (
+    <div className="flex w-[420px] flex-col gap-sm">
+      <label className="style-text-default-0 text-on-surface" htmlFor="password">
+        Password
+      </label>
+      <Input id="password" placeholder="Enter your password" type="password" variant="primary" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input configured for password entry with the primary variant.',
+      },
+    },
+  },
+}
+
+export const EmailField: Story = {
+  name: 'Composition / Email Field',
+  render: () => (
+    <div className="flex w-[420px] flex-col gap-sm">
+      <label className="style-text-default-0 text-on-surface" htmlFor="email">
+        Email address
+      </label>
+      <Input id="email" placeholder="Enter your email" type="email" variant="primary" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input configured for email entry with the primary variant.',
       },
     },
   },
