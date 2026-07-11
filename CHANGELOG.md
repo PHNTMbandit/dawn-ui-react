@@ -1,3 +1,17 @@
+# [1.0.0-alpha.22](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2026-07-11)
+
+
+### Bug Fixes
+
+* **dropzone-files-list.tsx:** delete duplicate file ([6a92b82](https://github.com/PHNTMbandit/dawn-ui-react/commit/6a92b82d10013b420114af3041c555b58aa31b4c))
+
+
+### Features
+
+* add dialog helper class ([6e11349](https://github.com/PHNTMbandit/dawn-ui-react/commit/6e11349fb4d8a4c61d4d4fdce73c9ee774154192))
+* add dropzone component ([6985317](https://github.com/PHNTMbandit/dawn-ui-react/commit/6985317cc067b63a0727ff21cd7ee79c892a55a4))
+* **input.tsx:** add file input variant ([ea7e0de](https://github.com/PHNTMbandit/dawn-ui-react/commit/ea7e0de2dc738fe7821009a860139861ba4b7855))
+
 # [1.0.0-alpha.21](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2026-06-26)
 
 ### Features
