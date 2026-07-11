@@ -16,3 +16,26 @@ export const formatFileSize = (bytes: number): string => {
 }
 
 export const getFileKey = (file: File): string => `${file.name}-${file.size}-${file.lastModified}`
+
+export const isFileTypeAccepted = (file: File, acceptedFileTypes: string[]): boolean => {
+  if (acceptedFileTypes.length === 0) {
+    return true
+  }
+
+  const fileName = file.name.toLowerCase()
+  const fileType = file.type.toLowerCase()
+
+  return acceptedFileTypes.some((accepted) => {
+    const pattern = accepted.toLowerCase()
+
+    if (pattern.startsWith('.')) {
+      return fileName.endsWith(pattern)
+    }
+
+    if (pattern.endsWith('/*')) {
+      return fileType.startsWith(`${pattern.slice(0, -1)}`)
+    }
+
+    return fileType === pattern
+  })
+}

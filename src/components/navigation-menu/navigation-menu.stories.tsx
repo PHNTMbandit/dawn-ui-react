@@ -205,49 +205,6 @@ export const MultipleItems: Story = {
   ),
 }
 
-export const WithActiveLink: Story = {
-  name: 'Active Link',
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Pass `active` to `NavigationMenuLink` to mark the currently active page. ' +
-          'The link receives a `data-active` attribute that you can target in CSS.',
-      },
-    },
-  },
-  render: (args) => (
-    <NavigationMenu {...args}>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            Overview
-            <NavigationMenuIcon>
-              <CaretDownIcon weight="bold" />
-            </NavigationMenuIcon>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul>
-              {overviewLinks.map((item, i) => (
-                <li key={item.href}>
-                  <NavigationMenuLink active={i === 0}>
-                    <h3 className="mb-1 leading-4 m-0 text-sm font-normal">{item.title}</h3>
-                    <p className="text-neutral-500 dark:text-neutral-400 m-0 text-sm">
-                      {item.description}
-                    </p>
-                  </NavigationMenuLink>
-                </li>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-
-      <NavigationMenuPopup />
-    </NavigationMenu>
-  ),
-}
-
 export const Sizes: Story = {
   parameters: {
     docs: {
@@ -318,7 +275,19 @@ export const Tones: Story = {
                   <CaretDownIcon weight="bold" />
                 </NavigationMenuIcon>
               </NavigationMenuTrigger>
-              <NavigationMenuContent>{tone} content</NavigationMenuContent>
+              <NavigationMenuContent>
+                {' '}
+                <ul>
+                  {handbookLinks.map((item) => (
+                    <li key={item.href}>
+                      <NavigationMenuLink tone={tone}>
+                        <h3 className="style-text-strong-0">{item.title}</h3>
+                        <p className="style-text-prose--1">{item.description}</p>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
             </NavigationMenuItem>
           ),
         )}

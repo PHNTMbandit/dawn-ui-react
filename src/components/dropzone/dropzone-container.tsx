@@ -47,7 +47,7 @@ export const DropzoneContainer = ({
       role="button"
       tabIndex={isDisabled ? -1 : 0}
       className={cn(
-        'flex size-full items-center justify-center rounded-xl border-2 border-brand-border bg-surface transition-all outline-none focus-visible:outline-2 focus-visible:outline-brand-border-strong',
+        'flex size-full items-center justify-center rounded-xl border-2 border-brand-border bg-surface py-2xl transition-all outline-none focus-visible:outline-2 focus-visible:outline-brand-border-strong',
         !isDisabled && 'cursor-pointer',
         isHovering && 'ring-8 ring-brand-border-strong/20',
         fileError && 'border-error-border',

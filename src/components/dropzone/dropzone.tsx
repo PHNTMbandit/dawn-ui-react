@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatFileSize, getFileKey } from './dropzone.utils'
+import { formatFileSize, getFileKey, isFileTypeAccepted } from './dropzone.utils'
 import { cn } from '@/utils/cn'
 
 import type { DropzoneProps } from './dropzone.types'
@@ -20,6 +20,8 @@ type DropzoneContextProps = {
   props: React.ComponentProps<'input'>
   removeFile: (file: File) => void
   setFiles: React.Dispatch<React.SetStateAction<File[]>>
+  onUpload?: (file: File, onProgress: (percent: number) => void) => void | Promise<void>
+  onConfirm?: (files: File[]) => void
 }
 
 const DropzoneContext = React.createContext<DropzoneContextProps | null>(null)
@@ -29,11 +31,13 @@ export const Dropzone = ({
   maxFileSize,
   maxFilesErrorLabel = (max) => `You can select up to ${max} file${max === 1 ? '' : 's'}.`,
   maxFileSizeErrorLabel = (fileName, max) => `"${fileName}" exceeds the maximum size of ${max}.`,
+  fileTypeErrorLabel = (fileName) => `"${fileName}" is not an accepted file type.`,
   onUpload,
   ref,
   className,
   children,
   onChange,
+  onConfirm,
   ...props
 }: DropzoneProps) => {
   const inputRef = React.useRef<HTMLInputElement | null>(null)
@@ -133,6 +137,17 @@ export const Dropzone = ({
 
   const processFiles = React.useCallback(
     (candidateFiles: File[]) => {
+      const invalidTypeFiles = candidateFiles.filter(
+        (file) => !isFileTypeAccepted(file, acceptedFileTypes),
+      )
+
+      if (invalidTypeFiles.length > 0) {
+        return {
+          acceptedFiles: null,
+          error: fileTypeErrorLabel(invalidTypeFiles[0].name),
+        }
+      }
+
       const oversizedFiles =
         maxFileSize !== undefined ? candidateFiles.filter((file) => file.size > maxFileSize) : []
       const acceptedFiles =
@@ -157,7 +172,14 @@ export const Dropzone = ({
         error,
       }
     },
-    [maxFiles, maxFileSize, maxFilesErrorLabel, maxFileSizeErrorLabel],
+    [
+      acceptedFileTypes,
+      fileTypeErrorLabel,
+      maxFiles,
+      maxFileSize,
+      maxFilesErrorLabel,
+      maxFileSizeErrorLabel,
+    ],
   )
 
   const handleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -244,12 +266,14 @@ export const Dropzone = ({
         isHovering,
         maxFileSize: maxFileSize !== undefined ? formatFileSize(maxFileSize) : undefined,
         maxFiles,
+        onConfirm,
+        onUpload,
         props,
         removeFile,
         setFiles,
       }}
     >
-      <div className={cn('space-y-xs', className)} ref={ref}>
+      <div className={cn('space-y-md', className)} ref={ref}>
         {children}
       </div>
     </DropzoneContext.Provider>

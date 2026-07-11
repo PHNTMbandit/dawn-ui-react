@@ -1,9 +1,16 @@
 import { FileArrowUpIcon } from '@phosphor-icons/react'
 import { Dropzone } from './dropzone'
+import { DropzoneActions } from './dropzone-actions'
+import { DropzoneClear } from './dropzone-clear'
+import { DropzoneConfirm } from './dropzone-confirm'
 import { DropzoneContainer } from './dropzone-container'
 import { DropzoneError } from './dropzone-error'
-import { DropzoneFileList } from './dropzone-file-list'
+import { DropzoneFileLimit } from './dropzone-file-limit'
 import { DropzoneFileSizeLimit } from './dropzone-file-size-limit'
+import { DropzoneFiles } from './dropzone-files'
+import { DropzoneFilesHeader } from './dropzone-files-header'
+import { DropzoneFilesList } from './dropzone-files-list'
+import { DropzoneFilesTitle } from './dropzone-files-title'
 import { DropzoneFormats } from './dropzone-formats'
 import { DropzoneHeading } from './dropzone-heading'
 import { DropzoneIcon } from './dropzone-icon'
@@ -21,20 +28,12 @@ export default {
     maxFiles: 3,
     maxFileSize: 200000000,
     multiple: true,
-    onUpload: (_file, onProgress) => {
-      let percent = 0
-      const interval = setInterval(() => {
-        percent += 20
-        onProgress(percent)
-
-        if (percent >= 100) {
-          clearInterval(interval)
-        }
-      }, 300)
+    onConfirm: (files) => {
+      alert(`Confirmed ${files.length} file${files.length === 1 ? '' : 's'}.`)
     },
   },
   render: (args) => (
-    <Dropzone {...args} className="h-[300px] w-[900px]">
+    <Dropzone {...args} className="w-[900px]">
       <DropzoneContainer>
         <DropzoneIcon>
           <FileArrowUpIcon />
@@ -50,7 +49,17 @@ export default {
         </DropzoneInfo>
       </DropzoneContainer>
       <DropzoneError />
-      <DropzoneFileList />
+      <DropzoneFiles>
+        <DropzoneFilesHeader>
+          <DropzoneFilesTitle>Uploaded Files</DropzoneFilesTitle>
+          <DropzoneFileLimit />
+        </DropzoneFilesHeader>
+        <DropzoneFilesList />
+      </DropzoneFiles>
+      <DropzoneActions>
+        <DropzoneClear>Clear</DropzoneClear>
+        <DropzoneConfirm>Confirm</DropzoneConfirm>
+      </DropzoneActions>
     </Dropzone>
   ),
 } as Meta<typeof Dropzone>
@@ -58,3 +67,33 @@ export default {
 type Story = StoryObj<typeof Dropzone>
 
 export const Playground: Story = {}
+export const SingleFile: Story = {
+  args: {
+    multiple: false,
+    maxFiles: 1,
+  },
+}
+
+export const CustomErrorMessages: Story = {
+  args: {
+    maxFilesErrorLabel: (maxFiles) => `You can only upload up to ${maxFiles} files.`,
+    maxFileSizeErrorLabel: (fileName, maxFileSize) =>
+      `The file "${fileName}" exceeds the maximum size of ${maxFileSize}.`,
+  },
+}
+
+export const UploadProgress: Story = {
+  args: {
+    onUpload: (_file, onProgress) => {
+      let percent = 0
+      const interval = setInterval(() => {
+        percent += 20
+        onProgress(percent)
+
+        if (percent >= 100) {
+          clearInterval(interval)
+        }
+      }, 300)
+    },
+  },
+}
