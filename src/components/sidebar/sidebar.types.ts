@@ -15,7 +15,7 @@ export type SidebarFooterProps = Omit<React.ComponentProps<'div'>, 'children'> &
 }
 export type SidebarMenuProps = React.ComponentProps<'div'>
 export type SidebarProps = React.ComponentProps<'div'> & {
-  tone?: 'default' | 'ghost'
+  tone?: 'primary' | 'secondary' | 'ghost'
   width?: string | number
 }
 

@@ -17,7 +17,7 @@ export const ResizeableHandle = ({
       data-slot="resizable-handle"
       {...props}
     >
-      {withHandle && <div className="z-10 flex h-md w-3xs shrink-0 rounded-lg bg-border" />}
+      {withHandle && <div className="z-10 flex h-md w-3xs shrink-0 rounded-lg bg-border-strong" />}
     </BaseResizable.Separator>
   )
 }

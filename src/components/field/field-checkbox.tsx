@@ -1,5 +1,5 @@
 import { Checkbox } from '../checkbox'
-import { useFieldContext } from '../form/form-context'
+import { useFieldContext } from '../form/form-contexts'
 import { Label } from '../label'
 
 import type { FieldCheckboxProps } from './field.types'

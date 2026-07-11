@@ -1,4 +1,4 @@
-import { useFieldContext } from '../form/form-context'
+import { useFieldContext } from '../form/form-contexts'
 import { Switch } from '../switch'
 
 import type { FieldSwitchProps } from './field.types'

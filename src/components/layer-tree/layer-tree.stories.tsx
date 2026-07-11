@@ -1,10 +1,13 @@
 import {
+  ClipboardIcon,
+  CopyIcon,
   EyeIcon,
   EyeSlashIcon,
   FolderIcon,
   FolderPlusIcon,
   LockIcon,
   LockSimpleOpenIcon,
+  ScissorsIcon,
   SquareIcon,
   TextAaIcon,
 } from '@phosphor-icons/react'
@@ -19,6 +22,13 @@ import {
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Button } from '../button'
+import {
+  ContextMenu,
+  ContextMenuItem,
+  ContextMenuPopup,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from '../context-menu'
 import { LayerTree } from './layer-tree'
 import { LayerTreeBody } from './layer-tree-body'
 import { LayerTreeExpandAll } from './layer-tree-expand-all'
@@ -156,14 +166,30 @@ export const Default: Story = {
     const columns = [
       columnHelper.accessor('name', {
         cell: (info) => (
-          <LayerTreeNode
-            row={info.row}
-            icon={info.row.original.icon}
-            dndDisabled={info.row.original.locked}
-            className={cn(!info.row.original.visible && 'opacity-50')}
-          >
-            {info.getValue()}
-          </LayerTreeNode>
+          <ContextMenu>
+            <ContextMenuTrigger>
+              <LayerTreeNode
+                row={info.row}
+                icon={info.row.original.icon}
+                dndDisabled={info.row.original.locked}
+                className={cn(!info.row.original.visible && 'opacity-50')}
+              >
+                {info.getValue()}
+              </LayerTreeNode>
+            </ContextMenuTrigger>
+            <ContextMenuPopup>
+              <ContextMenuItem>
+                <CopyIcon weight="bold" /> Copy
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <ClipboardIcon weight="bold" /> Paste
+              </ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem>
+                <ScissorsIcon weight="bold" /> Cut
+              </ContextMenuItem>
+            </ContextMenuPopup>
+          </ContextMenu>
         ),
       }),
       columnHelper.accessor('visible', {
@@ -244,37 +270,39 @@ export const Default: Story = {
     const allLocked = table.getRowModel().flatRows.every((row) => row.original.locked)
 
     return (
-      <LayerTree table={table} onDNDEnd={handleDragEnd} className="h-[400px] w-[360px]">
-        <LayerTreeBody />
-        <LayerTreeFooter>
-          <div className="flex items-center justify-between">
-            <LayerTreeSort />
-            <LayerTreeNodeToggle<Layer>
-              accessorKey="visible"
-              rows={table.getRowModel().flatRows}
-              size="iconMedium"
-              value={allVisible}
-              onToggle={refresh}
-            >
-              {(v) => (v ? <EyeSlashIcon /> : <EyeIcon />)}
-            </LayerTreeNodeToggle>
-            <LayerTreeNodeToggle<Layer>
-              accessorKey="locked"
-              size="iconMedium"
-              rows={table.getRowModel().flatRows}
-              value={allLocked}
-              onToggle={refresh}
-            >
-              {(v) => (v ? <LockIcon weight="fill" /> : <LockSimpleOpenIcon />)}
-            </LayerTreeNodeToggle>
-            <LayerTreeExpandAll />
-            <Button variant="ghost" size="iconMedium" tone="neutral" onClick={addFolder}>
-              <FolderPlusIcon />
-            </Button>
-          </div>
-          <LayerTreeSearch placeholder="Search layers..." />
-        </LayerTreeFooter>
-      </LayerTree>
+      <div className="pointer-events-auto z-10 bg-surface">
+        <LayerTree table={table} onDNDEnd={handleDragEnd} className="h-[400px] w-[360px]">
+          <LayerTreeBody />
+          <LayerTreeFooter>
+            <div className="flex items-center justify-between">
+              <LayerTreeSort />
+              <LayerTreeNodeToggle<Layer>
+                accessorKey="visible"
+                rows={table.getRowModel().flatRows}
+                size="iconMedium"
+                value={allVisible}
+                onToggle={refresh}
+              >
+                {(v) => (v ? <EyeSlashIcon /> : <EyeIcon />)}
+              </LayerTreeNodeToggle>
+              <LayerTreeNodeToggle<Layer>
+                accessorKey="locked"
+                size="iconMedium"
+                rows={table.getRowModel().flatRows}
+                value={allLocked}
+                onToggle={refresh}
+              >
+                {(v) => (v ? <LockIcon weight="fill" /> : <LockSimpleOpenIcon />)}
+              </LayerTreeNodeToggle>
+              <LayerTreeExpandAll />
+              <Button variant="ghost" size="iconMedium" tone="neutral" onClick={addFolder}>
+                <FolderPlusIcon />
+              </Button>
+            </div>
+            <LayerTreeSearch placeholder="Search layers..." />
+          </LayerTreeFooter>
+        </LayerTree>
+      </div>
     )
   },
 }

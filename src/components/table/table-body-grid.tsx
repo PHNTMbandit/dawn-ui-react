@@ -18,14 +18,12 @@ export const TableBodyGrid = <TData,>({
   }
 
   return (
-    <tbody className={cn('grid h-full gap-sm overflow-y-auto', className)} ref={ref} {...props}>
-      {rows.map((row) => {
-        return (
-          <TableRowGrid key={row.id} row={row}>
-            {children ? children(row) : null}
-          </TableRowGrid>
-        )
-      })}
-    </tbody>
+    <div role="rowgroup" className={cn('grid h-full gap-sm', className)} ref={ref} {...props}>
+      {rows.map((row) => (
+        <TableRowGrid key={row.id} row={row}>
+          {children ? children(row) : null}
+        </TableRowGrid>
+      ))}
+    </div>
   )
 }

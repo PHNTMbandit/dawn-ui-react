@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn'
 import type { SidebarProps } from './sidebar.types'
 
 export const Sidebar = ({
-  tone = 'default',
+  tone = 'primary',
   width = 400,
   className,
   children,
@@ -87,7 +87,9 @@ export const Sidebar = ({
       className={cn(
         'sticky left-[0px] flex h-full shrink-0 flex-col justify-between overflow-hidden border-border bg-surface transition-[width,transform] duration-300 ease-in-out',
         className,
-        tone === 'ghost' && !isMobile && 'bg-transparent',
+        tone === 'primary' && 'bg-surface-background',
+        tone === 'secondary' && 'bg-surface',
+        tone === 'ghost' && 'bg-transparent',
         getGapClasses(),
         getPositionClasses(),
         collapsible === 'offcanvas' && !open && 'border-none',

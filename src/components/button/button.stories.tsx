@@ -4,7 +4,7 @@ import { Button } from './button'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
-const VARIANTS = ['fill', 'outline', 'ghost', 'soft', 'elevated'] as const
+const VARIANTS = ['fill', 'outline', 'ghost', 'soft', 'elevated', 'link'] as const
 const SIZES = [
   'large',
   'iconLarge',
@@ -130,7 +130,7 @@ export default {
       subtitle: 'Displays a button or a component that looks like a button.',
       description: {
         component:
-          'The Button component is the primary action trigger across the interface. It supports five visual variants (`fill`, `outline`, `ghost`, `soft`, `elevated`), seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`), and paired text or icon-only sizes for a broad range of use cases.',
+          'The Button component is the primary action trigger across the interface. It supports six visual variants (`fill`, `outline`, `ghost`, `soft`, `elevated`, `link`), seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`), and paired text or icon-only sizes for a broad range of use cases.',
       },
     },
   },
@@ -335,6 +335,21 @@ export const Elevated: Story = {
     },
   },
   render: () => <VariantShowcase variant="elevated" />,
+}
+
+export const Link: Story = {
+  name: 'Variant / Link',
+  args: {
+    variant: 'link',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Text-style button for inline actions, links, and navigation.',
+      },
+    },
+  },
+  render: () => <VariantShowcase variant="link" />,
 }
 
 export const Small: Story = {

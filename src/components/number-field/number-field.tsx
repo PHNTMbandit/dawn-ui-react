@@ -6,9 +6,10 @@ import { numberFieldVariants, type NumberFieldTypesProps } from './number-field.
 import { cn } from '@/utils/cn'
 
 export const NumberField = ({
+  size,
+  variant,
   children,
   label,
-  size,
   className,
   ref,
   ...props
@@ -66,7 +67,7 @@ export const NumberField = ({
 
   return (
     <BaseNumberField.Root
-      className={cn(numberFieldVariants({ size, className }))}
+      className={cn(numberFieldVariants({ size, variant, className }))}
       ref={ref}
       aria-invalid={mergedAriaInvalid}
       data-invalid={mergedAriaInvalid ? '' : undefined}
@@ -94,16 +95,27 @@ export const NumberField = ({
               tone="error"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0'}
+              className={'shrink-0 rounded-r-none'}
             >
               <MinusIcon weight="bold" />
             </Button>
           )}
         />
-        <BaseNumberField.Input className="w-full text-center style-text-default-0 focus:outline-none" />
-        <div className="absolute right-2xl style-text-default-0 text-on-surface-variant">
-          {children}
-        </div>
+        <BaseNumberField.Input
+          className={cn('w-full text-center focus:outline-none', children && 'text-right')}
+        />
+        {children && (
+          <div
+            className={cn(
+              'w-full text-left text-on-surface-variant',
+              size === 'small' && 'style-text-default--1',
+              size === 'medium' && 'style-text-default-0',
+              size === 'large' && 'style-text-default-1',
+            )}
+          >
+            {children}
+          </div>
+        )}
         <BaseNumberField.Increment
           render={(stepperProps) => (
             <Button
@@ -111,7 +123,7 @@ export const NumberField = ({
               tone="success"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0'}
+              className={'shrink-0 rounded-l-none'}
             >
               <PlusIcon weight="bold" />
             </Button>
