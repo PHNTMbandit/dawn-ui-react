@@ -51,7 +51,7 @@ export const ColourChannelSlider = ({
           <BaseSlider.Thumb
             data-slot="slider-thumb"
             className={cn(
-              'absolute aspect-square rounded-full border-[#ffffff] shadow-xs transition-[width,height,opacity] data-dragging:cursor-grabbing hover:[&:not([data-dragging])]:cursor-pointer',
+              'absolute aspect-square rounded-full border-white shadow-xs transition-[width,height,opacity] data-dragging:cursor-grabbing hover:[&:not([data-dragging])]:cursor-pointer',
             )}
             render={(thumbProps, state) => (
               <div

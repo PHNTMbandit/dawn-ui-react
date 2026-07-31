@@ -227,7 +227,7 @@ const UserStatusDot = ({ status }: { status: Person['status'] }) => {
     inactive: 'bg-neutral-default',
     pending: 'bg-warning-default',
   }
-  return <span className={`size-2 inline-block rounded-full ${colors[status]}`} />
+  return <span className={`inline-block size-3xs rounded-full ${colors[status]}`} />
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════

@@ -19,7 +19,7 @@ export const SelectPopup = ({ className, children, ref, ...props }: SelectPopupP
         >
           <BaseSelect.ScrollUpArrow
             className={
-              "top-0 right-0 z-[1px] flex h-md w-full cursor-default items-center justify-center rounded-xl bg-surface-2 before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-top-full"
+              "top-0 right-0 z-[1px] flex h-md w-full cursor-default items-center justify-center rounded-xl bg-surface-2 before:absolute before:left-0 before:size-full before:content-[''] data-[side=none]:before:-top-full"
             }
           >
             <CaretUpIcon className="size-sm" weight="fill" />
@@ -27,7 +27,7 @@ export const SelectPopup = ({ className, children, ref, ...props }: SelectPopupP
           {children}
           <BaseSelect.ScrollDownArrow
             className={
-              "right-0 bottom-0 z-[1px] flex h-md w-full cursor-default items-center justify-center rounded-xl bg-surface-2 before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-bottom-full"
+              "right-0 bottom-0 z-[1px] flex h-md w-full cursor-default items-center justify-center rounded-xl bg-surface-2 before:absolute before:left-0 before:size-full before:content-[''] data-[side=none]:before:-bottom-full"
             }
           >
             <CaretDownIcon className="size-sm" weight="fill" />

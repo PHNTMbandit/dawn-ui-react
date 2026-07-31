@@ -78,7 +78,7 @@ const SettingsItem = ({
   description: string
 }) => (
   <button
-    className="hover:bg-surface-4 flex items-center gap-md rounded-md text-left transition-colors"
+    className="flex items-center gap-md rounded-md text-left transition-colors hover:bg-surface-3"
     type="button"
   >
     <span className="text-on-surface-variant">{icon}</span>
@@ -388,7 +388,7 @@ export const NavigationMenu: Story = {
                 {['Dashboard', 'Projects', 'Team', 'Reports', 'Settings'].map((item) => (
                   <li key={item}>
                     <a
-                      className="hover:bg-surface-4 block rounded-md px-sm py-sm style-text-default-0 text-on-surface transition-colors"
+                      className="block rounded-md p-sm style-text-default-0 text-on-surface transition-colors hover:bg-surface-3"
                       href="#"
                     >
                       {item}
@@ -437,7 +437,7 @@ export const BottomSheet: Story = {
                 {['Share', 'Copy link', 'Edit', 'Move to folder', 'Delete'].map((action) => (
                   <button
                     key={action}
-                    className="hover:bg-surface-4 rounded-md p-sm text-left style-text-default-0 text-on-surface transition-colors"
+                    className="rounded-md p-sm text-left style-text-default-0 text-on-surface transition-colors hover:bg-surface-3"
                     type="button"
                   >
                     {action}

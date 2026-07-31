@@ -433,7 +433,7 @@ export const ControlledValue: Story = {
         <button
           type="button"
           onClick={() => setValue('')}
-          className="hover:bg-surface-4 rounded-md bg-surface px-sm py-xs style-text-default--1 text-on-surface"
+          className="rounded-md bg-surface px-sm py-xs style-text-default--1 text-on-surface hover:bg-surface-3"
         >
           Clear
         </button>

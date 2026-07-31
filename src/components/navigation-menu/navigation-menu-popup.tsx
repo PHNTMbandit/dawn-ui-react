@@ -16,7 +16,7 @@ export const NavigationMenuPopup = ({
         collisionPadding={{ top: 5, bottom: 5, left: 20, right: 20 }}
         collisionAvoidance={{ side: 'none' }}
         className={cn(
-          'data-[side=bottom]:before:h-2.5 data-[side=left]:before:w-2.5 data-[side=right]:before:w-2.5 data-[side=top]:before:h-2.5 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[top,left,right,bottom] duration-(--duration) ease-(--easing) before:absolute data-instant:transition-none data-[side=bottom]:before:top-[-10px] data-[side=bottom]:before:right-0 data-[side=bottom]:before:left-0 data-[side=left]:before:top-0 data-[side=left]:before:right-[-10px] data-[side=left]:before:bottom-0 data-[side=right]:before:top-0 data-[side=right]:before:bottom-0 data-[side=right]:before:left-[-10px] data-[side=top]:before:right-0 data-[side=top]:before:bottom-[-10px] data-[side=top]:before:left-0',
+          'h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[top,left,right,bottom] duration-(--duration) ease-(--easing) before:absolute data-instant:transition-none data-[side=bottom]:before:inset-x-0 data-[side=bottom]:before:top-[-10px] data-[side=bottom]:before:h-2xs data-[side=left]:before:inset-y-0 data-[side=left]:before:right-[-10px] data-[side=left]:before:w-2xs data-[side=right]:before:inset-y-0 data-[side=right]:before:left-[-10px] data-[side=right]:before:w-2xs data-[side=top]:before:inset-x-0 data-[side=top]:before:bottom-[-10px] data-[side=top]:before:h-2xs',
           className,
         )}
         ref={ref}
@@ -33,7 +33,7 @@ export const NavigationMenuPopup = ({
         >
           <BaseNavigationMenu.Arrow
             className={
-              "relative block overflow-clip transition-[left,right] duration-(--duration) ease-(--easing) before:absolute before:bottom-0 before:left-1/2 before:block before:h-[calc(6px*sqrt(2))] before:w-[calc(6px*sqrt(2))] before:-translate-x-1/2 before:translate-y-1/2 before:rotate-45 before:border before:content-[''] data-[side=bottom]:top-[-6px] data-[side=left]:right-[-9px] data-[side=left]:rotate-90 data-[side=right]:left-[-9px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-6px] data-[side=top]:rotate-180"
+              "relative block overflow-clip transition-[left,right] duration-(--duration) ease-(--easing) before:absolute before:bottom-0 before:left-1/2 before:block before:size-[calc(6px*sqrt(2))] before:-translate-x-1/2 before:translate-y-1/2 before:rotate-45 before:border before:content-[''] data-[side=bottom]:top-[-6px] data-[side=left]:right-[-9px] data-[side=left]:rotate-90 data-[side=right]:left-[-9px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-6px] data-[side=top]:rotate-180"
             }
           />
           <BaseNavigationMenu.Viewport className={'relative size-full overflow-hidden'} />

@@ -45,7 +45,7 @@ export const ColourPickerArea = ({ className, ref, ...props }: ColourPickerAreaP
       }}
     >
       <div
-        className="pointer-events-none absolute size-md -translate-x-1/2 -translate-y-1/2 rounded-full border-3 border-[#ffffff]"
+        className="pointer-events-none absolute size-md -translate-x-1/2 -translate-y-1/2 rounded-full border-3 border-white"
         style={{
           left: `${saturation * 100}%`,
           top: `${(1 - value) * 100}%`,

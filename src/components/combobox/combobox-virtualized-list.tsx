@@ -55,7 +55,7 @@ export const ComboboxVirtualizedList = <TItem,>({
       ref={handleScrollElementRef}
       style={{ '--total-size': `${totalSize}px` } as React.CSSProperties}
       className={cn(
-        'scroll-py-1 h-[min(22.5rem,var(--total-size))] max-h-(--available-height) overflow-auto overscroll-contain',
+        'h-[min(22.5rem,var(--total-size))] max-h-(--available-height) scroll-py-3xs overflow-auto overscroll-contain',
         className,
       )}
       {...props}

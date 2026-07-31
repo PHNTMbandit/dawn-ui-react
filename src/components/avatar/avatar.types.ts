@@ -5,6 +5,7 @@ import type { VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 
 export const avatarVariants = cva(
+  // oxlint-disable-next-line tailwindcss/no-unknown-classes
   'group/avatar relative inline-flex shrink-0 items-center justify-center rounded-full',
   {
     variants: {
