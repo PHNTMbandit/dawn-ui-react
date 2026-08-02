@@ -6,7 +6,6 @@
 @layer theme {
   :root,
   :host {
-    --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-bold: 700;
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
@@ -1102,11 +1101,20 @@
   .flex-1 {
     flex: 1;
   }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
   .shrink-0 {
     flex-shrink: 0;
   }
+  .flex-grow {
+    flex-grow: 1;
+  }
   .grow {
     flex-grow: 1;
+  }
+  .border-collapse {
+    border-collapse: collapse;
   }
   .origin-\(--transform-origin\) {
     transform-origin: var(--transform-origin);
@@ -1660,6 +1668,9 @@
   .object-cover {
     object-fit: cover;
   }
+  .p-0 {
+    padding: var(--spacing-0);
+  }
   .p-0\! {
     padding: var(--spacing-0) !important;
   }
@@ -1929,6 +1940,9 @@
   .text-balance {
     text-wrap: balance;
   }
+  .text-wrap {
+    text-wrap: wrap;
+  }
   .break-keep {
     word-break: keep-all;
   }
@@ -2159,6 +2173,9 @@
   }
   .shadow-xs {
     box-shadow: var(--shadow-xs) var(--dawn-shadow);
+  }
+  .ring-brand-border-strong {
+    --tw-ring-color: var(--color-brand-border-strong);
   }
   .ring-brand-border-strong\/20 {
     --tw-ring-color: var(--color-brand-border-strong);
@@ -5015,6 +5032,9 @@
   .\[\&_\[role\=\"group\"\]\]\:rounded-2xl [role='group'] {
     border-radius: var(--radius-2xl);
   }
+  .\[\&_\[role\=\"group\"\]\]\:rounded-full [role='group'] {
+    border-radius: var(--radius-full);
+  }
   .\[\&_\[role\=\"group\"\]\]\:rounded-lg [role='group'] {
     border-radius: var(--radius-lg);
   }
@@ -5088,6 +5108,9 @@
   }
   .\[\&_\[role\=presentation\]\]\:rounded-2xl [role='presentation'] {
     border-radius: var(--radius-2xl);
+  }
+  .\[\&_\[role\=presentation\]\]\:rounded-full [role='presentation'] {
+    border-radius: var(--radius-full);
   }
   .\[\&_\[role\=presentation\]\]\:rounded-lg [role='presentation'] {
     border-radius: var(--radius-lg);
@@ -5165,11 +5188,17 @@
   .\[\&_\[role\=tab\]\]\:h-2xl [role='tab'] {
     height: var(--spacing-2xl);
   }
+  .\[\&_\[role\=tab\]\]\:h-3xl [role='tab'] {
+    height: var(--spacing-3xl);
+  }
   .\[\&_\[role\=tab\]\]\:h-lg [role='tab'] {
     height: var(--spacing-lg);
   }
   .\[\&_\[role\=tab\]\]\:h-xl [role='tab'] {
     height: var(--spacing-xl);
+  }
+  .\[\&_\[role\=tab\]\]\:h-xs [role='tab'] {
+    height: var(--spacing-xs);
   }
   .\[\&_\[role\=tab\]\]\:grow [role='tab'] {
     flex-grow: 1;
@@ -5200,6 +5229,9 @@
   }
   .\[\&_\[role\=tab\]\]\:pb-2xs [role='tab'] {
     padding-bottom: var(--spacing-2xs);
+  }
+  .\[\&_\[role\=tab\]\]\:pb-3xs [role='tab'] {
+    padding-bottom: var(--spacing-3xs);
   }
   .\[\&_\[role\=tab\]\]\:pb-sm [role='tab'] {
     padding-bottom: var(--spacing-sm);
@@ -5297,6 +5329,9 @@
   .\[\&_\[role\=tablist\]\]\:h-lg [role='tablist'] {
     height: var(--spacing-lg);
   }
+  .\[\&_\[role\=tablist\]\]\:h-md [role='tablist'] {
+    height: var(--spacing-md);
+  }
   .\[\&_\[role\=tablist\]\]\:h-xl [role='tablist'] {
     height: var(--spacing-xl);
   }
@@ -5326,6 +5361,9 @@
   }
   .\[\&_\[role\=tablist\]\]\:rounded-2xl [role='tablist'] {
     border-radius: var(--radius-2xl);
+  }
+  .\[\&_\[role\=tablist\]\]\:rounded-full [role='tablist'] {
+    border-radius: var(--radius-full);
   }
   .\[\&_\[role\=tablist\]\]\:rounded-lg [role='tablist'] {
     border-radius: var(--radius-lg);
@@ -5360,8 +5398,17 @@
   .\[\&_\[role\=tablist\]\]\:p-xs [role='tablist'] {
     padding: var(--spacing-xs);
   }
+  .\[\&_\[role\=tablist\]\]\:pb-2xs [role='tablist'] {
+    padding-bottom: var(--spacing-2xs);
+  }
+  .\[\&_\[role\=tablist\]\]\:pb-3xs [role='tablist'] {
+    padding-bottom: var(--spacing-3xs);
+  }
   .\[\&_\[role\=tablist\]\]\:pb-md [role='tablist'] {
     padding-bottom: var(--spacing-md);
+  }
+  .\[\&_\[role\=tablist\]\]\:pb-sm [role='tablist'] {
+    padding-bottom: var(--spacing-sm);
   }
   .\[\&_button\]\:shrink-0 button {
     flex-shrink: 0;

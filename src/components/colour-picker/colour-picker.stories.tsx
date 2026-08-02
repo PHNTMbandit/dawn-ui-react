@@ -1,3 +1,5 @@
+import chroma from 'chroma-js'
+import { useState } from 'react'
 import { Separator } from '../separator'
 import { ColourPicker } from './colour-picker'
 import { ColourPickerArea } from './colour-picker-area'
@@ -75,7 +77,7 @@ export const Playground: Story = {
   },
 
   render: (args) => (
-    <ColourPicker {...args} className="w-[400px]" onColourChange={(e) => console.log(e)}>
+    <ColourPicker {...args} className="w-[400px]" onValueChange={(value) => console.log(value)}>
       <ColourPickerArea />
       <ColourPickerGroup>
         <ColourPickerHueSlider />
@@ -152,4 +154,29 @@ export const Minimal: Story = {
       </ColourPickerGroup>
     </ColourPicker>
   ),
+}
+
+export const Controlled: Story = {
+  render: function ControlledStory(args) {
+    const [value, setValue] = useState(() => chroma(args.defaultColour ?? '#ff0000'))
+
+    return (
+      <div className="flex flex-col items-start gap-sm">
+        <ColourPicker {...args} value={value} onValueChange={setValue} className="w-[300px]">
+          <ColourPickerArea />
+          <ColourPickerGroup>
+            <ColourPickerHueSlider />
+            <ColourPickerTransparencySlider />
+            <ColourPickerRow>
+              <ColourPickerValueType />
+              <ColourPickerInput />
+            </ColourPickerRow>
+          </ColourPickerGroup>
+        </ColourPicker>
+        <code className="rounded-md bg-surface px-sm py-xs style-text-default--1 text-on-surface">
+          {value.css()}
+        </code>
+      </div>
+    )
+  },
 }
