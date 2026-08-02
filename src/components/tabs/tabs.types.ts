@@ -12,10 +12,10 @@ export type TabsListProps = ComponentProps<typeof BaseTabs.List>
 export const tabsVariants = cva('', {
   variants: {
     variant: {
-      default: 'space-y-md [&_[role=presentation]]:top-1/2 [&_[role=tablist]]:bg-surface-low',
+      default: 'space-y-xs [&_[role=presentation]]:top-1/2 [&_[role=tablist]]:bg-surface-low',
       ghost:
-        'space-y-md [&_[role=presentation]]:top-1/2 [&_[role=presentation]]:border [&_[role=tablist]]:rounded-lg',
-      underline: 'space-y-md [&_[role=tablist]]:border-border [&_[role=tablist]]:pb-md',
+        'space-y-2xs [&_[role=presentation]]:top-1/2 [&_[role=presentation]]:rounded-full [&_[role=presentation]]:border [&_[role=tablist]]:rounded-full',
+      underline: 'space-y-xs [&_[role=tablist]]:border-border',
     },
     size: {
       small: '',

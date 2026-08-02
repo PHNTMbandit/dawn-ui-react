@@ -51,10 +51,11 @@ const colourPickerReducer = (
 
 export const ColourPicker = ({
   variant,
+  value: controlledValue,
   defaultColour,
   defaultPalette,
   paletteLimit,
-  onColourChange,
+  onValueChange,
   className,
   children,
   ref,
@@ -78,26 +79,63 @@ export const ColourPicker = ({
     },
   )
 
-  const { hue, saturation, value, alpha, valueType, palette } = state
+  const {
+    hue: internalHue,
+    saturation: internalSaturation,
+    value: internalValue,
+    alpha: internalAlpha,
+    valueType,
+    palette,
+  } = state
+
+  const internalColour = React.useMemo(
+    () => chroma.hsv(internalHue, internalSaturation, internalValue).alpha(internalAlpha),
+    [internalHue, internalSaturation, internalValue, internalAlpha],
+  )
 
   const colour = React.useMemo(
-    () => chroma.hsv(hue, saturation, value).alpha(alpha),
-    [hue, saturation, value, alpha],
+    () => (controlledValue === undefined ? internalColour : chroma(controlledValue)),
+    [controlledValue, internalColour],
   )
 
-  const setColour = React.useCallback((colour: chroma.Color) => {
-    dispatch({ type: 'set_colour', colour })
-  }, [])
-  const setHue = React.useCallback((hue: number) => dispatch({ type: 'set_hue', hue }), [])
-  const setSaturation = React.useCallback(
-    (saturation: number) => dispatch({ type: 'set_saturation', saturation }),
-    [],
+  const [colourHue, colourSaturation, colourValue] = colour.hsv()
+  const hue = colourHue == null || Number.isNaN(colourHue) ? internalHue : colourHue
+  const saturation =
+    colourSaturation == null || Number.isNaN(colourSaturation)
+      ? internalSaturation
+      : colourSaturation
+  const value = colourValue
+  const alpha = colour.alpha()
+
+  const setColour = React.useCallback(
+    (colour: chroma.Color) => {
+      if (controlledValue === undefined) {
+        dispatch({ type: 'set_colour', colour })
+      }
+      onValueChange?.(colour)
+    },
+    [controlledValue, onValueChange],
   )
-  const setValue = React.useCallback((value: number) => dispatch({ type: 'set_value', value }), [])
-  const setAlpha = React.useCallback((alpha: number) => dispatch({ type: 'set_alpha', alpha }), [])
-  const setLightness = React.useCallback((lightness: number) => {
-    dispatch({ type: 'set_lightness', lightness })
-  }, [])
+  const setHue = React.useCallback(
+    (hue: number) => setColour(chroma.hsv(hue, saturation, value).alpha(alpha)),
+    [alpha, saturation, setColour, value],
+  )
+  const setSaturation = React.useCallback(
+    (saturation: number) => setColour(chroma.hsv(hue, saturation, value).alpha(alpha)),
+    [alpha, hue, setColour, value],
+  )
+  const setValue = React.useCallback(
+    (value: number) => setColour(chroma.hsv(hue, saturation, value).alpha(alpha)),
+    [alpha, hue, saturation, setColour],
+  )
+  const setAlpha = React.useCallback(
+    (alpha: number) => setColour(colour.alpha(alpha)),
+    [colour, setColour],
+  )
+  const setLightness = React.useCallback(
+    (lightness: number) => setColour(colour.set('hsl.l', lightness)),
+    [colour, setColour],
+  )
   const setValueType = React.useCallback(
     (valueType: ColourPickerState['valueType']) => dispatch({ type: 'set_value_type', valueType }),
     [],
@@ -116,12 +154,6 @@ export const ColourPicker = ({
     },
     [palette, paletteLimit],
   )
-
-  React.useEffect(() => {
-    if (onColourChange) {
-      onColourChange(colour)
-    }
-  }, [colour, onColourChange])
 
   return (
     <ColourPickerContext.Provider

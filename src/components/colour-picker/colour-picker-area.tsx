@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn'
 import type { ColourPickerAreaProps } from './colour-picker.types'
 
 export const ColourPickerArea = ({ className, ref, ...props }: ColourPickerAreaProps) => {
-  const { colour, hue, saturation, value, setSaturation, setValue } = useColourPicker()
+  const { colour, hue, saturation, value, alpha, setColour } = useColourPicker()
   const hueColour = chroma.hsv(hue, 1, 1).hex()
 
   const updateColour = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -13,8 +13,7 @@ export const ColourPickerArea = ({ className, ref, ...props }: ColourPickerAreaP
     const nextSaturation = Math.min(Math.max((event.clientX - bounds.left) / bounds.width, 0), 1)
     const nextValue = Math.min(Math.max(1 - (event.clientY - bounds.top) / bounds.height, 0), 1)
 
-    setSaturation(nextSaturation)
-    setValue(nextValue)
+    setColour(chroma.hsv(hue, nextSaturation, nextValue).alpha(alpha))
   }
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {

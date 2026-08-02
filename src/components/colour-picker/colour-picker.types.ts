@@ -48,10 +48,11 @@ export type ColourPickerAction =
 
 export type ColourPickerProps = React.ComponentProps<'div'> &
   VariantProps<typeof colourPickerVariants> & {
+    value?: string | chroma.Color
     defaultColour?: string
     defaultPalette?: string[]
     paletteLimit?: number
-    onColourChange?: (colour: chroma.Color) => void
+    onValueChange?: (colour: chroma.Color) => void
   }
 
 export const colourPickerVariants = cva('flex flex-col space-y-sm', {
