@@ -1,3 +1,12 @@
+# [1.0.0-alpha.23](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2026-08-02)
+
+
+### Features
+
+* add colour channel slider component ([1642e60](https://github.com/PHNTMbandit/dawn-ui-react/commit/1642e60c4f5ddadcac73c48557190c050e25cb92))
+* add colour picker component ([17f3c99](https://github.com/PHNTMbandit/dawn-ui-react/commit/17f3c9938e538d47ceddb5faf16de619c633488e))
+* add nav bar component ([96a36f7](https://github.com/PHNTMbandit/dawn-ui-react/commit/96a36f78ef4b2921b492f6df67aa05c0a54387f2))
+
 # [1.0.0-alpha.22](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2026-07-11)
 
 ### Bug Fixes
