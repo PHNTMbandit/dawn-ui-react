@@ -1,3 +1,10 @@
+# [1.0.0-alpha.24](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2026-08-02)
+
+
+### Bug Fixes
+
+* fix missing component exports ([ae87be8](https://github.com/PHNTMbandit/dawn-ui-react/commit/ae87be8a887d68dcc5737625edf72bbfda9b2d0d))
+
 # [1.0.0-alpha.23](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2026-08-02)
 
 
