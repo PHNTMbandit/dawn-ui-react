@@ -5,6 +5,7 @@ import { ColourPickerGroup } from './colour-picker-group'
 import { ColourPickerHueSlider } from './colour-picker-hue-slider'
 import { ColourPickerInput } from './colour-picker-input'
 import { ColourPickerLabel } from './colour-picker-label'
+import { ColourPickerLightnessSlider } from './colour-picker-lightness-slider'
 import { ColourPickerPaletteLimit } from './colour-picker-palette-limit'
 import { ColourPickerPaletteList } from './colour-picker-palette-list'
 import { ColourPickerPaletteSwatch } from './colour-picker-palette-swatch'
@@ -74,11 +75,12 @@ export const Playground: Story = {
   },
 
   render: (args) => (
-    <ColourPicker {...args} className="w-[400px]">
+    <ColourPicker {...args} className="w-[400px]" onColourChange={(e) => console.log(e)}>
       <ColourPickerArea />
       <ColourPickerGroup>
         <ColourPickerHueSlider />
         <ColourPickerTransparencySlider />
+        <ColourPickerLightnessSlider />
         <ColourPickerRow>
           <ColourPickerValueType />
           <ColourPickerInput />

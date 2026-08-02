@@ -17,6 +17,7 @@ export type ColourPickerContextType = {
   setSaturation: (saturation: number) => void
   setValue: (value: number) => void
   setAlpha: (alpha: number) => void
+  setLightness: (lightness: number) => void
   valueType: ValueType
   setValueType: (valueType: ValueType) => void
   palette: chroma.Color[]
@@ -40,6 +41,7 @@ export type ColourPickerAction =
   | { type: 'set_saturation'; saturation: number }
   | { type: 'set_value'; value: number }
   | { type: 'set_alpha'; alpha: number }
+  | { type: 'set_lightness'; lightness: number }
   | { type: 'set_value_type'; valueType: ValueType }
   | { type: 'set_palette'; palette: chroma.Color[] }
   | { type: 'add_palette_colour'; colour: chroma.Color }
@@ -49,6 +51,7 @@ export type ColourPickerProps = React.ComponentProps<'div'> &
     defaultColour?: string
     defaultPalette?: string[]
     paletteLimit?: number
+    onColourChange?: (colour: chroma.Color) => void
   }
 
 export const colourPickerVariants = cva('flex flex-col space-y-sm', {
@@ -151,6 +154,9 @@ export type ValueType = {
 export type ColourPickerInputProps = React.ComponentProps<typeof InputGroup>
 export type ColourPickerAreaProps = React.ComponentProps<'div'>
 export type ColourPickerHueSliderProps = Partial<React.ComponentProps<typeof ColourChannelSlider>>
+export type ColourPickerLightnessSliderProps = Partial<
+  React.ComponentProps<typeof ColourChannelSlider>
+>
 export type ColourPickerTransparencySliderProps = Partial<
   React.ComponentProps<typeof ColourChannelSlider>
 >
