@@ -16,6 +16,7 @@ export type {
   FieldInputGroupInputProps,
   FieldInputGroupProps,
   FieldSetProps,
+  FieldRowProps,
 } from './field.types'
 export { FieldDescription } from './field-description'
 export { FieldErrors } from './field-errors'
@@ -32,3 +33,4 @@ export { FieldToggle } from './field-toggle'
 export { FieldInputGroup } from './field-input-group'
 export { FieldInputGroupInput } from './field-input-group-input'
 export { FieldSet } from './field-set'
+export { FieldRow } from './field-row'

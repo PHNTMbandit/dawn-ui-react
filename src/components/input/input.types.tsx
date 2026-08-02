@@ -27,7 +27,7 @@ export const inputVariants = cva(
     variants: {
       variant: {
         primary: 'bg-surface shadow-2xs',
-        secondary: 'bg-surface-low',
+        secondary: 'bg-neutral-container',
       },
       size: {
         small: 'h-lg gap-3xs rounded-lg pr-3xs pl-xs style-text-prose--1',

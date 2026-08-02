@@ -6,7 +6,7 @@ import type { TabsPanelProps } from './tabs.types'
 export const TabsPanel = ({ className, ...props }: TabsPanelProps) => {
   return (
     <SwitchTabs.Panel
-      className={cn('relative flex grow items-center justify-start overflow-auto', className)}
+      className={cn('relative flex grow items-center justify-start overflow-auto p-3xs', className)}
       {...props}
     />
   )

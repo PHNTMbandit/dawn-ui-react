@@ -4,7 +4,7 @@ import type { FieldProps } from './field.types'
 
 export const Field = ({ className, children, ref, ...props }: FieldProps) => {
   return (
-    <div className={cn('space-y-2xs', className)} ref={ref} {...props}>
+    <div className={cn('flex flex-col gap-2xs', className)} ref={ref} {...props}>
       {children}
     </div>
   )

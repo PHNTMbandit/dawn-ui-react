@@ -28,11 +28,6 @@ const BasicDialog = ({
   showFooter?: boolean
 }) => (
   <Dialog>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-      laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
     <DialogTrigger>
       <Button>Open Dialog</Button>
     </DialogTrigger>
@@ -145,7 +140,7 @@ export const ScrollableContent: Story = {
         </DialogHeader>
         <DialogContent>
           <ScrollArea className="max-h-[40vh]">
-            <div className="flex flex-col gap-sm">
+            <div>
               <p>{LongDialogText}</p>
               <p>{LongDialogText}</p>
               <p>{LongDialogText}</p>
@@ -194,64 +189,6 @@ export const FormContent: Story = {
             Cancel
           </Button>
           <Button>Create</Button>
-        </DialogFooter>
-        <DialogClose data-testid="close-button" />
-      </DialogPopup>
-    </Dialog>
-  ),
-}
-
-export const NestedDialog: Story = {
-  name: 'Composition / Nested Dialog',
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Dialogs can be nested for related workflows, such as confirming a critical action within a settings dialog.',
-      },
-    },
-  },
-  render: () => (
-    <Dialog>
-      <DialogTrigger>
-        <Button>Open Settings</Button>
-      </DialogTrigger>
-      <DialogPopup>
-        <DialogHeader>
-          <DialogTitle>Settings</DialogTitle>
-          <DialogDescription>Manage your preferences and account details.</DialogDescription>
-        </DialogHeader>
-        <DialogContent className="flex flex-col gap-md">
-          <Dialog>
-            <DialogTrigger>
-              <Button variant="outline">Delete Account</Button>
-            </DialogTrigger>
-            <DialogPopup>
-              <DialogHeader>
-                <DialogTitle>Confirm Account Deletion</DialogTitle>
-                <DialogDescription>
-                  This action is irreversible. Are you sure you want to delete your account?
-                </DialogDescription>
-              </DialogHeader>
-              <DialogContent>
-                This is a critical action. Please confirm that you want to proceed with deleting
-                your account.
-              </DialogContent>
-              <DialogFooter>
-                <Button tone="neutral" variant="outline">
-                  Cancel
-                </Button>
-                <Button tone="error">Delete</Button>
-              </DialogFooter>
-              <DialogClose data-testid="close-button" />
-            </DialogPopup>
-          </Dialog>
-        </DialogContent>
-        <DialogFooter>
-          <Button tone="neutral" variant="outline">
-            Cancel
-          </Button>
-          <Button>Save Changes</Button>
         </DialogFooter>
         <DialogClose data-testid="close-button" />
       </DialogPopup>

@@ -121,10 +121,8 @@ export const Default: Story = {
               {overviewLinks.map((item) => (
                 <li key={item.href}>
                   <NavigationMenuLink>
-                    <h3 className="mb-1 leading-4 m-0 text-sm font-normal">{item.title}</h3>
-                    <p className="text-neutral-500 dark:text-neutral-400 m-0 text-sm">
-                      {item.description}
-                    </p>
+                    <h3 className="">{item.title}</h3>
+                    <p className="">{item.description}</p>
                   </NavigationMenuLink>
                 </li>
               ))}
@@ -164,10 +162,8 @@ export const MultipleItems: Story = {
               {overviewLinks.map((item) => (
                 <li key={item.href}>
                   <NavigationMenuLink>
-                    <h3 className="mb-1 leading-4 m-0 text-sm font-normal">{item.title}</h3>
-                    <p className="text-neutral-500 dark:text-neutral-400 m-0 text-sm">
-                      {item.description}
-                    </p>
+                    <h3 className="">{item.title}</h3>
+                    <p className="">{item.description}</p>
                   </NavigationMenuLink>
                 </li>
               ))}
@@ -186,10 +182,8 @@ export const MultipleItems: Story = {
               {handbookLinks.map((item) => (
                 <li key={item.href}>
                   <NavigationMenuLink>
-                    <h3 className="mb-1 leading-4 m-0 text-sm font-normal">{item.title}</h3>
-                    <p className="text-neutral-500 dark:text-neutral-400 m-0 text-sm">
-                      {item.description}
-                    </p>
+                    <h3 className="">{item.title}</h3>
+                    <p className="">{item.description}</p>
                   </NavigationMenuLink>
                 </li>
               ))}

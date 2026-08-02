@@ -13,3 +13,7 @@ export {
 export { FormErrors } from './form-errors'
 export { FormReset } from './form-reset'
 export { FormSubmit } from './form-submit'
+export { FormFooter } from './form-footer'
+export { FormSet } from './form-set'
+export { FormSetContent } from './form-set-content'
+export { FormSetHeading } from './form-set-heading'

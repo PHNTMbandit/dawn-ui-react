@@ -5,6 +5,8 @@
 
 @theme static {
   --color-*: initial;
+  --color-white: var(--dawn-white);
+  --color-black: var(--dawn-black);
   --color-brand-default: var(--dawn-brand-default);
   --color-brand-muted: var(--dawn-brand-muted);
   --color-brand-subtle: var(--dawn-brand-subtle);
@@ -405,6 +407,8 @@
   --yellow-900: #715212ff;
   --yellow-950: #422f06ff;
 
+  --dawn-white: var(--white);
+  --dawn-black: var(--black);
   --dawn-brand-default: light-dark(var(--rose-600), var(--rose-300));
   --dawn-brand-muted: light-dark(var(--rose-700), var(--rose-200));
   --dawn-brand-subtle: light-dark(var(--rose-100), var(--rose-950));
