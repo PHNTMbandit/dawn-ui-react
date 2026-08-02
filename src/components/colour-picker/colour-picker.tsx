@@ -35,6 +35,9 @@ const colourPickerReducer = (
       return { ...state, value: action.value }
     case 'set_alpha':
       return { ...state, alpha: action.alpha }
+    case 'set_lightness': {
+      return { ...state, value: action.lightness }
+    }
     case 'set_value_type':
       return { ...state, valueType: action.valueType }
     case 'set_palette':
@@ -51,6 +54,7 @@ export const ColourPicker = ({
   defaultColour,
   defaultPalette,
   paletteLimit,
+  onColourChange,
   className,
   children,
   ref,
@@ -81,10 +85,9 @@ export const ColourPicker = ({
     [hue, saturation, value, alpha],
   )
 
-  const setColour = React.useCallback(
-    (colour: chroma.Color) => dispatch({ type: 'set_colour', colour }),
-    [],
-  )
+  const setColour = React.useCallback((colour: chroma.Color) => {
+    dispatch({ type: 'set_colour', colour })
+  }, [])
   const setHue = React.useCallback((hue: number) => dispatch({ type: 'set_hue', hue }), [])
   const setSaturation = React.useCallback(
     (saturation: number) => dispatch({ type: 'set_saturation', saturation }),
@@ -92,6 +95,9 @@ export const ColourPicker = ({
   )
   const setValue = React.useCallback((value: number) => dispatch({ type: 'set_value', value }), [])
   const setAlpha = React.useCallback((alpha: number) => dispatch({ type: 'set_alpha', alpha }), [])
+  const setLightness = React.useCallback((lightness: number) => {
+    dispatch({ type: 'set_lightness', lightness })
+  }, [])
   const setValueType = React.useCallback(
     (valueType: ColourPickerState['valueType']) => dispatch({ type: 'set_value_type', valueType }),
     [],
@@ -111,6 +117,12 @@ export const ColourPicker = ({
     [palette, paletteLimit],
   )
 
+  React.useEffect(() => {
+    if (onColourChange) {
+      onColourChange(colour)
+    }
+  }, [colour, onColourChange])
+
   return (
     <ColourPickerContext.Provider
       value={{
@@ -124,6 +136,7 @@ export const ColourPicker = ({
         setSaturation,
         setValue,
         setAlpha,
+        setLightness,
         valueType,
         setValueType,
         palette,
