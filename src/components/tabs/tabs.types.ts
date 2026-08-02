@@ -11,6 +11,12 @@ export type TabsListProps = ComponentProps<typeof BaseTabs.List>
 
 export const tabsVariants = cva('', {
   variants: {
+    variant: {
+      default: 'space-y-md [&_[role=presentation]]:top-1/2 [&_[role=tablist]]:bg-surface-low',
+      ghost:
+        'space-y-md [&_[role=presentation]]:top-1/2 [&_[role=presentation]]:border [&_[role=tablist]]:rounded-lg',
+      underline: 'space-y-md [&_[role=tablist]]:border-border [&_[role=tablist]]:pb-md',
+    },
     size: {
       small: '',
       medium: '',
@@ -24,13 +30,6 @@ export const tabsVariants = cva('', {
       info: '',
       success: '',
       warning: '',
-    },
-    variant: {
-      default:
-        'space-y-2xs [&_[role=presentation]]:top-1/2 [&_[role=presentation]]:rounded-full [&_[role=tab]]:rounded-full [&_[role=tablist]]:rounded-full [&_[role=tablist]]:bg-surface-low',
-      ghost:
-        'space-y-2xs [&_[role=presentation]]:top-1/2 [&_[role=presentation]]:rounded-full [&_[role=presentation]]:border [&_[role=tab]]:rounded-full [&_[role=tablist]]:rounded-full',
-      underline: 'space-y-2xs [&_[role=tablist]]:border-border',
     },
     fill: {
       true: '[&_[role=tab]]:grow [&_[role=tablist]]:w-full',
@@ -61,12 +60,6 @@ export const tabsVariants = cva('', {
       tone: 'error',
       class:
         '[&_[role=presentation]]:bg-error-default [&_[role=tab]]:data-active:text-error-on-default [&_[role=tab]]:hover:[&:not([data-active])]:text-error-default',
-    },
-    {
-      variant: 'default',
-      tone: 'neutral',
-      class:
-        '[&_[role=presentation]]:bg-neutral-default [&_[role=tab]]:data-active:text-neutral-on-default [&_[role=tab]]:hover:[&:not([data-active])]:text-neutral-default',
     },
     {
       variant: 'default',
@@ -174,19 +167,25 @@ export const tabsVariants = cva('', {
       size: 'small',
       variant: 'default',
       class:
+        '[&_[role=presentation]]:rounded-lg [&_[role=tab]]:rounded-lg [&_[role=tablist]]:rounded-lg',
+    },
+    {
+      size: 'small',
+      variant: 'default',
+      class:
         '[&_[role=tab]]:h-lg [&_[role=tab]]:px-sm [&_[role=tab]]:style-text-default--1 [&_[role=tablist]]:gap-2xs [&_[role=tablist]]:p-3xs',
     },
     {
       size: 'medium',
       variant: 'default',
       class:
-        '[&_[role=tab]]:h-xl [&_[role=tab]]:px-md [&_[role=tab]]:style-text-default-0 [&_[role=tablist]]:gap-xs [&_[role=tablist]]:p-2xs',
+        '[&_[role=presentation]]:rounded-xl [&_[role=tab]]:h-xl [&_[role=tab]]:rounded-xl [&_[role=tab]]:px-md [&_[role=tab]]:style-text-default-0 [&_[role=tablist]]:gap-xs [&_[role=tablist]]:rounded-xl [&_[role=tablist]]:p-2xs',
     },
     {
       size: 'large',
       variant: 'default',
       class:
-        '[&_[role=tab]]:h-2xl [&_[role=tab]]:px-lg [&_[role=tab]]:style-text-default-1 [&_[role=tablist]]:gap-sm [&_[role=tablist]]:p-xs',
+        '[&_[role=presentation]]:rounded-2xl [&_[role=tab]]:h-2xl [&_[role=tab]]:rounded-2xl [&_[role=tab]]:px-lg [&_[role=tab]]:style-text-default-1 [&_[role=tablist]]:gap-sm [&_[role=tablist]]:rounded-2xl [&_[role=tablist]]:p-xs',
     },
     {
       size: 'small',
@@ -198,7 +197,7 @@ export const tabsVariants = cva('', {
       size: 'medium',
       variant: 'ghost',
       class:
-        '[&_[role=tab]]:h-xl [&_[role=tab]]:px-md [&_[role=tab]]:style-text-default-0 [&_[role=tablist]]:gap-xs',
+        '[&_[role=tab]]:h-xl [&_[role=tab]]:px-md [&_[role=tab]]:style-text-default-0 [&_[role=tablist]]:gap-xs [&_[role=tablist]]:p-2xs',
     },
     {
       size: 'large',
@@ -226,10 +225,10 @@ export const tabsVariants = cva('', {
     },
   ],
   defaultVariants: {
-    fill: false,
+    variant: 'default',
     size: 'medium',
     tone: 'brand',
-    variant: 'default',
+    fill: true,
   },
 })
 

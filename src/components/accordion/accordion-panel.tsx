@@ -14,7 +14,7 @@ export const AccordionPanel = ({ className, children, ref, ...props }: Accordion
       ref={ref}
       {...props}
     >
-      <p className="px-md pb-sm">{children}</p>
+      <div className="px-md pb-sm">{children}</div>
     </BaseAccordion.Panel>
   )
 }

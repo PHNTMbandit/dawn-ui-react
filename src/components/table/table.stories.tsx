@@ -227,7 +227,7 @@ const UserStatusDot = ({ status }: { status: Person['status'] }) => {
     inactive: 'bg-neutral-default',
     pending: 'bg-warning-default',
   }
-  return <span className={`inline-block size-3xs rounded-full ${colors[status]}`} />
+  return <span className={`rounded-full ${colors[status]}`} />
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -661,19 +661,19 @@ export const UserDirectory: Story = {
       getCoreRowModel: getCoreRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       getPaginationRowModel: getPaginationRowModel(),
-      initialState: { pagination: { pageSize: 8 } },
+      initialState: { pagination: { pageSize: 16 } },
     })
 
     return (
-      <Table table={table}>
-        <TableToolbar>
+      <Table table={table} className="max-h-[400px] overflow-y-auto">
+        <TableToolbar sticky>
           <TableSearch placeholder="Search users..." />
         </TableToolbar>
         <TableContainer>
           <TableHeader />
           <TableBodyList />
         </TableContainer>
-        <TableNav>
+        <TableNav sticky>
           <TableResults>
             {(_start, _end, total) => (
               <span className="text-on-surface-variant">{total} users</span>

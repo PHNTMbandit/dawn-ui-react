@@ -20,7 +20,7 @@ export const CollapsibleTrigger = ({
           variant={'ghost'}
           className={cn(
             // oxlint-disable-next-line tailwindcss/no-unknown-classes
-            'group/trigger flex w-full justify-start gap-xl data-panel-open:bg-surface data-panel-open:shadow-2xs',
+            'group/trigger flex w-full justify-start gap-xl hover:shadow-2xs data-panel-open:bg-surface data-panel-open:shadow-2xs',
             className,
           )}
           ref={ref}

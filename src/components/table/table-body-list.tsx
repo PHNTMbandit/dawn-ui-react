@@ -4,7 +4,13 @@ import { cn } from '@/utils/cn'
 
 import type { TableBodyListProps } from './table.types'
 
-export const TableBodyList = ({ className, children, ref, ...props }: TableBodyListProps) => {
+export const TableBodyList = ({
+  showDivider = true,
+  className,
+  children,
+  ref,
+  ...props
+}: TableBodyListProps) => {
   const { view, table } = useTable()
   const rows = table.getRowModel().rows
 
@@ -13,7 +19,11 @@ export const TableBodyList = ({ className, children, ref, ...props }: TableBodyL
   }
 
   return (
-    <tbody className={cn('divide-y divide-border overflow-y-auto', className)} ref={ref} {...props}>
+    <tbody
+      className={cn(showDivider && 'divide-y divide-border', 'overflow-y-auto', className)}
+      ref={ref}
+      {...props}
+    >
       {children}
       {rows.map((row) => {
         return <TableRowList key={row.id} row={row} />

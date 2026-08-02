@@ -81,21 +81,27 @@ export type TableColumnToggleProps = React.ComponentProps<typeof MenuTrigger>
 export type TableRowListProps<TData> = React.ComponentProps<'tr'> & {
   row: Row<TData>
 }
-export type TableBodyListProps = React.ComponentProps<'tbody'>
+export type TableBodyListProps = React.ComponentProps<'tbody'> & {
+  showDivider?: boolean
+}
 export type TableBodyGridProps<TData> = Omit<React.ComponentProps<'tbody'>, 'children'> & {
   children?: (row: Row<TData>) => React.ReactNode
 }
 export type TableRowGridProps<TData> = React.ComponentProps<'tr'> & {
   row: Row<TData>
 }
-export type TableNavProps = React.ComponentProps<'div'>
+export type TableNavProps = React.ComponentProps<'div'> & {
+  sticky?: boolean
+}
 export type TableContentProps = React.ComponentProps<'div'>
 export type TablePagingProps = React.ComponentProps<'div'> & {
   min?: number
   max?: number
 }
 export type TableContainerProps = React.ComponentProps<'table'>
-export type TableToolbarProps = React.ComponentProps<'div'>
+export type TableToolbarProps = React.ComponentProps<'div'> & {
+  sticky?: boolean
+}
 export type TableFiltersProps = React.ComponentProps<'ul'> & {
   operatorLabels?: Partial<Record<FilterOperator, string>>
 }
