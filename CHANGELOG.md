@@ -1,3 +1,10 @@
+# [1.0.0-alpha.26](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2026-08-02)
+
+
+### Features
+
+* **colour-picker:** add onColourChange event callback ([d0e570e](https://github.com/PHNTMbandit/dawn-ui-react/commit/d0e570ea98f4aa82a55ca7f29bd69259bb310a9e))
+
 # [1.0.0-alpha.25](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2026-08-02)
 
 
