@@ -1,3 +1,10 @@
+# [1.0.0-alpha.25](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2026-08-02)
+
+
+### Bug Fixes
+
+* add missing colour picker index declarations ([10180e6](https://github.com/PHNTMbandit/dawn-ui-react/commit/10180e62404c5c127544a749c5dc9fd843de1580))
+
 # [1.0.0-alpha.24](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2026-08-02)
 
 
