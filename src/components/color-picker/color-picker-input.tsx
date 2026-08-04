@@ -2,21 +2,16 @@ import { PercentIcon } from '@phosphor-icons/react'
 import React from 'react'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
 import { Separator } from '../separator'
-import { useColourPicker } from './colour-picker'
+import { useColorPicker } from './color-picker'
 import { cn } from '@/utils/cn'
 
-import type { ColourPickerInputProps } from './colour-picker.types'
+import type { ColorPickerInputProps } from './color-picker.types'
 
-export const ColourPickerInput = ({
-  className,
-  children,
-  ref,
-  ...props
-}: ColourPickerInputProps) => {
-  const { colour, setColour, valueType } = useColourPicker()
-  const [inputValue, setInputValue] = React.useState<string>(valueType.getValue(colour))
+export const ColorPickerInput = ({ className, children, ref, ...props }: ColorPickerInputProps) => {
+  const { color, setColor, valueType } = useColorPicker()
+  const [inputValue, setInputValue] = React.useState<string>(valueType.getValue(color))
   const [transparency, setTransparency] = React.useState<string>(
-    Math.round(colour.alpha() * 100).toString(),
+    Math.round(color.alpha() * 100).toString(),
   )
 
   const handleValueChange = (value: string) => {
@@ -28,31 +23,31 @@ export const ColourPickerInput = ({
   }
 
   const handleValueBlur = () => {
-    const newColour = valueType.parseValue(inputValue)
-    if (newColour) {
-      setColour(newColour)
+    const newColor = valueType.parseValue(inputValue)
+    if (newColor) {
+      setColor(newColor)
     }
   }
 
   const handleTransparencyBlur = () => {
     const alpha = parseFloat(transparency)
     if (!Number.isNaN(alpha)) {
-      setColour(colour.alpha(alpha / 100))
+      setColor(color.alpha(alpha / 100))
     }
   }
 
   React.useEffect(() => {
-    setInputValue(valueType.getValue(colour))
-    setTransparency(Math.round(colour.alpha() * 100).toString())
-  }, [colour, valueType])
+    setInputValue(valueType.getValue(color))
+    setTransparency(Math.round(color.alpha() * 100).toString())
+  }, [color, valueType])
 
   return (
     <InputGroup variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
       <InputGroupAddon
         style={{
-          backgroundColor: colour.hex(),
+          backgroundColor: color.hex(),
         }}
-        className="aspect-square size-md rounded-full"
+        className="aspect-square size-md rounded-lg"
       />
       <InputGroupInput
         value={inputValue}

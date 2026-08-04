@@ -1,24 +1,24 @@
 import { Slider as BaseSlider } from '@base-ui/react'
-import { colourChannelSliderVariants } from './colour-channel-slider.types'
+import { colorChannelSliderVariants } from './color-channel-slider.types'
 import { cn } from '@/utils/cn'
 
-import type { ColourChannelSliderProps } from './colour-channel-slider.types'
+import type { ColorChannelSliderProps } from './color-channel-slider.types'
 
-export const ColourChannelSlider = ({
+export const ColorChannelSlider = ({
   size,
   trackStyle,
   className,
   children,
   ref,
   ...props
-}: ColourChannelSliderProps) => {
+}: ColorChannelSliderProps) => {
   const hasTransparency = trackStyle.some(
     (color: string) => color.includes('rgba') || color.includes('hsla') || color.includes('/'),
   )
 
   return (
     <BaseSlider.Root
-      className={cn(colourChannelSliderVariants({ size }), className)}
+      className={cn(colorChannelSliderVariants({ size }), className)}
       data-slot="slider-root"
       thumbAlignment="edge"
       ref={ref}

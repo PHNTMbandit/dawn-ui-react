@@ -42,7 +42,7 @@ export const ChartLegendContent = ({
           <ChartLegendPayloadContext.Provider
             key={`payload-${index}`}
             value={{
-              color: payloadConfig?.colour,
+              color: payloadConfig?.color,
               icon: payloadConfig?.icon,
               label: payloadConfig?.label,
             }}

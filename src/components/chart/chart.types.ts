@@ -8,8 +8,8 @@ export type ChartConfig = Record<
     label?: string
     icon?: React.ComponentType
   } & (
-    | { colour?: string; theme?: never }
-    | { colour?: never; theme: Record<keyof typeof THEMES, string> }
+    | { color?: string; theme?: never }
+    | { color?: never; theme: Record<keyof typeof THEMES, string> }
   )
 >
 

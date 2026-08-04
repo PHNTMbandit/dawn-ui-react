@@ -8,17 +8,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../select'
-import { useColourPicker } from './colour-picker'
-import { VALUE_TYPES, type ColourPickerValueTypeProps } from './colour-picker.types'
+import { useColorPicker } from './color-picker'
+import { VALUE_TYPES, type ColorPickerValueTypeProps } from './color-picker.types'
 import { cn } from '@/utils/cn'
 
-export const ColourPickerValueType = ({
+export const ColorPickerValueType = ({
   className,
   children,
   ref,
   ...props
-}: ColourPickerValueTypeProps) => {
-  const { valueType, setValueType } = useColourPicker()
+}: ColorPickerValueTypeProps) => {
+  const { valueType, setValueType } = useColorPicker()
 
   const handleChange = (value: unknown) => {
     setValueType(VALUE_TYPES.find((type) => type.value === value) ?? VALUE_TYPES[0])

@@ -133,7 +133,7 @@ export default {
     tone: {
       control: 'select',
       options: TONES,
-      description: 'Sets the semantic tone of the dialog, colouring the icon and confirm button.',
+      description: 'Sets the semantic tone of the dialog, coloring the icon and confirm button.',
       table: {
         defaultValue: { summary: 'brand' },
       },
@@ -145,7 +145,7 @@ export default {
         'An accessible modal dialog that interrupts the user to confirm or acknowledge an action.',
       description: {
         component:
-          'The Alert Dialog component blocks interaction with the rest of the application until the user explicitly confirms or cancels. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) that colour the leading icon and the confirm button.',
+          'The Alert Dialog component blocks interaction with the rest of the application until the user explicitly confirms or cancels. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) that color the leading icon and the confirm button.',
       },
     },
   },

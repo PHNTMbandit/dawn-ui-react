@@ -1,15 +1,15 @@
-import { ColourChannelSlider } from './colour-channel-slider'
+import { ColorChannelSlider } from './color-channel-slider'
 import {
   getHueTrack,
   getTransparencyTrack,
   getSaturationTrack,
   getLightnessTrack,
-} from './colour-channel-slider.utils'
+} from './color-channel-slider.utils'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 export default {
-  title: 'Components/Colour Channel Slider',
+  title: 'Components/Color Channel Slider',
   argTypes: {
     size: {
       control: { type: 'select' },
@@ -19,16 +19,16 @@ export default {
   args: {
     size: 'medium',
   },
-  component: ColourChannelSlider,
-} satisfies Meta<typeof ColourChannelSlider>
+  component: ColorChannelSlider,
+} satisfies Meta<typeof ColorChannelSlider>
 
-type Story = StoryObj<typeof ColourChannelSlider>
+type Story = StoryObj<typeof ColorChannelSlider>
 
 export const Hue: Story = {
   name: 'Hue',
   render: (args) => {
     return (
-      <ColourChannelSlider
+      <ColorChannelSlider
         {...args}
         min={1}
         max={360}
@@ -43,7 +43,7 @@ export const Transparency: Story = {
   name: 'Transparency',
   render: (args) => {
     return (
-      <ColourChannelSlider
+      <ColorChannelSlider
         {...args}
         min={1}
         max={100}
@@ -58,7 +58,7 @@ export const Saturation: Story = {
   name: 'Saturation',
   render: (args) => {
     return (
-      <ColourChannelSlider
+      <ColorChannelSlider
         {...args}
         min={1}
         max={100}
@@ -73,7 +73,7 @@ export const Lightness: Story = {
   name: 'Lightness',
   render: (args) => {
     return (
-      <ColourChannelSlider
+      <ColorChannelSlider
         {...args}
         min={1}
         max={100}

@@ -1,16 +1,15 @@
 import { useTable } from './table'
-import { TableRowList } from './table-row-list'
 import { cn } from '@/utils/cn'
 
 import type { TableBodyListProps } from './table.types'
 
-export const TableBodyList = ({
+export const TableBodyList = <TData,>({
   showDivider = true,
   className,
   children,
   ref,
   ...props
-}: TableBodyListProps) => {
+}: TableBodyListProps<TData>) => {
   const { view, table } = useTable()
   const rows = table.getRowModel().rows
 
@@ -24,9 +23,8 @@ export const TableBodyList = ({
       ref={ref}
       {...props}
     >
-      {children}
       {rows.map((row) => {
-        return <TableRowList key={row.id} row={row} />
+        return children(row)
       })}
     </tbody>
   )

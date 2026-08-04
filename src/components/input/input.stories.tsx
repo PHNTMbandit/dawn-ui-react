@@ -180,7 +180,7 @@ export const Error: Story = {
   },
 }
 
-export const Colour: Story = {
+export const Color: Story = {
   name: 'Type / Color Picker',
   args: {
     type: 'color',

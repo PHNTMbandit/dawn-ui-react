@@ -29,7 +29,7 @@ const TONE_CONTENT: Record<string, { title: string; subtitle: string; body: stri
   brand: {
     title: 'Brand Information',
     subtitle: 'Core brand guidelines and assets',
-    body: 'This section contains important brand-related information, including colour usage, typography standards, and logo guidelines to ensure a consistent visual identity.',
+    body: 'This section contains important brand-related information, including color usage, typography standards, and logo guidelines to ensure a consistent visual identity.',
   },
   accent: {
     title: 'Highlighted Feature',

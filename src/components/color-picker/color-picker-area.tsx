@@ -1,24 +1,24 @@
 import chroma from 'chroma-js'
-import { useColourPicker } from './colour-picker'
+import { useColorPicker } from './color-picker'
 import { cn } from '@/utils/cn'
 
-import type { ColourPickerAreaProps } from './colour-picker.types'
+import type { ColorPickerAreaProps } from './color-picker.types'
 
-export const ColourPickerArea = ({ className, ref, ...props }: ColourPickerAreaProps) => {
-  const { colour, hue, saturation, value, alpha, setColour } = useColourPicker()
-  const hueColour = chroma.hsv(hue, 1, 1).hex()
+export const ColorPickerArea = ({ className, ref, ...props }: ColorPickerAreaProps) => {
+  const { color, hue, saturation, value, alpha, setColor } = useColorPicker()
+  const hueColor = chroma.hsv(hue, 1, 1).hex()
 
-  const updateColour = (event: React.PointerEvent<HTMLDivElement>) => {
+  const updateColor = (event: React.PointerEvent<HTMLDivElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect()
     const nextSaturation = Math.min(Math.max((event.clientX - bounds.left) / bounds.width, 0), 1)
     const nextValue = Math.min(Math.max(1 - (event.clientY - bounds.top) / bounds.height, 0), 1)
 
-    setColour(chroma.hsv(hue, nextSaturation, nextValue).alpha(alpha))
+    setColor(chroma.hsv(hue, nextSaturation, nextValue).alpha(alpha))
   }
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId)
-    updateColour(event)
+    updateColor(event)
   }
 
   return (
@@ -32,14 +32,14 @@ export const ColourPickerArea = ({ className, ref, ...props }: ColourPickerAreaP
       style={{
         background: `
           linear-gradient(to top, black, transparent),
-          linear-gradient(to right, white, ${hueColour})
+          linear-gradient(to right, white, ${hueColor})
         `,
         ...props.style,
       }}
       onPointerDown={handlePointerDown}
       onPointerMove={(event) => {
         if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-          updateColour(event)
+          updateColor(event)
         }
       }}
     >
@@ -48,7 +48,7 @@ export const ColourPickerArea = ({ className, ref, ...props }: ColourPickerAreaP
         style={{
           left: `${saturation * 100}%`,
           top: `${(1 - value) * 100}%`,
-          backgroundColor: colour.hex(),
+          backgroundColor: color.hex(),
         }}
       />
     </div>

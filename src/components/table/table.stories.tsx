@@ -262,7 +262,7 @@ export const Simple: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>
         </TableContainer>
       </Table>
     )
@@ -310,7 +310,7 @@ export const WithFooter: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>{' '}
           <TableFooter />
         </TableContainer>
       </Table>
@@ -359,7 +359,7 @@ export const HeaderGroups: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>{' '}
         </TableContainer>
       </Table>
     )
@@ -400,7 +400,7 @@ export const Sortable: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>{' '}
         </TableContainer>
         <TableNav>
           <TablePagination>
@@ -450,7 +450,7 @@ export const Searchable: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>{' '}
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -517,7 +517,7 @@ export const Selectable: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>{' '}
         </TableContainer>
         <p className="mt-sm style-text-prose--1 text-on-surface-variant">
           {table.getSelectedRowModel().rows.length} of {table.getRowModel().rows.length} selected
@@ -563,7 +563,7 @@ export const Paginated: Story = {
       <Table table={table}>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -671,7 +671,7 @@ export const UserDirectory: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>
         </TableContainer>
         <TableNav sticky>
           <TableResults>
@@ -757,7 +757,7 @@ export const TaskTracker: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -837,7 +837,7 @@ export const ProductInventory: Story = {
         </TableToolbar>
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>
         </TableContainer>
         <TableNav>
           <TableResults>
@@ -984,7 +984,7 @@ export const DataDashboard: Story = {
         <TableFilters />
         <TableContainer>
           <TableHeader />
-          <TableBodyList />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>
           <TableBodyGrid<Person> className="auto-rows-fr grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
             {(row) => (
               <div className="flex aspect-square size-full flex-col items-start gap-xs rounded-xl bg-surface px-sm py-xs">
@@ -1042,14 +1042,6 @@ export const GridView: Story = {
     const columns: ColumnDef<Product>[] = [
       {
         accessorKey: 'name',
-        cell: ({ row }) => (
-          <div className="flex size-full flex-col items-start gap-xs rounded-xl bg-surface px-sm py-xs">
-            <span className="line-clamp-1">{row.original.name}</span>
-            <span className="style-text-prose--1 text-on-surface-variant">
-              ${row.original.price.toFixed(2)}
-            </span>
-          </div>
-        ),
       },
     ]
 
@@ -1071,7 +1063,17 @@ export const GridView: Story = {
           <TableChangeView />
         </TableToolbar>
         <TableContainer>
-          <TableBodyGrid className="auto-rows-[minmax(9rem,auto)] grid-cols-[repeat(auto-fill,minmax(300px,1fr))]" />
+          <TableBodyList>{(row) => <TableRowList key={row.id} row={row} />}</TableBodyList>
+          <TableBodyGrid<Product> className="auto-rows-[minmax(9rem,auto)] grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+            {(row) => (
+              <div className="flex size-full flex-col items-start gap-xs rounded-xl bg-surface px-sm py-xs">
+                <span className="line-clamp-1">{row.original.name}</span>
+                <span className="style-text-prose--1 text-on-surface-variant">
+                  ${row.original.price.toFixed(2)}
+                </span>
+              </div>
+            )}
+          </TableBodyGrid>
         </TableContainer>
         <TableNav>
           <TableResults>
