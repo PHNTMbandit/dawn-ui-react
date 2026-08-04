@@ -16,6 +16,7 @@ export type ColorPickerContextType = {
   setHue: (hue: number) => void
   setSaturation: (saturation: number) => void
   setValue: (value: number) => void
+  setSaturationValue: (saturation: number, value: number) => void
   setAlpha: (alpha: number) => void
   setLightness: (lightness: number) => void
   valueType: ValueType
@@ -40,6 +41,7 @@ export type ColorPickerAction =
   | { type: 'set_hue'; hue: number }
   | { type: 'set_saturation'; saturation: number }
   | { type: 'set_value'; value: number }
+  | { type: 'set_saturation_value'; saturation: number; value: number }
   | { type: 'set_alpha'; alpha: number }
   | { type: 'set_lightness'; lightness: number }
   | { type: 'set_value_type'; valueType: ValueType }

@@ -12,6 +12,18 @@ import type {
 
 const ColorPickerContext = React.createContext<ColorPickerContextType | null>(null)
 
+const normalizeToColor = (value: string | chroma.Color, fallback: chroma.Color): chroma.Color => {
+  try {
+    if (typeof value === 'string') {
+      return chroma(value.trim())
+    }
+
+    return chroma(value)
+  } catch {
+    return fallback
+  }
+}
+
 const colorPickerReducer = (
   state: ColorPickerState,
   action: ColorPickerAction,
@@ -19,10 +31,13 @@ const colorPickerReducer = (
   switch (action.type) {
     case 'set_color': {
       const [h, s, v] = action.color.hsv()
+      // Black (value 0) reports saturation 0 and hue NaN; keep the previous ones
+      // so the area handle doesn't snap to the bottom-left corner.
       return {
         ...state,
         hue: h == null || Number.isNaN(h) ? state.hue : h,
-        saturation: s == null || Number.isNaN(s) ? state.saturation : s,
+        saturation:
+          v === 0 ? state.saturation : s == null || Number.isNaN(s) ? state.saturation : s,
         value: v,
         alpha: action.color.alpha(),
       }
@@ -33,6 +48,8 @@ const colorPickerReducer = (
       return { ...state, saturation: action.saturation }
     case 'set_value':
       return { ...state, value: action.value }
+    case 'set_saturation_value':
+      return { ...state, saturation: action.saturation, value: action.value }
     case 'set_alpha':
       return { ...state, alpha: action.alpha }
     case 'set_lightness': {
@@ -63,9 +80,12 @@ export const ColorPicker = ({
 }: ColorPickerProps) => {
   const [state, dispatch] = React.useReducer(
     colorPickerReducer,
-    { defaultColor, defaultPalette },
-    ({ defaultColor, defaultPalette }): ColorPickerState => {
-      const initialColor = chroma(defaultColor ?? '#ffffff')
+    { controlledValue, defaultColor, defaultPalette },
+    ({ controlledValue, defaultColor, defaultPalette }): ColorPickerState => {
+      const initialColor = normalizeToColor(
+        controlledValue ?? defaultColor ?? '#ffffff',
+        chroma('#ffffff'),
+      )
       const [h, s, v] = initialColor.hsv()
 
       return {
@@ -88,43 +108,68 @@ export const ColorPicker = ({
     palette,
   } = state
 
-  const internalColor = React.useMemo(
+  // Internal HSV is the source of truth so that lossy RGB/HEX round-trips from a
+  // controlled value never corrupt hue/saturation while dragging.
+  const color = React.useMemo(
     () => chroma.hsv(internalHue, internalSaturation, internalValue).alpha(internalAlpha),
     [internalHue, internalSaturation, internalValue, internalAlpha],
   )
 
-  const color = React.useMemo(
-    () => (controlledValue === undefined ? internalColor : chroma(controlledValue)),
-    [controlledValue, internalColor],
-  )
+  const hue = internalHue
+  const saturation = internalSaturation
+  const value = internalValue
+  const alpha = internalAlpha
 
-  const [colorHue, colorSaturation, colorValue] = color.hsv()
-  const hue = colorHue == null || Number.isNaN(colorHue) ? internalHue : colorHue
-  const saturation =
-    colorSaturation == null || Number.isNaN(colorSaturation) ? internalSaturation : colorSaturation
-  const value = colorValue
-  const alpha = color.alpha()
+  // Sync internal state only when the controlled value changes externally,
+  // i.e. it represents a different color than the one we already hold.
+  React.useEffect(() => {
+    if (controlledValue === undefined) {
+      return
+    }
+
+    const nextColor = normalizeToColor(controlledValue, color)
+
+    if (nextColor.hex('rgba') !== color.hex('rgba')) {
+      dispatch({ type: 'set_color', color: nextColor })
+    }
+  }, [controlledValue, color])
 
   const setColor = React.useCallback(
     (color: chroma.Color) => {
-      if (controlledValue === undefined) {
-        dispatch({ type: 'set_color', color })
-      }
+      dispatch({ type: 'set_color', color })
       onValueChange?.(color)
     },
-    [controlledValue, onValueChange],
+    [onValueChange],
   )
   const setHue = React.useCallback(
-    (hue: number) => setColor(chroma.hsv(hue, saturation, value).alpha(alpha)),
-    [alpha, saturation, setColor, value],
+    (hue: number) => {
+      dispatch({ type: 'set_hue', hue })
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+    },
+    [alpha, saturation, value, onValueChange],
   )
   const setSaturation = React.useCallback(
-    (saturation: number) => setColor(chroma.hsv(hue, saturation, value).alpha(alpha)),
-    [alpha, hue, setColor, value],
+    (saturation: number) => {
+      dispatch({ type: 'set_saturation', saturation })
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+    },
+    [alpha, hue, value, onValueChange],
   )
   const setValue = React.useCallback(
-    (value: number) => setColor(chroma.hsv(hue, saturation, value).alpha(alpha)),
-    [alpha, hue, saturation, setColor],
+    (value: number) => {
+      dispatch({ type: 'set_value', value })
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+    },
+    [alpha, hue, saturation, onValueChange],
+  )
+  // Saturation and value are updated together and dispatched as raw numbers so
+  // saturation survives even at value 0, where the color collapses to black.
+  const setSaturationValue = React.useCallback(
+    (saturation: number, value: number) => {
+      dispatch({ type: 'set_saturation_value', saturation, value })
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+    },
+    [alpha, hue, onValueChange],
   )
   const setAlpha = React.useCallback(
     (alpha: number) => setColor(color.alpha(alpha)),
@@ -165,6 +210,7 @@ export const ColorPicker = ({
         setHue,
         setSaturation,
         setValue,
+        setSaturationValue,
         setAlpha,
         setLightness,
         valueType,
