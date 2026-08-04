@@ -75,7 +75,7 @@ export default {
     tone: {
       control: 'select',
       options: TONES,
-      description: 'Sets the semantic tone and colour of the badge.',
+      description: 'Sets the semantic tone and color of the badge.',
       table: {
         defaultValue: { summary: 'brand' },
       },

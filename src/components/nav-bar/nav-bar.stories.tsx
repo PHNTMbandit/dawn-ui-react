@@ -125,7 +125,7 @@ export default {
       subtitle: 'A floating navigation bar for mobile app-shell layouts.',
       description: {
         component:
-          'NavBar is a compact bottom navigation surface composed of `NavBarItem`, `NavBarItemIcon`, and `NavBarItemLabel`. It supports three sizes, two visual variants, and per-item tone colouring.',
+          'NavBar is a compact bottom navigation surface composed of `NavBarItem`, `NavBarItemIcon`, and `NavBarItemLabel`. It supports three sizes, two visual variants, and per-item tone coloring.',
       },
     },
   },

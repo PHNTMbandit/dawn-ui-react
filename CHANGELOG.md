@@ -1,32 +1,28 @@
 # [1.0.0-alpha.26](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2026-08-02)
 
-
 ### Features
 
-* **colour-picker:** add onColourChange event callback ([d0e570e](https://github.com/PHNTMbandit/dawn-ui-react/commit/d0e570ea98f4aa82a55ca7f29bd69259bb310a9e))
+- **colour-picker:** add onColourChange event callback ([d0e570e](https://github.com/PHNTMbandit/dawn-ui-react/commit/d0e570ea98f4aa82a55ca7f29bd69259bb310a9e))
 
 # [1.0.0-alpha.25](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2026-08-02)
 
-
 ### Bug Fixes
 
-* add missing colour picker index declarations ([10180e6](https://github.com/PHNTMbandit/dawn-ui-react/commit/10180e62404c5c127544a749c5dc9fd843de1580))
+- add missing colour picker index declarations ([10180e6](https://github.com/PHNTMbandit/dawn-ui-react/commit/10180e62404c5c127544a749c5dc9fd843de1580))
 
 # [1.0.0-alpha.24](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2026-08-02)
 
-
 ### Bug Fixes
 
-* fix missing component exports ([ae87be8](https://github.com/PHNTMbandit/dawn-ui-react/commit/ae87be8a887d68dcc5737625edf72bbfda9b2d0d))
+- fix missing component exports ([ae87be8](https://github.com/PHNTMbandit/dawn-ui-react/commit/ae87be8a887d68dcc5737625edf72bbfda9b2d0d))
 
 # [1.0.0-alpha.23](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2026-08-02)
 
-
 ### Features
 
-* add colour channel slider component ([1642e60](https://github.com/PHNTMbandit/dawn-ui-react/commit/1642e60c4f5ddadcac73c48557190c050e25cb92))
-* add colour picker component ([17f3c99](https://github.com/PHNTMbandit/dawn-ui-react/commit/17f3c9938e538d47ceddb5faf16de619c633488e))
-* add nav bar component ([96a36f7](https://github.com/PHNTMbandit/dawn-ui-react/commit/96a36f78ef4b2921b492f6df67aa05c0a54387f2))
+- add colour channel slider component ([1642e60](https://github.com/PHNTMbandit/dawn-ui-react/commit/1642e60c4f5ddadcac73c48557190c050e25cb92))
+- add colour picker component ([17f3c99](https://github.com/PHNTMbandit/dawn-ui-react/commit/17f3c9938e538d47ceddb5faf16de619c633488e))
+- add nav bar component ([96a36f7](https://github.com/PHNTMbandit/dawn-ui-react/commit/96a36f78ef4b2921b492f6df67aa05c0a54387f2))
 
 # [1.0.0-alpha.22](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2026-07-11)
 

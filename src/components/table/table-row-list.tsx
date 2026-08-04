@@ -17,7 +17,7 @@ export const TableRowList = <TData,>({
 
   return (
     <tr
-      className={cn('transition-colors', className)}
+      className={cn('transition-colors')}
       ref={ref}
       style={{
         backgroundColor: isSelected ? 'var(--color-neutral-container-high)' : 'transparent',
@@ -27,7 +27,7 @@ export const TableRowList = <TData,>({
       {row.getVisibleCells().map((cell) => {
         return (
           <td
-            className="px-sm py-xs first:rounded-l-full last:rounded-r-full"
+            className={cn('h-xl px-xs first:rounded-l-xl last:rounded-r-xl', className)}
             key={cell.id}
             style={{
               width: cell.column.getSize(),

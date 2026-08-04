@@ -2,13 +2,13 @@ import chroma from 'chroma-js'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import type { Button } from '../button'
-import type { ColourChannelSlider } from '../colour-channel-slider'
+import type { ColorChannelSlider } from '../color-channel-slider'
 import type { InputGroup } from '../input-group'
 import type { SelectTrigger } from '../select'
 
-export type ColourPickerContextType = {
-  colour: chroma.Color
-  setColour: (colour: chroma.Color) => void
+export type ColorPickerContextType = {
+  color: chroma.Color
+  setColor: (color: chroma.Color) => void
   hue: number
   saturation: number
   value: number
@@ -22,11 +22,11 @@ export type ColourPickerContextType = {
   setValueType: (valueType: ValueType) => void
   palette: chroma.Color[]
   setPalette: (palette: chroma.Color[]) => void
-  addPaletteColour: (colour: chroma.Color) => void
+  addPaletteColor: (color: chroma.Color) => void
   paletteLimit?: number
 }
 
-export type ColourPickerState = {
+export type ColorPickerState = {
   hue: number
   saturation: number
   value: number
@@ -35,8 +35,8 @@ export type ColourPickerState = {
   palette: chroma.Color[]
 }
 
-export type ColourPickerAction =
-  | { type: 'set_colour'; colour: chroma.Color }
+export type ColorPickerAction =
+  | { type: 'set_color'; color: chroma.Color }
   | { type: 'set_hue'; hue: number }
   | { type: 'set_saturation'; saturation: number }
   | { type: 'set_value'; value: number }
@@ -44,18 +44,18 @@ export type ColourPickerAction =
   | { type: 'set_lightness'; lightness: number }
   | { type: 'set_value_type'; valueType: ValueType }
   | { type: 'set_palette'; palette: chroma.Color[] }
-  | { type: 'add_palette_colour'; colour: chroma.Color }
+  | { type: 'add_palette_color'; color: chroma.Color }
 
-export type ColourPickerProps = React.ComponentProps<'div'> &
-  VariantProps<typeof colourPickerVariants> & {
+export type ColorPickerProps = React.ComponentProps<'div'> &
+  VariantProps<typeof colorPickerVariants> & {
     value?: string | chroma.Color
-    defaultColour?: string
+    defaultColor?: string
     defaultPalette?: string[]
     paletteLimit?: number
-    onValueChange?: (colour: chroma.Color) => void
+    onValueChange?: (color: chroma.Color) => void
   }
 
-export const colourPickerVariants = cva('flex flex-col space-y-sm', {
+export const colorPickerVariants = cva('flex flex-col space-y-sm', {
   variants: {
     variant: {
       elevated: 'rounded-xl bg-surface p-md shadow-2xs',
@@ -68,14 +68,14 @@ export const colourPickerVariants = cva('flex flex-col space-y-sm', {
   },
 })
 
-export const colourPickerSwatchVariants = cva(
-  'overflow-hidden rounded-full border border-border hover:cursor-pointer focus:outline-2 focus:outline-offset-2',
+export const colorPickerSwatchVariants = cva(
+  'overflow-hidden border border-border hover:cursor-pointer focus:outline-2 focus:outline-offset-2',
   {
     variants: {
       size: {
-        small: 'size-sm',
-        medium: 'size-md',
-        large: 'size-lg',
+        small: 'size-sm rounded-md',
+        medium: 'size-md rounded-lg',
+        large: 'size-lg rounded-xl',
       },
     },
     defaultVariants: {
@@ -88,7 +88,7 @@ export const VALUE_TYPES: ValueType[] = [
   {
     label: 'RGB',
     value: 'rgb',
-    getValue: (colour: chroma.Color) => colour.rgb(),
+    getValue: (color: chroma.Color) => color.rgb(),
     parseValue: (value: string) => {
       const rgbValues = value.split(',').map((v) => parseInt(v.trim(), 10))
       if (rgbValues.length === 3 && rgbValues.every((v) => !isNaN(v))) {
@@ -99,7 +99,7 @@ export const VALUE_TYPES: ValueType[] = [
   {
     label: 'CSS',
     value: 'css',
-    getValue: (colour: chroma.Color) => colour.css(),
+    getValue: (color: chroma.Color) => color.css(),
     parseValue: (value: string) => {
       try {
         return chroma(value)
@@ -111,7 +111,7 @@ export const VALUE_TYPES: ValueType[] = [
   {
     label: 'HEX',
     value: 'hex',
-    getValue: (colour: chroma.Color) => colour.hex('rgb'),
+    getValue: (color: chroma.Color) => color.hex('rgb'),
     parseValue: (value: string) => {
       try {
         return chroma(value)
@@ -123,7 +123,7 @@ export const VALUE_TYPES: ValueType[] = [
   {
     label: 'HSL',
     value: 'hsl',
-    getValue: (colour: chroma.Color) => colour.hsl(),
+    getValue: (color: chroma.Color) => color.hsl(),
     parseValue: (value: string) => {
       try {
         return chroma(value)
@@ -135,7 +135,7 @@ export const VALUE_TYPES: ValueType[] = [
   {
     label: 'HSV',
     value: 'hsv',
-    getValue: (colour: chroma.Color) => colour.hsv(),
+    getValue: (color: chroma.Color) => color.hsv(),
     parseValue: (value: string) => {
       try {
         return chroma(value)
@@ -148,29 +148,29 @@ export const VALUE_TYPES: ValueType[] = [
 export type ValueType = {
   label: string
   value: string
-  getValue: (colour: chroma.Color) => any
+  getValue: (color: chroma.Color) => any
   parseValue: (value: string) => chroma.Color | undefined
 }
 
-export type ColourPickerInputProps = React.ComponentProps<typeof InputGroup>
-export type ColourPickerAreaProps = React.ComponentProps<'div'>
-export type ColourPickerHueSliderProps = Partial<React.ComponentProps<typeof ColourChannelSlider>>
-export type ColourPickerLightnessSliderProps = Partial<
-  React.ComponentProps<typeof ColourChannelSlider>
+export type ColorPickerInputProps = React.ComponentProps<typeof InputGroup>
+export type ColorPickerAreaProps = React.ComponentProps<'div'>
+export type ColorPickerHueSliderProps = Partial<React.ComponentProps<typeof ColorChannelSlider>>
+export type ColorPickerLightnessSliderProps = Partial<
+  React.ComponentProps<typeof ColorChannelSlider>
 >
-export type ColourPickerTransparencySliderProps = Partial<
-  React.ComponentProps<typeof ColourChannelSlider>
+export type ColorPickerTransparencySliderProps = Partial<
+  React.ComponentProps<typeof ColorChannelSlider>
 >
-export type ColourPickerValueTypeProps = React.ComponentProps<typeof SelectTrigger>
-export type ColourPickerRowProps = React.ComponentProps<'div'>
-export type ColourPickerGroupProps = React.ComponentProps<'div'>
-export type ColourPickerLabelProps = React.ComponentProps<'span'>
-export type ColourPickerPaletteListProps = Omit<React.ComponentProps<'ul'>, 'children'> & {
-  children?: (props: { colour: chroma.Color; index: number }) => React.ReactNode
+export type ColorPickerValueTypeProps = React.ComponentProps<typeof SelectTrigger>
+export type ColorPickerRowProps = React.ComponentProps<'div'>
+export type ColorPickerGroupProps = React.ComponentProps<'div'>
+export type ColorPickerLabelProps = React.ComponentProps<'span'>
+export type ColorPickerPaletteListProps = Omit<React.ComponentProps<'ul'>, 'children'> & {
+  children?: (props: { color: chroma.Color; index: number }) => React.ReactNode
 }
-export type ColourPickerPaletteSwatchProps = React.ComponentProps<'button'> &
-  VariantProps<typeof colourPickerSwatchVariants> & {
-    colour: chroma.Color
+export type ColorPickerPaletteSwatchProps = Omit<React.ComponentProps<'button'>, 'color'> &
+  VariantProps<typeof colorPickerSwatchVariants> & {
+    color: chroma.Color
   }
-export type ColourPickerPaletteAddProps = React.ComponentProps<typeof Button>
-export type ColourPickerPaletteLimitProps = React.ComponentProps<'span'>
+export type ColorPickerPaletteAddProps = React.ComponentProps<typeof Button>
+export type ColorPickerPaletteLimitProps = React.ComponentProps<'span'>

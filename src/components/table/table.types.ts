@@ -81,8 +81,9 @@ export type TableColumnToggleProps = React.ComponentProps<typeof MenuTrigger>
 export type TableRowListProps<TData> = React.ComponentProps<'tr'> & {
   row: Row<TData>
 }
-export type TableBodyListProps = React.ComponentProps<'tbody'> & {
+export type TableBodyListProps<TData> = Omit<React.ComponentProps<'tbody'>, 'children'> & {
   showDivider?: boolean
+  children: (row: Row<TData>) => React.ReactNode
 }
 export type TableBodyGridProps<TData> = Omit<React.ComponentProps<'tbody'>, 'children'> & {
   children?: (row: Row<TData>) => React.ReactNode

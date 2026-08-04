@@ -1,12 +1,12 @@
 import { Slider as BaseSlider } from '@base-ui/react'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-export type ColourChannelSliderProps = React.ComponentProps<typeof BaseSlider.Root> &
-  VariantProps<typeof colourChannelSliderVariants> & {
+export type ColorChannelSliderProps = React.ComponentProps<typeof BaseSlider.Root> &
+  VariantProps<typeof colorChannelSliderVariants> & {
     trackStyle: string[]
   }
 
-export const colourChannelSliderVariants = cva('flex flex-col gap-xs', {
+export const colorChannelSliderVariants = cva('flex flex-col gap-xs', {
   variants: {
     size: {
       small:

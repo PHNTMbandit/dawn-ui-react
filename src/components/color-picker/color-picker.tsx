@@ -1,14 +1,14 @@
 import chroma from 'chroma-js'
 import React from 'react'
-import { colorPickerVariants, type ColorPickerProps } from './colour-picker.types'
-import { VALUE_TYPES } from './colour-picker.types'
+import { colorPickerVariants, type ColorPickerProps } from './color-picker.types'
+import { VALUE_TYPES } from './color-picker.types'
 import { cn } from '@/index'
 
 import type {
   ColorPickerAction,
   ColorPickerContextType,
   ColorPickerState,
-} from './colour-picker.types'
+} from './color-picker.types'
 
 const ColorPickerContext = React.createContext<ColorPickerContextType | null>(null)
 

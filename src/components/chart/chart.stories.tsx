@@ -38,12 +38,12 @@ const chartData = [
 const chartConfig = {
   desktop: {
     label: 'Desktop',
-    colour: 'var(--dawn-brand-default)',
+    color: 'var(--dawn-brand-default)',
     icon: TrendUpIcon,
   },
   mobile: {
     label: 'Mobile',
-    colour: 'var(--dawn-accent-default)',
+    color: 'var(--dawn-accent-default)',
     icon: TrendDownIcon,
   },
 } satisfies ChartConfig
@@ -97,8 +97,8 @@ export const AreaChartStory: Story = {
           stackId="a"
           type="natural"
           dataKey="desktop"
-          fill={chartConfig.desktop.colour}
-          stroke={chartConfig.desktop.colour}
+          fill={chartConfig.desktop.color}
+          stroke={chartConfig.desktop.color}
           strokeWidth={2}
         />
       </AreaChart>
@@ -137,8 +137,8 @@ export const AreaChartLinearStory: Story = {
           stackId="a"
           type="linear"
           dataKey="desktop"
-          fill={chartConfig.desktop.colour}
-          stroke={chartConfig.desktop.colour}
+          fill={chartConfig.desktop.color}
+          stroke={chartConfig.desktop.color}
           strokeWidth={2}
         />
       </AreaChart>
@@ -177,8 +177,8 @@ export const AreaChartStepStory: Story = {
           stackId="a"
           type="step"
           dataKey="desktop"
-          fill={chartConfig.desktop.colour}
-          stroke={chartConfig.desktop.colour}
+          fill={chartConfig.desktop.color}
+          stroke={chartConfig.desktop.color}
           strokeWidth={2}
         />
       </AreaChart>
@@ -218,8 +218,8 @@ export const AreaChartStackedStory: Story = {
           stackId="a"
           type="natural"
           dataKey="desktop"
-          fill={chartConfig.desktop.colour}
-          stroke={chartConfig.desktop.colour}
+          fill={chartConfig.desktop.color}
+          stroke={chartConfig.desktop.color}
           strokeWidth={2}
         />
         <Area<MyData, number>
@@ -227,8 +227,8 @@ export const AreaChartStackedStory: Story = {
           stackId="a"
           type="natural"
           dataKey="mobile"
-          fill={chartConfig.mobile.colour}
-          stroke={chartConfig.mobile.colour}
+          fill={chartConfig.mobile.color}
+          stroke={chartConfig.mobile.color}
           strokeWidth={2}
         />
       </AreaChart>
@@ -268,8 +268,8 @@ export const AreaChartStackedExpandedStory: Story = {
           stackId="a"
           type="natural"
           dataKey="desktop"
-          fill={chartConfig.desktop.colour}
-          stroke={chartConfig.desktop.colour}
+          fill={chartConfig.desktop.color}
+          stroke={chartConfig.desktop.color}
           strokeWidth={2}
         />
         <Area<MyData, number>
@@ -277,8 +277,8 @@ export const AreaChartStackedExpandedStory: Story = {
           stackId="a"
           type="natural"
           dataKey="mobile"
-          fill={chartConfig.mobile.colour}
-          stroke={chartConfig.mobile.colour}
+          fill={chartConfig.mobile.color}
+          stroke={chartConfig.mobile.color}
           strokeWidth={2}
         />
       </AreaChart>
@@ -320,7 +320,7 @@ export const AreaChartGradientStory: Story = {
           type="natural"
           dataKey="mobile"
           fill="url(#fillMobile)"
-          stroke={chartConfig.mobile.colour}
+          stroke={chartConfig.mobile.color}
           strokeWidth={2}
         />
         <Area
@@ -329,13 +329,13 @@ export const AreaChartGradientStory: Story = {
           type="natural"
           dataKey="desktop"
           fill="url(#fillDesktop)"
-          stroke={chartConfig.desktop.colour}
+          stroke={chartConfig.desktop.color}
           strokeWidth={2}
         />
         <ChartLinearGradient
           gradients={[
-            { id: 'fillDesktop', stopColor: chartConfig.desktop.colour },
-            { id: 'fillMobile', stopColor: chartConfig.mobile.colour },
+            { id: 'fillDesktop', stopColor: chartConfig.desktop.color },
+            { id: 'fillMobile', stopColor: chartConfig.mobile.color },
           ]}
         />
       </AreaChart>
@@ -377,7 +377,7 @@ export const AreaChartIconsStory: Story = {
           type="natural"
           dataKey="mobile"
           fill="url(#fillMobile)"
-          stroke={chartConfig.mobile.colour}
+          stroke={chartConfig.mobile.color}
           strokeWidth={2}
         />
         <Area
@@ -386,13 +386,13 @@ export const AreaChartIconsStory: Story = {
           type="natural"
           dataKey="desktop"
           fill="url(#fillDesktop)"
-          stroke={chartConfig.desktop.colour}
+          stroke={chartConfig.desktop.color}
           strokeWidth={2}
         />
         <ChartLinearGradient
           gradients={[
-            { id: 'fillDesktop', stopColor: chartConfig.desktop.colour },
-            { id: 'fillMobile', stopColor: chartConfig.mobile.colour },
+            { id: 'fillDesktop', stopColor: chartConfig.desktop.color },
+            { id: 'fillMobile', stopColor: chartConfig.mobile.color },
           ]}
         />
       </AreaChart>
@@ -427,7 +427,7 @@ export const BarChartStory: Story = {
             </ChartTooltipContent>
           }
         />
-        <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.colour} />
+        <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.color} />
       </BarChart>
     </ChartContainer>
   ),
@@ -460,8 +460,8 @@ export const BarChartMultipleStory: Story = {
             </ChartTooltipContent>
           }
         />
-        <Bar radius={99} dataKey="desktop" fill={chartConfig.desktop.colour} />
-        <Bar radius={99} dataKey="mobile" fill={chartConfig.mobile.colour} />
+        <Bar radius={99} dataKey="desktop" fill={chartConfig.desktop.color} />
+        <Bar radius={99} dataKey="mobile" fill={chartConfig.mobile.color} />
       </BarChart>
     </ChartContainer>
   ),
@@ -495,8 +495,8 @@ export const BarChartHorizontalStory: Story = {
             </ChartTooltipContent>
           }
         />
-        <Bar radius={4} dataKey="desktop" fill={chartConfig.desktop.colour} />
-        <Bar radius={4} dataKey="mobile" fill={chartConfig.mobile.colour} />
+        <Bar radius={4} dataKey="desktop" fill={chartConfig.desktop.color} />
+        <Bar radius={4} dataKey="mobile" fill={chartConfig.mobile.color} />
       </BarChart>
     </ChartContainer>
   ),
@@ -533,14 +533,9 @@ export const BarChartStackedStory: Story = {
           radius={[0, 0, 4, 4]}
           stackId={'a'}
           dataKey="desktop"
-          fill={chartConfig.desktop.colour}
+          fill={chartConfig.desktop.color}
         />
-        <Bar
-          radius={[4, 4, 0, 0]}
-          stackId={'a'}
-          dataKey="mobile"
-          fill={chartConfig.mobile.colour}
-        />
+        <Bar radius={[4, 4, 0, 0]} stackId={'a'} dataKey="mobile" fill={chartConfig.mobile.color} />
       </BarChart>
     </ChartContainer>
   ),
@@ -572,7 +567,7 @@ export const BarChartLabelStory: Story = {
             </ChartTooltipContent>
           }
         />
-        <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.colour}>
+        <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.color}>
           <LabelList position="top" offset={12} fontSize={12} />
         </Bar>
       </BarChart>
@@ -608,7 +603,7 @@ export const BarChartCustomLabelStory: Story = {
             </ChartTooltipContent>
           }
         />
-        <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.colour}>
+        <Bar radius={8} dataKey="desktop" fill={chartConfig.desktop.color}>
           <LabelList
             dataKey="month"
             position="insideLeft"
@@ -664,7 +659,7 @@ export const BarChartDataSwitch: Story = {
                 </ChartTooltipContent>
               }
             />
-            <Bar radius={8} dataKey={activeChart} fill={chartConfig[activeChart].colour}>
+            <Bar radius={8} dataKey={activeChart} fill={chartConfig[activeChart].color}>
               <LabelList position="top" offset={12} fontSize={12} />
             </Bar>
           </BarChart>

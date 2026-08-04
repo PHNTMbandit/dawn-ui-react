@@ -1,15 +1,15 @@
-import { useColourPicker } from './colour-picker'
+import { useColorPicker } from './color-picker'
 import { cn } from '@/utils/cn'
 
-import type { ColourPickerPaletteLimitProps } from './colour-picker.types'
+import type { ColorPickerPaletteLimitProps } from './color-picker.types'
 
-export const ColourPickerPaletteLimit = ({
+export const ColorPickerPaletteLimit = ({
   className,
   children,
   ref,
   ...props
-}: ColourPickerPaletteLimitProps) => {
-  const { palette, paletteLimit } = useColourPicker()
+}: ColorPickerPaletteLimitProps) => {
+  const { palette, paletteLimit } = useColorPicker()
   const isAtLimit = paletteLimit && palette.length >= paletteLimit
 
   if (!paletteLimit) {
