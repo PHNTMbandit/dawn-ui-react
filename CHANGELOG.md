@@ -1,3 +1,10 @@
+# [1.0.0-alpha.29](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2026-08-04)
+
+
+### Bug Fixes
+
+* **color-picker:** fix controlled ui state ([4e353c2](https://github.com/PHNTMbandit/dawn-ui-react/commit/4e353c275077556b644e00930a807413f2a16218))
+
 # [1.0.0-alpha.28](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2026-08-04)
 
 ### Features
