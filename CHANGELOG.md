@@ -1,16 +1,14 @@
 # [1.0.0-alpha.28](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2026-08-04)
 
-
 ### Features
 
-* rename colour components to color ([5c4ed15](https://github.com/PHNTMbandit/dawn-ui-react/commit/5c4ed155c081f25ca3c6eba58672d58e997d21e4))
+- rename colour components to color ([5c4ed15](https://github.com/PHNTMbandit/dawn-ui-react/commit/5c4ed155c081f25ca3c6eba58672d58e997d21e4))
 
 # [1.0.0-alpha.27](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2026-08-02)
 
-
 ### Features
 
-* **colour-picker:** add value and onValueChange parameters ([59ed777](https://github.com/PHNTMbandit/dawn-ui-react/commit/59ed777da0f0056a9e2faab4ca8f3a4f64b7c189))
+- **colour-picker:** add value and onValueChange parameters ([59ed777](https://github.com/PHNTMbandit/dawn-ui-react/commit/59ed777da0f0056a9e2faab4ca8f3a4f64b7c189))
 
 # [1.0.0-alpha.26](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2026-08-02)
 

@@ -2853,20 +2853,12 @@
   .first\:mt-xs:first-child {
     margin-top: var(--spacing-xs);
   }
-  .first\:rounded-l-full:first-child {
-    border-top-left-radius: var(--radius-full);
-    border-bottom-left-radius: var(--radius-full);
-  }
   .first\:rounded-l-xl:first-child {
     border-top-left-radius: var(--radius-xl);
     border-bottom-left-radius: var(--radius-xl);
   }
   .last\:mb-xs:last-child {
     margin-bottom: var(--spacing-xs);
-  }
-  .last\:rounded-r-full:last-child {
-    border-top-right-radius: var(--radius-full);
-    border-bottom-right-radius: var(--radius-full);
   }
   .last\:rounded-r-xl:last-child {
     border-top-right-radius: var(--radius-xl);
@@ -5029,17 +5021,8 @@
   .\[\&_\[role\=\"group\"\]\]\:h-xl [role='group'] {
     height: var(--spacing-xl);
   }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-2xl [role='group'] {
-    border-radius: var(--radius-2xl);
-  }
   .\[\&_\[role\=\"group\"\]\]\:rounded-full [role='group'] {
     border-radius: var(--radius-full);
-  }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-lg [role='group'] {
-    border-radius: var(--radius-lg);
-  }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-xl [role='group'] {
-    border-radius: var(--radius-xl);
   }
   .\[\&_\[role\=\"group\"\]\]\:bg-neutral-container [role='group'] {
     background-color: var(--color-neutral-container);
@@ -5188,17 +5171,11 @@
   .\[\&_\[role\=tab\]\]\:h-2xl [role='tab'] {
     height: var(--spacing-2xl);
   }
-  .\[\&_\[role\=tab\]\]\:h-3xl [role='tab'] {
-    height: var(--spacing-3xl);
-  }
   .\[\&_\[role\=tab\]\]\:h-lg [role='tab'] {
     height: var(--spacing-lg);
   }
   .\[\&_\[role\=tab\]\]\:h-xl [role='tab'] {
     height: var(--spacing-xl);
-  }
-  .\[\&_\[role\=tab\]\]\:h-xs [role='tab'] {
-    height: var(--spacing-xs);
   }
   .\[\&_\[role\=tab\]\]\:grow [role='tab'] {
     flex-grow: 1;
@@ -5229,9 +5206,6 @@
   }
   .\[\&_\[role\=tab\]\]\:pb-2xs [role='tab'] {
     padding-bottom: var(--spacing-2xs);
-  }
-  .\[\&_\[role\=tab\]\]\:pb-3xs [role='tab'] {
-    padding-bottom: var(--spacing-3xs);
   }
   .\[\&_\[role\=tab\]\]\:pb-sm [role='tab'] {
     padding-bottom: var(--spacing-sm);
@@ -5329,9 +5303,6 @@
   .\[\&_\[role\=tablist\]\]\:h-lg [role='tablist'] {
     height: var(--spacing-lg);
   }
-  .\[\&_\[role\=tablist\]\]\:h-md [role='tablist'] {
-    height: var(--spacing-md);
-  }
   .\[\&_\[role\=tablist\]\]\:h-xl [role='tablist'] {
     height: var(--spacing-xl);
   }
@@ -5397,18 +5368,6 @@
   }
   .\[\&_\[role\=tablist\]\]\:p-xs [role='tablist'] {
     padding: var(--spacing-xs);
-  }
-  .\[\&_\[role\=tablist\]\]\:pb-2xs [role='tablist'] {
-    padding-bottom: var(--spacing-2xs);
-  }
-  .\[\&_\[role\=tablist\]\]\:pb-3xs [role='tablist'] {
-    padding-bottom: var(--spacing-3xs);
-  }
-  .\[\&_\[role\=tablist\]\]\:pb-md [role='tablist'] {
-    padding-bottom: var(--spacing-md);
-  }
-  .\[\&_\[role\=tablist\]\]\:pb-sm [role='tablist'] {
-    padding-bottom: var(--spacing-sm);
   }
   .\[\&_button\]\:shrink-0 button {
     flex-shrink: 0;

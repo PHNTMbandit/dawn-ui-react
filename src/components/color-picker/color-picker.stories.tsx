@@ -1,5 +1,6 @@
 import chroma from 'chroma-js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Button } from '../button'
 import { Separator } from '../separator'
 import { ColorPicker } from './color-picker'
 import { ColorPickerArea } from './color-picker-area'
@@ -158,11 +159,31 @@ export const Minimal: Story = {
 
 export const Controlled: Story = {
   render: function ControlledStory(args) {
-    const [value, setValue] = useState(() => chroma(args.defaultColor ?? '#ff0000'))
+    const initialColor = args.defaultColor ?? '#ff0000'
+    const [committedColor, setCommittedColor] = useState<string>(initialColor)
+    const [pendingColor, setPendingColor] = useState<string | undefined>(initialColor)
+
+    useEffect(() => {
+      setCommittedColor(initialColor)
+      setPendingColor(initialColor)
+    }, [initialColor])
+
+    const handleApply = () => {
+      if (!pendingColor) {
+        return
+      }
+
+      setCommittedColor(pendingColor)
+    }
 
     return (
       <div className="flex flex-col items-start gap-sm">
-        <ColorPicker {...args} value={value} onValueChange={setValue} className="w-[300px]">
+        <ColorPicker
+          {...args}
+          value={pendingColor}
+          onValueChange={(value) => setPendingColor(value.hex())}
+          className="w-[300px]"
+        >
           <ColorPickerArea />
           <ColorPickerGroup>
             <ColorPickerHueSlider />
@@ -173,8 +194,24 @@ export const Controlled: Story = {
             </ColorPickerRow>
           </ColorPickerGroup>
         </ColorPicker>
+        <Button
+          variant="outline"
+          className="w-[300px]"
+          onClick={handleApply}
+          disabled={!pendingColor || pendingColor === committedColor}
+        >
+          Apply
+        </Button>
+        <div className="flex w-[300px] flex-col gap-xs">
+          <code className="rounded-md bg-surface px-sm py-xs style-text-default--1 text-on-surface">
+            Pending: {pendingColor ?? 'undefined'}
+          </code>
+          <code className="rounded-md bg-surface px-sm py-xs style-text-default--1 text-on-surface">
+            Applied: {committedColor}
+          </code>
+        </div>
         <code className="rounded-md bg-surface px-sm py-xs style-text-default--1 text-on-surface">
-          {value.css()}
+          Pending CSS: {pendingColor ? chroma(pendingColor).css() : 'undefined'}
         </code>
       </div>
     )
