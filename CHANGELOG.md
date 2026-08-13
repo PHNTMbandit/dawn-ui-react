@@ -1,3 +1,10 @@
+# [1.0.0-alpha.30](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2026-08-13)
+
+
+### Bug Fixes
+
+* **select-item:** fix height to fit children ([f6515ce](https://github.com/PHNTMbandit/dawn-ui-react/commit/f6515ce5b7e624e8139d02c1b31cf7e0be077929))
+
 # [1.0.0-alpha.29](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2026-08-04)
 
 ### Bug Fixes
