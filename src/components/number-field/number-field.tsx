@@ -79,15 +79,17 @@ export const NumberField = ({
       value={value}
       {...restProps}
     >
-      <BaseNumberField.ScrubArea className={'cursor-ew-resize'}>
-        <label className="cursor-ew-resize style-text-default--1" htmlFor={id}>
-          {label}
-        </label>
-        <BaseNumberField.ScrubAreaCursor>
-          <CursorGrowIcon />
-        </BaseNumberField.ScrubAreaCursor>
-      </BaseNumberField.ScrubArea>
-      <BaseNumberField.Group className="relative flex w-full items-center gap-3xs">
+      {label && (
+        <BaseNumberField.ScrubArea className={'cursor-ew-resize'}>
+          <label className="cursor-ew-resize style-text-default--1" htmlFor={id}>
+            {label}
+          </label>
+          <BaseNumberField.ScrubAreaCursor>
+            <CursorGrowIcon />
+          </BaseNumberField.ScrubAreaCursor>
+        </BaseNumberField.ScrubArea>
+      )}
+      <BaseNumberField.Group className="relative flex w-full items-center justify-center gap-3xs">
         <BaseNumberField.Decrement
           render={(stepperProps) => (
             <Button
@@ -95,7 +97,7 @@ export const NumberField = ({
               tone="error"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0 rounded-r-none'}
+              className={'shrink-0 rounded-l-full rounded-r-none'}
             >
               <MinusIcon weight="bold" />
             </Button>
@@ -107,7 +109,7 @@ export const NumberField = ({
         {children && (
           <div
             className={cn(
-              'w-full text-left text-on-surface-variant',
+              'w-full text-left text-on-surface',
               size === 'small' && 'style-text-default--1',
               size === 'medium' && 'style-text-default-0',
               size === 'large' && 'style-text-default-1',
@@ -123,7 +125,7 @@ export const NumberField = ({
               tone="success"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0 rounded-l-none'}
+              className={'shrink-0 rounded-l-none rounded-r-full'}
             >
               <PlusIcon weight="bold" />
             </Button>
