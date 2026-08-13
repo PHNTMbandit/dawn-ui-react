@@ -12,8 +12,10 @@ const devices: Device[] = [
 ]
 
 export const useMediaQuery = (deviceName: Device['name']) => {
-  const [matches, setMatches] = React.useState(false)
   const device = devices.find((d) => d.name === deviceName)!
+  const [matches, setMatches] = React.useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia(device.query).matches : false,
+  )
 
   React.useEffect(() => {
     const media = window.matchMedia(device.query)

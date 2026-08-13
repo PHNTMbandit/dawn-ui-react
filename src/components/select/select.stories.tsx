@@ -93,7 +93,7 @@ const AppleSelect = ({
         <CaretUpDownIcon weight="bold" />
       </SelectIcon>
     </SelectTrigger>
-    <SelectPopup>
+    <SelectPopup alignItemWithTrigger={false} sideOffset={8}>
       <SelectList>
         {apples.map(({ label, value }) => (
           <SelectItem key={label} value={value}>
@@ -125,6 +125,61 @@ const GroupedProduceSelect = ({ multiple = false }: { multiple?: boolean }) => (
               </SelectItem>
             ))}
           </SelectGroup>
+        ))}
+      </SelectList>
+    </SelectPopup>
+  </Select>
+)
+
+const applesWithDescription = [
+  { label: 'Gala', value: 'gala', description: 'Mild and sweet with a crisp bite' },
+  { label: 'Fuji', value: 'fuji', description: 'Extra sweet and juicy, great for snacking' },
+  {
+    label: 'Honeycrisp',
+    value: 'honeycrisp',
+    description: 'Explosively crisp with balanced tartness',
+  },
+  { label: 'Granny Smith', value: 'granny-smith', description: 'Tart and firm, ideal for baking' },
+  { label: 'Pink Lady', value: 'pink-lady', description: 'Sweet-tart with a refreshing finish' },
+  {
+    label: 'Red Delicious',
+    value: 'red-delicious',
+    description: 'Mellow, sweet, and classically crunchy',
+  },
+]
+
+const AppleDescriptionSelect = ({
+  multiple = false,
+  placeholder = 'Select an apple',
+}: {
+  multiple?: boolean
+  placeholder?: string
+}) => (
+  <Select multiple={multiple}>
+    <SelectTrigger>
+      <SelectValue placeholder={placeholder}>
+        {(value: string) => (
+          <>
+            <BowlFoodIcon />
+            {applesWithDescription.find((apple) => apple.value === value)?.label || placeholder}
+          </>
+        )}
+      </SelectValue>
+      <SelectIcon>
+        <CaretUpDownIcon weight="bold" />
+      </SelectIcon>
+    </SelectTrigger>
+    <SelectPopup alignItemWithTrigger={false} sideOffset={8}>
+      <SelectList>
+        {applesWithDescription.map(({ label, value, description }) => (
+          <SelectItem key={value} value={value}>
+            <div className="flex flex-col">
+              <span className="style-text-default-0">{label}</span>
+              <span className="style-text-default--1 text-neutral-on-container-muted">
+                {description}
+              </span>
+            </div>
+          </SelectItem>
         ))}
       </SelectList>
     </SelectPopup>
@@ -327,6 +382,19 @@ export const GroupedMultiple: Story = {
     },
   },
   render: () => <GroupedProduceSelect multiple />,
+}
+
+export const WithItemDescription: Story = {
+  name: 'Composition / Item Description',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Renders a secondary description line beneath each option label to add context for richer choices.',
+      },
+    },
+  },
+  render: () => <AppleDescriptionSelect />,
 }
 
 export const WithDefaultValue: Story = {

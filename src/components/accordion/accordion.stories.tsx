@@ -200,6 +200,41 @@ export const Multiple: Story = {
   ),
 }
 
+export const Nested: Story = {
+  render: () => (
+    <Accordion className="w-[520px]">
+      <AccordionItem tone="brand">
+        <AccordionTrigger>
+          <InfoIcon weight="duotone" />
+          <AccordionHeader>
+            <AccordionTitle>Parent Accordion Item</AccordionTitle>
+            <AccordionSubtitle>Expand to reveal a nested accordion</AccordionSubtitle>
+          </AccordionHeader>
+        </AccordionTrigger>
+        <AccordionPanel>
+          <Accordion variant="ghost" multiple>
+            <SingleItem tone="info" />
+            <SingleItem tone="warning" />
+            <SingleItem tone="success" />
+          </Accordion>
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem tone="neutral">
+        <AccordionTrigger>
+          <InfoIcon weight="duotone" />
+          <AccordionHeader>
+            <AccordionTitle>Sibling Parent Item</AccordionTitle>
+            <AccordionSubtitle>Regular parent accordion content</AccordionSubtitle>
+          </AccordionHeader>
+        </AccordionTrigger>
+        <AccordionPanel>
+          This is a standard panel next to the nested example for quick comparison.
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  ),
+}
+
 export const Disabled: Story = {
   args: { disabled: true },
 }
