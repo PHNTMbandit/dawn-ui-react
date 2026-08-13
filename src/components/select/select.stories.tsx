@@ -1,11 +1,13 @@
 import { BowlFoodIcon, CaretUpDownIcon } from '@phosphor-icons/react'
 import { Select } from './select'
+import { SelectDescription } from './select-description'
 import { SelectGroup } from './select-group'
 import { SelectGroupLabel } from './select-group-label'
 import { SelectIcon } from './select-icon'
 import { SelectItem } from './select-item'
 import { SelectList } from './select-list'
 import { SelectPopup } from './select-popup'
+import { SelectTitle } from './select-title'
 import { SelectTrigger } from './select-trigger'
 import { SelectValue } from './select-value'
 
@@ -97,8 +99,10 @@ const AppleSelect = ({
       <SelectList>
         {apples.map(({ label, value }) => (
           <SelectItem key={label} value={value}>
-            <BowlFoodIcon />
-            {label}
+            <SelectTitle>
+              <BowlFoodIcon />
+              {label}
+            </SelectTitle>
           </SelectItem>
         ))}
       </SelectList>
@@ -121,7 +125,7 @@ const GroupedProduceSelect = ({ multiple = false }: { multiple?: boolean }) => (
             <SelectGroupLabel>{group.value}</SelectGroupLabel>
             {group.items.map((item) => (
               <SelectItem key={item.value} value={item.value}>
-                {item.label}
+                <SelectTitle>{item.label}</SelectTitle>
               </SelectItem>
             ))}
           </SelectGroup>
@@ -173,12 +177,8 @@ const AppleDescriptionSelect = ({
       <SelectList>
         {applesWithDescription.map(({ label, value, description }) => (
           <SelectItem key={value} value={value}>
-            <div className="flex flex-col">
-              <span className="style-text-default-0">{label}</span>
-              <span className="style-text-default--1 text-neutral-on-container-muted">
-                {description}
-              </span>
-            </div>
+            <SelectTitle>{label}</SelectTitle>
+            <SelectDescription>{description}</SelectDescription>
           </SelectItem>
         ))}
       </SelectList>

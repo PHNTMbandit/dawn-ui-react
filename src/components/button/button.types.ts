@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import type { Button as BaseButton } from '@base-ui/react'
 
 export const buttonVariants = cva(
-  'inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap transition-all select-none disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap transition-all select-none disabled:pointer-events-none disabled:opacity-50 rounded-full',
   {
     variants: {
       tone: {
@@ -24,14 +24,14 @@ export const buttonVariants = cva(
         link: 'size-fit! p-0! underline decoration-transparent underline-offset-2 [&>svg]:transition-colors',
       },
       size: {
-        large: 'h-2xl gap-xs rounded-2xl px-md style-text-default-2 [&>svg]:size-md',
-        medium: 'h-xl gap-2xs rounded-xl px-sm style-text-default-0 [&>svg]:size-sm',
-        small: 'h-lg gap-3xs rounded-lg px-xs style-text-default--1 [&>svg]:size-xs',
-        extraSmall: 'h-md gap-3xs rounded-md px-2xs style-text-default--2 [&>svg]:size-xs',
-        iconLarge: 'size-2xl rounded-2xl p-[0px] [&>svg]:size-md',
-        iconMedium: 'size-xl rounded-xl p-[0px] [&>svg]:size-sm',
-        iconSmall: 'size-lg rounded-lg p-[0px] [&>svg]:size-xs',
-        iconExtraSmall: 'size-md rounded-md p-[0px] [&>svg]:size-xs',
+        large: 'h-2xl gap-xs px-md style-text-default-2 [&>svg]:size-md',
+        medium: 'h-xl gap-2xs px-sm style-text-default-0 [&>svg]:size-sm',
+        small: 'h-lg gap-3xs px-xs style-text-default--1 [&>svg]:size-xs',
+        extraSmall: 'h-md gap-3xs px-2xs style-text-default--2 [&>svg]:size-xs',
+        iconLarge: 'size-2xl p-[0px] [&>svg]:size-md',
+        iconMedium: 'size-xl p-[0px] [&>svg]:size-sm',
+        iconSmall: 'size-lg p-[0px] [&>svg]:size-xs',
+        iconExtraSmall: 'size-md p-[0px] [&>svg]:size-xs',
       },
     },
     defaultVariants: {

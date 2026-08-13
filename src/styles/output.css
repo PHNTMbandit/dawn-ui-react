@@ -2551,11 +2551,28 @@
   .group-aria-invalid\:text-error-on-container:is(:where(.group)[aria-invalid='true'] *) {
     color: var(--color-error-on-container);
   }
+  .group-data-highlighted\:text-error-border:is(:where(.group)[data-highlighted] *) {
+    color: var(--color-error-border);
+  }
+  .group-data-highlighted\:text-neutral-on-container:is(:where(.group)[data-highlighted] *) {
+    color: var(--color-neutral-on-container);
+  }
+  .group-data-highlighted\/item\:text-neutral-on-container:is(
+    :where(.group\/item)[data-highlighted] *
+  ) {
+    color: var(--color-neutral-on-container);
+  }
   .group-data-panel-open\:rotate-180:is(:where(.group)[data-panel-open] *) {
     rotate: 180deg;
   }
   .group-data-panel-open\/trigger\:rotate-90:is(:where(.group\/trigger)[data-panel-open] *) {
     rotate: 90deg;
+  }
+  .group-data-selected\/item\:text-neutral-on-container:is(:where(.group\/item)[data-selected] *) {
+    color: var(--color-neutral-on-container);
+  }
+  .group-data-selected\/item\:text-neutral-on-default:is(:where(.group\/item)[data-selected] *) {
+    color: var(--color-neutral-on-default);
   }
   .group-data-\[side\=none\]\:pr-xs:is(:where(.group)[data-side='none'] *) {
     padding-right: var(--spacing-xs);
