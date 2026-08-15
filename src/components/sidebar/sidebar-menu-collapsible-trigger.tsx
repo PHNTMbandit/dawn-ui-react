@@ -33,10 +33,8 @@ export const SidebarMenuCollapsibleTrigger = ({
 
   return (
     <CollapsibleTrigger
-      className={cn(
-        'gap-2xs! whitespace-nowrap shadow-none! transition-all duration-200 ease-out select-none hover:bg-neutral-container hover:text-neutral-on-container data-panel-open:bg-neutral-container! [&>svg]:shrink-0!',
-        className,
-      )}
+      variant={'ghost'}
+      className={cn('justify-start', className)}
       ref={ref}
       {...props}
     >

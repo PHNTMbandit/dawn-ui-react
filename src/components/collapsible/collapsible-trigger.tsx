@@ -17,19 +17,15 @@ export const CollapsibleTrigger = ({
         <Button
           {...renderProps}
           tone="neutral"
-          variant={'ghost'}
-          className={cn(
-            // oxlint-disable-next-line tailwindcss/no-unknown-classes
-            'group/trigger flex w-full justify-start gap-xl hover:shadow-2xs data-panel-open:bg-surface data-panel-open:shadow-2xs',
-            className,
-          )}
+          variant={'elevated'}
+          className={cn('group/trigger', className)}
           ref={ref}
           {...props}
         >
           {children}
           <CaretRightIcon
             weight="bold"
-            className="ml-auto text-on-surface-variant transition-all ease-out group-data-panel-open/trigger:rotate-90"
+            className="ml-auto transition-all ease-out group-data-panel-open/trigger:rotate-90"
           />
         </Button>
       )}
