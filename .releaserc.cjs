@@ -34,16 +34,9 @@ module.exports = {
       '@semantic-release/git',
       {
         assets: ['CHANGELOG.md', 'package.json'],
-        message:
-          // biome-ignore lint/suspicious/noTemplateCurlyInString: Semantic release placeholder
-          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+        message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
-    [
-      '@semantic-release/github',
-      {
-        assets: ['dist/**'],
-      },
-    ],
+    '@semantic-release/github',
   ],
 }

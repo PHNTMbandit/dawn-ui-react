@@ -1,8 +1,6 @@
-name: Publish to NPM
+name: Release Github Package
 
 on:
-  workflow_dispatch:
-
   push:
     branches:
       - main
@@ -10,25 +8,24 @@ on:
       - beta
       - rc
 
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  id-token: write
-
 jobs:
   build:
+    name: Build project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
+
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/setup@v1
         with:
-          version: 10
+          version: 11
+          runtime: node@24
+          cache: true
+
       - name: Use Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.0.0
         with:
-          node-version: 24
+          node-version: 24.19
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -50,42 +47,64 @@ jobs:
         run: pnpm build
 
   release:
+    name: Release Github Package
     needs: build
     runs-on: ubuntu-latest
-
-    if: |
-      github.ref_name == 'main' ||
-      github.ref_name == 'alpha' ||
-      github.ref_name == 'beta' ||
-      github.ref_name == 'rc'
-
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      packages: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-          ref: ${{ github.ref_name }}
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/setup@v1
         with:
-          version: 10
+          version: 11
+          runtime: node@24
+          cache: true
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7.0.0
         with:
-          node-version: 24
-          registry-url: https://registry.npmjs.org/
-          cache: pnpm
+          node-version: 24.19
+          registry-url: https://npm.pkg.github.com/
+          cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install
-
-      - run: pnpm lint
-      - run: pnpm test
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
-      - name: Release
+      - name: Generate release notes and publish
         run: pnpm exec semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  chromatic:
+    name: Run Chromatic
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@24
+          cache: true
+
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.19
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+      - name: Run Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
