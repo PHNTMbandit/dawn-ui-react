@@ -21,7 +21,7 @@ export default {
     },
   },
   render: (args) => (
-    <Collapsible {...args}>
+    <Collapsible {...args} className={'w-[200px]'}>
       <CollapsibleTrigger>Toggle Content</CollapsibleTrigger>
       <CollapsiblePanel>
         <div>alien-bean-pasta</div>
@@ -34,4 +34,46 @@ export default {
 
 type Story = StoryObj<typeof Collapsible>
 
-export const Default: Story = {}
+export const Playground: Story = {}
+
+export const Ghost: Story = {
+  name: 'Tone / Ghost',
+  render: (args) => (
+    <Collapsible {...args}>
+      <CollapsibleTrigger variant={'ghost'}>Toggle Content</CollapsibleTrigger>
+      <CollapsiblePanel>
+        <div>alien-bean-pasta</div>
+        <div>wild-irish-burrito</div>
+        <div>horse-battery-staple</div>
+      </CollapsiblePanel>
+    </Collapsible>
+  ),
+}
+
+export const Elevated: Story = {
+  name: 'Tone / Elevated',
+  render: (args) => (
+    <Collapsible {...args}>
+      <CollapsibleTrigger variant={'elevated'}>Toggle Content</CollapsibleTrigger>
+      <CollapsiblePanel>
+        <div>alien-bean-pasta</div>
+        <div>wild-irish-burrito</div>
+        <div>horse-battery-staple</div>
+      </CollapsiblePanel>
+    </Collapsible>
+  ),
+}
+
+export const Outline: Story = {
+  name: 'Tone / Outlined',
+  render: (args) => (
+    <Collapsible {...args}>
+      <CollapsibleTrigger variant={'outline'}>Toggle Content</CollapsibleTrigger>
+      <CollapsiblePanel>
+        <div>alien-bean-pasta</div>
+        <div>wild-irish-burrito</div>
+        <div>horse-battery-staple</div>
+      </CollapsiblePanel>
+    </Collapsible>
+  ),
+}

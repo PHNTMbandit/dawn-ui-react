@@ -15,7 +15,7 @@ export const SidebarMenuCollapsiblePanel = ({
 
   if (!open) {
     return (
-      <PopoverPanel side="right" className={'w-fit p-[0.5rem_0.5rem]'}>
+      <PopoverPanel side="right" className={'w-fit bg-surface p-[0.5rem_0.5rem]'}>
         <PopoverContent className="flex gap-3xs">{children}</PopoverContent>
       </PopoverPanel>
     )

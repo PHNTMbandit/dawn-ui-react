@@ -19,7 +19,7 @@ export const SidebarMenuCollapsibleTrigger = ({
       <PopoverTrigger>
         <button
           className={cn(
-            'flex size-xl items-center justify-center rounded-xl shadow-none! transition-colors *:hidden hover:cursor-pointer hover:bg-neutral-container hover:text-neutral-on-container data-popup-open:bg-neutral-container [&>svg]:block',
+            'flex size-xl items-center justify-center rounded-full shadow-none! transition-colors *:hidden hover:cursor-pointer hover:bg-neutral-container hover:text-neutral-on-container data-popup-open:bg-neutral-container [&>svg]:block',
           )}
         >
           {children}
@@ -33,10 +33,8 @@ export const SidebarMenuCollapsibleTrigger = ({
 
   return (
     <CollapsibleTrigger
-      className={cn(
-        'gap-2xs! whitespace-nowrap shadow-none! transition-all duration-200 ease-out select-none hover:bg-neutral-container hover:text-neutral-on-container data-panel-open:bg-neutral-container! [&>svg]:shrink-0!',
-        className,
-      )}
+      variant={'ghost'}
+      className={cn('justify-start', className)}
       ref={ref}
       {...props}
     >
