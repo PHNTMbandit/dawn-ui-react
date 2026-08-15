@@ -46,6 +46,17 @@ export default defineConfig({
 
         return false
       },
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime',
+          'react-redux': 'ReactRedux',
+          'react-resizable-panels': 'ReactResizablePanels',
+          'use-sync-external-store/shim': 'useSyncExternalStore',
+          'use-sync-external-store/shim/with-selector': 'useSyncExternalStoreWithSelector',
+        },
+      },
     },
   },
   test: {

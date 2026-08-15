@@ -1,16 +1,14 @@
 # [1.0.0-alpha.31](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2026-08-13)
 
-
 ### Features
 
-* add SelectTitle and SelectDescription components ([0d599c0](https://github.com/PHNTMbandit/dawn-ui-react/commit/0d599c051c8b6496d01994e03f181e90e5705cc8))
+- add SelectTitle and SelectDescription components ([0d599c0](https://github.com/PHNTMbandit/dawn-ui-react/commit/0d599c051c8b6496d01994e03f181e90e5705cc8))
 
 # [1.0.0-alpha.30](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2026-08-13)
 
-
 ### Bug Fixes
 
-* **select-item:** fix height to fit children ([f6515ce](https://github.com/PHNTMbandit/dawn-ui-react/commit/f6515ce5b7e624e8139d02c1b31cf7e0be077929))
+- **select-item:** fix height to fit children ([f6515ce](https://github.com/PHNTMbandit/dawn-ui-react/commit/f6515ce5b7e624e8139d02c1b31cf7e0be077929))
 
 # [1.0.0-alpha.29](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2026-08-04)
 
