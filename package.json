@@ -32,7 +32,7 @@
     "build-storybook": "pnpm build:tailwind && storybook build",
     "build:css": "node -e \"require('fs').copyFileSync('src/styles/input.css', 'dist/styles.css')\"",
     "build:tailwind": "pnpm dlx @tailwindcss/cli -i ./src/styles/input.css -o ./dist/styles.css",
-    "chromatic": "chromatic --project-chpt_cb6fae2c2ef2566",
+    "chromatic": "chromatic --project-token chpt_cb6fae2c2ef2566",
     "commit": "git add . && git commit",
     "commit:skip": "git add . && git commit --no-verify",
     "cz": "cz",

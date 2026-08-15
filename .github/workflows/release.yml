@@ -1,12 +1,20 @@
-name: Release Github Package
+name: Publish to NPM
 
 on:
+  workflow_dispatch:
+
   push:
     branches:
       - main
       - alpha
       - beta
       - rc
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
 
 jobs:
   build:
@@ -41,24 +49,27 @@ jobs:
         run: pnpm exec playwright install
 
       - name: Run tests
-        run: pnpm test
+        run: pnpm run test
 
       - name: Build project
-        run: pnpm build
+        run: pnpm run build
 
   release:
-    name: Release Github Package
+    name: Release
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      packages: write
+
+    if: |
+      github.ref_name == 'main' ||
+      github.ref_name == 'alpha' ||
+      github.ref_name == 'beta' ||
+      github.ref_name == 'rc'
+
     steps:
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
+          ref: ${{ github.ref_name }}
 
       - uses: pnpm/setup@v1
         with:
@@ -72,14 +83,16 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm run build
 
       - name: Generate release notes and publish
         run: pnpm exec semantic-release
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   chromatic:
     name: Run Chromatic
@@ -105,6 +118,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - name: Run Chromatic
-        uses: chromaui/action@v1
+        uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
