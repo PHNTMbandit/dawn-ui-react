@@ -154,7 +154,10 @@ export type ValueType = {
   parseValue: (value: string) => chroma.Color | undefined
 }
 
-export type ColorPickerInputProps = React.ComponentProps<typeof InputGroup>
+export type ColorPickerInputProps = React.ComponentProps<typeof InputGroup> & {
+  showPopover?: boolean
+  showTransparencyField?: boolean
+}
 export type ColorPickerAreaProps = React.ComponentProps<'div'>
 export type ColorPickerHueSliderProps = Partial<React.ComponentProps<typeof ColorChannelSlider>>
 export type ColorPickerLightnessSliderProps = Partial<

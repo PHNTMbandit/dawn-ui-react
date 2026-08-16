@@ -97,7 +97,11 @@ export const Input = ({
     return (
       <button
         aria-label="Open color picker"
-        className={cn('relative hover:cursor-pointer', inputVariants({ variant, size }), className)}
+        className={cn(
+          'relative flex hover:cursor-pointer',
+          inputVariants({ variant, size }),
+          className,
+        )}
         disabled={props.disabled}
         onClick={() => inputRef.current?.click()}
         type="button"

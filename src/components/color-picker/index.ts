@@ -10,6 +10,7 @@ export { ColorPickerPaletteSwatch } from './color-picker-palette-swatch'
 export { ColorPickerRow } from './color-picker-row'
 export { ColorPickerTransparencySlider } from './color-picker-transparency-slider'
 export { ColorPickerValueType } from './color-picker-value-type'
+export { ColorPickerLightnessSlider } from './color-picker-lightness-slider'
 
 export type {
   ColorPickerProps,
@@ -28,4 +29,5 @@ export type {
   ColorPickerRowProps,
   ColorPickerTransparencySliderProps,
   ColorPickerValueTypeProps,
+  ColorPickerLightnessSliderProps,
 } from './color-picker.types'

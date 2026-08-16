@@ -507,6 +507,9 @@
   .left-auto {
     left: auto;
   }
+  .left-sm {
+    left: var(--spacing-sm);
+  }
   .left-xs {
     left: var(--spacing-xs);
   }
@@ -719,6 +722,10 @@
   }
   .aspect-video {
     aspect-ratio: var(--aspect-video);
+  }
+  .size-0 {
+    width: var(--spacing-0);
+    height: var(--spacing-0);
   }
   .size-2xl {
     width: var(--spacing-2xl);
@@ -942,6 +949,9 @@
   .w-\(--positioner-width\) {
     width: var(--positioner-width);
   }
+  .w-1\/2 {
+    width: calc(1 / 2 * 100%);
+  }
   .w-2xs {
     width: var(--spacing-2xs);
   }
@@ -1020,11 +1030,26 @@
   .w-\[calc\(100\%\+var\(--spacing-xl\)\)\] {
     width: calc(100% + var(--spacing-xl));
   }
+  .w-\[calc\(100vw-2rem\)\] {
+    width: calc(100vw - 2rem);
+  }
+  .w-\[calc\(100vw-10rem\)\] {
+    width: calc(100vw - 10rem);
+  }
+  .w-\[calc\(100vw-20rem\)\] {
+    width: calc(100vw - 20rem);
+  }
+  .w-\[calc\(100vw-30rem\)\] {
+    width: calc(100vw - 30rem);
+  }
   .w-\[calc\(100vw-40px\)\] {
     width: calc(100vw - 40px);
   }
   .w-\[calc\(var\(--anchor-width\)\+var\(--spacing-md\)\)\] {
     width: calc(var(--anchor-width) + var(--spacing-md));
+  }
+  .w-dvh {
+    width: 100dvh;
   }
   .w-fit {
     width: fit-content;
@@ -1043,6 +1068,9 @@
   }
   .w-px {
     width: 1px;
+  }
+  .w-sm-lg {
+    width: var(--spacing-sm-lg);
   }
   .w-xl {
     width: var(--spacing-xl);
@@ -1070,6 +1098,9 @@
   }
   .max-w-full {
     max-width: 100%;
+  }
+  .max-w-lg {
+    max-width: var(--spacing-lg);
   }
   .max-w-md {
     max-width: var(--spacing-md);
@@ -1769,6 +1800,9 @@
   .pr-sm {
     padding-right: var(--spacing-sm);
   }
+  .pr-xs {
+    padding-right: var(--spacing-xs);
+  }
   .pb-3xs {
     padding-bottom: var(--spacing-3xs);
   }
@@ -1784,8 +1818,14 @@
   .pb-xs {
     padding-bottom: var(--spacing-xs);
   }
+  .pl-2xl {
+    padding-left: var(--spacing-2xl);
+  }
   .pl-2xs {
     padding-left: var(--spacing-2xs);
+  }
+  .pl-\[calc\(var\(--cartyx-spacing-lg\)\+6px\)\] {
+    padding-left: calc(var(--cartyx-spacing-lg) + 6px);
   }
   .pl-lg {
     padding-left: var(--spacing-lg);
@@ -3019,9 +3059,6 @@
     }
     .hover\:bg-success-subtle:hover {
       background-color: var(--color-success-subtle);
-    }
-    .hover\:bg-surface-2:hover {
-      background-color: var(--color-surface-2);
     }
     .hover\:bg-surface-3:hover {
       background-color: var(--color-surface-3);

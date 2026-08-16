@@ -1,13 +1,27 @@
 import { PercentIcon } from '@phosphor-icons/react'
 import React from 'react'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
+import { Popover, PopoverTrigger, PopoverContent, PopoverPanel } from '../popover'
 import { Separator } from '../separator'
 import { useColorPicker } from './color-picker'
+import { ColorPickerArea } from './color-picker-area'
+import { ColorPickerGroup } from './color-picker-group'
+import { ColorPickerHueSlider } from './color-picker-hue-slider'
+import { ColorPickerRow } from './color-picker-row'
+import { ColorPickerTransparencySlider } from './color-picker-transparency-slider'
+import { ColorPickerValueType } from './color-picker-value-type'
 import { cn } from '@/utils/cn'
 
 import type { ColorPickerInputProps } from './color-picker.types'
 
-export const ColorPickerInput = ({ className, children, ref, ...props }: ColorPickerInputProps) => {
+export const ColorPickerInput = ({
+  showPopover = false,
+  showTransparencyField = true,
+  className,
+  children,
+  ref,
+  ...props
+}: ColorPickerInputProps) => {
   const { color, setColor, valueType } = useColorPicker()
   const [inputValue, setInputValue] = React.useState<string>(valueType.getValue(color))
   const [transparency, setTransparency] = React.useState<string>(
@@ -43,31 +57,61 @@ export const ColorPickerInput = ({ className, children, ref, ...props }: ColorPi
 
   return (
     <InputGroup variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
-      <InputGroupAddon
-        style={{
-          backgroundColor: color.hex(),
-        }}
-        className="aspect-square size-md rounded-lg"
-      />
+      {showPopover ? (
+        <Popover>
+          <PopoverTrigger>
+            <InputGroupAddon
+              style={{
+                backgroundColor: color.hex(),
+              }}
+              className="aspect-square size-md rounded-lg hover:cursor-pointer"
+            />
+          </PopoverTrigger>
+          <PopoverPanel>
+            <PopoverContent className="flex w-[calc(100vw-30rem)] flex-col gap-sm">
+              <ColorPickerArea className="aspect-video" />
+              <ColorPickerGroup>
+                <ColorPickerHueSlider />
+                <ColorPickerTransparencySlider />
+                <ColorPickerRow>
+                  <ColorPickerValueType />
+                  <ColorPickerInput />
+                </ColorPickerRow>
+              </ColorPickerGroup>
+            </PopoverContent>
+          </PopoverPanel>
+        </Popover>
+      ) : (
+        <InputGroupAddon
+          style={{
+            backgroundColor: color.hex(),
+          }}
+          className="aspect-square size-md rounded-lg"
+        />
+      )}
       <InputGroupInput
-        value={inputValue}
-        onValueChange={handleValueChange}
         onBlur={handleValueBlur}
-        className="uppercase"
+        onValueChange={handleValueChange}
+        value={inputValue}
+        className={'uppercase'}
       />
-      <Separator orientation="vertical" className="h-md" />
-      <InputGroupAddon>
-        <PercentIcon weight="bold" />
-      </InputGroupAddon>
-      <InputGroupInput
-        type="number"
-        min={0}
-        max={100}
-        value={transparency}
-        onValueChange={handleTransparencyChange}
-        onBlur={handleTransparencyBlur}
-        className="w-xl"
-      />
+      {showTransparencyField && (
+        <>
+          <Separator orientation="vertical" className="h-md" />
+          <InputGroupAddon>
+            <PercentIcon weight="bold" />
+          </InputGroupAddon>
+          <InputGroupInput
+            type="number"
+            min={0}
+            max={100}
+            value={transparency}
+            onValueChange={handleTransparencyChange}
+            onBlur={handleTransparencyBlur}
+            className="w-xl"
+          />
+        </>
+      )}
       {children}
     </InputGroup>
   )
