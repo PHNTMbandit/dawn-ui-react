@@ -4,12 +4,6 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
 import { Popover, PopoverTrigger, PopoverContent, PopoverPanel } from '../popover'
 import { Separator } from '../separator'
 import { useColorPicker } from './color-picker'
-import { ColorPickerArea } from './color-picker-area'
-import { ColorPickerGroup } from './color-picker-group'
-import { ColorPickerHueSlider } from './color-picker-hue-slider'
-import { ColorPickerRow } from './color-picker-row'
-import { ColorPickerTransparencySlider } from './color-picker-transparency-slider'
-import { ColorPickerValueType } from './color-picker-value-type'
 import { cn } from '@/utils/cn'
 
 import type { ColorPickerInputProps } from './color-picker.types'
@@ -64,21 +58,11 @@ export const ColorPickerInput = ({
               style={{
                 backgroundColor: color.hex(),
               }}
-              className="aspect-square size-md rounded-lg hover:cursor-pointer"
+              className="aspect-square h-1/2 rounded-lg hover:cursor-pointer"
             />
           </PopoverTrigger>
           <PopoverPanel>
-            <PopoverContent className="flex w-[calc(100vw-30rem)] flex-col gap-sm">
-              <ColorPickerArea className="aspect-video" />
-              <ColorPickerGroup>
-                <ColorPickerHueSlider />
-                <ColorPickerTransparencySlider />
-                <ColorPickerRow>
-                  <ColorPickerValueType />
-                  <ColorPickerInput />
-                </ColorPickerRow>
-              </ColorPickerGroup>
-            </PopoverContent>
+            <PopoverContent className="flex w-[300px] flex-col gap-sm">{children}</PopoverContent>
           </PopoverPanel>
         </Popover>
       ) : (
@@ -112,7 +96,6 @@ export const ColorPickerInput = ({
           />
         </>
       )}
-      {children}
     </InputGroup>
   )
 }

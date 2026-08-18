@@ -1,10 +1,9 @@
 # [1.0.0-alpha.32](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2026-08-15)
 
-
 ### Features
 
-* change sidebar collapsible panel bg colour ([f9a4315](https://github.com/PHNTMbandit/dawn-ui-react/commit/f9a4315ef820fd57f56b392a278483f03054a2bd))
-* improve collapsible and sidebar collapsible trigger ([20cf7f5](https://github.com/PHNTMbandit/dawn-ui-react/commit/20cf7f55311c6c9f5867a45fc25d8a7d13a6ab29))
+- change sidebar collapsible panel bg colour ([f9a4315](https://github.com/PHNTMbandit/dawn-ui-react/commit/f9a4315ef820fd57f56b392a278483f03054a2bd))
+- improve collapsible and sidebar collapsible trigger ([20cf7f5](https://github.com/PHNTMbandit/dawn-ui-react/commit/20cf7f55311c6c9f5867a45fc25d8a7d13a6ab29))
 
 # [1.0.0-alpha.31](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2026-08-13)
 

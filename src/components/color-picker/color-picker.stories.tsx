@@ -151,7 +151,9 @@ export const Minimal: Story = {
       <ColorPickerGroup>
         <ColorPickerHueSlider />
         <ColorPickerTransparencySlider />
-        <ColorPickerInput showPopover />
+        <ColorPickerInput showPopover>
+          <ColorPickerArea className="aspect-video" />
+        </ColorPickerInput>
       </ColorPickerGroup>
     </ColorPicker>
   ),
@@ -221,7 +223,14 @@ export const Controlled: Story = {
 export const InputOnly: Story = {
   render: (args) => (
     <ColorPicker {...args} className="w-[300px]" variant={'ghost'}>
-      <ColorPickerInput variant={'primary'} showPopover showTransparencyField={false} />
+      <ColorPickerInput variant={'primary'} showPopover showTransparencyField={false}>
+        <ColorPickerArea className="aspect-video" />
+        <ColorPickerGroup>
+          <ColorPickerHueSlider />
+          <ColorPickerTransparencySlider />
+          <ColorPickerInput />
+        </ColorPickerGroup>
+      </ColorPickerInput>
     </ColorPicker>
   ),
 }
