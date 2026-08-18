@@ -3,9 +3,16 @@ import { cn } from '@/utils/cn'
 
 import type { InputGroupProps } from './input-group.types'
 
-export const InputGroup = ({ variant, className, children, ref, ...props }: InputGroupProps) => {
+export const InputGroup = ({
+  variant,
+  size,
+  className,
+  children,
+  ref,
+  ...props
+}: InputGroupProps) => {
   return (
-    <div className={cn(inputVariants({ variant }), 'py-xs', className)} ref={ref} {...props}>
+    <div className={cn(inputVariants({ variant, size }), className)} ref={ref} {...props}>
       {children}
     </div>
   )

@@ -20,6 +20,7 @@ export const SidebarMenuButton = ({
         isActive
           ? 'pointer-events-none bg-surface text-on-surface shadow-2xs'
           : 'text-neutral-default hover:bg-neutral-container hover:text-neutral-on-container',
+        isActive && !open && 'bg-neutral-container',
         !showText && 'mx-auto',
         !open ? 'size-xl justify-center *:hidden [&>svg]:block' : 'h-xl w-full pl-sm',
         collapsible !== 'none' && open && 'animate-in fade-in-0 slide-in-from-left-2',
