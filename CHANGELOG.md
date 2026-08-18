@@ -1,3 +1,16 @@
+# [1.0.0-alpha.33](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.32...v1.0.0-alpha.33) (2026-08-18)
+
+
+### Bug Fixes
+
+* fix color picker maximum update depth exceeded ([cb77eb3](https://github.com/PHNTMbandit/dawn-ui-react/commit/cb77eb31e66471944647aa7542e0a63e0e357c26))
+
+
+### Features
+
+* add colour picker input popover ([bffa79b](https://github.com/PHNTMbandit/dawn-ui-react/commit/bffa79bfa5db408e01913bfcb5106fd29f640aaa))
+* move color picker input panel to children functionality ([cda5624](https://github.com/PHNTMbandit/dawn-ui-react/commit/cda5624c91f823feed9c8b581b3a280b71bb0a38))
+
 # [1.0.0-alpha.32](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2026-08-15)
 
 ### Features
