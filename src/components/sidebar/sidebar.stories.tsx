@@ -73,7 +73,7 @@ const PrimaryNavigation = () => (
         </SidebarMenuCollapsibleTrigger>
         <SidebarMenuCollapsiblePanel>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton isActive>
               <CloudRainIcon weight="bold" />
               <span>Point Cloud Viewer</span>
             </SidebarMenuButton>

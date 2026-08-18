@@ -120,16 +120,28 @@ export const ColorPicker = ({
   const value = internalValue
   const alpha = internalAlpha
 
-  // Sync internal state only when the controlled value changes externally,
-  // i.e. it represents a different color than the one we already hold.
+  // Sync internal state only when the controlled value changes externally.
+  // Compare against the last synced value rather than the derived color: the
+  // internal HSV state can't always losslessly reproduce the incoming color
+  // (grayscale hue is NaN, dropped alpha, hsv round-trip rounding), so keying
+  // off `color` here would dispatch on every render and loop forever.
+  const lastSyncedColorRef = React.useRef<string | undefined>(undefined)
+
   React.useEffect(() => {
     if (controlledValue === undefined) {
       return
     }
 
     const nextColor = normalizeToColor(controlledValue, color)
+    const nextKey = nextColor.hex('rgba')
 
-    if (nextColor.hex('rgba') !== color.hex('rgba')) {
+    if (nextKey === lastSyncedColorRef.current) {
+      return
+    }
+
+    lastSyncedColorRef.current = nextKey
+
+    if (nextKey !== color.hex('rgba')) {
       dispatch({ type: 'set_color', color: nextColor })
     }
   }, [controlledValue, color])
