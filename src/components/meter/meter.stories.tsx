@@ -1,5 +1,7 @@
 import { SpinnerGapIcon, XIcon } from '@phosphor-icons/react'
+import React from 'react'
 import { Button } from '../button'
+import { Input } from '../input'
 import { Meter } from './meter'
 import { MeterFooter } from './meter-footer'
 import { MeterHeader } from './meter-header'
@@ -248,6 +250,43 @@ export const AllTones: Story = {
     docs: {
       description: {
         story: 'Reference set showing each semantic tone for status-driven progress UI.',
+      },
+    },
+  },
+}
+
+export const Animation: Story = {
+  name: 'Composition / Animation',
+  render: () => {
+    const [value, setValue] = React.useState(0)
+
+    return (
+      <div className="flex w-[500px] flex-col gap-md">
+        <Input
+          max={100}
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+          type="number"
+        />
+        <Meter orientation="vertical" size="medium" tone="brand" value={value}>
+          <MeterHeader>
+            <MeterLabel>Animated Progress</MeterLabel>
+          </MeterHeader>
+          <MeterTrack>
+            <MeterIndicator />
+          </MeterTrack>
+          <MeterFooter>
+            <MeterSubtitle>Uploading file...</MeterSubtitle>
+            <MeterValue />
+          </MeterFooter>
+        </Meter>
+      </div>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates smooth animated transitions when the `value` prop changes over time.',
       },
     },
   },
