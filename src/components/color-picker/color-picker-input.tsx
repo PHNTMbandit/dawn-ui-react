@@ -61,7 +61,7 @@ export const ColorPickerInput = ({
               className="aspect-square h-1/2 rounded-lg hover:cursor-pointer"
             />
           </PopoverTrigger>
-          <PopoverPanel>
+          <PopoverPanel align="start" sideOffset={12} alignOffset={-15}>
             <PopoverContent className="flex w-[300px] flex-col gap-sm">{children}</PopoverContent>
           </PopoverPanel>
         </Popover>

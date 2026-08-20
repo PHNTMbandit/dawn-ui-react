@@ -68,10 +68,13 @@ const colorPickerReducer = (
 
 export const ColorPicker = ({
   variant,
-  value: controlledValue,
+  color: controlledValue,
   defaultColor,
+  palette: controlledPalette,
   defaultPalette,
+  onPaletteChange,
   paletteLimit,
+  defaultValueType,
   onValueChange,
   className,
   children,
@@ -93,8 +96,8 @@ export const ColorPicker = ({
         saturation: s == null || Number.isNaN(s) ? 0 : s,
         value: v,
         alpha: initialColor.alpha(),
-        valueType: VALUE_TYPES[0],
-        palette: (defaultPalette ?? []).map((c) => chroma(c)),
+        valueType: VALUE_TYPES.find((t) => t.value === defaultValueType) ?? VALUE_TYPES[0],
+        palette: (controlledPalette ?? defaultPalette ?? []).map((c) => chroma(c)),
       }
     },
   )
@@ -146,6 +149,27 @@ export const ColorPicker = ({
     }
   }, [controlledValue, color])
 
+  // Keep the internal palette in sync when a controlled palette changes
+  // externally. The ref guards against re-dispatching our own emitted changes,
+  // which would otherwise echo back through onPaletteChange and loop.
+  const lastSyncedPaletteRef = React.useRef<string | undefined>(undefined)
+
+  React.useEffect(() => {
+    if (controlledPalette === undefined) {
+      return
+    }
+
+    const parsed = controlledPalette.map((c) => chroma(c))
+    const nextKey = parsed.map((c) => c.hex('rgba')).join('|')
+
+    if (nextKey === lastSyncedPaletteRef.current) {
+      return
+    }
+
+    lastSyncedPaletteRef.current = nextKey
+    dispatch({ type: 'set_palette', palette: parsed })
+  }, [controlledPalette])
+
   const setColor = React.useCallback(
     (color: chroma.Color) => {
       dispatch({ type: 'set_color', color })
@@ -196,8 +220,12 @@ export const ColorPicker = ({
     [],
   )
   const setPalette = React.useCallback(
-    (palette: chroma.Color[]) => dispatch({ type: 'set_palette', palette }),
-    [],
+    (palette: chroma.Color[]) => {
+      lastSyncedPaletteRef.current = palette.map((c) => c.hex('rgba')).join('|')
+      dispatch({ type: 'set_palette', palette })
+      onPaletteChange?.(palette.map((c) => c.hex()))
+    },
+    [onPaletteChange],
   )
   const addPaletteColor = React.useCallback(
     (color: chroma.Color) => {
@@ -205,9 +233,12 @@ export const ColorPicker = ({
         return
       }
 
-      return dispatch({ type: 'add_palette_color', color })
+      const next = [...palette, color]
+      lastSyncedPaletteRef.current = next.map((c) => c.hex('rgba')).join('|')
+      dispatch({ type: 'add_palette_color', color })
+      onPaletteChange?.(next.map((c) => c.hex()))
     },
-    [palette, paletteLimit],
+    [palette, paletteLimit, onPaletteChange],
   )
 
   return (

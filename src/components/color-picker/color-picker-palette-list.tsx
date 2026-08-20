@@ -1,4 +1,4 @@
-import { PlusIcon } from '@phosphor-icons/react'
+import { Fragment } from 'react'
 import { useColorPicker } from './color-picker'
 import { cn } from '@/utils/cn'
 
@@ -10,11 +10,9 @@ export const ColorPickerPaletteList = ({
   ref,
   ...props
 }: ColorPickerPaletteListProps) => {
-  const { palette, color, addPaletteColor } = useColorPicker()
+  const { palette } = useColorPicker()
 
-  const handleClick = () => {
-    addPaletteColor(color)
-  }
+  const items = Array.isArray(children) ? children : [children]
 
   return (
     <ul
@@ -22,14 +20,13 @@ export const ColorPickerPaletteList = ({
       ref={ref}
       {...props}
     >
-      {children ? palette.map((color, index) => children({ color, index })) : null}
-      <button
-        type="button"
-        onClick={handleClick}
-        className="flex size-md items-center justify-center rounded-lg border border-border-strong text-border-strong hover:cursor-pointer [&>svg]:size-xs"
-      >
-        <PlusIcon weight="bold" />
-      </button>
+      {items.map((child, index) => (
+        <Fragment key={index}>
+          {typeof child === 'function'
+            ? palette.map((color, colorIndex) => child({ color, index: colorIndex }))
+            : child}
+        </Fragment>
+      ))}
     </ul>
   )
 }

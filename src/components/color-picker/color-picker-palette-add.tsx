@@ -1,4 +1,4 @@
-import { Button } from '../button'
+import { PlusIcon } from '@phosphor-icons/react'
 import { useColorPicker } from './color-picker'
 import { cn } from '@/utils/cn'
 
@@ -17,8 +17,17 @@ export const ColorPickerPaletteAdd = ({
   }
 
   return (
-    <Button onClick={handleClick} className={cn('', className)} ref={ref} {...props}>
+    <button
+      onClick={handleClick}
+      className={cn(
+        'flex size-md items-center justify-center rounded-lg border border-border-strong text-border-strong hover:cursor-pointer [&>svg]:size-xs',
+        className,
+      )}
+      ref={ref}
+      {...props}
+    >
       {children}
-    </Button>
+      <PlusIcon weight="bold" />
+    </button>
   )
 }

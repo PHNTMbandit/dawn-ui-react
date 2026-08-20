@@ -1,7 +1,6 @@
 import chroma from 'chroma-js'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-import type { Button } from '../button'
 import type { ColorChannelSlider } from '../color-channel-slider'
 import type { InputGroup } from '../input-group'
 import type { SelectTrigger } from '../select'
@@ -50,10 +49,13 @@ export type ColorPickerAction =
 
 export type ColorPickerProps = React.ComponentProps<'div'> &
   VariantProps<typeof colorPickerVariants> & {
-    value?: string | chroma.Color
+    color?: string
     defaultColor?: string
+    palette?: string[]
     defaultPalette?: string[]
+    onPaletteChange?: (palette: string[]) => void
     paletteLimit?: number
+    defaultValueType?: ValueTypeValue
     onValueChange?: (color: chroma.Color) => void
   }
 
@@ -154,6 +156,8 @@ export type ValueType = {
   parseValue: (value: string) => chroma.Color | undefined
 }
 
+export type ValueTypeValue = 'rgb' | 'css' | 'hex' | 'hsl' | 'hsv'
+
 export type ColorPickerInputProps = React.ComponentProps<typeof InputGroup> & {
   showPopover?: boolean
   showTransparencyField?: boolean
@@ -170,12 +174,16 @@ export type ColorPickerValueTypeProps = React.ComponentProps<typeof SelectTrigge
 export type ColorPickerRowProps = React.ComponentProps<'div'>
 export type ColorPickerGroupProps = React.ComponentProps<'div'>
 export type ColorPickerLabelProps = React.ComponentProps<'span'>
+export type ColorPickerPaletteListChild =
+  | React.ReactNode
+  | ((props: { color: chroma.Color; index: number }) => React.ReactNode)
+
 export type ColorPickerPaletteListProps = Omit<React.ComponentProps<'ul'>, 'children'> & {
-  children?: (props: { color: chroma.Color; index: number }) => React.ReactNode
+  children?: ColorPickerPaletteListChild | ColorPickerPaletteListChild[]
 }
 export type ColorPickerPaletteSwatchProps = Omit<React.ComponentProps<'button'>, 'color'> &
   VariantProps<typeof colorPickerSwatchVariants> & {
     color: chroma.Color
   }
-export type ColorPickerPaletteAddProps = React.ComponentProps<typeof Button>
+export type ColorPickerPaletteAddProps = React.ComponentProps<'button'>
 export type ColorPickerPaletteLimitProps = React.ComponentProps<'span'>

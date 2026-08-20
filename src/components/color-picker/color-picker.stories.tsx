@@ -9,6 +9,7 @@ import { ColorPickerHueSlider } from './color-picker-hue-slider'
 import { ColorPickerInput } from './color-picker-input'
 import { ColorPickerLabel } from './color-picker-label'
 import { ColorPickerLightnessSlider } from './color-picker-lightness-slider'
+import { ColorPickerPaletteAdd } from './color-picker-palette-add'
 import { ColorPickerPaletteLimit } from './color-picker-palette-limit'
 import { ColorPickerPaletteList } from './color-picker-palette-list'
 import { ColorPickerPaletteSwatch } from './color-picker-palette-swatch'
@@ -99,6 +100,7 @@ export const Playground: Story = {
           {({ color, index }) => (
             <ColorPickerPaletteSwatch key={index} color={color} size="medium" />
           )}
+          <ColorPickerPaletteAdd />
         </ColorPickerPaletteList>
       </ColorPickerGroup>
     </ColorPicker>
@@ -182,7 +184,8 @@ export const Controlled: Story = {
       <div className="flex flex-col items-start gap-sm">
         <ColorPicker
           {...args}
-          value={pendingColor}
+          defaultValueType={'hex'}
+          color={pendingColor}
           onValueChange={(value) => setPendingColor(value.hex())}
           className="w-[300px]"
         >
@@ -233,4 +236,60 @@ export const InputOnly: Story = {
       </ColorPickerInput>
     </ColorPicker>
   ),
+}
+
+export const ControlledPalette: Story = {
+  render: function ControlledPaletteStory(args) {
+    const [palette, setPalette] = useState<string[]>(['#ef4444', '#3b82f6', '#22c55e'])
+
+    return (
+      <div className="flex flex-col items-start gap-sm">
+        <ColorPicker
+          {...args}
+          palette={palette}
+          onPaletteChange={setPalette}
+          paletteLimit={10}
+          className="w-[300px]"
+        >
+          <ColorPickerArea />
+          <ColorPickerGroup>
+            <ColorPickerHueSlider />
+            <ColorPickerTransparencySlider />
+            <ColorPickerRow>
+              <ColorPickerValueType />
+              <ColorPickerInput />
+            </ColorPickerRow>
+          </ColorPickerGroup>
+          <Separator />
+          <ColorPickerGroup>
+            <ColorPickerRow>
+              <ColorPickerLabel>Saved</ColorPickerLabel>
+              <ColorPickerPaletteLimit />
+            </ColorPickerRow>
+            <ColorPickerPaletteList>
+              {({ color, index }) => (
+                <ColorPickerPaletteSwatch key={index} color={color} size="medium" />
+              )}
+              <ColorPickerPaletteAdd />
+            </ColorPickerPaletteList>
+          </ColorPickerGroup>
+        </ColorPicker>
+        <div className="flex w-[300px] gap-xs">
+          <Button variant="outline" className="flex-1" onClick={() => setPalette([])}>
+            Clear
+          </Button>
+          <Button
+            variant="outline"
+            className="flex-1"
+            onClick={() => setPalette(['#ef4444', '#3b82f6', '#22c55e'])}
+          >
+            Reset
+          </Button>
+        </div>
+        <code className="w-[300px] rounded-md bg-surface px-sm py-xs style-text-default--1 text-on-surface">
+          {palette.join(', ') || 'empty'}
+        </code>
+      </div>
+    )
+  },
 }

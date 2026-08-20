@@ -639,6 +639,9 @@
   .mr-\[0px\] {
     margin-right: 0px;
   }
+  .mb-2xs {
+    margin-bottom: var(--spacing-2xs);
+  }
   .mb-\[-3rem\] {
     margin-bottom: -3rem;
   }
@@ -674,6 +677,9 @@
   }
   .ml-auto {
     margin-left: auto;
+  }
+  .ml-md {
+    margin-left: var(--spacing-md);
   }
   .ml-sm {
     margin-left: var(--spacing-sm);
@@ -1107,11 +1113,20 @@
   .flex-1 {
     flex: 1;
   }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
   .shrink-0 {
     flex-shrink: 0;
   }
+  .flex-grow {
+    flex-grow: 1;
+  }
   .grow {
     flex-grow: 1;
+  }
+  .border-collapse {
+    border-collapse: collapse;
   }
   .origin-\(--transform-origin\) {
     transform-origin: var(--transform-origin);
@@ -1670,6 +1685,9 @@
   .object-cover {
     object-fit: cover;
   }
+  .p-0 {
+    padding: var(--spacing-0);
+  }
   .p-0\! {
     padding: var(--spacing-0) !important;
   }
@@ -1759,6 +1777,9 @@
   }
   .pr-sm {
     padding-right: var(--spacing-sm);
+  }
+  .pb-2xs {
+    padding-bottom: var(--spacing-2xs);
   }
   .pb-3xs {
     padding-bottom: var(--spacing-3xs);
@@ -1938,6 +1959,9 @@
   }
   .text-balance {
     text-wrap: balance;
+  }
+  .text-wrap {
+    text-wrap: wrap;
   }
   .break-keep {
     word-break: keep-all;
@@ -2170,6 +2194,9 @@
   .shadow-xs {
     box-shadow: var(--shadow-xs) var(--dawn-shadow);
   }
+  .ring-brand-border-strong {
+    --tw-ring-color: var(--color-brand-border-strong);
+  }
   .ring-brand-border-strong\/20 {
     --tw-ring-color: var(--color-brand-border-strong);
     @supports (color: color-mix(in lab, red, red)) {
@@ -2308,6 +2335,11 @@
   }
   .transition-\[width\,transform\] {
     transition-property: width, transform;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-\[width\] {
+    transition-property: width;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }

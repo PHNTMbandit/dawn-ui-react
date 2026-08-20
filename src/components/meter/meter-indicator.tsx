@@ -7,7 +7,7 @@ export const MeterIndicator = ({ className, children, ref, ...props }: MeterIndi
   return (
     <BaseMeter.Indicator
       data-indicator
-      className={cn('rounded-full', className)}
+      className={cn('rounded-full transition-[width] duration-300 ease-in-out', className)}
       ref={ref}
       {...props}
     >
