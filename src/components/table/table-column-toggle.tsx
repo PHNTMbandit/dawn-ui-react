@@ -1,5 +1,5 @@
 import { Menu, MenuCheckboxItem, MenuPopup, MenuTrigger } from '../menu'
-import { useTable } from './table'
+import { useTableContext } from './table-context'
 import { cn } from '@/utils/cn'
 
 import type { TableColumnToggleProps } from './table.types'
@@ -10,30 +10,33 @@ export const TableColumnToggle = ({
   ref,
   ...props
 }: TableColumnToggleProps) => {
-  const { table } = useTable()
+  const table = useTableContext()
 
   const handleToggleColumn = (columnId: string) => {
-    const column = table.getColumn(columnId)
-    if (column) {
-      column.toggleVisibility()
-    }
+    table.getColumn(columnId)?.toggleVisibility()
   }
 
   return (
     <Menu>
-      <MenuTrigger className={cn('', className)} ref={ref} {...props}>
+      <MenuTrigger className={cn('shrink-0', className)} ref={ref} {...props}>
         {children}
       </MenuTrigger>
       <MenuPopup>
-        {table.getAllColumns().map((column) => (
-          <MenuCheckboxItem
-            key={column.id}
-            checked={column.getIsVisible()}
-            onCheckedChange={() => handleToggleColumn(column.id)}
-          >
-            {column.id}
-          </MenuCheckboxItem>
-        ))}
+        {table.getAllColumns().flatMap((column) => {
+          if (!column.getCanHide()) {
+            return null
+          }
+
+          return (
+            <MenuCheckboxItem
+              key={column.id}
+              checked={column.getIsVisible()}
+              onCheckedChange={() => handleToggleColumn(column.id)}
+            >
+              {(column.columnDef.header as string) || column.id}
+            </MenuCheckboxItem>
+          )
+        })}
       </MenuPopup>
     </Menu>
   )

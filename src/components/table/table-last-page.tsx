@@ -1,12 +1,12 @@
 import { CaretLineRightIcon } from '@phosphor-icons/react'
 import { Button } from '../button'
-import { useTable } from './table'
+import { useTableContext } from './table-context'
 import { cn } from '@/utils/cn'
 
 import type { TableLastPageProps } from './table.types'
 
 export const TableLastPage = ({ className, children, ref, ...props }: TableLastPageProps) => {
-  const { table } = useTable()
+  const table = useTableContext()
 
   const handleClick = () => {
     table.setPageIndex(table.getPageCount() - 1)

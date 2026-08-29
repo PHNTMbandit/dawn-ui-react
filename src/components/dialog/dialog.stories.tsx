@@ -53,7 +53,7 @@ const BasicDialog = ({
   </Dialog>
 )
 
-export default {
+const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
   component: Dialog,
   subcomponents: {
@@ -67,6 +67,7 @@ export default {
     DialogTrigger,
   },
   parameters: {
+    layout: 'fullscreen',
     docs: {
       subtitle: 'A modal surface for focused tasks, confirmations, and contextual forms.',
       description: {
@@ -75,8 +76,23 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <div
+        className="flex min-h-dvh w-full items-center justify-center bg-cover bg-center p-lg"
+        style={{
+          backgroundImage:
+            'url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   render: () => <BasicDialog />,
-} satisfies Meta<typeof Dialog>
+}
+
+export default meta
 
 type Story = StoryObj<typeof Dialog>
 

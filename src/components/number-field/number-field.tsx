@@ -10,6 +10,7 @@ export const NumberField = ({
   variant,
   children,
   label,
+  disableInput = false,
   className,
   ref,
   ...props
@@ -79,17 +80,15 @@ export const NumberField = ({
       value={value}
       {...restProps}
     >
-      {label && (
-        <BaseNumberField.ScrubArea className={'cursor-ew-resize'}>
-          <label className="cursor-ew-resize style-text-default--1" htmlFor={id}>
-            {label}
-          </label>
-          <BaseNumberField.ScrubAreaCursor>
-            <CursorGrowIcon />
-          </BaseNumberField.ScrubAreaCursor>
-        </BaseNumberField.ScrubArea>
-      )}
-      <BaseNumberField.Group className="relative flex w-full items-center justify-center gap-3xs">
+      <BaseNumberField.ScrubArea className={'cursor-ew-resize'}>
+        <label className="cursor-ew-resize style-text-default--1" htmlFor={id}>
+          {label}
+        </label>
+        <BaseNumberField.ScrubAreaCursor>
+          <CursorGrowIcon />
+        </BaseNumberField.ScrubAreaCursor>
+      </BaseNumberField.ScrubArea>
+      <BaseNumberField.Group className="relative flex w-full items-center gap-3xs">
         <BaseNumberField.Decrement
           render={(stepperProps) => (
             <Button
@@ -97,19 +96,20 @@ export const NumberField = ({
               tone="error"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0 rounded-l-full rounded-r-none'}
+              className={'shrink-0 rounded-r-none'}
             >
               <MinusIcon weight="bold" />
             </Button>
           )}
         />
         <BaseNumberField.Input
+          disabled={disableInput}
           className={cn('w-full text-center focus:outline-none', children && 'text-right')}
         />
         {children && (
           <div
             className={cn(
-              'w-full text-left text-on-surface',
+              'w-full text-left text-on-surface-variant',
               size === 'small' && 'style-text-default--1',
               size === 'medium' && 'style-text-default-0',
               size === 'large' && 'style-text-default-1',
@@ -125,7 +125,7 @@ export const NumberField = ({
               tone="success"
               variant={'ghost'}
               size={getButtonSize()}
-              className={'shrink-0 rounded-l-none rounded-r-full'}
+              className={'shrink-0 rounded-l-none'}
             >
               <PlusIcon weight="bold" />
             </Button>

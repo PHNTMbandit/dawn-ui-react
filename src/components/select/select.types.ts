@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import type { Select as BaseSelect } from '@base-ui/react/select'
 
 export const selectVariants = cva(
-  'flex items-center justify-between outline outline-transparent transition-all hover:cursor-pointer aria-invalid:bg-error-container aria-invalid:text-error-on-container aria-invalid:outline-error-border data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50 [&_[data-value]]:min-w-0 [&_[data-value]]:flex-1',
+  'flex items-center justify-between outline outline-transparent transition-all hover:cursor-pointer aria-invalid:bg-error-container aria-invalid:text-error-on-container aria-invalid:outline-error-border data-disabled:cursor-not-allowed [&_[data-value]]:min-w-0 [&_[data-value]]:flex-1',
   {
     variants: {
       variant: {

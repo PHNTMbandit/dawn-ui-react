@@ -1,4 +1,3 @@
-import React from 'react'
 import { ColorChannelSlider } from '../color-channel-slider'
 import { getLightnessTrack } from '../color-channel-slider/color-channel-slider.utils'
 import { useColorPicker } from './color-picker'
@@ -12,12 +11,8 @@ export const ColorPickerLightnessSlider = ({
   ...props
 }: ColorPickerLightnessSliderProps) => {
   const { color, setColor } = useColorPicker()
-  const [lightness, setLightness] = React.useState<number>(color.get('hsl.l'))
-
-  React.useEffect(() => {
-    const l = color.get('hsl.l')
-    setLightness(Number.isNaN(l) ? 0 : l)
-  }, [color])
+  const l = color.get('hsl.l')
+  const lightness = Number.isNaN(l) ? 0 : l
 
   const handleChange = (value: number | readonly number[]) => {
     const lightness = Array.isArray(value) ? value[0] : value

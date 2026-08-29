@@ -1,6 +1,6 @@
 import { CaretLeftIcon } from '@phosphor-icons/react'
 import { Button } from '../button'
-import { useTable } from './table'
+import { useTableContext } from './table-context'
 import { cn } from '@/utils/cn'
 
 import type { TablePreviousPageProps } from './table.types'
@@ -11,7 +11,7 @@ export const TablePreviousPage = ({
   ref,
   ...props
 }: TablePreviousPageProps) => {
-  const { table } = useTable()
+  const table = useTableContext()
 
   const handleClick = () => {
     table.previousPage()

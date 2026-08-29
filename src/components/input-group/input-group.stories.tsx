@@ -7,10 +7,10 @@ import {
 } from '@phosphor-icons/react'
 import { Button } from '../button'
 import { Kbd } from '../kbd'
-import { Separator } from '../separator'
 import { InputGroup } from './input-group'
 import { InputGroupAddon } from './input-group-addon'
 import { InputGroupInput } from './input-group-input'
+import { InputGroupSeparator } from './input-group-separator'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
@@ -265,7 +265,7 @@ export const MultiInput: Story = {
           <TagIcon weight="bold" />
         </InputGroupAddon>
         <InputGroupInput placeholder="Campaign name" />
-        <Separator orientation="vertical" />
+        <InputGroupSeparator orientation="vertical" />
         <InputGroupAddon>
           <TagIcon weight="bold" />
         </InputGroupAddon>
@@ -277,6 +277,24 @@ export const MultiInput: Story = {
     docs: {
       description: {
         story: 'Stack multiple input groups together for complex forms.',
+      },
+    },
+  },
+}
+
+export const Color: Story = {
+  name: 'Composition / Color Input',
+  render: (args) => (
+    <div className="w-[480px]">
+      <InputGroup {...args}>
+        <InputGroupInput type="color" />
+      </InputGroup>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'A color input pattern with a leading icon addon.',
       },
     },
   },

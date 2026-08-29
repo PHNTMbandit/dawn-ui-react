@@ -182,6 +182,23 @@ export const Invalid: Story = {
   },
 }
 
+export const DisableKeyboard: Story = {
+  name: 'Behavior / Disable Keyboard',
+  args: {
+    label: 'Quantity',
+    defaultValue: 5,
+    disableInput: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Disables keyboard input, but still allows scrubbing and stepper controls. Useful for cases where you want to restrict input to only certain values.',
+      },
+    },
+  },
+}
+
 export const Suffix: Story = {
   name: 'Appearance / Suffix',
   args: {

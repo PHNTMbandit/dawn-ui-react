@@ -1,4 +1,3 @@
-import React from 'react'
 import { ColorChannelSlider } from '../color-channel-slider'
 import { getTransparencyTrack } from '../color-channel-slider/color-channel-slider.utils'
 import { useColorPicker } from './color-picker'
@@ -12,11 +11,7 @@ export const ColorPickerTransparencySlider = ({
   ...props
 }: ColorPickerTransparencySliderProps) => {
   const { color, setColor } = useColorPicker()
-  const [alpha, setAlpha] = React.useState<number>(color.alpha())
-
-  React.useEffect(() => {
-    setAlpha(color.alpha())
-  }, [color])
+  const alpha = color.alpha()
 
   const handleChange = (value: number | readonly number[]) => {
     const alpha = Array.isArray(value) ? value[0] : value
