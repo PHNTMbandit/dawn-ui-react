@@ -7,25 +7,26 @@ import {
 } from '@dnd-kit/react'
 import React from 'react'
 import { Badge } from '../badge'
+import { useTableContext } from './layer-tree-context'
 import { cn } from '@/utils/cn'
 
 import type { LayerTreeProps } from './layer-tree.types'
 
-type LayerTreeContextType<TData> = LayerTreeProps<TData> & {
+type LayerTreeContextType = LayerTreeProps & {
   draggingNodeId: string | null
 }
 
-const LayerTreeContext = React.createContext<LayerTreeContextType<any> | null>(null)
+const LayerTreeContext = React.createContext<LayerTreeContextType | null>(null)
 
-export const LayerTree = <TData,>({
-  table,
+export const LayerTree = ({
   onDNDStart: onDragStart,
   onDNDEnd: onDragEnd,
   className,
   children,
   ref,
   ...props
-}: LayerTreeProps<TData>) => {
+}: LayerTreeProps) => {
+  const table = useTableContext()
   const [draggingNodeId, setDraggingNodeId] = React.useState<string | null>(null)
 
   const handleDragStart = ({ operation: { source } }: DragStartEvent) => {
@@ -54,7 +55,6 @@ export const LayerTree = <TData,>({
     >
       <LayerTreeContext.Provider
         value={{
-          table,
           className,
           children,
           ref,
@@ -72,7 +72,7 @@ export const LayerTree = <TData,>({
                 )}
               >
                 {table.getRow(String(source.id)).renderValue('name') ?? source.id}
-                <Badge className="absolute -top-xs -right-xs" size={'iconSmall'}>
+                <Badge className="absolute -top-xs -right-xs" size={'iconSmall'} tone="neutral">
                   {table.getRow(String(source.id))?.subRows.length + 1}
                 </Badge>
               </div>
@@ -84,8 +84,8 @@ export const LayerTree = <TData,>({
   )
 }
 
-export const useLayerTree = <TData,>() => {
-  const context = React.useContext<LayerTreeContextType<TData> | null>(LayerTreeContext)
+export const useLayerTree = () => {
+  const context = React.useContext<LayerTreeContextType | null>(LayerTreeContext)
 
   if (!context) {
     throw new Error('useLayerTree must be used within a LayerTreeProvider')

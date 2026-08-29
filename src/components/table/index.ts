@@ -1,80 +1,97 @@
-export { Table, useTable } from './table'
+export { defaultFilterOperatorLabels } from './table.types'
+export {
+  createAppColumnHelper,
+  features,
+  useAppTable,
+  useCellContext,
+  useHeaderContext,
+  useTableContext,
+} from './table-context'
 export type {
-  FilterOperator,
-  FilterType,
-  FilterValue,
-  NumberFilterValue,
-  NumberOperator,
-  SelectFilterValue,
-  SelectOperator,
-  TableBodyGridProps,
-  TableBodyListProps,
+  TableBadgeCellProps,
+  TableBodyProps,
   TableChangeViewProps,
   TableColumnToggleProps,
   TableContainerProps,
   TableContentProps,
-  TableDataSet,
-  TableDataSetSelectProps,
-  TableDataSetTabsProps,
-  TableFilterFormProps,
-  TableFilterProps,
-  TableFiltersProps,
+  TableDateCellProps,
+  TableDateFilterChipProps,
+  TableDateFilterFormProps,
+  TableNumberFilterChipProps,
+  TableNumberFilterFormProps,
+  TableSelectFilterChipProps,
+  TableSelectFilterFormProps,
+  TableSelectFilterOption,
+  TableSelectFilterValue,
+  TableFilterListProps,
+  TableFilterMenuProps,
   TableFirstPageProps,
   TableFooterProps,
   TableHeaderProps,
+  TableImageCellProps,
   TableLastPageProps,
   TableNavProps,
   TableNextPageProps,
+  TableNumberCellProps,
   TablePaginationProps,
   TablePagingProps,
   TablePreviousPageProps,
-  TableProps,
   TableRefreshProps,
   TableResultsProps,
-  TableRowGridProps,
-  TableRowListProps,
+  TableRowProps,
   TableSearchProps,
-  TableSortProps,
+  TableCheckboxCellProps as TableSelectCellProps,
+  TableSelectHeaderProps,
+  TableStringFilterChipProps,
+  TableStringFilterFormProps,
+  TableSortMenuProps as TableSortProps,
+  TableTextCellProps,
   TableToolbarProps,
-  TableView,
-  TextFilterValue,
-  TextOperator,
+  TableViewportProps,
+  TableSortChipProps,
+  TableSortListProps,
 } from './table.types'
-export { TableBodyList } from './table-body-list'
-export { TableBodyGrid } from './table-body-grid'
+export { TableBody } from './table-body'
+export { TableBadgeCell } from './table-badge-cell'
 export { TableColumnToggle } from './table-column-toggle'
 export { TableContainer } from './table-container'
-export { TableContent } from './table-content'
-export { TableDataSetSelect } from './table-data-set-select'
-export { TableDataSetTabs } from './table-data-set-tabs'
-export { TableFilter } from './table-filter'
-export { TableFilterForm } from './table-filter-form'
-export { TableFilters } from './table-filters'
+export { TableFilterMenu } from './table-filter-menu'
+export { TableDateFilterForm } from './table-date-filter-form'
+export { TableNumberFilterForm } from './table-number-filter-form'
+export { TableSelectFilterForm } from './table-select-filter-form'
+export { TableStringFilterForm } from './table-string-filter-form'
+export { TableFilterList } from './table-filter-list'
 export { TableFirstPage } from './table-first-page'
 export { TableFooter } from './table-footer'
 export { TableHeader } from './table-header'
+export { TableImageCell } from './table-image-cell'
 export { TableLastPage } from './table-last-page'
 export { TableNav } from './table-nav'
 export { TableNextPage } from './table-next-page'
+export { TableNumberCell } from './table-number-cell'
 export { TablePagination } from './table-pagination'
 export { TablePaging } from './table-paging'
 export { TablePreviousPage } from './table-previous-page'
-export { TableRefresh } from './table-refresh'
 export { TableResults } from './table-results'
-export { TableRowGrid } from './table-row-grid'
-export { TableRowList } from './table-row-list'
 export { TableSearch } from './table-search'
-export { TableSort } from './table-sort'
+export { TableCheckboxCell as TableSelectCell } from './table-checkbox-cell'
+export { TableSelectHeader } from './table-select-header'
+export { TableSortMenu } from './table-sort-menu'
+export { TableSortList } from './table-sort-list'
+export { TableSortChip } from './table-sort-chip'
+export { TableTextCell } from './table-text-cell'
 export { TableToolbar } from './table-toolbar'
-export { TableChangeView } from './table-change-view'
-export { textFilterFn, selectFilterFn } from './table.utils'
+export { TableViewport } from './table-viewport'
+export { TableDateFilterChip } from './table-date-filter-chip'
+export { TableNumberFilterChip } from './table-number-filter-chip'
+export { TableSelectFilterChip } from './table-select-filter-chip'
+export { TableStringFilterChip } from './table-string-filter-chip'
 export {
-  defaultOperatorLabels,
-  filterDefinitions,
-  numberFilterOperators,
-  numberOperatorKeys,
-  selectFilterOperators,
-  selectOperatorKeys,
-  textFilterOperators,
-  textOperatorKeys,
-} from './table.constants'
+  dateFilterFn,
+  numberFilterFn,
+  selectFilterFn,
+  stringFilterFn,
+  type DateFilterValue,
+  type NumberFilterValue,
+  type StringFilterValue,
+} from './table.utils'

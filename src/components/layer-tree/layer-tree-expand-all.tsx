@@ -1,12 +1,12 @@
 import { FolderOpenIcon, FolderSimpleIcon } from '@phosphor-icons/react'
 import { Button } from '../button'
-import { useLayerTree } from './layer-tree'
+import { useTableContext } from './layer-tree-context'
 import { cn } from '@/utils/cn'
 
 import type { LayerTreeExpandAllProps } from './layer-tree.types'
 
 export const LayerTreeExpandAll = ({ className, ref, ...props }: LayerTreeExpandAllProps) => {
-  const { table } = useLayerTree()
+  const table = useTableContext()
 
   const handleClick = () => {
     if (table.getIsSomeRowsExpanded()) {
@@ -17,16 +17,24 @@ export const LayerTreeExpandAll = ({ className, ref, ...props }: LayerTreeExpand
   }
 
   return (
-    <Button
-      size={'iconMedium'}
-      tone="neutral"
-      variant={'ghost'}
-      onClick={handleClick}
-      className={cn('', className)}
-      ref={ref}
-      {...props}
-    >
-      {table.getIsSomeRowsExpanded() ? <FolderSimpleIcon /> : <FolderOpenIcon />}
-    </Button>
+    <table.Subscribe selector={(state) => state.expanded}>
+      {() => (
+        <Button
+          size={'iconMedium'}
+          tone="neutral"
+          variant={'ghost'}
+          onClick={handleClick}
+          className={cn('', className)}
+          ref={ref}
+          {...props}
+        >
+          {table.getIsSomeRowsExpanded() ? (
+            <FolderOpenIcon weight="bold" />
+          ) : (
+            <FolderSimpleIcon weight="bold" />
+          )}
+        </Button>
+      )}
+    </table.Subscribe>
   )
 }

@@ -1,11 +1,10 @@
-import { flexRender } from '@tanstack/react-table'
-import { useTable } from './table'
+import { useTableContext } from './table-context'
 import { cn } from '@/utils/cn'
 
 import type { TableFooterProps } from './table.types'
 
 export const TableFooter = ({ className, children, ref, ...props }: TableFooterProps) => {
-  const { table } = useTable()
+  const table = useTableContext()
 
   return (
     <tfoot className={cn('', className)} ref={ref} {...props}>
@@ -13,11 +12,18 @@ export const TableFooter = ({ className, children, ref, ...props }: TableFooterP
       {table.getFooterGroups().map((footerGroup) => (
         <tr key={footerGroup.id}>
           {footerGroup.headers.map((header) => (
-            <th colSpan={header.colSpan} key={header.id} className="px-xs text-left">
-              {header.isPlaceholder
-                ? null
-                : flexRender(header.column.columnDef.footer, header.getContext())}
-            </th>
+            <table.AppFooter header={header} key={header.id}>
+              {(footer) => (
+                <td
+                  style={{
+                    width: footer.getSize(),
+                  }}
+                  colSpan={footer.colSpan}
+                >
+                  <table.FlexRender footer={footer} />
+                </td>
+              )}
+            </table.AppFooter>
           ))}
         </tr>
       ))}

@@ -74,14 +74,16 @@ const AppleSelect = ({
   variant = 'primary',
   size = 'medium',
   placeholder = 'Select an apple',
+  disabled = false,
 }: {
   defaultValue?: string | string[]
   multiple?: boolean
   variant?: SelectVariant
   size?: SelectSize
   placeholder?: string
+  disabled?: boolean
 }) => (
-  <Select defaultValue={defaultValue} multiple={multiple}>
+  <Select defaultValue={defaultValue} multiple={multiple} disabled={disabled}>
     <SelectTrigger variant={variant} size={size}>
       <SelectValue placeholder={placeholder}>
         {(value: keyof typeof apples) => (
@@ -424,4 +426,17 @@ export const WithDefaultMultipleValues: Story = {
       },
     },
   },
+}
+
+export const Disabled: Story = {
+  name: 'State / Disabled',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Disables the select trigger and prevents interaction with the popup list. Useful for read-only or conditional states.',
+      },
+    },
+  },
+  render: () => <AppleSelect variant="primary" size="medium" defaultValue="fuji" disabled />,
 }

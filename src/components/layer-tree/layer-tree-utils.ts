@@ -1,3 +1,15 @@
+import {
+  assignPrototypeAPIs,
+  assignTableAPIs,
+  functionalUpdate,
+  makeStateUpdater,
+  type Table,
+  type TableFeature,
+  type Updater,
+} from '@tanstack/react-table'
+
+import type { RowLockedState, RowVisibilityState } from './layer-tree.types'
+
 /**
  * Base constraint for tree node data types used by layer tree utilities.
  */
@@ -153,4 +165,133 @@ export const moveLayerTreeNodeToRoot = <TData extends LayerTreeNodeBase>(
   const { nextNodes, removedNode } = removeLayerTreeNode(nodes, sourceId)
   if (!removedNode) return nodes
   return [...nextNodes, removedNode]
+}
+
+export const rowVisibilityFeature: TableFeature = {
+  getInitialState: (initialState) => {
+    return {
+      rowVisibility: {},
+      ...initialState,
+    }
+  },
+  getDefaultTableOptions: (table) => {
+    return {
+      enableRowVisibility: true,
+      onRowVisibilityChange: makeStateUpdater('rowVisibility', table),
+    }
+  },
+  constructTableAPIs: (table) => {
+    const t = table as Table<any, any>
+    const isRowVisible = (row: any) =>
+      t.atoms.rowVisibility?.get()?.[row.id] ?? t.options.getRowVisible?.(row) ?? true
+    const setRowVisibility = (updater: Updater<RowVisibilityState>) => {
+      const safeUpdater: Updater<RowVisibilityState> = (old) => functionalUpdate(updater, old)
+      t.options.onRowVisibilityChange?.(safeUpdater)
+    }
+    const getIsAllRowsVisible = () => {
+      return t.getRowModel().flatRows.every((row) => isRowVisible(row))
+    }
+    assignTableAPIs('rowVisibilityFeature', table, {
+      table_setRowVisibility: {
+        fn: (updater: Updater<RowVisibilityState>) => setRowVisibility(updater),
+      },
+      table_resetRowVisibility: {
+        fn: () => setRowVisibility(t.initialState.rowVisibility ?? {}),
+      },
+      table_getIsAllRowsVisible: {
+        fn: () => getIsAllRowsVisible(),
+      },
+      table_toggleAllRowsVisible: {
+        fn: (value?: boolean) => {
+          const next = value ?? !getIsAllRowsVisible()
+          setRowVisibility(() => {
+            const state: RowVisibilityState = {}
+            for (const row of t.getRowModel().flatRows) state[row.id] = next
+            return state
+          })
+        },
+      },
+    })
+  },
+  assignRowPrototype: (prototype, table) => {
+    const t = table as Table<any, any>
+    assignPrototypeAPIs('rowVisibilityFeature', prototype, table, {
+      row_getIsVisible: {
+        fn: (row) =>
+          t.atoms.rowVisibility?.get()?.[row.id] ?? t.options.getRowVisible?.(row) ?? true,
+      },
+      row_toggleVisibility: {
+        fn: (row, value?: boolean) => {
+          t.options.onRowVisibilityChange?.((old: RowVisibilityState) => ({
+            ...old,
+            [row.id]: value ?? !(old[row.id] ?? true),
+          }))
+        },
+      },
+    })
+  },
+}
+
+export const rowLockedFeature: TableFeature = {
+  getInitialState: (initialState) => {
+    return {
+      rowLocked: {},
+      ...initialState,
+    }
+  },
+  getDefaultTableOptions: (table) => {
+    return {
+      enableRowLocked: true,
+      onRowLockedChange: makeStateUpdater('rowLocked', table),
+    }
+  },
+  constructTableAPIs: (table) => {
+    const t = table as Table<any, any>
+    const isRowLocked = (row: any) =>
+      t.atoms.rowLocked?.get()?.[row.id] ?? t.options.getRowLocked?.(row) ?? false
+    const setRowLocked = (updater: Updater<RowLockedState>) => {
+      const safeUpdater: Updater<RowLockedState> = (old) => functionalUpdate(updater, old)
+      t.options.onRowLockedChange?.(safeUpdater)
+    }
+    const getIsAllRowsLocked = () => {
+      return t.getRowModel().flatRows.every((row) => isRowLocked(row))
+    }
+    assignTableAPIs('rowLockedFeature', table, {
+      table_setRowLocked: {
+        fn: (updater: Updater<RowLockedState>) => setRowLocked(updater),
+      },
+      table_resetRowLocked: {
+        fn: () => setRowLocked(t.initialState.rowLocked ?? {}),
+      },
+      table_getIsAllRowsLocked: {
+        fn: () => getIsAllRowsLocked(),
+      },
+      table_toggleAllRowsLocked: {
+        fn: (value?: boolean) => {
+          const next = value ?? !getIsAllRowsLocked()
+          setRowLocked(() => {
+            const state: RowLockedState = {}
+            for (const row of t.getRowModel().flatRows) state[row.id] = next
+            return state
+          })
+        },
+      },
+    })
+  },
+  assignRowPrototype: (prototype, table) => {
+    const t = table as Table<any, any>
+    assignPrototypeAPIs('rowLockedFeature', prototype, table, {
+      row_getIsLocked: {
+        fn: (row) => t.atoms.rowLocked?.get()?.[row.id] ?? t.options.getRowLocked?.(row) ?? false,
+      },
+      row_toggleLocked: {
+        fn: (row, value?: boolean) => {
+          t.options.onRowLockedChange?.((old: RowLockedState) => ({
+            ...old,
+            [row.id]: value ?? !(old[row.id] ?? false),
+          }))
+        },
+      },
+    })
+  },
 }

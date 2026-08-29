@@ -5,31 +5,6 @@ import { InputOTPSlot } from './input-otp-slot'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-/**
- * A one-time password input composed of individual character slots.
- *
- * ## Anatomy
- *
- * ```tsx
- * import { InputOTP, InputOTPSlot, InputOtpSeparator } from '@cartyx/ui'
- *
- * <InputOTP length={6}>
- *   <InputOTPSlot />
- *   <InputOTPSlot aria-label="Character 2 of 6" />
- *   <InputOTPSlot aria-label="Character 3 of 6" />
- *   <InputOtpSeparator />
- *   <InputOTPSlot aria-label="Character 4 of 6" />
- *   <InputOTPSlot aria-label="Character 5 of 6" />
- *   <InputOTPSlot aria-label="Character 6 of 6" />
- * </InputOTP>
- * ```
- *
- * ## Accessibility
- *
- * - The first input inherits the field label automatically
- * - Add `aria-label` to remaining inputs (e.g., "Character 2 of 6")
- * - Use `aria-describedby` when helper text should be announced
- */
 export default {
   title: 'Components/Input OTP',
   component: InputOTP,

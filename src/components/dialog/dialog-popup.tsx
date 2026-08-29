@@ -8,12 +8,13 @@ export const DialogPopup = ({ className, children, ref, ...props }: DialogPopupP
     <BaseDialog.Portal>
       <BaseDialog.Backdrop
         className={
-          'fixed inset-[0px] min-h-dvh bg-scrim opacity-50 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute'
+          'fixed inset-[0px] z-998 min-h-dvh transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute'
         }
+        style={{ backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
       />
       <BaseDialog.Popup
         className={cn(
-          'fixed top-1/2 left-1/2 flex max-w-[calc(100vw-3rem)] min-w-1/6 -translate-1/2 flex-col gap-sm overflow-hidden rounded-3xl bg-surface-2 p-md shadow-lg transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0',
+          'fixed top-1/2 left-1/2 z-999 flex max-w-[calc(100vw-3rem)] min-w-1/6 -translate-1/2 flex-col gap-sm overflow-hidden rounded-3xl bg-surface-2 p-md shadow-lg transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0',
           className,
         )}
         ref={ref}

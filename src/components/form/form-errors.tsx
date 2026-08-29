@@ -6,40 +6,36 @@ import { cn } from '@/utils/cn'
 
 import type { FormErrorsProps } from './form.types'
 
+const collectMessages = (value: unknown, acc: Set<string>) => {
+  if (value == null) return
+  if (typeof value === 'string') {
+    if (value.trim()) acc.add(value)
+    return
+  }
+  if (Array.isArray(value)) {
+    value.forEach((v) => collectMessages(v, acc))
+    return
+  }
+  if (typeof value === 'object') {
+    const message = (value as { message?: unknown }).message
+    if (typeof message === 'string') {
+      acc.add(message)
+      return
+    }
+    Object.values(value as Record<string, unknown>).forEach((v) => collectMessages(v, acc))
+  }
+}
+
 export const FormErrors = ({ className, children, ref, ...props }: FormErrorsProps) => {
   const form = useFormContext()
 
   return (
     <form.Subscribe selector={(state) => [state.errors]}>
       {([errors]) => {
-        if (!errors || errors.length === 0) {
-          return null
-        }
+        const messages = new Set<string>()
+        collectMessages(errors, messages)
 
-        const allMessages: string[] = []
-
-        errors.forEach((errorObj) => {
-          if (typeof errorObj === 'string') {
-            allMessages.push(errorObj)
-          } else if (errorObj?.message && typeof errorObj.message === 'string') {
-            allMessages.push(errorObj.message)
-          } else if (typeof errorObj === 'object' && errorObj !== null) {
-            const extractMessages = (obj: unknown): void => {
-              if (typeof obj === 'string') {
-                allMessages.push(obj)
-              } else if (Array.isArray(obj)) {
-                obj.forEach(extractMessages)
-              } else if (typeof obj === 'object' && obj !== null) {
-                if ('message' in obj && typeof (obj as any).message === 'string') {
-                  allMessages.push((obj as any).message)
-                } else {
-                  Object.values(obj).forEach(extractMessages)
-                }
-              }
-            }
-            extractMessages(errorObj)
-          }
-        })
+        if (messages.size === 0) return null
 
         return (
           <Alert className={cn('', className)} ref={ref} tone="error" {...props}>
@@ -48,11 +44,9 @@ export const FormErrors = ({ className, children, ref, ...props }: FormErrorsPro
               {children}
               <AlertDescription>
                 <ul>
-                  {allMessages.length > 0 ? (
-                    allMessages.map((message) => <li key={message}>{message}</li>)
-                  ) : (
-                    <li className="style-text-prose--1">{errors.toString()}</li>
-                  )}
+                  {[...messages].map((message) => (
+                    <li key={message}>{message}</li>
+                  ))}
                 </ul>
               </AlertDescription>
             </AlertContent>

@@ -116,7 +116,7 @@ const DialogTemplate = ({ tone = 'brand' }: { tone?: Tone }) => {
   )
 }
 
-export default {
+const meta: Meta<typeof AlertDialogPopup> = {
   title: 'Components/Alert Dialog',
   component: AlertDialog,
   subcomponents: {
@@ -140,6 +140,7 @@ export default {
     },
   },
   parameters: {
+    layout: 'fullscreen',
     docs: {
       subtitle:
         'An accessible modal dialog that interrupts the user to confirm or acknowledge an action.',
@@ -149,7 +150,22 @@ export default {
       },
     },
   },
-} satisfies Meta<typeof AlertDialogPopup>
+  decorators: [
+    (Story) => (
+      <div
+        className="flex min-h-dvh w-full items-center justify-center bg-cover bg-center p-lg"
+        style={{
+          backgroundImage:
+            'url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+}
+
+export default meta
 
 type Story = StoryObj<typeof AlertDialogPopup>
 

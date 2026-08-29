@@ -1,77 +1,77 @@
 import { ArrowsDownUpIcon, SortAscendingIcon, SortDescendingIcon } from '@phosphor-icons/react'
-import { MenuSubmenuTrigger } from '..'
 import { Button } from '../button'
 import {
   Menu,
-  MenuGroup,
-  MenuGroupLabel,
+  MenuCheckboxItem,
   MenuPopup,
-  MenuRadioGroup,
-  MenuRadioItem,
   MenuSubmenu,
+  MenuSubmenuTrigger,
   MenuTrigger,
 } from '../menu'
-import { useLayerTree } from './layer-tree'
+import { useTableContext } from './layer-tree-context'
 import { cn } from '@/utils/cn'
 
 import type { LayerTreeSortProps } from './layer-tree.types'
-import type { Column } from '@tanstack/react-table'
 
-export const LayerTreeSort = <TData,>({
-  className,
-  children,
-  ref,
-  ...props
-}: LayerTreeSortProps) => {
-  const { table } = useLayerTree<TData>()
+export const LayerTreeSort = ({ className, children, ref, ...props }: LayerTreeSortProps) => {
+  const table = useTableContext()
+  const buttonLabels = table.options.meta?.translations?.buttonLabels ?? {}
+  const ascendingLabel = buttonLabels.ascending ?? 'Ascending'
+  const descendingLabel = buttonLabels.descending ?? 'Descending'
 
-  const handleClick = (value: 'asc' | 'desc', column: Column<TData, unknown>) => {
-    column.toggleSorting(value !== 'asc', column.getCanMultiSort())
+  const handleSort = (columnId: string, direction: 'asc' | 'desc') => {
+    const column = table.getColumn(columnId)
+    const currentSort = column?.getIsSorted()
+
+    if (currentSort === direction) {
+      column?.clearSorting()
+      return
+    }
+
+    column?.toggleSorting(direction === 'desc', column.getCanMultiSort())
   }
 
   return (
     <Menu>
-      <MenuTrigger>
-        <Button
-          size={'iconMedium'}
-          tone="neutral"
-          variant="ghost"
-          className={cn('', className)}
-          ref={ref}
-          {...props}
-        >
-          {children}
-          <ArrowsDownUpIcon />
+      <MenuTrigger className={cn('shrink-0', className)} ref={ref} {...props}>
+        <Button variant="ghost" size="iconMedium" tone="neutral">
+          <ArrowsDownUpIcon weight="bold" />
         </Button>
       </MenuTrigger>
-      <MenuPopup>
-        <MenuGroup>
-          <MenuGroupLabel>Sort By</MenuGroupLabel>
-          {table
-            .getAllColumns()
-            .filter((column) => column.getCanSort() && column.getIsVisible())
-            .map((column) => {
-              return (
-                <MenuSubmenu key={column.id}>
-                  <MenuSubmenuTrigger className={'capitalize'}>{column.id}</MenuSubmenuTrigger>
-                  <MenuPopup>
-                    <MenuRadioGroup
-                      key={column.id}
-                      onValueChange={(value) => handleClick(value as 'asc' | 'desc', column)}
-                      value={column.getIsSorted() as 'asc' | 'desc' | false}
-                    >
-                      <MenuRadioItem value="asc">
-                        <SortAscendingIcon /> Ascending
-                      </MenuRadioItem>
-                      <MenuRadioItem value="desc">
-                        <SortDescendingIcon /> Descending
-                      </MenuRadioItem>
-                    </MenuRadioGroup>
-                  </MenuPopup>
-                </MenuSubmenu>
-              )
-            })}
-        </MenuGroup>
+      <MenuPopup align="end">
+        <table.Subscribe selector={(state) => state.sorting}>
+          {() =>
+            table
+              .getAllColumns()
+              .filter((column) => column.getCanSort())
+              .map((column) => {
+                return (
+                  <MenuSubmenu key={column.id}>
+                    <MenuSubmenuTrigger>
+                      {(column.columnDef.header as string) ?? column.id}
+                    </MenuSubmenuTrigger>
+                    <MenuPopup>
+                      {children}
+                      <MenuCheckboxItem
+                        checked={column.getIsSorted() === 'asc'}
+                        onClick={() => handleSort(column.id, 'asc')}
+                      >
+                        <SortDescendingIcon weight="bold" />
+                        {ascendingLabel}
+                      </MenuCheckboxItem>
+                      <MenuCheckboxItem
+                        checked={column.getIsSorted() === 'desc'}
+                        onClick={() => handleSort(column.id, 'desc')}
+                      >
+                        <SortAscendingIcon weight="bold" />
+                        {descendingLabel}
+                      </MenuCheckboxItem>
+                    </MenuPopup>
+                  </MenuSubmenu>
+                )
+              })
+          }
+        </table.Subscribe>
       </MenuPopup>
     </Menu>
   )

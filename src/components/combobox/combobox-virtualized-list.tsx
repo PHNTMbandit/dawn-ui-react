@@ -1,3 +1,4 @@
+// oxlint-disable react/incompatible-library
 import { useVirtualizer } from '@tanstack/react-virtual'
 import React from 'react'
 import { ComboboxItem } from './combobox-item'

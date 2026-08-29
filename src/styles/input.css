@@ -543,13 +543,13 @@
   --dawn-spacing-2xl-3xl: clamp(3rem, 1.7727rem + 5.4545vw, 6rem);
   --dawn-spacing-sm-lg: clamp(0.75rem, 0.2386rem + 2.2727vw, 2rem);
 
-  --dawn-blur-2xs: blur(4px);
-  --dawn-blur-xs: blur(8px);
-  --dawn-blur-sm: blur(12px);
-  --dawn-blur-md: blur(16px);
-  --dawn-blur-lg: blur(20px);
-  --dawn-blur-xl: blur(24px);
-  --dawn-blur-2xl: blur(32px);
+  --dawn-blur-2xs: 4px;
+  --dawn-blur-xs: 8px;
+  --dawn-blur-sm: 12px;
+  --dawn-blur-md: 16px;
+  --dawn-blur-lg: 20px;
+  --dawn-blur-xl: 24px;
+  --dawn-blur-2xl: 32px;
 
   --dawn-shadow-2xs: 0px 1px 2px;
   --dawn-shadow-xs: 0px 2px 4px;

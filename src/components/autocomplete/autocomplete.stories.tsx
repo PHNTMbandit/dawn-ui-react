@@ -308,16 +308,14 @@ const AsyncLoadingTemplate = () => {
   const [isPending, startTransition] = React.useTransition()
   const { contains } = useFilter()
 
-  React.useEffect(() => {
-    let cancelled = false
+  const hasQuery = searchValue.trim().length > 0
 
-    if (!searchValue.trim()) {
-      setSearchResults([])
-      setError(null)
-      return () => {
-        cancelled = true
-      }
+  React.useEffect(() => {
+    if (!hasQuery) {
+      return
     }
+
+    let cancelled = false
 
     startTransition(() => {
       void searchMovies(searchValue, contains).then((result) => {
@@ -332,7 +330,10 @@ const AsyncLoadingTemplate = () => {
     return () => {
       cancelled = true
     }
-  }, [contains, searchValue])
+  }, [contains, searchValue, hasQuery])
+
+  const results = hasQuery ? searchResults : []
+  const displayError = hasQuery ? error : null
 
   function getStatus(): React.ReactNode | null {
     if (isPending) {
@@ -344,20 +345,20 @@ const AsyncLoadingTemplate = () => {
       )
     }
 
-    if (error) {
-      return error
+    if (displayError) {
+      return displayError
     }
 
-    if (!searchValue.trim()) {
+    if (!hasQuery) {
       return 'Start typing to search movies.'
     }
 
-    return `${searchResults.length} result${searchResults.length === 1 ? '' : 's'} found`
+    return `${results.length} result${results.length === 1 ? '' : 's'} found`
   }
 
   return (
     <div className="w-[420px]">
-      <Autocomplete items={searchResults} mode="list" openOnInputClick>
+      <Autocomplete items={results} mode="list" openOnInputClick>
         <AutocompleteInputGroup variant="primary">
           <AutocompleteInputGroupInput
             onChange={(event) => setSearchValue(event.currentTarget.value)}

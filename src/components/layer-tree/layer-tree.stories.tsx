@@ -1,26 +1,19 @@
+import { faker } from '@faker-js/faker'
 import {
+  CircleIcon,
   ClipboardIcon,
   CopyIcon,
-  EyeIcon,
-  EyeSlashIcon,
   FolderIcon,
-  FolderPlusIcon,
-  LockIcon,
-  LockSimpleOpenIcon,
+  ImageIcon,
+  PlusIcon,
   ScissorsIcon,
   SquareIcon,
+  StarIcon,
   TextAaIcon,
+  TriangleIcon,
 } from '@phosphor-icons/react'
-import {
-  createColumnHelper,
-  getCoreRowModel,
-  getExpandedRowModel,
-  getFilteredRowModel,
-  useReactTable,
-  type ExpandedState,
-} from '@tanstack/react-table'
+import { functionalUpdate } from '@tanstack/react-table'
 import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import { Button } from '../button'
 import {
   ContextMenu,
@@ -29,22 +22,13 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '../context-menu'
-import { LayerTree } from './layer-tree'
-import { LayerTreeBody } from './layer-tree-body'
-import { LayerTreeExpandAll } from './layer-tree-expand-all'
-import { LayerTreeFooter } from './layer-tree-footer'
-import { LayerTreeNode } from './layer-tree-node'
-import { LayerTreeNodeToggle } from './layer-tree-node-toggle'
-import { LayerTreeSearch } from './layer-tree-search'
-import { LayerTreeSort } from './layer-tree-sort'
+import { createAppColumnHelper, useAppTable } from './layer-tree-context'
 import { moveLayerTreeNode, moveLayerTreeNodeToRoot } from './layer-tree-utils'
-import { cn } from '@/utils/cn'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ExpandedState } from '@tanstack/react-table'
 
 export default {
   title: 'Components/Layer Tree',
-  component: LayerTree,
   parameters: {
     docs: {
       subtitle: 'A hierarchical tree for managing nested layers with drag-and-drop support.',
@@ -60,9 +44,7 @@ The component is data-agnostic—you provide your own data structure with \`id\`
       },
     },
   },
-} satisfies Meta<typeof LayerTree>
-
-type Story = StoryObj<typeof LayerTree>
+}
 
 /**
  * Your data type only needs `id` and optional `children`.
@@ -75,76 +57,60 @@ type Layer = {
   visible: boolean
   locked: boolean
   children?: Layer[]
-  nestedProps?: {
-    boolean1: boolean
-    boolean2: boolean
-    string1: string
-    string2: string
-  }
 }
 
-const initialLayers: Layer[] = [
-  {
-    id: 'folder-1',
-    name: 'Background',
-    icon: FolderIcon,
-    visible: true,
-    locked: false,
-    children: [
-      {
-        id: 'layer-1',
-        name: 'Sky Gradient',
-        icon: SquareIcon,
-        visible: true,
-        locked: true,
-        nestedProps: { boolean1: true, boolean2: false, string1: 'value1', string2: 'value2' },
-      },
-      {
-        id: 'layer-2',
-        name: 'Mountains',
-        icon: SquareIcon,
-        visible: true,
-        locked: false,
-        nestedProps: { boolean1: false, boolean2: true, string1: 'value3', string2: 'value4' },
-      },
-    ],
-  },
-  {
-    id: 'folder-2',
-    name: 'Foreground',
-    icon: FolderIcon,
-    visible: true,
-    locked: false,
-    children: [
-      {
-        id: 'layer-3',
-        name: 'Title Text',
-        icon: TextAaIcon,
-        visible: true,
-        locked: false,
-        nestedProps: { boolean1: true, boolean2: false, string1: 'value5', string2: 'value6' },
-      },
-      {
-        id: 'layer-4',
-        name: 'Logo',
-        icon: SquareIcon,
-        visible: false,
-        locked: false,
-        nestedProps: { boolean1: false, boolean2: true, string1: 'value7', string2: 'value8' },
-      },
-    ],
-  },
-  {
-    id: 'layer-5',
-    name: 'Overlay',
-    icon: SquareIcon,
-    visible: true,
-    locked: false,
-    nestedProps: { boolean1: true, boolean2: false, string1: 'value9', string2: 'value10' },
-  },
-]
+const layerIcons = [SquareIcon, CircleIcon, TriangleIcon, StarIcon, TextAaIcon, ImageIcon]
 
-export const Default: Story = {
+const makeLayer = (): Layer => ({
+  id: faker.string.uuid(),
+  name: faker.commerce.product(),
+  icon: faker.helpers.arrayElement(layerIcons),
+  visible: faker.datatype.boolean(0.85),
+  locked: faker.datatype.boolean(0.15),
+})
+
+const makeGroup = (depth: number): Layer => ({
+  id: faker.string.uuid(),
+  name: faker.commerce.department(),
+  icon: FolderIcon,
+  visible: true,
+  locked: false,
+  children: Array.from({ length: faker.number.int({ min: 2, max: 4 }) }, () =>
+    depth > 0 && faker.datatype.boolean(0.35) ? makeGroup(depth - 1) : makeLayer(),
+  ),
+})
+
+const makeLayers = (count: number): Layer[] =>
+  Array.from({ length: count }, () => (faker.datatype.boolean(0.6) ? makeGroup(1) : makeLayer()))
+
+const initialLayers = makeLayers(5)
+
+/** Reads a boolean prop from every node into a row-id map. */
+const collectRowState = (nodes: Layer[], key: 'visible' | 'locked'): Record<string, boolean> => {
+  const state: Record<string, boolean> = {}
+  const walk = (items: Layer[]) => {
+    for (const item of items) {
+      state[item.id] = item[key]
+      if (item.children) walk(item.children)
+    }
+  }
+  walk(nodes)
+  return state
+}
+
+/** Writes a row-id map of booleans back onto the matching nodes. */
+const applyRowState = (
+  nodes: Layer[],
+  key: 'visible' | 'locked',
+  next: Record<string, boolean>,
+): Layer[] =>
+  nodes.map((node) => ({
+    ...node,
+    [key]: next[node.id] ?? node[key],
+    children: node.children ? applyRowState(node.children, key, next) : node.children,
+  }))
+
+export const Default = {
   name: 'Default',
   parameters: {
     docs: {
@@ -157,25 +123,21 @@ export const Default: Story = {
   render: function Render() {
     const [layers, setLayers] = React.useState<Layer[]>(initialLayers)
     const [expanded, setExpanded] = React.useState<ExpandedState>({})
-    const [globalFilter, setGlobalFilter] = React.useState('')
+    const rowVisibility = React.useMemo(() => collectRowState(layers, 'visible'), [layers])
+    const rowLocked = React.useMemo(() => collectRowState(layers, 'locked'), [layers])
 
-    // Force re-render when toggling mutable fields
-    const refresh = () => setLayers((prev) => [...prev])
-
-    const columnHelper = createColumnHelper<Layer>()
-    const columns = [
+    const columnHelper = createAppColumnHelper<Layer>()
+    const columns = columnHelper.columns([
+      columnHelper.accessor('icon', {
+        cell: ({ cell }) => <cell.LayerTreeIconCell />,
+        enableSorting: false,
+      }),
       columnHelper.accessor('name', {
-        cell: (info) => (
+        header: 'Layer Name',
+        cell: ({ cell, row }) => (
           <ContextMenu>
             <ContextMenuTrigger>
-              <LayerTreeNode
-                row={info.row}
-                icon={info.row.original.icon}
-                dndDisabled={info.row.original.locked}
-                className={cn(!info.row.original.visible && 'opacity-50')}
-              >
-                {info.getValue()}
-              </LayerTreeNode>
+              <cell.LayerTreeTriggerCell dndDisabled={row.original.locked} />
             </ContextMenuTrigger>
             <ContextMenuPopup>
               <ContextMenuItem>
@@ -193,46 +155,52 @@ export const Default: Story = {
         ),
       }),
       columnHelper.accessor('visible', {
-        cell: (info) => (
-          <LayerTreeNodeToggle
-            value={info.getValue()}
-            accessorKey="nestedProps.boolean1"
-            rows={[info.row, ...info.row.getLeafRows()]}
-            onToggle={refresh}
-          >
-            {(v) => (v ? <EyeIcon /> : <EyeSlashIcon />)}
-          </LayerTreeNodeToggle>
-        ),
+        header: 'Visible',
+        cell: ({ cell }) => <cell.LayerTreeVisibilityCell />,
       }),
       columnHelper.accessor('locked', {
-        cell: (info) => (
-          <LayerTreeNodeToggle
-            value={info.getValue()}
-            accessorKey="locked"
-            rows={[info.row, ...info.row.getLeafRows()]}
-            onToggle={refresh}
-          >
-            {(v) => (v ? <LockIcon weight="fill" /> : <LockSimpleOpenIcon />)}
-          </LayerTreeNodeToggle>
-        ),
+        header: 'Locked',
+        cell: ({ cell }) => <cell.LayerTreeLockedCell />,
       }),
-    ]
+    ])
 
-    const table = useReactTable({
-      data: layers,
+    const table = useAppTable({
+      key: 'layer-tree-table',
       columns,
-      state: { expanded, globalFilter },
-      getRowId: (row) => row.id,
-      getSubRows: (row) => row.children,
-      getRowCanExpand: (row) => !!row.original.children,
-      getCoreRowModel: getCoreRowModel(),
-      getExpandedRowModel: getExpandedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
+      data: layers,
+      state: {
+        expanded,
+        rowVisibility,
+        rowLocked,
+        pagination: {
+          pageIndex: 0,
+          pageSize: 100,
+        },
+      },
       filterFromLeafRows: true,
+      autoResetExpanded: false,
+      getRowCanExpand: (row) => !!row.original.children?.length,
+      enableRowSelection: (row) => !row.original.children?.length,
+      getRowId: (row, index) => row.id ?? String(index),
+      getSubRows: (row) => row.children ?? [],
       onExpandedChange: setExpanded,
-      onGlobalFilterChange: setGlobalFilter,
-      defaultColumn: { size: 0, minSize: 0 },
+      onRowVisibilityChange: (updater) =>
+        setLayers((prev) =>
+          applyRowState(
+            prev,
+            'visible',
+            functionalUpdate(updater, collectRowState(prev, 'visible')),
+          ),
+        ),
+      onRowLockedChange: (updater) =>
+        setLayers((prev) =>
+          applyRowState(prev, 'locked', functionalUpdate(updater, collectRowState(prev, 'locked'))),
+        ),
     })
+
+    const addLayer = () => {
+      setLayers((prev) => [...prev, makeLayer()])
+    }
 
     const handleDragEnd = ({
       sourceNodeId,
@@ -254,55 +222,24 @@ export const Default: Story = {
       }
     }
 
-    const addFolder = () => {
-      const newFolder: Layer = {
-        id: uuidv4(),
-        name: 'New Folder',
-        icon: FolderIcon,
-        visible: true,
-        locked: false,
-        children: [],
-      }
-      setLayers((prev) => [...prev, newFolder])
-    }
-
-    const allVisible = table.getRowModel().flatRows.every((row) => row.original.visible)
-    const allLocked = table.getRowModel().flatRows.every((row) => row.original.locked)
-
     return (
-      <div className="pointer-events-auto z-10 bg-surface">
-        <LayerTree table={table} onDNDEnd={handleDragEnd} className="h-[400px] w-[360px]">
-          <LayerTreeBody />
-          <LayerTreeFooter>
+      <table.AppTable>
+        <table.LayerTree onDNDEnd={handleDragEnd} className="h-[600px] w-[360px]">
+          <table.LayerTreeBody />
+          <table.LayerTreeFooter>
             <div className="flex items-center justify-between">
-              <LayerTreeSort />
-              <LayerTreeNodeToggle<Layer>
-                accessorKey="visible"
-                rows={table.getRowModel().flatRows}
-                size="iconMedium"
-                value={allVisible}
-                onToggle={refresh}
-              >
-                {(v) => (v ? <EyeSlashIcon /> : <EyeIcon />)}
-              </LayerTreeNodeToggle>
-              <LayerTreeNodeToggle<Layer>
-                accessorKey="locked"
-                size="iconMedium"
-                rows={table.getRowModel().flatRows}
-                value={allLocked}
-                onToggle={refresh}
-              >
-                {(v) => (v ? <LockIcon weight="fill" /> : <LockSimpleOpenIcon />)}
-              </LayerTreeNodeToggle>
-              <LayerTreeExpandAll />
-              <Button variant="ghost" size="iconMedium" tone="neutral" onClick={addFolder}>
-                <FolderPlusIcon />
+              <Button tone="neutral" size="iconMedium" variant="ghost" onClick={addLayer}>
+                <PlusIcon weight="bold" />
               </Button>
+              <table.LayerTreeSort />
+              <table.LayerTreeVisibilityAll size="iconMedium" />
+              <table.LayerTreeLockedAll size="iconMedium" />
+              <table.LayerTreeExpandAll size="iconMedium" />
             </div>
-            <LayerTreeSearch placeholder="Search layers..." />
-          </LayerTreeFooter>
-        </LayerTree>
-      </div>
+            <table.LayerTreeSearch placeholder="Search layers..." />
+          </table.LayerTreeFooter>
+        </table.LayerTree>
+      </table.AppTable>
     )
   },
 }

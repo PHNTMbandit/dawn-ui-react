@@ -1,9 +1,8 @@
 # [1.0.0-alpha.34](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.33...v1.0.0-alpha.34) (2026-08-20)
 
-
 ### Features
 
-* add controlled palette to color picker ([4eaaf97](https://github.com/PHNTMbandit/dawn-ui-react/commit/4eaaf97a2714dd6eca48d0635ab0a3a0ba6173c2))
+- add controlled palette to color picker ([4eaaf97](https://github.com/PHNTMbandit/dawn-ui-react/commit/4eaaf97a2714dd6eca48d0635ab0a3a0ba6173c2))
 
 # [1.0.0-alpha.33](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.32...v1.0.0-alpha.33) (2026-08-18)
 

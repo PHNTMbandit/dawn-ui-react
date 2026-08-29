@@ -21,6 +21,15 @@ export const ColorPickerInput = ({
   const [transparency, setTransparency] = React.useState<string>(
     Math.round(color.alpha() * 100).toString(),
   )
+  const [prevColor, setPrevColor] = React.useState(color)
+  const [prevValueType, setPrevValueType] = React.useState(valueType)
+
+  if (color !== prevColor || valueType !== prevValueType) {
+    setPrevColor(color)
+    setPrevValueType(valueType)
+    setInputValue(valueType.getValue(color))
+    setTransparency(Math.round(color.alpha() * 100).toString())
+  }
 
   const handleValueChange = (value: string) => {
     setInputValue(value)
@@ -44,11 +53,6 @@ export const ColorPickerInput = ({
     }
   }
 
-  React.useEffect(() => {
-    setInputValue(valueType.getValue(color))
-    setTransparency(Math.round(color.alpha() * 100).toString())
-  }, [color, valueType])
-
   return (
     <InputGroup variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
       {showPopover ? (
@@ -61,7 +65,7 @@ export const ColorPickerInput = ({
               className="aspect-square h-1/2 rounded-lg hover:cursor-pointer"
             />
           </PopoverTrigger>
-          <PopoverPanel align="start" sideOffset={12} alignOffset={-15}>
+          <PopoverPanel>
             <PopoverContent className="flex w-[300px] flex-col gap-sm">{children}</PopoverContent>
           </PopoverPanel>
         </Popover>
