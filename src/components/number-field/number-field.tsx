@@ -80,14 +80,16 @@ export const NumberField = ({
       value={value}
       {...restProps}
     >
-      <BaseNumberField.ScrubArea className={'cursor-ew-resize'}>
-        <label className="cursor-ew-resize style-text-default--1" htmlFor={id}>
-          {label}
-        </label>
-        <BaseNumberField.ScrubAreaCursor>
-          <CursorGrowIcon />
-        </BaseNumberField.ScrubAreaCursor>
-      </BaseNumberField.ScrubArea>
+      {label && (
+        <BaseNumberField.ScrubArea className={'cursor-ew-resize'}>
+          <label className="cursor-ew-resize style-text-default--1" htmlFor={id}>
+            {label}
+          </label>
+          <BaseNumberField.ScrubAreaCursor>
+            <CursorGrowIcon />
+          </BaseNumberField.ScrubAreaCursor>
+        </BaseNumberField.ScrubArea>
+      )}
       <BaseNumberField.Group className="relative flex w-full items-center gap-3xs">
         <BaseNumberField.Decrement
           render={(stepperProps) => (

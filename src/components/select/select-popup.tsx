@@ -8,7 +8,7 @@ export const SelectPopup = ({ className, children, ref, ...props }: SelectPopupP
   return (
     <BaseSelect.Portal>
       <BaseSelect.Positioner
-        className={cn('z-99 outline-none select-none', className)}
+        className={cn('z-9999 outline-none select-none', className)}
         ref={ref}
         {...props}
       >

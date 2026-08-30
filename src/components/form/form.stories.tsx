@@ -1,4 +1,5 @@
 import { PasswordIcon, UserIcon } from '@phosphor-icons/react'
+import { expect, waitFor } from 'storybook/test'
 import { z } from 'zod'
 import { AlertTitle } from '../alert/alert-title'
 import { Field } from '../field'
@@ -23,6 +24,64 @@ export default {
 } satisfies Meta<typeof Form>
 
 type Story = StoryObj<typeof Form>
+
+export const CustomErrors: Story = {
+  render: () => {
+    const form = useAppForm({
+      defaultValues: {
+        username: '',
+        email: '',
+      },
+      validators: {
+        onChange: ({ value }) => ({
+          fields: {
+            username: value.username.length < 3 ? 'Username too short' : undefined,
+            email: !value.email.includes('@') ? 'Invalid email' : undefined,
+          },
+        }),
+      },
+    })
+
+    return (
+      <Form action={() => form.handleSubmit()} className="w-[400px]">
+        <form.AppForm>
+          <form.FormErrors />
+          <form.AppField name="username">
+            {(field) => (
+              <Field>
+                <field.FieldLabel />
+                <field.FieldInput placeholder="Username" />
+                <field.FieldErrors />
+              </Field>
+            )}
+          </form.AppField>
+          <form.AppField name="email">
+            {(field) => (
+              <Field>
+                <field.FieldLabel />
+                <field.FieldInput placeholder="Email" type="email" />
+                <field.FieldErrors />
+              </Field>
+            )}
+          </form.AppField>
+          <form.FormSubmit>Submit</form.FormSubmit>
+        </form.AppForm>
+      </Form>
+    )
+  },
+  play: async ({ userEvent, canvas }) => {
+    await userEvent.type(canvas.getByPlaceholderText('Username'), 'a')
+
+    await waitFor(async () => {
+      await expect(
+        canvas.getByText('Username too short', { selector: '[data-description] li' }),
+      ).toBeVisible()
+      await expect(
+        canvas.getByText('Invalid email', { selector: '[data-description] li' }),
+      ).toBeVisible()
+    })
+  },
+}
 
 export const FieldInput: Story = {
   render: () => {
@@ -526,5 +585,115 @@ export const SubmitError: Story = {
         </form.AppForm>
       </Form>
     )
+  },
+  play: async ({ userEvent, canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Submit' }))
+
+    await waitFor(async () => {
+      await expect(
+        canvas.getByText('Username must be at least 2 characters', {
+          selector: '[data-description] li',
+        }),
+      ).toBeVisible()
+      await expect(
+        canvas.getByText('Password must be at least 6 characters', {
+          selector: '[data-description] li',
+        }),
+      ).toBeVisible()
+    })
+  },
+}
+
+export const SubmitHandlerError: Story = {
+  render: () => {
+    const schema = z.object({
+      username: z.string().min(2, 'Username must be at least 2 characters'),
+      password: z.string().min(6, 'Password must be at least 6 characters'),
+    })
+
+    const form = useAppForm({
+      defaultValues: {
+        username: '',
+        password: '',
+      },
+      validators: {
+        onSubmit: schema,
+      },
+      onSubmit: async ({ formApi }) => {
+        await new Promise<void>((resolve) => {
+          setTimeout(resolve, 500)
+        })
+
+        const error = 'Invalid username or password'
+        formApi.setErrorMap({
+          onSubmit: {
+            form: error,
+            fields: {},
+          },
+        })
+
+        return error
+      },
+    })
+
+    return (
+      <Form action={() => form.handleSubmit()}>
+        <form.AppForm>
+          <form.FormErrors>
+            <AlertTitle>There were some problems with your submission</AlertTitle>
+          </form.FormErrors>
+          <form.AppField name="username">
+            {(field) => (
+              <Field>
+                <field.FieldLabel />
+                <field.FieldInput placeholder="Username" />
+                <field.FieldErrors />
+              </Field>
+            )}
+          </form.AppField>
+          <form.AppField name="password">
+            {(field) => (
+              <Field>
+                <field.FieldLabel />
+                <field.FieldInput placeholder="Password" type="password" />
+                <field.FieldErrors />
+              </Field>
+            )}
+          </form.AppField>
+          <form.FormSubmit>Submit</form.FormSubmit>
+        </form.AppForm>
+      </Form>
+    )
+  },
+  play: async ({ userEvent, canvas }) => {
+    const submit = canvas.getByRole('button', { name: 'Submit' })
+
+    await userEvent.click(submit)
+
+    await waitFor(async () => {
+      await expect(
+        canvas.getByText('Username must be at least 2 characters', {
+          selector: '[data-description] li',
+        }),
+      ).toBeVisible()
+      await expect(
+        canvas.getByText('Password must be at least 6 characters', {
+          selector: '[data-description] li',
+        }),
+      ).toBeVisible()
+    })
+
+    await userEvent.type(canvas.getByPlaceholderText('Username'), 'demo')
+    await userEvent.type(canvas.getByPlaceholderText('Password'), 'password')
+    await expect(submit).toBeEnabled()
+    await userEvent.click(submit)
+
+    await waitFor(async () => {
+      await expect(
+        canvas.getByText('Invalid username or password', {
+          selector: '[data-description] li',
+        }),
+      ).toBeVisible()
+    })
   },
 }
