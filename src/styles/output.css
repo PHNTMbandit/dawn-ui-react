@@ -5005,14 +5005,8 @@
   .\[\&_\[role\=\"group\"\]\]\:h-xl [role='group'] {
     height: var(--spacing-xl);
   }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-2xl [role='group'] {
-    border-radius: var(--radius-2xl);
-  }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-lg [role='group'] {
-    border-radius: var(--radius-lg);
-  }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-xl [role='group'] {
-    border-radius: var(--radius-xl);
+  .\[\&_\[role\=\"group\"\]\]\:rounded-full [role='group'] {
+    border-radius: var(--radius-full);
   }
   .\[\&_\[role\=\"group\"\]\]\:bg-neutral-container [role='group'] {
     background-color: var(--color-neutral-container);

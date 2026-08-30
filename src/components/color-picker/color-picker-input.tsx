@@ -57,7 +57,7 @@ export const ColorPickerInput = ({
     <InputGroup variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
       {showPopover ? (
         <Popover>
-          <PopoverTrigger>
+          <PopoverTrigger nativeButton={false}>
             <InputGroupAddon
               style={{
                 backgroundColor: color.hex(),

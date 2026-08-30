@@ -30,10 +30,13 @@ export const FormErrors = ({ className, children, ref, ...props }: FormErrorsPro
   const form = useFormContext()
 
   return (
-    <form.Subscribe selector={(state) => [state.errors]}>
-      {([errors]) => {
+    <form.Subscribe selector={(state) => [state.errors, state.fieldMeta]}>
+      {([errors, fieldMeta]) => {
         const messages = new Set<string>()
         collectMessages(errors, messages)
+        Object.values(fieldMeta as Record<string, { errors?: unknown }>).forEach((meta) =>
+          collectMessages(meta.errors, messages),
+        )
 
         if (messages.size === 0) return null
 
