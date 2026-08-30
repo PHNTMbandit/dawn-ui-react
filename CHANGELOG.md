@@ -1,3 +1,10 @@
+# [1.0.0-alpha.36](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2026-08-30)
+
+
+### Features
+
+* improve form errors ([d6892a9](https://github.com/PHNTMbandit/dawn-ui-react/commit/d6892a9a7d0327d9633d8ffdf0269c385d295780))
+
 # [1.0.0-alpha.35](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2026-08-29)
 
 
