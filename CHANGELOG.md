@@ -1,3 +1,11 @@
+# [1.0.0-alpha.37](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2026-09-01)
+
+
+### Features
+
+* add bento box component ([62ae2c5](https://github.com/PHNTMbandit/dawn-ui-react/commit/62ae2c5b2c5aba4dd82f434d1be0495ac6c03051))
+* change color picker return prop types to string ([b94fa14](https://github.com/PHNTMbandit/dawn-ui-react/commit/b94fa146b4cdd53947fbe755c0811872d1d1a05d))
+
 # [1.0.0-alpha.36](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2026-08-30)
 
 ### Features
