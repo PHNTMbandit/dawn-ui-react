@@ -49,14 +49,14 @@ export type ColorPickerAction =
 
 export type ColorPickerProps = React.ComponentProps<'div'> &
   VariantProps<typeof colorPickerVariants> & {
-    color?: string
+    value?: string
+    onValueChange?: (color: string) => void
     defaultColor?: string
     palette?: string[]
     defaultPalette?: string[]
     onPaletteChange?: (palette: string[]) => void
     paletteLimit?: number
     defaultValueType?: ValueTypeValue
-    onValueChange?: (color: chroma.Color) => void
   }
 
 export const colorPickerVariants = cva('flex flex-col space-y-sm', {
