@@ -1,17 +1,15 @@
 # [1.0.0-alpha.36](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2026-08-30)
 
-
 ### Features
 
-* improve form errors ([d6892a9](https://github.com/PHNTMbandit/dawn-ui-react/commit/d6892a9a7d0327d9633d8ffdf0269c385d295780))
+- improve form errors ([d6892a9](https://github.com/PHNTMbandit/dawn-ui-react/commit/d6892a9a7d0327d9633d8ffdf0269c385d295780))
 
 # [1.0.0-alpha.35](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2026-08-29)
 
-
 ### Features
 
-* **input-group-input:** add color variant ([938b461](https://github.com/PHNTMbandit/dawn-ui-react/commit/938b46146e00e91114276f245b76abce62bb3666))
-* update to use tanstack table v9 ([810ff26](https://github.com/PHNTMbandit/dawn-ui-react/commit/810ff26c913c47b9fa9132fe06c2715c428fa924))
+- **input-group-input:** add color variant ([938b461](https://github.com/PHNTMbandit/dawn-ui-react/commit/938b46146e00e91114276f245b76abce62bb3666))
+- update to use tanstack table v9 ([810ff26](https://github.com/PHNTMbandit/dawn-ui-react/commit/810ff26c913c47b9fa9132fe06c2715c428fa924))
 
 # [1.0.0-alpha.34](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.33...v1.0.0-alpha.34) (2026-08-20)
 

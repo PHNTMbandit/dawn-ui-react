@@ -5,6 +5,39 @@ import type { TableBodyProps } from './table.types'
 
 export const TableBody = ({ showDivider = true, className, ref, ...props }: TableBodyProps) => {
   const table = useTableContext()
+  const isGridView = table.options.meta?.viewMode === 'grid'
+
+  if (isGridView) {
+    return (
+      <table.Subscribe selector={(state) => state}>
+        {() => (
+          <ul
+            className={cn(
+              'grid auto-rows-fr grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-sm overflow-y-auto',
+              className,
+            )}
+          >
+            {table.getRowModel().rows.map((row) => (
+              <li
+                key={row.id}
+                className="min-w-0 rounded-lg bg-neutral-container p-xs text-neutral-on-container"
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <table.AppCell cell={cell} key={cell.id}>
+                    {(cell) => (
+                      <div className="w-full">
+                        <table.FlexRender cell={cell} />
+                      </div>
+                    )}
+                  </table.AppCell>
+                ))}
+              </li>
+            ))}
+          </ul>
+        )}
+      </table.Subscribe>
+    )
+  }
 
   return (
     <table.Subscribe selector={(state) => state}>
