@@ -185,8 +185,8 @@ export const Controlled: Story = {
         <ColorPicker
           {...args}
           defaultValueType={'hex'}
-          color={pendingColor}
-          onValueChange={(value) => setPendingColor(value.hex())}
+          value={pendingColor}
+          onValueChange={(value) => setPendingColor(value)}
           className="w-[300px]"
         >
           <ColorPickerArea />

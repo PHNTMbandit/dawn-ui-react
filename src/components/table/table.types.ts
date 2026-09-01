@@ -135,6 +135,7 @@ export interface TableColumnMeta {
 }
 
 export interface TableMeta {
+  viewMode?: 'table' | 'grid'
   translations?: {
     filterOperatorLabels?: Partial<Record<FilterOperator, string>>
     buttonLabels?: {

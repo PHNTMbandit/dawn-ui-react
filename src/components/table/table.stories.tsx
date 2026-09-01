@@ -1,11 +1,11 @@
 import { faker, fakerJA } from '@faker-js/faker'
 import { ArrowsDownUpIcon, ColumnsIcon, FunnelIcon, TrashIcon } from '@phosphor-icons/react'
 import React from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from '../avatar'
+import { Badge, type BadgeProps } from '../badge'
 import { Button } from '../button'
 import { createAppColumnHelper, useAppTable } from './table-context'
 import { TableResults } from './table-results'
-
-import type { BadgeProps } from '../badge'
 
 export default {
   title: 'Components/Table',
@@ -761,6 +761,110 @@ export const CustomPagination = {
         <table.TableContainer>
           <table.TableViewport>
             <table.TableHeader />
+            <table.TableBody />
+          </table.TableViewport>
+          <table.TableNav>
+            <TableResults>
+              {(start, end, total) => (
+                <span className="style-text-default--1 text-on-surface-variant">
+                  Showing {start}–{end} of {total}
+                </span>
+              )}
+            </TableResults>
+            <table.TablePagination>
+              <table.TableFirstPage />
+              <table.TablePreviousPage />
+              <table.TablePaging />
+              <table.TableNextPage />
+              <table.TableLastPage />
+            </table.TablePagination>
+          </table.TableNav>
+        </table.TableContainer>
+      </table.AppTable>
+    )
+  },
+}
+
+export const Grid = {
+  name: 'Use case / Grid view',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A grid view with a single column and custom cell rendering. The table is configured to display as a grid via `viewMode="grid"`.',
+      },
+    },
+  },
+  render: () => {
+    const columnHelper = createAppColumnHelper<Person>()
+    const columns = columnHelper.columns([
+      columnHelper.display({
+        id: 'person',
+        cell: ({ cell }) => {
+          const person = cell.row.original
+
+          return (
+            <div className="flex flex-col gap-sm">
+              <div className="flex items-center gap-sm">
+                <Avatar size="medium">
+                  <AvatarImage alt={`${person.firstName} ${person.lastName}`} src={person.avatar} />
+                  <AvatarFallback>
+                    {person.firstName[0]}
+                    {person.lastName[0]}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex min-w-0 flex-col">
+                  <span className="truncate style-text-strong-0">
+                    {person.firstName} {person.lastName}
+                  </span>
+                  <span className="truncate style-text-default--1 text-on-surface-variant">
+                    {person.email}
+                  </span>
+                </div>
+                <Badge
+                  className="ml-auto capitalize"
+                  tone={statusTone(person.status)}
+                  variant="soft"
+                >
+                  {person.status}
+                </Badge>
+              </div>
+              <div className="flex items-center justify-between style-text-default--1 text-on-surface-variant">
+                <span>{person.visits.toLocaleString()} visits</span>
+                <span>Joined {person.dateJoined.getFullYear()}</span>
+              </div>
+              <div className="flex flex-col gap-3xs">
+                <div className="flex items-center justify-between style-text-default--2 text-on-surface-variant">
+                  <span>Progress</span>
+                  <span>{person.progress}%</span>
+                </div>
+                <div className="h-2xs w-full overflow-hidden rounded-full bg-neutral-container-high">
+                  <div
+                    className="h-full rounded-full bg-brand-default"
+                    style={{ width: `${person.progress}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          )
+        },
+      }),
+    ])
+
+    const table = useAppTable({
+      key: 'people-pagination',
+      columns,
+      meta: {
+        viewMode: 'grid',
+      },
+      data: React.useMemo(() => makePeople(120), []),
+      initialState: { pagination: { pageIndex: 0, pageSize: 10 } },
+    })
+
+    return (
+      <table.AppTable>
+        <table.TableContainer>
+          <table.TableViewport>
             <table.TableBody />
           </table.TableViewport>
           <table.TableNav>

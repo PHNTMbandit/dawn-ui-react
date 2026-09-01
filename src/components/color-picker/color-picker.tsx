@@ -68,7 +68,7 @@ const colorPickerReducer = (
 
 export const ColorPicker = ({
   variant,
-  color: controlledValue,
+  value: controlledValue,
   defaultColor,
   palette: controlledPalette,
   defaultPalette,
@@ -173,37 +173,36 @@ export const ColorPicker = ({
   const setColor = React.useCallback(
     (color: chroma.Color) => {
       dispatch({ type: 'set_color', color })
-      onValueChange?.(color)
+      onValueChange?.(color.hex())
     },
     [onValueChange],
   )
   const setHue = React.useCallback(
     (hue: number) => {
       dispatch({ type: 'set_hue', hue })
-      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha).hex())
     },
     [alpha, saturation, value, onValueChange],
   )
   const setSaturation = React.useCallback(
     (saturation: number) => {
       dispatch({ type: 'set_saturation', saturation })
-      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha).hex())
     },
     [alpha, hue, value, onValueChange],
   )
   const setValue = React.useCallback(
     (value: number) => {
       dispatch({ type: 'set_value', value })
-      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha).hex())
     },
     [alpha, hue, saturation, onValueChange],
   )
-  // Saturation and value are updated together and dispatched as raw numbers so
-  // saturation survives even at value 0, where the color collapses to black.
+
   const setSaturationValue = React.useCallback(
     (saturation: number, value: number) => {
       dispatch({ type: 'set_saturation_value', saturation, value })
-      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha))
+      onValueChange?.(chroma.hsv(hue, saturation, value).alpha(alpha).hex())
     },
     [alpha, hue, onValueChange],
   )
