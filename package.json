@@ -1,6 +1,22 @@
 {
   "name": "dawn-ui-react",
   "version": "1.0.0-beta.1",
+  "description": "A React component library for building polished product interfaces with composable primitives and Tailwind CSS styling.",
+  "keywords": [
+    "accessible-ui",
+    "component-library",
+    "components",
+    "design-system",
+    "react",
+    "storybook",
+    "tailwindcss",
+    "typescript",
+    "ui"
+  ],
+  "homepage": "https://github.com/PHNTMbandit/dawn-ui-react#readme",
+  "bugs": {
+    "url": "https://github.com/PHNTMbandit/dawn-ui-react/issues"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -116,8 +132,7 @@
   },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "use-sync-external-store": "^1.2.0"
+    "react-dom": "^19.0.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs}": "pnpm run lint",
