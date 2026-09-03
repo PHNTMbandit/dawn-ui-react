@@ -543,6 +543,9 @@
   .z-\[calc\(1000-var\(--toast-index\)\)\] {
     z-index: calc(1000 - var(--toast-index));
   }
+  .col-\[-2\/-1\] {
+    grid-column: -2/-1;
+  }
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -773,10 +776,6 @@
   .size-sm {
     width: var(--spacing-sm);
     height: var(--spacing-sm);
-  }
-  .size-sm\! {
-    width: var(--spacing-sm) !important;
-    height: var(--spacing-sm) !important;
   }
   .size-xl {
     width: var(--spacing-xl);
@@ -1080,6 +1079,9 @@
   .w-md {
     width: var(--spacing-md);
   }
+  .w-min {
+    width: min-content;
+  }
   .w-px {
     width: 1px;
   }
@@ -1094,6 +1096,9 @@
   }
   .max-w-\[32rem\] {
     max-width: 32rem;
+  }
+  .max-w-\[70vh\] {
+    max-width: 70vh;
   }
   .max-w-\[300px\] {
     max-width: 300px;
@@ -1112,6 +1117,9 @@
   }
   .max-w-md {
     max-width: var(--spacing-md);
+  }
+  .max-w-none {
+    max-width: none;
   }
   .max-w-sm {
     max-width: var(--spacing-sm);
@@ -1406,6 +1414,9 @@
     --tw-space-y-reverse: 0;
     margin-block-start: calc(var(--spacing-xs) * var(--tw-space-y-reverse));
     margin-block-end: calc(var(--spacing-xs) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  .gap-x-sm {
+    column-gap: var(--spacing-sm);
   }
   .gap-x-xs {
     column-gap: var(--spacing-xs);
@@ -1888,9 +1899,6 @@
   }
   .text-right {
     text-align: right;
-  }
-  .text-start {
-    text-align: start;
   }
   .align-middle {
     vertical-align: middle;
@@ -2391,6 +2399,11 @@
   }
   .transition-\[top\,left\,right\,bottom\] {
     transition-property: top, left, right, bottom;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-\[transform\,opacity\] {
+    transition-property: transform, opacity;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
@@ -3463,6 +3476,48 @@
   .has-disabled\:opacity-30:has(:disabled) {
     opacity: 30%;
   }
+  .has-data-\[slot\=accordion-icon\]\:grid-cols-\[auto_1fr\]:has([data-slot='accordion-icon']) {
+    grid-template-columns: auto 1fr;
+  }
+  .has-data-\[slot\=accordion-subtitle\]\:grid-rows-\[auto_auto\]:has(
+    [data-slot='accordion-subtitle']
+  ) {
+    grid-template-rows: auto auto;
+  }
+  .has-data-\[slot\=alert-action\]\:grid-cols-\[1fr_auto\]:has([data-slot='alert-action']) {
+    grid-template-columns: 1fr auto;
+  }
+  .has-data-\[slot\=alert-description\]\:grid-rows-\[auto_auto\]:has(
+    [data-slot='alert-description']
+  ) {
+    grid-template-rows: auto auto;
+  }
+  .has-data-\[slot\=alert-dialog-description\]\:grid-rows-\[auto_auto\]:has(
+    [data-slot='alert-dialog-description']
+  ) {
+    grid-template-rows: auto auto;
+  }
+  .has-data-\[slot\=alert-dialog-icon\]\:grid-cols-\[auto_1fr\]:has(
+    [data-slot='alert-dialog-icon']
+  ) {
+    grid-template-columns: auto 1fr;
+  }
+  .has-data-\[slot\=alert-icon\]\:grid-cols-\[auto_1fr\]:has([data-slot='alert-icon']) {
+    grid-template-columns: auto 1fr;
+  }
+  .has-data-\[slot\=alert-icon\]\:has-data-\[slot\=alert-action\]\:grid-cols-\[auto_1fr_auto\]:has(
+      [data-slot='alert-icon']
+    ):has([data-slot='alert-action']) {
+    grid-template-columns: auto 1fr auto;
+  }
+  .has-data-\[slot\=dialog-description\]\:grid-rows-\[auto_auto\]:has(
+    [data-slot='dialog-description']
+  ) {
+    grid-template-rows: auto auto;
+  }
+  .has-data-\[slot\=dialog-icon\]\:grid-cols-\[auto_1fr\]:has([data-slot='dialog-icon']) {
+    grid-template-columns: auto 1fr;
+  }
   .has-\[\[data-swipe-direction\=left\]\]\:items-center:has(:is([data-swipe-direction='left'])) {
     align-items: center;
   }
@@ -3644,6 +3699,9 @@
     --tw-scale-y: 95%;
     --tw-scale-z: 95%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .data-ending-style\:transform-\[scale\(0\.98\)\][data-ending-style] {
+    transform: scale(0.98);
   }
   .data-ending-style\:transform-\[translateY\(calc\(100\%-3rem\+2px\)\)\][data-ending-style] {
     transform: translateY(calc(100% - 3rem + 2px));
@@ -4018,6 +4076,9 @@
     --tw-scale-y: 95%;
     --tw-scale-z: 95%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .data-starting-style\:transform-\[scale\(0\.98\)\][data-starting-style] {
+    transform: scale(0.98);
   }
   .data-starting-style\:transform-\[translateY\(150\%\)\][data-starting-style] {
     transform: translateY(150%);
@@ -4536,6 +4597,38 @@
     .data-dragging\:\*\*\:data-\[slot\=\'slider-thumb\'\]\:opacity-100[data-dragging] *
   )[data-slot='slider-thumb'] {
     opacity: 100%;
+  }
+  :is(
+    .has-data-\[slot\=accordion-subtitle\]\:\*\*\:data-\[slot\=accordion-icon\]\:row-span-2:has(
+        [data-slot='accordion-subtitle']
+      )
+      *
+  )[data-slot='accordion-icon'] {
+    grid-row: span 2 / span 2;
+  }
+  :is(
+    .has-data-\[slot\=alert-dialog-description\]\:\*\*\:data-\[slot\=alert-dialog-icon\]\:row-span-2:has(
+        [data-slot='alert-dialog-description']
+      )
+      *
+  )[data-slot='alert-dialog-icon'] {
+    grid-row: span 2 / span 2;
+  }
+  :is(
+    .has-data-\[slot\=alert-description\]\:\*\*\:data-\[slot\=alert-icon\]\:row-span-2:has(
+        [data-slot='alert-description']
+      )
+      *
+  )[data-slot='alert-icon'] {
+    grid-row: span 2 / span 2;
+  }
+  :is(
+    .has-data-\[slot\=dialog-description\]\:\*\*\:data-\[slot\=dialog-icon\]\:row-span-2:has(
+        [data-slot='dialog-description']
+      )
+      *
+  )[data-slot='dialog-icon'] {
+    grid-row: span 2 / span 2;
   }
   .data-\[state\=closed\]\:animate-out[data-state='closed'] {
     animation: exit var(--tw-animation-duration, var(--tw-duration, 0.15s)) var(--tw-ease, ease)
@@ -5080,6 +5173,139 @@
     [data-slot='slider-track'][data-orientation='vertical'] {
     width: var(--spacing-xs);
   }
+  .\[\&_\[data-slot\=accordion-icon\]\]\:text-accent-default [data-slot='accordion-icon'] {
+    color: var(--color-accent-default);
+  }
+  .\[\&_\[data-slot\=accordion-icon\]\]\:text-brand-default [data-slot='accordion-icon'] {
+    color: var(--color-brand-default);
+  }
+  .\[\&_\[data-slot\=accordion-icon\]\]\:text-error-default [data-slot='accordion-icon'] {
+    color: var(--color-error-default);
+  }
+  .\[\&_\[data-slot\=accordion-icon\]\]\:text-info-default [data-slot='accordion-icon'] {
+    color: var(--color-info-default);
+  }
+  .\[\&_\[data-slot\=accordion-icon\]\]\:text-neutral-default [data-slot='accordion-icon'] {
+    color: var(--color-neutral-default);
+  }
+  .\[\&_\[data-slot\=accordion-icon\]\]\:text-success-default [data-slot='accordion-icon'] {
+    color: var(--color-success-default);
+  }
+  .\[\&_\[data-slot\=accordion-icon\]\]\:text-warning-default [data-slot='accordion-icon'] {
+    color: var(--color-warning-default);
+  }
+  .\[\&_\[data-slot\=accordion-subtitle\]\]\:text-accent-muted [data-slot='accordion-subtitle'] {
+    color: var(--color-accent-muted);
+  }
+  .\[\&_\[data-slot\=accordion-subtitle\]\]\:text-brand-muted [data-slot='accordion-subtitle'] {
+    color: var(--color-brand-muted);
+  }
+  .\[\&_\[data-slot\=accordion-subtitle\]\]\:text-error-muted [data-slot='accordion-subtitle'] {
+    color: var(--color-error-muted);
+  }
+  .\[\&_\[data-slot\=accordion-subtitle\]\]\:text-info-muted [data-slot='accordion-subtitle'] {
+    color: var(--color-info-muted);
+  }
+  .\[\&_\[data-slot\=accordion-subtitle\]\]\:text-neutral-muted [data-slot='accordion-subtitle'] {
+    color: var(--color-neutral-muted);
+  }
+  .\[\&_\[data-slot\=accordion-subtitle\]\]\:text-success-muted [data-slot='accordion-subtitle'] {
+    color: var(--color-success-muted);
+  }
+  .\[\&_\[data-slot\=accordion-subtitle\]\]\:text-warning-muted [data-slot='accordion-subtitle'] {
+    color: var(--color-warning-muted);
+  }
+  .\[\&_\[data-slot\=accordion-title\]\]\:text-accent-default [data-slot='accordion-title'] {
+    color: var(--color-accent-default);
+  }
+  .\[\&_\[data-slot\=accordion-title\]\]\:text-brand-default [data-slot='accordion-title'] {
+    color: var(--color-brand-default);
+  }
+  .\[\&_\[data-slot\=accordion-title\]\]\:text-error-default [data-slot='accordion-title'] {
+    color: var(--color-error-default);
+  }
+  .\[\&_\[data-slot\=accordion-title\]\]\:text-info-default [data-slot='accordion-title'] {
+    color: var(--color-info-default);
+  }
+  .\[\&_\[data-slot\=accordion-title\]\]\:text-neutral-default [data-slot='accordion-title'] {
+    color: var(--color-neutral-default);
+  }
+  .\[\&_\[data-slot\=accordion-title\]\]\:text-success-default [data-slot='accordion-title'] {
+    color: var(--color-success-default);
+  }
+  .\[\&_\[data-slot\=accordion-title\]\]\:text-warning-default [data-slot='accordion-title'] {
+    color: var(--color-warning-default);
+  }
+  .\[\&_\[data-slot\=alert-description\]\]\:text-accent-on-container-muted
+    [data-slot='alert-description'] {
+    color: var(--color-accent-on-container-muted);
+  }
+  .\[\&_\[data-slot\=alert-description\]\]\:text-brand-on-container-muted
+    [data-slot='alert-description'] {
+    color: var(--color-brand-on-container-muted);
+  }
+  .\[\&_\[data-slot\=alert-description\]\]\:text-error-on-container-muted
+    [data-slot='alert-description'] {
+    color: var(--color-error-on-container-muted);
+  }
+  .\[\&_\[data-slot\=alert-description\]\]\:text-info-on-container-muted
+    [data-slot='alert-description'] {
+    color: var(--color-info-on-container-muted);
+  }
+  .\[\&_\[data-slot\=alert-description\]\]\:text-neutral-on-container-muted
+    [data-slot='alert-description'] {
+    color: var(--color-neutral-on-container-muted);
+  }
+  .\[\&_\[data-slot\=alert-description\]\]\:text-success-on-container-muted
+    [data-slot='alert-description'] {
+    color: var(--color-success-on-container-muted);
+  }
+  .\[\&_\[data-slot\=alert-description\]\]\:text-warning-on-container-muted
+    [data-slot='alert-description'] {
+    color: var(--color-warning-on-container-muted);
+  }
+  .\[\&_\[data-slot\=alert-icon\]\]\:text-accent-on-container [data-slot='alert-icon'] {
+    color: var(--color-accent-on-container);
+  }
+  .\[\&_\[data-slot\=alert-icon\]\]\:text-brand-on-container [data-slot='alert-icon'] {
+    color: var(--color-brand-on-container);
+  }
+  .\[\&_\[data-slot\=alert-icon\]\]\:text-error-on-container [data-slot='alert-icon'] {
+    color: var(--color-error-on-container);
+  }
+  .\[\&_\[data-slot\=alert-icon\]\]\:text-info-on-container [data-slot='alert-icon'] {
+    color: var(--color-info-on-container);
+  }
+  .\[\&_\[data-slot\=alert-icon\]\]\:text-neutral-on-container [data-slot='alert-icon'] {
+    color: var(--color-neutral-on-container);
+  }
+  .\[\&_\[data-slot\=alert-icon\]\]\:text-success-on-container [data-slot='alert-icon'] {
+    color: var(--color-success-on-container);
+  }
+  .\[\&_\[data-slot\=alert-icon\]\]\:text-warning-on-container [data-slot='alert-icon'] {
+    color: var(--color-warning-on-container);
+  }
+  .\[\&_\[data-slot\=alert-title\]\]\:text-accent-on-container [data-slot='alert-title'] {
+    color: var(--color-accent-on-container);
+  }
+  .\[\&_\[data-slot\=alert-title\]\]\:text-brand-on-container [data-slot='alert-title'] {
+    color: var(--color-brand-on-container);
+  }
+  .\[\&_\[data-slot\=alert-title\]\]\:text-error-on-container [data-slot='alert-title'] {
+    color: var(--color-error-on-container);
+  }
+  .\[\&_\[data-slot\=alert-title\]\]\:text-info-on-container [data-slot='alert-title'] {
+    color: var(--color-info-on-container);
+  }
+  .\[\&_\[data-slot\=alert-title\]\]\:text-neutral-on-container [data-slot='alert-title'] {
+    color: var(--color-neutral-on-container);
+  }
+  .\[\&_\[data-slot\=alert-title\]\]\:text-success-on-container [data-slot='alert-title'] {
+    color: var(--color-success-on-container);
+  }
+  .\[\&_\[data-slot\=alert-title\]\]\:text-warning-on-container [data-slot='alert-title'] {
+    color: var(--color-warning-on-container);
+  }
   .\[\&_\[data-slot\=slider-indicator\]\]\:bg-accent-default [data-slot='slider-indicator'] {
     background-color: var(--color-accent-default);
   }
@@ -5122,65 +5348,23 @@
   .\[\&_\[data-slot\=slider-track\]\]\:bg-warning-container-high [data-slot='slider-track'] {
     background-color: var(--color-warning-container-high);
   }
-  .\[\&_\[data-subtitle\]\]\:text-accent-muted [data-subtitle] {
-    color: var(--color-accent-muted);
-  }
-  .\[\&_\[data-subtitle\]\]\:text-brand-muted [data-subtitle] {
-    color: var(--color-brand-muted);
-  }
-  .\[\&_\[data-subtitle\]\]\:text-error-muted [data-subtitle] {
-    color: var(--color-error-muted);
-  }
-  .\[\&_\[data-subtitle\]\]\:text-info-muted [data-subtitle] {
-    color: var(--color-info-muted);
-  }
-  .\[\&_\[data-subtitle\]\]\:text-neutral-muted [data-subtitle] {
-    color: var(--color-neutral-muted);
-  }
-  .\[\&_\[data-subtitle\]\]\:text-success-muted [data-subtitle] {
-    color: var(--color-success-muted);
-  }
-  .\[\&_\[data-subtitle\]\]\:text-warning-muted [data-subtitle] {
-    color: var(--color-warning-muted);
-  }
-  .\[\&_\[data-title\]\]\:text-accent-default [data-title] {
-    color: var(--color-accent-default);
-  }
   .\[\&_\[data-title\]\]\:text-accent-on-container [data-title] {
     color: var(--color-accent-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-brand-default [data-title] {
-    color: var(--color-brand-default);
   }
   .\[\&_\[data-title\]\]\:text-brand-on-container [data-title] {
     color: var(--color-brand-on-container);
   }
-  .\[\&_\[data-title\]\]\:text-error-default [data-title] {
-    color: var(--color-error-default);
-  }
   .\[\&_\[data-title\]\]\:text-error-on-container [data-title] {
     color: var(--color-error-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-info-default [data-title] {
-    color: var(--color-info-default);
   }
   .\[\&_\[data-title\]\]\:text-info-on-container [data-title] {
     color: var(--color-info-on-container);
   }
-  .\[\&_\[data-title\]\]\:text-neutral-default [data-title] {
-    color: var(--color-neutral-default);
-  }
   .\[\&_\[data-title\]\]\:text-neutral-on-container [data-title] {
     color: var(--color-neutral-on-container);
   }
-  .\[\&_\[data-title\]\]\:text-success-default [data-title] {
-    color: var(--color-success-default);
-  }
   .\[\&_\[data-title\]\]\:text-success-on-container [data-title] {
     color: var(--color-success-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-warning-default [data-title] {
-    color: var(--color-warning-default);
   }
   .\[\&_\[data-title\]\]\:text-warning-on-container [data-title] {
     color: var(--color-warning-on-container);
@@ -5744,6 +5928,18 @@
     > [role='separator'] {
     display: none;
   }
+  .\[\&\:not\(\:has\(\~_\[data-slot\=accordion-subtitle\]\)\)\]\:leading-0:not(
+    :has(~ [data-slot='accordion-subtitle'])
+  ) {
+    --tw-leading: var(--spacing-0);
+    line-height: var(--spacing-0);
+  }
+  .\[\&\:not\(\:has\(\~_\[data-slot\=alert-description\]\)\)\]\:leading-0:not(
+    :has(~ [data-slot='alert-description'])
+  ) {
+    --tw-leading: var(--spacing-0);
+    line-height: var(--spacing-0);
+  }
   @media (hover: hover) {
     .\[\&_\[role\=tab\]\]\:hover\:\[\&\:not\(\[data-active\]\)\]\:text-accent-default
       [role='tab']:hover:not([data-active]) {
@@ -5800,88 +5996,130 @@
     .\[\&\:not\(\[data-open\]\)\]\:hover\:bg-warning-container:not([data-open]):hover {
       background-color: var(--color-warning-container);
     }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-subtitle\]\]\:text-accent-on-container-muted:not(
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-icon\]\]\:text-accent-on-container:not(
         [data-open]
       ):hover
-      [data-subtitle] {
-      color: var(--color-accent-on-container-muted);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-subtitle\]\]\:text-brand-on-container-muted:not(
-        [data-open]
-      ):hover
-      [data-subtitle] {
-      color: var(--color-brand-on-container-muted);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-subtitle\]\]\:text-error-on-container-muted:not(
-        [data-open]
-      ):hover
-      [data-subtitle] {
-      color: var(--color-error-on-container-muted);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-subtitle\]\]\:text-info-on-container-muted:not(
-        [data-open]
-      ):hover
-      [data-subtitle] {
-      color: var(--color-info-on-container-muted);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-subtitle\]\]\:text-neutral-on-container-muted:not(
-        [data-open]
-      ):hover
-      [data-subtitle] {
-      color: var(--color-neutral-on-container-muted);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-subtitle\]\]\:text-success-on-container-muted:not(
-        [data-open]
-      ):hover
-      [data-subtitle] {
-      color: var(--color-success-on-container-muted);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-subtitle\]\]\:text-warning-on-container-muted:not(
-        [data-open]
-      ):hover
-      [data-subtitle] {
-      color: var(--color-warning-on-container-muted);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-title\]\]\:text-accent-on-container:not(
-        [data-open]
-      ):hover
-      [data-title] {
+      [data-slot='accordion-icon'] {
       color: var(--color-accent-on-container);
     }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-title\]\]\:text-brand-on-container:not(
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-icon\]\]\:text-brand-on-container:not(
         [data-open]
       ):hover
-      [data-title] {
+      [data-slot='accordion-icon'] {
       color: var(--color-brand-on-container);
     }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-title\]\]\:text-error-on-container:not(
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-icon\]\]\:text-error-on-container:not(
         [data-open]
       ):hover
-      [data-title] {
+      [data-slot='accordion-icon'] {
       color: var(--color-error-on-container);
     }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-title\]\]\:text-info-on-container:not(
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-icon\]\]\:text-info-on-container:not(
         [data-open]
       ):hover
-      [data-title] {
+      [data-slot='accordion-icon'] {
       color: var(--color-info-on-container);
     }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-title\]\]\:text-neutral-on-container:not(
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-icon\]\]\:text-neutral-on-container:not(
         [data-open]
       ):hover
-      [data-title] {
+      [data-slot='accordion-icon'] {
       color: var(--color-neutral-on-container);
     }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-title\]\]\:text-success-on-container:not(
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-icon\]\]\:text-success-on-container:not(
         [data-open]
       ):hover
-      [data-title] {
+      [data-slot='accordion-icon'] {
       color: var(--color-success-on-container);
     }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-title\]\]\:text-warning-on-container:not(
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-icon\]\]\:text-warning-on-container:not(
         [data-open]
       ):hover
-      [data-title] {
+      [data-slot='accordion-icon'] {
+      color: var(--color-warning-on-container);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-subtitle\]\]\:text-accent-on-container-muted:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-subtitle'] {
+      color: var(--color-accent-on-container-muted);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-subtitle\]\]\:text-brand-on-container-muted:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-subtitle'] {
+      color: var(--color-brand-on-container-muted);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-subtitle\]\]\:text-error-on-container-muted:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-subtitle'] {
+      color: var(--color-error-on-container-muted);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-subtitle\]\]\:text-info-on-container-muted:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-subtitle'] {
+      color: var(--color-info-on-container-muted);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-subtitle\]\]\:text-neutral-on-container-muted:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-subtitle'] {
+      color: var(--color-neutral-on-container-muted);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-subtitle\]\]\:text-success-on-container-muted:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-subtitle'] {
+      color: var(--color-success-on-container-muted);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-subtitle\]\]\:text-warning-on-container-muted:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-subtitle'] {
+      color: var(--color-warning-on-container-muted);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-title\]\]\:text-accent-on-container:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-title'] {
+      color: var(--color-accent-on-container);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-title\]\]\:text-brand-on-container:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-title'] {
+      color: var(--color-brand-on-container);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-title\]\]\:text-error-on-container:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-title'] {
+      color: var(--color-error-on-container);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-title\]\]\:text-info-on-container:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-title'] {
+      color: var(--color-info-on-container);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-title\]\]\:text-neutral-on-container:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-title'] {
+      color: var(--color-neutral-on-container);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-title\]\]\:text-success-on-container:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-title'] {
+      color: var(--color-success-on-container);
+    }
+    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-slot\=accordion-title\]\]\:text-warning-on-container:not(
+        [data-open]
+      ):hover
+      [data-slot='accordion-title'] {
       color: var(--color-warning-on-container);
     }
   }
@@ -6275,85 +6513,6 @@
     }
     .hover\:\[\&\>svg\]\:text-warning-default:hover > svg {
       color: var(--color-warning-default);
-    }
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-accent-default [data-trigger] > svg {
-    color: var(--color-accent-default);
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-brand-default [data-trigger] > svg {
-    color: var(--color-brand-default);
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-error-default [data-trigger] > svg {
-    color: var(--color-error-default);
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-info-default [data-trigger] > svg {
-    color: var(--color-info-default);
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-neutral-default [data-trigger] > svg {
-    color: var(--color-neutral-default);
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-success-default [data-trigger] > svg {
-    color: var(--color-success-default);
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-warning-default [data-trigger] > svg {
-    color: var(--color-warning-default);
-  }
-  .\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:transition-colors [data-trigger] > svg {
-    transition-property:
-      color, background-color, border-color, outline-color, text-decoration-color, fill, stroke,
-      --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
-  @media (hover: hover) {
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-accent-on-container:not(
-        [data-open]
-      ):hover
-      [data-trigger]
-      > svg {
-      color: var(--color-accent-on-container);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-brand-on-container:not(
-        [data-open]
-      ):hover
-      [data-trigger]
-      > svg {
-      color: var(--color-brand-on-container);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-error-on-container:not(
-        [data-open]
-      ):hover
-      [data-trigger]
-      > svg {
-      color: var(--color-error-on-container);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-info-on-container:not(
-        [data-open]
-      ):hover
-      [data-trigger]
-      > svg {
-      color: var(--color-info-on-container);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-neutral-on-container:not(
-        [data-open]
-      ):hover
-      [data-trigger]
-      > svg {
-      color: var(--color-neutral-on-container);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-success-on-container:not(
-        [data-open]
-      ):hover
-      [data-trigger]
-      > svg {
-      color: var(--color-success-on-container);
-    }
-    .\[\&\:not\(\[data-open\]\)\]\:hover\:\[\&_\[data-trigger\]\]\:\[\&\>svg\]\:text-warning-on-container:not(
-        [data-open]
-      ):hover
-      [data-trigger]
-      > svg {
-      color: var(--color-warning-on-container);
     }
   }
   .\[\&\>button\]\:\[\&\>svg\]\:size-2xs > button > svg {

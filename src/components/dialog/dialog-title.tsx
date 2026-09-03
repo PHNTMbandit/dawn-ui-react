@@ -6,7 +6,8 @@ import type { DialogTitleProps } from './dialog.types'
 export const DialogTitle = ({ className, children, ref, ...props }: DialogTitleProps) => {
   return (
     <BaseDialog.Title
-      className={cn('flex items-center gap-2xs style-text-strong-1 [&>svg]:size-md', className)}
+      data-slot="dialog-title"
+      className={cn('style-text-strong-1', className)}
       ref={ref}
       {...props}
     >

@@ -12,7 +12,6 @@ import { ColorPickerLightnessSlider } from './color-picker-lightness-slider'
 import { ColorPickerPaletteAdd } from './color-picker-palette-add'
 import { ColorPickerPaletteLimit } from './color-picker-palette-limit'
 import { ColorPickerPaletteList } from './color-picker-palette-list'
-import { ColorPickerPaletteSwatch } from './color-picker-palette-swatch'
 import { ColorPickerRow } from './color-picker-row'
 import { ColorPickerTransparencySlider } from './color-picker-transparency-slider'
 import { ColorPickerValueType } from './color-picker-value-type'
@@ -97,9 +96,6 @@ export const Playground: Story = {
           <ColorPickerPaletteLimit />
         </ColorPickerRow>
         <ColorPickerPaletteList>
-          {({ color, index }) => (
-            <ColorPickerPaletteSwatch key={index} color={color} size="medium" />
-          )}
           <ColorPickerPaletteAdd />
         </ColorPickerPaletteList>
       </ColorPickerGroup>
@@ -267,9 +263,6 @@ export const ControlledPalette: Story = {
               <ColorPickerPaletteLimit />
             </ColorPickerRow>
             <ColorPickerPaletteList>
-              {({ color, index }) => (
-                <ColorPickerPaletteSwatch key={index} color={color} size="medium" />
-              )}
               <ColorPickerPaletteAdd />
             </ColorPickerPaletteList>
           </ColorPickerGroup>

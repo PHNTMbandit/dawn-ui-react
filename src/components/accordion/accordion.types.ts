@@ -23,23 +23,23 @@ export const accordionVariants = cva('flex flex-col justify-center', {
 })
 
 export const accordionItemVariants = cva(
-  'group transition-all data-disabled:pointer-events-none data-disabled:opacity-50 [&_[data-trigger]]:[&>svg]:transition-colors',
+  'group transition-all data-disabled:pointer-events-none data-disabled:opacity-50',
   {
     variants: {
       tone: {
         brand:
-          '[&_[data-subtitle]]:text-brand-muted [&_[data-title]]:text-brand-default [&:not([data-open])]:hover:bg-brand-container [&:not([data-open])]:hover:[&_[data-subtitle]]:text-brand-on-container-muted [&:not([data-open])]:hover:[&_[data-title]]:text-brand-on-container [&_[data-trigger]]:[&>svg]:text-brand-default [&:not([data-open])]:hover:[&_[data-trigger]]:[&>svg]:text-brand-on-container',
+          '[&_[data-slot=accordion-icon]]:text-brand-default [&_[data-slot=accordion-subtitle]]:text-brand-muted [&_[data-slot=accordion-title]]:text-brand-default [&:not([data-open])]:hover:bg-brand-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-brand-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-brand-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-brand-on-container',
         accent:
-          '[&_[data-subtitle]]:text-accent-muted [&_[data-title]]:text-accent-default [&:not([data-open])]:hover:bg-accent-container [&:not([data-open])]:hover:[&_[data-subtitle]]:text-accent-on-container-muted [&:not([data-open])]:hover:[&_[data-title]]:text-accent-on-container [&_[data-trigger]]:[&>svg]:text-accent-default [&:not([data-open])]:hover:[&_[data-trigger]]:[&>svg]:text-accent-on-container',
+          '[&_[data-slot=accordion-icon]]:text-accent-default [&_[data-slot=accordion-subtitle]]:text-accent-muted [&_[data-slot=accordion-title]]:text-accent-default [&:not([data-open])]:hover:bg-accent-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-accent-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-accent-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-accent-on-container',
         neutral:
-          '[&_[data-subtitle]]:text-neutral-muted [&_[data-title]]:text-neutral-default [&:not([data-open])]:hover:bg-neutral-container [&:not([data-open])]:hover:[&_[data-subtitle]]:text-neutral-on-container-muted [&:not([data-open])]:hover:[&_[data-title]]:text-neutral-on-container [&_[data-trigger]]:[&>svg]:text-neutral-default [&:not([data-open])]:hover:[&_[data-trigger]]:[&>svg]:text-neutral-on-container',
+          '[&_[data-slot=accordion-icon]]:text-neutral-default [&_[data-slot=accordion-subtitle]]:text-neutral-muted [&_[data-slot=accordion-title]]:text-neutral-default [&:not([data-open])]:hover:bg-neutral-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-neutral-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-neutral-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-neutral-on-container',
         error:
-          '[&_[data-subtitle]]:text-error-muted [&_[data-title]]:text-error-default [&:not([data-open])]:hover:bg-error-container [&:not([data-open])]:hover:[&_[data-subtitle]]:text-error-on-container-muted [&:not([data-open])]:hover:[&_[data-title]]:text-error-on-container [&_[data-trigger]]:[&>svg]:text-error-default [&:not([data-open])]:hover:[&_[data-trigger]]:[&>svg]:text-error-on-container',
-        info: '[&_[data-subtitle]]:text-info-muted [&_[data-title]]:text-info-default [&:not([data-open])]:hover:bg-info-container [&:not([data-open])]:hover:[&_[data-subtitle]]:text-info-on-container-muted [&:not([data-open])]:hover:[&_[data-title]]:text-info-on-container [&_[data-trigger]]:[&>svg]:text-info-default [&:not([data-open])]:hover:[&_[data-trigger]]:[&>svg]:text-info-on-container',
+          '[&_[data-slot=accordion-icon]]:text-error-default [&_[data-slot=accordion-subtitle]]:text-error-muted [&_[data-slot=accordion-title]]:text-error-default [&:not([data-open])]:hover:bg-error-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-error-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-error-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-error-on-container',
+        info: '[&_[data-slot=accordion-icon]]:text-info-default [&_[data-slot=accordion-subtitle]]:text-info-muted [&_[data-slot=accordion-title]]:text-info-default [&:not([data-open])]:hover:bg-info-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-info-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-info-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-info-on-container',
         success:
-          '[&_[data-subtitle]]:text-success-muted [&_[data-title]]:text-success-default [&:not([data-open])]:hover:bg-success-container [&:not([data-open])]:hover:[&_[data-subtitle]]:text-success-on-container-muted [&:not([data-open])]:hover:[&_[data-title]]:text-success-on-container [&_[data-trigger]]:[&>svg]:text-success-default [&:not([data-open])]:hover:[&_[data-trigger]]:[&>svg]:text-success-on-container',
+          '[&_[data-slot=accordion-icon]]:text-success-default [&_[data-slot=accordion-subtitle]]:text-success-muted [&_[data-slot=accordion-title]]:text-success-default [&:not([data-open])]:hover:bg-success-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-success-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-success-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-success-on-container',
         warning:
-          '[&_[data-subtitle]]:text-warning-muted [&_[data-title]]:text-warning-default [&:not([data-open])]:hover:bg-warning-container [&:not([data-open])]:hover:[&_[data-subtitle]]:text-warning-on-container-muted [&:not([data-open])]:hover:[&_[data-title]]:text-warning-on-container [&_[data-trigger]]:[&>svg]:text-warning-default [&:not([data-open])]:hover:[&_[data-trigger]]:[&>svg]:text-warning-on-container',
+          '[&_[data-slot=accordion-icon]]:text-warning-default [&_[data-slot=accordion-subtitle]]:text-warning-muted [&_[data-slot=accordion-title]]:text-warning-default [&:not([data-open])]:hover:bg-warning-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-warning-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-warning-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-warning-on-container',
       },
     },
     defaultVariants: {
@@ -53,4 +53,4 @@ export type AccordionItemProps = React.ComponentProps<typeof BaseAccordion.Item>
 export type AccordionHeaderProps = React.ComponentProps<typeof BaseAccordion.Header>
 export type AccordionTitleProps = React.ComponentProps<'div'>
 export type AccordionSubtitleProps = React.ComponentProps<'div'>
-export type AccordionTriggerProps = React.ComponentProps<typeof BaseAccordion.Trigger>
+export type AccordionIconProps = React.ComponentProps<'div'>

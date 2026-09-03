@@ -174,16 +174,15 @@ export type ColorPickerValueTypeProps = React.ComponentProps<typeof SelectTrigge
 export type ColorPickerRowProps = React.ComponentProps<'div'>
 export type ColorPickerGroupProps = React.ComponentProps<'div'>
 export type ColorPickerLabelProps = React.ComponentProps<'span'>
-export type ColorPickerPaletteListChild =
-  | React.ReactNode
-  | ((props: { color: chroma.Color; index: number }) => React.ReactNode)
+export type ColorPickerPaletteListChild = (props: {
+  color: string
+  index: number
+}) => React.ReactNode
 
-export type ColorPickerPaletteListProps = Omit<React.ComponentProps<'ul'>, 'children'> & {
-  children?: ColorPickerPaletteListChild | ColorPickerPaletteListChild[]
-}
+export type ColorPickerPaletteListProps = React.ComponentProps<'ul'>
 export type ColorPickerPaletteSwatchProps = Omit<React.ComponentProps<'button'>, 'color'> &
   VariantProps<typeof colorPickerSwatchVariants> & {
-    color: chroma.Color
+    color: string
   }
 export type ColorPickerPaletteAddProps = React.ComponentProps<'button'>
 export type ColorPickerPaletteLimitProps = React.ComponentProps<'span'>

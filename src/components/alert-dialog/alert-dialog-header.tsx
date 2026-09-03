@@ -11,7 +11,7 @@ export const AlertDialogHeader = ({
   return (
     <div
       className={cn(
-        'flex w-full items-center justify-start gap-sm [&>svg]:size-xl [&>svg]:shrink-0',
+        'grid auto-rows-min items-center gap-x-sm has-data-[slot=alert-dialog-description]:grid-rows-[auto_auto] has-data-[slot=alert-dialog-icon]:grid-cols-[auto_1fr] has-data-[slot=alert-dialog-description]:**:data-[slot=alert-dialog-icon]:row-span-2',
         className,
       )}
       ref={ref}

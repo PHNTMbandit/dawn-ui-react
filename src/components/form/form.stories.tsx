@@ -74,10 +74,14 @@ export const CustomErrors: Story = {
 
     await waitFor(async () => {
       await expect(
-        canvas.getByText('Username too short', { selector: '[data-description] li' }),
+        canvas.getByText('Username too short', {
+          selector: '[data-slot="alert-description"] li',
+        }),
       ).toBeVisible()
       await expect(
-        canvas.getByText('Invalid email', { selector: '[data-description] li' }),
+        canvas.getByText('Invalid email', {
+          selector: '[data-slot="alert-description"] li',
+        }),
       ).toBeVisible()
     })
   },
@@ -592,12 +596,12 @@ export const SubmitError: Story = {
     await waitFor(async () => {
       await expect(
         canvas.getByText('Username must be at least 2 characters', {
-          selector: '[data-description] li',
+          selector: '[data-slot="alert-description"] li',
         }),
       ).toBeVisible()
       await expect(
         canvas.getByText('Password must be at least 6 characters', {
-          selector: '[data-description] li',
+          selector: '[data-slot="alert-description"] li',
         }),
       ).toBeVisible()
     })
@@ -673,12 +677,12 @@ export const SubmitHandlerError: Story = {
     await waitFor(async () => {
       await expect(
         canvas.getByText('Username must be at least 2 characters', {
-          selector: '[data-description] li',
+          selector: '[data-slot="alert-description"] li',
         }),
       ).toBeVisible()
       await expect(
         canvas.getByText('Password must be at least 6 characters', {
-          selector: '[data-description] li',
+          selector: '[data-slot="alert-description"] li',
         }),
       ).toBeVisible()
     })
@@ -691,7 +695,7 @@ export const SubmitHandlerError: Story = {
     await waitFor(async () => {
       await expect(
         canvas.getByText('Invalid username or password', {
-          selector: '[data-description] li',
+          selector: '[data-slot="alert-description"] li',
         }),
       ).toBeVisible()
     })

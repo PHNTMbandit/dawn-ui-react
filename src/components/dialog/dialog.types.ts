@@ -16,4 +16,5 @@ export type DialogCloseProps = ComponentProps<typeof BaseDialog.Close>
 export type DialogContentProps = React.ComponentProps<'div'>
 export type DialogHeaderProps = React.ComponentProps<'div'>
 export type DialogFooterProps = React.ComponentProps<'div'>
+export type DialogIconProps = React.ComponentProps<'div'>
 export const DialogHelper = BaseDialog

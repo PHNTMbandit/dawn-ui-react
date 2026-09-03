@@ -5,8 +5,11 @@ import type { AlertTitleProps } from './alert.types'
 export const AlertTitle = ({ className, children, ref, ...props }: AlertTitleProps) => {
   return (
     <div
-      className={cn('flex items-center gap-2xs style-text-strong-0 [&_svg]:size-sm', className)}
-      data-title
+      data-slot="alert-title"
+      className={cn(
+        'flex items-center gap-2xs style-text-strong-0 [&:not(:has(~_[data-slot=alert-description]))]:leading-0',
+        className,
+      )}
       ref={ref}
       {...props}
     >

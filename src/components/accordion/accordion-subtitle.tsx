@@ -10,8 +10,8 @@ export const AccordionSubtitle = ({
 }: AccordionSubtitleProps) => {
   return (
     <div
-      data-subtitle
-      className={cn('style-text-prose--1 transition-colors', className)}
+      data-slot="accordion-subtitle"
+      className={cn('text-left style-text-prose--1 transition-colors', className)}
       ref={ref}
       {...props}
     >

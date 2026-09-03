@@ -7,14 +7,15 @@ import {
   WarningIcon,
   XCircleIcon,
 } from '@phosphor-icons/react'
+import { expect, userEvent, within } from 'storybook/test'
 import { Button } from '../button'
 import { AlertDialog } from './alert-dialog'
 import { AlertDialogClose } from './alert-dialog-close'
 import { AlertDialogConfirm } from './alert-dialog-confirm'
-import { AlertDialogContent } from './alert-dialog-content'
 import { AlertDialogDescription } from './alert-dialog-description'
-import { AlertDialogActions } from './alert-dialog-footer'
+import { AlertDialogFooter } from './alert-dialog-footer'
 import { AlertDialogHeader } from './alert-dialog-header'
+import { AlertDialogIcon } from './alert-dialog-icon'
 import { AlertDialogPopup } from './alert-dialog-popup'
 import { AlertDialogTitle } from './alert-dialog-title'
 import { AlertDialogTrigger } from './alert-dialog-trigger'
@@ -101,16 +102,14 @@ const DialogTemplate = ({ tone = 'brand' }: { tone?: Tone }) => {
       </AlertDialogTrigger>
       <AlertDialogPopup tone={tone} className="w-[900px]">
         <AlertDialogHeader>
-          {TONE_ICONS[tone]}
-          <AlertDialogContent>
-            <AlertDialogTitle>{title}</AlertDialogTitle>
-            <AlertDialogDescription>{description}</AlertDialogDescription>
-          </AlertDialogContent>
+          <AlertDialogIcon>{TONE_ICONS[tone]}</AlertDialogIcon>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogActions>
+        <AlertDialogFooter>
           <AlertDialogClose>Cancel</AlertDialogClose>
           <AlertDialogConfirm>{confirm}</AlertDialogConfirm>
-        </AlertDialogActions>
+        </AlertDialogFooter>
       </AlertDialogPopup>
     </AlertDialog>
   )
@@ -122,9 +121,8 @@ const meta: Meta<typeof AlertDialogPopup> = {
   subcomponents: {
     AlertDialogClose,
     AlertDialogConfirm,
-    AlertDialogContent,
     AlertDialogDescription,
-    AlertDialogFooter: AlertDialogActions,
+    AlertDialogFooter: AlertDialogFooter,
     AlertDialogPopup,
     AlertDialogTitle,
     AlertDialogTrigger,
@@ -183,6 +181,13 @@ export const Playground: Story = {
     },
   },
   render: (args) => <DialogTemplate tone={args.tone as Tone} />,
+  play: async ({ canvasElement }) => {
+    await userEvent.click(within(canvasElement).getByRole('button', { name: 'Open Dialog' }))
+
+    const backdrop = document.querySelector<HTMLElement>('[data-slot="alert-dialog-backdrop"]')
+    await expect(backdrop).not.toBeNull()
+    await expect(getComputedStyle(backdrop!).backdropFilter).toBe('blur(16px)')
+  },
 }
 
 // ─── Tones ───────────────────────────────────────────────────────────────────
@@ -312,19 +317,19 @@ export const DestructiveFlow: Story = {
       </AlertDialogTrigger>
       <AlertDialogPopup tone="error">
         <AlertDialogHeader>
-          <XCircleIcon weight="fill" />
-          <AlertDialogContent>
-            <AlertDialogTitle>Delete your account?</AlertDialogTitle>
-            <AlertDialogDescription>
-              All of your data, including projects, settings, and billing history, will be
-              permanently erased. This action is irreversible and cannot be appealed.
-            </AlertDialogDescription>
-          </AlertDialogContent>
+          <AlertDialogIcon>
+            <XCircleIcon weight="fill" />
+          </AlertDialogIcon>
+          <AlertDialogTitle>Delete your account?</AlertDialogTitle>
+          <AlertDialogDescription>
+            All of your data, including projects, settings, and billing history, will be permanently
+            erased. This action is irreversible and cannot be appealed.
+          </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogActions>
+        <AlertDialogFooter>
           <AlertDialogClose>Keep Account</AlertDialogClose>
           <AlertDialogConfirm>Delete Forever</AlertDialogConfirm>
-        </AlertDialogActions>
+        </AlertDialogFooter>
       </AlertDialogPopup>
     </AlertDialog>
   ),
@@ -350,20 +355,20 @@ export const CriticalWarning: Story = {
       </AlertDialogTrigger>
       <AlertDialogPopup tone="warning">
         <AlertDialogHeader>
-          <WarningIcon weight="fill" />
-          <AlertDialogContent>
-            <AlertDialogTitle>Transfer workspace ownership?</AlertDialogTitle>
-            <AlertDialogDescription>
-              You are about to transfer ownership of this workspace to another member. You will
-              immediately lose your admin privileges and cannot reclaim ownership without their
-              consent.
-            </AlertDialogDescription>
-          </AlertDialogContent>
+          <AlertDialogIcon>
+            <WarningIcon weight="fill" />
+          </AlertDialogIcon>
+          <AlertDialogTitle>Transfer workspace ownership?</AlertDialogTitle>
+          <AlertDialogDescription>
+            You are about to transfer ownership of this workspace to another member. You will
+            immediately lose your admin privileges and cannot reclaim ownership without their
+            consent.
+          </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogActions>
+        <AlertDialogFooter>
           <AlertDialogClose>Cancel</AlertDialogClose>
           <AlertDialogConfirm>Transfer Ownership</AlertDialogConfirm>
-        </AlertDialogActions>
+        </AlertDialogFooter>
       </AlertDialogPopup>
     </AlertDialog>
   ),

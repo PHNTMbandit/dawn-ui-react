@@ -11,6 +11,7 @@ export const DialogDescription = ({
 }: DialogDescriptionProps) => {
   return (
     <BaseDialog.Description
+      data-slot="dialog-description"
       className={cn('style-text-prose-0 text-on-surface-variant', className)}
       ref={ref}
       {...props}
