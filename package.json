@@ -1,6 +1,6 @@
 {
   "name": "dawn-ui-react",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "A React component library for building polished product interfaces with composable primitives and Tailwind CSS styling.",
   "keywords": [
     "accessible-ui",

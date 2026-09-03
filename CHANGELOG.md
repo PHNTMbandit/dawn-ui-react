@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2026-09-03)
+
+
+### Features
+
+* optimise dependencies ([11abb2b](https://github.com/PHNTMbandit/dawn-ui-react/commit/11abb2bbc919b8e2d787ae8f1710c0f5c4d6ba6b))
+
 # [1.0.0-beta.2](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2026-09-03)
 
 
