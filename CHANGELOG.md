@@ -1,3 +1,10 @@
+# [1.0.0-alpha.38](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.37...v1.0.0-alpha.38) (2026-09-03)
+
+
+### Features
+
+* add preview card component and refactor alert dialog, dialog and accordion components ([b83fb4c](https://github.com/PHNTMbandit/dawn-ui-react/commit/b83fb4c5a4b8ef2ebd3e89799d87114a98ba966f))
+
 # [1.0.0-alpha.37](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2026-09-01)
 
 
