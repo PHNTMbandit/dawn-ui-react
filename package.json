@@ -120,6 +120,7 @@
     "oxlint-tailwindcss": "^1.10.0",
     "oxlint-tsgolint": "^7.0.2001",
     "playwright": "^1.62.1",
+    "rolldown": "1.2.6",
     "semantic-release": "^25.0.9",
     "shiki": "^4.4.3",
     "storybook": "^10.5.10",
