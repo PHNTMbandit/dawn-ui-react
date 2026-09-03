@@ -1,3 +1,4 @@
+import chroma from 'chroma-js'
 import { useColorPicker } from './color-picker'
 import { colorPickerSwatchVariants, type ColorPickerPaletteSwatchProps } from './color-picker.types'
 import { cn } from '@/index'
@@ -13,7 +14,7 @@ export const ColorPickerPaletteSwatch = ({
   const { setColor } = useColorPicker()
 
   const handleClick = () => {
-    setColor(color)
+    setColor(chroma(color))
   }
 
   return (
@@ -22,12 +23,12 @@ export const ColorPickerPaletteSwatch = ({
       className={cn(colorPickerSwatchVariants({ size }), className)}
       ref={ref}
       style={{
-        color: color.css(),
+        color: color,
       }}
       {...props}
     >
       {children}
-      <div className="size-full" style={{ backgroundColor: color.css() }} />
+      <div className="size-full" style={{ backgroundColor: color }} />
     </button>
   )
 }

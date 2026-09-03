@@ -1,12 +1,12 @@
 export { Alert } from './alert'
 export type {
+  AlertActionProps,
   AlertDescriptionProps,
-  AlertTitleProps,
+  AlertIconProps,
   AlertProps,
-  AlertContentProps,
-  AlertActionsProps,
+  AlertTitleProps,
 } from './alert.types'
 export { AlertDescription } from './alert-description'
 export { AlertTitle } from './alert-title'
-export { AlertContent } from './alert-content'
-export { AlertActions } from './alert-actions'
+export { AlertAction } from './alert-action'
+export { AlertIcon } from './alert-icon'

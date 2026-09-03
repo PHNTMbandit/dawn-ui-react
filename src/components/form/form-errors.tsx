@@ -1,6 +1,5 @@
 import { XCircleIcon } from '@phosphor-icons/react'
-import { Alert, AlertDescription } from '../alert'
-import { AlertContent } from '../alert/alert-content'
+import { Alert, AlertDescription, AlertIcon } from '../alert'
 import { useFormContext } from './form-contexts'
 import { cn } from '@/utils/cn'
 
@@ -42,17 +41,17 @@ export const FormErrors = ({ className, children, ref, ...props }: FormErrorsPro
 
         return (
           <Alert className={cn('', className)} ref={ref} tone="error" {...props}>
-            <XCircleIcon weight="duotone" />
-            <AlertContent>
-              {children}
-              <AlertDescription>
-                <ul>
-                  {[...messages].map((message) => (
-                    <li key={message}>{message}</li>
-                  ))}
-                </ul>
-              </AlertDescription>
-            </AlertContent>
+            <AlertIcon>
+              <XCircleIcon weight="duotone" />
+            </AlertIcon>
+            {children}
+            <AlertDescription>
+              <ul>
+                {[...messages].map((message) => (
+                  <li key={message}>{message}</li>
+                ))}
+              </ul>
+            </AlertDescription>
           </Alert>
         )
       }}

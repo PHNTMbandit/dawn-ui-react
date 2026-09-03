@@ -18,17 +18,10 @@ export const TableBody = ({ showDivider = true, className, ref, ...props }: Tabl
             )}
           >
             {table.getRowModel().rows.map((row) => (
-              <li
-                key={row.id}
-                className="min-w-0 rounded-lg bg-neutral-container p-xs text-neutral-on-container"
-              >
+              <li key={row.id} className="min-w-0">
                 {row.getVisibleCells().map((cell) => (
                   <table.AppCell cell={cell} key={cell.id}>
-                    {(cell) => (
-                      <div className="w-full">
-                        <table.FlexRender cell={cell} />
-                      </div>
-                    )}
+                    {(cell) => <table.FlexRender cell={cell} />}
                   </table.AppCell>
                 ))}
               </li>

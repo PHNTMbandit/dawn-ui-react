@@ -7,9 +7,9 @@ import {
 } from '@phosphor-icons/react'
 import { Button } from '../button'
 import { Alert } from './alert'
-import { AlertActions } from './alert-actions'
-import { AlertContent } from './alert-content'
+import { AlertAction } from './alert-action'
 import { AlertDescription } from './alert-description'
+import { AlertIcon } from './alert-icon'
 import { AlertTitle } from './alert-title'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -87,18 +87,18 @@ const SingleAlert = ({
 }) => {
   const { title, description, actionLabel } = TONE_CONTENT[tone]
   return (
-    <Alert tone={tone}>
-      {TONE_ICONS[tone]}
-      <AlertContent>
-        <AlertTitle>{title}</AlertTitle>
-        <AlertDescription>{description}</AlertDescription>
-      </AlertContent>
+    <Alert tone={tone} className="max-w-[70vh]">
+      <AlertIcon>{TONE_ICONS[tone]}</AlertIcon>
+      <AlertTitle>{title}</AlertTitle>
+      <AlertDescription>
+        {description} {description}
+      </AlertDescription>
       {withAction && actionLabel && (
-        <AlertActions>
-          <Button tone={tone} variant="soft">
+        <AlertAction>
+          <Button tone={tone} size="small">
             {actionLabel}
           </Button>
-        </AlertActions>
+        </AlertAction>
       )}
     </Alert>
   )
@@ -118,8 +118,7 @@ export default {
   subcomponents: {
     AlertTitle,
     AlertDescription,
-    AlertContent,
-    AlertActions,
+    AlertActions: AlertAction,
   },
   argTypes: {
     tone: {
@@ -145,13 +144,11 @@ export default {
   },
   render: (args) => (
     <Alert {...args}>
-      {TONE_ICONS[args.tone as Tone]}
-      <AlertContent>
-        <AlertTitle>Alert title</AlertTitle>
-        <AlertDescription>
-          A meaningful description of the alert and any required action.
-        </AlertDescription>
-      </AlertContent>
+      <AlertIcon>{TONE_ICONS[args.tone as Tone]}</AlertIcon>
+      <AlertTitle>Alert title</AlertTitle>
+      <AlertDescription>
+        A meaningful description of the alert and any required action.
+      </AlertDescription>
     </Alert>
   ),
 } satisfies Meta<typeof Alert>
@@ -347,6 +344,49 @@ export const MultipleAlerts: Story = {
           <SingleAlert tone="error" withAction />
         </div>
       </div>
+    </div>
+  ),
+}
+
+export const WithoutDescription: Story = {
+  name: 'Composition / Without Description',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Alerts can be rendered without a description for concise messages.',
+      },
+    },
+  },
+  render: () => (
+    <div className="flex flex-col gap-sm">
+      <Alert>
+        <AlertIcon>
+          <WarningIcon />
+        </AlertIcon>
+        <AlertTitle>This is an example of a brand alert without an description.</AlertTitle>
+      </Alert>
+    </div>
+  ),
+}
+
+export const ActionWithNoIcon: Story = {
+  name: 'Composition / Action with No Icon',
+  parameters: {
+    docs: {
+      description: {
+        story: 'An alert can have an action button even if no icon is present.',
+      },
+    },
+  },
+  render: () => (
+    <div className="flex flex-col gap-sm">
+      <Alert>
+        <AlertTitle>This is an example of an alert with an action but no icon.</AlertTitle>
+        <AlertDescription>This alert has an action but no icon.</AlertDescription>
+        <AlertAction>
+          <Button size="small">Action</Button>
+        </AlertAction>
+      </Alert>
     </div>
   ),
 }
