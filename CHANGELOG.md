@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2026-09-03)
+
+
+### Features
+
+* add README, LICENSE, CONTRIBUTING and optimise peer dependencies ([0d4d515](https://github.com/PHNTMbandit/dawn-ui-react/commit/0d4d5159bd5b6dadbb331c9c5b0cbab71f91ae37))
+
 # 1.0.0-beta.1 (2026-09-03)
 
 ### Bug Fixes
