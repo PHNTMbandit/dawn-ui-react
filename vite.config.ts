@@ -40,10 +40,6 @@ export default defineConfig({
           return true
         }
 
-        if (id.startsWith('use-sync-external-store')) {
-          return true
-        }
-
         return false
       },
       output: {
@@ -51,10 +47,6 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'jsxRuntime',
-          'react-redux': 'ReactRedux',
-          'react-resizable-panels': 'ReactResizablePanels',
-          'use-sync-external-store/shim': 'useSyncExternalStore',
-          'use-sync-external-store/shim/with-selector': 'useSyncExternalStoreWithSelector',
         },
       },
     },
