@@ -16,7 +16,7 @@ export const SidebarFooter = ({ className, children, ref, ...props }: SidebarFoo
       ref={ref}
       {...props}
     >
-      {typeof children === 'function' ? children(isExpanded!) : children}
+      {children(isExpanded)}
     </div>
   )
 }

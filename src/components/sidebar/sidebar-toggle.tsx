@@ -1,4 +1,3 @@
-import { SidebarSimpleIcon } from '@phosphor-icons/react'
 import { Button } from '../button'
 import { useSidebar } from './sidebar-provider'
 import { cn } from '@/utils/cn'
@@ -6,9 +5,9 @@ import { cn } from '@/utils/cn'
 import type { SidebarToggleProps } from './sidebar.types'
 
 export const SidebarToggle = ({ className, children, ref, ...props }: SidebarToggleProps) => {
-  const { trigger, collapsible } = useSidebar()
+  const { trigger, open, collapsible } = useSidebar()
 
-  if (collapsible === 'none' || collapsible === 'offcanvas') {
+  if (!trigger || collapsible === 'none') {
     return null
   }
 
@@ -28,8 +27,7 @@ export const SidebarToggle = ({ className, children, ref, ...props }: SidebarTog
       onClick={handleClick}
       {...props}
     >
-      {children}
-      <SidebarSimpleIcon weight="bold" />
+      {typeof children === 'function' ? children(open) : children}
     </Button>
   )
 }

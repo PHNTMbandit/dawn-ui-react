@@ -1,6 +1,5 @@
 import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
 import { useSidebar } from './sidebar-provider'
-import { SidebarToggle } from './sidebar-toggle'
 import { cn } from '@/utils/cn'
 
 import type { SidebarContentProps } from './sidebar.types'
@@ -26,7 +25,6 @@ export const SidebarContent = ({ className, children, ref, ...props }: SidebarCo
           open ? 'gap-md' : 'gap-xs px-3xs pt-3xs',
         )}
       >
-        {!open && <SidebarToggle />}
         {children}
       </BaseScrollArea.Viewport>
     </BaseScrollArea.Root>
