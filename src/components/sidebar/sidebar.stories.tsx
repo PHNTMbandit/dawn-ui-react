@@ -1,5 +1,4 @@
 import {
-  CaretUpDownIcon,
   ChartLineIcon,
   ChatIcon,
   CloudRainIcon,
@@ -9,11 +8,13 @@ import {
   MountainsIcon,
   NotePencilIcon,
   QuestionIcon,
+  SidebarSimpleIcon,
+  SquareHalfIcon,
   UserIcon,
 } from '@phosphor-icons/react'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
 import { Avatar, AvatarFallback } from '../avatar'
-import { Profile } from '../profile'
+import { Profile, ProfileContent, ProfileName, ProfileSubname } from '../profile'
 import { Sidebar } from './sidebar'
 import { SidebarContent } from './sidebar-content'
 import { SidebarFooter } from './sidebar-footer'
@@ -38,10 +39,10 @@ const TONES = ['primary', 'secondary', 'ghost'] as const
 const APP_FRAME_CLASS = 'h-[70vh] w-[1100px] overflow-hidden rounded-2xl border border-border'
 
 const SidebarLogo = ({ isExpanded }: { isExpanded: boolean }) => (
-  <>
+  <div className="flex items-center justify-center gap-xs">
     <GridFourIcon weight="fill" />
     {isExpanded ? <span>My Application</span> : null}
-  </>
+  </div>
 )
 
 const PrimaryNavigation = () => (
@@ -137,7 +138,26 @@ const SidebarShell = ({
   <div className={APP_FRAME_CLASS}>
     <SidebarProvider collapsible={provider?.collapsible} side={provider?.side}>
       <Sidebar tone={tone} width={width}>
-        <SidebarHeader>{(isExpanded) => <SidebarLogo isExpanded={isExpanded} />}</SidebarHeader>
+        <SidebarHeader>
+          {(isExpanded) => {
+            return (
+              <>
+                {isExpanded ? <SidebarLogo isExpanded={isExpanded} /> : null}
+                <SidebarToggle>
+                  {(open) => (
+                    <>
+                      {open ? (
+                        <SquareHalfIcon weight="bold" />
+                      ) : (
+                        <SidebarSimpleIcon weight="bold" />
+                      )}
+                    </>
+                  )}
+                </SidebarToggle>
+              </>
+            )
+          }}
+        </SidebarHeader>
         <SidebarContent>
           <PrimaryNavigation />
           <SecondaryNavigation />
@@ -146,7 +166,13 @@ const SidebarShell = ({
           {(isExpanded) =>
             isExpanded ? (
               <Profile>
-                <CaretUpDownIcon />
+                <Avatar>
+                  <AvatarFallback>DP</AvatarFallback>
+                </Avatar>
+                <ProfileContent>
+                  <ProfileName>Domenic Pittari</ProfileName>
+                  <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
+                </ProfileContent>
               </Profile>
             ) : (
               <Avatar>
@@ -160,7 +186,11 @@ const SidebarShell = ({
       <div className="flex flex-1 flex-col gap-sm bg-surface-background p-md">
         <div className="flex items-center justify-between rounded-lg bg-surface-low p-sm">
           <p className="style-text-strong--1 text-on-surface">Workspace Content</p>
-          <SidebarToggle />
+          <SidebarToggle>
+            {(open) => (
+              <>{open ? <SquareHalfIcon weight="bold" /> : <SidebarSimpleIcon weight="bold" />}</>
+            )}
+          </SidebarToggle>
         </div>
         <div className="flex-1 rounded-lg bg-surface-low p-sm style-text-default--1 text-on-surface-variant">
           Main content area to demonstrate sidebar positioning and collapse behavior.
@@ -253,11 +283,60 @@ export const CollapsibleIcon: Story = {
 export const CollapsibleOffcanvas: Story = {
   name: 'Behavior / Collapsible Offcanvas',
   render: (args) => (
-    <SidebarShell
-      provider={{ collapsible: 'offcanvas' }}
-      tone={args.tone}
-      width={args.width as number}
-    />
+    <div className={APP_FRAME_CLASS}>
+      <SidebarProvider collapsible={'offcanvas'} side={'left'}>
+        <Sidebar tone={args.tone} width={args.width as number}>
+          <SidebarHeader>
+            {(isExpanded) => {
+              return <>{isExpanded ? <SidebarLogo isExpanded={isExpanded} /> : null}</>
+            }}
+          </SidebarHeader>
+          <SidebarContent>
+            <PrimaryNavigation />
+            <SecondaryNavigation />
+          </SidebarContent>
+          <SidebarFooter>
+            {(isExpanded) =>
+              isExpanded ? (
+                <Profile>
+                  <Avatar>
+                    <AvatarFallback>DP</AvatarFallback>
+                  </Avatar>
+                  <ProfileContent>
+                    <ProfileName>Domenic Pittari</ProfileName>
+                    <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
+                  </ProfileContent>
+                </Profile>
+              ) : (
+                <Avatar>
+                  <AvatarFallback>DP</AvatarFallback>
+                </Avatar>
+              )
+            }
+          </SidebarFooter>
+        </Sidebar>
+
+        <div className="flex flex-1 flex-col gap-sm bg-surface-background p-md">
+          <SidebarToggle>
+            {(open) => (
+              <>
+                {open ? (
+                  <SidebarSimpleIcon weight="bold" className="rotate-90" />
+                ) : (
+                  <SidebarSimpleIcon weight="bold" />
+                )}
+              </>
+            )}
+          </SidebarToggle>
+          <div className="flex items-center justify-between rounded-lg bg-surface-low p-sm">
+            <p className="style-text-strong--1 text-on-surface">Workspace Content</p>
+          </div>
+          <div className="flex-1 rounded-lg bg-surface-low p-sm style-text-default--1 text-on-surface-variant">
+            Main content area to demonstrate sidebar positioning and collapse behavior.
+          </div>
+        </div>
+      </SidebarProvider>
+    </div>
   ),
 }
 
