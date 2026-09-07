@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2026-09-07)
+
+
+### Features
+
+* improve sidebar toggle ([47e3aa0](https://github.com/PHNTMbandit/dawn-ui-react/commit/47e3aa02895804da8a7fa4cc7788c1abe9356278))
+
 # [1.0.0-beta.4](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2026-09-07)
 
 
