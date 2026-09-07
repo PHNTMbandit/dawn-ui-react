@@ -5,7 +5,7 @@ import type { TableBodyProps } from './table.types'
 
 export const TableBody = ({ showDivider = true, className, ref, ...props }: TableBodyProps) => {
   const table = useTableContext()
-  const isGridView = table.options.meta?.viewMode === 'grid'
+  const isGridView = table.state.viewMode === 'grid'
 
   if (isGridView) {
     return (

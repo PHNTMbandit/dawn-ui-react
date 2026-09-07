@@ -1,5 +1,12 @@
 import { faker, fakerJA } from '@faker-js/faker'
-import { ArrowsDownUpIcon, ColumnsIcon, FunnelIcon, TrashIcon } from '@phosphor-icons/react'
+import {
+  ArrowsDownUpIcon,
+  ColumnsIcon,
+  FunnelIcon,
+  GridFourIcon,
+  TableIcon,
+  TrashIcon,
+} from '@phosphor-icons/react'
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../avatar'
 import { Badge, type BadgeProps } from '../badge'
@@ -791,17 +798,24 @@ export const Grid = {
     docs: {
       description: {
         story:
-          'A grid view with a single column and custom cell rendering. The table is configured to display as a grid via `viewMode="grid"`.',
+          'Toggle between a multi-column list view and a card-based grid view. The list view exposes the full set of columns, while the grid view collapses each row into a single rich card by hiding the list-only columns.',
       },
     },
   },
   render: () => {
+    const [viewMode, setViewMode] = React.useState<'list' | 'grid'>('list')
+    const isGridView = viewMode === 'grid'
+
     const columnHelper = createAppColumnHelper<Person>()
     const columns = columnHelper.columns([
-      columnHelper.display({
-        id: 'person',
+      columnHelper.accessor('firstName', {
+        header: 'First Name',
         cell: ({ cell }) => {
           const person = cell.row.original
+
+          if (!isGridView) {
+            return <cell.TableTextCell />
+          }
 
           return (
             <div className="flex flex-col gap-sm">
@@ -849,22 +863,56 @@ export const Grid = {
           )
         },
       }),
+      columnHelper.accessor('lastName', { header: 'Last Name' }),
+      columnHelper.accessor('email', { header: 'Email' }),
+      columnHelper.accessor('status', {
+        header: 'Status',
+        cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
+      }),
+      columnHelper.accessor('visits', {
+        header: 'Visits',
+        cell: ({ cell }) => <cell.TableNumberCell />,
+      }),
+      columnHelper.accessor('dateJoined', {
+        header: 'Date Joined',
+        cell: ({ cell }) => <cell.TableDateCell />,
+      }),
+      columnHelper.accessor('progress', {
+        header: 'Progress',
+        cell: ({ cell }) => <span>{cell.row.original.progress}%</span>,
+      }),
     ])
 
+    const listColumns = ['lastName', 'email', 'status', 'visits', 'dateJoined', 'progress']
+
     const table = useAppTable({
-      key: 'people-pagination',
+      key: 'people-grid',
       columns,
-      meta: {
-        viewMode: 'grid',
-      },
       data: React.useMemo(() => makePeople(120), []),
-      initialState: { pagination: { pageIndex: 0, pageSize: 10 } },
+      initialState: { pagination: { pageIndex: 0, pageSize: 12 } },
+      state: {
+        viewMode,
+        columnVisibility: isGridView
+          ? Object.fromEntries(listColumns.map((id) => [id, false]))
+          : {},
+      },
+      onViewModeChange: (updater) =>
+        setViewMode((prev) => (typeof updater === 'function' ? updater(prev) : updater)),
     })
 
     return (
       <table.AppTable>
-        <table.TableContainer>
+        <table.TableContainer className="w-[80vh]">
+          <table.TableToolbar>
+            <table.TableSearch placeholder="Search..." />
+            <table.TableViewModeToggle variant={'ghost'} size="iconMedium">
+              {(isGridView) => (
+                <>{isGridView ? <GridFourIcon weight="bold" /> : <TableIcon weight="bold" />}</>
+              )}
+            </table.TableViewModeToggle>
+          </table.TableToolbar>
           <table.TableViewport>
+            <table.TableHeader />
             <table.TableBody />
           </table.TableViewport>
           <table.TableNav>
