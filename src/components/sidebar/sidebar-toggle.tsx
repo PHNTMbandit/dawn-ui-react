@@ -8,7 +8,7 @@ import type { SidebarToggleProps } from './sidebar.types'
 export const SidebarToggle = ({ className, children, ref, ...props }: SidebarToggleProps) => {
   const { trigger, collapsible } = useSidebar()
 
-  if (collapsible === 'none') {
+  if (collapsible === 'none' || collapsible === 'offcanvas') {
     return null
   }
 

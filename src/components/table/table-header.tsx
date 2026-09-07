@@ -6,6 +6,9 @@ import type { TableHeaderProps } from './table.types'
 
 export const TableHeader = ({ className, children, ref, ...props }: TableHeaderProps) => {
   const table = useTableContext()
+  const isGridView = table.state.viewMode === 'grid'
+
+  if (isGridView) return null
 
   return (
     <thead className={cn('bg-neutral-container')} ref={ref} {...props}>

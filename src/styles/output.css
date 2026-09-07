@@ -1010,6 +1010,9 @@
   .w-\[32rem\] {
     width: 32rem;
   }
+  .w-\[90vw\] {
+    width: 90vw;
+  }
   .w-\[200px\] {
     width: 200px;
   }
@@ -1314,8 +1317,8 @@
   .grid-cols-\[auto_auto\] {
     grid-template-columns: auto auto;
   }
-  .grid-cols-\[repeat\(auto-fill\,minmax\(280px\,1fr\)\)\] {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  .grid-cols-\[repeat\(auto-fill\,minmax\(252px\,1fr\)\)\] {
+    grid-template-columns: repeat(auto-fill, minmax(252px, 1fr));
   }
   .grid-rows-3 {
     grid-template-rows: repeat(3, minmax(0, 1fr));
@@ -4899,27 +4902,6 @@
       outline-offset: 2px;
     }
   }
-  .\[\&_\[data-description\]\]\:text-accent-on-container-muted [data-description] {
-    color: var(--color-accent-on-container-muted);
-  }
-  .\[\&_\[data-description\]\]\:text-brand-on-container-muted [data-description] {
-    color: var(--color-brand-on-container-muted);
-  }
-  .\[\&_\[data-description\]\]\:text-error-on-container-muted [data-description] {
-    color: var(--color-error-on-container-muted);
-  }
-  .\[\&_\[data-description\]\]\:text-info-on-container-muted [data-description] {
-    color: var(--color-info-on-container-muted);
-  }
-  .\[\&_\[data-description\]\]\:text-neutral-on-container-muted [data-description] {
-    color: var(--color-neutral-on-container-muted);
-  }
-  .\[\&_\[data-description\]\]\:text-success-on-container-muted [data-description] {
-    color: var(--color-success-on-container-muted);
-  }
-  .\[\&_\[data-description\]\]\:text-warning-on-container-muted [data-description] {
-    color: var(--color-warning-on-container-muted);
-  }
   .\[\&_\[data-dot\]\]\:size-lg [data-dot] {
     width: var(--spacing-lg);
     height: var(--spacing-lg);
@@ -5347,27 +5329,6 @@
   }
   .\[\&_\[data-slot\=slider-track\]\]\:bg-warning-container-high [data-slot='slider-track'] {
     background-color: var(--color-warning-container-high);
-  }
-  .\[\&_\[data-title\]\]\:text-accent-on-container [data-title] {
-    color: var(--color-accent-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-brand-on-container [data-title] {
-    color: var(--color-brand-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-error-on-container [data-title] {
-    color: var(--color-error-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-info-on-container [data-title] {
-    color: var(--color-info-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-neutral-on-container [data-title] {
-    color: var(--color-neutral-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-success-on-container [data-title] {
-    color: var(--color-success-on-container);
-  }
-  .\[\&_\[data-title\]\]\:text-warning-on-container [data-title] {
-    color: var(--color-warning-on-container);
   }
   .\[\&_\[data-track\]\]\:h-2xs [data-track] {
     height: var(--spacing-2xs);
@@ -5829,44 +5790,23 @@
   .\[\&_svg\]\:text-accent-default svg {
     color: var(--color-accent-default);
   }
-  .\[\&_svg\]\:text-accent-on-container svg {
-    color: var(--color-accent-on-container);
-  }
   .\[\&_svg\]\:text-brand-default svg {
     color: var(--color-brand-default);
-  }
-  .\[\&_svg\]\:text-brand-on-container svg {
-    color: var(--color-brand-on-container);
   }
   .\[\&_svg\]\:text-error-default svg {
     color: var(--color-error-default);
   }
-  .\[\&_svg\]\:text-error-on-container svg {
-    color: var(--color-error-on-container);
-  }
   .\[\&_svg\]\:text-info-default svg {
     color: var(--color-info-default);
-  }
-  .\[\&_svg\]\:text-info-on-container svg {
-    color: var(--color-info-on-container);
   }
   .\[\&_svg\]\:text-neutral-default svg {
     color: var(--color-neutral-default);
   }
-  .\[\&_svg\]\:text-neutral-on-container svg {
-    color: var(--color-neutral-on-container);
-  }
   .\[\&_svg\]\:text-success-default svg {
     color: var(--color-success-default);
   }
-  .\[\&_svg\]\:text-success-on-container svg {
-    color: var(--color-success-on-container);
-  }
   .\[\&_svg\]\:text-warning-default svg {
     color: var(--color-warning-default);
-  }
-  .\[\&_svg\]\:text-warning-on-container svg {
-    color: var(--color-warning-on-container);
   }
   .group-data-\[size\=large\]\/avatar\:\[\&_svg\]\:size-sm:is(
       :where(.group\/avatar)[data-size='large'] *

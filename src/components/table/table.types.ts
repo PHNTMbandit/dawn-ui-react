@@ -6,7 +6,8 @@ import type { Button } from '../button'
 import type { Checkbox } from '../checkbox'
 import type { inputVariants } from '../input/input.types'
 import type { features } from './table-context'
-import type { Column, RowData } from '@tanstack/react-table'
+import type { Table_ViewMode, TableOptions_ViewMode, TableState_ViewMode } from './table.utils'
+import type { Column, RowData, TableFeature, TableFeatures } from '@tanstack/react-table'
 import type { VariantProps } from 'class-variance-authority'
 
 export type TableFirstPageProps = React.ComponentProps<typeof Button>
@@ -40,6 +41,9 @@ export type TablePagingProps = React.ComponentProps<'div'> & {
 export type TableContainerProps = React.ComponentProps<'div'>
 export type TableToolbarProps = React.ComponentProps<'div'> & {
   sticky?: boolean
+}
+export type TableViewModeToggleProps = Omit<React.ComponentProps<typeof Button>, 'children'> & {
+  children: (isGridView: boolean) => React.ReactNode
 }
 export type TableFilterMenuProps = React.ComponentProps<'button'>
 export type TableFilterListProps = React.ComponentProps<'ul'>
@@ -130,12 +134,13 @@ export const defaultFilterOperatorLabels = {
   between: 'Is between',
 } satisfies Record<FilterOperator, string>
 
+export type ViewMode = 'list' | 'grid'
+
 export interface TableColumnMeta {
   filterVariant?: 'range' | 'select' | 'date' | 'string' | 'number'
 }
 
 export interface TableMeta {
-  viewMode?: 'table' | 'grid'
   translations?: {
     filterOperatorLabels?: Partial<Record<FilterOperator, string>>
     buttonLabels?: {
@@ -163,3 +168,21 @@ export const numberFilterSchema = z.object({
   filterValueFrom: z.string(),
   filterValueTo: z.string(),
 })
+
+declare module '@tanstack/react-table' {
+  interface Plugins {
+    viewModePlugin: TableFeature
+  }
+
+  interface TableState_FeatureMap {
+    viewModePlugin: TableState_ViewMode
+  }
+
+  interface TableOptions_FeatureMap<TFeatures extends TableFeatures, TData extends RowData> {
+    viewModePlugin: TableOptions_ViewMode
+  }
+
+  interface Table_FeatureMap<TFeatures extends TableFeatures, TData extends RowData> {
+    viewModePlugin: Table_ViewMode
+  }
+}

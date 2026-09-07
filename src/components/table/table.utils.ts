@@ -1,4 +1,12 @@
-import { constructFilterFn } from '@tanstack/react-table'
+import {
+  constructFilterFn,
+  functionalUpdate,
+  makeStateUpdater,
+  assignTableAPIs,
+  type OnChangeFn,
+  type TableFeature,
+  type Updater,
+} from '@tanstack/react-table'
 
 import type {
   DateFilterOperator,
@@ -6,6 +14,7 @@ import type {
   StringFilterOperator,
   TableSelectFilterOption,
   TableSelectFilterValue,
+  ViewMode,
 } from './table.types'
 
 export type DateFilterValue = {
@@ -177,3 +186,57 @@ export const numberFilterFn = constructFilterFn({
   autoRemove: (value: NumberFilterValue) =>
     !value || (value.number[0] === '' && value.number[1] === ''),
 })
+
+export interface TableState_ViewMode {
+  viewMode: ViewMode
+}
+
+export interface TableOptions_ViewMode {
+  enableViewModeToggle?: boolean
+  onViewModeChange?: OnChangeFn<ViewMode>
+}
+
+export interface Table_ViewMode {
+  setViewMode: (updater: Updater<ViewMode>) => void
+  toggleViewMode: (value?: ViewMode) => void
+}
+
+export const viewModePlugin: TableFeature = {
+  getInitialState: (initialState) => {
+    return {
+      viewMode: 'list',
+      ...initialState,
+    }
+  },
+
+  getDefaultTableOptions: (table) => {
+    return {
+      enableViewModeToggle: true,
+      onViewModeChange: makeStateUpdater('viewMode', table),
+    }
+  },
+
+  constructTableAPIs: (table) => {
+    const options = table.options as TableOptions_ViewMode
+    assignTableAPIs('viewModePlugin', table, {
+      table_setViewMode: {
+        fn: (updater: Updater<ViewMode>) => {
+          const safeUpdater: Updater<ViewMode> = (old) => {
+            const newState = functionalUpdate(updater, old)
+            return newState
+          }
+          return options.onViewModeChange?.(safeUpdater)
+        },
+      },
+      table_toggleViewMode: {
+        fn: (value?: ViewMode) => {
+          const safeUpdater: Updater<ViewMode> = (old) => {
+            if (value) return value
+            return old === 'list' ? 'grid' : 'list'
+          }
+          return options.onViewModeChange?.(safeUpdater)
+        },
+      },
+    })
+  },
+}

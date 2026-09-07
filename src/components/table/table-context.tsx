@@ -63,8 +63,15 @@ import { TableSortList } from './table-sort-list'
 import { TableSortMenu } from './table-sort-menu'
 import { TableTextCell } from './table-text-cell'
 import { TableToolbar } from './table-toolbar'
+import { TableViewModeToggle } from './table-view-mode-toggle'
 import { TableViewport } from './table-viewport'
-import { dateFilterFn, numberFilterFn, selectFilterFn, stringFilterFn } from './table.utils'
+import {
+  dateFilterFn,
+  numberFilterFn,
+  selectFilterFn,
+  stringFilterFn,
+  viewModePlugin,
+} from './table.utils'
 
 import type { TableColumnMeta, TableMeta } from './table.types'
 
@@ -77,6 +84,7 @@ export const features = tableFeatures({
   rowPaginationFeature,
   rowSelectionFeature,
   rowSortingFeature,
+  viewModePlugin,
   filteredRowModel: createFilteredRowModel(),
   facetedRowModel: createFacetedRowModel(),
   facetedUniqueValues: createFacetedUniqueValues(),
@@ -144,6 +152,7 @@ export const {
     TableSortMenu,
     TableSortList,
     TableToolbar,
+    TableViewModeToggle,
     TableViewport,
   },
   cellComponents: {
