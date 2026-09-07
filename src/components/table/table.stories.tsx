@@ -902,7 +902,7 @@ export const Grid = {
 
     return (
       <table.AppTable>
-        <table.TableContainer className="w-[80vh]">
+        <table.TableContainer className="w-[90vw]">
           <table.TableToolbar>
             <table.TableSearch placeholder="Search..." />
             <table.TableViewModeToggle variant={'ghost'} size="iconMedium">

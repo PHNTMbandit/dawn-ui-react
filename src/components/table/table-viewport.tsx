@@ -5,8 +5,9 @@ import type { TableViewportProps } from './table.types'
 
 export const TableViewport = ({ className, children, ref, ...props }: TableViewportProps) => {
   const table = useTableContext()
+  const isGridView = table.state.viewMode === 'grid'
 
-  if (table.options.meta?.viewMode === 'grid') {
+  if (isGridView) {
     return (
       <div className={cn('size-full', className)} ref={ref as React.Ref<HTMLDivElement>} {...props}>
         {children}
