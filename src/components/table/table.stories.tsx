@@ -803,17 +803,14 @@ export const Grid = {
     },
   },
   render: () => {
-    const [viewMode, setViewMode] = React.useState<'list' | 'grid'>('list')
-    const isGridView = viewMode === 'grid'
-
     const columnHelper = createAppColumnHelper<Person>()
     const columns = columnHelper.columns([
       columnHelper.accessor('firstName', {
         header: 'First Name',
-        cell: ({ cell }) => {
+        cell: ({ cell, table }) => {
           const person = cell.row.original
 
-          if (!isGridView) {
+          if (!(table.atoms.viewMode.get() === 'grid')) {
             return <cell.TableTextCell />
           }
 
@@ -863,41 +860,69 @@ export const Grid = {
           )
         },
       }),
-      columnHelper.accessor('lastName', { header: 'Last Name' }),
-      columnHelper.accessor('email', { header: 'Email' }),
+      columnHelper.accessor('lastName', {
+        header: 'Last Name',
+        cell: ({ table }) => {
+          if (table.atoms.viewMode.get() === 'grid') {
+            return null
+          }
+        },
+      }),
+      columnHelper.accessor('email', {
+        header: 'Email',
+        cell: ({ table }) => {
+          if (table.atoms.viewMode.get() === 'grid') {
+            return null
+          }
+        },
+      }),
       columnHelper.accessor('status', {
         header: 'Status',
-        cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
+        cell: ({ cell, table }) => {
+          if (table.atoms.viewMode.get() === 'grid') {
+            return null
+          }
+
+          return <cell.TableBadgeCell tone={statusTone} />
+        },
       }),
       columnHelper.accessor('visits', {
         header: 'Visits',
-        cell: ({ cell }) => <cell.TableNumberCell />,
+        cell: ({ cell, table }) => {
+          if (table.atoms.viewMode.get() === 'grid') {
+            return null
+          }
+
+          return <cell.TableNumberCell />
+        },
       }),
       columnHelper.accessor('dateJoined', {
         header: 'Date Joined',
-        cell: ({ cell }) => <cell.TableDateCell />,
+        cell: ({ cell, table }) => {
+          if (table.atoms.viewMode.get() === 'grid') {
+            return null
+          }
+
+          return <cell.TableDateCell />
+        },
       }),
       columnHelper.accessor('progress', {
         header: 'Progress',
-        cell: ({ cell }) => <span>{cell.row.original.progress}%</span>,
+        cell: ({ cell, table }) => {
+          if (table.atoms.viewMode.get() === 'grid') {
+            return null
+          }
+
+          return <span>{cell.row.original.progress}%</span>
+        },
       }),
     ])
-
-    const listColumns = ['lastName', 'email', 'status', 'visits', 'dateJoined', 'progress']
 
     const table = useAppTable({
       key: 'people-grid',
       columns,
       data: React.useMemo(() => makePeople(120), []),
       initialState: { pagination: { pageIndex: 0, pageSize: 12 } },
-      state: {
-        viewMode,
-        columnVisibility: isGridView
-          ? Object.fromEntries(listColumns.map((id) => [id, false]))
-          : {},
-      },
-      onViewModeChange: (updater) =>
-        setViewMode((prev) => (typeof updater === 'function' ? updater(prev) : updater)),
     })
 
     return (
