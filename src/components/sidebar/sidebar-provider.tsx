@@ -2,6 +2,7 @@ import React from 'react'
 import { cn } from '@/utils/cn'
 
 type SidebarContextProps = React.ComponentProps<'div'> & {
+  id: string
   defaultOpen?: boolean
   trigger?: () => void
   open?: boolean
@@ -15,6 +16,7 @@ type SidebarContextProps = React.ComponentProps<'div'> & {
 const SidebarContext = React.createContext<SidebarContextProps | null>(null)
 
 export const SidebarProvider = ({
+  id,
   defaultOpen = true,
   side = 'left',
   collapsible = 'icon',
@@ -23,7 +25,12 @@ export const SidebarProvider = ({
   ref,
   ...props
 }: SidebarContextProps) => {
-  const [open, setOpen] = React.useState<boolean>(defaultOpen)
+  const getOpenState = () => {
+    const savedState = localStorage.getItem(`sidebarOpen-${id}`)
+    return savedState !== null ? JSON.parse(savedState) : defaultOpen
+  }
+
+  const [open, setOpen] = React.useState<boolean>(getOpenState())
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
   const trigger = () => setOpen(!open)
@@ -43,9 +50,21 @@ export const SidebarProvider = ({
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [defaultOpen, collapsible])
 
+  React.useEffect(() => {
+    const storedOpen = localStorage.getItem(`sidebarOpen-${id}`)
+    if (storedOpen !== null) {
+      localStorage.setItem(`sidebarOpen-${id}`, storedOpen)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    localStorage.setItem(`sidebarOpen-${id}`, JSON.stringify(open))
+  }, [open, id])
+
   return (
     <SidebarContext.Provider
       value={{
+        id,
         defaultOpen,
         open,
         setOpen,
