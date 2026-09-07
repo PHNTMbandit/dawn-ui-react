@@ -1,3 +1,16 @@
+# [1.0.0-beta.4](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2026-09-07)
+
+
+### Bug Fixes
+
+* **table-viewport:** fix deprecated table meta ([e5db4ef](https://github.com/PHNTMbandit/dawn-ui-react/commit/e5db4ef32d76a146863896ecafe1be59aac1607d))
+
+
+### Features
+
+* add view mode table plugin ([22feb7a](https://github.com/PHNTMbandit/dawn-ui-react/commit/22feb7af34ac56741867992ffcccf051f5e7b1a3))
+* **table.stories.tsx:** remove controlled view mode ([e11c170](https://github.com/PHNTMbandit/dawn-ui-react/commit/e11c1708fda7ae9c55dd5ab1d214e578a08557fc))
+
 # [1.0.0-beta.3](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2026-09-03)
 
 
