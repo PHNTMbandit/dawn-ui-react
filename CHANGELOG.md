@@ -1,29 +1,25 @@
 # [1.0.0-beta.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2026-09-07)
 
-
 ### Features
 
-* improve sidebar toggle ([47e3aa0](https://github.com/PHNTMbandit/dawn-ui-react/commit/47e3aa02895804da8a7fa4cc7788c1abe9356278))
+- improve sidebar toggle ([47e3aa0](https://github.com/PHNTMbandit/dawn-ui-react/commit/47e3aa02895804da8a7fa4cc7788c1abe9356278))
 
 # [1.0.0-beta.4](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2026-09-07)
 
-
 ### Bug Fixes
 
-* **table-viewport:** fix deprecated table meta ([e5db4ef](https://github.com/PHNTMbandit/dawn-ui-react/commit/e5db4ef32d76a146863896ecafe1be59aac1607d))
-
+- **table-viewport:** fix deprecated table meta ([e5db4ef](https://github.com/PHNTMbandit/dawn-ui-react/commit/e5db4ef32d76a146863896ecafe1be59aac1607d))
 
 ### Features
 
-* add view mode table plugin ([22feb7a](https://github.com/PHNTMbandit/dawn-ui-react/commit/22feb7af34ac56741867992ffcccf051f5e7b1a3))
-* **table.stories.tsx:** remove controlled view mode ([e11c170](https://github.com/PHNTMbandit/dawn-ui-react/commit/e11c1708fda7ae9c55dd5ab1d214e578a08557fc))
+- add view mode table plugin ([22feb7a](https://github.com/PHNTMbandit/dawn-ui-react/commit/22feb7af34ac56741867992ffcccf051f5e7b1a3))
+- **table.stories.tsx:** remove controlled view mode ([e11c170](https://github.com/PHNTMbandit/dawn-ui-react/commit/e11c1708fda7ae9c55dd5ab1d214e578a08557fc))
 
 # [1.0.0-beta.3](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2026-09-03)
 
-
 ### Features
 
-* optimise dependencies ([11abb2b](https://github.com/PHNTMbandit/dawn-ui-react/commit/11abb2bbc919b8e2d787ae8f1710c0f5c4d6ba6b))
+- optimise dependencies ([11abb2b](https://github.com/PHNTMbandit/dawn-ui-react/commit/11abb2bbc919b8e2d787ae8f1710c0f5c4d6ba6b))
 
 # [1.0.0-beta.2](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2026-09-03)
 

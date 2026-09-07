@@ -136,7 +136,7 @@ const SidebarShell = ({
   provider?: { collapsible?: 'icon' | 'offcanvas' | 'none'; side?: 'left' | 'right' }
 }) => (
   <div className={APP_FRAME_CLASS}>
-    <SidebarProvider collapsible={provider?.collapsible} side={provider?.side}>
+    <SidebarProvider id="main-sidebar" collapsible={provider?.collapsible} side={provider?.side}>
       <Sidebar tone={tone} width={width}>
         <SidebarHeader>
           {(isExpanded) => {
@@ -284,7 +284,7 @@ export const CollapsibleOffcanvas: Story = {
   name: 'Behavior / Collapsible Offcanvas',
   render: (args) => (
     <div className={APP_FRAME_CLASS}>
-      <SidebarProvider collapsible={'offcanvas'} side={'left'}>
+      <SidebarProvider id="main-sidebar" collapsible={'offcanvas'} side={'left'}>
         <Sidebar tone={args.tone} width={args.width as number}>
           <SidebarHeader>
             {(isExpanded) => {
