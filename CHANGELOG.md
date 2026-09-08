@@ -1,19 +1,17 @@
 # [1.0.0-alpha.39](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2026-09-07)
 
-
 ### Bug Fixes
 
-* **table-viewport:** fix deprecated table meta ([e5db4ef](https://github.com/PHNTMbandit/dawn-ui-react/commit/e5db4ef32d76a146863896ecafe1be59aac1607d))
-
+- **table-viewport:** fix deprecated table meta ([e5db4ef](https://github.com/PHNTMbandit/dawn-ui-react/commit/e5db4ef32d76a146863896ecafe1be59aac1607d))
 
 ### Features
 
-* add README, LICENSE, CONTRIBUTING and optimise peer dependencies ([0d4d515](https://github.com/PHNTMbandit/dawn-ui-react/commit/0d4d5159bd5b6dadbb331c9c5b0cbab71f91ae37))
-* add view mode table plugin ([22feb7a](https://github.com/PHNTMbandit/dawn-ui-react/commit/22feb7af34ac56741867992ffcccf051f5e7b1a3))
-* improve sidebar toggle ([47e3aa0](https://github.com/PHNTMbandit/dawn-ui-react/commit/47e3aa02895804da8a7fa4cc7788c1abe9356278))
-* optimise dependencies ([11abb2b](https://github.com/PHNTMbandit/dawn-ui-react/commit/11abb2bbc919b8e2d787ae8f1710c0f5c4d6ba6b))
-* **sidebar:** add persisted state ([ea34bcd](https://github.com/PHNTMbandit/dawn-ui-react/commit/ea34bcd8d19ef3e6c4a4071d2f09690b270e2a3a))
-* **table.stories.tsx:** remove controlled view mode ([e11c170](https://github.com/PHNTMbandit/dawn-ui-react/commit/e11c1708fda7ae9c55dd5ab1d214e578a08557fc))
+- add README, LICENSE, CONTRIBUTING and optimise peer dependencies ([0d4d515](https://github.com/PHNTMbandit/dawn-ui-react/commit/0d4d5159bd5b6dadbb331c9c5b0cbab71f91ae37))
+- add view mode table plugin ([22feb7a](https://github.com/PHNTMbandit/dawn-ui-react/commit/22feb7af34ac56741867992ffcccf051f5e7b1a3))
+- improve sidebar toggle ([47e3aa0](https://github.com/PHNTMbandit/dawn-ui-react/commit/47e3aa02895804da8a7fa4cc7788c1abe9356278))
+- optimise dependencies ([11abb2b](https://github.com/PHNTMbandit/dawn-ui-react/commit/11abb2bbc919b8e2d787ae8f1710c0f5c4d6ba6b))
+- **sidebar:** add persisted state ([ea34bcd](https://github.com/PHNTMbandit/dawn-ui-react/commit/ea34bcd8d19ef3e6c4a4071d2f09690b270e2a3a))
+- **table.stories.tsx:** remove controlled view mode ([e11c170](https://github.com/PHNTMbandit/dawn-ui-react/commit/e11c1708fda7ae9c55dd5ab1d214e578a08557fc))
 
 # [1.0.0-beta.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2026-09-07)
 

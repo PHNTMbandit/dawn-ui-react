@@ -50,7 +50,7 @@ const PrimaryNavigation = () => (
     <SidebarGroupLabel>Menu</SidebarGroupLabel>
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton isActive>
+        <SidebarMenuButton>
           <GridFourIcon weight="bold" />
           <span>Dashboard</span>
         </SidebarMenuButton>

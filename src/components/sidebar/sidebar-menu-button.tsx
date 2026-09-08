@@ -15,6 +15,7 @@ export const SidebarMenuButton = ({
 
   return (
     <button
+      data-active={isActive ? 'true' : 'false'}
       className={cn(
         'inline-flex cursor-pointer items-center gap-2xs rounded-full border border-transparent style-text-default-0 whitespace-nowrap transition-all duration-200 ease-out select-none active:scale-95 disabled:pointer-events-none disabled:opacity-50 [&>svg]:shrink-0',
         isActive
