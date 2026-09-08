@@ -22,7 +22,7 @@ export const SidebarMenuCollapsiblePanel = ({
   }
 
   return (
-    <CollapsiblePanel className={cn('[&>*:last-child]:pb-xs', className)} ref={ref} {...props}>
+    <CollapsiblePanel className={cn('py-3xs', className)} ref={ref} {...props}>
       {children}
     </CollapsiblePanel>
   )
