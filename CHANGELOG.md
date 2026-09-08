@@ -1,3 +1,10 @@
+# [1.0.0-alpha.41](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2026-09-08)
+
+
+### Features
+
+* **sidebar-provider:** add ssr friendly sidebar state persistence ([dc11ca7](https://github.com/PHNTMbandit/dawn-ui-react/commit/dc11ca7715b46721ebe56857ae374da2890f8e3c))
+
 # [1.0.0-alpha.40](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2026-09-08)
 
 ### Features
