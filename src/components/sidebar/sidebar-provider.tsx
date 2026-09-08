@@ -25,15 +25,30 @@ export const SidebarProvider = ({
   ref,
   ...props
 }: SidebarContextProps) => {
-  const getOpenState = () => {
-    const savedState = localStorage.getItem(`sidebarOpen-${id}`)
-    return savedState !== null ? JSON.parse(savedState) : defaultOpen
-  }
-
-  const [open, setOpen] = React.useState<boolean>(getOpenState())
+  const SIDEBAR_COOKIE_NAME = `sidebar-state-${id}`
+  const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
+  const [open, _setOpen] = React.useState<boolean>(defaultOpen)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
-  const trigger = () => setOpen(!open)
+  const setOpen = React.useCallback(
+    (value: boolean | ((open: boolean) => boolean)) => {
+      _setOpen((prev) => {
+        const openState = typeof value === 'function' ? value(prev) : value
+
+        document.cookie = [
+          `${SIDEBAR_COOKIE_NAME}=${encodeURIComponent(String(openState))}`,
+          'path=/',
+          `max-age=${SIDEBAR_COOKIE_MAX_AGE}`,
+          'samesite=lax',
+        ].join('; ')
+
+        return openState
+      })
+    },
+    [SIDEBAR_COOKIE_NAME, SIDEBAR_COOKIE_MAX_AGE],
+  )
+
+  const trigger = () => setOpen((prev) => !prev)
 
   React.useEffect(() => {
     const checkIsMobile = () => {
@@ -48,18 +63,7 @@ export const SidebarProvider = ({
     window.addEventListener('resize', checkIsMobile)
 
     return () => window.removeEventListener('resize', checkIsMobile)
-  }, [defaultOpen, collapsible])
-
-  React.useEffect(() => {
-    const storedOpen = localStorage.getItem(`sidebarOpen-${id}`)
-    if (storedOpen !== null) {
-      localStorage.setItem(`sidebarOpen-${id}`, storedOpen)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    localStorage.setItem(`sidebarOpen-${id}`, JSON.stringify(open))
-  }, [open, id])
+  }, [defaultOpen, collapsible, setOpen])
 
   return (
     <SidebarContext.Provider
