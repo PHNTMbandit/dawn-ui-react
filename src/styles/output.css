@@ -3512,9 +3512,6 @@
   .has-disabled\:opacity-30:has(:disabled) {
     opacity: 30%;
   }
-  .has-data-\[active\=true\]\:bg-success-border:has([data-active='true']) {
-    background-color: var(--color-success-border);
-  }
   .has-data-\[slot\=accordion-icon\]\:grid-cols-\[auto_1fr\]:has([data-slot='accordion-icon']) {
     grid-template-columns: auto 1fr;
   }

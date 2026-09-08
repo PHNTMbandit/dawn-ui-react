@@ -1,9 +1,8 @@
 # [1.0.0-alpha.40](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2026-09-08)
 
-
 ### Features
 
-* **sidebar-menu-collapsible:** set collapsible panel to default open if child is active ([0c3bc78](https://github.com/PHNTMbandit/dawn-ui-react/commit/0c3bc78b39aa162494f70c38183d15acbbcc899b))
+- **sidebar-menu-collapsible:** set collapsible panel to default open if child is active ([0c3bc78](https://github.com/PHNTMbandit/dawn-ui-react/commit/0c3bc78b39aa162494f70c38183d15acbbcc899b))
 
 # [1.0.0-alpha.39](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2026-09-07)
 
