@@ -31,7 +31,7 @@ const BasicActionMenu = () => (
     <MenuTrigger>
       <Button>Open Menu</Button>
     </MenuTrigger>
-    <MenuPopup>
+    <MenuPopup align="center">
       <MenuItem>
         <CopyIcon /> Copy
       </MenuItem>

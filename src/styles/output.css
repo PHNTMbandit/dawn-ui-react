@@ -1148,6 +1148,9 @@
   .min-w-3xl {
     min-width: var(--spacing-3xl);
   }
+  .min-w-\[12rem\] {
+    min-width: 12rem;
+  }
   .min-w-\[125px\] {
     min-width: 125px;
   }
@@ -2862,6 +2865,14 @@
     content: var(--tw-content);
     inset: 0px;
   }
+  .before\:inset-x-3xs::before {
+    content: var(--tw-content);
+    inset-inline: var(--spacing-3xs);
+  }
+  .before\:inset-y-\[0px\]::before {
+    content: var(--tw-content);
+    inset-block: 0px;
+  }
   .before\:top-0::before {
     content: var(--tw-content);
     top: var(--spacing-0);
@@ -2974,6 +2985,14 @@
   .before\:transition-\[height\]::before {
     content: var(--tw-content);
     transition-property: height;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .before\:transition-colors::before {
+    content: var(--tw-content);
+    transition-property:
+      color, background-color, border-color, outline-color, text-decoration-color, fill, stroke,
+      --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
