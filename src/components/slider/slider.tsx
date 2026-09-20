@@ -1,4 +1,6 @@
 import { Slider as BaseSlider } from '@base-ui/react'
+import React from 'react'
+import { useSliderGroupContext } from './slider-group-context'
 import { SliderThumb } from './slider-thumb'
 import { sliderVariants, type SliderProps } from './slider.types'
 import { cn } from '@/utils/cn'
@@ -7,71 +9,84 @@ export const Slider = ({
   size,
   tone,
   defaultValue,
-  description,
-  label,
-  leadingIcon: LeadingIcon,
-  max = 100,
   min = 0,
-  showMax = false,
-  showMin = false,
-  trailingIcon: TrailingIcon,
+  max = 100,
+  step = 1,
+  showIndicator = true,
+  showTooltip = true,
   showThumbOnHover = true,
   value,
+  onValueChange,
   className,
   ref,
   ...props
 }: SliderProps) => {
-  const _values = Array.isArray(value)
-    ? value
-    : Array.isArray(defaultValue)
-      ? defaultValue
-      : [min, max]
+  const group = useSliderGroupContext()
+
+  React.useEffect(() => {
+    group?.registerConfig({ min, max, step, defaultValue })
+  }, [group, min, max, step, defaultValue])
+
+  const groupValue = group
+    ? (group.value ??
+      (Array.isArray(defaultValue)
+        ? defaultValue
+        : [(value as number) ?? (defaultValue as number) ?? min]))
+    : undefined
+
+  const _values = group
+    ? groupValue!
+    : Array.isArray(value)
+      ? value
+      : Array.isArray(defaultValue)
+        ? defaultValue
+        : [value ?? defaultValue ?? min]
+
+  const handleValueChange = (...args: Parameters<NonNullable<SliderProps['onValueChange']>>) => {
+    const next = args[0]
+    group?.setValue(Array.isArray(next) ? [...next] : [next])
+    onValueChange?.(...args)
+  }
 
   return (
-    <div className={cn(sliderVariants({ size, tone }), className)}>
-      {label && <span className="style-text-default-0">{label}</span>}
-      <BaseSlider.Root
-        aria-label={label}
-        aria-valuemax={max}
-        aria-valuemin={min}
-        aria-valuenow={Array.isArray(value) ? value[0] : (value ?? defaultValue ?? min)}
-        className={cn('flex items-center gap-sm', className)}
-        defaultValue={defaultValue}
-        data-slot="slider-root"
-        max={max}
-        min={min}
-        ref={ref}
-        role="slider"
-        value={value}
-        {...props}
+    <BaseSlider.Root
+      aria-valuemax={max}
+      aria-valuemin={min}
+      aria-valuenow={_values[0]}
+      className={cn(sliderVariants({ size, tone }), className)}
+      defaultValue={group ? undefined : defaultValue}
+      data-slot="slider-root"
+      max={max}
+      min={min}
+      onValueChange={handleValueChange}
+      ref={ref}
+      role="slider"
+      step={step}
+      value={group ? groupValue : value}
+      {...props}
+    >
+      <BaseSlider.Control
+        className={
+          'shrink-0 hover:cursor-pointer data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full'
+        }
       >
-        {LeadingIcon && <LeadingIcon className="size-sm shrink-0" weight="fill" />}
-        {showMin && <span className="style-text-default-0">{min}</span>}
-        <BaseSlider.Control
-          className={
-            'shrink-0 hover:cursor-pointer data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full'
-          }
+        <BaseSlider.Track
+          data-slot="slider-track"
+          className={cn(
+            'relative size-full rounded-full',
+            !showThumbOnHover &&
+              "**:data-[slot='slider-thumb']:opacity-0 hover:**:data-[slot='slider-thumb']:opacity-100 active:**:data-[slot='slider-thumb']:opacity-100 data-dragging:**:data-[slot='slider-thumb']:opacity-100",
+          )}
         >
-          <BaseSlider.Track
-            data-slot="slider-track"
-            className={cn(
-              'relative size-full rounded-full',
-              !showThumbOnHover &&
-                "**:data-[slot='slider-thumb']:opacity-0 hover:**:data-[slot='slider-thumb']:opacity-100 active:**:data-[slot='slider-thumb']:opacity-100 data-dragging:**:data-[slot='slider-thumb']:opacity-100",
-            )}
-          >
-            <BaseSlider.Indicator data-slot="slider-indicator" className={'rounded-full'} />
-            {Array.from({ length: _values.length }, (_, index) => (
-              <SliderThumb index={index} key={index} />
-            ))}
-          </BaseSlider.Track>
-        </BaseSlider.Control>
-        {showMax && <span className="style-text-default-0">{max}</span>}
-        {TrailingIcon && <TrailingIcon className="size-sm shrink-0" weight="fill" />}
-      </BaseSlider.Root>
-      {description && (
-        <span className="style-text-prose--1 text-on-surface-variant">{description}</span>
-      )}
-    </div>
+          <BaseSlider.Indicator
+            data-slot="slider-indicator"
+            className={cn('rounded-full', !showIndicator && 'opacity-0')}
+          />
+          {Array.from({ length: _values.length }, (_, index) => (
+            <SliderThumb index={index} key={index} hide={!showTooltip} />
+          ))}
+        </BaseSlider.Track>
+      </BaseSlider.Control>
+    </BaseSlider.Root>
   )
 }
