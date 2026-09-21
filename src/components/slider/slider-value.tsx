@@ -1,7 +1,7 @@
 import { cn } from 'dawn-ui-react'
 import { useSliderGroupContext } from './slider-group-context'
 
-type SliderValueProps = React.ComponentProps<'span'>
+import type { SliderValueProps } from './slider.types'
 
 export const SliderValue = ({ className, children, ref, ...props }: SliderValueProps) => {
   const group = useSliderGroupContext()

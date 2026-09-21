@@ -1,12 +1,8 @@
 import React from 'react'
-import { SliderGroupContext, type SliderGroupConfig } from './slider-group-context'
+import { SliderGroupContext } from './slider-group-context'
 import { cn } from '@/utils/cn'
 
-type SliderGroupProps = Omit<React.ComponentProps<'div'>, 'defaultValue' | 'onChange'> & {
-  defaultValue?: number | number[]
-  value?: number | number[]
-  onValueChange?: (value: number[]) => void
-}
+import type { SliderGroupProps, SliderGroupConfig } from './slider.types'
 
 const toArray = (value: number | readonly number[] | undefined): number[] | undefined =>
   value == null ? undefined : Array.isArray(value) ? [...value] : [value as number]

@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 
-type SliderLabelProps = React.ComponentProps<'span'>
+import type { SliderLabelProps } from './slider.types'
 
 export const SliderLabel = ({ className, children, ref, ...props }: SliderLabelProps) => {
   return (

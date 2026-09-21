@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 
-type SliderDescriptionProps = React.ComponentProps<'p'>
+import type { SliderDescriptionProps } from './slider.types'
 
 export const SliderDescription = ({
   className,

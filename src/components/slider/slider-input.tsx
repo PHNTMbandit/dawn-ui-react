@@ -2,7 +2,7 @@ import { Input } from '../input'
 import { useSliderGroupContext } from './slider-group-context'
 import { cn } from '@/utils/cn'
 
-type SliderInputProps = Omit<React.ComponentProps<typeof Input>, 'value' | 'onChange' | 'type'>
+import type { SliderInputProps } from './slider.types'
 
 export const SliderInput = ({ className, ref, ...props }: SliderInputProps) => {
   const group = useSliderGroupContext()

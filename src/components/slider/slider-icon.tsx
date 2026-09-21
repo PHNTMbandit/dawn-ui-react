@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 
-type SliderIconProps = React.ComponentProps<'div'>
+import type { SliderIconProps } from './slider.types'
 
 export const SliderIcon = ({ className, children, ref, ...props }: SliderIconProps) => {
   return (
