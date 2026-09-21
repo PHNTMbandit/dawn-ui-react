@@ -1,5 +1,5 @@
-import { cn } from 'dawn-ui-react'
 import { useSliderGroupContext } from './slider-group-context'
+import { cn } from '@/utils/cn'
 
 import type { SliderValueProps } from './slider.types'
 
