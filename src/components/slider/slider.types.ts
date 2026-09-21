@@ -1,10 +1,10 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
+import type { Input } from '../input'
 import type { Slider as BaseSlider } from '@base-ui/react'
-import type { Icon } from '@phosphor-icons/react'
 import type { ComponentProps } from 'react'
 
-export const sliderVariants = cva('flex flex-col gap-xs', {
+export const sliderVariants = cva('flex h-lg w-full items-center', {
   variants: {
     size: {
       small:
@@ -38,12 +38,39 @@ export const sliderVariants = cva('flex flex-col gap-xs', {
 
 export type SliderProps = ComponentProps<typeof BaseSlider.Root> &
   VariantProps<typeof sliderVariants> & {
-    label?: string
-    description?: string
-    leadingIcon?: Icon
-    trailingIcon?: Icon
-    showMin?: boolean
-    showMax?: boolean
+    showIndicator?: boolean
     showThumbOnHover?: boolean
+    showTooltip?: boolean
   }
-export type SliderThumbProps = ComponentProps<typeof BaseSlider.Thumb>
+export type SliderThumbProps = ComponentProps<typeof BaseSlider.Thumb> & {
+  hide?: boolean
+}
+export type SliderDescriptionProps = React.ComponentProps<'p'>
+export type SliderGroupProps = Omit<React.ComponentProps<'div'>, 'defaultValue' | 'onChange'> & {
+  defaultValue?: number | number[]
+  value?: number | number[]
+  onValueChange?: (value: number[]) => void
+}
+export type SliderGroupConfig = {
+  min: number
+  max: number
+  step: number
+  defaultValue?: number | readonly number[]
+}
+
+export type SliderGroupContextValue = {
+  value: number[] | undefined
+  setValue: (value: number[]) => void
+  min: number
+  max: number
+  step: number
+  // Lets the Slider publish its min/max/step (and seed the initial value) to the group.
+  registerConfig: (config: SliderGroupConfig) => void
+}
+export type SliderIconProps = React.ComponentProps<'div'>
+export type SliderInputProps = Omit<
+  React.ComponentProps<typeof Input>,
+  'value' | 'onChange' | 'type'
+>
+export type SliderLabelProps = React.ComponentProps<'span'>
+export type SliderValueProps = React.ComponentProps<'span'>

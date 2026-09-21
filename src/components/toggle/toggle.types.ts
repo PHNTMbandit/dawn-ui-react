@@ -4,16 +4,16 @@ import type { Toggle, ToggleState } from '@base-ui/react'
 import type { VariantProps } from 'class-variance-authority'
 
 export const toggleVariants = cva(
-  'flex items-center justify-center text-on-surface-variant transition-all hover:cursor-pointer disabled:opacity-70',
+  'flex items-center justify-center rounded-full text-on-surface-variant transition-all hover:cursor-pointer disabled:opacity-70',
   {
     variants: {
       size: {
-        iconSmall: 'size-md rounded-md [&>svg]:size-xs',
-        iconMedium: 'size-lg rounded-lg [&>svg]:size-sm',
-        iconLarge: 'size-xl rounded-xl [&>svg]:size-md',
-        small: 'h-md gap-3xs rounded-md px-2xs style-text-default--2 [&>svg]:size-xs',
-        medium: 'h-lg gap-2xs rounded-lg px-xs style-text-default--1 [&>svg]:size-sm',
-        large: 'h-xl gap-xs rounded-xl px-sm style-text-default-0 [&>svg]:size-md',
+        iconSmall: 'size-md [&>svg]:size-xs',
+        iconMedium: 'size-lg [&>svg]:size-sm',
+        iconLarge: 'size-xl [&>svg]:size-md',
+        small: 'h-md gap-3xs px-2xs style-text-default--2 [&>svg]:size-xs',
+        medium: 'h-lg gap-2xs px-xs style-text-default--1 [&>svg]:size-sm',
+        large: 'h-xl gap-xs px-sm style-text-default-0 [&>svg]:size-md',
       },
       tone: {
         brand:

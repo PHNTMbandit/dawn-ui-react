@@ -1,4 +1,5 @@
 import React from 'react'
+import { useMediaQuery } from '@/hooks'
 import { cn } from '@/utils/cn'
 
 type SidebarContextProps = React.ComponentProps<'div'> & {
@@ -8,7 +9,6 @@ type SidebarContextProps = React.ComponentProps<'div'> & {
   open?: boolean
   setOpen?: (open: boolean) => void
   isMobile?: boolean
-  setIsMobile?: (isMobile: boolean) => void
   side?: 'left' | 'right'
   collapsible?: 'offcanvas' | 'icon' | 'none'
 }
@@ -28,7 +28,8 @@ export const SidebarProvider = ({
   const SIDEBAR_COOKIE_NAME = `sidebar-state-${id}`
   const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
   const [open, _setOpen] = React.useState<boolean>(defaultOpen)
-  const [isMobile, setIsMobile] = React.useState<boolean>(false)
+  const isMobile = useMediaQuery('mobile')
+  const effectiveCollapsible = isMobile ? 'offcanvas' : collapsible
 
   const setOpen = React.useCallback(
     (value: boolean | ((open: boolean) => boolean)) => {
@@ -50,21 +51,6 @@ export const SidebarProvider = ({
 
   const trigger = () => setOpen((prev) => !prev)
 
-  React.useEffect(() => {
-    const checkIsMobile = () => {
-      const mobile = window.innerWidth < 328
-      setIsMobile(mobile)
-      if (mobile && defaultOpen && collapsible !== 'none') {
-        setOpen(false)
-      }
-    }
-
-    checkIsMobile()
-    window.addEventListener('resize', checkIsMobile)
-
-    return () => window.removeEventListener('resize', checkIsMobile)
-  }, [defaultOpen, collapsible, setOpen])
-
   return (
     <SidebarContext.Provider
       value={{
@@ -75,8 +61,7 @@ export const SidebarProvider = ({
         side,
         trigger,
         isMobile,
-        setIsMobile,
-        collapsible,
+        collapsible: effectiveCollapsible,
       }}
     >
       <div
