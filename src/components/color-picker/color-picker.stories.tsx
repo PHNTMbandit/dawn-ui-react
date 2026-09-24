@@ -183,7 +183,7 @@ export const Controlled: Story = {
           defaultValueType={'hex'}
           value={pendingColor}
           onValueChange={(value) => setPendingColor(value)}
-          className="w-[300px]"
+          className="w-[600px]"
         >
           <ColorPickerArea />
           <ColorPickerGroup>

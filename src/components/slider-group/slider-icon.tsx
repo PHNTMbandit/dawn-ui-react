@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 
-import type { SliderIconProps } from './slider.types'
+import type { SliderIconProps } from './slider-group.types'
 
 export const SliderIcon = ({ className, children, ref, ...props }: SliderIconProps) => {
   return (

@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 
-import type { SliderDescriptionProps } from './slider.types'
+import type { SliderDescriptionProps } from './slider-group.types'
 
 export const SliderDescription = ({
   className,

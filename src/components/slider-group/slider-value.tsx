@@ -1,7 +1,7 @@
 import { useSliderGroupContext } from './slider-group-context'
 import { cn } from '@/utils/cn'
 
-import type { SliderValueProps } from './slider.types'
+import type { SliderValueProps } from './slider-group.types'
 
 export const SliderValue = ({ className, children, ref, ...props }: SliderValueProps) => {
   const group = useSliderGroupContext()

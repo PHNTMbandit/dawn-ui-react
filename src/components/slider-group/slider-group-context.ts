@@ -1,7 +1,6 @@
-// oxlint-disable typescript/no-redundant-type-constituents
 import { createContext, useContext, useRef } from 'react'
 
-import type { SliderGroupContextValue } from './slider.types'
+import type { SliderGroupContextValue } from './slider-group.types'
 
 export const SliderGroupContext = createContext<SliderGroupContextValue | null>(null)
 

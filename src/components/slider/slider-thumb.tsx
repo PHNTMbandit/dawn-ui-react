@@ -33,7 +33,7 @@ export const SliderThumb = ({ className, children, ref, hide, ...props }: Slider
   }, [])
 
   return (
-    <Tooltip open={isHovering || isDragging} trackCursorAxis="x" disabled={hide}>
+    <Tooltip open={isHovering || isDragging} disabled={hide}>
       <TooltipTrigger delay={0}>
         <BaseSlider.Thumb
           data-slot="slider-thumb"

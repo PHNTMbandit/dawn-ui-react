@@ -254,7 +254,7 @@ export const WithoutSubtitle: Story = {
 
 export const WithoutSeparators: Story = {
   render: () => (
-    <Accordion className="w-[520px]" withSeparator={false}>
+    <Accordion className="w-[520px]" variant={'ghost'} withSeparator={false}>
       <AllTonesItems />
     </Accordion>
   ),

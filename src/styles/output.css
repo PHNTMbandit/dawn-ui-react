@@ -893,9 +893,6 @@
   .h-xl {
     height: var(--spacing-xl);
   }
-  .h-xs {
-    height: var(--spacing-xs);
-  }
   .max-h-\(--available-height\) {
     max-height: var(--available-height);
   }
@@ -1054,6 +1051,9 @@
   }
   .w-\[520px\] {
     width: 520px;
+  }
+  .w-\[600px\] {
+    width: 600px;
   }
   .w-\[640px\] {
     width: 640px;
@@ -1464,15 +1464,6 @@
   }
   .gap-x-xs {
     column-gap: var(--spacing-xs);
-  }
-  .gap-y-2xs {
-    row-gap: var(--spacing-2xs);
-  }
-  .gap-y-3xs {
-    row-gap: var(--spacing-3xs);
-  }
-  .gap-y-xs {
-    row-gap: var(--spacing-xs);
   }
   :where(.divide-y > :not(:last-child)) {
     --tw-divide-y-reverse: 0;
@@ -1910,9 +1901,6 @@
   }
   .pr-xs {
     padding-right: var(--spacing-xs);
-  }
-  .pb-2xs {
-    padding-bottom: var(--spacing-2xs);
   }
   .pb-3xs {
     padding-bottom: var(--spacing-3xs);
@@ -3615,15 +3603,6 @@
   .has-data-\[slot\=dialog-icon\]\:grid-cols-\[auto_1fr\]:has([data-slot='dialog-icon']) {
     grid-template-columns: auto 1fr;
   }
-  .has-data-\[slot\=slider-icon\]\:grid-cols-\[auto_1fr_auto\]:has([data-slot='slider-icon']) {
-    grid-template-columns: auto 1fr auto;
-  }
-  .has-data-\[slot\=slider-input\]\:grid-cols-\[1fr_auto\]:has([data-slot='slider-input']) {
-    grid-template-columns: 1fr auto;
-  }
-  .has-data-\[slot\=slider-value\]\:grid-cols-\[1fr_auto\]:has([data-slot='slider-value']) {
-    grid-template-columns: 1fr auto;
-  }
   .has-\[\[data-swipe-direction\=left\]\]\:items-center:has(:is([data-swipe-direction='left'])) {
     align-items: center;
   }
@@ -4736,44 +4715,14 @@
   )[data-slot='dialog-icon'] {
     grid-row: span 2 / span 2;
   }
-  :is(.\*\*\:data-\[slot\=slider-description\]\:col-span-full *)[data-slot='slider-description'] {
-    grid-column: 1 / -1;
-  }
-  :is(.\*\*\:data-\[slot\=slider-description\]\:row-start-3 *)[data-slot='slider-description'] {
-    grid-row-start: 3;
-  }
   :is(.\*\*\:data-\[slot\=slider-description\]\:basis-full *)[data-slot='slider-description'] {
     flex-basis: 100%;
-  }
-  :is(.\*\*\:data-\[slot\=slider-icon\]\:row-start-2 *)[data-slot='slider-icon'] {
-    grid-row-start: 2;
-  }
-  :is(.\*\*\:data-\[slot\=slider-input\]\:row-start-2 *)[data-slot='slider-input'] {
-    grid-row-start: 2;
-  }
-  :is(.\*\*\:data-\[slot\=slider-input\]\:justify-self-end *)[data-slot='slider-input'] {
-    justify-self: flex-end;
-  }
-  :is(.\*\*\:data-\[slot\=slider-label\]\:col-span-full *)[data-slot='slider-label'] {
-    grid-column: 1 / -1;
-  }
-  :is(.\*\*\:data-\[slot\=slider-label\]\:row-start-1 *)[data-slot='slider-label'] {
-    grid-row-start: 1;
   }
   :is(.\*\*\:data-\[slot\=slider-label\]\:basis-full *)[data-slot='slider-label'] {
     flex-basis: 100%;
   }
-  :is(.\*\*\:data-\[slot\=slider-root\]\:row-start-2 *)[data-slot='slider-root'] {
-    grid-row-start: 2;
-  }
   :is(.\*\*\:data-\[slot\=slider-root\]\:flex-1 *)[data-slot='slider-root'] {
     flex: 1;
-  }
-  :is(.\*\*\:data-\[slot\=slider-value\]\:row-start-2 *)[data-slot='slider-value'] {
-    grid-row-start: 2;
-  }
-  :is(.\*\*\:data-\[slot\=slider-value\]\:justify-self-end *)[data-slot='slider-value'] {
-    justify-self: flex-end;
   }
   .data-\[state\=closed\]\:animate-out[data-state='closed'] {
     animation: exit var(--tw-animation-duration, var(--tw-duration, 0.15s)) var(--tw-ease, ease)
