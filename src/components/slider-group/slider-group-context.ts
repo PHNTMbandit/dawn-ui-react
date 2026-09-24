@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 import type { SliderGroupContextValue } from './slider-group.types'
 
@@ -12,9 +12,10 @@ export const areNumberArraysEqual = (a?: number[], b?: number[]) =>
 // Keeps a referentially-stable array while its contents are unchanged, so a new
 // literal each render can't masquerade as a value change (which loops Base UI's controlled Slider).
 export const useStableNumberArray = (next: number[] | undefined) => {
-  const ref = useRef(next)
-  if (!areNumberArraysEqual(ref.current, next)) {
-    ref.current = next
+  const [stable, setStable] = useState(next)
+  if (!areNumberArraysEqual(stable, next)) {
+    setStable(next)
+    return next
   }
-  return ref.current
+  return stable
 }
