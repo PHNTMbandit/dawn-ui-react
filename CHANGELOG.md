@@ -1,3 +1,15 @@
+# [1.0.0-alpha.43](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2026-09-24)
+
+
+### Bug Fixes
+
+* update imports and refactor useStableNumberArray for improved state management ([29fe435](https://github.com/PHNTMbandit/dawn-ui-react/commit/29fe4359895a9d0fd41dabe391ddf2bf946561d9))
+
+
+### Features
+
+* add SliderGroup component with supporting subcomponents and context ([2f69a4b](https://github.com/PHNTMbandit/dawn-ui-react/commit/2f69a4b3284a08c1cfd835603a2bfbc7ae03c4a6))
+
 # [1.0.0-alpha.42](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2026-09-21)
 
 
