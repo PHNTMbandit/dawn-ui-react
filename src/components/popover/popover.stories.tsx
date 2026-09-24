@@ -85,6 +85,67 @@ export const Animated: Story = {
   ),
 }
 
+export const Elevations: Story = {
+  render: (args) => (
+    <div className="flex items-center gap-sm">
+      <Popover {...args}>
+        <PopoverTrigger>
+          <span className="style-text-default-0 hover:cursor-pointer hover:underline">Low</span>
+        </PopoverTrigger>
+        <PopoverPanel side="top" elevation={'low'}>
+          <PopoverHeader>
+            <PopoverTitle>Popover Title</PopoverTitle>
+            <PopoverDescription>
+              Popover content goes here. Popover content goes here. Popover content goes here.{' '}
+            </PopoverDescription>
+          </PopoverHeader>
+          <PopoverContent>
+            <Button size="medium" className={'w-full'}>
+              Action
+            </Button>
+          </PopoverContent>
+        </PopoverPanel>
+      </Popover>
+      <Popover {...args}>
+        <PopoverTrigger>
+          <span className="style-text-default-0 hover:cursor-pointer hover:underline">Medium</span>
+        </PopoverTrigger>
+        <PopoverPanel side="top" elevation={'medium'}>
+          <PopoverHeader>
+            <PopoverTitle>Popover Title</PopoverTitle>
+            <PopoverDescription>
+              Popover content goes here. Popover content goes here. Popover content goes here.{' '}
+            </PopoverDescription>
+          </PopoverHeader>
+          <PopoverContent>
+            <Button size="medium" className={'w-full'}>
+              Action
+            </Button>
+          </PopoverContent>
+        </PopoverPanel>
+      </Popover>
+      <Popover {...args}>
+        <PopoverTrigger>
+          <span className="style-text-default-0 hover:cursor-pointer hover:underline">High</span>
+        </PopoverTrigger>
+        <PopoverPanel side="top" elevation={'high'}>
+          <PopoverHeader>
+            <PopoverTitle>Popover Title</PopoverTitle>
+            <PopoverDescription>
+              Popover content goes here. Popover content goes here. Popover content goes here.{' '}
+            </PopoverDescription>
+          </PopoverHeader>
+          <PopoverContent>
+            <Button size="medium" className={'w-full'}>
+              Action
+            </Button>
+          </PopoverContent>
+        </PopoverPanel>
+      </Popover>
+    </div>
+  ),
+}
+
 function NotificationsPanel() {
   return (
     <React.Fragment>

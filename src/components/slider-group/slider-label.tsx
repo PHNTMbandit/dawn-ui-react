@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 
-import type { SliderLabelProps } from './slider.types'
+import type { SliderLabelProps } from './slider-group.types'
 
 export const SliderLabel = ({ className, children, ref, ...props }: SliderLabelProps) => {
   return (

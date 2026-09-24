@@ -2,8 +2,7 @@ import React from 'react'
 import { SliderGroupContext, useStableNumberArray } from './slider-group-context'
 import { cn } from '@/utils/cn'
 
-import type { SliderGroupProps } from '../slider-group'
-import type { SliderGroupConfig } from '../slider-group/slider-group.types'
+import type { SliderGroupProps, SliderGroupConfig } from './slider-group.types'
 
 const toArray = (value: number | readonly number[] | undefined): number[] | undefined =>
   value == null ? undefined : Array.isArray(value) ? [...value] : [value as number]

@@ -53,6 +53,18 @@ export const ColorPickerInput = ({
     }
   }
 
+  const handleValueKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleValueBlur()
+    }
+  }
+
+  const handleTransparencyKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleTransparencyBlur()
+    }
+  }
+
   return (
     <InputGroup variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
       {showPopover ? (
@@ -79,6 +91,7 @@ export const ColorPickerInput = ({
       )}
       <InputGroupInput
         onBlur={handleValueBlur}
+        onKeyDown={handleValueKeyDown}
         onValueChange={handleValueChange}
         value={inputValue}
         className={'uppercase'}
@@ -96,6 +109,7 @@ export const ColorPickerInput = ({
             value={transparency}
             onValueChange={handleTransparencyChange}
             onBlur={handleTransparencyBlur}
+            onKeyDown={handleTransparencyKeyDown}
             className="w-xl"
           />
         </>

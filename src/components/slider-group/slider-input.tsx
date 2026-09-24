@@ -2,7 +2,7 @@ import { Input } from '../input'
 import { useSliderGroupContext } from './slider-group-context'
 import { cn } from '@/utils/cn'
 
-import type { SliderInputProps } from './slider.types'
+import type { SliderInputProps } from './slider-group.types'
 
 export const SliderInput = ({ className, ref, ...props }: SliderInputProps) => {
   const group = useSliderGroupContext()

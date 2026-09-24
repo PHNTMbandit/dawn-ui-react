@@ -1,6 +1,4 @@
 import { Slider as BaseSlider } from '@base-ui/react'
-import React from 'react'
-import { useSliderGroupContext } from './slider-group-context'
 import { SliderThumb } from './slider-thumb'
 import { sliderVariants, type SliderProps } from './slider.types'
 import { cn } from '@/utils/cn'
@@ -21,32 +19,11 @@ export const Slider = ({
   ref,
   ...props
 }: SliderProps) => {
-  const group = useSliderGroupContext()
-
-  React.useEffect(() => {
-    group?.registerConfig({ min, max, step, defaultValue })
-  }, [group, min, max, step, defaultValue])
-
-  const groupValue = group
-    ? (group.value ??
-      (Array.isArray(defaultValue)
-        ? defaultValue
-        : [(value as number) ?? (defaultValue as number) ?? min]))
-    : undefined
-
-  const _values = group
-    ? groupValue!
-    : Array.isArray(value)
-      ? value
-      : Array.isArray(defaultValue)
-        ? defaultValue
-        : [value ?? defaultValue ?? min]
-
-  const handleValueChange = (...args: Parameters<NonNullable<SliderProps['onValueChange']>>) => {
-    const next = args[0]
-    group?.setValue(Array.isArray(next) ? [...next] : [next])
-    onValueChange?.(...args)
-  }
+  const _values = Array.isArray(value)
+    ? value
+    : Array.isArray(defaultValue)
+      ? defaultValue
+      : [value ?? defaultValue ?? min]
 
   return (
     <BaseSlider.Root
@@ -54,15 +31,15 @@ export const Slider = ({
       aria-valuemin={min}
       aria-valuenow={_values[0]}
       className={cn(sliderVariants({ size, tone }), className)}
-      defaultValue={group ? undefined : defaultValue}
+      defaultValue={defaultValue}
       data-slot="slider-root"
       max={max}
       min={min}
-      onValueChange={handleValueChange}
+      onValueChange={onValueChange}
       ref={ref}
       role="slider"
       step={step}
-      value={group ? groupValue : value}
+      value={value}
       {...props}
     >
       <BaseSlider.Control
