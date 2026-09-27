@@ -19,11 +19,8 @@ export const ContextMenuSubmenuTrigger = ({
       ref={ref}
       {...props}
     >
-      <span className="col-start-1 flex min-w-3xl items-center gap-2xs pr-2xl">{children}</span>
-      <CaretRightIcon
-        className="col-start-2 size-xs place-self-end self-center"
-        weight="bold"
-      />{' '}
+      <span className="flex min-w-3xl items-center gap-2xs pr-2xl">{children}</span>
+      <CaretRightIcon className="ml-auto size-xs shrink-0 self-center" weight="bold" />
     </BaseContextMenu.SubmenuTrigger>
   )
 }

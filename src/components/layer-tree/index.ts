@@ -25,6 +25,7 @@ export type {
   LayerTreeVisibilityCellProps,
   RowLockedState,
   RowVisibilityState,
+  LayerTreeNodeIconProps,
 } from './layer-tree.types'
 export { LayerTree, useLayerTree } from './layer-tree'
 export { LayerTreeBody } from './layer-tree-body'
@@ -40,6 +41,7 @@ export { LayerTreeSearch } from './layer-tree-search'
 export { LayerTreeSort } from './layer-tree-sort'
 export { LayerTreeVisibilityAll } from './layer-tree-visibility-all'
 export { LayerTreeVisibilityCell } from './layer-tree-visibility-cell'
+export { LayerTreeNodeIcon } from './layer-tree-node-icon'
 export {
   findLayerTreeNode,
   insertLayerTreeNode,

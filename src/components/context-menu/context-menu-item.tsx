@@ -12,10 +12,18 @@ export const ContextMenuItem = ({
   return (
     <BaseContextMenu.Item
       className={cn(contextMenuItemVariants({ tone }), className)}
+      nativeButton
       ref={ref}
+      render={(renderProps) => (
+        <button
+          type="button"
+          {...renderProps}
+          className={cn('w-full gap-2xs [&>svg]:size-sm', renderProps.className)}
+        >
+          {children}
+        </button>
+      )}
       {...props}
-    >
-      <div className="flex w-full items-center gap-2xs [&>svg]:size-sm">{children}</div>
-    </BaseContextMenu.Item>
+    />
   )
 }

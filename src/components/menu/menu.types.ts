@@ -15,7 +15,7 @@ export type MenuSubmenuProps = React.ComponentProps<typeof BaseMenu.SubmenuRoot>
 export type MenuShortcutProps = React.ComponentProps<'div'>
 
 export const menuItemVariants = cva(
-  'flex h-lg cursor-default items-center px-xs style-text-default-0 transition-colors outline-none select-none before:outline before:outline-transparent before:transition-colors hover:cursor-pointer data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-3xs data-highlighted:before:inset-y-[0px] data-highlighted:before:z-[-1] data-highlighted:before:rounded-md',
+  'relative z-0 flex h-lg cursor-default items-center px-xs style-text-default-0 transition-colors outline-none select-none before:absolute before:inset-x-3xs before:inset-y-[0px] before:z-[-1] before:rounded-md before:bg-transparent before:transition-colors before:content-[""] hover:cursor-pointer',
   {
     variants: {
       tone: {

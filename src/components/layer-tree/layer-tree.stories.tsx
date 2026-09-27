@@ -22,6 +22,7 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '../context-menu'
+import { Dialog, DialogHelper, DialogPopup, DialogTrigger } from '../dialog'
 import { createAppColumnHelper, useAppTable } from './layer-tree-context'
 import { moveLayerTreeNode, moveLayerTreeNodeToRoot } from './layer-tree-utils'
 
@@ -134,25 +135,33 @@ export const Default = {
       }),
       columnHelper.accessor('name', {
         header: 'Layer Name',
-        cell: ({ cell, row }) => (
-          <ContextMenu>
-            <ContextMenuTrigger>
-              <cell.LayerTreeTriggerCell dndDisabled={row.original.locked} />
-            </ContextMenuTrigger>
-            <ContextMenuPopup>
-              <ContextMenuItem>
-                <CopyIcon weight="bold" /> Copy
-              </ContextMenuItem>
-              <ContextMenuItem>
-                <ClipboardIcon weight="bold" /> Paste
-              </ContextMenuItem>
-              <ContextMenuSeparator />
-              <ContextMenuItem>
-                <ScissorsIcon weight="bold" /> Cut
-              </ContextMenuItem>
-            </ContextMenuPopup>
-          </ContextMenu>
-        ),
+        cell: ({ cell, row }) => {
+          const handle = DialogHelper.createHandle()
+          return (
+            <ContextMenu>
+              <ContextMenuTrigger>
+                <cell.LayerTreeTriggerCell dndDisabled={row.original.locked} />
+              </ContextMenuTrigger>
+              <ContextMenuPopup>
+                <DialogTrigger handle={handle}>
+                  <ContextMenuItem>
+                    <CopyIcon weight="bold" /> Copy
+                  </ContextMenuItem>
+                </DialogTrigger>
+                <ContextMenuItem>
+                  <ClipboardIcon weight="bold" /> Paste
+                </ContextMenuItem>
+                <ContextMenuSeparator />
+                <ContextMenuItem>
+                  <ScissorsIcon weight="bold" /> Cut
+                </ContextMenuItem>
+              </ContextMenuPopup>
+              <Dialog handle={handle}>
+                <DialogPopup>Hello</DialogPopup>
+              </Dialog>
+            </ContextMenu>
+          )
+        },
       }),
       columnHelper.accessor('visible', {
         header: 'Visible',

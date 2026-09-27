@@ -1,28 +1,24 @@
 # [1.0.0-alpha.43](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2026-09-24)
 
-
 ### Bug Fixes
 
-* update imports and refactor useStableNumberArray for improved state management ([29fe435](https://github.com/PHNTMbandit/dawn-ui-react/commit/29fe4359895a9d0fd41dabe391ddf2bf946561d9))
-
+- update imports and refactor useStableNumberArray for improved state management ([29fe435](https://github.com/PHNTMbandit/dawn-ui-react/commit/29fe4359895a9d0fd41dabe391ddf2bf946561d9))
 
 ### Features
 
-* add SliderGroup component with supporting subcomponents and context ([2f69a4b](https://github.com/PHNTMbandit/dawn-ui-react/commit/2f69a4b3284a08c1cfd835603a2bfbc7ae03c4a6))
+- add SliderGroup component with supporting subcomponents and context ([2f69a4b](https://github.com/PHNTMbandit/dawn-ui-react/commit/2f69a4b3284a08c1cfd835603a2bfbc7ae03c4a6))
 
 # [1.0.0-alpha.42](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2026-09-21)
 
-
 ### Bug Fixes
 
-* improve menu appearance ([5cc1d84](https://github.com/PHNTMbandit/dawn-ui-react/commit/5cc1d844c7435c5013c29d191da4113f02110ebf))
-* **slider-value:** update import path for utility function in SliderValue component ([183eef6](https://github.com/PHNTMbandit/dawn-ui-react/commit/183eef60a350cfdf9b7c6f85c2b5f3c074fbadab))
-
+- improve menu appearance ([5cc1d84](https://github.com/PHNTMbandit/dawn-ui-react/commit/5cc1d844c7435c5013c29d191da4113f02110ebf))
+- **slider-value:** update import path for utility function in SliderValue component ([183eef6](https://github.com/PHNTMbandit/dawn-ui-react/commit/183eef60a350cfdf9b7c6f85c2b5f3c074fbadab))
 
 ### Features
 
-* add missing slider type exports ([d1b9b79](https://github.com/PHNTMbandit/dawn-ui-react/commit/d1b9b79e74ef5525932a21466ca0001c0e4d7502))
-* refactor slider to be more modular ([0260ca7](https://github.com/PHNTMbandit/dawn-ui-react/commit/0260ca763a831f6e8d67926085656344f9e86088))
+- add missing slider type exports ([d1b9b79](https://github.com/PHNTMbandit/dawn-ui-react/commit/d1b9b79e74ef5525932a21466ca0001c0e4d7502))
+- refactor slider to be more modular ([0260ca7](https://github.com/PHNTMbandit/dawn-ui-react/commit/0260ca763a831f6e8d67926085656344f9e86088))
 
 # [1.0.0-alpha.41](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2026-09-08)
 
