@@ -9,7 +9,7 @@ export const ContextMenuPopup = ({ className, children, ref, ...props }: Context
       <BaseContextMenu.Positioner>
         <BaseContextMenu.Popup
           className={cn(
-            'w-[calc(100%+var(--spacing-xl))] origin-(--transform-origin) translate-x-[-calc(var(--spacing-xl)/2)] space-y-3xs rounded-xl bg-surface-2 p-3xs py-2xs shadow-md transition-[transform,scale,opacity] outline-none data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0',
+            'z-99 flex w-[calc(100%+var(--spacing-xl))] origin-(--transform-origin) translate-x-[-calc(var(--spacing-xl)/2)] flex-col gap-3xs rounded-xl bg-surface-2 p-3xs py-2xs shadow-md transition-[transform,scale,opacity] outline-none data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0',
             className,
           )}
           ref={ref}

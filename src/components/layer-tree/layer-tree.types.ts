@@ -63,6 +63,9 @@ export type LayerTreeLockedCellProps = React.ComponentProps<typeof Button>
 export type LayerTreeLockedAllProps = React.ComponentProps<typeof Button>
 export type LayerTreeVisibilityCellProps = React.ComponentProps<typeof Button>
 export type LayerTreeVisibilityAllProps = React.ComponentProps<typeof Button>
+export type LayerTreeNodeIconProps = React.ComponentProps<'div'> & {
+  icon: React.ElementType
+}
 export type LayerTreeTextCellProps = React.ComponentProps<'span'> &
   VariantProps<typeof layerTreeTextCellVariants>
 

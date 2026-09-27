@@ -49,6 +49,7 @@ import { LayerTreeFooter } from './layer-tree-footer'
 import { LayerTreeIconCell } from './layer-tree-icon-cell'
 import { LayerTreeLockedAll } from './layer-tree-locked-all'
 import { LayerTreeLockedCell } from './layer-tree-locked-cell'
+import { LayerTreeNodeIcon } from './layer-tree-node-icon'
 import { LayerTreeRow } from './layer-tree-row'
 import { LayerTreeSearch } from './layer-tree-search'
 import { LayerTreeSort } from './layer-tree-sort'
@@ -130,6 +131,7 @@ export const {
   cellComponents: {
     LayerTreeIconCell,
     LayerTreeLockedCell,
+    LayerTreeNodeIcon,
     LayerTreeTextCell,
     LayerTreeTriggerCell,
     LayerTreeVisibilityCell,
