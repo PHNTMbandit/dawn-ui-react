@@ -26,7 +26,13 @@ export const CodeBlockSelect = ({ className, children, ref, ...props }: CodeBloc
 
   return (
     <Select value={currentValue.id} onValueChange={handleChange}>
-      <SelectTrigger className={cn('', className)} ref={ref} {...props} variant={'ghost'}>
+      <SelectTrigger
+        aria-label="Select file"
+        className={cn('', className)}
+        ref={ref}
+        {...props}
+        variant={'ghost'}
+      >
         <SelectValue>
           {(value: keyof typeof items) => items.find((item) => item.id === value)?.label}
         </SelectValue>

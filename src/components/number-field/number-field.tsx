@@ -15,16 +15,19 @@ export const NumberField = ({
   ref,
   ...props
 }: NumberFieldTypesProps) => {
-  const id = React.useId()
+  const generatedId = React.useId()
   const {
+    id: idProp,
     min,
     max,
     value,
     defaultValue,
     onValueChange,
     'aria-invalid': ariaInvalid,
+    'aria-label': ariaLabel,
     ...restProps
   } = props
+  const id = idProp ?? generatedId
 
   const [uncontrolledValue, setUncontrolledValue] = React.useState<number | null>(() => {
     if (typeof defaultValue === 'number') {
@@ -105,6 +108,7 @@ export const NumberField = ({
           )}
         />
         <BaseNumberField.Input
+          aria-label={label ? undefined : ariaLabel}
           disabled={disableInput}
           className={cn('w-full text-center focus:outline-none', children && 'text-right')}
         />

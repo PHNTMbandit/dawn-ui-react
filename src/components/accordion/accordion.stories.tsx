@@ -281,3 +281,34 @@ export const NoIcon: Story = {
     </Accordion>
   ),
 }
+
+export const AllSizes: Story = {
+  render: () => (
+    <Accordion className="w-[520px]">
+      <AccordionItem size="small" tone="brand">
+        <AccordionHeader>
+          <AccordionIcon>{TONE_ICONS['brand']}</AccordionIcon>
+          <AccordionTitle>Small Accordion Item</AccordionTitle>
+          <AccordionSubtitle>This is a small accordion item</AccordionSubtitle>
+        </AccordionHeader>
+        <AccordionPanel>Content for the small accordion item.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem size="medium" tone="brand">
+        <AccordionHeader>
+          <AccordionIcon>{TONE_ICONS['brand']}</AccordionIcon>
+          <AccordionTitle>Medium Accordion Item</AccordionTitle>
+          <AccordionSubtitle>This is a medium accordion item</AccordionSubtitle>
+        </AccordionHeader>
+        <AccordionPanel>Content for the medium accordion item.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem size="large" tone="brand">
+        <AccordionHeader>
+          <AccordionIcon>{TONE_ICONS['brand']}</AccordionIcon>
+          <AccordionTitle>Large Accordion Item</AccordionTitle>
+          <AccordionSubtitle>This is a large accordion item</AccordionSubtitle>
+        </AccordionHeader>
+        <AccordionPanel>Content for the large accordion item.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  ),
+}

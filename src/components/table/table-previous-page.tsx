@@ -19,6 +19,7 @@ export const TablePreviousPage = ({
 
   return (
     <Button
+      aria-label="Previous page"
       className={cn('shrink-0', className)}
       disabled={!table.getCanPreviousPage()}
       onClick={handleClick}

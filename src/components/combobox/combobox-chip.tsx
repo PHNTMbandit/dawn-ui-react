@@ -19,7 +19,7 @@ export const ComboboxChip = ({ className, children, ref, ...props }: ComboboxChi
       <BaseCombobox.ChipRemove
         aria-label="Remove"
         render={(e) => (
-          <Button onClick={e.onClick} variant={'ghost'} tone="error" size="iconExtraSmall">
+          <Button {...e} variant={'ghost'} tone="error" size="iconExtraSmall">
             <XIcon className="size-sm" weight="bold" />
           </Button>
         )}

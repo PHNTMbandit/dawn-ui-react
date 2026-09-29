@@ -34,6 +34,7 @@ export const CodeBlockDownload = ({
 
   return (
     <Button
+      aria-label={downloaded ? 'Downloaded' : 'Download code'}
       onClick={handleClick}
       size="iconMedium"
       variant={'ghost'}

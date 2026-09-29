@@ -71,6 +71,7 @@ export const ColorPickerInput = ({
         <Popover>
           <PopoverTrigger nativeButton={false}>
             <InputGroupAddon
+              aria-label="Open color options"
               style={{
                 backgroundColor: color.hex(),
               }}
@@ -90,6 +91,7 @@ export const ColorPickerInput = ({
         />
       )}
       <InputGroupInput
+        aria-label="Color value"
         onBlur={handleValueBlur}
         onKeyDown={handleValueKeyDown}
         onValueChange={handleValueChange}
@@ -103,6 +105,7 @@ export const ColorPickerInput = ({
             <PercentIcon weight="bold" />
           </InputGroupAddon>
           <InputGroupInput
+            aria-label="Transparency percentage"
             type="number"
             min={0}
             max={100}

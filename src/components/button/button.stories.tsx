@@ -52,7 +52,7 @@ const ButtonPreview = ({
   const iconOnly = size.startsWith('icon')
 
   return (
-    <Button size={size} tone={tone} variant={variant}>
+    <Button aria-label={iconOnly ? 'Add' : undefined} size={size} tone={tone} variant={variant}>
       <PlusIcon weight="bold" />
       {iconOnly ? null : TONE_LABELS[tone]}
     </Button>

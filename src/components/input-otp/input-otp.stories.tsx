@@ -80,7 +80,7 @@ export default {
     required: false,
   },
   render: (args) => (
-    <InputOTP {...args}>
+    <InputOTP aria-label="One-time password" {...args}>
       <InputOTPSlot />
       <InputOTPSlot aria-label="Character 2" />
       <InputOTPSlot aria-label="Character 3" />
@@ -136,7 +136,7 @@ export const FourDigits: Story = {
     length: 4,
   },
   render: (args) => (
-    <InputOTP {...args}>
+    <InputOTP aria-label="One-time password" {...args}>
       <InputOTPSlot />
       <InputOTPSlot aria-label="Character 2 of 4" />
       <InputOTPSlot aria-label="Character 3 of 4" />
@@ -172,7 +172,7 @@ export const EightDigits: Story = {
     length: 8,
   },
   render: (args) => (
-    <InputOTP {...args}>
+    <InputOTP aria-label="One-time password" {...args}>
       <InputOTPSlot />
       <InputOTPSlot aria-label="Character 2 of 8" />
       <InputOTPSlot aria-label="Character 3 of 8" />
@@ -238,7 +238,7 @@ export const GroupedThreeThree: Story = {
     length: 6,
   },
   render: (args) => (
-    <InputOTP {...args}>
+    <InputOTP aria-label="One-time password" {...args}>
       <InputOTPSlot />
       <InputOTPSlot aria-label="Character 2 of 6" />
       <InputOTPSlot aria-label="Character 3 of 6" />
@@ -264,7 +264,7 @@ export const GroupedTwoTwoTwo: Story = {
     length: 6,
   },
   render: (args) => (
-    <InputOTP {...args}>
+    <InputOTP aria-label="One-time password" {...args}>
       <InputOTPSlot />
       <InputOTPSlot aria-label="Character 2 of 6" />
       <InputOtpSeparator />
@@ -356,6 +356,7 @@ export const OnValueComplete: Story = {
       <div className="flex flex-col gap-sm">
         <InputOTP
           {...args}
+          aria-label="One-time password"
           onValueComplete={(value: string) => setMessage(`Code submitted: ${value}`)}
         >
           <InputOTPSlot />
@@ -390,7 +391,7 @@ export const ControlledValue: Story = {
 
     return (
       <div className="flex flex-col gap-sm">
-        <InputOTP {...args} value={value} onValueChange={setValue}>
+        <InputOTP aria-label="One-time password" {...args} value={value} onValueChange={setValue}>
           <InputOTPSlot />
           <InputOTPSlot aria-label="Character 2 of 6" />
           <InputOTPSlot aria-label="Character 3 of 6" />

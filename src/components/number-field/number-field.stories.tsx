@@ -67,7 +67,9 @@ export default {
     disabled: false,
     'aria-invalid': false,
   },
-  render: (args) => <NumberField {...args} id="number-field" className={'w-[200px]'} />,
+  render: (args) => (
+    <NumberField aria-label="Value" {...args} id="number-field" className={'w-[200px]'} />
+  ),
 } satisfies Meta<typeof NumberField>
 
 type Story = StoryObj<typeof NumberField>
@@ -128,9 +130,27 @@ export const Sizes: Story = {
   },
   render: (args) => (
     <div className="flex flex-col items-start gap-md">
-      <NumberField {...args} size="small" id="number-field-small" className={'w-[300px]'} />
-      <NumberField {...args} size="medium" id="number-field-medium" className={'w-[300px]'} />
-      <NumberField {...args} size="large" id="number-field-large" className={'w-[300px]'} />
+      <NumberField
+        aria-label="Value"
+        {...args}
+        size="small"
+        id="number-field-small"
+        className={'w-[300px]'}
+      />
+      <NumberField
+        aria-label="Value"
+        {...args}
+        size="medium"
+        id="number-field-medium"
+        className={'w-[300px]'}
+      />
+      <NumberField
+        aria-label="Value"
+        {...args}
+        size="large"
+        id="number-field-large"
+        className={'w-[300px]'}
+      />
     </div>
   ),
 }

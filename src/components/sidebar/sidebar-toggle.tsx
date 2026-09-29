@@ -20,6 +20,7 @@ export const SidebarToggle = ({ className, children, ref, ...props }: SidebarTog
 
   return (
     <Button
+      aria-label="Toggle sidebar"
       className={cn('shrink-0 border-none', className)}
       ref={ref}
       size={'iconMedium'}

@@ -18,6 +18,7 @@ export const ColorPickerPaletteAdd = ({
 
   return (
     <button
+      aria-label="Add current color to palette"
       onClick={handleClick}
       className={cn(
         'flex size-md items-center justify-center rounded-lg border border-border-strong text-border-strong hover:cursor-pointer [&>svg]:size-xs',

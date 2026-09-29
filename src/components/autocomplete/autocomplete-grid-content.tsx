@@ -23,6 +23,7 @@ export const AutocompleteGridContent = ({
         sideOffset={4}
       >
         <BaseAutocomplete.Popup
+          aria-label="Suggestions"
           className={
             'max-h-[20.5rem] max-w-(--available-width) origin-(--transform-origin) overflow-hidden rounded-lg bg-surface-2 shadow-lg transition-[transform,scale,opacity] [--input-container-height:3rem] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0'
           }

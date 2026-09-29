@@ -26,6 +26,7 @@ export const LayerTreeVisibilityAll = ({
 
         return (
           <Button
+            aria-label={isVisible ? 'Hide all layers' : 'Show all layers'}
             size="iconSmall"
             tone="neutral"
             variant={'ghost'}

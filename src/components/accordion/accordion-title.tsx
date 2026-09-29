@@ -7,7 +7,7 @@ export const AccordionTitle = ({ className, children, ref, ...props }: Accordion
     <div
       data-slot="accordion-title"
       className={cn(
-        'text-left style-text-strong-0 transition-colors [&:not(:has(~_[data-slot=accordion-subtitle]))]:leading-0',
+        'text-left transition-colors [&:not(:has(~_[data-slot=accordion-subtitle]))]:leading-0',
         className,
       )}
       ref={ref}

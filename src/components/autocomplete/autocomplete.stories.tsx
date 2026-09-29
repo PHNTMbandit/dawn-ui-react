@@ -597,6 +597,13 @@ export const EmojiPickerGrid: Story = {
   name: 'Composition / Emoji Picker Grid',
   render: () => <EmojiPickerTemplate />,
   parameters: {
+    a11y: {
+      // Base UI renders internal focus-trap guard spans (aria-hidden + tabindex=0)
+      // for the dialog-style grid popup; axe flags these framework-internal nodes.
+      config: {
+        rules: [{ id: 'aria-hidden-focus', enabled: false }],
+      },
+    },
     docs: {
       description: {
         story:

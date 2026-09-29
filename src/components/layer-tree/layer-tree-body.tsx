@@ -22,7 +22,9 @@ export const LayerTreeBody = ({ className, children, ...props }: LayerTreeBodyPr
           {children}
           <ul className="flex min-h-0 w-full flex-col gap-xs overflow-y-auto">
             {table.getRowModel().rows.map((row) => (
-              <LayerTreeRow key={row.id} rowId={row.id} />
+              <li key={row.id} className="contents">
+                <LayerTreeRow rowId={row.id} />
+              </li>
             ))}
           </ul>
           <div

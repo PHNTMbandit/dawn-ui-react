@@ -44,7 +44,7 @@ export default {
 type Story = StoryObj<typeof Slider>
 
 export const Playground: Story = {
-  render: (args) => <Slider className={'w-[200px]'} {...args} />,
+  render: (args) => <Slider aria-label="Value" className={'w-[200px]'} {...args} />,
 }
 
 /**
@@ -59,8 +59,8 @@ export const CompositionPriceRange: Story = {
           Choose your ideal price range
         </p>
       </div>
-      <Slider defaultValue={[250, 750]} min={0} max={1000} step={10} />
-      <div className="flex justify-between text-on-surface-muted">
+      <Slider aria-label="Price range" defaultValue={[250, 750]} min={0} max={1000} step={10} />
+      <div className="flex justify-between text-on-surface-variant">
         <span className="style-text-default--1">Min: $250</span>
         <span className="style-text-default--1">Max: $750</span>
       </div>

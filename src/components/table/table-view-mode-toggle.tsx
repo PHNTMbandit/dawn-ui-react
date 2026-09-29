@@ -18,7 +18,13 @@ export const TableViewModeToggle = ({
   }
 
   return (
-    <Button onClick={handleClick} className={cn('shrink-0', className)} ref={ref} {...props}>
+    <Button
+      aria-label="Toggle view mode"
+      onClick={handleClick}
+      className={cn('shrink-0', className)}
+      ref={ref}
+      {...props}
+    >
       {children(isGridView)}
     </Button>
   )

@@ -19,6 +19,7 @@ export const TableSelectHeader = ({
 
         return (
           <Checkbox
+            aria-label="Select all rows"
             checked={allRowsSelected}
             indeterminate={!allRowsSelected && table.getIsSomeRowsSelected()}
             onCheckedChange={(checked) => table.toggleAllRowsSelected(checked)}

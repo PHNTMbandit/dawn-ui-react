@@ -7,6 +7,12 @@ export const TableImageCell = ({ className, ref, ...props }: TableImageCellProps
   const cell = useCellContext<string>()
 
   return (
-    <img src={cell.getValue()} className={cn('my-xs size-xl', className)} ref={ref} {...props} />
+    <img
+      alt=""
+      src={cell.getValue()}
+      className={cn('my-xs size-xl', className)}
+      ref={ref}
+      {...props}
+    />
   )
 }

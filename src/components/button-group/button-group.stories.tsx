@@ -301,7 +301,7 @@ export const InputWithButton: Story = {
   render: (args) => (
     <ButtonGroup {...args}>
       <Input placeholder="Search..." />
-      <Button tone="neutral">
+      <Button aria-label="Add" tone="neutral">
         <PlusIcon weight="bold" />
       </Button>
     </ButtonGroup>
@@ -321,7 +321,7 @@ export const MixedTextIcon: Story = {
   render: (args) => (
     <ButtonGroup {...args}>
       <Button>Button 1</Button>
-      <Button>
+      <Button aria-label="Add">
         <PlusIcon weight="bold" />
       </Button>
       <Button>Button 3</Button>

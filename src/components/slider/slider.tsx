@@ -25,11 +25,10 @@ export const Slider = ({
       ? defaultValue
       : [value ?? defaultValue ?? min]
 
+  const { 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, ...rootProps } = props
+
   return (
     <BaseSlider.Root
-      aria-valuemax={max}
-      aria-valuemin={min}
-      aria-valuenow={_values[0]}
       className={cn(sliderVariants({ size, tone }), className)}
       defaultValue={defaultValue}
       data-slot="slider-root"
@@ -37,10 +36,9 @@ export const Slider = ({
       min={min}
       onValueChange={onValueChange}
       ref={ref}
-      role="slider"
       step={step}
       value={value}
-      {...props}
+      {...rootProps}
     >
       <BaseSlider.Control
         className={
@@ -60,7 +58,13 @@ export const Slider = ({
             className={cn('rounded-full', !showIndicator && 'opacity-0')}
           />
           {Array.from({ length: _values.length }, (_, index) => (
-            <SliderThumb index={index} key={index} hide={!showTooltip} />
+            <SliderThumb
+              aria-label={ariaLabel}
+              aria-labelledby={ariaLabelledby}
+              index={index}
+              key={index}
+              hide={!showTooltip}
+            />
           ))}
         </BaseSlider.Track>
       </BaseSlider.Control>

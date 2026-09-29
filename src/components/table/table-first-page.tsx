@@ -14,6 +14,7 @@ export const TableFirstPage = ({ className, children, ref, ...props }: TableFirs
 
   return (
     <Button
+      aria-label="First page"
       className={cn('shrink-0', className)}
       disabled={!table.getCanPreviousPage()}
       onClick={handleClick}

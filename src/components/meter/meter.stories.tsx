@@ -142,20 +142,22 @@ export const Horizontal: Story = {
     orientation: 'horizontal',
   },
   render: (args) => (
-    <Meter className="w-[500px]" {...args}>
-      <MeterLabel>
-        Progress
-        <SpinnerGapIcon className="animate-spin" />
-      </MeterLabel>
-      <MeterSubtitle>Uploading file...</MeterSubtitle>
-      <MeterTrack>
-        <MeterIndicator />
-      </MeterTrack>
-      <MeterValue />
-      <Button size={'iconSmall'} tone="error" variant="ghost">
+    <div className="flex w-[500px] items-center gap-sm">
+      <Meter className="w-full" {...args}>
+        <MeterLabel>
+          Progress
+          <SpinnerGapIcon className="animate-spin" />
+        </MeterLabel>
+        <MeterSubtitle>Uploading file...</MeterSubtitle>
+        <MeterTrack>
+          <MeterIndicator />
+        </MeterTrack>
+        <MeterValue />
+      </Meter>
+      <Button aria-label="Cancel upload" size={'iconSmall'} tone="error" variant="ghost">
         <XIcon weight="bold" />
       </Button>
-    </Meter>
+    </div>
   ),
   parameters: {
     docs: {
@@ -170,24 +172,26 @@ export const Horizontal: Story = {
 export const Downloading: Story = {
   name: 'Composition / Downloading',
   render: (args) => (
-    <Meter className="w-[500px]" {...args}>
-      <MeterHeader>
-        <MeterLabel>
-          <SpinnerGapIcon className="animate-spin" />
-          Downloading File...
-        </MeterLabel>
-      </MeterHeader>
-      <MeterTrack>
-        <MeterIndicator />
-      </MeterTrack>
-      <MeterFooter>
-        <MeterSubtitle>Estimated time remaining: 2 minutes</MeterSubtitle>
-        <MeterValue />
-      </MeterFooter>
+    <div className="flex w-[500px] flex-col gap-sm">
+      <Meter className="w-full" {...args}>
+        <MeterHeader>
+          <MeterLabel>
+            <SpinnerGapIcon className="animate-spin" />
+            Downloading File...
+          </MeterLabel>
+        </MeterHeader>
+        <MeterTrack>
+          <MeterIndicator />
+        </MeterTrack>
+        <MeterFooter>
+          <MeterSubtitle>Estimated time remaining: 2 minutes</MeterSubtitle>
+          <MeterValue />
+        </MeterFooter>
+      </Meter>
       <Button tone="error" className={'w-full'} size={'small'}>
         <XIcon weight="bold" /> Cancel
       </Button>
-    </Meter>
+    </div>
   ),
   parameters: {
     docs: {
@@ -263,6 +267,7 @@ export const Animation: Story = {
     return (
       <div className="flex w-[500px] flex-col gap-md">
         <Input
+          aria-label="Progress value"
           max={100}
           value={value}
           onChange={(e) => setValue(Number(e.target.value))}

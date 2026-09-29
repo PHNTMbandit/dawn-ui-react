@@ -11,6 +11,7 @@ export const AnchoredToasts = ({ className, ref, ...props }: AnchoredToastProps)
   return (
     <BaseToast.Portal>
       <BaseToast.Viewport
+        aria-label="Anchored notifications"
         className={cn(
           'fixed top-auto right-[1rem] bottom-[1rem] z-10 mx-auto flex w-[250px] sm:right-[2rem] sm:bottom-[2rem] sm:w-[300px]',
           className,
