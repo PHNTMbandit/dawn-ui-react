@@ -1,3 +1,10 @@
+# [1.0.0-rc.3](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2026-09-29)
+
+
+### Features
+
+* add compound react components ([b96bce3](https://github.com/PHNTMbandit/dawn-ui-react/commit/b96bce34e907f678b60df9425db09d40d8092765))
+
 # [1.0.0-rc.2](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2026-09-29)
 
 ### Features
