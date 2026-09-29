@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react'
 import { playwright } from '@vitest/browser-playwright'
 import path, { resolve } from 'node:path'
 import url, { fileURLToPath } from 'node:url'
-import { esmExternalRequirePlugin } from 'rolldown/plugins'
 import dts from 'vite-plugin-dts'
 import { defineConfig } from 'vitest/config'
 import pkg from './package.json' with { type: 'json' }
@@ -30,11 +29,6 @@ export default defineConfig({
       fileName: 'dawn-ui-react',
     },
     rollupOptions: {
-      plugins: [
-        esmExternalRequirePlugin({
-          external: [/^react($|\/)/, /^react-dom($|\/)/],
-        }),
-      ],
       external: (id) => {
         if (/^react($|\/)/.test(id) || /^react-dom($|\/)/.test(id)) {
           return true
