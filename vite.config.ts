@@ -37,7 +37,7 @@ export default defineConfig({
       ],
       external: (id) => {
         if (/^react($|\/)/.test(id) || /^react-dom($|\/)/.test(id)) {
-          return false
+          return true
         }
 
         if (
