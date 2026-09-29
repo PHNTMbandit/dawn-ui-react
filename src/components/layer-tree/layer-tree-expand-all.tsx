@@ -20,6 +20,7 @@ export const LayerTreeExpandAll = ({ className, ref, ...props }: LayerTreeExpand
     <table.Subscribe selector={(state) => state.expanded}>
       {() => (
         <Button
+          aria-label={table.getIsSomeRowsExpanded() ? 'Collapse all layers' : 'Expand all layers'}
           size={'iconMedium'}
           tone="neutral"
           variant={'ghost'}

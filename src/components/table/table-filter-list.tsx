@@ -6,6 +6,8 @@ import { TableStringFilterChip } from './table-string-filter-chip'
 import { type TableFilterListProps } from './table.types'
 import { cn } from '@/utils/cn'
 
+import type { ReactNode } from 'react'
+
 export const TableFilterList = ({ className, children, ref, ...props }: TableFilterListProps) => {
   const table = useTableContext()
 
@@ -18,24 +20,35 @@ export const TableFilterList = ({ className, children, ref, ...props }: TableFil
 
         return (
           <ul className={cn('flex flex-wrap items-center gap-xs', className)} ref={ref} {...props}>
-            {children}
+            {children && <li className="contents">{children}</li>}
             {table.getAllColumns().map((column) => {
               if (!column.getIsFiltered()) {
                 return null
               }
 
+              let chip: ReactNode = null
               switch (column.columnDef.meta?.filterVariant) {
                 case 'date':
-                  return <TableDateFilterChip key={column.id} column={column} />
+                  chip = <TableDateFilterChip column={column} />
+                  break
                 case 'number':
-                  return <TableNumberFilterChip key={column.id} column={column} />
+                  chip = <TableNumberFilterChip column={column} />
+                  break
                 case 'select':
-                  return <TableSelectFilterChip key={column.id} column={column} />
+                  chip = <TableSelectFilterChip column={column} />
+                  break
                 case 'string':
-                  return <TableStringFilterChip key={column.id} column={column} />
+                  chip = <TableStringFilterChip column={column} />
+                  break
                 default:
                   return null
               }
+
+              return (
+                <li className="contents" key={column.id}>
+                  {chip}
+                </li>
+              )
             })}
           </ul>
         )

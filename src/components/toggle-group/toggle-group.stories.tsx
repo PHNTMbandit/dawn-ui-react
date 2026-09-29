@@ -129,21 +129,21 @@ export const CompositionAutoSizing: Story = {
           Small size (Toggles inherit from group)
         </p>
         <ToggleGroup size="small" multiple>
-          <Toggle tone="brand">
+          <Toggle aria-label="Favorite" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="accent">
+          <Toggle aria-label="Bookmark" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="info">
+          <Toggle aria-label="Star" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -156,21 +156,21 @@ export const CompositionAutoSizing: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Medium size (default)</p>
         <ToggleGroup size="medium" multiple>
-          <Toggle tone="brand">
+          <Toggle aria-label="Favorite" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="accent">
+          <Toggle aria-label="Bookmark" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="info">
+          <Toggle aria-label="Star" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -183,21 +183,21 @@ export const CompositionAutoSizing: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Large size</p>
         <ToggleGroup size="large" multiple>
-          <Toggle tone="brand">
+          <Toggle aria-label="Favorite" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="accent">
+          <Toggle aria-label="Bookmark" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="info">
+          <Toggle aria-label="Star" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -218,21 +218,21 @@ export const GhostVariant: Story = {
           Small size (Toggles inherit from group)
         </p>
         <ToggleGroup size="small" variant="ghost" multiple>
-          <Toggle tone="brand">
+          <Toggle aria-label="Favorite" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="accent">
+          <Toggle aria-label="Bookmark" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="info">
+          <Toggle aria-label="Star" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -245,21 +245,21 @@ export const GhostVariant: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Medium size (default)</p>
         <ToggleGroup size="medium" variant="ghost" multiple>
-          <Toggle tone="brand">
+          <Toggle aria-label="Favorite" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="accent">
+          <Toggle aria-label="Bookmark" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="info">
+          <Toggle aria-label="Star" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -272,21 +272,21 @@ export const GhostVariant: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Large size</p>
         <ToggleGroup size="large" variant="ghost" multiple>
-          <Toggle tone="brand">
+          <Toggle aria-label="Favorite" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="accent">
+          <Toggle aria-label="Bookmark" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle tone="info">
+          <Toggle aria-label="Star" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />

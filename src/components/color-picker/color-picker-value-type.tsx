@@ -26,7 +26,13 @@ export const ColorPickerValueType = ({
 
   return (
     <Select value={valueType.value} onValueChange={handleChange}>
-      <SelectTrigger variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
+      <SelectTrigger
+        aria-label="Color value type"
+        variant={'secondary'}
+        className={cn('', className)}
+        ref={ref}
+        {...props}
+      >
         {children}
         <SelectValue>
           {(value: string) => VALUE_TYPES.find((type) => type.value === value)?.label ?? value}

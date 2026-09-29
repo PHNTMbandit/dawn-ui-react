@@ -30,6 +30,7 @@ export const Hue: Story = {
     return (
       <ColorChannelSlider
         {...args}
+        aria-label="Hue"
         min={1}
         max={360}
         trackStyle={getHueTrack()}
@@ -45,6 +46,7 @@ export const Transparency: Story = {
     return (
       <ColorChannelSlider
         {...args}
+        aria-label="Transparency"
         min={1}
         max={100}
         trackStyle={getTransparencyTrack('blue')}
@@ -60,6 +62,7 @@ export const Saturation: Story = {
     return (
       <ColorChannelSlider
         {...args}
+        aria-label="Saturation"
         min={1}
         max={100}
         trackStyle={getSaturationTrack('blue')}
@@ -75,6 +78,7 @@ export const Lightness: Story = {
     return (
       <ColorChannelSlider
         {...args}
+        aria-label="Lightness"
         min={1}
         max={100}
         trackStyle={getLightnessTrack('blue')}

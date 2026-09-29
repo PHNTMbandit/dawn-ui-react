@@ -14,6 +14,7 @@ export const TableNextPage = ({ className, children, ref, ...props }: TableNextP
 
   return (
     <Button
+      aria-label="Next page"
       className={cn('shrink-0', className)}
       disabled={!table.getCanNextPage()}
       onClick={handleClick}

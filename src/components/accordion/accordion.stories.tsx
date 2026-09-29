@@ -254,7 +254,7 @@ export const WithoutSubtitle: Story = {
 
 export const WithoutSeparators: Story = {
   render: () => (
-    <Accordion className="w-[520px]" withSeparator={false}>
+    <Accordion className="w-[520px]" variant={'ghost'} withSeparator={false}>
       <AllTonesItems />
     </Accordion>
   ),
@@ -277,6 +277,37 @@ export const NoIcon: Story = {
           <AccordionSubtitle>This item has no icon in the header</AccordionSubtitle>
         </AccordionHeader>
         <AccordionPanel>Content for the accordion item without an icon.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  ),
+}
+
+export const AllSizes: Story = {
+  render: () => (
+    <Accordion className="w-[520px]">
+      <AccordionItem size="small" tone="brand">
+        <AccordionHeader>
+          <AccordionIcon>{TONE_ICONS['brand']}</AccordionIcon>
+          <AccordionTitle>Small Accordion Item</AccordionTitle>
+          <AccordionSubtitle>This is a small accordion item</AccordionSubtitle>
+        </AccordionHeader>
+        <AccordionPanel>Content for the small accordion item.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem size="medium" tone="brand">
+        <AccordionHeader>
+          <AccordionIcon>{TONE_ICONS['brand']}</AccordionIcon>
+          <AccordionTitle>Medium Accordion Item</AccordionTitle>
+          <AccordionSubtitle>This is a medium accordion item</AccordionSubtitle>
+        </AccordionHeader>
+        <AccordionPanel>Content for the medium accordion item.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem size="large" tone="brand">
+        <AccordionHeader>
+          <AccordionIcon>{TONE_ICONS['brand']}</AccordionIcon>
+          <AccordionTitle>Large Accordion Item</AccordionTitle>
+          <AccordionSubtitle>This is a large accordion item</AccordionSubtitle>
+        </AccordionHeader>
+        <AccordionPanel>Content for the large accordion item.</AccordionPanel>
       </AccordionItem>
     </Accordion>
   ),

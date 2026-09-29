@@ -6,10 +6,7 @@ export const AccordionIcon = ({ className, children, ref, ...props }: AccordionI
   return (
     <div
       data-slot="accordion-icon"
-      className={cn(
-        'col-start-1 row-start-1 self-center transition-colors [&>svg]:size-md',
-        className,
-      )}
+      className={cn('col-start-1 row-start-1 self-center transition-colors', className)}
       ref={ref}
       {...props}
     >

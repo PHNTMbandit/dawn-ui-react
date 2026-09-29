@@ -62,7 +62,7 @@ export const ComboboxInput = ({
             aria-label="Clear selection"
             keepMounted
             render={(e) => (
-              <Button onClick={e.onClick} size={'iconExtraSmall'} variant="ghost" tone="error">
+              <Button {...e} size={'iconExtraSmall'} variant="ghost" tone="error">
                 <XIcon weight="bold" />
               </Button>
             )}
@@ -71,7 +71,7 @@ export const ComboboxInput = ({
             aria-label="Open popup"
             render={(props, state) => (
               <Button
-                onClick={props.onClick}
+                {...props}
                 size={'iconExtraSmall'}
                 variant={state.open ? 'fill' : 'ghost'}
                 tone={'brand'}

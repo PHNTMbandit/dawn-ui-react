@@ -38,7 +38,7 @@ export const TextArea = ({ variant, className, ref, ...props }: TextAreaProps) =
       {hasMaxLength && (
         <span
           className={cn(
-            'w-full px-xs py-2xs text-right style-text-default--1 text-on-surface-variant',
+            'w-full px-xs py-2xs text-right style-text-default--1 text-on-surface',
             isMaxLengthExceeded && 'text-error-default',
           )}
         >

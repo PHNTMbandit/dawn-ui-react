@@ -29,6 +29,7 @@ export const LayerTreeVisibilityCell = ({
 
         return (
           <Button
+            aria-label={isVisible ? 'Hide layer' : 'Show layer'}
             size="iconSmall"
             tone="neutral"
             variant={'ghost'}

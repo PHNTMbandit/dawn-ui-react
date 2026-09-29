@@ -3,6 +3,7 @@ import {
   ClipboardIcon,
   CommandIcon,
   CopyIcon,
+  ListIcon,
   ScissorsIcon,
   TrashIcon,
 } from '@phosphor-icons/react'
@@ -31,7 +32,7 @@ const BasicActionMenu = () => (
     <MenuTrigger>
       <Button>Open Menu</Button>
     </MenuTrigger>
-    <MenuPopup>
+    <MenuPopup align="center">
       <MenuItem>
         <CopyIcon /> Copy
       </MenuItem>
@@ -223,7 +224,9 @@ export const Submenus: Story = {
       <MenuPopup>
         <MenuItem>Option 1</MenuItem>
         <MenuSubmenu>
-          <MenuSubmenuTrigger>More Options</MenuSubmenuTrigger>
+          <MenuSubmenuTrigger>
+            <ListIcon /> More Options
+          </MenuSubmenuTrigger>
           <MenuPopup>
             <MenuItem>Option 2</MenuItem>
             <MenuItem>Option 3</MenuItem>

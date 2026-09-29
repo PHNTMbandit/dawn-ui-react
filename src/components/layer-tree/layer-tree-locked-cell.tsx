@@ -29,6 +29,7 @@ export const LayerTreeLockedCell = ({
 
         return (
           <Button
+            aria-label={isLocked ? 'Unlock layer' : 'Lock layer'}
             size="iconSmall"
             tone="neutral"
             variant={'ghost'}

@@ -16,7 +16,9 @@ export const MenuSubmenuTrigger = ({
       ref={ref}
       {...props}
     >
-      <span className="col-start-1 min-w-3xl pr-2xl">{children}</span>
+      <div className="col-start-1 flex min-w-3xl items-center gap-2xs pr-2xl [&>svg]:size-sm">
+        {children}
+      </div>
       <CaretRightIcon className="col-start-2 size-xs place-self-end self-center" weight="bold" />
     </BaseMenu.SubmenuTrigger>
   )

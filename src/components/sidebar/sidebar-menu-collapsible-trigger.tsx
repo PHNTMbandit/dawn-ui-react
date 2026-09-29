@@ -10,9 +10,11 @@ export const SidebarMenuCollapsibleTrigger = ({
   className,
   children,
   ref,
+  style: _style,
   ...props
 }: SidebarMenuCollapsibleTriggerProps) => {
-  const { open } = useSidebar()
+  const { open, collapsible } = useSidebar()
+  const showText = collapsible === 'none' || open
 
   if (!open)
     return (
@@ -34,11 +36,18 @@ export const SidebarMenuCollapsibleTrigger = ({
   return (
     <CollapsibleTrigger
       variant={'ghost'}
-      className={cn('justify-start', className)}
+      className={cn(
+        'inline-flex! w-full! animate-in! justify-start! overflow-hidden! text-left! whitespace-nowrap! fade-in-0! slide-in-from-left-2! [&>svg]:size-sm! [&>svg]:flex-none [&>svg]:shrink-0',
+        !showText && 'mx-auto',
+        !open ? 'size-xl *:hidden [&>svg]:block' : 'h-xl pl-sm',
+        collapsible !== 'none' && open && 'animate-in slide-in-from-left-2',
+        className,
+      )}
       ref={ref}
+      style={{ justifyContent: 'flex-start' }}
       {...props}
     >
-      {children}
+      <span className="flex shrink-0 items-center gap-2xs [&>svg]:size-sm">{children}</span>
     </CollapsibleTrigger>
   )
 }

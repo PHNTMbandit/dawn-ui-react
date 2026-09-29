@@ -10,6 +10,7 @@ export const LayerTreeTriggerCell = ({
   className,
   children,
   dndDisabled,
+  onClick,
   ...props
 }: LayerTreeTriggerCellProps) => {
   const cell = useCellContext<string>()
@@ -43,6 +44,8 @@ export const LayerTreeTriggerCell = ({
   )
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick?.(event)
+    if (event.defaultPrevented) return
     if (hasChildren) {
       row.toggleExpanded()
       return

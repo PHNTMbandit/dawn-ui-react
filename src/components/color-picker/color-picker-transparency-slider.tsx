@@ -20,6 +20,7 @@ export const ColorPickerTransparencySlider = ({
 
   return (
     <ColorChannelSlider
+      aria-label="Transparency"
       {...props}
       min={0}
       max={100}

@@ -34,7 +34,7 @@ export const LayerTreeSort = ({ className, children, ref, ...props }: LayerTreeS
   return (
     <Menu>
       <MenuTrigger className={cn('shrink-0', className)} ref={ref} {...props}>
-        <Button variant="ghost" size="iconMedium" tone="neutral">
+        <Button aria-label="Sort layers" variant="ghost" size="iconMedium" tone="neutral">
           <ArrowsDownUpIcon weight="bold" />
         </Button>
       </MenuTrigger>

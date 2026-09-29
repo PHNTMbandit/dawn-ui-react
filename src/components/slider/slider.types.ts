@@ -1,10 +1,9 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import type { Slider as BaseSlider } from '@base-ui/react'
-import type { Icon } from '@phosphor-icons/react'
 import type { ComponentProps } from 'react'
 
-export const sliderVariants = cva('flex flex-col gap-xs', {
+export const sliderVariants = cva('flex h-lg w-full items-center', {
   variants: {
     size: {
       small:
@@ -38,12 +37,10 @@ export const sliderVariants = cva('flex flex-col gap-xs', {
 
 export type SliderProps = ComponentProps<typeof BaseSlider.Root> &
   VariantProps<typeof sliderVariants> & {
-    label?: string
-    description?: string
-    leadingIcon?: Icon
-    trailingIcon?: Icon
-    showMin?: boolean
-    showMax?: boolean
+    showIndicator?: boolean
     showThumbOnHover?: boolean
+    showTooltip?: boolean
   }
-export type SliderThumbProps = ComponentProps<typeof BaseSlider.Thumb>
+export type SliderThumbProps = ComponentProps<typeof BaseSlider.Thumb> & {
+  hide?: boolean
+}

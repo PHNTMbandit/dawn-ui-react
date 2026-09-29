@@ -53,12 +53,25 @@ export const ColorPickerInput = ({
     }
   }
 
+  const handleValueKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleValueBlur()
+    }
+  }
+
+  const handleTransparencyKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleTransparencyBlur()
+    }
+  }
+
   return (
     <InputGroup variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
       {showPopover ? (
         <Popover>
           <PopoverTrigger nativeButton={false}>
             <InputGroupAddon
+              aria-label="Open color options"
               style={{
                 backgroundColor: color.hex(),
               }}
@@ -78,7 +91,9 @@ export const ColorPickerInput = ({
         />
       )}
       <InputGroupInput
+        aria-label="Color value"
         onBlur={handleValueBlur}
+        onKeyDown={handleValueKeyDown}
         onValueChange={handleValueChange}
         value={inputValue}
         className={'uppercase'}
@@ -90,12 +105,14 @@ export const ColorPickerInput = ({
             <PercentIcon weight="bold" />
           </InputGroupAddon>
           <InputGroupInput
+            aria-label="Transparency percentage"
             type="number"
             min={0}
             max={100}
             value={transparency}
             onValueChange={handleTransparencyChange}
             onBlur={handleTransparencyBlur}
+            onKeyDown={handleTransparencyKeyDown}
             className="w-xl"
           />
         </>

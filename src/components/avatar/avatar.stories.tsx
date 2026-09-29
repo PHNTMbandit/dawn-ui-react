@@ -6,11 +6,14 @@ import {
   PlusIcon,
   WarningIcon,
 } from '@phosphor-icons/react'
+import { useState } from 'react'
+import { Button } from '../button'
 import { Avatar } from './avatar'
 import { AvatarBadge } from './avatar-badge'
 import { AvatarFallback } from './avatar-fallback'
 import { AvatarImage } from './avatar-image'
 
+import type { ImageLoadingStatus } from '@base-ui/react/avatar'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const SIZES = ['small', 'medium', 'large'] as const
@@ -173,6 +176,43 @@ export const WithFallback: Story = {
     docs: {
       description: {
         story: 'When no image is available, fallback initials keep the identity recognizable.',
+      },
+    },
+  },
+}
+
+const largeImage = (cacheBuster: number) => `https://picsum.photos/2400/2400?v=${cacheBuster}`
+
+const SkeletonLoadingTemplate = ({ size = 'large' }: { size?: AvatarSize }) => {
+  const [reloadKey, setReloadKey] = useState(0)
+  const [_status, setStatus] = useState<ImageLoadingStatus>('loading')
+
+  return (
+    <div className="flex flex-col items-center gap-md">
+      <Avatar size={size}>
+        <AvatarImage key={reloadKey} alt={SAMPLE_USERS[0].name} src={largeImage(reloadKey)} />
+      </Avatar>
+
+      <Button
+        onClick={() => {
+          setStatus('loading')
+          setReloadKey((key) => key + 1)
+        }}
+      >
+        Reload image
+      </Button>
+    </div>
+  )
+}
+
+export const SkeletonLoading: Story = {
+  name: 'State / Skeleton Loading',
+  render: (args) => <SkeletonLoadingTemplate size={(args.size as AvatarSize) ?? 'large'} />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'While the image is downloading, `AvatarImage` renders a pulsing skeleton via its `data-loading` styles. This story loads a large image and offers a reload control so the loading state can be observed on demand.',
       },
     },
   },

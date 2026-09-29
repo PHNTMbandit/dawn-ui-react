@@ -600,6 +600,10 @@
   color-scheme: dark;
 }
 
+[data-theme='dark'] .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
 @layer base {
   * {
     box-sizing: border-box;

@@ -26,6 +26,7 @@ export const LayerTreeLockedAll = ({
 
         return (
           <Button
+            aria-label={isLocked ? 'Unlock all layers' : 'Lock all layers'}
             size="iconSmall"
             tone="neutral"
             variant={'ghost'}

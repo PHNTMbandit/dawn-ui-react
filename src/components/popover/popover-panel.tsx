@@ -1,9 +1,14 @@
 import { Popover as BasePopover } from '@base-ui/react/popover'
 import { cn } from '../../utils/cn'
+import { popoverPanelVariants, type PopoverPanelProps } from './popover.types'
 
-import type { PopoverPanelProps } from './popover.types'
-
-export const PopoverPanel = ({ className, ref, children, ...props }: PopoverPanelProps) => {
+export const PopoverPanel = ({
+  elevation,
+  className,
+  ref,
+  children,
+  ...props
+}: PopoverPanelProps) => {
   return (
     <BasePopover.Portal>
       <BasePopover.Positioner
@@ -14,7 +19,7 @@ export const PopoverPanel = ({ className, ref, children, ...props }: PopoverPane
         sideOffset={8}
         {...props}
       >
-        <BasePopover.Popup className="relative z-99 h-(--popup-height,auto) w-(--popup-width,auto) origin-(--transform-origin) overflow-hidden rounded-2xl bg-surface-3 text-on-surface shadow-md transition-[width,height,opacity,scale] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-90 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-90 data-starting-style:opacity-0">
+        <BasePopover.Popup className={popoverPanelVariants({ elevation, className })}>
           <BasePopover.Arrow className="flex transition-[left] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180" />
           <BasePopover.Viewport
             className={cn(

@@ -15,13 +15,17 @@ export const TableSortList = ({ className, children, ref, ...props }: TableSortL
     <table.Subscribe selector={(state) => state.sorting}>
       {() => (
         <ul className={cn('flex flex-wrap items-center gap-xs', className)} ref={ref} {...props}>
-          {children}
+          {children && <li className="contents">{children}</li>}
           {table.getAllColumns().map((column) => {
             if (!column.getIsSorted()) {
               return null
             }
 
-            return <TableSortChip key={column.id} column={column} />
+            return (
+              <li className="contents" key={column.id}>
+                <TableSortChip column={column} />
+              </li>
+            )
           })}
         </ul>
       )}

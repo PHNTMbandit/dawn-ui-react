@@ -31,6 +31,7 @@ import { SidebarMenuCollapsibleTrigger } from './sidebar-menu-collapsible-trigge
 import { SidebarMenuItem } from './sidebar-menu-item'
 import { SidebarProvider } from './sidebar-provider'
 import { SidebarToggle } from './sidebar-toggle'
+import { getStoredSidebarOpen } from './sidebar.utils'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
@@ -50,7 +51,7 @@ const PrimaryNavigation = () => (
     <SidebarGroupLabel>Menu</SidebarGroupLabel>
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton isActive>
+        <SidebarMenuButton>
           <GridFourIcon weight="bold" />
           <span>Dashboard</span>
         </SidebarMenuButton>
@@ -136,7 +137,12 @@ const SidebarShell = ({
   provider?: { collapsible?: 'icon' | 'offcanvas' | 'none'; side?: 'left' | 'right' }
 }) => (
   <div className={APP_FRAME_CLASS}>
-    <SidebarProvider collapsible={provider?.collapsible} side={provider?.side}>
+    <SidebarProvider
+      id="main-sidebar"
+      defaultOpen={getStoredSidebarOpen('main-sidebar', true)}
+      collapsible={provider?.collapsible}
+      side={provider?.side}
+    >
       <Sidebar tone={tone} width={width}>
         <SidebarHeader>
           {(isExpanded) => {
@@ -284,7 +290,12 @@ export const CollapsibleOffcanvas: Story = {
   name: 'Behavior / Collapsible Offcanvas',
   render: (args) => (
     <div className={APP_FRAME_CLASS}>
-      <SidebarProvider collapsible={'offcanvas'} side={'left'}>
+      <SidebarProvider
+        id="main-sidebar"
+        defaultOpen={getStoredSidebarOpen('main-sidebar', true)}
+        collapsible={'offcanvas'}
+        side={'left'}
+      >
         <Sidebar tone={args.tone} width={args.width as number}>
           <SidebarHeader>
             {(isExpanded) => {
@@ -369,5 +380,89 @@ export const RightSide: Story = {
   name: 'Position / Right Side',
   render: (args) => (
     <SidebarShell provider={{ side: 'right' }} tone={args.tone} width={args.width as number} />
+  ),
+}
+
+export const MobileResponsive: Story = {
+  name: 'Behavior / Mobile Responsive',
+  parameters: {
+    viewport: {
+      options: INITIAL_VIEWPORTS,
+      defaultViewport: 'mobile1',
+    },
+    docs: {
+      description: {
+        story:
+          'On mobile viewports the sidebar automatically switches to offcanvas mode, so an open sidebar collapses into an overlay driven by `useMediaQuery`. Use `SidebarToggle` to slide it in and out.',
+      },
+    },
+  },
+  render: (args) => (
+    <div className={APP_FRAME_CLASS}>
+      <SidebarProvider
+        id="mobile-sidebar"
+        defaultOpen={getStoredSidebarOpen('mobile-sidebar', true)}
+        collapsible="icon"
+        side="left"
+      >
+        <Sidebar tone={args.tone} width={args.width as number}>
+          <SidebarHeader>
+            {(isExpanded) => (
+              <>
+                {isExpanded ? <SidebarLogo isExpanded={isExpanded} /> : null}
+                <SidebarToggle>
+                  {(open) => (
+                    <>
+                      {open ? (
+                        <SquareHalfIcon weight="bold" />
+                      ) : (
+                        <SidebarSimpleIcon weight="bold" />
+                      )}
+                    </>
+                  )}
+                </SidebarToggle>
+              </>
+            )}
+          </SidebarHeader>
+          <SidebarContent>
+            <PrimaryNavigation />
+            <SecondaryNavigation />
+          </SidebarContent>
+          <SidebarFooter>
+            {(isExpanded) =>
+              isExpanded ? (
+                <Profile>
+                  <Avatar>
+                    <AvatarFallback>DP</AvatarFallback>
+                  </Avatar>
+                  <ProfileContent>
+                    <ProfileName>Domenic Pittari</ProfileName>
+                    <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
+                  </ProfileContent>
+                </Profile>
+              ) : (
+                <Avatar>
+                  <AvatarFallback>DP</AvatarFallback>
+                </Avatar>
+              )
+            }
+          </SidebarFooter>
+        </Sidebar>
+
+        <div className="flex flex-1 flex-col gap-sm bg-surface-background p-md">
+          <div className="flex items-center justify-between rounded-lg bg-surface-low p-sm">
+            <p className="style-text-strong--1 text-on-surface">Workspace Content</p>
+            <SidebarToggle>
+              {(open) => (
+                <>{open ? <SquareHalfIcon weight="bold" /> : <SidebarSimpleIcon weight="bold" />}</>
+              )}
+            </SidebarToggle>
+          </div>
+          <div className="flex-1 rounded-lg bg-surface-low p-sm style-text-default--1 text-on-surface-variant">
+            Resize to a mobile viewport and the sidebar becomes an offcanvas overlay automatically.
+          </div>
+        </div>
+      </SidebarProvider>
+    </div>
   ),
 }

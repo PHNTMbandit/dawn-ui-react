@@ -18,6 +18,7 @@ export const TableCheckboxCell = ({
     <table.Subscribe selector={(state) => state.rowSelection}>
       {() => (
         <Checkbox
+          aria-label="Select row"
           checked={
             row.getIsSelected() || (row.getCanSelectSubRows() && row.getIsAllSubRowsSelected())
           }

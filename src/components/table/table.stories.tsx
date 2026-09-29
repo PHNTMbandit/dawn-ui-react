@@ -197,17 +197,22 @@ export const Playground = {
           <table.TableToolbar>
             <table.TableSearch placeholder="Search..." />
             <table.TableFilterMenu>
-              <Button size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="Filter" size="iconMedium" variant={'ghost'} tone="neutral">
                 <FunnelIcon weight="bold" />
               </Button>
             </table.TableFilterMenu>
             <table.TableSortMenu>
-              <Button size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="Sort" size="iconMedium" variant={'ghost'} tone="neutral">
                 <ArrowsDownUpIcon weight="bold" />
               </Button>
             </table.TableSortMenu>
             <table.TableColumnToggle>
-              <Button size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button
+                aria-label="Toggle columns"
+                size="iconMedium"
+                variant={'ghost'}
+                tone="neutral"
+              >
                 <ColumnsIcon weight="bold" />
               </Button>
             </table.TableColumnToggle>
@@ -353,17 +358,22 @@ export const PlaygroundJA = {
           <table.TableToolbar>
             <table.TableSearch placeholder="検索..." />
             <table.TableFilterMenu>
-              <Button size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="Filter" size="iconMedium" variant={'ghost'} tone="neutral">
                 <FunnelIcon weight="bold" />
               </Button>
             </table.TableFilterMenu>
             <table.TableSortMenu>
-              <Button size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="Sort" size="iconMedium" variant={'ghost'} tone="neutral">
                 <ArrowsDownUpIcon weight="bold" />
               </Button>
             </table.TableSortMenu>
             <table.TableColumnToggle>
-              <Button size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button
+                aria-label="Toggle columns"
+                size="iconMedium"
+                variant={'ghost'}
+                tone="neutral"
+              >
                 <ColumnsIcon weight="bold" />
               </Button>
             </table.TableColumnToggle>
@@ -560,7 +570,7 @@ export const Filtering = {
           <table.TableToolbar>
             <table.TableSearch placeholder="Search..." />
             <table.TableFilterMenu>
-              <Button size="iconMedium" variant="ghost" tone="neutral">
+              <Button aria-label="Filter" size="iconMedium" variant="ghost" tone="neutral">
                 <FunnelIcon weight="bold" />
               </Button>
             </table.TableFilterMenu>
