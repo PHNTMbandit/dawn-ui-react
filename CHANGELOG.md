@@ -1,3 +1,25 @@
+# [1.0.0-beta.6](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2026-09-29)
+
+
+### Bug Fixes
+
+* improve menu appearance ([5cc1d84](https://github.com/PHNTMbandit/dawn-ui-react/commit/5cc1d844c7435c5013c29d191da4113f02110ebf))
+* **number-field.types:** correct class syntax for number field variants ([d4a2866](https://github.com/PHNTMbandit/dawn-ui-react/commit/d4a2866fcb64ff200bab0e3ea577acb6978a0f47))
+* **slider-value:** update import path for utility function in SliderValue component ([183eef6](https://github.com/PHNTMbandit/dawn-ui-react/commit/183eef60a350cfdf9b7c6f85c2b5f3c074fbadab))
+* update imports and refactor useStableNumberArray for improved state management ([29fe435](https://github.com/PHNTMbandit/dawn-ui-react/commit/29fe4359895a9d0fd41dabe391ddf2bf946561d9))
+
+
+### Features
+
+* add accordion item sizes and fix accessibility errors ([1a8aae0](https://github.com/PHNTMbandit/dawn-ui-react/commit/1a8aae04594dbf3ba03d3e01327132b30d456c87))
+* add missing slider type exports ([d1b9b79](https://github.com/PHNTMbandit/dawn-ui-react/commit/d1b9b79e74ef5525932a21466ca0001c0e4d7502))
+* add SliderGroup component with supporting subcomponents and context ([2f69a4b](https://github.com/PHNTMbandit/dawn-ui-react/commit/2f69a4b3284a08c1cfd835603a2bfbc7ae03c4a6))
+* refactor context menu components for improved styling and functionality ([0156bc9](https://github.com/PHNTMbandit/dawn-ui-react/commit/0156bc9f84f5401714ca217a375bb963b0765cf1))
+* refactor slider to be more modular ([0260ca7](https://github.com/PHNTMbandit/dawn-ui-react/commit/0260ca763a831f6e8d67926085656344f9e86088))
+* **sidebar-menu-collapsible:** set collapsible panel to default open if child is active ([0c3bc78](https://github.com/PHNTMbandit/dawn-ui-react/commit/0c3bc78b39aa162494f70c38183d15acbbcc899b))
+* **sidebar-provider:** add ssr friendly sidebar state persistence ([dc11ca7](https://github.com/PHNTMbandit/dawn-ui-react/commit/dc11ca7715b46721ebe56857ae374da2890f8e3c))
+* **sidebar:** add persisted state ([ea34bcd](https://github.com/PHNTMbandit/dawn-ui-react/commit/ea34bcd8d19ef3e6c4a4071d2f09690b270e2a3a))
+
 # [1.0.0-alpha.45](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2026-09-29)
 
 
