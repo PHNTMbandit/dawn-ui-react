@@ -1,3 +1,22 @@
+import { NavigationMenu as NavigationMenuBase } from './navigation-menu'
+import { NavigationMenuContent } from './navigation-menu-content'
+import { NavigationMenuIcon } from './navigation-menu-icon'
+import { NavigationMenuItem } from './navigation-menu-item'
+import { NavigationMenuLink } from './navigation-menu-link'
+import { NavigationMenuList } from './navigation-menu-list'
+import { NavigationMenuPopup } from './navigation-menu-popup'
+import { NavigationMenuTrigger } from './navigation-menu-trigger'
+
+export const NavigationMenu = Object.assign(NavigationMenuBase, {
+  Content: NavigationMenuContent,
+  Icon: NavigationMenuIcon,
+  Item: NavigationMenuItem,
+  Link: NavigationMenuLink,
+  List: NavigationMenuList,
+  Popup: NavigationMenuPopup,
+  Trigger: NavigationMenuTrigger,
+})
+
 export type {
   NavigationMenuContentProps,
   NavigationMenuIconProps,
@@ -9,7 +28,6 @@ export type {
   NavigationMenuTriggerProps,
 } from './navigation-menu.types'
 
-export { NavigationMenu } from './navigation-menu'
 export { NavigationMenuContent } from './navigation-menu-content'
 export { NavigationMenuIcon } from './navigation-menu-icon'
 export { NavigationMenuItem } from './navigation-menu-item'

@@ -1,4 +1,26 @@
-export { AlertDialog } from './alert-dialog'
+import { AlertDialog as AlertDialogBase } from './alert-dialog'
+import { AlertDialogClose } from './alert-dialog-close'
+import { AlertDialogConfirm } from './alert-dialog-confirm'
+import { AlertDialogDescription } from './alert-dialog-description'
+import { AlertDialogFooter } from './alert-dialog-footer'
+import { AlertDialogHeader } from './alert-dialog-header'
+import { AlertDialogIcon } from './alert-dialog-icon'
+import { AlertDialogPopup } from './alert-dialog-popup'
+import { AlertDialogTitle } from './alert-dialog-title'
+import { AlertDialogTrigger } from './alert-dialog-trigger'
+
+export const AlertDialog = Object.assign(AlertDialogBase, {
+  Close: AlertDialogClose,
+  Confirm: AlertDialogConfirm,
+  Description: AlertDialogDescription,
+  Footer: AlertDialogFooter,
+  Header: AlertDialogHeader,
+  Popup: AlertDialogPopup,
+  Title: AlertDialogTitle,
+  Trigger: AlertDialogTrigger,
+  Icon: AlertDialogIcon,
+})
+
 export type {
   AlertDialogCloseProps,
   AlertDialogConfirmProps,

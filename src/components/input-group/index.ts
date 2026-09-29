@@ -1,4 +1,14 @@
-export { InputGroup } from './input-group'
+import { InputGroup as InputGroupBase } from './input-group'
+import { InputGroupAddon } from './input-group-addon'
+import { InputGroupInput } from './input-group-input'
+import { InputGroupSeparator } from './input-group-separator'
+
+export const InputGroup = Object.assign(InputGroupBase, {
+  Addon: InputGroupAddon,
+  Input: InputGroupInput,
+  Separator: InputGroupSeparator,
+})
+
 export type {
   InputGroupAddonProps,
   InputGroupInputProps,

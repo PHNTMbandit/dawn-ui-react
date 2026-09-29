@@ -1,4 +1,34 @@
-export { Autocomplete } from './autocomplete'
+import { Autocomplete as AutocompleteBase } from './autocomplete'
+import { AutocompleteCollection } from './autocomplete-collection'
+import { AutocompleteContent } from './autocomplete-content'
+import { AutocompleteGridContent } from './autocomplete-grid-content'
+import { AutocompleteGridItem } from './autocomplete-grid-item'
+import { AutocompleteGroup } from './autocomplete-group'
+import { AutocompleteGroupLabel } from './autocomplete-group-label'
+import { AutocompleteInputGroup } from './autocomplete-input-group'
+import { AutocompleteInputGroupAddon } from './autocomplete-input-group-addon'
+import { AutocompleteInputGroupInput } from './autocomplete-input-group-input'
+import { AutocompleteItem } from './autocomplete-item'
+import { AutocompleteRow } from './autocomplete-row'
+import { AutocompleteStatus } from './autocomplete-status'
+import { AutocompleteTrigger } from './autocomplete-trigger'
+
+export const Autocomplete = Object.assign(AutocompleteBase, {
+  Collection: AutocompleteCollection,
+  Content: AutocompleteContent,
+  GridContent: AutocompleteGridContent,
+  GridItem: AutocompleteGridItem,
+  Group: AutocompleteGroup,
+  GroupLabel: AutocompleteGroupLabel,
+  InputGroup: AutocompleteInputGroup,
+  InputGroupAddon: AutocompleteInputGroupAddon,
+  InputGroupInput: AutocompleteInputGroupInput,
+  Item: AutocompleteItem,
+  Row: AutocompleteRow,
+  Status: AutocompleteStatus,
+  Trigger: AutocompleteTrigger,
+})
+
 export type {
   AutocompleteCollectionProps,
   AutocompleteContentProps,

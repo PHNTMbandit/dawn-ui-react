@@ -1,4 +1,16 @@
-export { Tabs } from './tabs'
+import { Tabs as TabsBase } from './tabs'
+import { TabsIndicator } from './tabs-indicator'
+import { TabsList } from './tabs-list'
+import { TabsPanel } from './tabs-panel'
+import { TabsTab } from './tabs-tab'
+
+export const Tabs = Object.assign(TabsBase, {
+  Indicator: TabsIndicator,
+  List: TabsList,
+  Panel: TabsPanel,
+  Tab: TabsTab,
+})
+
 export type {
   TabsIndicatorProps,
   TabsListProps,

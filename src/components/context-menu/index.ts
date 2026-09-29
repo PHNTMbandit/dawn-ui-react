@@ -1,4 +1,32 @@
-export { ContextMenu } from './context-menu'
+import { ContextMenu as ContextMenuBase } from './context-menu'
+import { ContextMenuCheckboxItem } from './context-menu-checkbox-item'
+import { ContextMenuGroup } from './context-menu-group'
+import { ContextMenuGroupLabel } from './context-menu-group-label'
+import { ContextMenuItem } from './context-menu-item'
+import { ContextMenuPopup } from './context-menu-popup'
+import { ContextMenuRadioGroup } from './context-menu-radio-group'
+import { ContextMenuRadioItem } from './context-menu-radio-item'
+import { ContextMenuSeparator } from './context-menu-separator'
+import { ContextMenuShortcut } from './context-menu-shortcut'
+import { ContextMenuSubmenu } from './context-menu-submenu'
+import { ContextMenuSubmenuTrigger } from './context-menu-submenu-trigger'
+import { ContextMenuTrigger } from './context-menu-trigger'
+
+export const ContextMenu = Object.assign(ContextMenuBase, {
+  CheckboxItem: ContextMenuCheckboxItem,
+  Group: ContextMenuGroup,
+  GroupLabel: ContextMenuGroupLabel,
+  RadioGroup: ContextMenuRadioGroup,
+  RadioItem: ContextMenuRadioItem,
+  Shortcut: ContextMenuShortcut,
+  Item: ContextMenuItem,
+  Popup: ContextMenuPopup,
+  Separator: ContextMenuSeparator,
+  Submenu: ContextMenuSubmenu,
+  SubmenuTrigger: ContextMenuSubmenuTrigger,
+  Trigger: ContextMenuTrigger,
+})
+
 export type {
   ContextMenuCheckboxItemProps,
   ContextMenuGroupLabelProps,

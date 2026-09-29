@@ -1,4 +1,26 @@
-export { Dialog } from './dialog'
+import { Dialog as DialogBase } from './dialog'
+import { DialogClose } from './dialog-close'
+import { DialogContent } from './dialog-content'
+import { DialogDescription } from './dialog-description'
+import { DialogFooter } from './dialog-footer'
+import { DialogHeader } from './dialog-header'
+import { DialogIcon } from './dialog-icon'
+import { DialogPopup } from './dialog-popup'
+import { DialogTitle } from './dialog-title'
+import { DialogTrigger } from './dialog-trigger'
+
+export const Dialog = Object.assign(DialogBase, {
+  Close: DialogClose,
+  Content: DialogContent,
+  Description: DialogDescription,
+  Footer: DialogFooter,
+  Header: DialogHeader,
+  Icon: DialogIcon,
+  Popup: DialogPopup,
+  Title: DialogTitle,
+  Trigger: DialogTrigger,
+})
+
 export type {
   DialogCloseProps,
   DialogDescriptionProps,
