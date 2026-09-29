@@ -1,4 +1,22 @@
-export { Meter } from './meter'
+import { Meter as MeterBase } from './meter'
+import { MeterFooter } from './meter-footer'
+import { MeterHeader } from './meter-header'
+import { MeterIndicator } from './meter-indicator'
+import { MeterLabel } from './meter-label'
+import { MeterSubtitle } from './meter-subtitle'
+import { MeterTrack } from './meter-track'
+import { MeterValue } from './meter-value'
+
+export const Meter = Object.assign(MeterBase, {
+  Header: MeterHeader,
+  Indicator: MeterIndicator,
+  Label: MeterLabel,
+  Track: MeterTrack,
+  Value: MeterValue,
+  Footer: MeterFooter,
+  Subtitle: MeterSubtitle,
+})
+
 export type {
   MeterHeaderProps,
   MeterIndicatorProps,

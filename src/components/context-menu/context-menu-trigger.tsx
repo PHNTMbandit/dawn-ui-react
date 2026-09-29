@@ -1,5 +1,5 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
-import { cn } from '@/index'
+import { cn } from '@/utils/cn'
 
 import type { ContextMenuTriggerProps } from './context-menu.types'
 

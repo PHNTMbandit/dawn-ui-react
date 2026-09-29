@@ -1,4 +1,40 @@
-export { Field } from './field'
+import { Field as FieldBase } from './field'
+import { FieldCheckbox } from './field-checkbox'
+import { FieldDescription } from './field-description'
+import { FieldErrors } from './field-errors'
+import { FieldInput } from './field-input'
+import { FieldInputGroup } from './field-input-group'
+import { FieldInputGroupInput } from './field-input-group-input'
+import { FieldLabel } from './field-label'
+import { FieldRadio } from './field-radio'
+import { FieldRadioGroup } from './field-radio-group'
+import { FieldRow } from './field-row'
+import { FieldSelect } from './field-select'
+import { FieldSet } from './field-set'
+import { FieldSlider } from './field-slider'
+import { FieldSwitch } from './field-switch'
+import { FieldTextArea } from './field-text-area'
+import { FieldToggle } from './field-toggle'
+
+export const Field = Object.assign(FieldBase, {
+  Description: FieldDescription,
+  Errors: FieldErrors,
+  Input: FieldInput,
+  Label: FieldLabel,
+  Slider: FieldSlider,
+  Select: FieldSelect,
+  TextArea: FieldTextArea,
+  Checkbox: FieldCheckbox,
+  Radio: FieldRadio,
+  RadioGroup: FieldRadioGroup,
+  Switch: FieldSwitch,
+  Toggle: FieldToggle,
+  InputGroup: FieldInputGroup,
+  InputGroupInput: FieldInputGroupInput,
+  Set: FieldSet,
+  Row: FieldRow,
+})
+
 export type {
   FieldDescriptionProps,
   FieldErrorProps,

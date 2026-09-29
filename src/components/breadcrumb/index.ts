@@ -1,4 +1,16 @@
-export { Breadcrumb } from './breadcrumb'
+import { Breadcrumb as BreadcrumbBase } from './breadcrumb'
+import { BreadcrumbEllipsis } from './breadcrumb-ellipsis'
+import { BreadcrumbItem } from './breadcrumb-item'
+import { BreadcrumbLink } from './breadcrumb-link'
+import { BreadcrumbSeparator } from './breadcrumb-separator'
+
+export const Breadcrumb = Object.assign(BreadcrumbBase, {
+  Ellipsis: BreadcrumbEllipsis,
+  Item: BreadcrumbItem,
+  Link: BreadcrumbLink,
+  Separator: BreadcrumbSeparator,
+})
+
 export type {
   BreadcrumbEllipsisProps,
   BreadcrumbItemProps,

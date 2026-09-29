@@ -1,6 +1,6 @@
 import { Button } from '../button'
 import { useTableContext } from './table-context'
-import { cn } from '@/index'
+import { cn } from '@/utils/cn'
 
 import type { TableViewModeToggleProps } from './table.types'
 

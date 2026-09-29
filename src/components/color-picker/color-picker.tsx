@@ -2,7 +2,7 @@ import chroma from 'chroma-js'
 import React from 'react'
 import { colorPickerVariants, type ColorPickerProps } from './color-picker.types'
 import { VALUE_TYPES } from './color-picker.types'
-import { cn } from '@/index'
+import { cn } from '@/utils/cn'
 
 import type {
   ColorPickerAction,

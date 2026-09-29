@@ -27,7 +27,7 @@ export type {
   RowVisibilityState,
   LayerTreeNodeIconProps,
 } from './layer-tree.types'
-export { LayerTree, useLayerTree } from './layer-tree'
+export { useLayerTree } from './layer-tree'
 export { LayerTreeBody } from './layer-tree-body'
 export { LayerTreeExpandAll } from './layer-tree-expand-all'
 export { LayerTreeFooter } from './layer-tree-footer'

@@ -1,3 +1,40 @@
+import { Dropzone as DropzoneBase } from './dropzone'
+import { DropzoneActions } from './dropzone-actions'
+import { DropzoneClear } from './dropzone-clear'
+import { DropzoneConfirm } from './dropzone-confirm'
+import { DropzoneContainer } from './dropzone-container'
+import { DropzoneError } from './dropzone-error'
+import { DropzoneFileSizeLimit } from './dropzone-file-size-limit'
+import { DropzoneFiles } from './dropzone-files'
+import { DropzoneFilesHeader } from './dropzone-files-header'
+import { DropzoneFilesList as DropzoneFileList } from './dropzone-files-list'
+import { DropzoneFilesTitle } from './dropzone-files-title'
+import { DropzoneFormats } from './dropzone-formats'
+import { DropzoneHeading } from './dropzone-heading'
+import { DropzoneIcon } from './dropzone-icon'
+import { DropzoneInfo } from './dropzone-info'
+import { DropzoneSubtitle } from './dropzone-subtitle'
+import { DropzoneTrigger } from './dropzone-trigger'
+
+export const Dropzone = Object.assign(DropzoneBase, {
+  Container: DropzoneContainer,
+  Error: DropzoneError,
+  FileList: DropzoneFileList,
+  FileSizeLimit: DropzoneFileSizeLimit,
+  Formats: DropzoneFormats,
+  Heading: DropzoneHeading,
+  Icon: DropzoneIcon,
+  Subtitle: DropzoneSubtitle,
+  Trigger: DropzoneTrigger,
+  Info: DropzoneInfo,
+  Files: DropzoneFiles,
+  FilesHeader: DropzoneFilesHeader,
+  FilesTitle: DropzoneFilesTitle,
+  Actions: DropzoneActions,
+  Confirm: DropzoneConfirm,
+  Clear: DropzoneClear,
+})
+
 export type {
   DropzoneProps,
   DropzoneContainerProps,
@@ -18,7 +55,6 @@ export type {
   DropzoneTriggerProps,
   DropzoneInfoProps,
 } from './dropzone.types'
-export { Dropzone } from './dropzone'
 export { DropzoneContainer } from './dropzone-container'
 export { DropzoneError } from './dropzone-error'
 export { DropzoneFilesList as DropzoneFileList } from './dropzone-files-list'

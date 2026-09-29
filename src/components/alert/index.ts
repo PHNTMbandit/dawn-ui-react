@@ -1,4 +1,16 @@
-export { Alert } from './alert'
+import { Alert as AlertBase } from './alert'
+import { AlertAction } from './alert-action'
+import { AlertDescription } from './alert-description'
+import { AlertIcon } from './alert-icon'
+import { AlertTitle } from './alert-title'
+
+export const Alert = Object.assign(AlertBase, {
+  Description: AlertDescription,
+  Title: AlertTitle,
+  Action: AlertAction,
+  Icon: AlertIcon,
+})
+
 export type {
   AlertActionProps,
   AlertDescriptionProps,

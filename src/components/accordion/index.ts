@@ -1,4 +1,20 @@
-export { Accordion } from './accordion'
+import { Accordion as AccordionBase } from './accordion'
+import { AccordionHeader } from './accordion-header'
+import { AccordionIcon } from './accordion-icon'
+import { AccordionItem } from './accordion-item'
+import { AccordionPanel } from './accordion-panel'
+import { AccordionSubtitle } from './accordion-subtitle'
+import { AccordionTitle } from './accordion-title'
+
+export const Accordion = Object.assign(AccordionBase, {
+  Header: AccordionHeader,
+  Item: AccordionItem,
+  Panel: AccordionPanel,
+  Subtitle: AccordionSubtitle,
+  Title: AccordionTitle,
+  Icon: AccordionIcon,
+})
+
 export type {
   AccordionHeaderProps,
   AccordionItemProps,

@@ -1,4 +1,28 @@
-export { Select } from './select'
+import { Select as SelectBase } from './select'
+import { SelectDescription } from './select-description'
+import { SelectGroup } from './select-group'
+import { SelectGroupLabel } from './select-group-label'
+import { SelectIcon } from './select-icon'
+import { SelectItem } from './select-item'
+import { SelectList } from './select-list'
+import { SelectPopup } from './select-popup'
+import { SelectTitle } from './select-title'
+import { SelectTrigger } from './select-trigger'
+import { SelectValue } from './select-value'
+
+export const Select = Object.assign(SelectBase, {
+  Item: SelectItem,
+  List: SelectList,
+  Icon: SelectIcon,
+  Popup: SelectPopup,
+  Trigger: SelectTrigger,
+  Value: SelectValue,
+  Group: SelectGroup,
+  GroupLabel: SelectGroupLabel,
+  Description: SelectDescription,
+  Title: SelectTitle,
+})
+
 export type {
   SelectIconProps,
   SelectItemProps,
