@@ -1,36 +1,3 @@
-import { LayerTree as LayerTreeBase } from './layer-tree'
-import { LayerTreeBody } from './layer-tree-body'
-import { LayerTreeExpandAll } from './layer-tree-expand-all'
-import { LayerTreeFooter } from './layer-tree-footer'
-import { LayerTreeIconCell } from './layer-tree-icon-cell'
-import { LayerTreeLockedAll } from './layer-tree-locked-all'
-import { LayerTreeLockedCell } from './layer-tree-locked-cell'
-import { LayerTreeNodeIcon } from './layer-tree-node-icon'
-import { LayerTreeRow } from './layer-tree-row'
-import { LayerTreeSearch } from './layer-tree-search'
-import { LayerTreeSort } from './layer-tree-sort'
-import { LayerTreeTextCell } from './layer-tree-text-cell'
-import { LayerTreeTriggerCell } from './layer-tree-trigger-cell'
-import { LayerTreeVisibilityAll } from './layer-tree-visibility-all'
-import { LayerTreeVisibilityCell } from './layer-tree-visibility-cell'
-
-export const LayerTree = Object.assign(LayerTreeBase, {
-  Body: LayerTreeBody,
-  ExpandAll: LayerTreeExpandAll,
-  Footer: LayerTreeFooter,
-  IconCell: LayerTreeIconCell,
-  LockedAll: LayerTreeLockedAll,
-  LockedCell: LayerTreeLockedCell,
-  TextCell: LayerTreeTextCell,
-  TriggerCell: LayerTreeTriggerCell,
-  Row: LayerTreeRow,
-  Search: LayerTreeSearch,
-  Sort: LayerTreeSort,
-  VisibilityAll: LayerTreeVisibilityAll,
-  VisibilityCell: LayerTreeVisibilityCell,
-  NodeIcon: LayerTreeNodeIcon,
-})
-
 export {
   createAppColumnHelper as createLayerTreeColumnHelper,
   features as layerTreeFeatures,

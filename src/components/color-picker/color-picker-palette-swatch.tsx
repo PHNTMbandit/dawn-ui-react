@@ -1,7 +1,7 @@
 import chroma from 'chroma-js'
 import { useColorPicker } from './color-picker'
 import { colorPickerSwatchVariants, type ColorPickerPaletteSwatchProps } from './color-picker.types'
-import { cn } from '@/index'
+import { cn } from '@/utils/cn'
 
 export const ColorPickerPaletteSwatch = ({
   size,
