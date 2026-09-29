@@ -1,3 +1,10 @@
+# [1.0.0-rc.2](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2026-09-29)
+
+
+### Features
+
+* **vite.config:** update dependencies ([2d623ee](https://github.com/PHNTMbandit/dawn-ui-react/commit/2d623ee283e65884382345d49abfb45162a58d0d))
+
 # 1.0.0-rc.1 (2026-09-29)
 
 
