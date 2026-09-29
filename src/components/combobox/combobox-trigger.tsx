@@ -13,6 +13,7 @@ export const ComboboxTrigger = ({
 }: ComboboxTriggerProps) => {
   return (
     <BaseCombobox.Trigger
+      aria-label={typeof placeholder === 'string' ? placeholder : undefined}
       className={cn(
         'inline-flex h-xl items-center justify-between gap-xl rounded-xl bg-surface pr-sm pl-md style-text-default-0 outline-2 outline-transparent transition-all hover:cursor-pointer hover:outline-border data-popup-open:outline-brand-border',
         className,

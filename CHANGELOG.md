@@ -1,9 +1,8 @@
 # [1.0.0-alpha.44](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2026-09-27)
 
-
 ### Features
 
-* refactor context menu components for improved styling and functionality ([0156bc9](https://github.com/PHNTMbandit/dawn-ui-react/commit/0156bc9f84f5401714ca217a375bb963b0765cf1))
+- refactor context menu components for improved styling and functionality ([0156bc9](https://github.com/PHNTMbandit/dawn-ui-react/commit/0156bc9f84f5401714ca217a375bb963b0765cf1))
 
 # [1.0.0-alpha.43](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2026-09-24)
 

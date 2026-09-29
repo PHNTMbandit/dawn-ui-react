@@ -27,25 +27,14 @@ export const DropzoneContainer = ({
     }
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      openFilePicker()
-    }
-  }
-
   return (
     <div
       aria-disabled={isDisabled}
       aria-invalid={fileError ? true : undefined}
-      aria-label="File upload dropzone"
       onClick={openFilePicker}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={isDisabled ? -1 : 0}
       className={cn(
         'flex size-full items-center justify-center rounded-xl border-2 border-brand-border bg-surface py-2xl transition-all outline-none focus-visible:outline-2 focus-visible:outline-brand-border-strong',
         !isDisabled && 'cursor-pointer',

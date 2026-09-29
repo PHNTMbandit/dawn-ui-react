@@ -24,6 +24,7 @@ export const SliderInput = ({ className, ref, ...props }: SliderInputProps) => {
 
   return (
     <Input
+      aria-label="Value"
       data-slot="slider-input"
       className={cn('w-[4rem]', className)}
       ref={ref}

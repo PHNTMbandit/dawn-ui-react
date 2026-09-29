@@ -22,6 +22,7 @@ export const CodeBlockCopy = ({ className, children, ref, ...props }: CodeBlockC
 
   return (
     <Button
+      aria-label={copied ? 'Copied' : 'Copy code'}
       onClick={handleClick}
       size="iconMedium"
       variant={'ghost'}

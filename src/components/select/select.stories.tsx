@@ -84,7 +84,7 @@ const AppleSelect = ({
   disabled?: boolean
 }) => (
   <Select defaultValue={defaultValue} multiple={multiple} disabled={disabled}>
-    <SelectTrigger variant={variant} size={size}>
+    <SelectTrigger aria-label={placeholder} variant={variant} size={size}>
       <SelectValue placeholder={placeholder}>
         {(value: keyof typeof apples) => (
           <>
@@ -114,7 +114,7 @@ const AppleSelect = ({
 
 const GroupedProduceSelect = ({ multiple = false }: { multiple?: boolean }) => (
   <Select multiple={multiple}>
-    <SelectTrigger>
+    <SelectTrigger aria-label="Select produce">
       <SelectValue placeholder="Select produce" />
       <SelectIcon>
         <CaretUpDownIcon weight="bold" />
@@ -162,7 +162,7 @@ const AppleDescriptionSelect = ({
   placeholder?: string
 }) => (
   <Select multiple={multiple}>
-    <SelectTrigger>
+    <SelectTrigger aria-label={placeholder}>
       <SelectValue placeholder={placeholder}>
         {(value: string) => (
           <>

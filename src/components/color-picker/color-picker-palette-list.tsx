@@ -19,9 +19,11 @@ export const ColorPickerPaletteList = ({
       {...props}
     >
       {palette.map((color, index) => (
-        <ColorPickerPaletteSwatch key={index} color={color.css()} size="medium" />
+        <li key={index} className="flex">
+          <ColorPickerPaletteSwatch color={color.css()} size="medium" />
+        </li>
       ))}
-      {children}
+      {children && <li className="flex">{children}</li>}
     </ul>
   )
 }

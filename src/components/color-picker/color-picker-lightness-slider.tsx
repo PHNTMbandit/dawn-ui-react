@@ -21,6 +21,7 @@ export const ColorPickerLightnessSlider = ({
 
   return (
     <ColorChannelSlider
+      aria-label="Lightness"
       {...props}
       min={0}
       max={100}

@@ -237,7 +237,13 @@ export const Default = {
           <table.LayerTreeBody />
           <table.LayerTreeFooter>
             <div className="flex items-center justify-between">
-              <Button tone="neutral" size="iconMedium" variant="ghost" onClick={addLayer}>
+              <Button
+                aria-label="Add layer"
+                tone="neutral"
+                size="iconMedium"
+                variant="ghost"
+                onClick={addLayer}
+              >
                 <PlusIcon weight="bold" />
               </Button>
               <table.LayerTreeSort />

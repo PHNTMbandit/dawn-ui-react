@@ -26,6 +26,14 @@ export const accordionItemVariants = cva(
   'group transition-all data-disabled:pointer-events-none data-disabled:opacity-50',
   {
     variants: {
+      size: {
+        small:
+          '[&_[data-slot=accordion-content]]:gap-x-2xs [&_[data-slot=accordion-down-icon]]:size-xs [&_[data-slot=accordion-subtitle]]:style-text-prose--2 [&_[data-slot=accordion-title]]:style-text-strong--1 [&_[data-slot=accordion-trigger]]:h-xl [&_[data-slot=accordion-trigger]]:gap-xs [&_[data-slot=accordion-trigger]]:px-sm [&_[data-slot=accordion-icon]]:[&>svg]:size-sm',
+        medium:
+          '[&_[data-slot=accordion-content]]:gap-x-xs [&_[data-slot=accordion-down-icon]]:size-sm [&_[data-slot=accordion-subtitle]]:style-text-prose--1 [&_[data-slot=accordion-title]]:style-text-strong-0 [&_[data-slot=accordion-trigger]]:h-2xl [&_[data-slot=accordion-trigger]]:gap-sm [&_[data-slot=accordion-trigger]]:pr-sm [&_[data-slot=accordion-trigger]]:pl-md [&_[data-slot=accordion-icon]]:[&>svg]:size-md',
+        large:
+          '[&_[data-slot=accordion-content]]:gap-x-sm [&_[data-slot=accordion-down-icon]]:size-md [&_[data-slot=accordion-subtitle]]:style-text-prose-0 [&_[data-slot=accordion-title]]:style-text-strong-1 [&_[data-slot=accordion-trigger]]:h-3xl [&_[data-slot=accordion-trigger]]:gap-md [&_[data-slot=accordion-trigger]]:pr-sm [&_[data-slot=accordion-trigger]]:pl-lg [&_[data-slot=accordion-icon]]:[&>svg]:size-lg',
+      },
       tone: {
         brand:
           '[&_[data-slot=accordion-icon]]:text-brand-default [&_[data-slot=accordion-subtitle]]:text-brand-muted [&_[data-slot=accordion-title]]:text-brand-default [&:not([data-open])]:hover:bg-brand-container [&:not([data-open])]:hover:[&_[data-slot=accordion-icon]]:text-brand-on-container [&:not([data-open])]:hover:[&_[data-slot=accordion-subtitle]]:text-brand-on-container-muted [&:not([data-open])]:hover:[&_[data-slot=accordion-title]]:text-brand-on-container',
@@ -43,6 +51,7 @@ export const accordionItemVariants = cva(
       },
     },
     defaultVariants: {
+      size: 'medium',
       tone: 'brand',
     },
   },

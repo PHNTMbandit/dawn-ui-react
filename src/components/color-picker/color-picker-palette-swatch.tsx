@@ -19,6 +19,7 @@ export const ColorPickerPaletteSwatch = ({
 
   return (
     <button
+      aria-label={typeof color === 'string' ? `Select color ${color}` : 'Select color'}
       onClick={handleClick}
       className={cn(colorPickerSwatchVariants({ size }), className)}
       ref={ref}

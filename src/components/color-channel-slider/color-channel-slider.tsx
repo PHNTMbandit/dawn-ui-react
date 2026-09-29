@@ -16,14 +16,15 @@ export const ColorChannelSlider = ({
     (color: string) => color.includes('rgba') || color.includes('hsla') || color.includes('/'),
   )
 
+  const { 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, ...rootProps } = props
+
   return (
     <BaseSlider.Root
       className={cn(colorChannelSliderVariants({ size }), className)}
       data-slot="slider-root"
       thumbAlignment="edge"
       ref={ref}
-      role="slider"
-      {...props}
+      {...rootProps}
     >
       <BaseSlider.Control
         className={
@@ -49,6 +50,8 @@ export const ColorChannelSlider = ({
           {children}
           <BaseSlider.Indicator data-slot="slider-indicator" className={'rounded-full'} />
           <BaseSlider.Thumb
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledby}
             data-slot="slider-thumb"
             className={cn(
               'absolute aspect-square rounded-full border-white shadow-xs transition-[width,height,opacity] data-dragging:cursor-grabbing hover:[&:not([data-dragging])]:cursor-pointer',

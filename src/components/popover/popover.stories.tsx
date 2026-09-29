@@ -34,7 +34,7 @@ export default {
 
   render: (args) => (
     <Popover {...args}>
-      <PopoverTrigger>
+      <PopoverTrigger nativeButton={false}>
         <span className="style-text-default-0 hover:cursor-pointer hover:underline">Click me</span>
       </PopoverTrigger>
       <PopoverPanel side="top">
@@ -61,17 +61,17 @@ export const Animated: Story = {
   render: (args) => (
     <div className="flex gap-2xs">
       <PopoverTrigger handle={popoverHandle} payload={NotificationsPanel}>
-        <Button size="iconMedium" variant={'ghost'} tone="neutral">
+        <Button aria-label="Notifications" size="iconMedium" variant={'ghost'} tone="neutral">
           <BellIcon weight="bold" />
         </Button>
       </PopoverTrigger>
       <PopoverTrigger handle={popoverHandle} payload={ProfilePanel} nativeButton={false}>
-        <Button size="iconMedium" variant={'ghost'} tone="neutral">
+        <Button aria-label="Profile" size="iconMedium" variant={'ghost'} tone="neutral">
           <UserIcon weight="bold" />
         </Button>
       </PopoverTrigger>
       <PopoverTrigger handle={popoverHandle} payload={ActivityPanel} nativeButton={false}>
-        <Button size="iconMedium" variant={'ghost'} tone="neutral">
+        <Button aria-label="Activity" size="iconMedium" variant={'ghost'} tone="neutral">
           <ChartBarIcon weight="bold" />
         </Button>
       </PopoverTrigger>
@@ -89,7 +89,7 @@ export const Elevations: Story = {
   render: (args) => (
     <div className="flex items-center gap-sm">
       <Popover {...args}>
-        <PopoverTrigger>
+        <PopoverTrigger nativeButton={false}>
           <span className="style-text-default-0 hover:cursor-pointer hover:underline">Low</span>
         </PopoverTrigger>
         <PopoverPanel side="top" elevation={'low'}>
@@ -107,7 +107,7 @@ export const Elevations: Story = {
         </PopoverPanel>
       </Popover>
       <Popover {...args}>
-        <PopoverTrigger>
+        <PopoverTrigger nativeButton={false}>
           <span className="style-text-default-0 hover:cursor-pointer hover:underline">Medium</span>
         </PopoverTrigger>
         <PopoverPanel side="top" elevation={'medium'}>
@@ -125,7 +125,7 @@ export const Elevations: Story = {
         </PopoverPanel>
       </Popover>
       <Popover {...args}>
-        <PopoverTrigger>
+        <PopoverTrigger nativeButton={false}>
           <span className="style-text-default-0 hover:cursor-pointer hover:underline">High</span>
         </PopoverTrigger>
         <PopoverPanel side="top" elevation={'high'}>

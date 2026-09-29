@@ -46,7 +46,13 @@ export const TablePaging = ({
             {totalPages > min + max && (
               <Menu>
                 <MenuTrigger>
-                  <Button tone="neutral" size="iconMedium" variant="ghost" className={'shrink-0'}>
+                  <Button
+                    aria-label="More pages"
+                    tone="neutral"
+                    size="iconMedium"
+                    variant="ghost"
+                    className={'shrink-0'}
+                  >
                     <DotsThreeIcon weight="bold" />
                   </Button>
                 </MenuTrigger>

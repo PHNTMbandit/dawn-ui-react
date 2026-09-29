@@ -14,6 +14,7 @@ export const ColorPickerHueSlider = ({ className, ref, ...props }: ColorPickerHu
 
   return (
     <ColorChannelSlider
+      aria-label="Hue"
       {...props}
       min={0}
       max={360}
