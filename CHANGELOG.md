@@ -1,3 +1,15 @@
+# [1.0.0-alpha.45](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2026-09-29)
+
+
+### Bug Fixes
+
+* **number-field.types:** correct class syntax for number field variants ([d4a2866](https://github.com/PHNTMbandit/dawn-ui-react/commit/d4a2866fcb64ff200bab0e3ea577acb6978a0f47))
+
+
+### Features
+
+* add accordion item sizes and fix accessibility errors ([1a8aae0](https://github.com/PHNTMbandit/dawn-ui-react/commit/1a8aae04594dbf3ba03d3e01327132b30d456c87))
+
 # [1.0.0-alpha.44](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2026-09-27)
 
 ### Features
