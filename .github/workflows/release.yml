@@ -1,0 +1,123 @@
+name: Publish to NPM
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+      - alpha
+      - beta
+      - rc
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Install pnpm
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@24
+          cache: true
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.19
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint code
+        run: pnpm run lint
+
+      - name: Format code
+        run: pnpm run fmt
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install
+
+      - name: Run tests
+        run: pnpm run test
+
+      - name: Build project
+        run: pnpm run build
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    if: |
+      github.ref_name == 'main' ||
+      github.ref_name == 'alpha' ||
+      github.ref_name == 'beta' ||
+      github.ref_name == 'rc'
+
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref_name }}
+
+      - uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@24
+          cache: true
+
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.19
+          registry-url: https://npm.pkg.github.com/
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Generate release notes and publish
+        run: pnpm exec semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  chromatic:
+    name: Run Chromatic
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@24
+          cache: true
+
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.19
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

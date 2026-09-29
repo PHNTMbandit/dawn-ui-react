@@ -1,0 +1,16 @@
+import { cn } from '@/utils/cn'
+
+import type { AccordionIconProps } from './accordion.types'
+
+export const AccordionIcon = ({ className, children, ref, ...props }: AccordionIconProps) => {
+  return (
+    <div
+      data-slot="accordion-icon"
+      className={cn('col-start-1 row-start-1 self-center transition-colors', className)}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+}

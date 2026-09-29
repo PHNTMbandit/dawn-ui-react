@@ -1,0 +1,9 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lefthook: true
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
+  - lefthook

@@ -1,0 +1,32 @@
+prepare-commit-msg:
+  commands:
+    commitzen:
+      interactive: true
+      run: pnpm run cz --hook
+      env:
+        LEFTHOOK: '0'
+      skip:
+        - rebase
+        - merge
+
+pre-commit:
+  commands:
+    lint-staged:
+      run: pnpm exec lint-staged --concurrent false
+
+pre-push:
+  commands:
+    format:
+      run: pnpm run fmt
+      fail_text: 'Formatting issues found — run `pnpm run fmt` and commit.'
+
+    test:
+      run: pnpm test
+
+    build:
+      run: pnpm build
+
+commit-msg:
+  commands:
+    lint commit message:
+      run: pnpm exec commitlint --edit {1}
