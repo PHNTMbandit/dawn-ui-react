@@ -1,19 +1,27 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { CaretUpDownIcon } from '@phosphor-icons/react'
+
 import { cn } from '@/utils/cn'
 
 import type { ComboboxTriggerProps } from './combobox.types'
 
-export const ComboboxTrigger = ({
+function getPlaceholderLabel(placeholder: ComboboxTriggerProps['placeholder']): string | undefined {
+  if (typeof placeholder === 'string') {
+    return placeholder
+  }
+  return undefined
+}
+
+export function ComboboxTrigger({
   placeholder,
   className,
   children,
   ref,
   ...props
-}: ComboboxTriggerProps) => {
+}: ComboboxTriggerProps) {
   return (
     <BaseCombobox.Trigger
-      aria-label={typeof placeholder === 'string' ? placeholder : undefined}
+      aria-label={getPlaceholderLabel(placeholder)}
       className={cn(
         'inline-flex h-xl items-center justify-between gap-xl rounded-xl bg-surface pr-sm pl-md style-text-default-0 outline-2 outline-transparent transition-all hover:cursor-pointer hover:outline-border data-popup-open:outline-brand-border',
         className,

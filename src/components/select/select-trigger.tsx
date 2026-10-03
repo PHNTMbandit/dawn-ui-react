@@ -1,22 +1,16 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
-import { selectVariants, type SelectTriggerProps } from './select.types'
+
 import { cn } from '@/utils/cn'
 
-export const SelectTrigger = ({
-  variant,
-  size,
-  className,
-  children,
-  ref,
-  ...props
-}: SelectTriggerProps) => {
+import { selectVariants } from './select.types'
+import type { SelectTriggerProps } from './select.types'
+
+export function SelectTrigger({ variant, size, className, ref, ...props }: SelectTriggerProps) {
   return (
     <BaseSelect.Trigger
-      className={cn(selectVariants({ variant, size, className }))}
+      className={cn(selectVariants({ className, size, variant }))}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseSelect.Trigger>
+    />
   )
 }

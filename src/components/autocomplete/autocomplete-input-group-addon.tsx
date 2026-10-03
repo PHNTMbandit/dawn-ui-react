@@ -2,12 +2,11 @@ import { cn } from '@/utils/cn'
 
 import type { AutocompleteInputGroupAddonProps } from './autocomplete.types'
 
-export const AutocompleteInputGroupAddon = ({
+export function AutocompleteInputGroupAddon({
   className,
-  children,
   ref,
   ...props
-}: AutocompleteInputGroupAddonProps) => {
+}: AutocompleteInputGroupAddonProps) {
   return (
     <div
       className={cn(
@@ -16,8 +15,6 @@ export const AutocompleteInputGroupAddon = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

@@ -1,9 +1,10 @@
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
+
 import { cn } from '@/utils/cn'
 
 import type { AvatarFallbackProps } from './avatar.types'
 
-export const AvatarFallback = ({ className, ref, ...props }: AvatarFallbackProps) => {
+export function AvatarFallback({ className, ref, ...props }: AvatarFallbackProps) {
   return (
     <BaseAvatar.Fallback
       className={cn(

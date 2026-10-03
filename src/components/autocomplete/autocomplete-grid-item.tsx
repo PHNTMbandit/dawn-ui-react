@@ -1,14 +1,15 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
+
 import { cn } from '@/utils/cn'
 
 import type { AutocompleteGridItemProps } from './autocomplete.types'
 
-export const AutocompleteGridItem = ({
+export function AutocompleteGridItem({
   className,
   children,
   ref,
   ...props
-}: AutocompleteGridItemProps) => {
+}: AutocompleteGridItemProps) {
   return (
     <BaseAutocomplete.Item
       className={cn(

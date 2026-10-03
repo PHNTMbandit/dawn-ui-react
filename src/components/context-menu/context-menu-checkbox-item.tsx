@@ -1,15 +1,16 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import { CheckIcon } from '@phosphor-icons/react'
+
 import { cn } from '@/utils/cn'
 
 import type { ContextMenuCheckboxItemProps } from './context-menu.types'
 
-export const ContextMenuCheckboxItem = ({
+export function ContextMenuCheckboxItem({
   className,
   children,
   ref,
   ...props
-}: ContextMenuCheckboxItemProps) => {
+}: ContextMenuCheckboxItemProps) {
   return (
     <BaseContextMenu.CheckboxItem
       className={cn(

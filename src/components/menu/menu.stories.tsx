@@ -7,79 +7,67 @@ import {
   ScissorsIcon,
   TrashIcon,
 } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import React from 'react'
+
 import { Button } from '../button'
 import { Kbd } from '../kbd'
 import { KbdGroup } from '../kbd/kbd-group'
-import { Menu } from './menu'
-import { MenuCheckboxItem } from './menu-checkbox-item'
-import { MenuGroup } from './menu-group'
-import { MenuGroupLabel } from './menu-group-label'
-import { MenuItem } from './menu-item'
-import { MenuPopup } from './menu-popup'
-import { MenuRadioGroup } from './menu-radio-group'
-import { MenuRadioItem } from './menu-radio-item'
-import { MenuSeparator } from './menu-separator'
-import { MenuShortcut } from './menu-shortcut'
-import { MenuSubmenu } from './menu-submenu'
-import { MenuSubmenuTrigger } from './menu-submenu-trigger'
-import { MenuTrigger } from './menu-trigger'
-
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Menu } from './index'
 
 const BasicActionMenu = () => (
   <Menu>
-    <MenuTrigger>
+    <Menu.Trigger>
       <Button>Open Menu</Button>
-    </MenuTrigger>
-    <MenuPopup align="center">
-      <MenuItem>
+    </Menu.Trigger>
+    <Menu.Popup align="center">
+      <Menu.Item>
         <CopyIcon /> Copy
-      </MenuItem>
-      <MenuItem>
+      </Menu.Item>
+      <Menu.Item>
         <ClipboardIcon /> Paste
-      </MenuItem>
-      <MenuSeparator />
-      <MenuItem>
+      </Menu.Item>
+      <Menu.Separator />
+      <Menu.Item>
         <ScissorsIcon /> Cut
-      </MenuItem>
-      <MenuItem tone={'error'}>
+      </Menu.Item>
+      <Menu.Item tone="error">
         <TrashIcon /> Delete
-      </MenuItem>
-      <MenuSeparator />
-      <MenuItem>
+      </Menu.Item>
+      <Menu.Separator />
+      <Menu.Item>
         <CardsIcon /> Select All
-      </MenuItem>
-    </MenuPopup>
+      </Menu.Item>
+    </Menu.Popup>
   </Menu>
 )
 
 export default {
-  title: 'Components/Menu',
   component: Menu,
-  subcomponents: {
-    MenuTrigger,
-    MenuPopup,
-    MenuItem,
-    MenuSeparator,
-    MenuCheckboxItem,
-    MenuRadioItem,
-    MenuGroup,
-    MenuGroupLabel,
-    MenuSubmenu,
-    MenuSubmenuTrigger,
-    MenuShortcut,
-  },
   parameters: {
     docs: {
-      subtitle: 'Provides a dropdown menu for navigation or actions.',
       description: {
         component:
           'The Menu component displays a popup list of actions anchored to a trigger. It supports destructive actions, grouped sections, checkbox and radio items, nested submenus, and keyboard shortcut affordances.',
       },
+      subtitle: 'Provides a dropdown menu for navigation or actions.',
     },
   },
   render: () => <BasicActionMenu />,
+  subcomponents: {
+    MenuCheckboxItem: Menu.CheckboxItem,
+    MenuGroup: Menu.Group,
+    MenuGroupLabel: Menu.GroupLabel,
+    MenuItem: Menu.Item,
+    MenuPopup: Menu.Popup,
+    MenuRadioItem: Menu.RadioItem,
+    MenuSeparator: Menu.Separator,
+    MenuShortcut: Menu.Shortcut,
+    MenuSubmenu: Menu.Submenu,
+    MenuSubmenuTrigger: Menu.SubmenuTrigger,
+    MenuTrigger: Menu.Trigger,
+  },
+  title: 'Components/Menu',
 } satisfies Meta<typeof Menu>
 
 type Story = StoryObj<typeof Menu>
@@ -111,36 +99,39 @@ export const CheckboxItems: Story = {
     },
   },
   render: (args) => {
-    const [showCopy, setShowCopy] = React.useState(false)
-    const [showPaste, setShowPaste] = React.useState(false)
-    const [showCut, setShowCut] = React.useState(false)
-    const [showDelete, setShowDelete] = React.useState(false)
+    const [showCopy, setShowCopy] = React.useState(false),
+      [showPaste, setShowPaste] = React.useState(false),
+      [showCut, setShowCut] = React.useState(false),
+      [showDelete, setShowDelete] = React.useState(false)
 
     return (
       <Menu {...args}>
-        <MenuTrigger>
+        <Menu.Trigger>
           <Button>Open Menu</Button>
-        </MenuTrigger>
-        <MenuPopup>
-          <MenuCheckboxItem checked={showCopy} onCheckedChange={() => setShowCopy((prev) => !prev)}>
+        </Menu.Trigger>
+        <Menu.Popup>
+          <Menu.CheckboxItem
+            checked={showCopy}
+            onCheckedChange={() => setShowCopy((prev) => !prev)}
+          >
             Option 1
-          </MenuCheckboxItem>
-          <MenuCheckboxItem
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem
             checked={showPaste}
             onCheckedChange={() => setShowPaste((prev) => !prev)}
           >
             Option 2
-          </MenuCheckboxItem>
-          <MenuCheckboxItem checked={showCut} onCheckedChange={() => setShowCut((prev) => !prev)}>
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem checked={showCut} onCheckedChange={() => setShowCut((prev) => !prev)}>
             Option 3
-          </MenuCheckboxItem>
-          <MenuCheckboxItem
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem
             checked={showDelete}
             onCheckedChange={() => setShowDelete((prev) => !prev)}
           >
             Option 4
-          </MenuCheckboxItem>
-        </MenuPopup>
+          </Menu.CheckboxItem>
+        </Menu.Popup>
       </Menu>
     )
   },
@@ -160,16 +151,16 @@ export const RadioItems: Story = {
 
     return (
       <Menu {...args}>
-        <MenuTrigger>
+        <Menu.Trigger>
           <Button>Open Menu</Button>
-        </MenuTrigger>
-        <MenuPopup align="center">
-          <MenuRadioGroup onValueChange={setValue} value={value}>
-            <MenuRadioItem value="date">Date</MenuRadioItem>
-            <MenuRadioItem value="name">Name</MenuRadioItem>
-            <MenuRadioItem value="type">Type</MenuRadioItem>
-          </MenuRadioGroup>
-        </MenuPopup>
+        </Menu.Trigger>
+        <Menu.Popup align="center">
+          <Menu.RadioGroup onValueChange={setValue} value={value}>
+            <Menu.RadioItem value="date">Date</Menu.RadioItem>
+            <Menu.RadioItem value="name">Name</Menu.RadioItem>
+            <Menu.RadioItem value="type">Type</Menu.RadioItem>
+          </Menu.RadioGroup>
+        </Menu.Popup>
       </Menu>
     )
   },
@@ -186,22 +177,22 @@ export const GroupLabels: Story = {
   },
   render: (args) => (
     <Menu {...args}>
-      <MenuTrigger>
+      <Menu.Trigger>
         <Button>Open Menu</Button>
-      </MenuTrigger>
-      <MenuPopup>
-        <MenuGroup>
-          <MenuGroupLabel>Group 1</MenuGroupLabel>
-          <MenuItem>Option 1</MenuItem>
-          <MenuItem>Option 2</MenuItem>
-        </MenuGroup>
-        <MenuSeparator />
-        <MenuGroup>
-          <MenuGroupLabel>Group 2</MenuGroupLabel>
-          <MenuItem>Option 3</MenuItem>
-          <MenuItem>Option 4</MenuItem>
-        </MenuGroup>
-      </MenuPopup>
+      </Menu.Trigger>
+      <Menu.Popup>
+        <Menu.Group>
+          <Menu.GroupLabel>Group 1</Menu.GroupLabel>
+          <Menu.Item>Option 1</Menu.Item>
+          <Menu.Item>Option 2</Menu.Item>
+        </Menu.Group>
+        <Menu.Separator />
+        <Menu.Group>
+          <Menu.GroupLabel>Group 2</Menu.GroupLabel>
+          <Menu.Item>Option 3</Menu.Item>
+          <Menu.Item>Option 4</Menu.Item>
+        </Menu.Group>
+      </Menu.Popup>
     </Menu>
   ),
 }
@@ -218,21 +209,21 @@ export const Submenus: Story = {
   },
   render: (args) => (
     <Menu {...args}>
-      <MenuTrigger>
+      <Menu.Trigger>
         <Button>Open Menu</Button>
-      </MenuTrigger>
-      <MenuPopup>
-        <MenuItem>Option 1</MenuItem>
-        <MenuSubmenu>
-          <MenuSubmenuTrigger>
+      </Menu.Trigger>
+      <Menu.Popup>
+        <Menu.Item>Option 1</Menu.Item>
+        <Menu.Submenu>
+          <Menu.SubmenuTrigger>
             <ListIcon /> More Options
-          </MenuSubmenuTrigger>
-          <MenuPopup>
-            <MenuItem>Option 2</MenuItem>
-            <MenuItem>Option 3</MenuItem>
-          </MenuPopup>
-        </MenuSubmenu>
-      </MenuPopup>
+          </Menu.SubmenuTrigger>
+          <Menu.Popup>
+            <Menu.Item>Option 2</Menu.Item>
+            <Menu.Item>Option 3</Menu.Item>
+          </Menu.Popup>
+        </Menu.Submenu>
+      </Menu.Popup>
     </Menu>
   ),
 }
@@ -249,44 +240,44 @@ export const Shortcuts: Story = {
   },
   render: (args) => (
     <Menu {...args}>
-      <MenuTrigger>
+      <Menu.Trigger>
         <Button>Open Menu</Button>
-      </MenuTrigger>
-      <MenuPopup>
-        <MenuItem>
+      </Menu.Trigger>
+      <Menu.Popup>
+        <Menu.Item>
           <CopyIcon /> Copy
-          <MenuShortcut>
+          <Menu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>C</Kbd>
             </KbdGroup>
-          </MenuShortcut>
-        </MenuItem>
-        <MenuItem>
+          </Menu.Shortcut>
+        </Menu.Item>
+        <Menu.Item>
           <ClipboardIcon /> Paste
-          <MenuShortcut>
+          <Menu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>V</Kbd>
             </KbdGroup>
-          </MenuShortcut>
-        </MenuItem>
-        <MenuItem>
+          </Menu.Shortcut>
+        </Menu.Item>
+        <Menu.Item>
           <ScissorsIcon /> Cut
-          <MenuShortcut>
+          <Menu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>X</Kbd>
             </KbdGroup>
-          </MenuShortcut>
-        </MenuItem>
-      </MenuPopup>
+          </Menu.Shortcut>
+        </Menu.Item>
+      </Menu.Popup>
     </Menu>
   ),
 }
@@ -302,20 +293,20 @@ export const DestructiveAction: Story = {
   },
   render: () => (
     <Menu>
-      <MenuTrigger>
+      <Menu.Trigger>
         <Button tone="error" variant="soft">
           Open Destructive Menu
         </Button>
-      </MenuTrigger>
-      <MenuPopup>
-        <MenuItem>
+      </Menu.Trigger>
+      <Menu.Popup>
+        <Menu.Item>
           <CopyIcon /> Duplicate Project
-        </MenuItem>
-        <MenuSeparator />
-        <MenuItem tone="error">
+        </Menu.Item>
+        <Menu.Separator />
+        <Menu.Item tone="error">
           <TrashIcon /> Delete Project
-        </MenuItem>
-      </MenuPopup>
+        </Menu.Item>
+      </Menu.Popup>
     </Menu>
   ),
 }

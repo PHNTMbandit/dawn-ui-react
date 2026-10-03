@@ -1,2 +1,4 @@
-export type KbdProps = React.ComponentProps<'div'>
-export type KbdGroupProps = React.ComponentProps<'div'>
+type KbdProps = React.ComponentProps<'div'>
+type KbdGroupProps = React.ComponentProps<'div'>
+
+export type { KbdProps, KbdGroupProps }

@@ -1,26 +1,31 @@
-import { FolderIcon, FolderOpenIcon, type Icon } from '@phosphor-icons/react'
+import { FolderIcon, FolderOpenIcon } from '@phosphor-icons/react'
+import type { Icon } from '@phosphor-icons/react'
 import { createElement } from 'react'
-import { useCellContext, useTableContext } from './layer-tree-context'
+import type { ReactNode } from 'react'
+
 import { cn } from '@/utils/cn'
 
+import { useCellContext, useTableContext } from './layer-tree-context'
 import type { LayerTreeIconCellProps } from './layer-tree.types'
 
-export const LayerTreeIconCell = ({
-  className,
-  children,
-  ref,
-  ...props
-}: LayerTreeIconCellProps) => {
-  const cell = useCellContext<Icon>()
-  const table = useTableContext()
-  const icon = cell.getValue()
-  const row = cell.row
-  const hasChildren = row.getCanExpand() && row.getLeafRows().length > 0
+export function LayerTreeIconCell({ className, children, ref, ...props }: LayerTreeIconCellProps) {
+  const cell = useCellContext<Icon>(),
+    table = useTableContext(),
+    icon = cell.getValue(),
+    { row } = cell,
+    hasChildren = row.getCanExpand() && Boolean(row.getLeafRows().length)
 
   return (
     <table.Subscribe selector={(state) => state.expanded}>
       {() => {
         const isExpanded = row.getIsExpanded()
+
+        let iconNode: ReactNode = createElement(icon, { weight: 'bold' })
+        if (hasChildren && isExpanded) {
+          iconNode = <FolderOpenIcon />
+        } else if (hasChildren) {
+          iconNode = <FolderIcon weight="fill" />
+        }
 
         return (
           <div
@@ -29,17 +34,7 @@ export const LayerTreeIconCell = ({
             {...props}
           >
             {children}
-            {hasChildren ? (
-              isExpanded ? (
-                <FolderOpenIcon />
-              ) : (
-                <FolderIcon weight={hasChildren && 'fill'} />
-              )
-            ) : (
-              createElement(icon, {
-                weight: 'bold',
-              })
-            )}
+            {iconNode}
           </div>
         )
       }}

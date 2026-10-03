@@ -1,47 +1,51 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { DEFAULT_THEME, THEME_STORAGE_KEY } from './constants'
 
-import type { ThemeProviderProps, ThemeProviderState, ThemeValue } from './types'
+import { DEFAULT_THEME, THEME_STORAGE_KEY } from './theme.constants.ts'
+import type { ThemeProviderProps, ThemeProviderState, ThemeValue } from './theme.types.ts'
 
 const initialState: ThemeProviderState = {
-  theme: 'system',
-  setTheme: () => null,
+    setTheme: () => undefined,
+    theme: 'system',
+  },
+  ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+
+function getStoredTheme(storageKey: string, fallback: ThemeValue): ThemeValue {
+  const stored = localStorage.getItem(storageKey)
+  if (stored === 'light' || stored === 'dark' || stored === 'system') {
+    return stored
+  }
+  return fallback
 }
 
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
-
-export function ThemeProvider({
+function ThemeProvider({
   children,
   defaultTheme = DEFAULT_THEME,
   storageKey = THEME_STORAGE_KEY,
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<ThemeValue>(
-    () => (localStorage.getItem(storageKey) as ThemeValue) || defaultTheme,
-  )
+  const [theme, setTheme] = useState<ThemeValue>(() => getStoredTheme(storageKey, defaultTheme))
 
   useEffect(() => {
-    const root = window.document.documentElement
+    const root = globalThis.document.documentElement
     root.setAttribute('data-theme', theme)
     localStorage.setItem(storageKey, theme)
   }, [theme, storageKey])
 
-  const value = {
-    theme,
-    setTheme,
-  }
-
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider {...props} value={{ setTheme, theme }}>
       {children}
     </ThemeProviderContext.Provider>
   )
 }
 
-export const useTheme = () => {
+function useTheme() {
   const context = useContext(ThemeProviderContext)
 
-  if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider')
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider')
+  }
 
   return context
 }
+
+export { ThemeProvider, useTheme }

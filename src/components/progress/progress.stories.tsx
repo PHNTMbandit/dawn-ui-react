@@ -1,75 +1,72 @@
 import { CheckIcon } from '@phosphor-icons/react'
-import { Progress } from './progress'
-import { ProgressBar } from './progress-bar'
-import { ProgressIndicator } from './progress-indicator'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const STEP_ITEMS = [
-  {
-    title: 'Account',
-    description: 'Set your account details',
-  },
-  {
-    title: 'Verification',
-    description: 'Confirm contact information',
-  },
-  {
-    title: 'Complete',
-    description: 'Finalize your setup',
-  },
-] as const
+import { Progress } from './index'
 
-const StepsTemplate = ({
-  currentIndex = 1,
-  withIcons = false,
-}: {
-  currentIndex?: number
-  withIcons?: boolean
-}) => (
-  <Progress className="w-[300px]" currentIndex={currentIndex}>
-    {STEP_ITEMS.map((item, index) => (
-      <div key={item.title} className="contents">
-        <ProgressIndicator description={item.description} title={item.title}>
-          {withIcons && index + 1 < currentIndex ? <CheckIcon weight="bold" /> : index + 1}
-        </ProgressIndicator>
-        {index < STEP_ITEMS.length - 1 ? <ProgressBar /> : null}
-      </div>
-    ))}
-  </Progress>
-)
+const STEP_ITEMS = [
+    {
+      description: 'Set your account details',
+      title: 'Account',
+    },
+    {
+      description: 'Confirm contact information',
+      title: 'Verification',
+    },
+    {
+      description: 'Finalize your setup',
+      title: 'Complete',
+    },
+  ] as const,
+  StepsTemplate = ({
+    currentIndex = 1,
+    withIcons = false,
+  }: {
+    currentIndex?: number
+    withIcons?: boolean
+  }) => (
+    <Progress className="w-[300px]" currentIndex={currentIndex}>
+      {STEP_ITEMS.map((item, index) => (
+        <div key={item.title} className="contents">
+          <Progress.Indicator description={item.description} title={item.title}>
+            {withIcons && index + 1 < currentIndex ? <CheckIcon weight="bold" /> : index + 1}
+          </Progress.Indicator>
+          {index < STEP_ITEMS.length - 1 ? <Progress.Bar /> : null}
+        </div>
+      ))}
+    </Progress>
+  )
 
 export default {
-  title: 'Components/Progress',
-  component: Progress,
-  subcomponents: { ProgressIndicator, ProgressBar },
   argTypes: {
     currentIndex: {
-      control: { type: 'number', min: 1, max: 3, step: 1 },
+      control: { max: 3, min: 1, step: 1, type: 'number' },
       description: 'Current active step index (1-based).',
       table: {
         defaultValue: { summary: '1' },
       },
     },
   },
+  args: {
+    currentIndex: 1,
+  },
+  component: Progress,
   parameters: {
     docs: {
-      subtitle: 'A step-based progress tracker composed from indicators and connecting bars.',
       description: {
         component:
           'The Progress component helps represent multi-step workflows such as onboarding, checkout, and setup flows. Compose steps with `ProgressIndicator` and connectors with `ProgressBar`, then control the highlighted state with `currentIndex`. Indicators support optional titles and descriptions for richer guidance.',
       },
+      subtitle: 'A step-based progress tracker composed from indicators and connecting bars.',
     },
   },
-  args: {
-    currentIndex: 1,
-  },
   render: (args) => <StepsTemplate currentIndex={args.currentIndex} />,
+  subcomponents: { ProgressBar: Progress.Bar, ProgressIndicator: Progress.Indicator },
+  title: 'Components/Progress',
 } satisfies Meta<typeof Progress>
 
 type Story = StoryObj<typeof Progress>
-type IndicatorStory = StoryObj<typeof ProgressIndicator>
-type BarStory = StoryObj<typeof ProgressBar>
+type IndicatorStory = StoryObj<typeof Progress.Indicator>
+type BarStory = StoryObj<typeof Progress.Bar>
 
 export const Playground: Story = {
   parameters: {
@@ -86,11 +83,10 @@ export const Default: Story = {
 }
 
 export const WithCompletionIcons: Story = {
-  name: 'State / Completion Icons',
   args: {
     currentIndex: 2,
   },
-  render: (args) => <StepsTemplate currentIndex={args.currentIndex} withIcons />,
+  name: 'State / Completion Icons',
   parameters: {
     docs: {
       description: {
@@ -99,15 +95,15 @@ export const WithCompletionIcons: Story = {
       },
     },
   },
+  render: (args) => <StepsTemplate currentIndex={args.currentIndex} withIcons />,
 }
 
 export const IndicatorText: IndicatorStory = {
-  name: 'Primitive / Indicator Text',
   args: {
-    title: 'Profile',
     description: 'Complete your profile details',
+    title: 'Profile',
   },
-  render: (args) => <ProgressIndicator {...args}>1</ProgressIndicator>,
+  name: 'Primitive / Indicator Text',
   parameters: {
     docs: {
       description: {
@@ -115,19 +111,15 @@ export const IndicatorText: IndicatorStory = {
       },
     },
   },
+  render: (args) => <Progress.Indicator {...args}>1</Progress.Indicator>,
 }
 
 export const IndicatorIcon: IndicatorStory = {
-  name: 'Primitive / Indicator Icon',
   args: {
-    title: 'Verified',
     description: 'Step completed successfully',
+    title: 'Verified',
   },
-  render: (args) => (
-    <ProgressIndicator {...args}>
-      <CheckIcon weight="bold" />
-    </ProgressIndicator>
-  ),
+  name: 'Primitive / Indicator Icon',
   parameters: {
     docs: {
       description: {
@@ -135,15 +127,15 @@ export const IndicatorIcon: IndicatorStory = {
       },
     },
   },
+  render: (args) => (
+    <Progress.Indicator {...args}>
+      <CheckIcon weight="bold" />
+    </Progress.Indicator>
+  ),
 }
 
 export const Bar: BarStory = {
   name: 'Primitive / Bar',
-  render: (args) => (
-    <div className="w-3xl">
-      <ProgressBar {...args} />
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -151,4 +143,9 @@ export const Bar: BarStory = {
       },
     },
   },
+  render: (args) => (
+    <div className="w-3xl">
+      <Progress.Bar {...args} />
+    </div>
+  ),
 }

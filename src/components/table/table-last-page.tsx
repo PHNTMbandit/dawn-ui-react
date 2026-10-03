@@ -1,20 +1,22 @@
 import { CaretLineRightIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { useTableContext } from './table-context'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useTableContext } from './table-feature-context'
 import type { TableLastPageProps } from './table.types'
 
-export const TableLastPage = ({ className, children, ref, ...props }: TableLastPageProps) => {
-  const table = useTableContext()
+const LAST_PAGE_OFFSET = 1
 
-  const handleClick = () => {
-    table.setPageIndex(table.getPageCount() - 1)
-  }
+export function TableLastPage({ className, children, ref, ...props }: TableLastPageProps) {
+  const table = useTableContext(),
+    handleClick = () => {
+      table.setPageIndex(table.getPageCount() - LAST_PAGE_OFFSET)
+    }
 
   return (
     <Button
-      aria-label="Last page"
+      aria-label="Go to last page"
       className={cn('shrink-0', className)}
       disabled={!table.getCanNextPage()}
       onClick={handleClick}

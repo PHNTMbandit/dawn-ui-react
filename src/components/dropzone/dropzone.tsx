@@ -1,37 +1,53 @@
 import React from 'react'
-import { formatFileSize, getFileKey, isFileTypeAccepted } from './dropzone.utils'
+
 import { cn } from '@/utils/cn'
 
 import type { DropzoneProps } from './dropzone.types'
+import { DropzoneContext, formatFileSize, getFileKey, isFileTypeAccepted } from './dropzone.utils'
 
-type DropzoneContextProps = {
-  acceptedFileTypes: string[]
-  fileError: string | null
-  fileProgress: Record<string, number>
-  files: File[]
-  handleDragLeave: (event: React.DragEvent<HTMLDivElement>) => void
-  handleDragOver: (event: React.DragEvent<HTMLDivElement>) => void
-  handleDrop: (event: React.DragEvent<HTMLDivElement>) => void
-  handleFiles: (event: React.ChangeEvent<HTMLInputElement>) => void
-  inputRef: React.RefObject<HTMLInputElement | null>
-  isHovering: boolean
-  maxFileSize?: string
-  maxFiles?: number
-  props: React.ComponentProps<'input'>
-  removeFile: (file: File) => void
-  setFiles: React.Dispatch<React.SetStateAction<File[]>>
-  onUpload?: (file: File, onProgress: (percent: number) => void) => void | Promise<void>
-  onConfirm?: (files: File[]) => void
-}
+const SINGLE_FILE = 1,
+  FIRST_INDEX = 0,
+  EMPTY = 0,
+  MIN_PROGRESS = 0,
+  MAX_PROGRESS = 100,
+  defaultMaxFilesErrorLabel = (max: number) => {
+    let suffix = 's'
+    if (max === SINGLE_FILE) {
+      suffix = ''
+    }
+    return `You can select up to ${max} file${suffix}.`
+  },
+  defaultMaxFileSizeErrorLabel = (fileName: string, max: string) =>
+    `"${fileName}" exceeds the maximum size of ${max}.`,
+  defaultFileTypeErrorLabel = (fileName: string) => `"${fileName}" is not an accepted file type.`,
+  resolveAcceptedTypes = (accept: string | undefined) => {
+    if (typeof accept !== 'string') {
+      return []
+    }
+    return accept
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean)
+  },
+  toFileArray = (fileList: FileList | null) => {
+    if (!fileList) {
+      return []
+    }
+    return [...fileList]
+  },
+  formatOptionalSize = (size: number | undefined) => {
+    if (size === undefined) {
+      return undefined
+    }
+    return formatFileSize(size)
+  }
 
-const DropzoneContext = React.createContext<DropzoneContextProps | null>(null)
-
-export const Dropzone = ({
+export function Dropzone({
   maxFiles,
   maxFileSize,
-  maxFilesErrorLabel = (max) => `You can select up to ${max} file${max === 1 ? '' : 's'}.`,
-  maxFileSizeErrorLabel = (fileName, max) => `"${fileName}" exceeds the maximum size of ${max}.`,
-  fileTypeErrorLabel = (fileName) => `"${fileName}" is not an accepted file type.`,
+  maxFilesErrorLabel = defaultMaxFilesErrorLabel,
+  maxFileSizeErrorLabel = defaultMaxFileSizeErrorLabel,
+  fileTypeErrorLabel = defaultFileTypeErrorLabel,
   onUpload,
   ref,
   className,
@@ -39,62 +55,122 @@ export const Dropzone = ({
   onChange,
   onConfirm,
   ...props
-}: DropzoneProps) => {
-  const inputRef = React.useRef<HTMLInputElement | null>(null)
-  const filesRef = React.useRef<File[]>([])
-  const [isHovering, setIsHovering] = React.useState(false)
-  const [files, setFiles] = React.useState<File[]>([])
-  const [fileError, setFileError] = React.useState<string | null>(null)
-  const [fileProgress, setFileProgress] = React.useState<Record<string, number>>({})
-
-  React.useEffect(() => {
-    filesRef.current = files
-  }, [files])
-  const acceptedFileTypes = React.useMemo(() => {
-    if (typeof props.accept !== 'string') {
-      return []
-    }
-
-    return props.accept
-      .split(',')
-      .map((value) => value.trim())
-      .filter(Boolean)
-  }, [props.accept])
-
-  const syncInputFiles = React.useCallback((nextFiles: File[]) => {
-    if (!inputRef.current) {
-      return
-    }
-
-    const dataTransfer = new DataTransfer()
-    nextFiles.forEach((file) => dataTransfer.items.add(file))
-    inputRef.current.files = dataTransfer.files
-  }, [])
-
-  const getNextFiles = React.useCallback(
-    (incomingFiles: File[]) => {
-      if (!props.multiple) {
-        return incomingFiles.slice(0, 1)
+}: DropzoneProps) {
+  const inputRef = React.useRef<HTMLInputElement | null>(null),
+    filesRef = React.useRef<File[]>([]),
+    [isHovering, setIsHovering] = React.useState(false),
+    [files, setFiles] = React.useState<File[]>([]),
+    [fileError, setFileError] = React.useState<string | undefined>(undefined),
+    [fileProgress, setFileProgress] = React.useState<Record<string, number>>({}),
+    acceptedFileTypes = resolveAcceptedTypes(props.accept),
+    formattedMaxFileSize = formatOptionalSize(maxFileSize),
+    syncInputFiles = React.useCallback((nextFiles: File[]) => {
+      if (!inputRef.current) {
+        return
       }
 
-      const mergedFiles = [...filesRef.current, ...incomingFiles]
-      const dedupedFiles = mergedFiles.filter(
-        (file, index, source) =>
-          source.findIndex(
-            (item) =>
-              item.name === file.name &&
-              item.size === file.size &&
-              item.lastModified === file.lastModified,
-          ) === index,
-      )
+      const dataTransfer = new DataTransfer()
+      nextFiles.forEach((file) => dataTransfer.items.add(file))
+      inputRef.current.files = dataTransfer.files
+    }, []),
+    getNextFiles = (incomingFiles: File[]) => {
+      if (!props.multiple) {
+        return incomingFiles.slice(FIRST_INDEX, SINGLE_FILE)
+      }
+
+      const mergedFiles = [...filesRef.current, ...incomingFiles],
+        dedupedFiles = mergedFiles.filter(
+          (file, index, source) =>
+            source.findIndex(
+              (item) =>
+                item.name === file.name &&
+                item.size === file.size &&
+                item.lastModified === file.lastModified,
+            ) === index,
+        )
 
       return dedupedFiles
     },
-    [props.multiple],
-  )
+    startUploads = (newFiles: File[]) => {
+      newFiles.forEach((file) => {
+        const key = getFileKey(file)
 
-  const removeFile = React.useCallback(
-    (fileToRemove: File) => {
+        if (!onUpload) {
+          setFileProgress((previous) => ({ ...previous, [key]: MAX_PROGRESS }))
+          return
+        }
+
+        setFileProgress((previous) => ({ ...previous, [key]: MIN_PROGRESS }))
+        void onUpload(file, (percent) => {
+          setFileProgress((previous) => ({
+            ...previous,
+            [key]: Math.max(MIN_PROGRESS, Math.min(MAX_PROGRESS, percent)),
+          }))
+        })
+      })
+    },
+    commitFiles = (previousFiles: File[], acceptedFiles: File[]) => {
+      const previousKeys = new Set(previousFiles.map(getFileKey)),
+        addedFiles = acceptedFiles.filter((file) => !previousKeys.has(getFileKey(file)))
+      filesRef.current = acceptedFiles
+      setFiles(acceptedFiles)
+      syncInputFiles(acceptedFiles)
+      startUploads(addedFiles)
+    },
+    partitionBySize = (candidateFiles: File[]) => {
+      if (maxFileSize === undefined) {
+        return { acceptedFiles: candidateFiles, oversizedFiles: [] as File[] }
+      }
+
+      return {
+        acceptedFiles: candidateFiles.filter((file) => file.size <= maxFileSize),
+        oversizedFiles: candidateFiles.filter((file) => file.size > maxFileSize),
+      }
+    },
+    processFiles = (candidateFiles: File[]) => {
+      const invalidTypeFiles = candidateFiles.filter(
+          (file) => !isFileTypeAccepted(file, acceptedFileTypes),
+        ),
+        { oversizedFiles, acceptedFiles } = partitionBySize(candidateFiles)
+
+      if (invalidTypeFiles.length > EMPTY) {
+        return {
+          acceptedFiles: undefined,
+          error: fileTypeErrorLabel(invalidTypeFiles[FIRST_INDEX].name),
+        }
+      }
+
+      if (maxFiles !== undefined && acceptedFiles.length > maxFiles) {
+        return {
+          acceptedFiles: undefined,
+          error: maxFilesErrorLabel(maxFiles),
+        }
+      }
+
+      if (oversizedFiles.length > EMPTY && maxFileSize !== undefined) {
+        return {
+          acceptedFiles,
+          error: maxFileSizeErrorLabel(
+            oversizedFiles[FIRST_INDEX].name,
+            formatFileSize(maxFileSize),
+          ),
+        }
+      }
+
+      return { acceptedFiles, error: undefined }
+    },
+    applyAcceptedFiles = (candidateFiles: File[]) => {
+      const previousFiles = filesRef.current,
+        nextFiles = getNextFiles(candidateFiles),
+        { acceptedFiles, error } = processFiles(nextFiles)
+
+      if (acceptedFiles) {
+        commitFiles(previousFiles, acceptedFiles)
+      }
+
+      return { acceptedFiles, error, previousFiles }
+    },
+    removeFile = (fileToRemove: File) => {
       const removedKey = getFileKey(fileToRemove)
 
       setFiles((previousFiles) => {
@@ -108,148 +184,45 @@ export const Dropzone = ({
         delete next[removedKey]
         return next
       })
-      setFileError(null)
+      setFileError(undefined)
     },
-    [syncInputFiles],
-  )
-
-  const startUploads = React.useCallback(
-    (newFiles: File[]) => {
-      newFiles.forEach((file) => {
-        const key = getFileKey(file)
-
-        if (!onUpload) {
-          setFileProgress((previous) => ({ ...previous, [key]: 100 }))
-          return
-        }
-
-        setFileProgress((previous) => ({ ...previous, [key]: 0 }))
-        void onUpload(file, (percent) => {
-          setFileProgress((previous) => ({
-            ...previous,
-            [key]: Math.max(0, Math.min(100, percent)),
-          }))
-        })
-      })
-    },
-    [onUpload],
-  )
-
-  const processFiles = React.useCallback(
-    (candidateFiles: File[]) => {
-      const invalidTypeFiles = candidateFiles.filter(
-        (file) => !isFileTypeAccepted(file, acceptedFileTypes),
+    handleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { acceptedFiles, error, previousFiles } = applyAcceptedFiles(
+        toFileArray(event.target.files),
       )
 
-      if (invalidTypeFiles.length > 0) {
-        return {
-          acceptedFiles: null,
-          error: fileTypeErrorLabel(invalidTypeFiles[0].name),
-        }
+      setFileError(error)
+      if (!acceptedFiles) {
+        syncInputFiles(previousFiles)
+        return
       }
 
-      const oversizedFiles =
-        maxFileSize !== undefined ? candidateFiles.filter((file) => file.size > maxFileSize) : []
-      const acceptedFiles =
-        maxFileSize !== undefined
-          ? candidateFiles.filter((file) => file.size <= maxFileSize)
-          : candidateFiles
-
-      if (maxFiles !== undefined && acceptedFiles.length > maxFiles) {
-        return {
-          acceptedFiles: null,
-          error: maxFilesErrorLabel(maxFiles),
-        }
-      }
-
-      const error =
-        oversizedFiles.length > 0 && maxFileSize !== undefined
-          ? maxFileSizeErrorLabel(oversizedFiles[0].name, formatFileSize(maxFileSize))
-          : null
-
-      return {
-        acceptedFiles,
-        error,
-      }
+      onChange?.(event)
     },
-    [
-      acceptedFileTypes,
-      fileTypeErrorLabel,
-      maxFiles,
-      maxFileSize,
-      maxFilesErrorLabel,
-      maxFileSizeErrorLabel,
-    ],
-  )
-
-  const handleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = event.target.files ? Array.from(event.target.files) : []
-    const previousFiles = filesRef.current
-    const nextFiles = getNextFiles(selectedFiles)
-    const { acceptedFiles, error } = processFiles(nextFiles)
-
-    if (!acceptedFiles) {
-      setFileError(error)
-      syncInputFiles(previousFiles)
-
-      return
-    }
-
-    setFileError(error)
-    const previousKeys = new Set(previousFiles.map(getFileKey))
-    const addedFiles = acceptedFiles.filter((file) => !previousKeys.has(getFileKey(file)))
-    filesRef.current = acceptedFiles
-    setFiles(acceptedFiles)
-    syncInputFiles(acceptedFiles)
-    startUploads(addedFiles)
-
-    if (inputRef.current) {
-      onChange?.({
-        target: inputRef.current,
-        currentTarget: inputRef.current,
-      } as React.ChangeEvent<HTMLInputElement>)
-    }
-  }
-
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    setIsHovering(true)
-  }
-
-  const handleDragLeave = () => {
-    setIsHovering(false)
-  }
-
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    const droppedFiles = Array.from(event.dataTransfer.files)
-    const previousFiles = filesRef.current
-    const nextFiles = getNextFiles(droppedFiles)
-    const { acceptedFiles, error } = processFiles(nextFiles)
-
-    if (!acceptedFiles) {
-      setFileError(error)
+    handleDragOver = (event: React.DragEvent<HTMLElement>) => {
+      event.preventDefault()
+      setIsHovering(true)
+    },
+    handleDragLeave = () => {
       setIsHovering(false)
-      return
+    },
+    handleDrop = (event: React.DragEvent<HTMLElement>) => {
+      event.preventDefault()
+      const { acceptedFiles, error } = applyAcceptedFiles([...event.dataTransfer.files])
+
+      setFileError(error)
+      if (!acceptedFiles) {
+        setIsHovering(false)
+        return
+      }
+
+      inputRef.current?.dispatchEvent(new Event('change', { bubbles: true }))
+      setIsHovering(false)
     }
 
-    setFileError(error)
-    const previousKeys = new Set(previousFiles.map(getFileKey))
-    const addedFiles = acceptedFiles.filter((file) => !previousKeys.has(getFileKey(file)))
-    filesRef.current = acceptedFiles
-    setFiles(acceptedFiles)
-    syncInputFiles(acceptedFiles)
-    startUploads(addedFiles)
-
-    if (inputRef.current) {
-      onChange?.({
-        target: inputRef.current,
-        currentTarget: inputRef.current,
-      } as React.ChangeEvent<HTMLInputElement>)
-    }
-
-    setIsHovering(false)
-  }
+  React.useEffect(() => {
+    filesRef.current = files
+  }, [files])
 
   return (
     <DropzoneContext.Provider
@@ -264,7 +237,7 @@ export const Dropzone = ({
         handleFiles,
         inputRef,
         isHovering,
-        maxFileSize: maxFileSize !== undefined ? formatFileSize(maxFileSize) : undefined,
+        maxFileSize: formattedMaxFileSize,
         maxFiles,
         onConfirm,
         onUpload,
@@ -278,14 +251,4 @@ export const Dropzone = ({
       </div>
     </DropzoneContext.Provider>
   )
-}
-
-export const useDropzone = () => {
-  const context = React.useContext(DropzoneContext)
-
-  if (!context) {
-    throw new Error('useDropzone must be used within a DropzoneProvider')
-  }
-
-  return context
 }

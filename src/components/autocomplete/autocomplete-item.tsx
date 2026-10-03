@@ -1,9 +1,10 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
+
 import { cn } from '@/utils/cn'
 
 import type { AutocompleteItemProps } from './autocomplete.types'
 
-export const AutocompleteItem = ({ className, children, ref, ...props }: AutocompleteItemProps) => {
+export function AutocompleteItem({ className, ref, ...props }: AutocompleteItemProps) {
   return (
     <BaseAutocomplete.Item
       className={cn(
@@ -12,8 +13,6 @@ export const AutocompleteItem = ({ className, children, ref, ...props }: Autocom
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseAutocomplete.Item>
+    />
   )
 }

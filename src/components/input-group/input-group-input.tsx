@@ -1,46 +1,71 @@
 import { Input as BaseInput } from '@base-ui/react/input'
 import { useRef, useState } from 'react'
+
 import { cn } from '@/utils/cn'
 
 import type { InputGroupInputProps } from './input-group.types'
 
-export const InputGroupInput = ({
+const DEFAULT_COLOR = '#000000'
+
+function getStringValue(value: unknown): string | undefined {
+  if (typeof value === 'string') {
+    return value
+  }
+  return undefined
+}
+
+function getColorValue(
+  isControlled: boolean,
+  controlledValue: unknown,
+  uncontrolledValue: string,
+): string {
+  if (isControlled) {
+    return getStringValue(controlledValue) || DEFAULT_COLOR
+  }
+  return uncontrolledValue || DEFAULT_COLOR
+}
+
+function getColorInputProps(isControlled: boolean, colorValue: string) {
+  if (isControlled) {
+    return { value: colorValue }
+  }
+  return { defaultValue: colorValue }
+}
+
+export function InputGroupInput({
   size = 'medium',
   className,
   ref,
   ...props
-}: InputGroupInputProps) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [uncontrolledColorValue, setUncontrolledColorValue] = useState<string>(
-    (props.defaultValue as string) || (props.value as string) || '#000000',
-  )
+}: InputGroupInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null),
+    [uncontrolledColorValue, setUncontrolledColorValue] = useState<string>(
+      getStringValue(props.defaultValue) || getStringValue(props.value) || DEFAULT_COLOR,
+    )
 
   if (props.type === 'color') {
-    const isControlled = props.value !== undefined
-    const colorValue =
-      ((isControlled ? props.value : uncontrolledColorValue) as string) || '#000000'
-    const { onChange, defaultValue: _defaultValue, value: _value, ...colorProps } = props
+    const isControlled = props.value !== undefined,
+      colorValue = getColorValue(isControlled, props.value, uncontrolledColorValue),
+      { onChange, defaultValue: _defaultValue, value: _value, ...colorProps } = props,
+      handleColorChange: NonNullable<typeof onChange> = (event) => {
+        if (!isControlled) {
+          setUncontrolledColorValue(event.currentTarget.value)
+        }
 
-    const handleColorChange: NonNullable<typeof onChange> = (event) => {
-      if (!isControlled) {
-        setUncontrolledColorValue((event.currentTarget as HTMLInputElement).value)
+        onChange?.(event)
+      },
+      handleColorRef = (node: HTMLInputElement | null) => {
+        inputRef.current = node
+
+        if (typeof ref === 'function') {
+          ref(node)
+          return
+        }
+
+        if (ref && typeof ref === 'object') {
+          Object.assign(ref, { current: node })
+        }
       }
-
-      onChange?.(event)
-    }
-
-    const handleColorRef = (node: HTMLInputElement | null) => {
-      inputRef.current = node
-
-      if (typeof ref === 'function') {
-        ref(node)
-        return
-      }
-
-      if (ref && typeof ref === 'object') {
-        ;(ref as { current: HTMLInputElement | null }).current = node
-      }
-    }
 
     return (
       <button
@@ -66,11 +91,10 @@ export const InputGroupInput = ({
         />
         <BaseInput
           className="peer pointer-events-none invisible absolute top-lg"
-          defaultValue={!isControlled ? colorValue : undefined}
+          {...getColorInputProps(isControlled, colorValue)}
           onChange={handleColorChange}
           ref={handleColorRef}
           type="color"
-          value={isControlled ? colorValue : undefined}
           {...colorProps}
         />
         <p

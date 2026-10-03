@@ -1,9 +1,10 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
+
 import { cn } from '@/utils/cn'
 
 import type { MenuGroupLabelProps } from './menu.types'
 
-export const MenuGroupLabel = ({ className, children, ref, ...props }: MenuGroupLabelProps) => {
+export function MenuGroupLabel({ className, ref, ...props }: MenuGroupLabelProps) {
   return (
     <BaseMenu.GroupLabel
       className={cn(
@@ -12,8 +13,6 @@ export const MenuGroupLabel = ({ className, children, ref, ...props }: MenuGroup
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseMenu.GroupLabel>
+    />
   )
 }

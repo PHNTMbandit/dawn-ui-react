@@ -1,4 +1,4 @@
-import { NavigationMenu as NavigationMenuBase } from './navigation-menu'
+import { NavigationMenu as NavigationMenuRoot } from './navigation-menu'
 import { NavigationMenuContent } from './navigation-menu-content'
 import { NavigationMenuIcon } from './navigation-menu-icon'
 import { NavigationMenuItem } from './navigation-menu-item'
@@ -7,7 +7,7 @@ import { NavigationMenuList } from './navigation-menu-list'
 import { NavigationMenuPopup } from './navigation-menu-popup'
 import { NavigationMenuTrigger } from './navigation-menu-trigger'
 
-export const NavigationMenu = Object.assign(NavigationMenuBase, {
+const NavigationMenu = Object.assign(NavigationMenuRoot, {
   Content: NavigationMenuContent,
   Icon: NavigationMenuIcon,
   Item: NavigationMenuItem,
@@ -35,3 +35,5 @@ export { NavigationMenuLink } from './navigation-menu-link'
 export { NavigationMenuList } from './navigation-menu-list'
 export { NavigationMenuPopup } from './navigation-menu-popup'
 export { NavigationMenuTrigger } from './navigation-menu-trigger'
+
+export { NavigationMenu }

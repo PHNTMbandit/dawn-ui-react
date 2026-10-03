@@ -1,4 +1,4 @@
-import { Select as SelectBase } from './select'
+import { Select as SelectRoot } from './select'
 import { SelectDescription } from './select-description'
 import { SelectGroup } from './select-group'
 import { SelectGroupLabel } from './select-group-label'
@@ -10,17 +10,17 @@ import { SelectTitle } from './select-title'
 import { SelectTrigger } from './select-trigger'
 import { SelectValue } from './select-value'
 
-export const Select = Object.assign(SelectBase, {
-  Item: SelectItem,
-  List: SelectList,
-  Icon: SelectIcon,
-  Popup: SelectPopup,
-  Trigger: SelectTrigger,
-  Value: SelectValue,
+const Select = Object.assign(SelectRoot, {
+  Description: SelectDescription,
   Group: SelectGroup,
   GroupLabel: SelectGroupLabel,
-  Description: SelectDescription,
+  Icon: SelectIcon,
+  Item: SelectItem,
+  List: SelectList,
+  Popup: SelectPopup,
   Title: SelectTitle,
+  Trigger: SelectTrigger,
+  Value: SelectValue,
 })
 
 export type {
@@ -33,6 +33,8 @@ export type {
   SelectValueProps,
   SelectGroupProps,
   SelectGroupLabelProps,
+  SelectDescriptionProps,
+  SelectTitleProps,
 } from './select.types'
 export { SelectItem } from './select-item'
 export { SelectList } from './select-list'
@@ -44,3 +46,5 @@ export { SelectGroup } from './select-group'
 export { SelectGroupLabel } from './select-group-label'
 export { SelectDescription } from './select-description'
 export { SelectTitle } from './select-title'
+
+export { Select }

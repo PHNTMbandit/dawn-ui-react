@@ -1,15 +1,10 @@
-import { Checkbox } from '../checkbox'
-import { useTableContext } from './table-context'
 import { cn } from '@/utils/cn'
 
+import { Checkbox } from '../checkbox'
+import { useTableContext } from './table-feature-context'
 import type { TableSelectHeaderProps } from './table.types'
 
-export const TableSelectHeader = ({
-  className,
-  children,
-  ref,
-  ...props
-}: TableSelectHeaderProps) => {
+export function TableSelectHeader({ className, ref, ...props }: TableSelectHeaderProps) {
   const table = useTableContext()
 
   return (
@@ -26,9 +21,7 @@ export const TableSelectHeader = ({
             className={cn('', className)}
             ref={ref}
             {...props}
-          >
-            {children}
-          </Checkbox>
+          />
         )
       }}
     </table.Subscribe>

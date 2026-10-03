@@ -1,9 +1,10 @@
 import { Tabs as SwitchTabs } from '@base-ui/react/tabs'
+
 import { cn } from '@/utils/cn'
 
 import type { TabsIndicatorProps } from './tabs.types'
 
-export const TabsIndicator = ({ className, ...props }: TabsIndicatorProps) => {
+export function TabsIndicator({ className, ...props }: TabsIndicatorProps) {
   return (
     <SwitchTabs.Indicator
       className={cn(

@@ -1,4 +1,7 @@
 import { CaretUpDownIcon } from '@phosphor-icons/react'
+
+import { cn } from '@/utils/cn'
+
 import {
   Select,
   SelectGroup,
@@ -10,28 +13,25 @@ import {
   SelectValue,
 } from '../select'
 import { useCodeBlock } from './code-block'
-import { cn } from '@/utils/cn'
-
 import type { CodeBlockSelectProps } from './code-block.types'
 
-export const CodeBlockSelect = ({ className, children, ref, ...props }: CodeBlockSelectProps) => {
-  const { currentValue, setCurrentValue, items } = useCodeBlock()
-
-  const handleChange = (value: unknown) => {
-    const selectedValue = items.find((v) => v.id === value)
-    if (selectedValue) {
-      setCurrentValue(selectedValue)
+export function CodeBlockSelect({ className, children, ref, ...props }: CodeBlockSelectProps) {
+  const { currentValue, setCurrentValue, items } = useCodeBlock(),
+    handleChange = (value: unknown) => {
+      const selectedValue = items.find(({ id }) => id === value)
+      if (selectedValue) {
+        setCurrentValue(selectedValue)
+      }
     }
-  }
 
   return (
     <Select value={currentValue.id} onValueChange={handleChange}>
       <SelectTrigger
-        aria-label="Select file"
+        aria-label="Select snippet"
         className={cn('', className)}
         ref={ref}
         {...props}
-        variant={'ghost'}
+        variant="ghost"
       >
         <SelectValue>
           {(value: keyof typeof items) => items.find((item) => item.id === value)?.label}

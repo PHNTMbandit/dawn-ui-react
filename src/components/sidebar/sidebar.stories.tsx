@@ -12,144 +12,123 @@ import {
   SquareHalfIcon,
   UserIcon,
 } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
+
 import { Avatar, AvatarFallback } from '../avatar'
 import { Profile, ProfileContent, ProfileName, ProfileSubname } from '../profile'
-import { Sidebar } from './sidebar'
-import { SidebarContent } from './sidebar-content'
-import { SidebarFooter } from './sidebar-footer'
-import { SidebarGroup } from './sidebar-group'
-import { SidebarGroupContent } from './sidebar-group-content'
-import { SidebarGroupLabel } from './sidebar-group-label'
-import { SidebarHeader } from './sidebar-header'
-import { SidebarMenu } from './sidebar-menu'
-import { SidebarMenuBadge } from './sidebar-menu-badge'
-import { SidebarMenuButton } from './sidebar-menu-button'
-import { SidebarMenuCollapsible } from './sidebar-menu-collapsible'
-import { SidebarMenuCollapsiblePanel } from './sidebar-menu-collapsible-panel'
-import { SidebarMenuCollapsibleTrigger } from './sidebar-menu-collapsible-trigger'
-import { SidebarMenuItem } from './sidebar-menu-item'
-import { SidebarProvider } from './sidebar-provider'
-import { SidebarToggle } from './sidebar-toggle'
+import { Sidebar } from './index'
 import { getStoredSidebarOpen } from './sidebar.utils'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
-const TONES = ['primary', 'secondary', 'ghost'] as const
-
-const APP_FRAME_CLASS = 'h-[70vh] w-[1100px] overflow-hidden rounded-2xl border border-border'
-
-const SidebarLogo = ({ isExpanded }: { isExpanded: boolean }) => (
-  <div className="flex items-center justify-center gap-xs">
-    <GridFourIcon weight="fill" />
-    {isExpanded ? <span>My Application</span> : null}
-  </div>
-)
-
-const PrimaryNavigation = () => (
-  <SidebarGroup>
-    <SidebarGroupLabel>Menu</SidebarGroupLabel>
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <SidebarMenuButton>
-          <GridFourIcon weight="bold" />
-          <span>Dashboard</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-      <SidebarMenuItem>
-        <SidebarMenuButton>
-          <MapTrifoldIcon weight="bold" />
-          <span>Map</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-      <SidebarMenuItem>
-        <SidebarMenuButton>
-          <ChartLineIcon weight="bold" />
-          <span>Usage</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-      <SidebarMenuCollapsible>
-        <SidebarMenuCollapsibleTrigger>
-          <NotePencilIcon weight="bold" />
-          <span>Projects</span>
-        </SidebarMenuCollapsibleTrigger>
-        <SidebarMenuCollapsiblePanel>
-          <SidebarMenuItem>
-            <SidebarMenuButton>
-              <CloudRainIcon weight="bold" />
-              <span>Point Cloud Viewer</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton isActive>
-              <MountainsIcon weight="bold" />
-              <span>3D Tile Projects</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenuCollapsiblePanel>
-      </SidebarMenuCollapsible>
-      <SidebarMenuItem>
-        <SidebarMenuButton>
-          <MegaphoneIcon weight="bold" />
-          <span>Announcements</span>
-        </SidebarMenuButton>
-        <SidebarMenuBadge tone="accent">9</SidebarMenuBadge>
-      </SidebarMenuItem>
-      <SidebarMenuItem>
-        <SidebarMenuButton>
-          <QuestionIcon weight="bold" />
-          <span>Help Center</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  </SidebarGroup>
-)
-
-const SecondaryNavigation = () => (
-  <SidebarGroup>
-    <SidebarGroupLabel>Admin</SidebarGroupLabel>
-    <SidebarGroupContent>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton>
-            <ChatIcon weight="bold" />
-            <span>Communications</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-        <SidebarMenuItem>
-          <SidebarMenuButton>
-            <UserIcon weight="bold" />
-            <span>Team Members</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroupContent>
-  </SidebarGroup>
-)
-
-const SidebarShell = ({
-  tone,
-  width,
-  provider,
-}: {
-  tone?: (typeof TONES)[number]
-  width?: number
-  provider?: { collapsible?: 'icon' | 'offcanvas' | 'none'; side?: 'left' | 'right' }
-}) => (
-  <div className={APP_FRAME_CLASS}>
-    <SidebarProvider
-      id="main-sidebar"
-      defaultOpen={getStoredSidebarOpen('main-sidebar', true)}
-      collapsible={provider?.collapsible}
-      side={provider?.side}
-    >
-      <Sidebar tone={tone} width={width}>
-        <SidebarHeader>
-          {(isExpanded) => {
-            return (
+const TONES = ['primary', 'secondary', 'ghost'] as const,
+  APP_FRAME_CLASS = 'h-[70vh] w-[1100px] overflow-hidden rounded-2xl border border-border',
+  SidebarLogo = ({ isExpanded }: { isExpanded: boolean }) => (
+    <div className="flex items-center justify-center gap-xs">
+      <GridFourIcon weight="fill" />
+      {isExpanded ? <span>My Application</span> : null}
+    </div>
+  ),
+  PrimaryNavigation = () => (
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>Menu</Sidebar.GroupLabel>
+      <Sidebar.Menu>
+        <Sidebar.MenuItem>
+          <Sidebar.MenuButton>
+            <GridFourIcon weight="bold" />
+            <span>Dashboard</span>
+          </Sidebar.MenuButton>
+        </Sidebar.MenuItem>
+        <Sidebar.MenuItem>
+          <Sidebar.MenuButton>
+            <MapTrifoldIcon weight="bold" />
+            <span>Map</span>
+          </Sidebar.MenuButton>
+        </Sidebar.MenuItem>
+        <Sidebar.MenuItem>
+          <Sidebar.MenuButton>
+            <ChartLineIcon weight="bold" />
+            <span>Usage</span>
+          </Sidebar.MenuButton>
+        </Sidebar.MenuItem>
+        <Sidebar.MenuCollapsible>
+          <Sidebar.MenuCollapsibleTrigger>
+            <NotePencilIcon weight="bold" />
+            <span>Projects</span>
+          </Sidebar.MenuCollapsibleTrigger>
+          <Sidebar.MenuCollapsiblePanel>
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton>
+                <CloudRainIcon weight="bold" />
+                <span>Point Cloud Viewer</span>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton isActive>
+                <MountainsIcon weight="bold" />
+                <span>3D Tile Projects</span>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem>
+          </Sidebar.MenuCollapsiblePanel>
+        </Sidebar.MenuCollapsible>
+        <Sidebar.MenuItem>
+          <Sidebar.MenuButton>
+            <MegaphoneIcon weight="bold" />
+            <span>Announcements</span>
+          </Sidebar.MenuButton>
+          <Sidebar.MenuBadge tone="accent">9</Sidebar.MenuBadge>
+        </Sidebar.MenuItem>
+        <Sidebar.MenuItem>
+          <Sidebar.MenuButton>
+            <QuestionIcon weight="bold" />
+            <span>Help Center</span>
+          </Sidebar.MenuButton>
+        </Sidebar.MenuItem>
+      </Sidebar.Menu>
+    </Sidebar.Group>
+  ),
+  SecondaryNavigation = () => (
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>Admin</Sidebar.GroupLabel>
+      <Sidebar.GroupContent>
+        <Sidebar.Menu>
+          <Sidebar.MenuItem>
+            <Sidebar.MenuButton>
+              <ChatIcon weight="bold" />
+              <span>Communications</span>
+            </Sidebar.MenuButton>
+          </Sidebar.MenuItem>
+          <Sidebar.MenuItem>
+            <Sidebar.MenuButton>
+              <UserIcon weight="bold" />
+              <span>Team Members</span>
+            </Sidebar.MenuButton>
+          </Sidebar.MenuItem>
+        </Sidebar.Menu>
+      </Sidebar.GroupContent>
+    </Sidebar.Group>
+  ),
+  SidebarShell = ({
+    tone,
+    width,
+    provider,
+  }: {
+    tone?: (typeof TONES)[number]
+    width?: number
+    provider?: { collapsible?: 'icon' | 'offcanvas' | 'none'; side?: 'left' | 'right' }
+  }) => (
+    <div className={APP_FRAME_CLASS}>
+      <Sidebar.Provider
+        id="main-sidebar"
+        defaultOpen={getStoredSidebarOpen('main-sidebar', true)}
+        collapsible={provider?.collapsible}
+        side={provider?.side}
+      >
+        <Sidebar tone={tone} width={width}>
+          <Sidebar.Header>
+            {(isExpanded) => (
               <>
                 {isExpanded ? <SidebarLogo isExpanded={isExpanded} /> : null}
-                <SidebarToggle>
+                <Sidebar.Toggle>
                   {(open) => (
                     <>
                       {open ? (
@@ -159,84 +138,64 @@ const SidebarShell = ({
                       )}
                     </>
                   )}
-                </SidebarToggle>
+                </Sidebar.Toggle>
               </>
-            )
-          }}
-        </SidebarHeader>
-        <SidebarContent>
-          <PrimaryNavigation />
-          <SecondaryNavigation />
-        </SidebarContent>
-        <SidebarFooter>
-          {(isExpanded) =>
-            isExpanded ? (
-              <Profile>
+            )}
+          </Sidebar.Header>
+          <Sidebar.Content>
+            <PrimaryNavigation />
+            <SecondaryNavigation />
+          </Sidebar.Content>
+          <Sidebar.Footer>
+            {(isExpanded) =>
+              isExpanded ? (
+                <Profile>
+                  <Avatar>
+                    <AvatarFallback>DP</AvatarFallback>
+                  </Avatar>
+                  <ProfileContent>
+                    <ProfileName>Domenic Pittari</ProfileName>
+                    <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
+                  </ProfileContent>
+                </Profile>
+              ) : (
                 <Avatar>
                   <AvatarFallback>DP</AvatarFallback>
                 </Avatar>
-                <ProfileContent>
-                  <ProfileName>Domenic Pittari</ProfileName>
-                  <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
-                </ProfileContent>
-              </Profile>
-            ) : (
-              <Avatar>
-                <AvatarFallback>DP</AvatarFallback>
-              </Avatar>
-            )
-          }
-        </SidebarFooter>
-      </Sidebar>
+              )
+            }
+          </Sidebar.Footer>
+        </Sidebar>
 
-      <div className="flex flex-1 flex-col gap-sm bg-surface-background p-md">
-        <div className="flex items-center justify-between rounded-lg bg-surface-low p-sm">
-          <p className="style-text-strong--1 text-on-surface">Workspace Content</p>
-          <SidebarToggle>
-            {(open) => (
-              <>{open ? <SquareHalfIcon weight="bold" /> : <SidebarSimpleIcon weight="bold" />}</>
-            )}
-          </SidebarToggle>
+        <div className="flex flex-1 flex-col gap-sm bg-surface-background p-md">
+          <div className="flex items-center justify-between rounded-lg bg-surface-low p-sm">
+            <p className="style-text-strong--1 text-on-surface">Workspace Content</p>
+            <Sidebar.Toggle>
+              {(open) => (
+                <>{open ? <SquareHalfIcon weight="bold" /> : <SidebarSimpleIcon weight="bold" />}</>
+              )}
+            </Sidebar.Toggle>
+          </div>
+          <div className="flex-1 rounded-lg bg-surface-low p-sm style-text-default--1 text-on-surface-variant">
+            Main content area to demonstrate sidebar positioning and collapse behavior.
+          </div>
         </div>
-        <div className="flex-1 rounded-lg bg-surface-low p-sm style-text-default--1 text-on-surface-variant">
-          Main content area to demonstrate sidebar positioning and collapse behavior.
-        </div>
-      </div>
-    </SidebarProvider>
-  </div>
-)
+      </Sidebar.Provider>
+    </div>
+  )
 
 export default {
-  title: 'Components/Sidebar',
-  component: Sidebar,
-  subcomponents: {
-    SidebarContent,
-    SidebarFooter,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuBadge,
-    SidebarMenuButton,
-    SidebarMenuCollapsible,
-    SidebarMenuCollapsiblePanel,
-    SidebarMenuCollapsibleTrigger,
-    SidebarMenuItem,
-    SidebarProvider,
-    SidebarToggle,
-  },
   argTypes: {
     tone: {
       control: { type: 'select' },
-      options: TONES,
       description: 'Visual surface treatment for the sidebar container.',
+      options: TONES,
       table: {
         defaultValue: { summary: 'primary' },
       },
     },
     width: {
-      control: { type: 'number', min: 220, max: 520, step: 10 },
+      control: { max: 520, min: 220, step: 10, type: 'number' },
       description: 'Expanded sidebar width in pixels.',
       table: {
         defaultValue: { summary: '400' },
@@ -247,20 +206,39 @@ export default {
     tone: 'primary',
     width: 400,
   },
+  component: Sidebar,
   parameters: {
     docs: {
-      subtitle:
-        'A composable navigation sidebar with collapse modes, grouped menus, and app-shell behavior.',
       description: {
         component:
           'Sidebar is a layout-aware navigation surface built from composable primitives such as groups, menu items, badges, and collapsible sections. Pair `SidebarProvider` with `Sidebar` to control side placement and collapse mode (`icon`, `offcanvas`, `none`). Use `SidebarToggle` to expose runtime control in app-shell layouts.',
       },
+      subtitle:
+        'A composable navigation sidebar with collapse modes, grouped menus, and app-shell behavior.',
     },
     viewport: {
       options: INITIAL_VIEWPORTS,
     },
   },
   render: (args) => <SidebarShell tone={args.tone} width={args.width as number} />,
+  subcomponents: {
+    SidebarContent: Sidebar.Content,
+    SidebarFooter: Sidebar.Footer,
+    SidebarGroup: Sidebar.Group,
+    SidebarGroupContent: Sidebar.GroupContent,
+    SidebarGroupLabel: Sidebar.GroupLabel,
+    SidebarHeader: Sidebar.Header,
+    SidebarMenu: Sidebar.Menu,
+    SidebarMenuBadge: Sidebar.MenuBadge,
+    SidebarMenuButton: Sidebar.MenuButton,
+    SidebarMenuCollapsible: Sidebar.MenuCollapsible,
+    SidebarMenuCollapsiblePanel: Sidebar.MenuCollapsiblePanel,
+    SidebarMenuCollapsibleTrigger: Sidebar.MenuCollapsibleTrigger,
+    SidebarMenuItem: Sidebar.MenuItem,
+    SidebarProvider: Sidebar.Provider,
+    SidebarToggle: Sidebar.Toggle,
+  },
+  title: 'Components/Sidebar',
 } satisfies Meta<typeof Sidebar>
 
 type Story = StoryObj<typeof Sidebar>
@@ -290,23 +268,21 @@ export const CollapsibleOffcanvas: Story = {
   name: 'Behavior / Collapsible Offcanvas',
   render: (args) => (
     <div className={APP_FRAME_CLASS}>
-      <SidebarProvider
+      <Sidebar.Provider
         id="main-sidebar"
         defaultOpen={getStoredSidebarOpen('main-sidebar', true)}
-        collapsible={'offcanvas'}
-        side={'left'}
+        collapsible="offcanvas"
+        side="left"
       >
         <Sidebar tone={args.tone} width={args.width as number}>
-          <SidebarHeader>
-            {(isExpanded) => {
-              return <>{isExpanded ? <SidebarLogo isExpanded={isExpanded} /> : null}</>
-            }}
-          </SidebarHeader>
-          <SidebarContent>
+          <Sidebar.Header>
+            {(isExpanded) => <>{isExpanded ? <SidebarLogo isExpanded={isExpanded} /> : null}</>}
+          </Sidebar.Header>
+          <Sidebar.Content>
             <PrimaryNavigation />
             <SecondaryNavigation />
-          </SidebarContent>
-          <SidebarFooter>
+          </Sidebar.Content>
+          <Sidebar.Footer>
             {(isExpanded) =>
               isExpanded ? (
                 <Profile>
@@ -324,11 +300,11 @@ export const CollapsibleOffcanvas: Story = {
                 </Avatar>
               )
             }
-          </SidebarFooter>
+          </Sidebar.Footer>
         </Sidebar>
 
         <div className="flex flex-1 flex-col gap-sm bg-surface-background p-md">
-          <SidebarToggle>
+          <Sidebar.Toggle>
             {(open) => (
               <>
                 {open ? (
@@ -338,7 +314,7 @@ export const CollapsibleOffcanvas: Story = {
                 )}
               </>
             )}
-          </SidebarToggle>
+          </Sidebar.Toggle>
           <div className="flex items-center justify-between rounded-lg bg-surface-low p-sm">
             <p className="style-text-strong--1 text-on-surface">Workspace Content</p>
           </div>
@@ -346,7 +322,7 @@ export const CollapsibleOffcanvas: Story = {
             Main content area to demonstrate sidebar positioning and collapse behavior.
           </div>
         </div>
-      </SidebarProvider>
+      </Sidebar.Provider>
     </div>
   ),
 }
@@ -363,10 +339,10 @@ export const NonCollapsible: Story = {
 }
 
 export const GhostTone: Story = {
-  name: 'Tone / Ghost',
   args: {
     tone: 'ghost',
   },
+  name: 'Tone / Ghost',
   render: (args) => (
     <SidebarShell
       provider={{ collapsible: 'icon' }}
@@ -386,31 +362,31 @@ export const RightSide: Story = {
 export const MobileResponsive: Story = {
   name: 'Behavior / Mobile Responsive',
   parameters: {
-    viewport: {
-      options: INITIAL_VIEWPORTS,
-      defaultViewport: 'mobile1',
-    },
     docs: {
       description: {
         story:
           'On mobile viewports the sidebar automatically switches to offcanvas mode, so an open sidebar collapses into an overlay driven by `useMediaQuery`. Use `SidebarToggle` to slide it in and out.',
       },
     },
+    viewport: {
+      defaultViewport: 'mobile1',
+      options: INITIAL_VIEWPORTS,
+    },
   },
   render: (args) => (
     <div className={APP_FRAME_CLASS}>
-      <SidebarProvider
+      <Sidebar.Provider
         id="mobile-sidebar"
         defaultOpen={getStoredSidebarOpen('mobile-sidebar', true)}
         collapsible="icon"
         side="left"
       >
         <Sidebar tone={args.tone} width={args.width as number}>
-          <SidebarHeader>
+          <Sidebar.Header>
             {(isExpanded) => (
               <>
                 {isExpanded ? <SidebarLogo isExpanded={isExpanded} /> : null}
-                <SidebarToggle>
+                <Sidebar.Toggle>
                   {(open) => (
                     <>
                       {open ? (
@@ -420,15 +396,15 @@ export const MobileResponsive: Story = {
                       )}
                     </>
                   )}
-                </SidebarToggle>
+                </Sidebar.Toggle>
               </>
             )}
-          </SidebarHeader>
-          <SidebarContent>
+          </Sidebar.Header>
+          <Sidebar.Content>
             <PrimaryNavigation />
             <SecondaryNavigation />
-          </SidebarContent>
-          <SidebarFooter>
+          </Sidebar.Content>
+          <Sidebar.Footer>
             {(isExpanded) =>
               isExpanded ? (
                 <Profile>
@@ -446,23 +422,23 @@ export const MobileResponsive: Story = {
                 </Avatar>
               )
             }
-          </SidebarFooter>
+          </Sidebar.Footer>
         </Sidebar>
 
         <div className="flex flex-1 flex-col gap-sm bg-surface-background p-md">
           <div className="flex items-center justify-between rounded-lg bg-surface-low p-sm">
             <p className="style-text-strong--1 text-on-surface">Workspace Content</p>
-            <SidebarToggle>
+            <Sidebar.Toggle>
               {(open) => (
                 <>{open ? <SquareHalfIcon weight="bold" /> : <SidebarSimpleIcon weight="bold" />}</>
               )}
-            </SidebarToggle>
+            </Sidebar.Toggle>
           </div>
           <div className="flex-1 rounded-lg bg-surface-low p-sm style-text-default--1 text-on-surface-variant">
             Resize to a mobile viewport and the sidebar becomes an offcanvas overlay automatically.
           </div>
         </div>
-      </SidebarProvider>
+      </Sidebar.Provider>
     </div>
   ),
 }

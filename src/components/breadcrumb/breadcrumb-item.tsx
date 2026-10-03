@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { BreadcrumbItemProps } from './breadcrumb.types'
 
-export const BreadcrumbItem = ({ className, children, ref, ...props }: BreadcrumbItemProps) => {
+export function BreadcrumbItem({ className, ref, ...props }: BreadcrumbItemProps) {
   return (
     <div
       className={cn(
@@ -11,8 +11,6 @@ export const BreadcrumbItem = ({ className, children, ref, ...props }: Breadcrum
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

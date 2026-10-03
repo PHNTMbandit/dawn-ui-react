@@ -1,16 +1,22 @@
+import { cn } from '@/utils/cn'
+
 import { ColorChannelSlider } from '../color-channel-slider'
 import { getHueTrack } from '../color-channel-slider/color-channel-slider.utils'
 import { useColorPicker } from './color-picker'
-import { cn } from '@/utils/cn'
-
 import type { ColorPickerHueSliderProps } from './color-picker.types'
 
-export const ColorPickerHueSlider = ({ className, ref, ...props }: ColorPickerHueSliderProps) => {
-  const { hue, setHue } = useColorPicker()
+const HUE_VALUE_INDEX = 0
 
-  const handleChange = (value: number | readonly number[]) => {
-    setHue(Array.isArray(value) ? value[0] : value)
-  }
+export function ColorPickerHueSlider({ className, ref, ...props }: ColorPickerHueSliderProps) {
+  const { hue, setHue } = useColorPicker(),
+    handleChange = (value: number | readonly number[]) => {
+      if (typeof value === 'number') {
+        setHue(value)
+        return
+      }
+
+      setHue(value[HUE_VALUE_INDEX])
+    }
 
   return (
     <ColorChannelSlider

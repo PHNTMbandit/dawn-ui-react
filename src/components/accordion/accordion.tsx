@@ -1,25 +1,25 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
-import { accordionVariants, type AccordionProps } from './accordion.types'
+
 import { cn } from '@/utils/cn'
 
-export const Accordion = ({
+import { accordionVariants } from './accordion.types'
+import type { AccordionProps } from './accordion.types'
+
+export function Accordion({
   withSeparator = true,
   variant,
   className,
-  children,
   ref,
   ...props
-}: AccordionProps) => {
+}: AccordionProps) {
   return (
     <BaseAccordion.Root
       className={cn(
-        accordionVariants({ variant, className }),
+        accordionVariants({ className, variant }),
         withSeparator && 'divide-y divide-border',
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseAccordion.Root>
+    />
   )
 }

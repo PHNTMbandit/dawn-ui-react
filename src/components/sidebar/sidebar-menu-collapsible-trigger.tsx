@@ -1,25 +1,27 @@
 import { CaretRightIcon } from '@phosphor-icons/react'
+
+import { cn } from '@/utils/cn'
+
 import { CollapsibleTrigger } from '../collapsible'
 import { PopoverTrigger } from '../popover'
 import { useSidebar } from './sidebar-provider'
-import { cn } from '@/utils/cn'
-
 import type { SidebarMenuCollapsibleTriggerProps } from './sidebar.types'
 
-export const SidebarMenuCollapsibleTrigger = ({
+export function SidebarMenuCollapsibleTrigger({
   className,
   children,
   ref,
   style: _style,
   ...props
-}: SidebarMenuCollapsibleTriggerProps) => {
-  const { open, collapsible } = useSidebar()
-  const showText = collapsible === 'none' || open
+}: SidebarMenuCollapsibleTriggerProps) {
+  const { open, collapsible } = useSidebar(),
+    showText = collapsible === 'none' || open
 
-  if (!open)
+  if (!open) {
     return (
       <PopoverTrigger>
         <button
+          type="button"
           className={cn(
             'flex size-xl items-center justify-center rounded-full shadow-none! transition-colors *:hidden hover:cursor-pointer hover:bg-neutral-container hover:text-neutral-on-container data-popup-open:bg-neutral-container [&>svg]:block',
           )}
@@ -32,14 +34,16 @@ export const SidebarMenuCollapsibleTrigger = ({
         </button>
       </PopoverTrigger>
     )
+  }
 
   return (
     <CollapsibleTrigger
-      variant={'ghost'}
+      variant="ghost"
       className={cn(
         'inline-flex! w-full! animate-in! justify-start! overflow-hidden! text-left! whitespace-nowrap! fade-in-0! slide-in-from-left-2! [&>svg]:size-sm! [&>svg]:flex-none [&>svg]:shrink-0',
         !showText && 'mx-auto',
-        !open ? 'size-xl *:hidden [&>svg]:block' : 'h-xl pl-sm',
+        !open && 'size-xl *:hidden [&>svg]:block',
+        open && 'h-xl pl-sm',
         collapsible !== 'none' && open && 'animate-in slide-in-from-left-2',
         className,
       )}

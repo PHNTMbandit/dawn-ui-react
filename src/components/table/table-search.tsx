@@ -1,17 +1,17 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react'
-import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
-import { useTableContext } from './table-context'
+import type { ChangeEvent } from 'react'
+
 import { cn } from '@/utils/cn'
 
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
+import { useTableContext } from './table-feature-context'
 import type { TableSearchProps } from './table.types'
-import type * as React from 'react'
 
-export const TableSearch = ({ className, children, ref, ...props }: TableSearchProps) => {
-  const table = useTableContext()
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    table.setGlobalFilter(String(event.target.value))
-  }
+export function TableSearch({ className, ref, ...props }: TableSearchProps) {
+  const table = useTableContext(),
+    handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      table.setGlobalFilter(event.target.value)
+    }
 
   return (
     <table.Subscribe selector={(state) => state.globalFilter}>
@@ -26,9 +26,7 @@ export const TableSearch = ({ className, children, ref, ...props }: TableSearchP
             ref={ref}
             value={globalFilter ?? ''}
             {...props}
-          >
-            {children}
-          </InputGroupInput>
+          />
         </InputGroup>
       )}
     </table.Subscribe>

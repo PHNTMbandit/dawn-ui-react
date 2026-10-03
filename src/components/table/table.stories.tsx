@@ -8,26 +8,28 @@ import {
   TrashIcon,
 } from '@phosphor-icons/react'
 import React from 'react'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../avatar'
-import { Badge, type BadgeProps } from '../badge'
+import { Badge } from '../badge'
+import type { BadgeProps } from '../badge'
 import { Button } from '../button'
 import { createAppColumnHelper, useAppTable } from './table-context'
 import { TableResults } from './table-results'
 
 export default {
-  title: 'Components/Table',
   parameters: {
     docs: {
-      subtitle: 'Flexible data table with sorting, filtering, pagination, and multiple view modes.',
       description: {
         component:
           'A composition-first data table built on TanStack Table. Supports common patterns like simple lists, data grids, dashboards, user directories, and task trackers.',
       },
+      subtitle: 'Flexible data table with sorting, filtering, pagination, and multiple view modes.',
     },
   },
+  title: 'Components/Table',
 }
 
-type Person = {
+interface Person {
   age: number
   avatar: string
   dateJoined: Date
@@ -40,45 +42,46 @@ type Person = {
 }
 
 const makePeople = (count: number): Person[] =>
-  Array.from({ length: count }, () => ({
-    age: faker.number.int({ min: 18, max: 65 }),
-    avatar: faker.image.avatar(),
-    dateJoined: faker.date.past({ years: 5 }),
-    email: faker.internet.email(),
-    firstName: faker.person.firstName(),
-    lastName: faker.person.lastName(),
-    progress: faker.number.int({ min: 0, max: 100 }),
-    status: faker.helpers.arrayElement(['active', 'inactive', 'pending']),
-    visits: faker.number.int({ min: 0, max: 500 }),
-  }))
-
-const makePeopleJA = (count: number): Person[] =>
-  Array.from({ length: count }, () => ({
-    age: fakerJA.number.int({ min: 18, max: 65 }),
-    avatar: fakerJA.image.avatar(),
-    dateJoined: fakerJA.date.past({ years: 5 }),
-    email: fakerJA.internet.email(),
-    firstName: fakerJA.person.firstName(),
-    lastName: fakerJA.person.lastName(),
-    progress: fakerJA.number.int({ min: 0, max: 100 }),
-    status: fakerJA.helpers.arrayElement(['active', 'inactive', 'pending']),
-    visits: fakerJA.number.int({ min: 0, max: 500 }),
-  }))
-
-const statusTone = (value: string): BadgeProps['tone'] => {
-  switch (value) {
-    case 'active':
-    case 'in-stock':
-      return 'success'
-    case 'pending':
-    case 'low-stock':
-      return 'warning'
-    default:
-      return 'neutral'
+    Array.from({ length: count }, () => ({
+      age: faker.number.int({ max: 65, min: 18 }),
+      avatar: faker.image.avatar(),
+      dateJoined: faker.date.past({ years: 5 }),
+      email: faker.internet.email(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      progress: faker.number.int({ max: 100, min: 0 }),
+      status: faker.helpers.arrayElement(['active', 'inactive', 'pending']),
+      visits: faker.number.int({ max: 500, min: 0 }),
+    })),
+  makePeopleJA = (count: number): Person[] =>
+    Array.from({ length: count }, () => ({
+      age: fakerJA.number.int({ max: 65, min: 18 }),
+      avatar: fakerJA.image.avatar(),
+      dateJoined: fakerJA.date.past({ years: 5 }),
+      email: fakerJA.internet.email(),
+      firstName: fakerJA.person.firstName(),
+      lastName: fakerJA.person.lastName(),
+      progress: fakerJA.number.int({ max: 100, min: 0 }),
+      status: fakerJA.helpers.arrayElement(['active', 'inactive', 'pending']),
+      visits: fakerJA.number.int({ max: 500, min: 0 }),
+    })),
+  statusTone = (value: string): BadgeProps['tone'] => {
+    switch (value) {
+      case 'active':
+      case 'in-stock': {
+        return 'success'
+      }
+      case 'pending':
+      case 'low-stock': {
+        return 'warning'
+      }
+      default: {
+        return 'neutral'
+      }
+    }
   }
-}
 
-type Product = {
+interface Product {
   id: string
   name: string
   category: string
@@ -89,12 +92,12 @@ type Product = {
 
 const makeProducts = (count: number): Product[] =>
   Array.from({ length: count }, () => ({
+    category: faker.commerce.department(),
     id: faker.string.uuid(),
     name: faker.commerce.productName(),
-    category: faker.commerce.department(),
     price: faker.number.float({ min: 5, max: 500, fractionDigits: 2 }),
-    stock: faker.number.int({ min: 0, max: 200 }),
     status: faker.helpers.arrayElement(['in-stock', 'low-stock', 'out-of-stock']),
+    stock: faker.number.int({ min: 0, max: 200 }),
   }))
 
 export const Playground = {
@@ -108,88 +111,87 @@ export const Playground = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.display({
-        id: 'select',
-        header: ({ header }) => <header.TableSelectHeader />,
-        cell: ({ cell }) => <cell.TableCheckboxCell />,
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-        enableHiding: false,
-        size: 48,
-      }),
-      columnHelper.accessor('avatar', {
-        header: 'Avatar',
-        cell: ({ cell }) => <cell.TableImageCell className="rounded-full" />,
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-      }),
-      columnHelper.accessor('firstName', {
-        header: 'First Name',
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.display({
+          cell: ({ cell }) => <cell.TableCheckboxCell />,
+          enableColumnFilter: false,
+          enableGlobalFilter: false,
+          enableHiding: false,
+          enableSorting: false,
+          header: ({ header }) => <header.TableSelectHeader />,
+          id: 'select',
+          size: 48,
+        }),
+        columnHelper.accessor('avatar', {
+          cell: ({ cell }) => <cell.TableImageCell className="rounded-full" />,
+          enableColumnFilter: false,
+          enableGlobalFilter: false,
+          enableSorting: false,
+          header: 'Avatar',
+        }),
+        columnHelper.accessor('firstName', {
+          enableMultiSort: true,
+          filterFn: 'string',
+          header: 'First Name',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('lastName', {
+          enableMultiSort: true,
+          filterFn: 'string',
+          header: 'Last Name',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('email', {
+          enableMultiSort: true,
+          filterFn: 'string',
+          header: 'Email',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('age', {
+          filterFn: 'number',
+          header: 'Age',
+          meta: { filterVariant: 'number' },
+        }),
+        columnHelper.accessor('dateJoined', {
+          cell: ({ cell }) => <cell.TableDateCell />,
+          filterFn: 'date',
+          header: 'Date Joined',
+          meta: {
+            filterVariant: 'date',
+          },
+        }),
+        columnHelper.accessor('visits', {
+          filterFn: 'number',
+          header: 'Visits',
+          meta: { filterVariant: 'number' },
+        }),
+        columnHelper.accessor('progress', {
+          filterFn: 'number',
+          header: 'Progress',
+          meta: { filterVariant: 'number' },
+        }),
+        columnHelper.accessor('status', {
+          cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
+          filterFn: 'select',
+          header: 'Status',
+          meta: { filterVariant: 'select' },
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makePeople(5000), []),
         enableMultiSort: true,
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('lastName', {
-        header: 'Last Name',
-        enableMultiSort: true,
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('email', {
-        header: 'Email',
-        enableMultiSort: true,
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('age', {
-        header: 'Age',
-        filterFn: 'number',
-        meta: { filterVariant: 'number' },
-      }),
-      columnHelper.accessor('dateJoined', {
-        header: 'Date Joined',
-        cell: ({ cell }) => <cell.TableDateCell />,
-        filterFn: 'date',
-        meta: {
-          filterVariant: 'date',
+        initialState: {
+          pagination: {
+            pageIndex: 0,
+            pageSize: 10,
+          },
+          rowSelection: {},
+          sorting: [{ id: 'firstName', desc: false }],
         },
-      }),
-      columnHelper.accessor('visits', {
-        header: 'Visits',
-        filterFn: 'number',
-        meta: { filterVariant: 'number' },
-      }),
-      columnHelper.accessor('progress', {
-        header: 'Progress',
-        filterFn: 'number',
-        meta: { filterVariant: 'number' },
-      }),
-      columnHelper.accessor('status', {
-        header: 'Status',
-        filterFn: 'select',
-        meta: { filterVariant: 'select' },
-        cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-simple',
-      columns,
-      data: React.useMemo(() => makePeople(5000), []),
-      enableMultiSort: true,
-      initialState: {
-        pagination: {
-          pageIndex: 0,
-          pageSize: 10,
-        },
-        sorting: [{ id: 'firstName', desc: false }],
-        rowSelection: {},
-      },
-    })
+        key: 'people-simple',
+      })
 
     return (
       <table.AppTable>
@@ -197,22 +199,17 @@ export const Playground = {
           <table.TableToolbar>
             <table.TableSearch placeholder="Search..." />
             <table.TableFilterMenu>
-              <Button aria-label="Filter" size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="Filter" size="iconMedium" variant="ghost" tone="neutral">
                 <FunnelIcon weight="bold" />
               </Button>
             </table.TableFilterMenu>
             <table.TableSortMenu>
-              <Button aria-label="Sort" size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="Sort" size="iconMedium" variant="ghost" tone="neutral">
                 <ArrowsDownUpIcon weight="bold" />
               </Button>
             </table.TableSortMenu>
             <table.TableColumnToggle>
-              <Button
-                aria-label="Toggle columns"
-                size="iconMedium"
-                variant={'ghost'}
-                tone="neutral"
-              >
+              <Button aria-label="Toggle columns" size="iconMedium" variant="ghost" tone="neutral">
                 <ColumnsIcon weight="bold" />
               </Button>
             </table.TableColumnToggle>
@@ -248,109 +245,108 @@ export const PlaygroundJA = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.display({
-        id: 'select',
-        header: ({ header }) => <header.TableSelectHeader />,
-        cell: ({ cell }) => <cell.TableCheckboxCell />,
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-        enableHiding: false,
-        size: 48,
-      }),
-      columnHelper.accessor('avatar', {
-        header: 'アバター',
-        cell: ({ cell }) => <cell.TableImageCell className="rounded-full" />,
-        enableSorting: false,
-        enableColumnFilter: false,
-        enableGlobalFilter: false,
-      }),
-      columnHelper.accessor('firstName', {
-        header: '名',
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.display({
+          cell: ({ cell }) => <cell.TableCheckboxCell />,
+          enableColumnFilter: false,
+          enableGlobalFilter: false,
+          enableHiding: false,
+          enableSorting: false,
+          header: ({ header }) => <header.TableSelectHeader />,
+          id: 'select',
+          size: 48,
+        }),
+        columnHelper.accessor('avatar', {
+          cell: ({ cell }) => <cell.TableImageCell className="rounded-full" />,
+          enableColumnFilter: false,
+          enableGlobalFilter: false,
+          enableSorting: false,
+          header: 'アバター',
+        }),
+        columnHelper.accessor('firstName', {
+          enableMultiSort: true,
+          filterFn: 'string',
+          header: '名',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('lastName', {
+          enableMultiSort: true,
+          filterFn: 'string',
+          header: '姓',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('email', {
+          enableMultiSort: true,
+          filterFn: 'string',
+          header: 'メール',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('age', {
+          filterFn: 'number',
+          header: '年齢',
+          meta: { filterVariant: 'number' },
+        }),
+        columnHelper.accessor('dateJoined', {
+          cell: ({ cell }) => <cell.TableDateCell />,
+          filterFn: 'date',
+          header: '入社日',
+          meta: {
+            filterVariant: 'date',
+          },
+        }),
+        columnHelper.accessor('visits', {
+          filterFn: 'number',
+          header: '訪問回数',
+          meta: { filterVariant: 'number' },
+        }),
+        columnHelper.accessor('progress', {
+          filterFn: 'number',
+          header: '進捗',
+          meta: { filterVariant: 'number' },
+        }),
+        columnHelper.accessor('status', {
+          cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
+          filterFn: 'select',
+          header: 'ステータス',
+          meta: { filterVariant: 'select' },
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makePeopleJA(5000), []),
         enableMultiSort: true,
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('lastName', {
-        header: '姓',
-        enableMultiSort: true,
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('email', {
-        header: 'メール',
-        enableMultiSort: true,
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('age', {
-        header: '年齢',
-        filterFn: 'number',
-        meta: { filterVariant: 'number' },
-      }),
-      columnHelper.accessor('dateJoined', {
-        header: '入社日',
-        cell: ({ cell }) => <cell.TableDateCell />,
-        filterFn: 'date',
+        initialState: {
+          pagination: {
+            pageIndex: 0,
+            pageSize: 10,
+          },
+          rowSelection: {},
+          sorting: [{ id: 'firstName', desc: false }],
+        },
+        key: 'people-simple-ja',
         meta: {
-          filterVariant: 'date',
-        },
-      }),
-      columnHelper.accessor('visits', {
-        header: '訪問回数',
-        filterFn: 'number',
-        meta: { filterVariant: 'number' },
-      }),
-      columnHelper.accessor('progress', {
-        header: '進捗',
-        filterFn: 'number',
-        meta: { filterVariant: 'number' },
-      }),
-      columnHelper.accessor('status', {
-        header: 'ステータス',
-        filterFn: 'select',
-        meta: { filterVariant: 'select' },
-        cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-simple-ja',
-      columns,
-      data: React.useMemo(() => makePeopleJA(5000), []),
-      enableMultiSort: true,
-      initialState: {
-        pagination: {
-          pageIndex: 0,
-          pageSize: 10,
-        },
-        sorting: [{ id: 'firstName', desc: false }],
-        rowSelection: {},
-      },
-      meta: {
-        translations: {
-          filterOperatorLabels: {
-            equals: 'と等しい',
-            notEquals: 'と等しくない',
-            contains: 'を含む',
-            notContains: 'を含まない',
-            startsWith: 'で始まる',
-            endsWith: 'で終わる',
-            greaterThan: 'より大きい',
-            lessThan: 'より小さい',
-            between: 'の間',
-          },
-          buttonLabels: {
-            ascending: '昇順',
-            descending: '降順',
-            reset: 'リセット',
-            apply: '適用',
+          translations: {
+            buttonLabels: {
+              apply: '適用',
+              ascending: '昇順',
+              descending: '降順',
+              reset: 'リセット',
+            },
+            filterOperatorLabels: {
+              between: 'の間',
+              contains: 'を含む',
+              endsWith: 'で終わる',
+              equals: 'と等しい',
+              greaterThan: 'より大きい',
+              lessThan: 'より小さい',
+              notContains: 'を含まない',
+              notEquals: 'と等しくない',
+              startsWith: 'で始まる',
+            },
           },
         },
-      },
-    })
+      })
 
     return (
       <table.AppTable>
@@ -358,20 +354,20 @@ export const PlaygroundJA = {
           <table.TableToolbar>
             <table.TableSearch placeholder="検索..." />
             <table.TableFilterMenu>
-              <Button aria-label="Filter" size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="フィルター" size="iconMedium" variant="ghost" tone="neutral">
                 <FunnelIcon weight="bold" />
               </Button>
             </table.TableFilterMenu>
             <table.TableSortMenu>
-              <Button aria-label="Sort" size="iconMedium" variant={'ghost'} tone="neutral">
+              <Button aria-label="並び替え" size="iconMedium" variant="ghost" tone="neutral">
                 <ArrowsDownUpIcon weight="bold" />
               </Button>
             </table.TableSortMenu>
             <table.TableColumnToggle>
               <Button
-                aria-label="Toggle columns"
+                aria-label="列の表示切り替え"
                 size="iconMedium"
-                variant={'ghost'}
+                variant="ghost"
                 tone="neutral"
               >
                 <ColumnsIcon weight="bold" />
@@ -409,25 +405,24 @@ export const BasicList = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Product>()
-    const columns = columnHelper.columns([
-      columnHelper.accessor('name', { header: 'Product' }),
-      columnHelper.accessor('category', { header: 'Category' }),
-      columnHelper.accessor('stock', {
-        header: 'Stock',
-        cell: ({ cell }) => <cell.TableNumberCell />,
-      }),
-      columnHelper.accessor('price', {
-        header: 'Price',
-        cell: ({ cell }) => <cell.TableNumberCell>$</cell.TableNumberCell>,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'products-basic',
-      columns,
-      data: React.useMemo(() => makeProducts(6), []),
-    })
+    const columnHelper = createAppColumnHelper<Product>(),
+      columns = columnHelper.columns([
+        columnHelper.accessor('name', { header: 'Product' }),
+        columnHelper.accessor('category', { header: 'Category' }),
+        columnHelper.accessor('stock', {
+          cell: ({ cell }) => <cell.TableNumberCell />,
+          header: 'Stock',
+        }),
+        columnHelper.accessor('price', {
+          cell: ({ cell }) => <cell.TableNumberCell>$</cell.TableNumberCell>,
+          header: 'Price',
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makeProducts(6), []),
+        key: 'products-basic',
+      })
 
     return (
       <table.AppTable>
@@ -453,31 +448,30 @@ export const RowSelection = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.display({
-        id: 'select',
-        header: ({ header }) => <header.TableSelectHeader />,
-        cell: ({ cell }) => <cell.TableCheckboxCell />,
-        enableSorting: false,
-        enableHiding: false,
-        size: 48,
-      }),
-      columnHelper.accessor('firstName', { header: 'First Name' }),
-      columnHelper.accessor('lastName', { header: 'Last Name' }),
-      columnHelper.accessor('email', { header: 'Email' }),
-      columnHelper.accessor('status', {
-        header: 'Status',
-        cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-selection',
-      columns,
-      data: React.useMemo(() => makePeople(8), []),
-      initialState: { rowSelection: {} },
-    })
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.display({
+          cell: ({ cell }) => <cell.TableCheckboxCell />,
+          enableHiding: false,
+          enableSorting: false,
+          header: ({ header }) => <header.TableSelectHeader />,
+          id: 'select',
+          size: 48,
+        }),
+        columnHelper.accessor('firstName', { header: 'First Name' }),
+        columnHelper.accessor('lastName', { header: 'Last Name' }),
+        columnHelper.accessor('email', { header: 'Email' }),
+        columnHelper.accessor('status', {
+          cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
+          header: 'Status',
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makePeople(8), []),
+        initialState: { rowSelection: {} },
+        key: 'people-selection',
+      })
 
     return (
       <table.AppTable>
@@ -526,43 +520,42 @@ export const Filtering = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.accessor('firstName', {
-        header: 'First Name',
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('email', {
-        header: 'Email',
-        filterFn: 'string',
-        meta: { filterVariant: 'string' },
-      }),
-      columnHelper.accessor('age', {
-        header: 'Age',
-        filterFn: 'number',
-        meta: { filterVariant: 'number' },
-      }),
-      columnHelper.accessor('dateJoined', {
-        header: 'Date Joined',
-        cell: ({ cell }) => <cell.TableDateCell />,
-        filterFn: 'date',
-        meta: { filterVariant: 'date' },
-      }),
-      columnHelper.accessor('status', {
-        header: 'Status',
-        filterFn: 'select',
-        meta: { filterVariant: 'select' },
-        cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-filtering',
-      columns,
-      data: React.useMemo(() => makePeople(200), []),
-      initialState: { pagination: { pageIndex: 0, pageSize: 8 } },
-    })
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.accessor('firstName', {
+          filterFn: 'string',
+          header: 'First Name',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('email', {
+          filterFn: 'string',
+          header: 'Email',
+          meta: { filterVariant: 'string' },
+        }),
+        columnHelper.accessor('age', {
+          filterFn: 'number',
+          header: 'Age',
+          meta: { filterVariant: 'number' },
+        }),
+        columnHelper.accessor('dateJoined', {
+          cell: ({ cell }) => <cell.TableDateCell />,
+          filterFn: 'date',
+          header: 'Date Joined',
+          meta: { filterVariant: 'date' },
+        }),
+        columnHelper.accessor('status', {
+          cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
+          filterFn: 'select',
+          header: 'Status',
+          meta: { filterVariant: 'select' },
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makePeople(200), []),
+        initialState: { pagination: { pageIndex: 0, pageSize: 8 } },
+        key: 'people-filtering',
+      })
 
     return (
       <table.AppTable>
@@ -604,35 +597,34 @@ export const WithFooterTotals = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Product>()
-    const columns = columnHelper.columns([
-      columnHelper.accessor('name', { header: 'Product', footer: 'Total' }),
-      columnHelper.accessor('category', { header: 'Category' }),
-      columnHelper.accessor('stock', {
-        header: 'Stock',
-        cell: ({ cell }) => <cell.TableNumberCell />,
-        footer: ({ table }) =>
-          table
-            .getFilteredRowModel()
-            .rows.reduce((sum, row) => sum + row.getValue<number>('stock'), 0)
-            .toLocaleString(),
-      }),
-      columnHelper.accessor('price', {
-        header: 'Price',
-        cell: ({ cell }) => <cell.TableNumberCell>$</cell.TableNumberCell>,
-        footer: ({ table }) =>
-          `$${table
-            .getFilteredRowModel()
-            .rows.reduce((sum, row) => sum + row.getValue<number>('price'), 0)
-            .toLocaleString(undefined, { maximumFractionDigits: 2 })}`,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'products-footer',
-      columns,
-      data: React.useMemo(() => makeProducts(8), []),
-    })
+    const columnHelper = createAppColumnHelper<Product>(),
+      columns = columnHelper.columns([
+        columnHelper.accessor('name', { footer: 'Total', header: 'Product' }),
+        columnHelper.accessor('category', { header: 'Category' }),
+        columnHelper.accessor('stock', {
+          cell: ({ cell }) => <cell.TableNumberCell />,
+          footer: ({ table }) =>
+            table
+              .getFilteredRowModel()
+              .rows.reduce((sum, row) => sum + row.getValue<number>('stock'), 0)
+              .toLocaleString(),
+          header: 'Stock',
+        }),
+        columnHelper.accessor('price', {
+          cell: ({ cell }) => <cell.TableNumberCell>$</cell.TableNumberCell>,
+          footer: ({ table }) =>
+            `$${table
+              .getFilteredRowModel()
+              .rows.reduce((sum, row) => sum + row.getValue<number>('price'), 0)
+              .toLocaleString(undefined, { maximumFractionDigits: 2 })}`,
+          header: 'Price',
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makeProducts(8), []),
+        key: 'products-footer',
+      })
 
     return (
       <table.AppTable>
@@ -659,27 +651,26 @@ export const CompactDensity = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.accessor('firstName', { header: 'First Name' }),
-      columnHelper.accessor('lastName', { header: 'Last Name' }),
-      columnHelper.accessor('email', { header: 'Email' }),
-      columnHelper.accessor('visits', {
-        header: 'Visits',
-        cell: ({ cell }) => <cell.TableNumberCell />,
-      }),
-      columnHelper.accessor('status', {
-        header: 'Status',
-        cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-compact',
-      columns,
-      data: React.useMemo(() => makePeople(50), []),
-      initialState: { pagination: { pageIndex: 0, pageSize: 6 } },
-    })
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.accessor('firstName', { header: 'First Name' }),
+        columnHelper.accessor('lastName', { header: 'Last Name' }),
+        columnHelper.accessor('email', { header: 'Email' }),
+        columnHelper.accessor('visits', {
+          cell: ({ cell }) => <cell.TableNumberCell />,
+          header: 'Visits',
+        }),
+        columnHelper.accessor('status', {
+          cell: ({ cell }) => <cell.TableBadgeCell tone={statusTone} />,
+          header: 'Status',
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makePeople(50), []),
+        initialState: { pagination: { pageIndex: 0, pageSize: 6 } },
+        key: 'people-compact',
+      })
 
     return (
       <table.AppTable>
@@ -712,18 +703,17 @@ export const EmptyState = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.accessor('firstName', { header: 'First Name' }),
-      columnHelper.accessor('lastName', { header: 'Last Name' }),
-      columnHelper.accessor('email', { header: 'Email' }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-empty',
-      columns,
-      data: [],
-    })
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.accessor('firstName', { header: 'First Name' }),
+        columnHelper.accessor('lastName', { header: 'Last Name' }),
+        columnHelper.accessor('email', { header: 'Email' }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: [],
+        key: 'people-empty',
+      })
 
     return (
       <table.AppTable>
@@ -755,23 +745,22 @@ export const CustomPagination = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.accessor('firstName', { header: 'First Name' }),
-      columnHelper.accessor('lastName', { header: 'Last Name' }),
-      columnHelper.accessor('email', { header: 'Email' }),
-      columnHelper.accessor('visits', {
-        header: 'Visits',
-        cell: ({ cell }) => <cell.TableNumberCell />,
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-pagination',
-      columns,
-      data: React.useMemo(() => makePeople(120), []),
-      initialState: { pagination: { pageIndex: 0, pageSize: 10 } },
-    })
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.accessor('firstName', { header: 'First Name' }),
+        columnHelper.accessor('lastName', { header: 'Last Name' }),
+        columnHelper.accessor('email', { header: 'Email' }),
+        columnHelper.accessor('visits', {
+          cell: ({ cell }) => <cell.TableNumberCell />,
+          header: 'Visits',
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makePeople(120), []),
+        initialState: { pagination: { pageIndex: 0, pageSize: 10 } },
+        key: 'people-pagination',
+      })
 
     return (
       <table.AppTable>
@@ -813,134 +802,140 @@ export const Grid = {
     },
   },
   render: () => {
-    const columnHelper = createAppColumnHelper<Person>()
-    const columns = columnHelper.columns([
-      columnHelper.accessor('firstName', {
-        header: 'First Name',
-        cell: ({ cell, table }) => {
-          const person = cell.row.original
+    const columnHelper = createAppColumnHelper<Person>(),
+      columns = columnHelper.columns([
+        columnHelper.accessor('firstName', {
+          cell: ({ cell, table }) => {
+            const person = cell.row.original
 
-          if (!(table.atoms.viewMode.get() === 'grid')) {
-            return <cell.TableTextCell />
-          }
+            if (!(table.atoms.viewMode.get() === 'grid')) {
+              return <cell.TableTextCell />
+            }
 
-          return (
-            <div className="flex flex-col gap-sm">
-              <div className="flex items-center gap-sm">
-                <Avatar size="medium">
-                  <AvatarImage alt={`${person.firstName} ${person.lastName}`} src={person.avatar} />
-                  <AvatarFallback>
-                    {person.firstName[0]}
-                    {person.lastName[0]}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex min-w-0 flex-col">
-                  <span className="truncate style-text-strong-0">
-                    {person.firstName} {person.lastName}
-                  </span>
-                  <span className="truncate style-text-default--1 text-on-surface-variant">
-                    {person.email}
-                  </span>
+            return (
+              <div className="flex flex-col gap-sm">
+                <div className="flex items-center gap-sm">
+                  <Avatar size="medium">
+                    <AvatarImage
+                      alt={`${person.firstName} ${person.lastName}`}
+                      src={person.avatar}
+                    />
+                    <AvatarFallback>
+                      {person.firstName[0]}
+                      {person.lastName[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex min-w-0 flex-col">
+                    <span className="truncate style-text-strong-0">
+                      {person.firstName} {person.lastName}
+                    </span>
+                    <span className="truncate style-text-default--1 text-on-surface-variant">
+                      {person.email}
+                    </span>
+                  </div>
+                  <Badge
+                    className="ml-auto capitalize"
+                    tone={statusTone(person.status)}
+                    variant="soft"
+                  >
+                    {person.status}
+                  </Badge>
                 </div>
-                <Badge
-                  className="ml-auto capitalize"
-                  tone={statusTone(person.status)}
-                  variant="soft"
-                >
-                  {person.status}
-                </Badge>
-              </div>
-              <div className="flex items-center justify-between style-text-default--1 text-on-surface-variant">
-                <span>{person.visits.toLocaleString()} visits</span>
-                <span>Joined {person.dateJoined.getFullYear()}</span>
-              </div>
-              <div className="flex flex-col gap-3xs">
-                <div className="flex items-center justify-between style-text-default--2 text-on-surface-variant">
-                  <span>Progress</span>
-                  <span>{person.progress}%</span>
+                <div className="flex items-center justify-between style-text-default--1 text-on-surface-variant">
+                  <span>{person.visits.toLocaleString()} visits</span>
+                  <span>Joined {person.dateJoined.getFullYear()}</span>
                 </div>
-                <div className="h-2xs w-full overflow-hidden rounded-full bg-neutral-container-high">
-                  <div
-                    className="h-full rounded-full bg-brand-default"
-                    style={{ width: `${person.progress}%` }}
-                  />
+                <div className="flex flex-col gap-3xs">
+                  <div className="flex items-center justify-between style-text-default--2 text-on-surface-variant">
+                    <span>Progress</span>
+                    <span>{person.progress}%</span>
+                  </div>
+                  <div className="h-2xs w-full overflow-hidden rounded-full bg-neutral-container-high">
+                    <div
+                      className="h-full rounded-full bg-brand-default"
+                      style={{ width: `${person.progress}%` }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        },
-      }),
-      columnHelper.accessor('lastName', {
-        header: 'Last Name',
-        cell: ({ table }) => {
-          if (table.atoms.viewMode.get() === 'grid') {
-            return null
-          }
-        },
-      }),
-      columnHelper.accessor('email', {
-        header: 'Email',
-        cell: ({ table }) => {
-          if (table.atoms.viewMode.get() === 'grid') {
-            return null
-          }
-        },
-      }),
-      columnHelper.accessor('status', {
-        header: 'Status',
-        cell: ({ cell, table }) => {
-          if (table.atoms.viewMode.get() === 'grid') {
-            return null
-          }
+            )
+          },
+          header: 'First Name',
+        }),
+        columnHelper.accessor('lastName', {
+          cell: ({ table }) => {
+            if (table.atoms.viewMode.get() === 'grid') {
+              return null
+            }
+          },
+          header: 'Last Name',
+        }),
+        columnHelper.accessor('email', {
+          cell: ({ table }) => {
+            if (table.atoms.viewMode.get() === 'grid') {
+              return null
+            }
+          },
+          header: 'Email',
+        }),
+        columnHelper.accessor('status', {
+          cell: ({ cell, table }) => {
+            if (table.atoms.viewMode.get() === 'grid') {
+              return null
+            }
 
-          return <cell.TableBadgeCell tone={statusTone} />
-        },
-      }),
-      columnHelper.accessor('visits', {
-        header: 'Visits',
-        cell: ({ cell, table }) => {
-          if (table.atoms.viewMode.get() === 'grid') {
-            return null
-          }
+            return <cell.TableBadgeCell tone={statusTone} />
+          },
+          header: 'Status',
+        }),
+        columnHelper.accessor('visits', {
+          cell: ({ cell, table }) => {
+            if (table.atoms.viewMode.get() === 'grid') {
+              return null
+            }
 
-          return <cell.TableNumberCell />
-        },
-      }),
-      columnHelper.accessor('dateJoined', {
-        header: 'Date Joined',
-        cell: ({ cell, table }) => {
-          if (table.atoms.viewMode.get() === 'grid') {
-            return null
-          }
+            return <cell.TableNumberCell />
+          },
+          header: 'Visits',
+        }),
+        columnHelper.accessor('dateJoined', {
+          cell: ({ cell, table }) => {
+            if (table.atoms.viewMode.get() === 'grid') {
+              return null
+            }
 
-          return <cell.TableDateCell />
-        },
-      }),
-      columnHelper.accessor('progress', {
-        header: 'Progress',
-        cell: ({ cell, table }) => {
-          if (table.atoms.viewMode.get() === 'grid') {
-            return null
-          }
+            return <cell.TableDateCell />
+          },
+          header: 'Date Joined',
+        }),
+        columnHelper.accessor('progress', {
+          cell: ({ cell, table }) => {
+            if (table.atoms.viewMode.get() === 'grid') {
+              return null
+            }
 
-          return <span>{cell.row.original.progress}%</span>
-        },
-      }),
-    ])
-
-    const table = useAppTable({
-      key: 'people-grid',
-      columns,
-      data: React.useMemo(() => makePeople(120), []),
-      initialState: { pagination: { pageIndex: 0, pageSize: 12 } },
-    })
+            return <span>{cell.row.original.progress}%</span>
+          },
+          header: 'Progress',
+        }),
+      ]),
+      table = useAppTable({
+        columns,
+        data: React.useMemo(() => makePeople(120), []),
+        initialState: { pagination: { pageIndex: 0, pageSize: 12 } },
+        key: 'people-grid',
+      })
 
     return (
       <table.AppTable>
         <table.TableContainer className="w-[90vw]">
           <table.TableToolbar>
             <table.TableSearch placeholder="Search..." />
-            <table.TableViewModeToggle variant={'ghost'} size="iconMedium">
+            <table.TableViewModeToggle
+              aria-label="Toggle view mode"
+              variant="ghost"
+              size="iconMedium"
+            >
               {(isGridView) => (
                 <>{isGridView ? <GridFourIcon weight="bold" /> : <TableIcon weight="bold" />}</>
               )}

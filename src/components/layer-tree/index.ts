@@ -1,11 +1,11 @@
 export {
   createAppColumnHelper as createLayerTreeColumnHelper,
-  features as layerTreeFeatures,
   useAppTable as useLayerTreeTable,
   useCellContext as useLayerTreeCellContext,
   useHeaderContext as useLayerTreeHeaderContext,
   useTableContext as useLayerTreeContext,
-} from './layer-tree-context'
+} from './layer-tree-table'
+export { features as layerTreeFeatures } from './layer-tree-context'
 export type {
   LayerTreeBodyProps,
   LayerTreeColumnMeta,
@@ -27,7 +27,7 @@ export type {
   RowVisibilityState,
   LayerTreeNodeIconProps,
 } from './layer-tree.types'
-export { useLayerTree } from './layer-tree'
+export { LayerTree, useLayerTree } from './layer-tree'
 export { LayerTreeBody } from './layer-tree-body'
 export { LayerTreeExpandAll } from './layer-tree-expand-all'
 export { LayerTreeFooter } from './layer-tree-footer'

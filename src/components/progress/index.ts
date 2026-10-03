@@ -1,8 +1,8 @@
-import { Progress as ProgressBase } from './progress'
+import { Progress as ProgressRoot } from './progress'
 import { ProgressBar } from './progress-bar'
 import { ProgressIndicator } from './progress-indicator'
 
-export const Progress = Object.assign(ProgressBase, {
+const Progress = Object.assign(ProgressRoot, {
   Bar: ProgressBar,
   Indicator: ProgressIndicator,
 })
@@ -10,3 +10,4 @@ export const Progress = Object.assign(ProgressBase, {
 export type { ProgressBarProps, ProgressIndicatorProps, ProgressProps } from './progress.types'
 export { ProgressBar } from './progress-bar'
 export { ProgressIndicator } from './progress-indicator'
+export { Progress }

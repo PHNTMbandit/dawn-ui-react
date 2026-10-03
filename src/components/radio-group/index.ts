@@ -1,9 +1,11 @@
 import { Radio } from './radio'
-import { RadioGroup as RadioGroupBase } from './radio-group'
+import { RadioGroup as RadioGroupRoot } from './radio-group'
 
-export const RadioGroup = Object.assign(RadioGroupBase, {
+const RadioGroup = Object.assign(RadioGroupRoot, {
   Radio,
 })
 
-export { Radio } from './radio'
 export type { RadioGroupProps, RadioProps } from './radio-group.types'
+export { Radio } from './radio'
+
+export { RadioGroup }

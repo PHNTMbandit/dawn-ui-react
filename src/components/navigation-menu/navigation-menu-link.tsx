@@ -1,25 +1,19 @@
-import { navigationMenuLinkVariants, type NavigationMenuLinkProps } from './navigation-menu.types'
 import { cn } from '@/utils/cn'
 
-export const NavigationMenuLink = ({
-  tone,
-  className,
-  children,
-  ref,
-  ...props
-}: NavigationMenuLinkProps) => {
+import { navigationMenuLinkVariants } from './navigation-menu.types'
+import type { NavigationMenuLinkProps } from './navigation-menu.types'
+
+export function NavigationMenuLink({ tone, className, ref, ...props }: NavigationMenuLinkProps) {
   return (
     <div
       className={cn(
         navigationMenuLinkVariants({
-          tone,
           className,
+          tone,
         }),
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

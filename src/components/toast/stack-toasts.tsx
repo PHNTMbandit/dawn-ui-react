@@ -1,11 +1,12 @@
 import { Toast as BaseToast } from '@base-ui/react/toast'
-import { StackToastItem } from './stack-toast-item'
-import { useToastManager } from './toast-manager'
+
 import { cn } from '@/utils/cn'
 
+import { StackToastItem } from './stack-toast-item'
+import { useToastManager } from './toast-manager'
 import type { StackToastProps } from './toast.types'
 
-export const StackToasts = ({ className, ref, ...props }: StackToastProps) => {
+export function StackToasts({ className, ref, ...props }: StackToastProps) {
   const { toasts } = useToastManager()
 
   return (

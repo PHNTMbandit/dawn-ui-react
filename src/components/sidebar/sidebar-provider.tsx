@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useMediaQuery } from '@/hooks'
 import { cn } from '@/utils/cn'
 
@@ -13,76 +14,86 @@ type SidebarContextProps = React.ComponentProps<'div'> & {
   collapsible?: 'offcanvas' | 'icon' | 'none'
 }
 
-const SidebarContext = React.createContext<SidebarContextProps | null>(null)
+// 7 days in seconds
+const SIDEBAR_COOKIE_MAX_AGE_SECONDS = 604_800,
+  // oxlint-disable-next-line unicorn/no-null
+  SidebarContext = React.createContext<SidebarContextProps | null>(null),
+  useSidebar = () => {
+    const context = React.useContext(SidebarContext)
+    if (!context) {
+      throw new Error('useSidebar must be used within a SidebarProvider')
+    }
+    return context
+  }
 
-export const SidebarProvider = ({
+function resolveOpenState(
+  value: boolean | ((open: boolean) => boolean),
+  previous: boolean,
+): boolean {
+  if (typeof value === 'function') {
+    return value(previous)
+  }
+  return value
+}
+
+function SidebarProvider({
   id,
   defaultOpen = true,
   side = 'left',
   collapsible = 'icon',
   className,
-  children,
   ref,
   ...props
-}: SidebarContextProps) => {
-  const SIDEBAR_COOKIE_NAME = `sidebar-state-${id}`
-  const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-  const [open, _setOpen] = React.useState<boolean>(defaultOpen)
-  const isMobile = useMediaQuery('mobile')
-  const effectiveCollapsible = isMobile ? 'offcanvas' : collapsible
-
-  const setOpen = React.useCallback(
-    (value: boolean | ((open: boolean) => boolean)) => {
-      _setOpen((prev) => {
-        const openState = typeof value === 'function' ? value(prev) : value
+}: SidebarContextProps) {
+  const cookieName = `sidebar-state-${id}`,
+    [openState, setOpenState] = React.useState<boolean>(defaultOpen),
+    isMobile = useMediaQuery('mobile'),
+    setOpen = (value: boolean | ((open: boolean) => boolean)) => {
+      setOpenState((prev) => {
+        const nextOpen = resolveOpenState(value, prev)
 
         document.cookie = [
-          `${SIDEBAR_COOKIE_NAME}=${encodeURIComponent(String(openState))}`,
+          `${cookieName}=${encodeURIComponent(String(nextOpen))}`,
           'path=/',
-          `max-age=${SIDEBAR_COOKIE_MAX_AGE}`,
+          `max-age=${SIDEBAR_COOKIE_MAX_AGE_SECONDS}`,
           'samesite=lax',
         ].join('; ')
 
-        return openState
+        return nextOpen
       })
     },
-    [SIDEBAR_COOKIE_NAME, SIDEBAR_COOKIE_MAX_AGE],
-  )
+    trigger = () => setOpen((prev) => !prev)
 
-  const trigger = () => setOpen((prev) => !prev)
+  let effectiveCollapsible = collapsible
+  if (isMobile) {
+    effectiveCollapsible = 'offcanvas'
+  }
 
   return (
     <SidebarContext.Provider
       value={{
-        id,
+        collapsible: effectiveCollapsible,
         defaultOpen,
-        open,
+        id,
+        isMobile,
+        open: openState,
         setOpen,
         side,
         trigger,
-        isMobile,
-        collapsible: effectiveCollapsible,
       }}
     >
       <div
         className={cn(
           'relative size-full',
-          side === 'left' ? 'flex flex-row' : 'flex flex-row-reverse',
+          side === 'left' && 'flex flex-row',
+          side === 'right' && 'flex flex-row-reverse',
           className,
         )}
         ref={ref}
         {...props}
-      >
-        {children}
-      </div>
+      />
     </SidebarContext.Provider>
   )
 }
 
-export const useSidebar = () => {
-  const context = React.useContext(SidebarContext)
-  if (!context) {
-    throw new Error('useSidebar must be used within a SidebarProvider')
-  }
-  return context
-}
+export { SidebarProvider, useSidebar }

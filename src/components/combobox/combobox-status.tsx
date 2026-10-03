@@ -1,9 +1,10 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
+
 import { cn } from '@/utils/cn'
 
 import type { ComboboxStatusProps } from './combobox.types'
 
-export const ComboboxStatus = ({ className, children, ref, ...props }: ComboboxStatusProps) => {
+export function ComboboxStatus({ className, ref, ...props }: ComboboxStatusProps) {
   return (
     <BaseCombobox.Status
       className={cn(
@@ -12,8 +13,6 @@ export const ComboboxStatus = ({ className, children, ref, ...props }: ComboboxS
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseCombobox.Status>
+    />
   )
 }

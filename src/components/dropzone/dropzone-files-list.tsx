@@ -1,30 +1,34 @@
 import { CheckIcon, FileArrowUpIcon, TrashIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { Meter, MeterFooter, MeterIndicator, MeterTrack, MeterValue } from '../meter'
-import { useDropzone } from './dropzone'
-import { formatFileSize, getFileKey } from './dropzone.utils'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { Meter, MeterFooter, MeterIndicator, MeterTrack, MeterValue } from '../meter'
 import type { DropzoneFilesListProps } from './dropzone.types'
+import { formatFileSize, getFileKey, useDropzone } from './dropzone.utils'
 
-export const DropzoneFilesList = ({
-  className,
-  children,
-  ref,
-  ...props
-}: DropzoneFilesListProps) => {
+const NO_PROGRESS = 0,
+  COMPLETE_PROGRESS = 100
+
+export function DropzoneFilesList({ className, children, ref, ...props }: DropzoneFilesListProps) {
   const { files, fileProgress, removeFile, onUpload } = useDropzone()
 
   return (
     <ul className={cn('flex flex-col gap-xs', className)} ref={ref} {...props}>
-      {files.map((file, index) => {
-        const progress = fileProgress[getFileKey(file)] ?? 0
-        const isUploading = progress >= 0 && progress < 100
-        const isUploaded = progress >= 100
+      {files.map((file) => {
+        const fileKey = getFileKey(file),
+          progress = fileProgress[fileKey] ?? NO_PROGRESS,
+          isUploading = progress >= NO_PROGRESS && progress < COMPLETE_PROGRESS,
+          isUploaded = progress >= COMPLETE_PROGRESS
+
+        let meterTone: 'success' | 'brand' = 'brand'
+        if (isUploaded) {
+          meterTone = 'success'
+        }
 
         return (
           <li
-            key={index}
+            key={fileKey}
             className={cn(
               'flex items-center justify-between gap-lg rounded-xl border bg-surface px-md py-sm',
               isUploading && 'border-border',
@@ -43,12 +47,8 @@ export const DropzoneFilesList = ({
             )}
             <div className="flex w-full flex-col justify-between gap-3xs">
               <span className="style-text-default-0">{file.name}</span>
-              {onUpload ? (
-                <Meter
-                  orientation="vertical"
-                  tone={progress >= 100 ? 'success' : 'brand'}
-                  value={progress}
-                >
+              {onUpload && (
+                <Meter orientation="vertical" tone={meterTone} value={progress}>
                   <MeterTrack>
                     <MeterIndicator />
                   </MeterTrack>
@@ -59,13 +59,14 @@ export const DropzoneFilesList = ({
                     <MeterValue />
                   </MeterFooter>
                 </Meter>
-              ) : (
+              )}
+              {!onUpload && (
                 <span className="style-text-prose--1 text-on-surface-variant">
                   {formatFileSize(file.size)}
                 </span>
               )}
             </div>
-            <Button variant={'ghost'} tone="error" onClick={() => removeFile(file)}>
+            <Button variant="ghost" tone="error" onClick={() => removeFile(file)}>
               <TrashIcon weight="bold" />
             </Button>
           </li>

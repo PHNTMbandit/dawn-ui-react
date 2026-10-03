@@ -1,9 +1,11 @@
-export type ProgressProps = React.ComponentProps<'div'> & {
+type ProgressProps = React.ComponentProps<'div'> & {
   currentIndex: number
 }
 
-export type ProgressIndicatorProps = React.ComponentProps<'div'> & {
+type ProgressIndicatorProps = React.ComponentProps<'div'> & {
   title?: string
   description?: string
 }
-export type ProgressBarProps = React.ComponentProps<'div'>
+type ProgressBarProps = React.ComponentProps<'div'>
+
+export type { ProgressProps, ProgressIndicatorProps, ProgressBarProps }

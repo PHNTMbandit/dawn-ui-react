@@ -1,16 +1,20 @@
 import { withThemeByDataAttribute } from '@storybook/addon-themes'
-import '../src/styles/output.css'
+
+import '../src/styles/input.css'
 
 import type { Preview } from '@storybook/react-vite'
 
 const preview: Preview = {
-  tags: ['autodocs'],
+  decorators: [
+    withThemeByDataAttribute({
+      attributeName: 'data-theme',
+      defaultTheme: 'dark',
+      themes: { dark: 'dark', light: 'light' },
+    }),
+  ],
   parameters: {
-    layout: 'centered',
-    options: {
-      storySort: {
-        method: 'alphabetical',
-      },
+    a11y: {
+      test: 'error',
     },
     controls: {
       matchers: {
@@ -18,20 +22,17 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    a11y: {
-      test: 'error',
-    },
     docs: {
       toc: true,
     },
+    layout: 'centered',
+    options: {
+      storySort: {
+        method: 'alphabetical',
+      },
+    },
   },
-  decorators: [
-    withThemeByDataAttribute({
-      defaultTheme: 'dark',
-      themes: { dark: 'dark', light: 'light' },
-      attributeName: 'data-theme',
-    }),
-  ],
+  tags: ['autodocs'],
 }
 
 export default preview

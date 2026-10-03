@@ -6,95 +6,79 @@ import {
   WarningIcon,
   XCircleIcon,
 } from '@phosphor-icons/react'
-import { Badge } from './badge'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
-const VARIANTS = ['fill', 'outline', 'soft'] as const
+import { Badge } from './badge'
+
+const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const,
+  VARIANTS = ['fill', 'outline', 'soft'] as const
 
 type Tone = (typeof TONES)[number]
 type Variant = (typeof VARIANTS)[number]
 
 const TONE_ICONS: Record<Tone, React.ReactNode> = {
-  brand: <TagIcon weight="fill" />,
-  accent: <InfoIcon weight="fill" />,
-  neutral: <FolderIcon weight="fill" />,
-  error: <XCircleIcon weight="fill" />,
-  info: <InfoIcon weight="fill" />,
-  success: <CheckCircleIcon weight="fill" />,
-  warning: <WarningIcon weight="fill" />,
-}
-
-const TONE_LABELS: Record<Tone, string> = {
-  brand: 'Featured',
-  accent: 'Promoted',
-  neutral: 'Standard',
-  error: 'Error',
-  info: 'Info',
-  success: 'Complete',
-  warning: 'Warning',
-}
-
-const TONE_DESCRIPTIONS: Record<Tone, string> = {
-  brand: 'Used for primary brand-aligned labels and tags',
-  accent: 'Highlights secondary or promotional content',
-  neutral: 'General labels for non-critical information',
-  error: 'Indicates errors or invalid states',
-  info: 'Provides supplementary information',
-  success: 'Confirms successful states or completion',
-  warning: 'Alerts to situations requiring attention',
-}
-
-const SingleBadge = ({ tone = 'brand', variant = 'fill' }: { tone?: Tone; variant?: Variant }) => (
-  <Badge tone={tone} variant={variant}>
-    {TONE_ICONS[tone]} {TONE_LABELS[tone]}
-  </Badge>
-)
-
-const AllTonesGrid = ({ variant = 'fill' }: { variant?: Variant }) => (
-  <div className="flex flex-wrap gap-sm">
-    {TONES.map((tone) => (
-      <SingleBadge key={tone} tone={tone} variant={variant} />
-    ))}
-  </div>
-)
-
-const AllVariantsGrid = ({ tone = 'brand' }: { tone?: Tone }) => (
-  <div className="flex flex-wrap gap-sm">
-    {VARIANTS.map((variant) => (
-      <SingleBadge key={variant} tone={tone} variant={variant} />
-    ))}
-  </div>
-)
+    accent: <InfoIcon weight="fill" />,
+    brand: <TagIcon weight="fill" />,
+    error: <XCircleIcon weight="fill" />,
+    info: <InfoIcon weight="fill" />,
+    neutral: <FolderIcon weight="fill" />,
+    success: <CheckCircleIcon weight="fill" />,
+    warning: <WarningIcon weight="fill" />,
+  },
+  TONE_LABELS: Record<Tone, string> = {
+    accent: 'Promoted',
+    brand: 'Featured',
+    error: 'Error',
+    info: 'Info',
+    neutral: 'Standard',
+    success: 'Complete',
+    warning: 'Warning',
+  },
+  TONE_DESCRIPTIONS: Record<Tone, string> = {
+    accent: 'Highlights secondary or promotional content',
+    brand: 'Used for primary brand-aligned labels and tags',
+    error: 'Indicates errors or invalid states',
+    info: 'Provides supplementary information',
+    neutral: 'General labels for non-critical information',
+    success: 'Confirms successful states or completion',
+    warning: 'Alerts to situations requiring attention',
+  },
+  SingleBadge = ({ tone = 'brand', variant = 'fill' }: { tone?: Tone; variant?: Variant }) => (
+    <Badge tone={tone} variant={variant}>
+      {TONE_ICONS[tone]} {TONE_LABELS[tone]}
+    </Badge>
+  ),
+  AllTonesGrid = ({ variant = 'fill' }: { variant?: Variant }) => (
+    <div className="flex flex-wrap gap-sm">
+      {TONES.map((tone) => (
+        <SingleBadge key={tone} tone={tone} variant={variant} />
+      ))}
+    </div>
+  ),
+  AllVariantsGrid = ({ tone = 'brand' }: { tone?: Tone }) => (
+    <div className="flex flex-wrap gap-sm">
+      {VARIANTS.map((variant) => (
+        <SingleBadge key={variant} tone={tone} variant={variant} />
+      ))}
+    </div>
+  )
 
 export default {
-  title: 'Components/Badge',
-  component: Badge,
   argTypes: {
     tone: {
       control: 'select',
-      options: TONES,
       description: 'Sets the semantic tone and color of the badge.',
+      options: TONES,
       table: {
         defaultValue: { summary: 'brand' },
       },
     },
     variant: {
       control: 'select',
-      options: VARIANTS,
       description: 'Sets the visual style: solid fill, bordered, or soft container.',
+      options: VARIANTS,
       table: {
         defaultValue: { summary: 'fill' },
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A compact element for displaying status, labels, or counts.',
-      description: {
-        component:
-          'The Badge component conveys small pieces of information, such as statuses, categories, or counts. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) and three visual variants (`fill`, `outline`, `soft`).',
       },
     },
   },
@@ -102,11 +86,22 @@ export default {
     tone: 'brand',
     variant: 'fill',
   },
+  component: Badge,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Badge component conveys small pieces of information, such as statuses, categories, or counts. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) and three visual variants (`fill`, `outline`, `soft`).',
+      },
+      subtitle: 'A compact element for displaying status, labels, or counts.',
+    },
+  },
   render: (args) => (
     <Badge {...args}>
       {TONE_ICONS[args.tone as Tone]} {TONE_LABELS[args.tone as Tone]}
     </Badge>
   ),
+  title: 'Components/Badge',
 } satisfies Meta<typeof Badge>
 
 type Story = StoryObj<typeof Badge>
@@ -127,50 +122,50 @@ export const Playground: Story = {
 // ─── Tones ───────────────────────────────────────────────────────────────────
 
 export const Brand: Story = {
-  name: 'Tone / Brand',
   args: { tone: 'brand' },
+  name: 'Tone / Brand',
   parameters: { docs: { description: { story: TONE_DESCRIPTIONS.brand } } },
   render: () => <SingleBadge tone="brand" />,
 }
 
 export const Accent: Story = {
-  name: 'Tone / Accent',
   args: { tone: 'accent' },
+  name: 'Tone / Accent',
   parameters: { docs: { description: { story: TONE_DESCRIPTIONS.accent } } },
   render: () => <SingleBadge tone="accent" />,
 }
 
 export const Neutral: Story = {
-  name: 'Tone / Neutral',
   args: { tone: 'neutral' },
+  name: 'Tone / Neutral',
   parameters: { docs: { description: { story: TONE_DESCRIPTIONS.neutral } } },
   render: () => <SingleBadge tone="neutral" />,
 }
 
 export const Error: Story = {
-  name: 'Tone / Error',
   args: { tone: 'error' },
+  name: 'Tone / Error',
   parameters: { docs: { description: { story: TONE_DESCRIPTIONS.error } } },
   render: () => <SingleBadge tone="error" />,
 }
 
 export const Info: Story = {
-  name: 'Tone / Info',
   args: { tone: 'info' },
+  name: 'Tone / Info',
   parameters: { docs: { description: { story: TONE_DESCRIPTIONS.info } } },
   render: () => <SingleBadge tone="info" />,
 }
 
 export const Success: Story = {
-  name: 'Tone / Success',
   args: { tone: 'success' },
+  name: 'Tone / Success',
   parameters: { docs: { description: { story: TONE_DESCRIPTIONS.success } } },
   render: () => <SingleBadge tone="success" />,
 }
 
 export const Warning: Story = {
-  name: 'Tone / Warning',
   args: { tone: 'warning' },
+  name: 'Tone / Warning',
   parameters: { docs: { description: { story: TONE_DESCRIPTIONS.warning } } },
   render: () => <SingleBadge tone="warning" />,
 }
@@ -178,8 +173,8 @@ export const Warning: Story = {
 // ─── Variants ────────────────────────────────────────────────────────────────
 
 export const Fill: Story = {
-  name: 'Variant / Fill',
   args: { variant: 'fill' },
+  name: 'Variant / Fill',
   parameters: {
     docs: {
       description: {
@@ -192,8 +187,8 @@ export const Fill: Story = {
 }
 
 export const Outline: Story = {
-  name: 'Variant / Outline',
   args: { variant: 'outline' },
+  name: 'Variant / Outline',
   parameters: {
     docs: {
       description: {
@@ -206,8 +201,8 @@ export const Outline: Story = {
 }
 
 export const Soft: Story = {
-  name: 'Variant / Soft',
   args: { variant: 'soft' },
+  name: 'Variant / Soft',
   parameters: {
     docs: {
       description: {

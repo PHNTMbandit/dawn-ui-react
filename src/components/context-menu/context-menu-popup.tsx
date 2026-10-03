@@ -1,9 +1,10 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
+
 import { cn } from '@/utils/cn'
 
 import type { ContextMenuPopupProps } from './context-menu.types'
 
-export const ContextMenuPopup = ({ className, children, ref, ...props }: ContextMenuPopupProps) => {
+export function ContextMenuPopup({ className, ref, ...props }: ContextMenuPopupProps) {
   return (
     <BaseContextMenu.Portal>
       <BaseContextMenu.Positioner>
@@ -14,9 +15,7 @@ export const ContextMenuPopup = ({ className, children, ref, ...props }: Context
           )}
           ref={ref}
           {...props}
-        >
-          {children}
-        </BaseContextMenu.Popup>
+        />
       </BaseContextMenu.Positioner>
     </BaseContextMenu.Portal>
   )

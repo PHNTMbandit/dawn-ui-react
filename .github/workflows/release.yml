@@ -21,38 +21,30 @@ jobs:
     name: Build project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7.0.1
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
 
-      - name: Install pnpm
-        uses: pnpm/setup@v1
+      - name: Set up Vite+
+        uses: voidzero-dev/setup-vp@v1.21.1
         with:
-          version: 11
-          runtime: node@24
+          node-version: '24'
           cache: true
-
-      - name: Use Node.js
-        uses: actions/setup-node@v7.0.0
-        with:
-          node-version: 24.19
-          cache: 'pnpm'
+          run-install: false
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: vp install --frozen-lockfile
 
-      - name: Lint code
-        run: pnpm run lint
-
-      - name: Format code
-        run: pnpm run fmt
+      - name: Check code
+        run: vp check
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install
+        run: vp exec playwright install
 
       - name: Run tests
-        run: pnpm run test
+        run: vp test
 
-      - name: Build project
-        run: pnpm run build
+      - name: Build package
+        run: vp run pack
 
   release:
     name: Release
@@ -65,34 +57,35 @@ jobs:
       github.ref_name == 'beta' ||
       github.ref_name == 'rc'
 
+    env:
+      VP_GIT_HOOKS: '0'
+
     steps:
-      - uses: actions/checkout@v7.0.1
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           ref: ${{ github.ref_name }}
 
-      - uses: pnpm/setup@v1
+      - name: Set up Vite+
+        uses: voidzero-dev/setup-vp@v1.21.1
         with:
-          version: 11
-          runtime: node@24
+          node-version: '24'
           cache: true
-
-      - uses: actions/setup-node@v7.0.0
-        with:
-          node-version: 24.19
-          registry-url: https://npm.pkg.github.com/
-          cache: 'pnpm'
+          run-install: false
+          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: vp install --frozen-lockfile
 
-      - name: Build project
-        run: pnpm run build
+      - name: Build package
+        run: vp run pack
 
       - name: Generate release notes and publish
-        run: pnpm exec semantic-release
+        run: vp exec semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   chromatic:
     name: Run Chromatic
@@ -104,20 +97,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/setup@v1
+      - name: Set up Vite+
+        uses: voidzero-dev/setup-vp@v1.21.1
         with:
-          version: 11
-          runtime: node@24
+          node-version: '24'
           cache: true
 
-      - uses: actions/setup-node@v7.0.0
-        with:
-          node-version: 24.19
-          cache: 'pnpm'
-
-      - run: pnpm install --frozen-lockfile
       - name: Run Chromatic
-        uses: chromaui/action@latest
+        uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

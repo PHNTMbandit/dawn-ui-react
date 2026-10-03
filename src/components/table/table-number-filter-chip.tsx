@@ -1,4 +1,8 @@
 import { FunnelIcon } from '@phosphor-icons/react'
+import type { RowData } from '@tanstack/react-table'
+
+import { cn } from '@/utils/cn'
+
 import { Button } from '../button'
 import {
   Popover,
@@ -8,36 +12,40 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from '../popover'
-import { useTableContext } from './table-context'
+import { useTableContext } from './table-feature-context'
 import { TableNumberFilterForm } from './table-number-filter-form'
 import { defaultFilterOperatorLabels } from './table.types'
-import { cn } from '@/utils/cn'
-
 import type { TableNumberFilterChipProps } from './table.types'
+import { asFilterValue, getColumnHeaderLabel } from './table.utils'
 import type { NumberFilterValue } from './table.utils'
-import type { RowData } from '@tanstack/react-table'
 
-export const TableNumberFilterChip = <TData extends RowData>({
+const FIRST_RANGE_INDEX = 0
+
+function getFilterDisplayValue(filterValue: NumberFilterValue): string {
+  if (filterValue.operator === 'between') {
+    return filterValue.number.filter(Boolean).join(' - ')
+  }
+  return filterValue.number[FIRST_RANGE_INDEX]
+}
+
+export function TableNumberFilterChip<TData extends RowData>({
   column,
   className,
   children,
   ref,
   ...props
-}: TableNumberFilterChipProps<TData>) => {
-  const table = useTableContext()
-  const filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels
-  const columnFilter = column.getFilterValue() as NumberFilterValue
-  const filterValue =
-    columnFilter.operator === 'between'
-      ? columnFilter.number.filter(Boolean).join(' - ')
-      : columnFilter.number[0]
+}: TableNumberFilterChipProps<TData>) {
+  const table = useTableContext(),
+    filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels,
+    columnFilter = asFilterValue<NumberFilterValue>(column.getFilterValue()),
+    filterValue = getFilterDisplayValue(columnFilter)
 
   return (
     <Popover>
       <PopoverTrigger className={cn('', className)} ref={ref} {...props}>
         <Button tone="neutral" size="extraSmall" variant="soft">
           <FunnelIcon />
-          <span>{(column.columnDef.header as string) || column.id}</span>
+          <span>{getColumnHeaderLabel(column)}</span>
           <span className="font-light lowercase">
             {filterOperatorLabels?.[columnFilter.operator] ??
               defaultFilterOperatorLabels[columnFilter.operator]}
@@ -48,7 +56,7 @@ export const TableNumberFilterChip = <TData extends RowData>({
       </PopoverTrigger>
       <PopoverPanel>
         <PopoverHeader>
-          <PopoverTitle>{(column.columnDef.header as string) || column.id}</PopoverTitle>
+          <PopoverTitle>{getColumnHeaderLabel(column)}</PopoverTitle>
         </PopoverHeader>
         <PopoverContent>
           <TableNumberFilterForm column={column} />

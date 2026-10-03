@@ -1,4 +1,4 @@
-import { Meter as MeterBase } from './meter'
+import { Meter as MeterRoot } from './meter'
 import { MeterFooter } from './meter-footer'
 import { MeterHeader } from './meter-header'
 import { MeterIndicator } from './meter-indicator'
@@ -7,14 +7,14 @@ import { MeterSubtitle } from './meter-subtitle'
 import { MeterTrack } from './meter-track'
 import { MeterValue } from './meter-value'
 
-export const Meter = Object.assign(MeterBase, {
+const Meter = Object.assign(MeterRoot, {
+  Footer: MeterFooter,
   Header: MeterHeader,
   Indicator: MeterIndicator,
   Label: MeterLabel,
+  Subtitle: MeterSubtitle,
   Track: MeterTrack,
   Value: MeterValue,
-  Footer: MeterFooter,
-  Subtitle: MeterSubtitle,
 })
 
 export type {
@@ -34,3 +34,4 @@ export { MeterTrack } from './meter-track'
 export { MeterValue } from './meter-value'
 export { MeterFooter } from './meter-footer'
 export { MeterSubtitle } from './meter-subtitle'
+export { Meter }

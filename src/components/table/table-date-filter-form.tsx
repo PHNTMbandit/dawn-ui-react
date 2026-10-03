@@ -1,58 +1,59 @@
-import { Radio, useTableContext } from '..'
-import { Field } from '../field'
-import { Form, useAppForm } from '../form'
-import {
-  dateFilterOperators,
-  dateFilterSchema,
-  defaultFilterOperatorLabels,
-  type TableDateFilterFormProps,
-} from './table.types'
-import { cn } from '@/utils/cn'
-
-import type { DateFilterValue } from './table.utils'
 import type { RowData } from '@tanstack/react-table'
 
-export const TableDateFilterForm = <TData extends RowData>({
+import { cn } from '@/utils/cn'
+
+import { Field } from '../field'
+import { Form, useAppForm } from '../form'
+import { Radio } from '../radio-group'
+import { useTableContext } from './table-feature-context'
+import { dateFilterOperators, dateFilterSchema, defaultFilterOperatorLabels } from './table.types'
+import type { TableDateFilterFormProps } from './table.types'
+import { asFilterValue } from './table.utils'
+import type { DateFilterValue } from './table.utils'
+
+const FROM_DATE_INDEX = 0,
+  TO_DATE_INDEX = 1
+
+export function TableDateFilterForm<TData extends RowData>({
   column,
   className,
   children,
   ref,
   ...props
-}: TableDateFilterFormProps<TData>) => {
-  const table = useTableContext()
-  const filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels
-  const buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
-    reset: 'Reset',
-    apply: 'Apply',
-  }
-  const currentFilter = column.getFilterValue() as DateFilterValue | undefined
-  const form = useAppForm({
-    defaultValues: {
-      filterOperator: currentFilter?.operator ?? 'equals',
-      filterValueFrom: currentFilter?.date[0] ?? '',
-      filterValueTo: currentFilter?.date[1] ?? '',
+}: TableDateFilterFormProps<TData>) {
+  const table = useTableContext(),
+    filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels,
+    buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
+      apply: 'Apply',
+      reset: 'Reset',
     },
-    validators: {
-      onSubmit: dateFilterSchema,
-    },
-    onSubmit: ({ value }) => {
-      column.setFilterValue({
-        operator: value.filterOperator,
-        date: [value.filterValueFrom, value.filterValueTo],
-      } satisfies DateFilterValue)
-    },
-  })
-
-  const onReset = () => {
-    column.setFilterValue(undefined)
-    form.reset()
-  }
+    currentFilter = asFilterValue<DateFilterValue | undefined>(column.getFilterValue()),
+    form = useAppForm({
+      defaultValues: {
+        filterOperator: currentFilter?.operator ?? 'equals',
+        filterValueFrom: currentFilter?.date[FROM_DATE_INDEX] ?? '',
+        filterValueTo: currentFilter?.date[TO_DATE_INDEX] ?? '',
+      },
+      onSubmit: ({ value }) => {
+        column.setFilterValue({
+          date: [value.filterValueFrom, value.filterValueTo],
+          operator: value.filterOperator,
+        } satisfies DateFilterValue)
+      },
+      validators: {
+        onSubmit: dateFilterSchema,
+      },
+    }),
+    onReset = () => {
+      column.setFilterValue(undefined)
+      form.reset()
+    }
 
   return (
     <Form
-      onSubmit={async (e) => {
-        e.preventDefault()
-        e.stopPropagation()
+      onSubmit={async (event) => {
+        event.preventDefault()
+        event.stopPropagation()
         await form.handleSubmit()
       }}
       onReset={onReset}
@@ -74,7 +75,7 @@ export const TableDateFilterForm = <TData extends RowData>({
                       <field.FieldRadioGroup>
                         {dateFilterOperators.map((operator) => (
                           <field.FieldSet key={operator}>
-                            <Radio value={operator} variant={'inSurface'}>
+                            <Radio value={operator} variant="inSurface">
                               {filterOperatorLabels?.[operator] ??
                                 defaultFilterOperatorLabels[operator]}
                             </Radio>

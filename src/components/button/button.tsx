@@ -1,15 +1,16 @@
 import { Button as BaseButton } from '@base-ui/react'
-import { type ButtonProps, buttonVariants } from './button.types'
+
 import { cn } from '@/utils/cn'
 
-export const Button = ({ tone, variant, size, className, children, ...props }: ButtonProps) => {
+import { buttonVariants } from './button.types'
+import type { ButtonProps } from './button.types'
+
+export function Button({ tone, variant, size, className, ...props }: ButtonProps) {
   return (
     <BaseButton
       data-size={size}
-      className={cn(buttonVariants({ tone, variant, size, className }))}
+      className={cn(buttonVariants({ className, size, tone, variant }))}
       {...props}
-    >
-      {children}
-    </BaseButton>
+    />
   )
 }

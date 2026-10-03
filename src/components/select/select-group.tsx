@@ -1,9 +1,10 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
+
 import { cn } from '@/utils/cn'
 
 import type { SelectGroupProps } from './select.types'
 
-export const SelectGroup = ({ className, children, ref, ...props }: SelectGroupProps) => {
+export function SelectGroup({ className, ref, ...props }: SelectGroupProps) {
   return (
     <BaseSelect.Group
       className={cn(
@@ -12,8 +13,6 @@ export const SelectGroup = ({ className, children, ref, ...props }: SelectGroupP
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseSelect.Group>
+    />
   )
 }

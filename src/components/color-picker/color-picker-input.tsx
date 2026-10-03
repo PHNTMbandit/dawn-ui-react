@@ -1,82 +1,73 @@
 import { PercentIcon } from '@phosphor-icons/react'
 import React from 'react'
-import { InputGroup } from '../input-group/input-group'
-import { InputGroupAddon } from '../input-group/input-group-addon'
-import { InputGroupInput } from '../input-group/input-group-input'
-import { Popover } from '../popover/popover'
-import { PopoverContent } from '../popover/popover-content'
-import { PopoverPanel } from '../popover/popover-panel'
-import { PopoverTrigger } from '../popover/popover-trigger'
-import { Separator } from '../separator'
-import { useColorPicker } from './color-picker'
+
 import { cn } from '@/utils/cn'
 
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
+import { Popover, PopoverTrigger, PopoverContent, PopoverPanel } from '../popover'
+import { Separator } from '../separator'
+import { useColorPicker } from './color-picker'
 import type { ColorPickerInputProps } from './color-picker.types'
 
-export const ColorPickerInput = ({
+const TRANSPARENCY_MULTIPLIER = 100
+
+export function ColorPickerInput({
   showPopover = false,
   showTransparencyField = true,
   className,
   children,
   ref,
   ...props
-}: ColorPickerInputProps) => {
-  const { color, setColor, valueType } = useColorPicker()
-  const [inputValue, setInputValue] = React.useState<string>(valueType.getValue(color))
-  const [transparency, setTransparency] = React.useState<string>(
-    Math.round(color.alpha() * 100).toString(),
-  )
-  const [prevColor, setPrevColor] = React.useState(color)
-  const [prevValueType, setPrevValueType] = React.useState(valueType)
+}: ColorPickerInputProps) {
+  const { color, setColor, valueType } = useColorPicker(),
+    [inputValue, setInputValue] = React.useState<string>(String(valueType.getValue(color))),
+    [transparency, setTransparency] = React.useState<string>(
+      Math.round(color.alpha() * TRANSPARENCY_MULTIPLIER).toString(),
+    ),
+    [prevColor, setPrevColor] = React.useState(color),
+    [prevValueType, setPrevValueType] = React.useState(valueType),
+    handleValueChange = (value: string) => {
+      setInputValue(value)
+    },
+    handleTransparencyChange = (value: string) => {
+      setTransparency(value)
+    },
+    handleValueBlur = () => {
+      const newColor = valueType.parseValue(inputValue)
+      if (newColor) {
+        setColor(newColor)
+      }
+    },
+    handleTransparencyBlur = () => {
+      const alpha = parseFloat(transparency)
+      if (!Number.isNaN(alpha)) {
+        setColor(color.alpha(alpha / TRANSPARENCY_MULTIPLIER))
+      }
+    },
+    handleValueKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        handleValueBlur()
+      }
+    },
+    handleTransparencyKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        handleTransparencyBlur()
+      }
+    }
 
   if (color !== prevColor || valueType !== prevValueType) {
     setPrevColor(color)
     setPrevValueType(valueType)
-    setInputValue(valueType.getValue(color))
-    setTransparency(Math.round(color.alpha() * 100).toString())
-  }
-
-  const handleValueChange = (value: string) => {
-    setInputValue(value)
-  }
-
-  const handleTransparencyChange = (value: string) => {
-    setTransparency(value)
-  }
-
-  const handleValueBlur = () => {
-    const newColor = valueType.parseValue(inputValue)
-    if (newColor) {
-      setColor(newColor)
-    }
-  }
-
-  const handleTransparencyBlur = () => {
-    const alpha = parseFloat(transparency)
-    if (!Number.isNaN(alpha)) {
-      setColor(color.alpha(alpha / 100))
-    }
-  }
-
-  const handleValueKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      handleValueBlur()
-    }
-  }
-
-  const handleTransparencyKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      handleTransparencyBlur()
-    }
+    setInputValue(String(valueType.getValue(color)))
+    setTransparency(Math.round(color.alpha() * TRANSPARENCY_MULTIPLIER).toString())
   }
 
   return (
-    <InputGroup variant={'secondary'} className={cn('', className)} ref={ref} {...props}>
-      {showPopover ? (
+    <InputGroup variant="secondary" className={cn('', className)} ref={ref} {...props}>
+      {showPopover && (
         <Popover>
-          <PopoverTrigger nativeButton={false}>
+          <PopoverTrigger aria-label="Open color picker" nativeButton={false}>
             <InputGroupAddon
-              aria-label="Open color options"
               style={{
                 backgroundColor: color.hex(),
               }}
@@ -87,7 +78,8 @@ export const ColorPickerInput = ({
             <PopoverContent className="flex w-[300px] flex-col gap-sm">{children}</PopoverContent>
           </PopoverPanel>
         </Popover>
-      ) : (
+      )}
+      {!showPopover && (
         <InputGroupAddon
           style={{
             backgroundColor: color.hex(),
@@ -101,7 +93,7 @@ export const ColorPickerInput = ({
         onKeyDown={handleValueKeyDown}
         onValueChange={handleValueChange}
         value={inputValue}
-        className={'uppercase'}
+        className="uppercase"
       />
       {showTransparencyField && (
         <>

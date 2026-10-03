@@ -1,51 +1,53 @@
-import { Radio, useTableContext } from '..'
+import type { RowData } from '@tanstack/react-table'
+
+import { cn } from '@/utils/cn'
+
 import { Field } from '../field'
 import { Form, useAppForm } from '../form'
+import { Radio } from '../radio-group'
+import { useTableContext } from './table-feature-context'
 import {
   defaultFilterOperatorLabels,
   stringFilterOperators,
   stringFilterSchema,
-  type TableStringFilterFormProps,
 } from './table.types'
-import { cn } from '@/utils/cn'
-
+import type { TableStringFilterFormProps } from './table.types'
+import { asFilterValue } from './table.utils'
 import type { StringFilterValue } from './table.utils'
-import type { RowData } from '@tanstack/react-table'
 
-export const TableStringFilterForm = <TData extends RowData>({
+export function TableStringFilterForm<TData extends RowData>({
   column,
   className,
   children,
   ref,
   ...props
-}: TableStringFilterFormProps<TData>) => {
-  const table = useTableContext()
-  const filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels
-  const buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
-    reset: 'Reset',
-    apply: 'Apply',
-  }
-  const currentFilter = column.getFilterValue() as StringFilterValue | undefined
-  const form = useAppForm({
-    defaultValues: {
-      filterOperator: currentFilter?.operator ?? 'contains',
-      filterValue: currentFilter?.value ?? '',
+}: TableStringFilterFormProps<TData>) {
+  const table = useTableContext(),
+    filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels,
+    buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
+      apply: 'Apply',
+      reset: 'Reset',
     },
-    validators: {
-      onSubmit: stringFilterSchema,
-    },
-    onSubmit: ({ value }) => {
-      column.setFilterValue({
-        operator: value.filterOperator,
-        value: value.filterValue,
-      } satisfies StringFilterValue)
-    },
-  })
-
-  const onReset = () => {
-    column.setFilterValue(undefined)
-    form.reset({ filterOperator: 'contains', filterValue: '' })
-  }
+    currentFilter = asFilterValue<StringFilterValue | undefined>(column.getFilterValue()),
+    form = useAppForm({
+      defaultValues: {
+        filterOperator: currentFilter?.operator ?? 'contains',
+        filterValue: currentFilter?.value ?? '',
+      },
+      onSubmit: ({ value }) => {
+        column.setFilterValue({
+          operator: value.filterOperator,
+          value: value.filterValue,
+        } satisfies StringFilterValue)
+      },
+      validators: {
+        onSubmit: stringFilterSchema,
+      },
+    }),
+    onReset = () => {
+      column.setFilterValue(undefined)
+      form.reset({ filterOperator: 'contains', filterValue: '' })
+    }
 
   return (
     <Form

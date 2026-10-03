@@ -1,23 +1,24 @@
 import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'
 import { CaretRightIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
 import type { CollapsibleTriggerProps } from './collapsible.types'
 
-export const CollapsibleTrigger = ({
+export function CollapsibleTrigger({
   className,
   children,
   ref,
   ...props
-}: CollapsibleTriggerProps) => {
+}: CollapsibleTriggerProps) {
   return (
     <BaseCollapsible.Trigger
       render={(renderProps) => (
         <Button
           {...renderProps}
           tone="neutral"
-          variant={'elevated'}
+          variant="elevated"
           className={cn('group/trigger', className)}
           ref={ref}
           {...props}

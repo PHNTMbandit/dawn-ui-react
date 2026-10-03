@@ -1,9 +1,10 @@
 import { OTPField } from '@base-ui/react'
+
 import { cn } from '@/utils/cn'
 
 import type { InputOTPSlotProps } from './input-otp.types'
 
-export const InputOTPSlot = ({ className, ...props }: InputOTPSlotProps) => {
+export function InputOTPSlot({ className, ...props }: InputOTPSlotProps) {
   return (
     <OTPField.Input
       className={cn(

@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { BentoBoxHeaderProps } from './bento-box.types'
 
-export const BentoBoxHeader = ({ className, children, ref, ...props }: BentoBoxHeaderProps) => {
+export function BentoBoxHeader({ className, ref, ...props }: BentoBoxHeaderProps) {
   return (
     <div
       className={cn(
@@ -11,8 +11,6 @@ export const BentoBoxHeader = ({ className, children, ref, ...props }: BentoBoxH
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

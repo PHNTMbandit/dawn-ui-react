@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { DialogHeaderProps } from './dialog.types'
 
-export const DialogHeader = ({ className, children, ref, ...props }: DialogHeaderProps) => {
+export function DialogHeader({ className, ref, ...props }: DialogHeaderProps) {
   return (
     <div
       className={cn(
@@ -11,8 +11,6 @@ export const DialogHeader = ({ className, children, ref, ...props }: DialogHeade
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

@@ -1,10 +1,11 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { CheckIcon } from '@phosphor-icons/react'
+
 import { cn } from '@/utils/cn'
 
 import type { MenuRadioItemProps } from './menu.types'
 
-export const MenuRadioItem = ({ className, children, ref, ...props }: MenuRadioItemProps) => {
+export function MenuRadioItem({ className, children, ref, ...props }: MenuRadioItemProps) {
   return (
     <BaseMenu.RadioItem
       className={cn(

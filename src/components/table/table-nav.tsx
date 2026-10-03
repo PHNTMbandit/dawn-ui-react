@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { TableNavProps } from './table.types'
 
-export const TableNav = ({ sticky = false, className, children, ref, ...props }: TableNavProps) => {
+export function TableNav({ sticky = false, className, ref, ...props }: TableNavProps) {
   return (
     <div
       className={cn(
@@ -12,8 +12,6 @@ export const TableNav = ({ sticky = false, className, children, ref, ...props }:
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

@@ -1,19 +1,22 @@
-import { cva } from 'class-variance-authority'
-
 import type { Meter as BaseMeter } from '@base-ui/react'
+import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
 
-export type MeterProps = React.ComponentProps<typeof BaseMeter.Root> &
-  VariantProps<typeof meterVariants>
-export type MeterLabelProps = React.ComponentProps<typeof BaseMeter.Label>
-export type MeterValueProps = React.ComponentProps<typeof BaseMeter.Value>
-export type MeterTrackProps = React.ComponentProps<typeof BaseMeter.Track>
-export type MeterIndicatorProps = React.ComponentProps<typeof BaseMeter.Indicator>
-export type MeterHeaderProps = React.ComponentProps<'div'>
-export type MeterFooterProps = React.ComponentProps<'div'>
-export type MeterSubtitleProps = React.ComponentProps<'span'>
+type MeterProps = React.ComponentProps<typeof BaseMeter.Root> & VariantProps<typeof meterVariants>
+type MeterLabelProps = React.ComponentProps<typeof BaseMeter.Label>
+type MeterValueProps = React.ComponentProps<typeof BaseMeter.Value>
+type MeterTrackProps = React.ComponentProps<typeof BaseMeter.Track>
+type MeterIndicatorProps = React.ComponentProps<typeof BaseMeter.Indicator>
+type MeterHeaderProps = React.ComponentProps<'div'>
+type MeterFooterProps = React.ComponentProps<'div'>
+type MeterSubtitleProps = React.ComponentProps<'span'>
 
-export const meterVariants = cva('', {
+const meterVariants = cva('', {
+  defaultVariants: {
+    orientation: 'vertical',
+    size: 'medium',
+    tone: 'brand',
+  },
   variants: {
     orientation: {
       horizontal:
@@ -21,23 +24,30 @@ export const meterVariants = cva('', {
       vertical: 'flex flex-col space-y-3xs',
     },
     size: {
-      small: '[&_[data-track]]:h-3xs',
-      medium: '[&_[data-track]]:h-2xs',
       large: '[&_[data-track]]:h-xs',
+      medium: '[&_[data-track]]:h-2xs',
+      small: '[&_[data-track]]:h-3xs',
     },
     tone: {
-      brand: '[&_[data-indicator]]:bg-brand-default',
       accent: '[&_[data-indicator]]:bg-accent-default',
-      neutral: '[&_[data-indicator]]:bg-neutral-default',
+      brand: '[&_[data-indicator]]:bg-brand-default',
       error: '[&_[data-indicator]]:bg-error-default',
       info: '[&_[data-indicator]]:bg-info-default',
+      neutral: '[&_[data-indicator]]:bg-neutral-default',
       success: '[&_[data-indicator]]:bg-success-default',
       warning: '[&_[data-indicator]]:bg-warning-default',
     },
   },
-  defaultVariants: {
-    orientation: 'vertical',
-    size: 'medium',
-    tone: 'brand',
-  },
 })
+
+export { meterVariants }
+export type {
+  MeterProps,
+  MeterLabelProps,
+  MeterValueProps,
+  MeterTrackProps,
+  MeterIndicatorProps,
+  MeterHeaderProps,
+  MeterFooterProps,
+  MeterSubtitleProps,
+}

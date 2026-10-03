@@ -1,23 +1,25 @@
 import { EyeClosedIcon, EyeIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { useTableContext } from './layer-tree-context'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useTableContext } from './layer-tree-context'
 import type { LayerTreeVisibilityAllProps } from './layer-tree.types'
 
-export const LayerTreeVisibilityAll = ({
+export function LayerTreeVisibilityAll({
   className,
   children,
   ref,
   ...props
-}: LayerTreeVisibilityAllProps) => {
-  const table = useTableContext()
-  const allRows = table.getCoreRowModel().flatRows
-
-  const handleClick = (isVisible: boolean) => {
-    const next = !isVisible
-    for (const leafRow of allRows) leafRow.toggleVisibility(next)
-  }
+}: LayerTreeVisibilityAllProps) {
+  const table = useTableContext(),
+    allRows = table.getCoreRowModel().flatRows,
+    handleClick = (isVisible: boolean) => {
+      const next = !isVisible
+      for (const leafRow of allRows) {
+        leafRow.toggleVisibility(next)
+      }
+    }
 
   return (
     <table.Subscribe selector={(state) => state.rowVisibility}>
@@ -26,17 +28,18 @@ export const LayerTreeVisibilityAll = ({
 
         return (
           <Button
-            aria-label={isVisible ? 'Hide all layers' : 'Show all layers'}
+            aria-label="Toggle all layers visibility"
             size="iconSmall"
             tone="neutral"
-            variant={'ghost'}
+            variant="ghost"
             onClick={() => handleClick(isVisible)}
             className={cn('', className)}
             ref={ref}
             {...props}
           >
             {children}
-            {isVisible ? <EyeIcon weight="bold" /> : <EyeClosedIcon weight="bold" />}
+            {isVisible && <EyeIcon weight="bold" />}
+            {!isVisible && <EyeClosedIcon weight="bold" />}
           </Button>
         )
       }}

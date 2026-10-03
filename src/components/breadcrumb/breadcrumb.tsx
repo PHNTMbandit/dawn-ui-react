@@ -2,10 +2,8 @@ import { cn } from '@/utils/cn'
 
 import type { BreadcrumbProps } from './breadcrumb.types'
 
-export const Breadcrumb = ({ className, children, ref, ...props }: BreadcrumbProps) => {
+export function Breadcrumb({ className, ref, ...props }: BreadcrumbProps) {
   return (
-    <nav className={cn('flex items-center gap-2xs px-sm py-2xs', className)} ref={ref} {...props}>
-      {children}
-    </nav>
+    <nav className={cn('flex items-center gap-2xs px-sm py-2xs', className)} ref={ref} {...props} />
   )
 }

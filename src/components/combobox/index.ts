@@ -1,4 +1,4 @@
-import { Combobox as ComboboxBase } from './combobox'
+import { Combobox as ComboboxRoot } from './combobox'
 import { ComboboxChip } from './combobox-chip'
 import { ComboboxChips } from './combobox-chips'
 import { ComboboxCollection } from './combobox-collection'
@@ -14,7 +14,7 @@ import { ComboboxTrigger } from './combobox-trigger'
 import { ComboboxValue } from './combobox-value'
 import { ComboboxVirtualizedList } from './combobox-virtualized-list'
 
-export const Combobox = Object.assign(ComboboxBase, {
+const Combobox = Object.assign(ComboboxRoot, {
   Chip: ComboboxChip,
   Chips: ComboboxChips,
   Collection: ComboboxCollection,
@@ -47,8 +47,6 @@ export type {
   ComboboxTriggerProps,
   ComboboxValueProps,
   ComboboxVirtualizedListProps,
-  useFilteredItems,
-  useFilter,
 } from './combobox.types'
 export { ComboboxChip } from './combobox-chip'
 export { ComboboxChips } from './combobox-chips'
@@ -64,3 +62,6 @@ export { ComboboxStatus } from './combobox-status'
 export { ComboboxTrigger } from './combobox-trigger'
 export { ComboboxValue } from './combobox-value'
 export { ComboboxVirtualizedList } from './combobox-virtualized-list'
+export { useFilter, useFilteredItems } from './combobox.types'
+
+export { Combobox }

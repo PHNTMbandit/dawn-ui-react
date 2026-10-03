@@ -1,15 +1,18 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { CaretRightIcon } from '@phosphor-icons/react'
-import { menuSubmenuTriggerVariants, type MenuSubmenuTriggerProps } from './menu.types'
+
 import { cn } from '@/utils/cn'
 
-export const MenuSubmenuTrigger = ({
+import { menuSubmenuTriggerVariants } from './menu.types'
+import type { MenuSubmenuTriggerProps } from './menu.types'
+
+export function MenuSubmenuTrigger({
   tone,
   className,
   children,
   ref,
   ...props
-}: MenuSubmenuTriggerProps) => {
+}: MenuSubmenuTriggerProps) {
   return (
     <BaseMenu.SubmenuTrigger
       className={cn(menuSubmenuTriggerVariants({ tone }), className)}

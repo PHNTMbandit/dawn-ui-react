@@ -1,16 +1,18 @@
-import { Collapsible as CollapsibleBase } from './collapsible'
+import { Collapsible as CollapsibleRoot } from './collapsible'
 import { CollapsiblePanel } from './collapsible-panel'
 import { CollapsibleTrigger } from './collapsible-trigger'
 
-export const Collapsible = Object.assign(CollapsibleBase, {
+const Collapsible = Object.assign(CollapsibleRoot, {
   Panel: CollapsiblePanel,
   Trigger: CollapsibleTrigger,
 })
 
-export { CollapsiblePanel } from './collapsible-panel'
-export { CollapsibleTrigger } from './collapsible-trigger'
 export type {
   CollapsibleProps,
   CollapsibleTriggerProps,
   CollapsiblePanelProps,
 } from './collapsible.types'
+export { CollapsiblePanel } from './collapsible-panel'
+export { CollapsibleTrigger } from './collapsible-trigger'
+
+export { Collapsible }

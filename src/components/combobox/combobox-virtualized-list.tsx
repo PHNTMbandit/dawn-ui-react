@@ -1,32 +1,64 @@
-// oxlint-disable react/incompatible-library
 import { useVirtualizer } from '@tanstack/react-virtual'
 import React from 'react'
-import { ComboboxItem } from './combobox-item'
-import { useFilteredItems, type ComboboxVirtualizedListProps } from './combobox.types'
+
 import { cn } from '@/utils/cn'
 
-export const ComboboxVirtualizedList = <TItem,>({
+import { ComboboxItem } from './combobox-item'
+import { useFilteredItems } from './combobox.types'
+import type { ComboboxVirtualizedListProps } from './combobox.types'
+
+const DEFAULT_ESTIMATE_SIZE = 32,
+  DEFAULT_OVERSCAN = 20,
+  PADDING = 8,
+  FIRST_POSITION = 1
+type TotalSizeStyle = React.CSSProperties & { '--total-size': string }
+
+function renderItem<TItem>(
+  children: React.ReactNode | ((item: TItem) => React.ReactNode),
+  item: TItem,
+) {
+  if (typeof children === 'function') {
+    return children(item)
+  }
+  return children
+}
+
+export function ComboboxVirtualizedList<TItem>({
   open,
   virtualizerRef,
-  estimateSize = 32,
-  overscan = 20,
+  estimateSize = DEFAULT_ESTIMATE_SIZE,
+  overscan = DEFAULT_OVERSCAN,
   className,
   children,
   ...props
-}: ComboboxVirtualizedListProps<TItem>) => {
-  const filteredItems = useFilteredItems<TItem>()
-  const scrollElementRef = React.useRef<HTMLDivElement | null>(null)
-  const virtualizer = useVirtualizer<HTMLDivElement, HTMLDivElement>({
-    enabled: open,
-    count: filteredItems.length,
-    getScrollElement: () => scrollElementRef.current,
-    estimateSize: () => estimateSize,
-    overscan,
-    paddingStart: 8,
-    paddingEnd: 8,
-    scrollPaddingStart: 8,
-    scrollPaddingEnd: 8,
-  })
+}: ComboboxVirtualizedListProps<TItem>) {
+  const filteredItems = useFilteredItems<TItem>(),
+    // oxlint-disable-next-line unicorn(no-null)
+    scrollElementRef = React.useRef<HTMLDivElement | null>(null),
+    // oxlint-disable-next-line react/incompatible-library
+    virtualizer = useVirtualizer<HTMLDivElement, HTMLDivElement>({
+      count: filteredItems.length,
+      directDomUpdates: true,
+      enabled: open,
+      estimateSize: () => estimateSize,
+      getScrollElement: () => scrollElementRef.current,
+      overscan,
+      paddingEnd: PADDING,
+      paddingStart: PADDING,
+      scrollPaddingEnd: PADDING,
+      scrollPaddingStart: PADDING,
+    }),
+    handleScrollElementRef = React.useCallback(
+      (element: HTMLDivElement | null) => {
+        scrollElementRef.current = element
+        if (element) {
+          virtualizer.measure()
+        }
+      },
+      [virtualizer],
+    ),
+    totalSize = virtualizer.getTotalSize(),
+    totalSizeStyle: TotalSizeStyle = { '--total-size': `${totalSize}px` }
 
   React.useEffect(() => {
     if (virtualizerRef) {
@@ -34,27 +66,11 @@ export const ComboboxVirtualizedList = <TItem,>({
     }
   }, [virtualizer, virtualizerRef])
 
-  const handleScrollElementRef = React.useCallback(
-    (element: HTMLDivElement | null) => {
-      scrollElementRef.current = element
-      if (element) {
-        virtualizer.measure()
-      }
-    },
-    [virtualizer],
-  )
-
-  const totalSize = virtualizer.getTotalSize()
-
-  if (!filteredItems.length) {
-    return null
-  }
-
   return (
     <div
       role="presentation"
       ref={handleScrollElementRef}
-      style={{ '--total-size': `${totalSize}px` } as React.CSSProperties}
+      style={totalSizeStyle}
       className={cn(
         'h-[min(22.5rem,var(--total-size))] max-h-(--available-height) scroll-py-3xs overflow-auto overscroll-contain',
         className,
@@ -65,7 +81,7 @@ export const ComboboxVirtualizedList = <TItem,>({
         {virtualizer.getVirtualItems().map((virtualItem) => {
           const item = filteredItems[virtualItem.index]
           if (!item) {
-            return null
+            return undefined
           }
 
           return (
@@ -76,17 +92,17 @@ export const ComboboxVirtualizedList = <TItem,>({
               ref={virtualizer.measureElement}
               value={item}
               aria-setsize={filteredItems.length}
-              aria-posinset={virtualItem.index + 1}
-              className={'first-of-type:mt-0!'}
+              aria-posinset={virtualItem.index + FIRST_POSITION}
+              className="first-of-type:mt-0!"
               style={{
+                left: 0,
                 position: 'absolute',
                 top: 0,
-                left: 0,
-                width: '100%',
                 transform: `translateY(${virtualItem.start}px)`,
+                width: '100%',
               }}
             >
-              {typeof children === 'function' ? children(item) : children}
+              {renderItem(children, item)}
             </ComboboxItem>
           )
         })}

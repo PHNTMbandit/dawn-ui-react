@@ -1,7 +1,9 @@
-import type * as BaseResizable from 'react-resizable-panels'
+import type { GroupProps, PanelProps, SeparatorProps } from 'react-resizable-panels'
 
-export type ResizeablePanelGroupProps = BaseResizable.GroupProps
-export type ResizeablePanelProps = BaseResizable.PanelProps
-export type ResizeableHandleProps = BaseResizable.SeparatorProps & {
+type ResizeablePanelGroupProps = GroupProps
+type ResizeablePanelProps = PanelProps
+type ResizeableHandleProps = SeparatorProps & {
   withHandle?: boolean
 }
+
+export type { ResizeablePanelGroupProps, ResizeablePanelProps, ResizeableHandleProps }

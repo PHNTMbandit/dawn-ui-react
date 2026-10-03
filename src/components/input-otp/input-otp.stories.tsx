@@ -1,37 +1,35 @@
-import { useState } from 'react'
-import { InputOTP } from './input-otp'
-import { InputOtpSeparator } from './input-otp-separator'
-import { InputOTPSlot } from './input-otp-slot'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
 
+import { InputOTP } from './index'
+
+/**
+ * A one-time password input composed of individual character slots.
+ *
+ * ## Anatomy
+ *
+ * ```tsx
+ * import { InputOTP, InputOTPSlot, InputOtpSeparator } from '@dawn/ui'
+ *
+ * <InputOTP length={6}>
+ *   <InputOTPSlot />
+ *   <InputOTPSlot aria-label="Character 2 of 6" />
+ *   <InputOTPSlot aria-label="Character 3 of 6" />
+ *   <InputOtpSeparator />
+ *   <InputOTPSlot aria-label="Character 4 of 6" />
+ *   <InputOTPSlot aria-label="Character 5 of 6" />
+ *   <InputOTPSlot aria-label="Character 6 of 6" />
+ * </InputOTP>
+ * ```
+ *
+ * ## Accessibility
+ *
+ * - The first input inherits the field label automatically
+ * - Add `aria-label` to remaining inputs (e.g., "Character 2 of 6")
+ * - Use `aria-describedby` when helper text should be announced
+ */
 export default {
-  title: 'Components/Input OTP',
-  component: InputOTP,
-  subcomponents: { InputOTPSlot, InputOtpSeparator },
   argTypes: {
-    length: {
-      control: { type: 'number', min: 1, max: 8, step: 1 },
-      description: 'Number of OTP slots to render.',
-      table: {
-        defaultValue: { summary: '6' },
-      },
-    },
-    validationType: {
-      control: 'select',
-      options: ['numeric', 'alphanumeric', 'none'],
-      description: 'Restricts allowed input characters.',
-      table: {
-        defaultValue: { summary: 'numeric' },
-      },
-    },
-    mask: {
-      control: 'boolean',
-      description: 'Obscures entered characters like a password field.',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     autoSubmit: {
       control: 'boolean',
       description: 'Submits the owning form automatically when all slots are filled.',
@@ -42,6 +40,20 @@ export default {
     disabled: {
       control: 'boolean',
       description: 'Disables input and interaction for all slots.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    length: {
+      control: { max: 8, min: 1, step: 1, type: 'number' },
+      description: 'Number of OTP slots to render.',
+      table: {
+        defaultValue: { summary: '6' },
+      },
+    },
+    mask: {
+      control: 'boolean',
+      description: 'Obscures entered characters like a password field.',
       table: {
         defaultValue: { summary: 'false' },
       },
@@ -60,35 +72,46 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A one-time password input composed of individual character slots.',
-      description: {
-        component:
-          'The Input OTP component provides a segmented input experience for collecting one-time passcodes. It supports numeric, alphanumeric, or custom validation, masked entry for sensitive codes, grouped layouts with separators, and auto-submission on completion.',
+    validationType: {
+      control: 'select',
+      description: 'Restricts allowed input characters.',
+      options: ['numeric', 'alphanumeric', 'none'],
+      table: {
+        defaultValue: { summary: 'numeric' },
       },
     },
   },
   args: {
-    length: 6,
-    validationType: 'numeric',
-    mask: false,
     autoSubmit: false,
     disabled: false,
+    length: 6,
+    mask: false,
     readOnly: false,
     required: false,
+    validationType: 'numeric',
+  },
+  component: InputOTP,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Input OTP component provides a segmented input experience for collecting one-time passcodes. It supports numeric, alphanumeric, or custom validation, masked entry for sensitive codes, grouped layouts with separators, and auto-submission on completion.',
+      },
+      subtitle: 'A one-time password input composed of individual character slots.',
+    },
   },
   render: (args) => (
-    <InputOTP aria-label="One-time password" {...args}>
-      <InputOTPSlot />
-      <InputOTPSlot aria-label="Character 2" />
-      <InputOTPSlot aria-label="Character 3" />
-      <InputOTPSlot aria-label="Character 4" />
-      <InputOTPSlot aria-label="Character 5" />
-      <InputOTPSlot aria-label="Character 6" />
+    <InputOTP {...args}>
+      <InputOTP.Slot />
+      <InputOTP.Slot aria-label="Character 2" />
+      <InputOTP.Slot aria-label="Character 3" />
+      <InputOTP.Slot aria-label="Character 4" />
+      <InputOTP.Slot aria-label="Character 5" />
+      <InputOTP.Slot aria-label="Character 6" />
     </InputOTP>
   ),
+  subcomponents: { InputOTPSlot: InputOTP.Slot, InputOtpSeparator: InputOTP.Separator },
+  title: 'Components/Input OTP',
 } satisfies Meta<typeof InputOTP>
 
 type Story = StoryObj<typeof InputOTP>
@@ -112,10 +135,10 @@ export const Playground: Story = {
 // =============================================================================
 
 export const Default: Story = {
-  name: 'Usage / Default',
   args: {
     length: 6,
   },
+  name: 'Usage / Default',
   parameters: {
     docs: {
       description: {
@@ -131,18 +154,10 @@ export const Default: Story = {
 // =============================================================================
 
 export const FourDigits: Story = {
-  name: 'Length / Four Digits',
   args: {
     length: 4,
   },
-  render: (args) => (
-    <InputOTP aria-label="One-time password" {...args}>
-      <InputOTPSlot />
-      <InputOTPSlot aria-label="Character 2 of 4" />
-      <InputOTPSlot aria-label="Character 3 of 4" />
-      <InputOTPSlot aria-label="Character 4 of 4" />
-    </InputOTP>
-  ),
+  name: 'Length / Four Digits',
   parameters: {
     docs: {
       description: {
@@ -150,13 +165,21 @@ export const FourDigits: Story = {
       },
     },
   },
+  render: (args) => (
+    <InputOTP {...args}>
+      <InputOTP.Slot />
+      <InputOTP.Slot aria-label="Character 2 of 4" />
+      <InputOTP.Slot aria-label="Character 3 of 4" />
+      <InputOTP.Slot aria-label="Character 4 of 4" />
+    </InputOTP>
+  ),
 }
 
 export const SixDigits: Story = {
-  name: 'Length / Six Digits',
   args: {
     length: 6,
   },
+  name: 'Length / Six Digits',
   parameters: {
     docs: {
       description: {
@@ -167,23 +190,10 @@ export const SixDigits: Story = {
 }
 
 export const EightDigits: Story = {
-  name: 'Length / Eight Digits',
   args: {
     length: 8,
   },
-  render: (args) => (
-    <InputOTP aria-label="One-time password" {...args}>
-      <InputOTPSlot />
-      <InputOTPSlot aria-label="Character 2 of 8" />
-      <InputOTPSlot aria-label="Character 3 of 8" />
-      <InputOTPSlot aria-label="Character 4 of 8" />
-      <InputOtpSeparator />
-      <InputOTPSlot aria-label="Character 5 of 8" />
-      <InputOTPSlot aria-label="Character 6 of 8" />
-      <InputOTPSlot aria-label="Character 7 of 8" />
-      <InputOTPSlot aria-label="Character 8 of 8" />
-    </InputOTP>
-  ),
+  name: 'Length / Eight Digits',
   parameters: {
     docs: {
       description: {
@@ -191,6 +201,19 @@ export const EightDigits: Story = {
       },
     },
   },
+  render: (args) => (
+    <InputOTP {...args}>
+      <InputOTP.Slot />
+      <InputOTP.Slot aria-label="Character 2 of 8" />
+      <InputOTP.Slot aria-label="Character 3 of 8" />
+      <InputOTP.Slot aria-label="Character 4 of 8" />
+      <InputOTP.Separator />
+      <InputOTP.Slot aria-label="Character 5 of 8" />
+      <InputOTP.Slot aria-label="Character 6 of 8" />
+      <InputOTP.Slot aria-label="Character 7 of 8" />
+      <InputOTP.Slot aria-label="Character 8 of 8" />
+    </InputOTP>
+  ),
 }
 
 // =============================================================================
@@ -198,11 +221,11 @@ export const EightDigits: Story = {
 // =============================================================================
 
 export const Numeric: Story = {
-  name: 'Validation / Numeric',
   args: {
     length: 6,
     validationType: 'numeric',
   },
+  name: 'Validation / Numeric',
   parameters: {
     docs: {
       description: {
@@ -213,11 +236,11 @@ export const Numeric: Story = {
 }
 
 export const Alphanumeric: Story = {
-  name: 'Validation / Alphanumeric',
   args: {
     length: 6,
     validationType: 'alphanumeric',
   },
+  name: 'Validation / Alphanumeric',
   parameters: {
     docs: {
       description: {
@@ -233,21 +256,10 @@ export const Alphanumeric: Story = {
 // =============================================================================
 
 export const GroupedThreeThree: Story = {
-  name: 'Layout / Grouped 3-3',
   args: {
     length: 6,
   },
-  render: (args) => (
-    <InputOTP aria-label="One-time password" {...args}>
-      <InputOTPSlot />
-      <InputOTPSlot aria-label="Character 2 of 6" />
-      <InputOTPSlot aria-label="Character 3 of 6" />
-      <InputOtpSeparator />
-      <InputOTPSlot aria-label="Character 4 of 6" />
-      <InputOTPSlot aria-label="Character 5 of 6" />
-      <InputOTPSlot aria-label="Character 6 of 6" />
-    </InputOTP>
-  ),
+  name: 'Layout / Grouped 3-3',
   parameters: {
     docs: {
       description: {
@@ -256,25 +268,24 @@ export const GroupedThreeThree: Story = {
       },
     },
   },
+  render: (args) => (
+    <InputOTP {...args}>
+      <InputOTP.Slot />
+      <InputOTP.Slot aria-label="Character 2 of 6" />
+      <InputOTP.Slot aria-label="Character 3 of 6" />
+      <InputOTP.Separator />
+      <InputOTP.Slot aria-label="Character 4 of 6" />
+      <InputOTP.Slot aria-label="Character 5 of 6" />
+      <InputOTP.Slot aria-label="Character 6 of 6" />
+    </InputOTP>
+  ),
 }
 
 export const GroupedTwoTwoTwo: Story = {
-  name: 'Layout / Grouped 2-2-2',
   args: {
     length: 6,
   },
-  render: (args) => (
-    <InputOTP aria-label="One-time password" {...args}>
-      <InputOTPSlot />
-      <InputOTPSlot aria-label="Character 2 of 6" />
-      <InputOtpSeparator />
-      <InputOTPSlot aria-label="Character 3 of 6" />
-      <InputOTPSlot aria-label="Character 4 of 6" />
-      <InputOtpSeparator />
-      <InputOTPSlot aria-label="Character 5 of 6" />
-      <InputOTPSlot aria-label="Character 6 of 6" />
-    </InputOTP>
-  ),
+  name: 'Layout / Grouped 2-2-2',
   parameters: {
     docs: {
       description: {
@@ -282,6 +293,18 @@ export const GroupedTwoTwoTwo: Story = {
       },
     },
   },
+  render: (args) => (
+    <InputOTP {...args}>
+      <InputOTP.Slot />
+      <InputOTP.Slot aria-label="Character 2 of 6" />
+      <InputOTP.Separator />
+      <InputOTP.Slot aria-label="Character 3 of 6" />
+      <InputOTP.Slot aria-label="Character 4 of 6" />
+      <InputOTP.Separator />
+      <InputOTP.Slot aria-label="Character 5 of 6" />
+      <InputOTP.Slot aria-label="Character 6 of 6" />
+    </InputOTP>
+  ),
 }
 
 // =============================================================================
@@ -289,11 +312,11 @@ export const GroupedTwoTwoTwo: Story = {
 // =============================================================================
 
 export const Masked: Story = {
-  name: 'Security / Masked',
   args: {
     length: 6,
     mask: true,
   },
+  name: 'Security / Masked',
   parameters: {
     docs: {
       description: {
@@ -309,11 +332,11 @@ export const Masked: Story = {
 // =============================================================================
 
 export const Disabled: Story = {
-  name: 'State / Disabled',
   args: {
-    length: 6,
     disabled: true,
+    length: 6,
   },
+  name: 'State / Disabled',
   parameters: {
     docs: {
       description: {
@@ -325,12 +348,12 @@ export const Disabled: Story = {
 }
 
 export const ReadOnly: Story = {
-  name: 'State / Read Only',
   args: {
     length: 6,
     readOnly: true,
     value: '123456',
   },
+  name: 'State / Read Only',
   parameters: {
     docs: {
       description: {
@@ -345,32 +368,10 @@ export const ReadOnly: Story = {
 // =============================================================================
 
 export const OnValueComplete: Story = {
-  name: 'Behavior / On Complete',
   args: {
     length: 6,
   },
-  render: function OnValueCompleteStory(args) {
-    const [message, setMessage] = useState('')
-
-    return (
-      <div className="flex flex-col gap-sm">
-        <InputOTP
-          {...args}
-          aria-label="One-time password"
-          onValueComplete={(value: string) => setMessage(`Code submitted: ${value}`)}
-        >
-          <InputOTPSlot />
-          <InputOTPSlot aria-label="Character 2 of 6" />
-          <InputOTPSlot aria-label="Character 3 of 6" />
-          <InputOtpSeparator />
-          <InputOTPSlot aria-label="Character 4 of 6" />
-          <InputOTPSlot aria-label="Character 5 of 6" />
-          <InputOTPSlot aria-label="Character 6 of 6" />
-        </InputOTP>
-        {message && <p className="style-text-default--1 text-success-default">{message}</p>}
-      </div>
-    )
-  },
+  name: 'Behavior / On Complete',
   parameters: {
     docs: {
       description: {
@@ -379,26 +380,55 @@ export const OnValueComplete: Story = {
       },
     },
   },
+  render: function OnValueCompleteStory(args) {
+    const [message, setMessage] = useState('')
+
+    return (
+      <div className="flex flex-col gap-sm">
+        <InputOTP
+          {...args}
+          onValueComplete={(value: string) => setMessage(`Code submitted: ${value}`)}
+        >
+          <InputOTP.Slot />
+          <InputOTP.Slot aria-label="Character 2 of 6" />
+          <InputOTP.Slot aria-label="Character 3 of 6" />
+          <InputOTP.Separator />
+          <InputOTP.Slot aria-label="Character 4 of 6" />
+          <InputOTP.Slot aria-label="Character 5 of 6" />
+          <InputOTP.Slot aria-label="Character 6 of 6" />
+        </InputOTP>
+        {message && <p className="style-text-default--1 text-success-default">{message}</p>}
+      </div>
+    )
+  },
 }
 
 export const ControlledValue: Story = {
-  name: 'Behavior / Controlled',
   args: {
     length: 6,
+  },
+  name: 'Behavior / Controlled',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `value` and `onValueChange` for controlled input. Useful when you need to programmatically clear or set the code.',
+      },
+    },
   },
   render: function ControlledStory(args) {
     const [value, setValue] = useState('')
 
     return (
       <div className="flex flex-col gap-sm">
-        <InputOTP aria-label="One-time password" {...args} value={value} onValueChange={setValue}>
-          <InputOTPSlot />
-          <InputOTPSlot aria-label="Character 2 of 6" />
-          <InputOTPSlot aria-label="Character 3 of 6" />
-          <InputOtpSeparator />
-          <InputOTPSlot aria-label="Character 4 of 6" />
-          <InputOTPSlot aria-label="Character 5 of 6" />
-          <InputOTPSlot aria-label="Character 6 of 6" />
+        <InputOTP {...args} value={value} onValueChange={setValue}>
+          <InputOTP.Slot />
+          <InputOTP.Slot aria-label="Character 2 of 6" />
+          <InputOTP.Slot aria-label="Character 3 of 6" />
+          <InputOTP.Separator />
+          <InputOTP.Slot aria-label="Character 4 of 6" />
+          <InputOTP.Slot aria-label="Character 5 of 6" />
+          <InputOTP.Slot aria-label="Character 6 of 6" />
         </InputOTP>
         <div className="flex gap-xs">
           <span className="style-text-default--1 text-on-surface-variant">Current value:</span>
@@ -416,14 +446,6 @@ export const ControlledValue: Story = {
       </div>
     )
   },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Use `value` and `onValueChange` for controlled input. Useful when you need to programmatically clear or set the code.',
-      },
-    },
-  },
 }
 
 // =============================================================================
@@ -431,29 +453,10 @@ export const ControlledValue: Story = {
 // =============================================================================
 
 export const VerificationForm: Story = {
-  name: 'Composition / Verification Form',
   args: {
     length: 6,
   },
-  render: (args) => (
-    <div className="flex flex-col items-center gap-sm">
-      <label htmlFor="verification-code" className="style-text-strong-0 text-on-surface">
-        Verification code
-      </label>
-      <InputOTP id="verification-code" aria-describedby="verification-hint" {...args}>
-        <InputOTPSlot />
-        <InputOTPSlot aria-label="Character 2 of 6" />
-        <InputOTPSlot aria-label="Character 3 of 6" />
-        <InputOtpSeparator />
-        <InputOTPSlot aria-label="Character 4 of 6" />
-        <InputOTPSlot aria-label="Character 5 of 6" />
-        <InputOTPSlot aria-label="Character 6 of 6" />
-      </InputOTP>
-      <p id="verification-hint" className="style-text-default--1 text-on-surface-variant">
-        Enter the 6-digit code we sent to your email. The code expires in 10 minutes.
-      </p>
-    </div>
-  ),
+  name: 'Composition / Verification Form',
   parameters: {
     docs: {
       description: {
@@ -462,35 +465,33 @@ export const VerificationForm: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="flex flex-col items-center gap-sm">
+      <label htmlFor="verification-code" className="style-text-strong-0 text-on-surface">
+        Verification code
+      </label>
+      <InputOTP id="verification-code" aria-describedby="verification-hint" {...args}>
+        <InputOTP.Slot />
+        <InputOTP.Slot aria-label="Character 2 of 6" />
+        <InputOTP.Slot aria-label="Character 3 of 6" />
+        <InputOTP.Separator />
+        <InputOTP.Slot aria-label="Character 4 of 6" />
+        <InputOTP.Slot aria-label="Character 5 of 6" />
+        <InputOTP.Slot aria-label="Character 6 of 6" />
+      </InputOTP>
+      <p id="verification-hint" className="style-text-default--1 text-on-surface-variant">
+        Enter the 6-digit code we sent to your email. The code expires in 10 minutes.
+      </p>
+    </div>
+  ),
 }
 
 export const RecoveryCode: Story = {
-  name: 'Composition / Recovery Code',
   args: {
     length: 8,
     validationType: 'alphanumeric',
   },
-  render: (args) => (
-    <div className="flex flex-col items-center gap-sm">
-      <label htmlFor="recovery-code" className="style-text-strong-0 text-on-surface">
-        Recovery code
-      </label>
-      <InputOTP id="recovery-code" aria-describedby="recovery-hint" {...args}>
-        <InputOTPSlot />
-        <InputOTPSlot aria-label="Character 2 of 8" />
-        <InputOTPSlot aria-label="Character 3 of 8" />
-        <InputOTPSlot aria-label="Character 4 of 8" />
-        <InputOtpSeparator />
-        <InputOTPSlot aria-label="Character 5 of 8" />
-        <InputOTPSlot aria-label="Character 6 of 8" />
-        <InputOTPSlot aria-label="Character 7 of 8" />
-        <InputOTPSlot aria-label="Character 8 of 8" />
-      </InputOTP>
-      <p id="recovery-hint" className="style-text-default--1 text-on-surface-variant">
-        Enter one of your backup recovery codes (e.g., A7C9-XZ4B).
-      </p>
-    </div>
-  ),
+  name: 'Composition / Recovery Code',
   parameters: {
     docs: {
       description: {
@@ -498,33 +499,35 @@ export const RecoveryCode: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="flex flex-col items-center gap-sm">
+      <label htmlFor="recovery-code" className="style-text-strong-0 text-on-surface">
+        Recovery code
+      </label>
+      <InputOTP id="recovery-code" aria-describedby="recovery-hint" {...args}>
+        <InputOTP.Slot />
+        <InputOTP.Slot aria-label="Character 2 of 8" />
+        <InputOTP.Slot aria-label="Character 3 of 8" />
+        <InputOTP.Slot aria-label="Character 4 of 8" />
+        <InputOTP.Separator />
+        <InputOTP.Slot aria-label="Character 5 of 8" />
+        <InputOTP.Slot aria-label="Character 6 of 8" />
+        <InputOTP.Slot aria-label="Character 7 of 8" />
+        <InputOTP.Slot aria-label="Character 8 of 8" />
+      </InputOTP>
+      <p id="recovery-hint" className="style-text-default--1 text-on-surface-variant">
+        Enter one of your backup recovery codes (e.g., A7C9-XZ4B).
+      </p>
+    </div>
+  ),
 }
 
 export const SecureAccessCode: Story = {
-  name: 'Composition / Secure Access',
   args: {
     length: 6,
     mask: true,
   },
-  render: (args) => (
-    <div className="flex flex-col items-center gap-sm">
-      <label htmlFor="secure-code" className="style-text-strong-0 text-on-surface">
-        Access code
-      </label>
-      <InputOTP id="secure-code" aria-describedby="secure-hint" {...args}>
-        <InputOTPSlot />
-        <InputOTPSlot aria-label="Character 2 of 6" />
-        <InputOTPSlot aria-label="Character 3 of 6" />
-        <InputOtpSeparator />
-        <InputOTPSlot aria-label="Character 4 of 6" />
-        <InputOTPSlot aria-label="Character 5 of 6" />
-        <InputOTPSlot aria-label="Character 6 of 6" />
-      </InputOTP>
-      <p id="secure-hint" className="style-text-default--1 text-on-surface-variant">
-        Use mask to obscure the code on shared screens.
-      </p>
-    </div>
-  ),
+  name: 'Composition / Secure Access',
   parameters: {
     docs: {
       description: {
@@ -532,4 +535,23 @@ export const SecureAccessCode: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="flex flex-col items-center gap-sm">
+      <label htmlFor="secure-code" className="style-text-strong-0 text-on-surface">
+        Access code
+      </label>
+      <InputOTP id="secure-code" aria-describedby="secure-hint" {...args}>
+        <InputOTP.Slot />
+        <InputOTP.Slot aria-label="Character 2 of 6" />
+        <InputOTP.Slot aria-label="Character 3 of 6" />
+        <InputOTP.Separator />
+        <InputOTP.Slot aria-label="Character 4 of 6" />
+        <InputOTP.Slot aria-label="Character 5 of 6" />
+        <InputOTP.Slot aria-label="Character 6 of 6" />
+      </InputOTP>
+      <p id="secure-hint" className="style-text-default--1 text-on-surface-variant">
+        Use mask to obscure the code on shared screens.
+      </p>
+    </div>
+  ),
 }

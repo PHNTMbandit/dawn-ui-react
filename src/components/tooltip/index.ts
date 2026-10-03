@@ -1,8 +1,8 @@
-import { Tooltip as TooltipBase } from './tooltip'
+import { Tooltip as TooltipRoot } from './tooltip'
 import { TooltipContent } from './tooltip-context'
 import { TooltipTrigger } from './tooltip-trigger'
 
-export const Tooltip = Object.assign(TooltipBase, {
+const Tooltip = Object.assign(TooltipRoot, {
   Content: TooltipContent,
   Trigger: TooltipTrigger,
 })
@@ -10,3 +10,5 @@ export const Tooltip = Object.assign(TooltipBase, {
 export type { TooltipContentProps, TooltipProps, TooltipTriggerProps } from './tooltip.types'
 export { TooltipContent } from './tooltip-context'
 export { TooltipTrigger } from './tooltip-trigger'
+
+export { Tooltip }
