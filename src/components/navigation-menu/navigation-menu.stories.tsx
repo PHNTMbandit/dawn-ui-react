@@ -1,68 +1,50 @@
 import { CaretDownIcon } from '@phosphor-icons/react'
-import { NavigationMenu } from './navigation-menu'
-import { NavigationMenuContent } from './navigation-menu-content'
-import { NavigationMenuIcon } from './navigation-menu-icon'
-import { NavigationMenuItem } from './navigation-menu-item'
-import { NavigationMenuLink } from './navigation-menu-link'
-import { NavigationMenuList } from './navigation-menu-list'
-import { NavigationMenuPopup } from './navigation-menu-popup'
-import { NavigationMenuTrigger } from './navigation-menu-trigger'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const overviewLinks = [
-  {
-    href: '/react/overview/quick-start',
-    title: 'Quick Start',
-    description: 'Install and assemble your first component.',
-  },
-  {
-    href: '/react/overview/accessibility',
-    title: 'Accessibility',
-    description: 'Learn how we build accessible components.',
-  },
-  {
-    href: '/react/overview/releases',
-    title: 'Releases',
-    description: "See what's new in the latest Base UI versions.",
-  },
-  {
-    href: '/react/overview/about',
-    title: 'About',
-    description: 'Learn more about Base UI and our mission.',
-  },
-] as const
+import { NavigationMenu } from './index'
 
-const handbookLinks = [
-  {
-    href: '/react/handbook/styling',
-    title: 'Styling',
-    description: 'Style with plain CSS, Tailwind, CSS-in-JS, or CSS Modules.',
-  },
-  {
-    href: '/react/handbook/animation',
-    title: 'Animation',
-    description: 'Animate with CSS transitions, CSS animations, or JS libraries.',
-  },
-  {
-    href: '/react/handbook/composition',
-    title: 'Composition',
-    description: 'Replace and compose components with your own existing components.',
-  },
-] as const
+const overviewLinks = [
+    {
+      description: 'Install and assemble your first component.',
+      href: '/react/overview/quick-start',
+      title: 'Quick Start',
+    },
+    {
+      description: 'Learn how we build accessible components.',
+      href: '/react/overview/accessibility',
+      title: 'Accessibility',
+    },
+    {
+      description: "See what's new in the latest Base UI versions.",
+      href: '/react/overview/releases',
+      title: 'Releases',
+    },
+    {
+      description: 'Learn more about Base UI and our mission.',
+      href: '/react/overview/about',
+      title: 'About',
+    },
+  ] as const,
+  handbookLinks = [
+    {
+      description: 'Style with plain CSS, Tailwind, CSS-in-JS, or CSS Modules.',
+      href: '/react/handbook/styling',
+      title: 'Styling',
+    },
+    {
+      description: 'Animate with CSS transitions, CSS animations, or JS libraries.',
+      href: '/react/handbook/animation',
+      title: 'Animation',
+    },
+    {
+      description: 'Replace and compose components with your own existing components.',
+      href: '/react/handbook/composition',
+      title: 'Composition',
+    },
+  ] as const
 
 export default {
-  title: 'Components/Navigation Menu',
   component: NavigationMenu,
-  subcomponents: {
-    NavigationMenuContent,
-    NavigationMenuIcon,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuPopup,
-    NavigationMenuTrigger,
-  },
   parameters: {
     docs: {
       description: {
@@ -92,6 +74,16 @@ A collection of links and menus for website navigation, built on top of
       },
     },
   },
+  subcomponents: {
+    NavigationMenuContent: NavigationMenu.Content,
+    NavigationMenuIcon: NavigationMenu.Icon,
+    NavigationMenuItem: NavigationMenu.Item,
+    NavigationMenuLink: NavigationMenu.Link,
+    NavigationMenuList: NavigationMenu.List,
+    NavigationMenuPopup: NavigationMenu.Popup,
+    NavigationMenuTrigger: NavigationMenu.Trigger,
+  },
+  title: 'Components/Navigation Menu',
 } as Meta<typeof NavigationMenu>
 
 type Story = StoryObj<typeof NavigationMenu>
@@ -108,29 +100,29 @@ export const Default: Story = {
   },
   render: (args) => (
     <NavigationMenu {...args}>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>
+      <NavigationMenu.List>
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger>
             Overview
-            <NavigationMenuIcon>
+            <NavigationMenu.Icon>
               <CaretDownIcon weight="bold" />
-            </NavigationMenuIcon>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
+            </NavigationMenu.Icon>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content>
             <ul>
               {overviewLinks.map((item) => (
                 <li key={item.href}>
-                  <NavigationMenuLink>
+                  <NavigationMenu.Link>
                     <h3 className="">{item.title}</h3>
                     <p className="">{item.description}</p>
-                  </NavigationMenuLink>
+                  </NavigationMenu.Link>
                 </li>
               ))}
             </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-      <NavigationMenuPopup />
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+      </NavigationMenu.List>
+      <NavigationMenu.Popup />
     </NavigationMenu>
   ),
 }
@@ -149,52 +141,52 @@ export const MultipleItems: Story = {
   },
   render: (args) => (
     <NavigationMenu {...args}>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>
+      <NavigationMenu.List>
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger>
             Overview
-            <NavigationMenuIcon>
+            <NavigationMenu.Icon>
               <CaretDownIcon weight="bold" />
-            </NavigationMenuIcon>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
+            </NavigationMenu.Icon>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content>
             <ul>
               {overviewLinks.map((item) => (
                 <li key={item.href}>
-                  <NavigationMenuLink>
+                  <NavigationMenu.Link>
                     <h3 className="">{item.title}</h3>
                     <p className="">{item.description}</p>
-                  </NavigationMenuLink>
+                  </NavigationMenu.Link>
                 </li>
               ))}
             </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger>
             Handbook
-            <NavigationMenuIcon>
+            <NavigationMenu.Icon>
               <CaretDownIcon weight="bold" />
-            </NavigationMenuIcon>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
+            </NavigationMenu.Icon>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content>
             <ul>
               {handbookLinks.map((item) => (
                 <li key={item.href}>
-                  <NavigationMenuLink>
+                  <NavigationMenu.Link>
                     <h3 className="">{item.title}</h3>
                     <p className="">{item.description}</p>
-                  </NavigationMenuLink>
+                  </NavigationMenu.Link>
                 </li>
               ))}
             </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink>GitHub</NavigationMenuLink>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-      <NavigationMenuPopup />
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link>GitHub</NavigationMenu.Link>
+        </NavigationMenu.Item>
+      </NavigationMenu.List>
+      <NavigationMenu.Popup />
     </NavigationMenu>
   ),
 }
@@ -211,38 +203,38 @@ export const Sizes: Story = {
   },
   render: (args) => (
     <NavigationMenu {...args}>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger size="small">
+      <NavigationMenu.List>
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger size="small">
             Small
-            <NavigationMenuIcon>
+            <NavigationMenu.Icon>
               <CaretDownIcon weight="bold" />
-            </NavigationMenuIcon>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>Small content</NavigationMenuContent>
-        </NavigationMenuItem>
+            </NavigationMenu.Icon>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content>Small content</NavigationMenu.Content>
+        </NavigationMenu.Item>
 
-        <NavigationMenuItem>
-          <NavigationMenuTrigger size="medium">
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger size="medium">
             Medium
-            <NavigationMenuIcon>
+            <NavigationMenu.Icon>
               <CaretDownIcon weight="bold" />
-            </NavigationMenuIcon>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>Medium content</NavigationMenuContent>
-        </NavigationMenuItem>
+            </NavigationMenu.Icon>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content>Medium content</NavigationMenu.Content>
+        </NavigationMenu.Item>
 
-        <NavigationMenuItem>
-          <NavigationMenuTrigger size="large">
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger size="large">
             Large
-            <NavigationMenuIcon>
+            <NavigationMenu.Icon>
               <CaretDownIcon weight="bold" />
-            </NavigationMenuIcon>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>Large content</NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-      <NavigationMenuPopup />
+            </NavigationMenu.Icon>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content>Large content</NavigationMenu.Content>
+        </NavigationMenu.Item>
+      </NavigationMenu.List>
+      <NavigationMenu.Popup />
     </NavigationMenu>
   ),
 }
@@ -259,34 +251,34 @@ export const Tones: Story = {
   },
   render: (args) => (
     <NavigationMenu {...args}>
-      <NavigationMenuList>
+      <NavigationMenu.List>
         {(['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const).map(
           (tone) => (
-            <NavigationMenuItem key={tone}>
-              <NavigationMenuTrigger tone={tone}>
+            <NavigationMenu.Item key={tone}>
+              <NavigationMenu.Trigger tone={tone}>
                 {tone.charAt(0).toUpperCase() + tone.slice(1)}
-                <NavigationMenuIcon>
+                <NavigationMenu.Icon>
                   <CaretDownIcon weight="bold" />
-                </NavigationMenuIcon>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
+                </NavigationMenu.Icon>
+              </NavigationMenu.Trigger>
+              <NavigationMenu.Content>
                 {' '}
                 <ul>
                   {handbookLinks.map((item) => (
                     <li key={item.href}>
-                      <NavigationMenuLink tone={tone}>
+                      <NavigationMenu.Link tone={tone}>
                         <h3 className="style-text-strong-0">{item.title}</h3>
                         <p className="style-text-prose--1">{item.description}</p>
-                      </NavigationMenuLink>
+                      </NavigationMenu.Link>
                     </li>
                   ))}
                 </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
+              </NavigationMenu.Content>
+            </NavigationMenu.Item>
           ),
         )}
-      </NavigationMenuList>
-      <NavigationMenuPopup />
+      </NavigationMenu.List>
+      <NavigationMenu.Popup />
     </NavigationMenu>
   ),
 }

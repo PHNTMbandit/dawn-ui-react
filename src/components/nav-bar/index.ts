@@ -1,9 +1,9 @@
-import { NavBar as NavBarBase } from './nav-bar'
+import { NavBar as NavBarRoot } from './nav-bar'
 import { NavBarItem } from './nav-bar-item'
 import { NavBarItemIcon } from './nav-bar-item-icon'
 import { NavBarItemLabel } from './nav-bar-item-label'
 
-export const NavBar = Object.assign(NavBarBase, {
+const NavBar = Object.assign(NavBarRoot, {
   Item: NavBarItem,
   ItemIcon: NavBarItemIcon,
   ItemLabel: NavBarItemLabel,
@@ -18,3 +18,5 @@ export type {
 export { NavBarItem } from './nav-bar-item'
 export { NavBarItemIcon } from './nav-bar-item-icon'
 export { NavBarItemLabel } from './nav-bar-item-label'
+
+export { NavBar }

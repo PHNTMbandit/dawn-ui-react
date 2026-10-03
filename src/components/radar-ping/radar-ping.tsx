@@ -1,7 +1,9 @@
-import { type RadarPingProps, radarPingVariants } from './radar-ping.types'
 import { cn } from '@/utils/cn'
 
-export const RadarPing = ({
+import { radarPingVariants } from './radar-ping.types'
+import type { RadarPingProps } from './radar-ping.types'
+
+export function RadarPing({
   hidePing = false,
   tone = 'brand',
   size = 'medium',
@@ -9,9 +11,9 @@ export const RadarPing = ({
   children,
   ref,
   ...props
-}: RadarPingProps) => {
+}: RadarPingProps) {
   return (
-    <div className={cn(radarPingVariants({ tone, size, className }))} ref={ref} {...props}>
+    <div className={cn(radarPingVariants({ className, size, tone }))} ref={ref} {...props}>
       {!hidePing && (
         <span
           className="absolute inline-flex size-full animate-ping rounded-full opacity-75"

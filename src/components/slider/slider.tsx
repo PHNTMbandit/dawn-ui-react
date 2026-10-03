@@ -1,31 +1,53 @@
 import { Slider as BaseSlider } from '@base-ui/react'
-import { SliderThumb } from './slider-thumb'
-import { sliderVariants, type SliderProps } from './slider.types'
+
 import { cn } from '@/utils/cn'
 
-export const Slider = ({
+import { SliderThumb } from './slider-thumb'
+import { sliderVariants } from './slider.types'
+import type { SliderProps } from './slider.types'
+
+const MIN_DEFAULT = 0,
+  MAX_DEFAULT = 100,
+  STEP_DEFAULT = 1
+
+function resolveThumbValues(
+  value: SliderProps['value'],
+  defaultValue: SliderProps['defaultValue'],
+  min: number,
+): number[] {
+  if (typeof value === 'number') {
+    return [value]
+  }
+  if (Array.isArray(value)) {
+    return [...value]
+  }
+  if (typeof defaultValue === 'number') {
+    return [defaultValue]
+  }
+  if (Array.isArray(defaultValue)) {
+    return [...defaultValue]
+  }
+  return [min]
+}
+
+export function Slider({
   size,
   tone,
   defaultValue,
-  min = 0,
-  max = 100,
-  step = 1,
+  min = MIN_DEFAULT,
+  max = MAX_DEFAULT,
+  step = STEP_DEFAULT,
   showIndicator = true,
   showTooltip = true,
   showThumbOnHover = true,
   value,
   onValueChange,
   className,
+  'aria-label': ariaLabel = 'Slider',
   ref,
   ...props
-}: SliderProps) => {
-  const _values = Array.isArray(value)
-    ? value
-    : Array.isArray(defaultValue)
-      ? defaultValue
-      : [value ?? defaultValue ?? min]
-
-  const { 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, ...rootProps } = props
+}: SliderProps) {
+  const thumbValues = resolveThumbValues(value, defaultValue, min)
 
   return (
     <BaseSlider.Root
@@ -38,13 +60,9 @@ export const Slider = ({
       ref={ref}
       step={step}
       value={value}
-      {...rootProps}
+      {...props}
     >
-      <BaseSlider.Control
-        className={
-          'shrink-0 hover:cursor-pointer data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full'
-        }
-      >
+      <BaseSlider.Control className="shrink-0 hover:cursor-pointer data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full">
         <BaseSlider.Track
           data-slot="slider-track"
           className={cn(
@@ -57,14 +75,8 @@ export const Slider = ({
             data-slot="slider-indicator"
             className={cn('rounded-full', !showIndicator && 'opacity-0')}
           />
-          {Array.from({ length: _values.length }, (_, index) => (
-            <SliderThumb
-              aria-label={ariaLabel}
-              aria-labelledby={ariaLabelledby}
-              index={index}
-              key={index}
-              hide={!showTooltip}
-            />
+          {[...thumbValues.keys()].map((index) => (
+            <SliderThumb aria-label={ariaLabel} index={index} key={index} hide={!showTooltip} />
           ))}
         </BaseSlider.Track>
       </BaseSlider.Control>

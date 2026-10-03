@@ -1,59 +1,83 @@
 import React from 'react'
-import { SliderGroupContext, useStableNumberArray } from './slider-group-context'
+
 import { cn } from '@/utils/cn'
 
+import { SliderGroupContext, useStableNumberArray } from './slider-group-context'
 import type { SliderGroupProps, SliderGroupConfig } from './slider-group.types'
 
-const toArray = (value: number | readonly number[] | undefined): number[] | undefined =>
-  value == null ? undefined : Array.isArray(value) ? [...value] : [value as number]
+const MIN_DEFAULT = 0,
+  MAX_DEFAULT = 100,
+  STEP_DEFAULT = 1
 
-export const SliderGroup = ({
+function toArray(value: number | readonly number[] | undefined): number[] | undefined {
+  if (value === undefined) {
+    return undefined
+  }
+  if (typeof value === 'number') {
+    return [value]
+  }
+  return [...value]
+}
+
+function getControlledValue(
+  isControlled: boolean,
+  valueProp: SliderGroupProps['value'],
+  internalValue: number[] | undefined,
+): number[] | undefined {
+  if (isControlled) {
+    return toArray(valueProp)
+  }
+  return internalValue
+}
+
+function mergeConfig(
+  prev: { min: number; max: number; step: number },
+  incoming: SliderGroupConfig,
+) {
+  if (prev.min === incoming.min && prev.max === incoming.max && prev.step === incoming.step) {
+    return prev
+  }
+  return { max: incoming.max, min: incoming.min, step: incoming.step }
+}
+
+export function SliderGroup({
   className,
-  children,
   ref,
   defaultValue,
   value: valueProp,
   onValueChange,
   ...props
-}: SliderGroupProps) => {
-  const isControlled = valueProp != null
-  const [internalValue, setInternalValue] = React.useState<number[] | undefined>(() =>
-    toArray(defaultValue),
-  )
-  const [config, setConfig] = React.useState({ min: 0, max: 100, step: 1 })
-
-  const value = useStableNumberArray(isControlled ? toArray(valueProp) : internalValue)
-
-  const setValue = React.useCallback(
-    (next: number[]) => {
-      if (!isControlled) setInternalValue(next)
+}: SliderGroupProps) {
+  const isControlled = valueProp !== undefined,
+    [internalValue, setInternalValue] = React.useState<number[] | undefined>(() =>
+      toArray(defaultValue),
+    ),
+    [config, setConfig] = React.useState({
+      max: MAX_DEFAULT,
+      min: MIN_DEFAULT,
+      step: STEP_DEFAULT,
+    }),
+    value = useStableNumberArray(getControlledValue(isControlled, valueProp, internalValue)),
+    setValue = (next: number[]) => {
+      if (!isControlled) {
+        setInternalValue(next)
+      }
       onValueChange?.(next)
     },
-    [isControlled, onValueChange],
-  )
-
-  const registerConfig = React.useCallback((incoming: SliderGroupConfig) => {
-    setConfig((prev) =>
-      prev.min === incoming.min && prev.max === incoming.max && prev.step === incoming.step
-        ? prev
-        : { min: incoming.min, max: incoming.max, step: incoming.step },
-    )
-    if (incoming.defaultValue != null) {
-      setInternalValue((prev) => (prev === undefined ? toArray(incoming.defaultValue) : prev))
-    }
-  }, [])
-
-  const context = React.useMemo(
-    () => ({
-      value,
-      setValue,
-      min: config.min,
+    registerConfig = (incoming: SliderGroupConfig) => {
+      setConfig((prev) => mergeConfig(prev, incoming))
+      if (incoming.defaultValue !== undefined) {
+        setInternalValue((prev) => prev ?? toArray(incoming.defaultValue))
+      }
+    },
+    context = {
       max: config.max,
-      step: config.step,
+      min: config.min,
       registerConfig,
-    }),
-    [value, setValue, config, registerConfig],
-  )
+      setValue,
+      step: config.step,
+      value,
+    }
 
   return (
     <SliderGroupContext.Provider value={context}>
@@ -68,9 +92,7 @@ export const SliderGroup = ({
         )}
         ref={ref}
         {...props}
-      >
-        {children}
-      </div>
+      />
     </SliderGroupContext.Provider>
   )
 }

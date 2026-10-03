@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { AlertTitleProps } from './alert.types'
 
-export const AlertTitle = ({ className, children, ref, ...props }: AlertTitleProps) => {
+export function AlertTitle({ className, ref, ...props }: AlertTitleProps) {
   return (
     <div
       data-slot="alert-title"
@@ -12,8 +12,6 @@ export const AlertTitle = ({ className, children, ref, ...props }: AlertTitlePro
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

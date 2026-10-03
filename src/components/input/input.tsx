@@ -1,59 +1,138 @@
 import { Input as BaseInput } from '@base-ui/react/input'
 import { UploadIcon, XIcon } from '@phosphor-icons/react'
 import { useRef, useState } from 'react'
-import { Button } from '../button'
-import { formatFileSize, inputVariants, type InputProps } from './input.types'
+
 import { cn } from '@/utils/cn'
 
-export const Input = ({
-  fileUploadButtonIcon = <UploadIcon weight="bold" />,
+import { Button } from '../button'
+import { formatFileSize, inputVariants } from './input.types'
+import type { InputProps } from './input.types'
+
+const DEFAULT_COLOR = '#000000',
+  EMPTY_FILE_COUNT = 0,
+  SINGLE_FILE_COUNT = 1,
+  defaultFileUploadButtonIcon = <UploadIcon weight="bold" />,
+  defaultFilesSelectedLabel = (count: number) => `${count} files selected`,
+  defaultMaxFilesErrorLabel = (maxFiles: number) => {
+    if (maxFiles === SINGLE_FILE_COUNT) {
+      return `You can select up to ${maxFiles} file.`
+    }
+    return `You can select up to ${maxFiles} files.`
+  },
+  defaultMaxFileSizeErrorLabel = (fileName: string, maxFileSize: string) =>
+    `"${fileName}" exceeds the maximum size of ${maxFileSize}.`
+
+function getStringValue(value: unknown): string | undefined {
+  if (typeof value === 'string') {
+    return value
+  }
+  return undefined
+}
+
+function getColorValue(
+  isControlled: boolean,
+  controlledValue: unknown,
+  uncontrolledValue: string,
+): string {
+  if (isControlled) {
+    return getStringValue(controlledValue) || DEFAULT_COLOR
+  }
+  return uncontrolledValue || DEFAULT_COLOR
+}
+
+function getColorInputProps(isControlled: boolean, colorValue: string) {
+  if (isControlled) {
+    return { value: colorValue }
+  }
+  return { defaultValue: colorValue }
+}
+
+function getFileValidationError(
+  files: File[],
+  options: {
+    maxFiles: number | undefined
+    maxFileSize: number | undefined
+    maxFilesErrorLabel: NonNullable<InputProps['maxFilesErrorLabel']>
+    maxFileSizeErrorLabel: NonNullable<InputProps['maxFileSizeErrorLabel']>
+  },
+): string | undefined {
+  const { maxFiles, maxFileSize, maxFilesErrorLabel, maxFileSizeErrorLabel } = options,
+    oversizedFile = files.find((file) => maxFileSize !== undefined && file.size > maxFileSize)
+  if (maxFiles !== undefined && files.length > maxFiles) {
+    return maxFilesErrorLabel(maxFiles)
+  }
+
+  if (oversizedFile && maxFileSize !== undefined) {
+    return maxFileSizeErrorLabel(oversizedFile.name, formatFileSize(maxFileSize))
+  }
+  return undefined
+}
+
+function getFileStatus(options: {
+  fileError: string | undefined
+  selectedFiles: File[]
+  placeholder: InputProps['placeholder']
+  filesSelectedLabel: (count: number) => string
+}) {
+  const { fileError, selectedFiles, placeholder, filesSelectedLabel } = options
+  if (fileError) {
+    return <span className="style-text-prose-0 text-error-default">{fileError}</span>
+  }
+  if (selectedFiles.length === EMPTY_FILE_COUNT) {
+    return <span className="style-text-prose-0 text-on-surface-variant">{placeholder}</span>
+  }
+  if (selectedFiles.length === SINGLE_FILE_COUNT) {
+    return selectedFiles.at(EMPTY_FILE_COUNT)?.name
+  }
+  return filesSelectedLabel(selectedFiles.length)
+}
+
+export function Input({
+  fileUploadButtonIcon = defaultFileUploadButtonIcon,
   fileUploadButtonLabel,
   maxFiles,
   maxFileSize,
   clearFilesLabel = 'Remove files',
-  filesSelectedLabel = (count) => `${count} files selected`,
-  maxFilesErrorLabel = (max) => `You can select up to ${max} file${max === 1 ? '' : 's'}.`,
-  maxFileSizeErrorLabel = (fileName, max) => `"${fileName}" exceeds the maximum size of ${max}.`,
+  filesSelectedLabel = defaultFilesSelectedLabel,
+  maxFilesErrorLabel = defaultMaxFilesErrorLabel,
+  maxFileSizeErrorLabel = defaultMaxFileSizeErrorLabel,
   compact,
   variant,
   size,
   className,
   ref,
   ...props
-}: InputProps) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [uncontrolledColorValue, setUncontrolledColorValue] = useState<string>(
-    (props.defaultValue as string) || (props.value as string) || '#000000',
-  )
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
-  const [fileError, setFileError] = useState<string | null>(null)
+}: InputProps) {
+  const inputRef = useRef<HTMLInputElement>(null),
+    [uncontrolledColorValue, setUncontrolledColorValue] = useState<string>(
+      getStringValue(props.defaultValue) || getStringValue(props.value) || DEFAULT_COLOR,
+    ),
+    [selectedFiles, setSelectedFiles] = useState<File[]>([]),
+    [fileError, setFileError] = useState<string | undefined>(undefined)
 
   if (props.type === 'color') {
-    const isControlled = props.value !== undefined
-    const colorValue =
-      ((isControlled ? props.value : uncontrolledColorValue) as string) || '#000000'
-    const { onChange, defaultValue: _defaultValue, value: _value, ...colorProps } = props
+    const isControlled = props.value !== undefined,
+      colorValue = getColorValue(isControlled, props.value, uncontrolledColorValue),
+      { onChange, defaultValue: _defaultValue, value: _value, ...colorProps } = props,
+      handleColorChange: NonNullable<typeof onChange> = (event) => {
+        if (!isControlled) {
+          setUncontrolledColorValue(event.currentTarget.value)
+        }
 
-    const handleColorChange: NonNullable<typeof onChange> = (event) => {
-      if (!isControlled) {
-        setUncontrolledColorValue((event.currentTarget as HTMLInputElement).value)
+        onChange?.(event)
+      },
+      handleColorRef = (node: HTMLInputElement | null) => {
+        inputRef.current = node
+
+        if (typeof ref === 'function') {
+          ref(node)
+          return
+        }
+
+        if (ref && typeof ref === 'object') {
+          Object.assign(ref, { current: node })
+        }
       }
-
-      onChange?.(event)
-    }
-
-    const handleColorRef = (node: HTMLInputElement | null) => {
-      inputRef.current = node
-
-      if (typeof ref === 'function') {
-        ref(node)
-        return
-      }
-
-      if (ref && typeof ref === 'object') {
-        ;(ref as { current: HTMLInputElement | null }).current = node
-      }
-    }
 
     if (compact) {
       return (
@@ -83,11 +162,10 @@ export const Input = ({
           />
           <BaseInput
             className="peer pointer-events-none invisible absolute"
-            defaultValue={!isControlled ? colorValue : undefined}
+            {...getColorInputProps(isControlled, colorValue)}
             onChange={handleColorChange}
             ref={handleColorRef}
             type="color"
-            value={isControlled ? colorValue : undefined}
             {...colorProps}
           />
         </button>
@@ -99,7 +177,7 @@ export const Input = ({
         aria-label="Open color picker"
         className={cn(
           'relative flex hover:cursor-pointer',
-          inputVariants({ variant, size }),
+          inputVariants({ size, variant }),
           className,
         )}
         disabled={props.disabled}
@@ -119,11 +197,10 @@ export const Input = ({
         />
         <BaseInput
           className="peer pointer-events-none invisible absolute top-lg"
-          defaultValue={!isControlled ? colorValue : undefined}
+          {...getColorInputProps(isControlled, colorValue)}
           onChange={handleColorChange}
           ref={handleColorRef}
           type="color"
-          value={isControlled ? colorValue : undefined}
           {...colorProps}
         />
         <p
@@ -141,69 +218,57 @@ export const Input = ({
   }
 
   if (props.type === 'file') {
-    const { onChange, ...fileProps } = props
+    const { onChange, ...fileProps } = props,
+      clearFiles = () => {
+        if (inputRef.current) {
+          inputRef.current.value = ''
+        }
 
-    const clearFiles = () => {
-      if (inputRef.current) {
-        inputRef.current.value = ''
-      }
-
-      setSelectedFiles([])
-      setFileError(null)
-    }
-
-    const handleFileChange: NonNullable<typeof onChange> = (event) => {
-      const input = event.currentTarget as HTMLInputElement
-      const files = input.files ? Array.from(input.files) : []
-
-      if (maxFiles !== undefined && files.length > maxFiles) {
         setSelectedFiles([])
-        setFileError(maxFilesErrorLabel(maxFiles))
-        input.value = ''
-        return
+        setFileError(undefined)
+      },
+      handleFileChange: NonNullable<typeof onChange> = (event) => {
+        const input = event.currentTarget,
+          files = [...(input.files ?? [])],
+          validationError = getFileValidationError(files, {
+            maxFileSize,
+            maxFileSizeErrorLabel,
+            maxFiles,
+            maxFilesErrorLabel,
+          })
+        if (validationError) {
+          setSelectedFiles([])
+          setFileError(validationError)
+          input.value = ''
+          return
+        }
+
+        setFileError(undefined)
+        setSelectedFiles(files)
+        onChange?.(event)
       }
-
-      const oversizedFile =
-        maxFileSize !== undefined ? files.find((file) => file.size > maxFileSize) : undefined
-
-      if (oversizedFile && maxFileSize !== undefined) {
-        setSelectedFiles([])
-        setFileError(maxFileSizeErrorLabel(oversizedFile.name, formatFileSize(maxFileSize)))
-        input.value = ''
-        return
-      }
-
-      setFileError(null)
-      setSelectedFiles(files)
-      onChange?.(event)
-    }
 
     return (
       <div className="flex items-center justify-between gap-lg">
         <div className="flex items-center gap-xs">
-          <Button variant={'soft'} tone="neutral" onClick={() => inputRef.current?.click()}>
+          <Button variant="soft" tone="neutral" onClick={() => inputRef.current?.click()}>
             {fileUploadButtonIcon}
             {fileUploadButtonLabel}
           </Button>
           <BaseInput ref={inputRef} {...fileProps} hidden onChange={handleFileChange} />
           <p className="style-text-default-0">
-            {fileError ? (
-              <span className="style-text-prose-0 text-error-default">{fileError}</span>
-            ) : selectedFiles.length === 0 ? (
-              <span className="style-text-prose-0 text-on-surface-variant">
-                {props?.placeholder}
-              </span>
-            ) : selectedFiles.length === 1 ? (
-              selectedFiles[0].name
-            ) : (
-              filesSelectedLabel(selectedFiles.length)
-            )}
+            {getFileStatus({
+              fileError,
+              filesSelectedLabel,
+              placeholder: props.placeholder,
+              selectedFiles,
+            })}
           </p>
         </div>
         <Button
           aria-label={clearFilesLabel}
           size="iconMedium"
-          variant={'ghost'}
+          variant="ghost"
           tone="error"
           onClick={clearFiles}
         >
@@ -214,6 +279,6 @@ export const Input = ({
   }
 
   return (
-    <BaseInput className={cn(inputVariants({ variant, size }), className)} ref={ref} {...props} />
+    <BaseInput className={cn(inputVariants({ size, variant }), className)} ref={ref} {...props} />
   )
 }

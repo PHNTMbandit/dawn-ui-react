@@ -1,25 +1,106 @@
 import React from 'react'
-import { useSidebar } from './sidebar-provider'
+
 import { cn } from '@/utils/cn'
 
+import { useSidebar } from './sidebar-provider'
 import type { SidebarProps } from './sidebar.types'
 
-export const Sidebar = ({
+const DEFAULT_SIDEBAR_WIDTH = 400
+
+interface SidebarLayoutProps {
+  collapsible?: 'offcanvas' | 'icon' | 'none'
+  open?: boolean
+  isMobile?: boolean
+  width: string | number
+}
+
+function getOffcanvasWidth(
+  open: boolean | undefined,
+  isMobile: boolean | undefined,
+  fullWidth: React.CSSProperties,
+): React.CSSProperties {
+  if (!open) {
+    return { width: '0px' }
+  }
+  if (isMobile) {
+    return { width: '33.333333%' }
+  }
+  return fullWidth
+}
+
+function getIconWidth(
+  open: boolean | undefined,
+  isMobile: boolean | undefined,
+  fullWidth: React.CSSProperties,
+): React.CSSProperties {
+  if (open) {
+    return fullWidth
+  }
+  if (isMobile) {
+    return { width: '0px' }
+  }
+  return { width: '80px' }
+}
+
+function getWidthStyle({
+  collapsible,
+  open,
+  isMobile,
+  width,
+}: SidebarLayoutProps): React.CSSProperties {
+  const fullWidth: React.CSSProperties = { width: `${width}px` }
+  if (collapsible === 'offcanvas') {
+    return getOffcanvasWidth(open, isMobile, fullWidth)
+  }
+  if (collapsible === 'icon') {
+    return getIconWidth(open, isMobile, fullWidth)
+  }
+  return fullWidth
+}
+
+function getGapClasses({ collapsible, open }: SidebarLayoutProps) {
+  if (collapsible === 'none') {
+    return 'gap-lg'
+  }
+  if (open) {
+    return 'gap-lg'
+  }
+  return 'gap-sm'
+}
+
+function getPositionClasses({ collapsible, open, isMobile }: SidebarLayoutProps) {
+  if ((collapsible === 'offcanvas' || collapsible === 'icon') && !open && isMobile) {
+    return 'absolute z-50 -translate-x-full'
+  }
+
+  if ((collapsible === 'offcanvas' || collapsible === 'icon') && open && isMobile) {
+    return 'absolute z-50'
+  }
+
+  return ''
+}
+
+export function Sidebar({
   tone = 'primary',
-  width = 400,
+  width = DEFAULT_SIDEBAR_WIDTH,
   className,
-  children,
   ...props
-}: SidebarProps) => {
-  const { open, setOpen, isMobile, collapsible, side } = useSidebar()
-  const sidebarRef = React.useRef<HTMLDivElement>(null)
+}: SidebarProps) {
+  const { open, setOpen, isMobile, collapsible, side } = useSidebar(),
+    sidebarRef = React.useRef<HTMLDivElement>(null),
+    layout: SidebarLayoutProps = { collapsible, isMobile, open, width }
 
   React.useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node) && isMobile) {
-        if (open && setOpen) {
-          setOpen(false)
-        }
+      if (
+        sidebarRef.current &&
+        event.target instanceof Node &&
+        !sidebarRef.current.contains(event.target) &&
+        isMobile &&
+        open &&
+        setOpen
+      ) {
+        setOpen(false)
       }
     }
 
@@ -30,58 +111,6 @@ export const Sidebar = ({
     }
   }, [open, setOpen, isMobile])
 
-  const getWidthStyle = (): React.CSSProperties => {
-    if (collapsible === 'none') {
-      return { width: `${width}px` }
-    }
-
-    if (collapsible === 'offcanvas') {
-      if (open) {
-        return isMobile ? { width: '33.333333%' } : { width: `${width}px` }
-      } else {
-        return isMobile ? { width: '0px' } : { width: '0px' }
-      }
-    }
-
-    if (collapsible == 'icon') {
-      if (open) {
-        return isMobile ? { width: `${width}px` } : { width: `${width}px` }
-      } else {
-        return isMobile ? { width: '0px' } : { width: '80px' }
-      }
-    }
-
-    return { width: `${width}px` }
-  }
-
-  const getGapClasses = () => {
-    if (collapsible === 'none') {
-      return 'gap-lg'
-    }
-
-    if (collapsible === 'offcanvas') {
-      return open ? 'gap-lg' : 'gap-sm'
-    }
-
-    if (collapsible === 'icon') {
-      return open ? 'gap-lg' : 'gap-sm'
-    }
-
-    return 'gap-lg'
-  }
-
-  const getPositionClasses = () => {
-    if ((collapsible === 'offcanvas' || collapsible === 'icon') && !open && isMobile) {
-      return 'absolute z-50 -translate-x-full'
-    }
-
-    if ((collapsible === 'offcanvas' || collapsible === 'icon') && open && isMobile) {
-      return 'absolute z-50'
-    }
-
-    return ''
-  }
-
   return (
     <div
       className={cn(
@@ -90,19 +119,18 @@ export const Sidebar = ({
         tone === 'primary' && 'bg-surface-background',
         tone === 'secondary' && 'bg-surface',
         tone === 'ghost' && 'bg-transparent',
-        getGapClasses(),
-        getPositionClasses(),
+        getGapClasses(layout),
+        getPositionClasses(layout),
         collapsible === 'offcanvas' && !open && 'border-none',
         open && 'p-md',
         collapsible === 'icon' && !open && 'py-md',
         isMobile && 'border-none',
-        side === 'left' ? 'border-r' : 'border-l',
+        side === 'left' && 'border-r',
+        side === 'right' && 'border-l',
       )}
       ref={sidebarRef}
-      style={getWidthStyle()}
+      style={getWidthStyle(layout)}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

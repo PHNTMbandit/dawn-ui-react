@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { ProgressBarProps } from './progress.types'
 
-export const ProgressBar = ({ className, children, ref, ...props }: ProgressBarProps) => {
+export function ProgressBar({ className, ref, ...props }: ProgressBarProps) {
   return (
     <div className="w-full">
       <div
@@ -10,12 +10,9 @@ export const ProgressBar = ({ className, children, ref, ...props }: ProgressBarP
           'h-3xs w-full grow rounded-full bg-accent-default/20 transition-colors ease-in-out',
           className,
         )}
-        data-slot="progress-bar"
         ref={ref}
         {...props}
-      >
-        {children}
-      </div>
+      />
     </div>
   )
 }

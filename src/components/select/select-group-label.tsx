@@ -1,9 +1,10 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
+
 import { cn } from '@/utils/cn'
 
 import type { SelectGroupLabelProps } from './select.types'
 
-export const SelectGroupLabel = ({ className, children, ref, ...props }: SelectGroupLabelProps) => {
+export function SelectGroupLabel({ className, ref, ...props }: SelectGroupLabelProps) {
   return (
     <BaseSelect.GroupLabel
       className={cn(
@@ -12,8 +13,6 @@ export const SelectGroupLabel = ({ className, children, ref, ...props }: SelectG
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseSelect.GroupLabel>
+    />
   )
 }

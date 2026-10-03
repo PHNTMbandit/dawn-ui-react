@@ -1,4 +1,4 @@
-import { CodeBlock as CodeBlockBase } from './code-block'
+import { CodeBlock as CodeBlockRoot } from './code-block'
 import { CodeBlockActions } from './code-block-actions'
 import { CodeBlockCopy } from './code-block-copy'
 import { CodeBlockDownload } from './code-block-download'
@@ -8,7 +8,7 @@ import { CodeBlockSelect } from './code-block-select'
 import { CodeBlockTabs } from './code-block-tabs'
 import { CodeBlockWindow } from './code-block-window'
 
-export const CodeBlock = Object.assign(CodeBlockBase, {
+const CodeBlock = Object.assign(CodeBlockRoot, {
   Actions: CodeBlockActions,
   Copy: CodeBlockCopy,
   Download: CodeBlockDownload,
@@ -40,3 +40,5 @@ export { CodeBlockName } from './code-block-name'
 export { CodeBlockSelect } from './code-block-select'
 export { CodeBlockTabs } from './code-block-tabs'
 export { CodeBlockWindow } from './code-block-window'
+
+export { CodeBlock }

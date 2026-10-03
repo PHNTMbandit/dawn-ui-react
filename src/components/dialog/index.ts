@@ -1,4 +1,4 @@
-import { Dialog as DialogBase } from './dialog'
+import { Dialog as DialogRoot } from './dialog'
 import { DialogClose } from './dialog-close'
 import { DialogContent } from './dialog-content'
 import { DialogDescription } from './dialog-description'
@@ -9,7 +9,7 @@ import { DialogPopup } from './dialog-popup'
 import { DialogTitle } from './dialog-title'
 import { DialogTrigger } from './dialog-trigger'
 
-export const Dialog = Object.assign(DialogBase, {
+const Dialog = Object.assign(DialogRoot, {
   Close: DialogClose,
   Content: DialogContent,
   Description: DialogDescription,
@@ -42,3 +42,5 @@ export { DialogPopup } from './dialog-popup'
 export { DialogTitle } from './dialog-title'
 export { DialogTrigger } from './dialog-trigger'
 export { DialogHelper } from './dialog.types'
+
+export { Dialog }

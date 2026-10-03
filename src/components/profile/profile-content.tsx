@@ -2,13 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { ProfileContentProps } from './profile.types'
 
-export const ProfileContent = ({
-  compact,
-  className,
-  children,
-  ref,
-  ...props
-}: ProfileContentProps) => {
+export function ProfileContent({ compact, className, ref, ...props }: ProfileContentProps) {
   return (
     <div
       className={cn(
@@ -18,8 +12,6 @@ export const ProfileContent = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

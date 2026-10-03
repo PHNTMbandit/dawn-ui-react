@@ -1,4 +1,4 @@
-import { Drawer as DrawerBase } from './drawer'
+import { Drawer as DrawerRoot } from './drawer'
 import { DrawerClose } from './drawer-close'
 import { DrawerContent } from './drawer-content'
 import { DrawerDescription } from './drawer-description'
@@ -8,15 +8,15 @@ import { DrawerProvider } from './drawer-provider'
 import { DrawerTitle } from './drawer-title'
 import { DrawerTrigger } from './drawer-trigger'
 
-export const Drawer = Object.assign(DrawerBase, {
+const Drawer = Object.assign(DrawerRoot, {
   Close: DrawerClose,
   Content: DrawerContent,
   Description: DrawerDescription,
-  Provider: DrawerProvider,
-  Trigger: DrawerTrigger,
-  Popup: DrawerPopup,
-  Title: DrawerTitle,
   Header: DrawerHeader,
+  Popup: DrawerPopup,
+  Provider: DrawerProvider,
+  Title: DrawerTitle,
+  Trigger: DrawerTrigger,
 })
 
 export type {
@@ -38,3 +38,5 @@ export { DrawerTrigger } from './drawer-trigger'
 export { DrawerPopup } from './drawer-popup'
 export { DrawerTitle } from './drawer-title'
 export { DrawerHeader } from './drawer-header'
+
+export { Drawer }

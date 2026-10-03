@@ -1,27 +1,27 @@
 import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
-import { scrollAreaVariants, type ScrollAreaProps } from './scroll-area.types'
+
 import { cn } from '@/utils/cn'
 
-export const ScrollArea = ({
-  defaultHeight = 200,
+import { scrollAreaVariants } from './scroll-area.types'
+import type { ScrollAreaProps } from './scroll-area.types'
+
+export function ScrollArea({
   orientation,
   variant,
   className,
   children,
   ref,
   ...props
-}: ScrollAreaProps) => {
+}: ScrollAreaProps) {
   return (
     <BaseScrollArea.Root
       className={cn(className, scrollAreaVariants({ orientation, variant }))}
       ref={ref}
-      style={{
-        height: orientation === 'vertical' ? `${defaultHeight}px` : '100%',
-      }}
       {...props}
     >
       <BaseScrollArea.Viewport
         data-viewport
+        tabIndex={0}
         className={cn(
           'flex h-full gap-xs overscroll-contain',
           orientation === 'horizontal' && 'flex-row pb-md',
@@ -39,7 +39,7 @@ export const ScrollArea = ({
         )}
         orientation={orientation!}
       >
-        <BaseScrollArea.Thumb className={'size-full rounded-full bg-accent-default shadow-xs'} />
+        <BaseScrollArea.Thumb className="size-full rounded-full bg-accent-default shadow-xs" />
       </BaseScrollArea.Scrollbar>
       <BaseScrollArea.Corner />
     </BaseScrollArea.Root>

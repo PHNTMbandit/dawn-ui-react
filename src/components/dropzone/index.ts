@@ -1,13 +1,14 @@
-import { Dropzone as DropzoneBase } from './dropzone'
+import { Dropzone as DropzoneRoot } from './dropzone'
 import { DropzoneActions } from './dropzone-actions'
 import { DropzoneClear } from './dropzone-clear'
 import { DropzoneConfirm } from './dropzone-confirm'
 import { DropzoneContainer } from './dropzone-container'
 import { DropzoneError } from './dropzone-error'
+import { DropzoneFileLimit } from './dropzone-file-limit'
 import { DropzoneFileSizeLimit } from './dropzone-file-size-limit'
 import { DropzoneFiles } from './dropzone-files'
 import { DropzoneFilesHeader } from './dropzone-files-header'
-import { DropzoneFilesList as DropzoneFileList } from './dropzone-files-list'
+import { DropzoneFilesList } from './dropzone-files-list'
 import { DropzoneFilesTitle } from './dropzone-files-title'
 import { DropzoneFormats } from './dropzone-formats'
 import { DropzoneHeading } from './dropzone-heading'
@@ -16,23 +17,24 @@ import { DropzoneInfo } from './dropzone-info'
 import { DropzoneSubtitle } from './dropzone-subtitle'
 import { DropzoneTrigger } from './dropzone-trigger'
 
-export const Dropzone = Object.assign(DropzoneBase, {
+const Dropzone = Object.assign(DropzoneRoot, {
+  Actions: DropzoneActions,
+  Clear: DropzoneClear,
+  Confirm: DropzoneConfirm,
   Container: DropzoneContainer,
   Error: DropzoneError,
-  FileList: DropzoneFileList,
+  FileLimit: DropzoneFileLimit,
   FileSizeLimit: DropzoneFileSizeLimit,
+  Files: DropzoneFiles,
+  FilesHeader: DropzoneFilesHeader,
+  FilesList: DropzoneFilesList,
+  FilesTitle: DropzoneFilesTitle,
   Formats: DropzoneFormats,
   Heading: DropzoneHeading,
   Icon: DropzoneIcon,
+  Info: DropzoneInfo,
   Subtitle: DropzoneSubtitle,
   Trigger: DropzoneTrigger,
-  Info: DropzoneInfo,
-  Files: DropzoneFiles,
-  FilesHeader: DropzoneFilesHeader,
-  FilesTitle: DropzoneFilesTitle,
-  Actions: DropzoneActions,
-  Confirm: DropzoneConfirm,
-  Clear: DropzoneClear,
 })
 
 export type {
@@ -71,3 +73,5 @@ export { DropzoneFilesTitle } from './dropzone-files-title'
 export { DropzoneActions } from './dropzone-actions'
 export { DropzoneConfirm } from './dropzone-confirm'
 export { DropzoneClear } from './dropzone-clear'
+
+export { Dropzone }

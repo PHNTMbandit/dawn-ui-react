@@ -1,12 +1,9 @@
-import { Button } from '../button'
-import { PreviewCard } from './preview-card'
-import { PreviewCardPopup } from './preview-card-popup'
-import { PreviewCardTrigger } from './preview-card-trigger'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Button } from '../button'
+import { PreviewCard } from './index'
+
 export default {
-  title: 'Components/Preview Card',
   component: PreviewCard,
   parameters: {
     docs: {
@@ -18,13 +15,13 @@ export default {
   render: (args) => (
     <PreviewCard {...args}>
       The principles of good{' '}
-      <PreviewCardTrigger href="https://en.wikipedia.org/wiki/Typography">
+      <PreviewCard.Trigger href="https://en.wikipedia.org/wiki/Typography">
         <Button variant={'link'} tone="neutral">
           typography
         </Button>
-      </PreviewCardTrigger>{' '}
+      </PreviewCard.Trigger>{' '}
       remain in the digital age.
-      <PreviewCardPopup>
+      <PreviewCard.Popup>
         <div className="flex w-min flex-col gap-2xs p-xs">
           <img
             width="224"
@@ -38,9 +35,10 @@ export default {
             language clear, visually appealing, and effective in communication.
           </p>
         </div>
-      </PreviewCardPopup>
+      </PreviewCard.Popup>
     </PreviewCard>
   ),
+  title: 'Components/Preview Card',
 } satisfies Meta<typeof PreviewCard>
 
 type Story = StoryObj<typeof PreviewCard>

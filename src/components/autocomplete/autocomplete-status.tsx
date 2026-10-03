@@ -1,14 +1,10 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
+
 import { cn } from '@/utils/cn'
 
 import type { AutocompleteStatusProps } from './autocomplete.types'
 
-export const AutocompleteStatus = ({
-  className,
-  children,
-  ref,
-  ...props
-}: AutocompleteStatusProps) => {
+export function AutocompleteStatus({ className, ref, ...props }: AutocompleteStatusProps) {
   return (
     <BaseAutocomplete.Status
       className={cn(
@@ -17,8 +13,6 @@ export const AutocompleteStatus = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseAutocomplete.Status>
+    />
   )
 }

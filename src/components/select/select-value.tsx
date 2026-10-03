@@ -1,9 +1,10 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
+
 import { cn } from '@/utils/cn'
 
 import type { SelectValueProps } from './select.types'
 
-export const SelectValue = ({ className, children, ref, ...props }: SelectValueProps) => {
+export function SelectValue({ className, ref, ...props }: SelectValueProps) {
   return (
     <BaseSelect.Value
       data-value
@@ -13,8 +14,6 @@ export const SelectValue = ({ className, children, ref, ...props }: SelectValueP
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseSelect.Value>
+    />
   )
 }

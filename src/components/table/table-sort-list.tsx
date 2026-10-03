@@ -1,33 +1,29 @@
-import { useTableContext } from './table-context'
-import { TableSortChip } from './table-sort-chip'
 import { cn } from '@/utils/cn'
 
+import { useTableContext } from './table-feature-context'
+import { TableSortChip } from './table-sort-chip'
 import type { TableSortListProps } from './table.types'
 
-export const TableSortList = ({ className, children, ref, ...props }: TableSortListProps) => {
+export function TableSortList({ className, children, ref, ...props }: TableSortListProps) {
   const table = useTableContext()
 
   if (!table.getAllColumns().some((column) => column.getIsSorted())) {
-    return null
+    return undefined
   }
 
   return (
     <table.Subscribe selector={(state) => state.sorting}>
       {() => (
-        <ul className={cn('flex flex-wrap items-center gap-xs', className)} ref={ref} {...props}>
-          {children && <li className="contents">{children}</li>}
+        <div className={cn('flex flex-wrap items-center gap-xs', className)} ref={ref} {...props}>
+          {children}
           {table.getAllColumns().map((column) => {
             if (!column.getIsSorted()) {
-              return null
+              return undefined
             }
 
-            return (
-              <li className="contents" key={column.id}>
-                <TableSortChip column={column} />
-              </li>
-            )
+            return <TableSortChip key={column.id} column={column} />
           })}
-        </ul>
+        </div>
       )}
     </table.Subscribe>
   )

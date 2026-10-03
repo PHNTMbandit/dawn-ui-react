@@ -1,10 +1,11 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { CheckIcon } from '@phosphor-icons/react'
+
 import { cn } from '@/utils/cn'
 
 import type { ComboboxItemProps } from './combobox.types'
 
-export const ComboboxItem = ({ className, children, ref, ...props }: ComboboxItemProps) => {
+export function ComboboxItem({ className, children, ref, ...props }: ComboboxItemProps) {
   return (
     <BaseCombobox.Item
       className={cn(
@@ -15,7 +16,7 @@ export const ComboboxItem = ({ className, children, ref, ...props }: ComboboxIte
       {...props}
     >
       <span className="col-start-1">{children}</span>
-      <BaseCombobox.ItemIndicator className={'col-start-2 place-self-end self-center'}>
+      <BaseCombobox.ItemIndicator className="col-start-2 place-self-end self-center">
         <CheckIcon className="size-sm" weight="bold" />
       </BaseCombobox.ItemIndicator>
     </BaseCombobox.Item>

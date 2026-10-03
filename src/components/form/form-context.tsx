@@ -1,4 +1,5 @@
 import { createFormHook } from '@tanstack/react-form'
+
 import {
   FieldCheckbox,
   FieldDescription,
@@ -29,18 +30,17 @@ import { FormSubmit } from './form-submit'
 export { fieldContext, formContext, useFieldContext, useFormContext } from './form-contexts'
 
 export const { useAppForm, withFieldGroup, withForm, useTypedAppFormContext } = createFormHook({
-  fieldContext,
   fieldComponents: {
     FieldCheckbox,
     FieldDescription,
     FieldErrors,
-    FieldRow,
     FieldInput,
     FieldInputGroup,
     FieldInputGroupInput,
     FieldLabel,
     FieldRadio,
     FieldRadioGroup,
+    FieldRow,
     FieldSelect,
     FieldSet,
     FieldSlider,
@@ -48,14 +48,15 @@ export const { useAppForm, withFieldGroup, withForm, useTypedAppFormContext } = 
     FieldTextArea,
     FieldToggle,
   },
-  formContext,
+  fieldContext,
   formComponents: {
     FormErrors,
     FormFooter,
     FormReset,
     FormSet,
-    FormSetHeading,
     FormSetContent,
+    FormSetHeading,
     FormSubmit,
   },
+  formContext,
 })

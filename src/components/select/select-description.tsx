@@ -2,12 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { SelectDescriptionProps } from './select.types'
 
-export const SelectDescription = ({
-  className,
-  children,
-  ref,
-  ...props
-}: SelectDescriptionProps) => {
+export function SelectDescription({ className, ref, ...props }: SelectDescriptionProps) {
   return (
     <span
       className={cn(
@@ -16,8 +11,6 @@ export const SelectDescription = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </span>
+    />
   )
 }

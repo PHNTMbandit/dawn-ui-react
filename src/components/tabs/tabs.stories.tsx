@@ -1,65 +1,66 @@
 import { CodeIcon, EyeIcon } from '@phosphor-icons/react'
-import { Tabs } from './tabs'
-import { TabsIndicator } from './tabs-indicator'
-import { TabsList } from './tabs-list'
-import { TabsPanel } from './tabs-panel'
-import { TabsTab } from './tabs-tab'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Tabs } from './index'
+
 export default {
-  title: 'Components/Tabs',
-  component: Tabs,
-  subcomponents: { TabsIndicator, TabsList, TabsPanel, TabsTab },
-  parameters: {
-    subtitle: 'A component for organizing content into separate views',
-    description: {
-      component:
-        'The Tabs component allows users to navigate between different sections of content within the same context. Each tab corresponds to a panel that displays related information when selected.',
-    },
-  },
-  args: {
-    size: 'medium',
-    variant: 'default',
-    fill: true,
-  },
   argTypes: {
-    size: {
-      control: { type: 'inline-radio' },
-      options: ['small', 'medium', 'large'],
-      description: 'Size of the tabs and indicator.',
-      table: {
-        type: { summary: 'small | medium | large' },
-        defaultValue: { summary: 'medium' },
-      },
-    },
-    tone: {
-      control: { type: 'inline-radio' },
-      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
-      description: 'Color tone of the tabs.',
-      table: {
-        type: { summary: 'brand | accent | neutral | error | info | success | warning' },
-        defaultValue: { summary: 'brand' },
-      },
-    },
-    variant: {
-      control: { type: 'inline-radio' },
-      options: ['default', 'ghost', 'underline'],
-      description: 'Visual style of the tabs list.',
-      table: {
-        type: { summary: 'default | ghost | underline' },
-        defaultValue: { summary: 'default' },
-      },
-    },
     fill: {
       control: 'boolean',
       description: 'Whether tabs should fill available width.',
       table: {
-        type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
+        type: { summary: 'boolean' },
+      },
+    },
+    size: {
+      control: { type: 'inline-radio' },
+      description: 'Size of the tabs and indicator.',
+      options: ['small', 'medium', 'large'],
+      table: {
+        defaultValue: { summary: 'medium' },
+        type: { summary: 'small | medium | large' },
+      },
+    },
+    tone: {
+      control: { type: 'inline-radio' },
+      description: 'Color tone of the tabs.',
+      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
+      table: {
+        defaultValue: { summary: 'brand' },
+        type: { summary: 'brand | accent | neutral | error | info | success | warning' },
+      },
+    },
+    variant: {
+      control: { type: 'inline-radio' },
+      description: 'Visual style of the tabs list.',
+      options: ['default', 'ghost', 'underline'],
+      table: {
+        defaultValue: { summary: 'default' },
+        type: { summary: 'default | ghost | underline' },
       },
     },
   },
+  args: {
+    fill: true,
+    size: 'medium',
+    variant: 'default',
+  },
+  component: Tabs,
+  parameters: {
+    description: {
+      component:
+        'The Tabs component allows users to navigate between different sections of content within the same context. Each tab corresponds to a panel that displays related information when selected.',
+    },
+    subtitle: 'A component for organizing content into separate views',
+  },
+  subcomponents: {
+    TabsIndicator: Tabs.Indicator,
+    TabsList: Tabs.List,
+    TabsPanel: Tabs.Panel,
+    TabsTab: Tabs.Tab,
+  },
+  title: 'Components/Tabs',
 } satisfies Meta<typeof Tabs>
 
 type Story = StoryObj<typeof Tabs>
@@ -67,113 +68,103 @@ type Story = StoryObj<typeof Tabs>
 const BasicTemplate = (args: Story['args']) => (
   <div className="w-[500px]">
     <Tabs defaultValue="overview" {...args}>
-      <TabsList>
-        <TabsTab value="overview">Overview</TabsTab>
-        <TabsTab value="details">Details</TabsTab>
-        <TabsTab value="activity">Activity</TabsTab>
-        <TabsIndicator />
-      </TabsList>
-      <TabsPanel value="overview" className="rounded-md border border-surface-3 bg-surface p-md">
+      <Tabs.List>
+        <Tabs.Tab value="overview">Overview</Tabs.Tab>
+        <Tabs.Tab value="details">Details</Tabs.Tab>
+        <Tabs.Tab value="activity">Activity</Tabs.Tab>
+        <Tabs.Indicator />
+      </Tabs.List>
+      <Tabs.Panel value="overview" className="rounded-md border border-surface-3 bg-surface p-md">
         <p className="style-text-prose-0 text-on-surface">Overview content for this workspace.</p>
-      </TabsPanel>
-      <TabsPanel value="details" className="rounded-md border border-surface-3 bg-surface p-md">
+      </Tabs.Panel>
+      <Tabs.Panel value="details" className="rounded-md border border-surface-3 bg-surface p-md">
         <p className="style-text-prose-0 text-on-surface">Detailed metadata and settings.</p>
-      </TabsPanel>
-      <TabsPanel value="activity" className="rounded-md border border-surface-3 bg-surface p-md">
+      </Tabs.Panel>
+      <Tabs.Panel value="activity" className="rounded-md border border-surface-3 bg-surface p-md">
         <p className="style-text-prose-0 text-on-surface">Recent activity appears here.</p>
-      </TabsPanel>
+      </Tabs.Panel>
     </Tabs>
   </div>
 )
 
 export const Playground: Story = {
-  render: (args) => {
-    return BasicTemplate(args)
-  },
+  render: (args) => BasicTemplate(args),
 }
 
 export const VariantDefault: Story = {
   args: {
-    variant: 'default',
     fill: true,
+    variant: 'default',
   },
-  render: (args) => {
-    return BasicTemplate(args)
-  },
+  render: (args) => BasicTemplate(args),
 }
 
 export const VariantUnderline: Story = {
   args: {
-    variant: 'underline',
     fill: true,
+    variant: 'underline',
   },
-  render: (args) => {
-    return BasicTemplate(args)
-  },
+  render: (args) => BasicTemplate(args),
 }
 
 export const VariantGhost: Story = {
   args: {
-    variant: 'ghost',
     fill: true,
+    variant: 'ghost',
   },
-  render: (args) => {
-    return BasicTemplate(args)
-  },
+  render: (args) => BasicTemplate(args),
 }
 
 export const BehaviorFitContent: Story = {
   args: {
-    variant: 'default',
     fill: false,
+    variant: 'default',
   },
   render: (args) => BasicTemplate(args),
 }
 
 export const CompositionPreviewCode: Story = {
   args: {
-    variant: 'default',
     fill: false,
+    variant: 'default',
   },
-  render: (args) => {
-    return (
-      <div className="w-[500px]">
-        <Tabs defaultValue="preview" {...args}>
-          <TabsList>
-            <TabsTab value="preview">
-              <EyeIcon weight="bold" />
-              Preview
-            </TabsTab>
-            <TabsTab value="code">
-              <CodeIcon weight="bold" />
-              Code
-            </TabsTab>
-            <TabsIndicator />
-          </TabsList>
-          <TabsPanel value="preview" className="rounded-md border border-surface-3 bg-surface p-md">
-            <p className="style-text-prose-0">Live component preview area.</p>
-          </TabsPanel>
-          <TabsPanel value="code" className="rounded-md border border-surface-3 bg-surface p-md">
-            <pre className="overflow-x-auto style-text-default--1 text-on-surface-muted">
-              {`<Tabs defaultValue="preview">
+  render: (args) => (
+    <div className="w-[500px]">
+      <Tabs defaultValue="preview" {...args}>
+        <Tabs.List>
+          <Tabs.Tab value="preview">
+            <EyeIcon weight="bold" />
+            Preview
+          </Tabs.Tab>
+          <Tabs.Tab value="code">
+            <CodeIcon weight="bold" />
+            Code
+          </Tabs.Tab>
+          <Tabs.Indicator />
+        </Tabs.List>
+        <Tabs.Panel value="preview" className="rounded-md border border-surface-3 bg-surface p-md">
+          <p className="style-text-prose-0">Live component preview area.</p>
+        </Tabs.Panel>
+        <Tabs.Panel value="code" className="rounded-md border border-surface-3 bg-surface p-md">
+          <pre className="overflow-x-auto style-text-default--1 text-on-surface-muted">
+            {`<Tabs defaultValue="preview">
   <TabsList>
     <TabsTab value="preview">Preview</TabsTab>
     <TabsTab value="code">Code</TabsTab>
     <TabsIndicator />
   </TabsList>
 </Tabs>`}
-            </pre>
-          </TabsPanel>
-        </Tabs>
-      </div>
-    )
-  },
+          </pre>
+        </Tabs.Panel>
+      </Tabs>
+    </div>
+  ),
 }
 
 export const CompositionSettingsPage: Story = {
   args: {
-    variant: 'underline',
     fill: false,
+    variant: 'underline',
   },
   render: (args) => (
     <div className="w-[500px] space-y-md rounded-lg border border-surface-3 bg-surface p-md">
@@ -184,21 +175,30 @@ export const CompositionSettingsPage: Story = {
         </p>
       </header>
       <Tabs defaultValue="general" {...args}>
-        <TabsList>
-          <TabsTab value="general">General</TabsTab>
-          <TabsTab value="members">Members</TabsTab>
-          <TabsTab value="billing">Billing</TabsTab>
-          <TabsIndicator />
-        </TabsList>
-        <TabsPanel value="general" className="rounded-md border border-surface-3 bg-surface-2 p-md">
+        <Tabs.List>
+          <Tabs.Tab value="general">General</Tabs.Tab>
+          <Tabs.Tab value="members">Members</Tabs.Tab>
+          <Tabs.Tab value="billing">Billing</Tabs.Tab>
+          <Tabs.Indicator />
+        </Tabs.List>
+        <Tabs.Panel
+          value="general"
+          className="rounded-md border border-surface-3 bg-surface-2 p-md"
+        >
           <p className="style-text-prose-0">Workspace name, URL and locale preferences.</p>
-        </TabsPanel>
-        <TabsPanel value="members" className="rounded-md border border-surface-3 bg-surface-2 p-md">
+        </Tabs.Panel>
+        <Tabs.Panel
+          value="members"
+          className="rounded-md border border-surface-3 bg-surface-2 p-md"
+        >
           <p className="style-text-prose-0">Invite and manage team member permissions.</p>
-        </TabsPanel>
-        <TabsPanel value="billing" className="rounded-md border border-surface-3 bg-surface-2 p-md">
+        </Tabs.Panel>
+        <Tabs.Panel
+          value="billing"
+          className="rounded-md border border-surface-3 bg-surface-2 p-md"
+        >
           <p className="style-text-prose-0">Plans, invoices and payment methods.</p>
-        </TabsPanel>
+        </Tabs.Panel>
       </Tabs>
     </div>
   ),

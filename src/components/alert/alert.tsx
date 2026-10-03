@@ -1,10 +1,8 @@
-import { type AlertProps, alertVariants } from './alert.types'
 import { cn } from '@/utils/cn'
 
-export const Alert = ({ tone, className, children, ref, ...props }: AlertProps) => {
-  return (
-    <div className={cn(alertVariants({ tone, className }))} ref={ref} {...props}>
-      {children}
-    </div>
-  )
+import { alertVariants } from './alert.types'
+import type { AlertProps } from './alert.types'
+
+export function Alert({ tone, className, ref, ...props }: AlertProps) {
+  return <div className={cn(alertVariants({ className, tone }))} ref={ref} {...props} />
 }

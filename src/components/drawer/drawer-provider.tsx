@@ -2,11 +2,11 @@ import { Drawer as BaseDrawer } from '@base-ui/react'
 
 import type { DrawerProviderProps } from './drawer.types'
 
-export const DrawerProvider = ({ children, ...props }: DrawerProviderProps) => {
+export function DrawerProvider({ children, ...props }: DrawerProviderProps) {
   return (
     <BaseDrawer.Provider {...props}>
       <BaseDrawer.IndentBackground />
-      <BaseDrawer.Indent className={'size-full'}>{children}</BaseDrawer.Indent>
+      <BaseDrawer.Indent>{children}</BaseDrawer.Indent>
     </BaseDrawer.Provider>
   )
 }

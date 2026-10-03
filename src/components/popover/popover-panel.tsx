@@ -1,14 +1,10 @@
 import { Popover as BasePopover } from '@base-ui/react/popover'
-import { cn } from '../../utils/cn'
-import { popoverPanelVariants, type PopoverPanelProps } from './popover.types'
 
-export const PopoverPanel = ({
-  elevation,
-  className,
-  ref,
-  children,
-  ...props
-}: PopoverPanelProps) => {
+import { cn } from '../../utils/cn'
+import { popoverPanelVariants } from './popover.types'
+import type { PopoverPanelProps } from './popover.types'
+
+export function PopoverPanel({ elevation, className, ref, children, ...props }: PopoverPanelProps) {
   return (
     <BasePopover.Portal>
       <BasePopover.Positioner
@@ -19,7 +15,7 @@ export const PopoverPanel = ({
         sideOffset={8}
         {...props}
       >
-        <BasePopover.Popup className={popoverPanelVariants({ elevation, className })}>
+        <BasePopover.Popup className={popoverPanelVariants({ className, elevation })}>
           <BasePopover.Arrow className="flex transition-[left] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180" />
           <BasePopover.Viewport
             className={cn(

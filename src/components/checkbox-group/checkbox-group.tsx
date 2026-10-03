@@ -1,10 +1,11 @@
 import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react'
 import React from 'react'
+
 import { cn } from '@/utils/cn'
 
 import type { CheckboxGroupProps } from './checkbox-group.types'
 
-export const CheckboxGroup = ({ className, children, ref, ...props }: CheckboxGroupProps) => {
+export function CheckboxGroup({ className, ref, ...props }: CheckboxGroupProps) {
   const id = React.useId()
   return (
     <BaseCheckboxGroup
@@ -12,8 +13,6 @@ export const CheckboxGroup = ({ className, children, ref, ...props }: CheckboxGr
       className={cn('flex flex-col items-start gap-2xs', className)}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseCheckboxGroup>
+    />
   )
 }

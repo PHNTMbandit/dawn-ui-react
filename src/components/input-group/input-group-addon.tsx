@@ -1,16 +1,8 @@
-import { inputGroupAddonVariants, type InputGroupAddonProps } from './input-group.types'
 import { cn } from '@/utils/cn'
 
-export const InputGroupAddon = ({
-  size,
-  className,
-  children,
-  ref,
-  ...props
-}: InputGroupAddonProps) => {
-  return (
-    <div className={cn(inputGroupAddonVariants({ size }), className)} ref={ref} {...props}>
-      {children}
-    </div>
-  )
+import { inputGroupAddonVariants } from './input-group.types'
+import type { InputGroupAddonProps } from './input-group.types'
+
+export function InputGroupAddon({ size, className, ref, ...props }: InputGroupAddonProps) {
+  return <div className={cn(inputGroupAddonVariants({ size }), className)} ref={ref} {...props} />
 }

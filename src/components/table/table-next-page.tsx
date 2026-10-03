@@ -1,20 +1,20 @@
 import { CaretRightIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { useTableContext } from './table-context'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useTableContext } from './table-feature-context'
 import type { TableNextPageProps } from './table.types'
 
-export const TableNextPage = ({ className, children, ref, ...props }: TableNextPageProps) => {
-  const table = useTableContext()
-
-  const handleClick = () => {
-    table.nextPage()
-  }
+export function TableNextPage({ className, children, ref, ...props }: TableNextPageProps) {
+  const table = useTableContext(),
+    handleClick = () => {
+      table.nextPage()
+    }
 
   return (
     <Button
-      aria-label="Next page"
+      aria-label="Go to next page"
       className={cn('shrink-0', className)}
       disabled={!table.getCanNextPage()}
       onClick={handleClick}

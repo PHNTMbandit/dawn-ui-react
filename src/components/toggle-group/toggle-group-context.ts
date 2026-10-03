@@ -1,12 +1,14 @@
 import { createContext, useContext } from 'react'
 
-export type ToggleGroupContextType = {
+interface ToggleGroupContextType {
   size?: 'small' | 'medium' | 'large'
 }
 
-export const ToggleGroupContext = createContext<ToggleGroupContextType | undefined>(undefined)
+const ToggleGroupContext = createContext<ToggleGroupContextType | undefined>(undefined),
+  useToggleGroupContext = () => {
+    const context = useContext(ToggleGroupContext)
+    return context
+  }
 
-export const useToggleGroupContext = () => {
-  const context = useContext(ToggleGroupContext)
-  return context
-}
+export { ToggleGroupContext, useToggleGroupContext }
+export type { ToggleGroupContextType }

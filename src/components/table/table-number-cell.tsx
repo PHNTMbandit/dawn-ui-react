@@ -1,9 +1,9 @@
-import { useCellContext } from './table-context'
 import { cn } from '@/utils/cn'
 
+import { useCellContext } from './table-feature-context'
 import type { TableNumberCellProps } from './table.types'
 
-export const TableNumberCell = ({ className, children, ref, ...props }: TableNumberCellProps) => {
+export function TableNumberCell({ className, children, ref, ...props }: TableNumberCellProps) {
   const cell = useCellContext<number>()
 
   return (

@@ -1,57 +1,51 @@
 import { BellIcon, ChartBarIcon, UserIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import React from 'react'
+
 import { Avatar, AvatarImage } from '../avatar'
 import { Button } from '../button'
-import { Popover } from './popover'
-import { PopoverContent } from './popover-content'
-import { PopoverDescription } from './popover-description'
-import { PopoverHeader } from './popover-header'
-import { PopoverPanel } from './popover-panel'
-import { PopoverTitle } from './popover-title'
-import { PopoverTrigger } from './popover-trigger'
-import { popoverHandle } from './popover.types'
-
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Popover, popoverHandle } from './index'
 
 export default {
-  title: 'Components/Popover',
   component: Popover,
-  subcomponents: {
-    PopoverDescription,
-    PopoverPanel,
-    PopoverTitle,
-    PopoverTrigger,
-  },
   parameters: {
     docs: {
-      subtitle: 'A component for displaying contextual overlays.',
       description: {
         component:
           'The Popover component provides a way to display additional information or actions in a floating container that appears on user interaction, such as clicking or hovering over an element. It is useful for showing tooltips, menus, or other contextual content without cluttering the main interface.',
       },
+      subtitle: 'A component for displaying contextual overlays.',
     },
   },
-
   render: (args) => (
     <Popover {...args}>
-      <PopoverTrigger nativeButton={false}>
-        <span className="style-text-default-0 hover:cursor-pointer hover:underline">Click me</span>
-      </PopoverTrigger>
-      <PopoverPanel side="top">
-        <PopoverHeader>
-          <PopoverTitle>Popover Title</PopoverTitle>
-          <PopoverDescription>
+      <Popover.Trigger>
+        <button type="button" className="style-text-default-0 hover:cursor-pointer hover:underline">
+          Click me
+        </button>
+      </Popover.Trigger>
+      <Popover.Panel side="top">
+        <Popover.Header>
+          <Popover.Title>Popover Title</Popover.Title>
+          <Popover.Description>
             Popover content goes here. Popover content goes here. Popover content goes here.{' '}
-          </PopoverDescription>
-        </PopoverHeader>
-        <PopoverContent>
+          </Popover.Description>
+        </Popover.Header>
+        <Popover.Content>
           <Button size="medium" className={'w-full'}>
             Action
           </Button>
-        </PopoverContent>
-      </PopoverPanel>
+        </Popover.Content>
+      </Popover.Panel>
     </Popover>
   ),
+  subcomponents: {
+    PopoverDescription: Popover.Description,
+    PopoverPanel: Popover.Panel,
+    PopoverTitle: Popover.Title,
+    PopoverTrigger: Popover.Trigger,
+  },
+  title: 'Components/Popover',
 } satisfies Meta<typeof Popover>
 
 type Story = StoryObj<typeof Popover>
@@ -60,25 +54,25 @@ export const Default: Story = {}
 export const Animated: Story = {
   render: (args) => (
     <div className="flex gap-2xs">
-      <PopoverTrigger handle={popoverHandle} payload={NotificationsPanel}>
-        <Button aria-label="Notifications" size="iconMedium" variant={'ghost'} tone="neutral">
+      <Popover.Trigger handle={popoverHandle} payload={NotificationsPanel}>
+        <Button aria-label="Notifications" size="iconMedium" variant="ghost" tone="neutral">
           <BellIcon weight="bold" />
         </Button>
-      </PopoverTrigger>
-      <PopoverTrigger handle={popoverHandle} payload={ProfilePanel} nativeButton={false}>
-        <Button aria-label="Profile" size="iconMedium" variant={'ghost'} tone="neutral">
+      </Popover.Trigger>
+      <Popover.Trigger handle={popoverHandle} payload={ProfilePanel} nativeButton={false}>
+        <Button aria-label="Profile" size="iconMedium" variant="ghost" tone="neutral">
           <UserIcon weight="bold" />
         </Button>
-      </PopoverTrigger>
-      <PopoverTrigger handle={popoverHandle} payload={ActivityPanel} nativeButton={false}>
-        <Button aria-label="Activity" size="iconMedium" variant={'ghost'} tone="neutral">
+      </Popover.Trigger>
+      <Popover.Trigger handle={popoverHandle} payload={ActivityPanel} nativeButton={false}>
+        <Button aria-label="Activity" size="iconMedium" variant="ghost" tone="neutral">
           <ChartBarIcon weight="bold" />
         </Button>
-      </PopoverTrigger>
+      </Popover.Trigger>
       <Popover handle={popoverHandle} {...args}>
         {({ payload }) => {
           const Payload = payload as React.ComponentType | undefined
-          return <PopoverPanel side="top">{Payload !== undefined && <Payload />}</PopoverPanel>
+          return <Popover.Panel side="top">{Payload !== undefined && <Payload />}</Popover.Panel>
         }}
       </Popover>
     </div>
@@ -89,58 +83,73 @@ export const Elevations: Story = {
   render: (args) => (
     <div className="flex items-center gap-sm">
       <Popover {...args}>
-        <PopoverTrigger nativeButton={false}>
-          <span className="style-text-default-0 hover:cursor-pointer hover:underline">Low</span>
-        </PopoverTrigger>
-        <PopoverPanel side="top" elevation={'low'}>
-          <PopoverHeader>
-            <PopoverTitle>Popover Title</PopoverTitle>
-            <PopoverDescription>
+        <Popover.Trigger>
+          <button
+            type="button"
+            className="style-text-default-0 hover:cursor-pointer hover:underline"
+          >
+            Low
+          </button>
+        </Popover.Trigger>
+        <Popover.Panel side="top" elevation="low">
+          <Popover.Header>
+            <Popover.Title>Popover Title</Popover.Title>
+            <Popover.Description>
               Popover content goes here. Popover content goes here. Popover content goes here.{' '}
-            </PopoverDescription>
-          </PopoverHeader>
-          <PopoverContent>
-            <Button size="medium" className={'w-full'}>
+            </Popover.Description>
+          </Popover.Header>
+          <Popover.Content>
+            <Button size="medium" className="w-full">
               Action
             </Button>
-          </PopoverContent>
-        </PopoverPanel>
+          </Popover.Content>
+        </Popover.Panel>
       </Popover>
       <Popover {...args}>
-        <PopoverTrigger nativeButton={false}>
-          <span className="style-text-default-0 hover:cursor-pointer hover:underline">Medium</span>
-        </PopoverTrigger>
-        <PopoverPanel side="top" elevation={'medium'}>
-          <PopoverHeader>
-            <PopoverTitle>Popover Title</PopoverTitle>
-            <PopoverDescription>
+        <Popover.Trigger>
+          <button
+            type="button"
+            className="style-text-default-0 hover:cursor-pointer hover:underline"
+          >
+            Medium
+          </button>
+        </Popover.Trigger>
+        <Popover.Panel side="top" elevation="medium">
+          <Popover.Header>
+            <Popover.Title>Popover Title</Popover.Title>
+            <Popover.Description>
               Popover content goes here. Popover content goes here. Popover content goes here.{' '}
-            </PopoverDescription>
-          </PopoverHeader>
-          <PopoverContent>
-            <Button size="medium" className={'w-full'}>
+            </Popover.Description>
+          </Popover.Header>
+          <Popover.Content>
+            <Button size="medium" className="w-full">
               Action
             </Button>
-          </PopoverContent>
-        </PopoverPanel>
+          </Popover.Content>
+        </Popover.Panel>
       </Popover>
       <Popover {...args}>
-        <PopoverTrigger nativeButton={false}>
-          <span className="style-text-default-0 hover:cursor-pointer hover:underline">High</span>
-        </PopoverTrigger>
-        <PopoverPanel side="top" elevation={'high'}>
-          <PopoverHeader>
-            <PopoverTitle>Popover Title</PopoverTitle>
-            <PopoverDescription>
+        <Popover.Trigger>
+          <button
+            type="button"
+            className="style-text-default-0 hover:cursor-pointer hover:underline"
+          >
+            High
+          </button>
+        </Popover.Trigger>
+        <Popover.Panel side="top" elevation="high">
+          <Popover.Header>
+            <Popover.Title>Popover Title</Popover.Title>
+            <Popover.Description>
               Popover content goes here. Popover content goes here. Popover content goes here.{' '}
-            </PopoverDescription>
-          </PopoverHeader>
-          <PopoverContent>
-            <Button size="medium" className={'w-full'}>
+            </Popover.Description>
+          </Popover.Header>
+          <Popover.Content>
+            <Button size="medium" className="w-full">
               Action
             </Button>
-          </PopoverContent>
-        </PopoverPanel>
+          </Popover.Content>
+        </Popover.Panel>
       </Popover>
     </div>
   ),
@@ -148,17 +157,17 @@ export const Elevations: Story = {
 
 function NotificationsPanel() {
   return (
-    <React.Fragment>
-      <PopoverTitle>Notifications</PopoverTitle>
-      <PopoverDescription>You are all caught up. Good job!</PopoverDescription>
-    </React.Fragment>
+    <>
+      <Popover.Title>Notifications</Popover.Title>
+      <Popover.Description>You are all caught up. Good job!</Popover.Description>
+    </>
   )
 }
 
 function ProfilePanel() {
   return (
     <div className="-mx-2xs grid grid-cols-[auto_auto] gap-x-xs">
-      <PopoverTitle>Jason Eventon</PopoverTitle>
+      <Popover.Title>Jason Eventon</Popover.Title>
       <Avatar>
         <AvatarImage
           src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=128&h=128&dpr=2&q=80"
@@ -182,11 +191,11 @@ function ProfilePanel() {
 
 function ActivityPanel() {
   return (
-    <React.Fragment>
-      <PopoverTitle className="m-0 text-base font-medium">Activity</PopoverTitle>
-      <PopoverDescription className="m-0 text-base">
+    <>
+      <Popover.Title className="m-0 text-base font-medium">Activity</Popover.Title>
+      <Popover.Description className="m-0 text-base">
         Nothing interesting happened recently.
-      </PopoverDescription>
-    </React.Fragment>
+      </Popover.Description>
+    </>
   )
 }

@@ -1,9 +1,9 @@
-import { useCellContext } from './table-context'
 import { cn } from '@/utils/cn'
 
+import { useCellContext } from './table-feature-context'
 import type { TableDateCellProps } from './table.types'
 
-export const TableDateCell = ({ className, children, ref, ...props }: TableDateCellProps) => {
+export function TableDateCell({ className, children, ref, ...props }: TableDateCellProps) {
   const cell = useCellContext<Date>()
 
   return (

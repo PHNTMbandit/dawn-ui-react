@@ -2,14 +2,12 @@ import { cn } from '@/utils/cn'
 
 import type { DropzoneInfoProps } from './dropzone.types'
 
-export const DropzoneInfo = ({ className, children, ref, ...props }: DropzoneInfoProps) => {
+export function DropzoneInfo({ className, ref, ...props }: DropzoneInfoProps) {
   return (
     <div
-      className={cn('flex flex-col items-center justify-center gap-2xs', className)}
+      className={cn('flex flex-col items-center justify-center gap-sm', className)}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

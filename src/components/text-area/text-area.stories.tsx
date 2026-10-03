@@ -1,25 +1,22 @@
-import { TextArea } from './text-area'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { TextArea } from './text-area'
+
 export default {
-  title: 'Components/Text Area',
-  component: TextArea,
-  parameters: {
-    subtitle: 'A multi-line text input field for user input.',
-    description: {
-      component:
-        'The TextArea component provides a multi-line input field that allows users to enter and edit larger amounts of text. It supports visual variants, max length feedback, and disabled states for form workflows.',
-    },
-  },
   argTypes: {
-    variant: {
-      control: { type: 'inline-radio' },
-      options: ['primary', 'secondary'],
-      description: 'Visual style for the textarea container.',
+    disabled: {
+      control: 'boolean',
+      description: 'Disables editing and interactions.',
       table: {
-        type: { summary: 'primary | secondary' },
-        defaultValue: { summary: 'primary' },
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' },
+      },
+    },
+    maxLength: {
+      control: { max: 1000, min: 1, step: 1, type: 'number' },
+      description: 'Maximum characters allowed. Shows character counter when set.',
+      table: {
+        type: { summary: 'number' },
       },
     },
     placeholder: {
@@ -29,36 +26,39 @@ export default {
         type: { summary: 'string' },
       },
     },
-    maxLength: {
-      control: { type: 'number', min: 1, max: 1000, step: 1 },
-      description: 'Maximum characters allowed. Shows character counter when set.',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
     rows: {
-      control: { type: 'number', min: 2, max: 12, step: 1 },
+      control: { max: 12, min: 2, step: 1, type: 'number' },
       description: 'Visible number of text rows.',
       table: {
         type: { summary: 'number' },
       },
     },
-    disabled: {
-      control: 'boolean',
-      description: 'Disables editing and interactions.',
+    variant: {
+      control: { type: 'inline-radio' },
+      description: 'Visual style for the textarea container.',
+      options: ['primary', 'secondary'],
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
+        defaultValue: { summary: 'primary' },
+        type: { summary: 'primary | secondary' },
       },
     },
   },
   args: {
-    variant: 'primary',
-    placeholder: 'Enter your text here...',
-    maxLength: 120,
-    rows: 4,
     cols: 50,
+    maxLength: 120,
+    placeholder: 'Enter your text here...',
+    rows: 4,
+    variant: 'primary',
   },
+  component: TextArea,
+  parameters: {
+    description: {
+      component:
+        'The TextArea component provides a multi-line input field that allows users to enter and edit larger amounts of text. It supports visual variants, max length feedback, and disabled states for form workflows.',
+    },
+    subtitle: 'A multi-line text input field for user input.',
+  },
+  title: 'Components/Text Area',
 } satisfies Meta<typeof TextArea>
 
 type Story = StoryObj<typeof TextArea>
@@ -73,25 +73,25 @@ export const Playground: Story = {
 
 export const StatePrimary: Story = {
   args: {
-    variant: 'primary',
-    placeholder: 'Write a short note...',
     maxLength: 120,
+    placeholder: 'Write a short note...',
+    variant: 'primary',
   },
 }
 
 export const StateSecondary: Story = {
   args: {
-    variant: 'secondary',
-    placeholder: 'Describe your request...',
     maxLength: 180,
+    placeholder: 'Describe your request...',
+    variant: 'secondary',
   },
 }
 
 export const BehaviorDisabled: Story = {
   args: {
     disabled: true,
-    placeholder: 'This field is disabled',
     maxLength: 120,
+    placeholder: 'This field is disabled',
   },
 }
 

@@ -1,4 +1,4 @@
-import { Menu as MenuBase } from './menu'
+import { Menu as MenuRoot } from './menu'
 import { MenuCheckboxItem } from './menu-checkbox-item'
 import { MenuGroup } from './menu-group'
 import { MenuGroupLabel } from './menu-group-label'
@@ -12,7 +12,7 @@ import { MenuSubmenu } from './menu-submenu'
 import { MenuSubmenuTrigger } from './menu-submenu-trigger'
 import { MenuTrigger } from './menu-trigger'
 
-export const Menu = Object.assign(MenuBase, {
+const Menu = Object.assign(MenuRoot, {
   CheckboxItem: MenuCheckboxItem,
   Group: MenuGroup,
   GroupLabel: MenuGroupLabel,
@@ -54,3 +54,5 @@ export { MenuShortcut } from './menu-shortcut'
 export { MenuSubmenu } from './menu-submenu'
 export { MenuSubmenuTrigger } from './menu-submenu-trigger'
 export { MenuTrigger } from './menu-trigger'
+
+export { Menu }

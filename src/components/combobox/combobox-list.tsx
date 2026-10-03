@@ -1,9 +1,10 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
+
 import { cn } from '@/utils/cn'
 
 import type { ComboboxListProps } from './combobox.types'
 
-export const ComboboxList = ({ className, children, ref, ...props }: ComboboxListProps) => {
+export function ComboboxList({ className, ref, ...props }: ComboboxListProps) {
   return (
     <BaseCombobox.List
       className={cn(
@@ -12,8 +13,6 @@ export const ComboboxList = ({ className, children, ref, ...props }: ComboboxLis
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseCombobox.List>
+    />
   )
 }

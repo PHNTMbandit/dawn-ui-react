@@ -1,20 +1,22 @@
 import { CaretLineLeftIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { useTableContext } from './table-context'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useTableContext } from './table-feature-context'
 import type { TableFirstPageProps } from './table.types'
 
-export const TableFirstPage = ({ className, children, ref, ...props }: TableFirstPageProps) => {
-  const table = useTableContext()
+const DEFAULT_PAGE_INDEX = 0
 
-  const handleClick = () => {
-    table.setPageIndex(0)
-  }
+export function TableFirstPage({ className, children, ref, ...props }: TableFirstPageProps) {
+  const table = useTableContext(),
+    handleClick = () => {
+      table.setPageIndex(DEFAULT_PAGE_INDEX)
+    }
 
   return (
     <Button
-      aria-label="First page"
+      aria-label="Go to first page"
       className={cn('shrink-0', className)}
       disabled={!table.getCanPreviousPage()}
       onClick={handleClick}

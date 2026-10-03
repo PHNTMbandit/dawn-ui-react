@@ -1,56 +1,49 @@
-import { useTableContext } from './table-context'
+import { cn } from '@/utils/cn'
+
 import { TableDateFilterChip } from './table-date-filter-chip'
+import { useTableContext } from './table-feature-context'
 import { TableNumberFilterChip } from './table-number-filter-chip'
 import { TableSelectFilterChip } from './table-select-filter-chip'
 import { TableStringFilterChip } from './table-string-filter-chip'
-import { type TableFilterListProps } from './table.types'
-import { cn } from '@/utils/cn'
+import type { TableFilterListProps } from './table.types'
 
-import type { ReactNode } from 'react'
-
-export const TableFilterList = ({ className, children, ref, ...props }: TableFilterListProps) => {
+export function TableFilterList({ className, children, ref, ...props }: TableFilterListProps) {
   const table = useTableContext()
 
   return (
     <table.Subscribe selector={(state) => state.columnFilters}>
       {() => {
         if (!table.getAllColumns().some((column) => column.getIsFiltered())) {
-          return null
+          return undefined
         }
 
         return (
-          <ul className={cn('flex flex-wrap items-center gap-xs', className)} ref={ref} {...props}>
-            {children && <li className="contents">{children}</li>}
+          <div className={cn('flex flex-wrap items-center gap-xs', className)} ref={ref} {...props}>
+            {children}
             {table.getAllColumns().map((column) => {
               if (!column.getIsFiltered()) {
-                return null
+                return undefined
               }
 
-              let chip: ReactNode = null
               switch (column.columnDef.meta?.filterVariant) {
-                case 'date':
-                  chip = <TableDateFilterChip column={column} />
-                  break
-                case 'number':
-                  chip = <TableNumberFilterChip column={column} />
-                  break
-                case 'select':
-                  chip = <TableSelectFilterChip column={column} />
-                  break
-                case 'string':
-                  chip = <TableStringFilterChip column={column} />
-                  break
-                default:
-                  return null
+                case 'date': {
+                  return <TableDateFilterChip key={column.id} column={column} />
+                }
+                case 'number': {
+                  return <TableNumberFilterChip key={column.id} column={column} />
+                }
+                case 'select': {
+                  return <TableSelectFilterChip key={column.id} column={column} />
+                }
+                case 'string': {
+                  return <TableStringFilterChip key={column.id} column={column} />
+                }
+                default: {
+                  return undefined
+                }
               }
-
-              return (
-                <li className="contents" key={column.id}>
-                  {chip}
-                </li>
-              )
             })}
-          </ul>
+          </div>
         )
       }}
     </table.Subscribe>

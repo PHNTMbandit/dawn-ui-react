@@ -1,87 +1,86 @@
-import { Separator } from './separator'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const ORIENTATIONS = ['horizontal', 'vertical'] as const
-const STYLES = ['rounded', 'square'] as const
-const VARIANTS = ['default', 'strong'] as const
-const WEIGHTS = ['thinnest', 'thin', 'medium', 'thick'] as const
+import { Separator } from './separator'
 
-const PreviewFrame = ({
-  orientation,
-  children,
-}: {
-  orientation?: (typeof ORIENTATIONS)[number]
-  children: React.ReactNode
-}) => (
-  <div
-    className="flex items-center justify-center"
-    style={{
-      height: orientation === 'vertical' ? '250px' : 'auto',
-      width: orientation === 'vertical' ? 'auto' : '500px',
-    }}
-  >
-    {children}
-  </div>
-)
+const ORIENTATIONS = ['horizontal', 'vertical'] as const,
+  STYLES = ['rounded', 'square'] as const,
+  VARIANTS = ['default', 'strong'] as const,
+  WEIGHTS = ['thinnest', 'thin', 'medium', 'thick'] as const,
+  PreviewFrame = ({
+    orientation,
+    children,
+  }: {
+    orientation?: (typeof ORIENTATIONS)[number]
+    children: React.ReactNode
+  }) => (
+    <div
+      className="flex items-center justify-center"
+      style={{
+        height: orientation === 'vertical' ? '250px' : 'auto',
+        width: orientation === 'vertical' ? 'auto' : '500px',
+      }}
+    >
+      {children}
+    </div>
+  )
 
 export default {
-  title: 'Components/Separator',
-  component: Separator,
   argTypes: {
     orientation: {
       control: { type: 'select' },
-      options: ORIENTATIONS,
       description: 'Direction of the dividing line.',
+      options: ORIENTATIONS,
       table: {
         defaultValue: { summary: 'horizontal' },
       },
     },
     style: {
       control: { type: 'select' },
-      options: STYLES,
       description: 'Corner treatment of the separator line.',
+      options: STYLES,
       table: {
         defaultValue: { summary: 'rounded' },
       },
     },
     variant: {
       control: { type: 'select' },
-      options: VARIANTS,
       description: 'Visual emphasis token for separator color.',
+      options: VARIANTS,
       table: {
         defaultValue: { summary: 'default' },
       },
     },
     weight: {
       control: { type: 'select' },
-      options: WEIGHTS,
       description: 'Thickness of the separator line.',
+      options: WEIGHTS,
       table: {
         defaultValue: { summary: 'thinnest' },
       },
     },
   },
+  args: {
+    orientation: 'horizontal',
+    style: 'rounded',
+    variant: 'default',
+    weight: 'thinnest',
+  },
+  component: Separator,
   parameters: {
     docs: {
-      subtitle: 'A flexible divider line for separating content, sections, and surfaces.',
       description: {
         component:
           'Separator visually partitions related content while preserving layout rhythm. It supports horizontal and vertical orientation, multiple thickness weights, and style/variant options for subtle or stronger emphasis. Common use cases include menus, sidebars, toolbars, and card sections.',
       },
+      subtitle: 'A flexible divider line for separating content, sections, and surfaces.',
     },
-  },
-  args: {
-    variant: 'default',
-    orientation: 'horizontal',
-    style: 'rounded',
-    weight: 'thinnest',
   },
   render: (args) => (
     <PreviewFrame orientation={args.orientation}>
       <Separator {...args} />
     </PreviewFrame>
   ),
+  title: 'Components/Separator',
 } satisfies Meta<typeof Separator>
 
 type Story = StoryObj<typeof Separator>
@@ -101,60 +100,67 @@ export const Default: Story = {
 }
 
 export const Strong: Story = {
-  name: 'Variant / Strong',
   args: {
     variant: 'strong',
   },
+  name: 'Variant / Strong',
 }
 
 export const Horizontal: Story = {
-  name: 'Orientation / Horizontal',
   args: {
     orientation: 'horizontal',
   },
+  name: 'Orientation / Horizontal',
 }
 
 export const Vertical: Story = {
-  name: 'Orientation / Vertical',
   args: {
     orientation: 'vertical',
   },
+  name: 'Orientation / Vertical',
 }
 
 export const Thinnest: Story = {
-  name: 'Weight / Thinnest',
   args: {
     weight: 'thinnest',
   },
+  name: 'Weight / Thinnest',
 }
 
 export const Thin: Story = {
-  name: 'Weight / Thin',
   args: {
     weight: 'thin',
   },
+  name: 'Weight / Thin',
 }
 
 export const Medium: Story = {
-  name: 'Weight / Medium',
   args: {
     weight: 'medium',
   },
+  name: 'Weight / Medium',
 }
 
 export const Thick: Story = {
-  name: 'Weight / Thick',
   args: {
     weight: 'thick',
   },
+  name: 'Weight / Thick',
 }
 
 export const BetweenContent: Story = {
-  name: 'Composition / Between Content',
   args: {
     orientation: 'horizontal',
     variant: 'default',
     weight: 'thin',
+  },
+  name: 'Composition / Between Content',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Typical section divider use in cards, forms, and settings pages.',
+      },
+    },
   },
   render: (args) => (
     <div className="w-[500px] space-y-sm rounded-xl bg-surface p-md">
@@ -171,22 +177,22 @@ export const BetweenContent: Story = {
       </div>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Typical section divider use in cards, forms, and settings pages.',
-      },
-    },
-  },
 }
 
 export const VerticalMenuDivider: Story = {
-  name: 'Composition / Vertical Menu Divider',
   args: {
     orientation: 'vertical',
-    weight: 'thin',
-    variant: 'strong',
     style: 'square',
+    variant: 'strong',
+    weight: 'thin',
+  },
+  name: 'Composition / Vertical Menu Divider',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Vertical separators are useful for compact horizontal nav and toolbar grouping.',
+      },
+    },
   },
   render: (args) => (
     <div className="flex h-[64px] items-center rounded-xl bg-surface p-sm">
@@ -197,22 +203,23 @@ export const VerticalMenuDivider: Story = {
       <button className="px-sm style-text-default--1 text-on-surface">Billing</button>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Vertical separators are useful for compact horizontal nav and toolbar grouping.',
-      },
-    },
-  },
 }
 
 export const WithLabel: Story = {
-  name: 'Composition / With Label',
   args: {
     orientation: 'horizontal',
-    weight: 'thin',
-    variant: 'default',
     style: 'rounded',
+    variant: 'default',
+    weight: 'thin',
+  },
+  name: 'Composition / With Label',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Separators can also include centered labels for additional context within sections.',
+      },
+    },
   },
   render: (args) => (
     <div className="w-[500px] space-y-sm bg-surface p-md">
@@ -230,12 +237,4 @@ export const WithLabel: Story = {
       </Separator>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Separators can also include centered labels for additional context within sections.',
-      },
-    },
-  },
 }

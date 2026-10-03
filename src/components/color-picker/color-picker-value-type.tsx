@@ -1,4 +1,7 @@
 import { CaretUpDownIcon } from '@phosphor-icons/react'
+
+import { cn } from '@/utils/cn'
+
 import {
   Select,
   SelectIcon,
@@ -9,26 +12,27 @@ import {
   SelectValue,
 } from '../select'
 import { useColorPicker } from './color-picker'
-import { VALUE_TYPES, type ColorPickerValueTypeProps } from './color-picker.types'
-import { cn } from '@/utils/cn'
+import { VALUE_TYPES } from './color-picker.types'
+import type { ColorPickerValueTypeProps } from './color-picker.types'
 
-export const ColorPickerValueType = ({
+const [defaultValueType] = VALUE_TYPES
+
+export function ColorPickerValueType({
   className,
   children,
   ref,
   ...props
-}: ColorPickerValueTypeProps) => {
-  const { valueType, setValueType } = useColorPicker()
-
-  const handleChange = (value: unknown) => {
-    setValueType(VALUE_TYPES.find((type) => type.value === value) ?? VALUE_TYPES[0])
-  }
+}: ColorPickerValueTypeProps) {
+  const { valueType, setValueType } = useColorPicker(),
+    handleChange = (value: unknown) => {
+      setValueType(VALUE_TYPES.find((type) => type.value === value) ?? defaultValueType)
+    }
 
   return (
     <Select value={valueType.value} onValueChange={handleChange}>
       <SelectTrigger
-        aria-label="Color value type"
-        variant={'secondary'}
+        aria-label="Color value format"
+        variant="secondary"
         className={cn('', className)}
         ref={ref}
         {...props}

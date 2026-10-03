@@ -1,14 +1,10 @@
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react'
+
 import { cn } from '@/utils/cn'
 
 import type { NavigationMenuIconProps } from './navigation-menu.types'
 
-export const NavigationMenuIcon = ({
-  className,
-  children,
-  ref,
-  ...props
-}: NavigationMenuIconProps) => {
+export function NavigationMenuIcon({ className, ref, ...props }: NavigationMenuIconProps) {
   return (
     <BaseNavigationMenu.Icon
       className={cn(
@@ -17,8 +13,6 @@ export const NavigationMenuIcon = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseNavigationMenu.Icon>
+    />
   )
 }

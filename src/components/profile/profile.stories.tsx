@@ -1,25 +1,20 @@
 import { CaretUpDownIcon, CheckIcon, SealCheckIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from '../avatar'
 import { Button } from '../button'
 import { Popover, PopoverDescription, PopoverPanel, PopoverTitle, PopoverTrigger } from '../popover'
-import { Profile } from './profile'
-import { ProfileAction } from './profile-action'
-import { ProfileContent } from './profile-content'
-import { ProfileName } from './profile-name'
-import { ProfileSubname } from './profile-subname'
-
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Profile } from './index'
 
 export default {
-  title: 'Components/Profile',
   component: Profile,
   parameters: {
     docs: {
-      subtitle: 'A profile identity row with avatar, content, and optional actions.',
       description: {
         component:
           'The Profile component combines avatar, user identity text, and optional right-side actions. It is optimized for account menus, sidebars, and header controls. Compose with `Avatar`, `AvatarBadge`, `ProfileContent`, `ProfileName`, and `ProfileSubname` for full control over layout and styling.',
       },
+      subtitle: 'A profile identity row with avatar, content, and optional actions.',
     },
   },
   render: (args) => (
@@ -28,12 +23,13 @@ export default {
         <AvatarFallback>DP</AvatarFallback>
         <AvatarImage src={'https://github.com/shadcn.png'} alt={'Profile Image'} />
       </Avatar>
-      <ProfileContent>
-        <ProfileName>Domenic Pittari</ProfileName>
-        <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
-      </ProfileContent>
+      <Profile.Content>
+        <Profile.Name>Domenic Pittari</Profile.Name>
+        <Profile.Subname>dom.pittari@gmail.com</Profile.Subname>
+      </Profile.Content>
     </Profile>
   ),
+  title: 'Components/Profile',
 } satisfies Meta<typeof Profile>
 
 type Story = StoryObj<typeof Profile>
@@ -67,10 +63,10 @@ export const WithoutImage: Story = {
       <Avatar>
         <AvatarFallback>DP</AvatarFallback>
       </Avatar>
-      <ProfileContent>
-        <ProfileName>Domenic Pittari</ProfileName>
-        <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
-      </ProfileContent>
+      <Profile.Content>
+        <Profile.Name>Domenic Pittari</Profile.Name>
+        <Profile.Subname>dom.pittari@gmail.com</Profile.Subname>
+      </Profile.Content>
     </Profile>
   ),
 }
@@ -88,13 +84,13 @@ export const WithBadgeDot: Story = {
     <Profile {...args}>
       <Avatar>
         <AvatarFallback>DP</AvatarFallback>
-        <AvatarImage src={''} alt={'Profile Image'} />
+        <AvatarImage src="" alt="Profile Image" />
         <AvatarBadge tone="success" />
       </Avatar>
-      <ProfileContent>
-        <ProfileName>Domenic Pittari</ProfileName>
-        <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
-      </ProfileContent>
+      <Profile.Content>
+        <Profile.Name>Domenic Pittari</Profile.Name>
+        <Profile.Subname>dom.pittari@gmail.com</Profile.Subname>
+      </Profile.Content>
     </Profile>
   ),
 }
@@ -112,15 +108,15 @@ export const WithBadgeIcon: Story = {
     <Profile {...args}>
       <Avatar>
         <AvatarFallback>DP</AvatarFallback>
-        <AvatarImage src={''} alt={'Profile Image'} />
+        <AvatarImage src="" alt="Profile Image" />
         <AvatarBadge tone="success">
           <CheckIcon weight="bold" />
         </AvatarBadge>
       </Avatar>
-      <ProfileContent>
-        <ProfileName>Domenic Pittari</ProfileName>
-        <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
-      </ProfileContent>
+      <Profile.Content>
+        <Profile.Name>Domenic Pittari</Profile.Name>
+        <Profile.Subname>dom.pittari@gmail.com</Profile.Subname>
+      </Profile.Content>
     </Profile>
   ),
 }
@@ -130,22 +126,22 @@ export const AsButton: Story = {
   render: (args) => (
     <Popover>
       <PopoverTrigger>
-        <Button variant={'ghost'} tone="neutral" size={'large'}>
+        <Button variant="ghost" tone="neutral" size="large">
           <Profile {...args} className="w-[400px]">
             <Avatar>
               <AvatarFallback>DP</AvatarFallback>
-              <AvatarImage src={''} alt={'Profile Image'} />
+              <AvatarImage src="" alt="Profile Image" />
               <AvatarBadge tone="success">
                 <CheckIcon weight="bold" />
               </AvatarBadge>
             </Avatar>
-            <ProfileContent>
-              <ProfileName>Domenic Pittari</ProfileName>
-              <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
-            </ProfileContent>
-            <ProfileAction>
+            <Profile.Content>
+              <Profile.Name>Domenic Pittari</Profile.Name>
+              <Profile.Subname>dom.pittari@gmail.com</Profile.Subname>
+            </Profile.Content>
+            <Profile.Action>
               <CaretUpDownIcon />
-            </ProfileAction>
+            </Profile.Action>
           </Profile>
         </Button>
       </PopoverTrigger>
@@ -163,18 +159,18 @@ export const VerifiedAccount: Story = {
     <Profile {...args}>
       <Avatar>
         <AvatarFallback>DP</AvatarFallback>
-        <AvatarImage src={''} alt={'Profile Image'} />
+        <AvatarImage src="" alt="Profile Image" />
         <AvatarBadge tone="success">
           <CheckIcon weight="bold" />
         </AvatarBadge>
       </Avatar>
-      <ProfileContent>
-        <ProfileName>
+      <Profile.Content>
+        <Profile.Name>
           Domenic Pittari
           <SealCheckIcon weight="fill" className="text-success-default" />
-        </ProfileName>
-        <ProfileSubname>dom.pittari@gmail.com</ProfileSubname>
-      </ProfileContent>
+        </Profile.Name>
+        <Profile.Subname>dom.pittari@gmail.com</Profile.Subname>
+      </Profile.Content>
     </Profile>
   ),
 }

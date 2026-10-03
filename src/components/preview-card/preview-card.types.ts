@@ -1,5 +1,7 @@
 import type { PreviewCard } from '@base-ui/react'
 
-export type PreviewCardProps = React.ComponentProps<typeof PreviewCard.Root>
-export type PreviewCardTriggerProps = React.ComponentProps<typeof PreviewCard.Trigger>
-export type PreviewCardPopupProps = React.ComponentProps<typeof PreviewCard.Positioner>
+type PreviewCardProps = React.ComponentProps<typeof PreviewCard.Root>
+type PreviewCardTriggerProps = React.ComponentProps<typeof PreviewCard.Trigger>
+type PreviewCardPopupProps = React.ComponentProps<typeof PreviewCard.Positioner>
+
+export type { PreviewCardProps, PreviewCardTriggerProps, PreviewCardPopupProps }

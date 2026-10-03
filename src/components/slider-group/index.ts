@@ -1,18 +1,18 @@
 import { SliderDescription } from './slider-description'
-import { SliderGroup as SliderGroupBase } from './slider-group'
+import { SliderGroup as SliderGroupRoot } from './slider-group'
 import { SliderGroupSlider } from './slider-group-slider'
 import { SliderIcon } from './slider-icon'
 import { SliderInput } from './slider-input'
 import { SliderLabel } from './slider-label'
 import { SliderValue } from './slider-value'
 
-export const SliderGroup = Object.assign(SliderGroupBase, {
-  Slider: SliderGroupSlider,
-  Input: SliderInput,
-  Value: SliderValue,
-  Label: SliderLabel,
+const SliderGroup = Object.assign(SliderGroupRoot, {
   Description: SliderDescription,
   Icon: SliderIcon,
+  Input: SliderInput,
+  Label: SliderLabel,
+  Slider: SliderGroupSlider,
+  Value: SliderValue,
 })
 
 export { SliderGroupSlider } from './slider-group-slider'
@@ -31,3 +31,5 @@ export type {
   SliderDescriptionProps,
   SliderIconProps,
 } from './slider-group.types'
+
+export { SliderGroup }

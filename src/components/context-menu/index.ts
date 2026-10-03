@@ -1,4 +1,4 @@
-import { ContextMenu as ContextMenuBase } from './context-menu'
+import { ContextMenu as ContextMenuRoot } from './context-menu'
 import { ContextMenuCheckboxItem } from './context-menu-checkbox-item'
 import { ContextMenuGroup } from './context-menu-group'
 import { ContextMenuGroupLabel } from './context-menu-group-label'
@@ -12,16 +12,16 @@ import { ContextMenuSubmenu } from './context-menu-submenu'
 import { ContextMenuSubmenuTrigger } from './context-menu-submenu-trigger'
 import { ContextMenuTrigger } from './context-menu-trigger'
 
-export const ContextMenu = Object.assign(ContextMenuBase, {
+const ContextMenu = Object.assign(ContextMenuRoot, {
   CheckboxItem: ContextMenuCheckboxItem,
   Group: ContextMenuGroup,
   GroupLabel: ContextMenuGroupLabel,
-  RadioGroup: ContextMenuRadioGroup,
-  RadioItem: ContextMenuRadioItem,
-  Shortcut: ContextMenuShortcut,
   Item: ContextMenuItem,
   Popup: ContextMenuPopup,
+  RadioGroup: ContextMenuRadioGroup,
+  RadioItem: ContextMenuRadioItem,
   Separator: ContextMenuSeparator,
+  Shortcut: ContextMenuShortcut,
   Submenu: ContextMenuSubmenu,
   SubmenuTrigger: ContextMenuSubmenuTrigger,
   Trigger: ContextMenuTrigger,
@@ -54,3 +54,5 @@ export { ContextMenuSeparator } from './context-menu-separator'
 export { ContextMenuSubmenu } from './context-menu-submenu'
 export { ContextMenuSubmenuTrigger } from './context-menu-submenu-trigger'
 export { ContextMenuTrigger } from './context-menu-trigger'
+
+export { ContextMenu }

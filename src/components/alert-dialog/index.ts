@@ -1,4 +1,4 @@
-import { AlertDialog as AlertDialogBase } from './alert-dialog'
+import { AlertDialog as AlertDialogRoot } from './alert-dialog'
 import { AlertDialogClose } from './alert-dialog-close'
 import { AlertDialogConfirm } from './alert-dialog-confirm'
 import { AlertDialogDescription } from './alert-dialog-description'
@@ -9,16 +9,16 @@ import { AlertDialogPopup } from './alert-dialog-popup'
 import { AlertDialogTitle } from './alert-dialog-title'
 import { AlertDialogTrigger } from './alert-dialog-trigger'
 
-export const AlertDialog = Object.assign(AlertDialogBase, {
+const AlertDialog = Object.assign(AlertDialogRoot, {
   Close: AlertDialogClose,
   Confirm: AlertDialogConfirm,
   Description: AlertDialogDescription,
   Footer: AlertDialogFooter,
   Header: AlertDialogHeader,
+  Icon: AlertDialogIcon,
   Popup: AlertDialogPopup,
   Title: AlertDialogTitle,
   Trigger: AlertDialogTrigger,
-  Icon: AlertDialogIcon,
 })
 
 export type {
@@ -42,3 +42,5 @@ export { AlertDialogPopup } from './alert-dialog-popup'
 export { AlertDialogTitle } from './alert-dialog-title'
 export { AlertDialogTrigger } from './alert-dialog-trigger'
 export { AlertDialogIcon } from './alert-dialog-icon'
+
+export { AlertDialog }

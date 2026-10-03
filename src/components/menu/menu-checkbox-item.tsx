@@ -1,10 +1,11 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { CheckIcon } from '@phosphor-icons/react'
+
 import { cn } from '@/utils/cn'
 
 import type { MenuCheckboxItemProps } from './menu.types'
 
-export const MenuCheckboxItem = ({ className, children, ref, ...props }: MenuCheckboxItemProps) => {
+export function MenuCheckboxItem({ className, children, ref, ...props }: MenuCheckboxItemProps) {
   return (
     <BaseMenu.CheckboxItem
       className={cn(

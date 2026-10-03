@@ -1,49 +1,12 @@
-import {
-  columnFacetingFeature,
-  columnFilteringFeature,
-  columnSizingFeature,
-  columnVisibilityFeature,
-  createFacetedRowModel,
-  createFacetedUniqueValues,
-  createFilteredRowModel,
-  createPaginatedRowModel,
-  createSortedRowModel,
-  createTableHook,
-  filterFn_arrHas,
-  filterFn_arrIncludes,
-  filterFn_arrIncludesAll,
-  filterFn_arrIncludesSome,
-  filterFn_between,
-  filterFn_betweenInclusive,
-  filterFn_empty,
-  filterFn_endsWith,
-  filterFn_equals,
-  filterFn_equalsString,
-  filterFn_equalsStringSensitive,
-  filterFn_inDateRange,
-  filterFn_inNumberRange,
-  filterFn_includesString,
-  filterFn_includesStringSensitive,
-  filterFn_notEmpty,
-  filterFn_startsWith,
-  filterFn_weakEquals,
-  globalFilteringFeature,
-  metaHelper,
-  rowPaginationFeature,
-  rowSelectionFeature,
-  rowSortingFeature,
-  sortFn_alphanumeric,
-  sortFn_basic,
-  sortFn_datetime,
-  sortFn_text,
-  tableFeatures,
-} from '@tanstack/react-table'
+import { createTableHook } from '@tanstack/react-table'
+
 import { TableBadgeCell } from './table-badge-cell'
 import { TableBody } from './table-body'
 import { TableCheckboxCell } from './table-checkbox-cell'
 import { TableColumnToggle } from './table-column-toggle'
 import { TableContainer } from './table-container'
 import { TableDateCell } from './table-date-cell'
+import { cellContext, features, headerContext, tableContext } from './table-feature-context'
 import { TableFilterList } from './table-filter-list'
 import { TableFilterMenu } from './table-filter-menu'
 import { TableFirstPage } from './table-first-page'
@@ -65,103 +28,53 @@ import { TableTextCell } from './table-text-cell'
 import { TableToolbar } from './table-toolbar'
 import { TableViewModeToggle } from './table-view-mode-toggle'
 import { TableViewport } from './table-viewport'
-import {
-  dateFilterFn,
-  numberFilterFn,
-  selectFilterFn,
-  stringFilterFn,
-  viewModePlugin,
-} from './table.utils'
 
-import type { TableColumnMeta, TableMeta } from './table.types'
+const { createAppColumnHelper, useAppTable, useTableContext, useCellContext, useHeaderContext } =
+  createTableHook({
+    cellComponents: {
+      TableBadgeCell,
+      TableCheckboxCell,
+      TableDateCell,
+      TableImageCell,
+      TableNumberCell,
+      TableTextCell,
+    },
+    cellContext,
+    features,
+    getRowId: (row, index, parent) => {
+      if (row.id !== undefined && row.id !== null) {
+        return row.id
+      }
+      if (parent) {
+        return `${parent.id}.${index}`
+      }
+      return String(index)
+    },
+    headerComponents: { TableSelectHeader },
+    headerContext,
+    tableComponents: {
+      TableBody,
+      TableColumnToggle,
+      TableContainer,
+      TableFilterList,
+      TableFilterMenu,
+      TableFirstPage,
+      TableFooter,
+      TableHeader,
+      TableLastPage,
+      TableNav,
+      TableNextPage,
+      TablePagination,
+      TablePaging,
+      TablePreviousPage,
+      TableSearch,
+      TableSortList,
+      TableSortMenu,
+      TableToolbar,
+      TableViewModeToggle,
+      TableViewport,
+    },
+    tableContext,
+  })
 
-export const features = tableFeatures({
-  columnFacetingFeature,
-  columnFilteringFeature,
-  columnSizingFeature,
-  columnVisibilityFeature,
-  globalFilteringFeature,
-  rowPaginationFeature,
-  rowSelectionFeature,
-  rowSortingFeature,
-  viewModePlugin,
-  filteredRowModel: createFilteredRowModel(),
-  facetedRowModel: createFacetedRowModel(),
-  facetedUniqueValues: createFacetedUniqueValues(),
-  paginatedRowModel: createPaginatedRowModel(),
-  sortedRowModel: createSortedRowModel(),
-  columnMeta: metaHelper<TableColumnMeta>(),
-  tableMeta: metaHelper<TableMeta>(),
-  filterFns: {
-    includesString: filterFn_includesString,
-    includesStringSensitive: filterFn_includesStringSensitive,
-    startsWith: filterFn_startsWith,
-    endsWith: filterFn_endsWith,
-    equalsString: filterFn_equalsString,
-    equalsStringSensitive: filterFn_equalsStringSensitive,
-    equals: filterFn_equals,
-    weakEquals: filterFn_weakEquals,
-    empty: filterFn_empty,
-    notEmpty: filterFn_notEmpty,
-    arrIncludes: filterFn_arrIncludes,
-    arrIncludesAll: filterFn_arrIncludesAll,
-    arrIncludesSome: filterFn_arrIncludesSome,
-    arrHas: filterFn_arrHas,
-    inNumberRange: filterFn_inNumberRange,
-    inDateRange: filterFn_inDateRange,
-    between: filterFn_between,
-    betweenInclusive: filterFn_betweenInclusive,
-    date: dateFilterFn,
-    string: stringFilterFn,
-    number: numberFilterFn,
-    select: selectFilterFn,
-  },
-  sortFns: {
-    alphanumeric: sortFn_alphanumeric,
-    text: sortFn_text,
-    datetime: sortFn_datetime,
-    basic: sortFn_basic,
-  },
-})
-
-export const {
-  createAppColumnHelper,
-  useAppTable,
-  useTableContext,
-  useCellContext,
-  useHeaderContext,
-} = createTableHook({
-  features,
-  getRowId: (row, index, parent) => row.id ?? (parent ? `${parent.id}.${index}` : String(index)),
-  tableComponents: {
-    TableBody,
-    TableColumnToggle,
-    TableContainer,
-    TableFirstPage,
-    TableFilterMenu,
-    TableFilterList,
-    TableFooter,
-    TableHeader,
-    TableLastPage,
-    TableNav,
-    TableNextPage,
-    TablePagination,
-    TablePaging,
-    TablePreviousPage,
-    TableSearch,
-    TableSortMenu,
-    TableSortList,
-    TableToolbar,
-    TableViewModeToggle,
-    TableViewport,
-  },
-  cellComponents: {
-    TableCheckboxCell,
-    TableDateCell,
-    TableImageCell,
-    TableNumberCell,
-    TableBadgeCell,
-    TableTextCell,
-  },
-  headerComponents: { TableSelectHeader },
-})
+export { createAppColumnHelper, useAppTable, useTableContext, useCellContext, useHeaderContext }

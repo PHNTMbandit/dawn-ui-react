@@ -1,19 +1,11 @@
 import { XIcon, GearIcon, UserIcon, BellIcon, ListIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
+
 import { Button } from '../button/button'
 import { Input } from '../input/input'
-import { Drawer } from './drawer'
-import { DrawerClose } from './drawer-close'
-import { DrawerContent } from './drawer-content'
-import { DrawerDescription } from './drawer-description'
-import { DrawerHeader } from './drawer-header'
-import { DrawerPopup } from './drawer-popup'
-import { DrawerProvider } from './drawer-provider'
-import { DrawerTitle } from './drawer-title'
-import { DrawerTrigger } from './drawer-trigger'
-
 import type { DrawerProps } from './drawer.types'
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Drawer } from './index'
 
 const SWIPE_DIRECTIONS = ['right', 'left', 'up', 'down'] as const
 
@@ -23,107 +15,78 @@ type DrawerStoryArgs = DrawerProps & {
 }
 
 const DrawerDemo = ({ showTitle = true, showDescription = true, ...props }: DrawerStoryArgs) => (
-  <DrawerProvider>
-    <Drawer {...props}>
-      <DrawerTrigger>
-        <Button tone="brand" variant="fill">
-          Open drawer
-        </Button>
-      </DrawerTrigger>
-      <DrawerPopup>
-        <DrawerContent>
-          <DrawerHeader>
-            <div>
-              {showTitle && <DrawerTitle>Settings</DrawerTitle>}
-              {showDescription && (
-                <DrawerDescription>
-                  Manage your account preferences and application settings.
-                </DrawerDescription>
-              )}
-            </div>
-            <DrawerClose>
-              <Button aria-label="Close drawer" size="iconSmall" tone="neutral" variant="ghost">
-                <XIcon weight="bold" />
-              </Button>
-            </DrawerClose>
-          </DrawerHeader>
-          <SettingsItem
-            icon={<UserIcon />}
-            label="Profile"
-            description="Update your personal information"
-          />
-          <SettingsItem
-            icon={<BellIcon />}
-            label="Notifications"
-            description="Configure alert preferences"
-          />
-          <SettingsItem
-            icon={<GearIcon />}
-            label="General"
-            description="App behavior and display"
-          />
-        </DrawerContent>
-      </DrawerPopup>
-    </Drawer>
-  </DrawerProvider>
-)
-
-const SettingsItem = ({
-  icon,
-  label,
-  description,
-}: {
-  icon: React.ReactNode
-  label: string
-  description: string
-}) => (
-  <button
-    className="flex items-center gap-md rounded-md text-left transition-colors hover:bg-surface-3"
-    type="button"
-  >
-    <span className="text-on-surface-variant">{icon}</span>
-    <div className="flex flex-col">
-      <span className="style-text-default-0 text-on-surface">{label}</span>
-      <span className="style-text-default--1 text-on-surface-variant">{description}</span>
-    </div>
-  </button>
-)
+    <Drawer.Provider>
+      <Drawer {...props}>
+        <Drawer.Trigger>
+          <Button tone="brand" variant="fill">
+            Open drawer
+          </Button>
+        </Drawer.Trigger>
+        <Drawer.Popup>
+          <Drawer.Content>
+            <Drawer.Header>
+              <div>
+                {showTitle && <Drawer.Title>Settings</Drawer.Title>}
+                {showDescription && (
+                  <Drawer.Description>
+                    Manage your account preferences and application settings.
+                  </Drawer.Description>
+                )}
+              </div>
+              <Drawer.Close>
+                <Button aria-label="Close drawer" size="iconSmall" tone="neutral" variant="ghost">
+                  <XIcon weight="bold" />
+                </Button>
+              </Drawer.Close>
+            </Drawer.Header>
+            <SettingsItem
+              icon={<UserIcon />}
+              label="Profile"
+              description="Update your personal information"
+            />
+            <SettingsItem
+              icon={<BellIcon />}
+              label="Notifications"
+              description="Configure alert preferences"
+            />
+            <SettingsItem
+              icon={<GearIcon />}
+              label="General"
+              description="App behavior and display"
+            />
+          </Drawer.Content>
+        </Drawer.Popup>
+      </Drawer>
+    </Drawer.Provider>
+  ),
+  SettingsItem = ({
+    icon,
+    label,
+    description,
+  }: {
+    icon: React.ReactNode
+    label: string
+    description: string
+  }) => (
+    <button
+      className="flex items-center gap-md rounded-md text-left transition-colors hover:bg-surface-3"
+      type="button"
+    >
+      <span className="text-on-surface-variant">{icon}</span>
+      <div className="flex flex-col">
+        <span className="style-text-default-0 text-on-surface">{label}</span>
+        <span className="style-text-default--1 text-on-surface-variant">{description}</span>
+      </div>
+    </button>
+  )
 
 export default {
-  title: 'Components/Drawer',
-  component: Drawer,
-  subcomponents: {
-    DrawerProvider,
-    DrawerTrigger,
-    DrawerPopup,
-    DrawerContent,
-    DrawerTitle,
-    DrawerDescription,
-    DrawerClose,
-  },
   argTypes: {
     defaultOpen: {
       control: 'boolean',
       description: 'Whether the drawer is initially open in uncontrolled mode.',
       table: {
         defaultValue: { summary: 'false' },
-      },
-    },
-    swipeDirection: {
-      control: 'select',
-      options: SWIPE_DIRECTIONS,
-      description:
-        'The direction to swipe to dismiss the drawer, which also determines the edge it slides in from. `right` = right edge, `left` = left edge, `down` = bottom edge, `up` = top edge.',
-      table: {
-        defaultValue: { summary: 'right' },
-      },
-    },
-    modal: {
-      control: 'boolean',
-      description:
-        'Whether the drawer should trap focus and block interaction with the rest of the page.',
-      table: {
-        defaultValue: { summary: 'true' },
       },
     },
     disablePointerDismissal: {
@@ -134,9 +97,10 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
-    showTitle: {
+    modal: {
       control: 'boolean',
-      description: 'Show the drawer title (story control only).',
+      description:
+        'Whether the drawer should trap focus and block interaction with the rest of the page.',
       table: {
         defaultValue: { summary: 'true' },
       },
@@ -148,26 +112,53 @@ export default {
         defaultValue: { summary: 'true' },
       },
     },
-  },
-  parameters: {
-    docs: {
-      subtitle:
-        'A slide-out panel anchored to the edge of the viewport for secondary content and navigation.',
-      description: {
-        component:
-          "The Drawer component presents supplementary content in a panel that slides in from the edge of the screen. It supports swipe-to-dismiss gestures on touch devices, modal or non-modal behavior, and integrates with the app layout via the Provider/Indent pattern for smooth push animations. Use drawers for settings panels, navigation menus, detail views, and multi-step flows that shouldn't replace the main content.\n\n**Positioning:** Use the `swipeDirection` prop on `Drawer` to control which edge the drawer appears from: `right` (default), `left`, `down` (bottom sheet), or `up` (top sheet).",
+    showTitle: {
+      control: 'boolean',
+      description: 'Show the drawer title (story control only).',
+      table: {
+        defaultValue: { summary: 'true' },
+      },
+    },
+    swipeDirection: {
+      control: 'select',
+      description:
+        'The direction to swipe to dismiss the drawer, which also determines the edge it slides in from. `right` = right edge, `left` = left edge, `down` = bottom edge, `up` = top edge.',
+      options: SWIPE_DIRECTIONS,
+      table: {
+        defaultValue: { summary: 'right' },
       },
     },
   },
   args: {
     defaultOpen: false,
-    swipeDirection: 'right',
-    modal: true,
     disablePointerDismissal: false,
-    showTitle: true,
+    modal: true,
     showDescription: true,
+    showTitle: true,
+    swipeDirection: 'right',
+  },
+  component: Drawer,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "The Drawer component presents supplementary content in a panel that slides in from the edge of the screen. It supports swipe-to-dismiss gestures on touch devices, modal or non-modal behavior, and integrates with the app layout via the Provider/Indent pattern for smooth push animations. Use drawers for settings panels, navigation menus, detail views, and multi-step flows that shouldn't replace the main content.\n\n**Positioning:** Use the `swipeDirection` prop on `Drawer` to control which edge the drawer appears from: `right` (default), `left`, `down` (bottom sheet), or `up` (top sheet).",
+      },
+      subtitle:
+        'A slide-out panel anchored to the edge of the viewport for secondary content and navigation.',
+    },
   },
   render: (args) => <DrawerDemo {...args} />,
+  subcomponents: {
+    DrawerClose: Drawer.Close,
+    DrawerContent: Drawer.Content,
+    DrawerDescription: Drawer.Description,
+    DrawerPopup: Drawer.Popup,
+    DrawerProvider: Drawer.Provider,
+    DrawerTitle: Drawer.Title,
+    DrawerTrigger: Drawer.Trigger,
+  },
+  title: 'Components/Drawer',
 } satisfies Meta<DrawerStoryArgs>
 
 type Story = StoryObj<DrawerStoryArgs>
@@ -197,10 +188,10 @@ export const Default: Story = {
 }
 
 export const SwipeRight: Story = {
-  name: 'Position / Right',
   args: {
     swipeDirection: 'right',
   },
+  name: 'Position / Right',
   parameters: {
     docs: {
       description: {
@@ -212,10 +203,10 @@ export const SwipeRight: Story = {
 }
 
 export const SwipeLeft: Story = {
-  name: 'Position / Left',
   args: {
     swipeDirection: 'left',
   },
+  name: 'Position / Left',
   parameters: {
     docs: {
       description: {
@@ -227,10 +218,10 @@ export const SwipeLeft: Story = {
 }
 
 export const SwipeDown: Story = {
-  name: 'Position / Bottom',
   args: {
     swipeDirection: 'down',
   },
+  name: 'Position / Bottom',
   parameters: {
     docs: {
       description: {
@@ -242,10 +233,10 @@ export const SwipeDown: Story = {
 }
 
 export const SwipeUp: Story = {
-  name: 'Position / Top',
   args: {
     swipeDirection: 'up',
   },
+  name: 'Position / Top',
   parameters: {
     docs: {
       description: {
@@ -257,10 +248,10 @@ export const SwipeUp: Story = {
 }
 
 export const WithoutTitle: Story = {
-  name: 'Usage / Without Title',
   args: {
     showTitle: false,
   },
+  name: 'Usage / Without Title',
   parameters: {
     docs: {
       description: {
@@ -272,10 +263,10 @@ export const WithoutTitle: Story = {
 }
 
 export const WithoutDescription: Story = {
-  name: 'Usage / Without Description',
   args: {
     showDescription: false,
   },
+  name: 'Usage / Without Description',
   parameters: {
     docs: {
       description: {
@@ -286,10 +277,10 @@ export const WithoutDescription: Story = {
 }
 
 export const NonDismissible: Story = {
-  name: 'Behavior / Non-Dismissible',
   args: {
     disablePointerDismissal: true,
   },
+  name: 'Behavior / Non-Dismissible',
   parameters: {
     docs: {
       description: {
@@ -315,19 +306,19 @@ export const Controlled: Story = {
 
     return (
       <div className="flex items-center gap-md">
-        <DrawerProvider>
+        <Drawer.Provider>
           <Drawer open={open} onOpenChange={setOpen}>
-            <DrawerTrigger>
+            <Drawer.Trigger>
               <Button tone="brand" variant="fill">
                 Open drawer
               </Button>
-            </DrawerTrigger>
-            <DrawerPopup>
-              <DrawerContent>
+            </Drawer.Trigger>
+            <Drawer.Popup>
+              <Drawer.Content>
                 <div className="flex flex-col gap-md p-lg">
                   <div className="flex items-start justify-between">
-                    <DrawerTitle>Controlled Drawer</DrawerTitle>
-                    <DrawerClose>
+                    <Drawer.Title>Controlled Drawer</Drawer.Title>
+                    <Drawer.Close>
                       <Button
                         aria-label="Close drawer"
                         size="iconSmall"
@@ -336,19 +327,19 @@ export const Controlled: Story = {
                       >
                         <XIcon weight="bold" />
                       </Button>
-                    </DrawerClose>
+                    </Drawer.Close>
                   </div>
-                  <DrawerDescription>
+                  <Drawer.Description>
                     This drawer's state is controlled externally via React state.
-                  </DrawerDescription>
+                  </Drawer.Description>
                   <Button onClick={() => setOpen(false)} tone="brand" variant="fill">
                     Close from inside
                   </Button>
                 </div>
-              </DrawerContent>
-            </DrawerPopup>
+              </Drawer.Content>
+            </Drawer.Popup>
           </Drawer>
-        </DrawerProvider>
+        </Drawer.Provider>
         <span>Drawer is {open ? 'open' : 'closed'}</span>
       </div>
     )
@@ -366,23 +357,23 @@ export const NavigationMenu: Story = {
     },
   },
   render: () => (
-    <DrawerProvider>
+    <Drawer.Provider>
       <Drawer swipeDirection="left">
-        <DrawerTrigger>
+        <Drawer.Trigger>
           <Button aria-label="Open menu" size="iconMedium" tone="neutral" variant="ghost">
             <ListIcon weight="bold" />
           </Button>
-        </DrawerTrigger>
-        <DrawerPopup>
-          <DrawerContent>
+        </Drawer.Trigger>
+        <Drawer.Popup>
+          <Drawer.Content>
             <nav className="flex flex-col p-lg">
               <div className="mb-lg flex items-center justify-between">
                 <span className="style-text-strong-0 text-on-surface">Menu</span>
-                <DrawerClose>
+                <Drawer.Close>
                   <Button aria-label="Close menu" size="iconSmall" tone="neutral" variant="ghost">
                     <XIcon weight="bold" />
                   </Button>
-                </DrawerClose>
+                </Drawer.Close>
               </div>
               <ul className="flex flex-col gap-xs">
                 {['Dashboard', 'Projects', 'Team', 'Reports', 'Settings'].map((item) => (
@@ -397,10 +388,10 @@ export const NavigationMenu: Story = {
                 ))}
               </ul>
             </nav>
-          </DrawerContent>
-        </DrawerPopup>
+          </Drawer.Content>
+        </Drawer.Popup>
       </Drawer>
-    </DrawerProvider>
+    </Drawer.Provider>
   ),
 }
 
@@ -415,23 +406,23 @@ export const BottomSheet: Story = {
     },
   },
   render: () => (
-    <DrawerProvider>
+    <Drawer.Provider>
       <Drawer swipeDirection="down">
-        <DrawerTrigger>
+        <Drawer.Trigger>
           <Button tone="brand" variant="fill">
             Show actions
           </Button>
-        </DrawerTrigger>
-        <DrawerPopup>
-          <DrawerContent>
+        </Drawer.Trigger>
+        <Drawer.Popup>
+          <Drawer.Content>
             <div className="flex flex-col gap-md p-lg">
               <div className="flex items-center justify-between">
-                <DrawerTitle>Quick Actions</DrawerTitle>
-                <DrawerClose>
+                <Drawer.Title>Quick Actions</Drawer.Title>
+                <Drawer.Close>
                   <Button aria-label="Close sheet" size="iconSmall" tone="neutral" variant="ghost">
                     <XIcon weight="bold" />
                   </Button>
-                </DrawerClose>
+                </Drawer.Close>
               </div>
               <div className="flex flex-col gap-sm">
                 {['Share', 'Copy link', 'Edit', 'Move to folder', 'Delete'].map((action) => (
@@ -445,10 +436,10 @@ export const BottomSheet: Story = {
                 ))}
               </div>
             </div>
-          </DrawerContent>
-        </DrawerPopup>
+          </Drawer.Content>
+        </Drawer.Popup>
       </Drawer>
-    </DrawerProvider>
+    </Drawer.Provider>
   ),
 }
 
@@ -463,28 +454,28 @@ export const DetailPanel: Story = {
     },
   },
   render: () => (
-    <DrawerProvider>
+    <Drawer.Provider>
       <Drawer>
-        <DrawerTrigger>
+        <Drawer.Trigger>
           <Button tone="neutral" variant="outline">
             View project details
           </Button>
-        </DrawerTrigger>
-        <DrawerPopup>
-          <DrawerContent>
+        </Drawer.Trigger>
+        <Drawer.Popup>
+          <Drawer.Content>
             <div className="flex flex-col gap-lg p-lg">
               <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-xs">
-                  <DrawerTitle className="text-on-surface">Project Alpha</DrawerTitle>
+                  <Drawer.Title className="text-on-surface">Project Alpha</Drawer.Title>
                   <span className="style-text-default--1 text-on-surface-variant">
                     Created on Jan 15, 2026
                   </span>
                 </div>
-                <DrawerClose>
+                <Drawer.Close>
                   <Button aria-label="Close panel" size="iconSmall" tone="neutral" variant="ghost">
                     <XIcon weight="bold" />
                   </Button>
-                </DrawerClose>
+                </Drawer.Close>
               </div>
               <div className="flex flex-col gap-md">
                 <div className="flex flex-col gap-xs">
@@ -514,10 +505,10 @@ export const DetailPanel: Story = {
                 </Button>
               </div>
             </div>
-          </DrawerContent>
-        </DrawerPopup>
+          </Drawer.Content>
+        </Drawer.Popup>
       </Drawer>
-    </DrawerProvider>
+    </Drawer.Provider>
   ),
 }
 
@@ -531,22 +522,22 @@ export const FormDrawer: Story = {
     },
   },
   render: () => (
-    <DrawerProvider>
+    <Drawer.Provider>
       <Drawer>
-        <DrawerTrigger>
+        <Drawer.Trigger>
           <Button tone="brand" variant="fill">
             Add new contact
           </Button>
-        </DrawerTrigger>
-        <DrawerPopup>
-          <DrawerContent>
+        </Drawer.Trigger>
+        <Drawer.Popup>
+          <Drawer.Content>
             <form className="flex flex-col gap-lg p-lg">
               <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-xs">
-                  <DrawerTitle>New Contact</DrawerTitle>
-                  <DrawerDescription>Add a new contact to your address book.</DrawerDescription>
+                  <Drawer.Title>New Contact</Drawer.Title>
+                  <Drawer.Description>Add a new contact to your address book.</Drawer.Description>
                 </div>
-                <DrawerClose>
+                <Drawer.Close>
                   <Button
                     aria-label="Close form"
                     size="iconSmall"
@@ -556,7 +547,7 @@ export const FormDrawer: Story = {
                   >
                     <XIcon weight="bold" />
                   </Button>
-                </DrawerClose>
+                </Drawer.Close>
               </div>
               <div className="flex flex-col gap-md">
                 <div className="flex flex-col gap-xs">
@@ -582,17 +573,17 @@ export const FormDrawer: Story = {
                 <Button tone="brand" type="submit" variant="fill">
                   Save contact
                 </Button>
-                <DrawerClose>
+                <Drawer.Close>
                   <Button tone="neutral" type="button" variant="outline">
                     Cancel
                   </Button>
-                </DrawerClose>
+                </Drawer.Close>
               </div>
             </form>
-          </DrawerContent>
-        </DrawerPopup>
+          </Drawer.Content>
+        </Drawer.Popup>
       </Drawer>
-    </DrawerProvider>
+    </Drawer.Provider>
   ),
 }
 
@@ -607,38 +598,38 @@ export const NestedDrawers: Story = {
     },
   },
   render: () => (
-    <DrawerProvider>
+    <Drawer.Provider>
       <Drawer>
-        <DrawerTrigger>
+        <Drawer.Trigger>
           <Button tone="brand" variant="fill">
             Open settings
           </Button>
-        </DrawerTrigger>
-        <DrawerPopup>
-          <DrawerContent>
+        </Drawer.Trigger>
+        <Drawer.Popup>
+          <Drawer.Content>
             <div className="flex flex-col gap-md p-lg">
               <div className="flex items-start justify-between">
-                <DrawerTitle>Settings</DrawerTitle>
-                <DrawerClose>
+                <Drawer.Title>Settings</Drawer.Title>
+                <Drawer.Close>
                   <Button aria-label="Close drawer" size="iconSmall" tone="neutral" variant="ghost">
                     <XIcon weight="bold" />
                   </Button>
-                </DrawerClose>
+                </Drawer.Close>
               </div>
 
               <Drawer>
-                <DrawerTrigger>
+                <Drawer.Trigger>
                   <Button tone="neutral" variant="outline">
                     <UserIcon weight="bold" />
                     Account settings
                   </Button>
-                </DrawerTrigger>
-                <DrawerPopup>
-                  <DrawerContent>
+                </Drawer.Trigger>
+                <Drawer.Popup>
+                  <Drawer.Content>
                     <div className="flex flex-col gap-md p-lg">
                       <div className="flex items-start justify-between">
-                        <DrawerTitle>Account</DrawerTitle>
-                        <DrawerClose>
+                        <Drawer.Title>Account</Drawer.Title>
+                        <Drawer.Close>
                           <Button
                             aria-label="Close nested drawer"
                             size="iconSmall"
@@ -647,29 +638,29 @@ export const NestedDrawers: Story = {
                           >
                             <XIcon weight="bold" />
                           </Button>
-                        </DrawerClose>
+                        </Drawer.Close>
                       </div>
-                      <DrawerDescription>
+                      <Drawer.Description>
                         Manage your account details, security preferences, and connected services.
-                      </DrawerDescription>
+                      </Drawer.Description>
                     </div>
-                  </DrawerContent>
-                </DrawerPopup>
+                  </Drawer.Content>
+                </Drawer.Popup>
               </Drawer>
 
               <Drawer>
-                <DrawerTrigger>
+                <Drawer.Trigger>
                   <Button tone="neutral" variant="outline">
                     <BellIcon weight="bold" />
                     Notification settings
                   </Button>
-                </DrawerTrigger>
-                <DrawerPopup>
-                  <DrawerContent>
+                </Drawer.Trigger>
+                <Drawer.Popup>
+                  <Drawer.Content>
                     <div className="flex flex-col gap-md p-lg">
                       <div className="flex items-start justify-between">
-                        <DrawerTitle>Notifications</DrawerTitle>
-                        <DrawerClose>
+                        <Drawer.Title>Notifications</Drawer.Title>
+                        <Drawer.Close>
                           <Button
                             aria-label="Close nested drawer"
                             size="iconSmall"
@@ -678,19 +669,19 @@ export const NestedDrawers: Story = {
                           >
                             <XIcon weight="bold" />
                           </Button>
-                        </DrawerClose>
+                        </Drawer.Close>
                       </div>
-                      <DrawerDescription>
+                      <Drawer.Description>
                         Configure how and when you receive notifications from the app.
-                      </DrawerDescription>
+                      </Drawer.Description>
                     </div>
-                  </DrawerContent>
-                </DrawerPopup>
+                  </Drawer.Content>
+                </Drawer.Popup>
               </Drawer>
             </div>
-          </DrawerContent>
-        </DrawerPopup>
+          </Drawer.Content>
+        </Drawer.Popup>
       </Drawer>
-    </DrawerProvider>
+    </Drawer.Provider>
   ),
 }

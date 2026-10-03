@@ -1,25 +1,17 @@
 import { FileCssIcon, FileJsIcon, FileTsIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { codeToHtml } from 'shiki/bundle/web'
-import { CodeBlock } from './code-block'
-import { CodeBlockActions } from './code-block-actions'
-import { CodeBlockCopy } from './code-block-copy'
-import { CodeBlockDownload } from './code-block-download'
-import { CodeBlockHeader } from './code-block-header'
-import { CodeBlockName } from './code-block-name'
-import { CodeBlockSelect } from './code-block-select'
-import { CodeBlockTabs } from './code-block-tabs'
-import { CodeBlockWindow } from './code-block-window'
+import type { BundledLanguage } from 'shiki/bundle/web'
 
 import type { CodeBlockValue } from './code-block.types'
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { BundledLanguage } from 'shiki/bundle/web'
+import { CodeBlock } from './index'
 
 async function highlightCode(code: string, lang: BundledLanguage): Promise<string> {
   return await codeToHtml(code, {
-    lang: lang,
+    lang,
     themes: {
-      light: 'github-light',
       dark: 'github-dark',
+      light: 'github-light',
     },
     transformers: [
       {
@@ -34,8 +26,6 @@ async function highlightCode(code: string, lang: BundledLanguage): Promise<strin
 
 const data: CodeBlockValue[] = [
   {
-    id: '1',
-    icon: <FileJsIcon weight="bold" />,
     content: await highlightCode(
       `const fetchUserData = async (userId) => {
   try {
@@ -50,12 +40,12 @@ const data: CodeBlockValue[] = [
 };`,
       'javascript',
     ),
+    icon: <FileJsIcon weight="bold" />,
+    id: '1',
     label: 'JavaScript',
     name: 'api.js',
   },
   {
-    id: '2',
-    icon: <FileTsIcon weight="bold" />,
     content: await highlightCode(
       `interface User {
   id: string;
@@ -71,12 +61,12 @@ async function fetchUserData(userId: string): Promise<User> {
 }`,
       'typescript',
     ),
+    icon: <FileTsIcon weight="bold" />,
+    id: '2',
     label: 'TypeScript',
     name: 'types.ts',
   },
   {
-    id: '3',
-    icon: <FileCssIcon weight="bold" />,
     content: await highlightCode(
       `.container {
   max-width: 1200px;
@@ -98,25 +88,21 @@ async function fetchUserData(userId: string): Promise<User> {
 }`,
       'css',
     ),
+    icon: <FileCssIcon weight="bold" />,
+    id: '3',
     label: 'CSS',
     name: 'styles.css',
   },
 ]
 
 export default {
-  title: 'Components/Code Block',
-  component: CodeBlock,
-  subcomponents: {
-    CodeBlockHeader,
-    CodeBlockWindow,
-    CodeBlockCopy,
-    CodeBlockSelect,
-    CodeBlockTabs,
-    CodeBlockName,
-    CodeBlockActions,
-    CodeBlockDownload,
-  },
   argTypes: {
+    defaultValue: {
+      description: 'The initially selected code block value from the items array.',
+      table: {
+        type: { summary: 'CodeBlockValue' },
+      },
+    },
     items: {
       description:
         'Array of code block values containing id, label, and content for each tab or select option.',
@@ -124,26 +110,42 @@ export default {
         type: { summary: 'CodeBlockValue[]' },
       },
     },
-    defaultValue: {
-      description: 'The initially selected code block value from the items array.',
-      table: {
-        type: { summary: 'CodeBlockValue' },
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A container for displaying formatted code snippets with optional navigation.',
-      description: {
-        component:
-          'The CodeBlock component provides a structured way to display code snippets with support for multiple languages or versions. It includes subcomponents for headers, navigation (tabs or select), and copy functionality, allowing for a customizable and interactive code display experience.',
-      },
-    },
   },
   args: {
     defaultValue: data[0],
     items: data,
   },
+  component: CodeBlock,
+  decorators: [
+    (Story) => (
+      <>
+        <style>
+          {`[data-theme='dark'] .shiki, [data-theme='dark'] .shiki span { color: var(--shiki-dark) !important; }`}
+        </style>
+        <Story />
+      </>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The CodeBlock component provides a structured way to display code snippets with support for multiple languages or versions. It includes subcomponents for headers, navigation (tabs or select), and copy functionality, allowing for a customizable and interactive code display experience.',
+      },
+      subtitle: 'A container for displaying formatted code snippets with optional navigation.',
+    },
+  },
+  subcomponents: {
+    CodeBlockActions: CodeBlock.Actions,
+    CodeBlockCopy: CodeBlock.Copy,
+    CodeBlockDownload: CodeBlock.Download,
+    CodeBlockHeader: CodeBlock.Header,
+    CodeBlockName: CodeBlock.Name,
+    CodeBlockSelect: CodeBlock.Select,
+    CodeBlockTabs: CodeBlock.Tabs,
+    CodeBlockWindow: CodeBlock.Window,
+  },
+  title: 'Components/Code Block',
 } satisfies Meta<typeof CodeBlock>
 
 type Story = StoryObj<typeof CodeBlock>
@@ -162,16 +164,16 @@ export const Playground: Story = {
   },
   render: (args) => (
     <CodeBlock className="w-[800px]" {...args}>
-      <CodeBlockHeader>
-        <CodeBlockSelect />
-        <CodeBlockName />
-      </CodeBlockHeader>
-      <CodeBlockWindow>
-        <CodeBlockActions>
-          <CodeBlockDownload />
-          <CodeBlockCopy />
-        </CodeBlockActions>
-      </CodeBlockWindow>
+      <CodeBlock.Header>
+        <CodeBlock.Select />
+        <CodeBlock.Name />
+      </CodeBlock.Header>
+      <CodeBlock.Window>
+        <CodeBlock.Actions>
+          <CodeBlock.Download />
+          <CodeBlock.Copy />
+        </CodeBlock.Actions>
+      </CodeBlock.Window>
     </CodeBlock>
   ),
 }
@@ -190,16 +192,16 @@ export const Select: Story = {
   },
   render: (args) => (
     <CodeBlock className="w-[800px]" {...args}>
-      <CodeBlockHeader>
-        <CodeBlockSelect />
-        <CodeBlockName />
-      </CodeBlockHeader>
-      <CodeBlockWindow>
-        <CodeBlockActions>
-          <CodeBlockDownload />
-          <CodeBlockCopy />
-        </CodeBlockActions>
-      </CodeBlockWindow>
+      <CodeBlock.Header>
+        <CodeBlock.Select />
+        <CodeBlock.Name />
+      </CodeBlock.Header>
+      <CodeBlock.Window>
+        <CodeBlock.Actions>
+          <CodeBlock.Download />
+          <CodeBlock.Copy />
+        </CodeBlock.Actions>
+      </CodeBlock.Window>
     </CodeBlock>
   ),
 }
@@ -216,16 +218,16 @@ export const Tabs: Story = {
   },
   render: (args) => (
     <CodeBlock className="w-[800px]" {...args}>
-      <CodeBlockHeader>
-        <CodeBlockTabs />
-        <CodeBlockName />
-      </CodeBlockHeader>
-      <CodeBlockWindow>
-        <CodeBlockActions>
-          <CodeBlockDownload />
-          <CodeBlockCopy />
-        </CodeBlockActions>
-      </CodeBlockWindow>
+      <CodeBlock.Header>
+        <CodeBlock.Tabs />
+        <CodeBlock.Name />
+      </CodeBlock.Header>
+      <CodeBlock.Window>
+        <CodeBlock.Actions>
+          <CodeBlock.Download />
+          <CodeBlock.Copy />
+        </CodeBlock.Actions>
+      </CodeBlock.Window>
     </CodeBlock>
   ),
 }
@@ -244,12 +246,12 @@ export const NoHeader: Story = {
   },
   render: (args) => (
     <CodeBlock className="w-[800px]" {...args}>
-      <CodeBlockWindow>
-        <CodeBlockActions>
-          <CodeBlockDownload />
-          <CodeBlockCopy />
-        </CodeBlockActions>
-      </CodeBlockWindow>
+      <CodeBlock.Window>
+        <CodeBlock.Actions>
+          <CodeBlock.Download />
+          <CodeBlock.Copy />
+        </CodeBlock.Actions>
+      </CodeBlock.Window>
     </CodeBlock>
   ),
 }
@@ -266,15 +268,15 @@ export const NoSelect: Story = {
   },
   render: (args) => (
     <CodeBlock className="w-[800px]" {...args}>
-      <CodeBlockHeader>
-        <CodeBlockName />
-      </CodeBlockHeader>
-      <CodeBlockWindow>
-        <CodeBlockActions>
-          <CodeBlockDownload />
-          <CodeBlockCopy />
-        </CodeBlockActions>
-      </CodeBlockWindow>
+      <CodeBlock.Header>
+        <CodeBlock.Name />
+      </CodeBlock.Header>
+      <CodeBlock.Window>
+        <CodeBlock.Actions>
+          <CodeBlock.Download />
+          <CodeBlock.Copy />
+        </CodeBlock.Actions>
+      </CodeBlock.Window>
     </CodeBlock>
   ),
 }

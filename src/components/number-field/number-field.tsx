@@ -1,80 +1,99 @@
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
 import React from 'react'
-import { Button } from '../button'
-import { numberFieldVariants, type NumberFieldTypesProps } from './number-field.types'
+
 import { cn } from '@/utils/cn'
 
-export const NumberField = ({
+import { Button } from '../button'
+import { numberFieldVariants } from './number-field.types'
+import type { NumberFieldTypesProps } from './number-field.types'
+
+function getCurrentValue(value: number | null | undefined, uncontrolledValue: number | undefined) {
+  if (typeof value === 'number' || value === null) {
+    return value
+  }
+  return uncontrolledValue
+}
+
+function getInvalidAttribute(isInvalid: boolean): string | undefined {
+  if (isInvalid) {
+    return ''
+  }
+  return undefined
+}
+
+function getInputLabel(label: React.ReactNode): string {
+  if (typeof label === 'string') {
+    return label
+  }
+  return 'Number value'
+}
+
+function NumberField({
   size,
   variant,
   children,
   label,
-  disableInput = false,
+  disableInput: disabledInput = false,
   className,
   ref,
   ...props
-}: NumberFieldTypesProps) => {
-  const generatedId = React.useId()
-  const {
-    id: idProp,
-    min,
-    max,
-    value,
-    defaultValue,
-    onValueChange,
-    'aria-invalid': ariaInvalid,
-    'aria-label': ariaLabel,
-    ...restProps
-  } = props
-  const id = idProp ?? generatedId
+}: NumberFieldTypesProps) {
+  const id = React.useId(),
+    {
+      min,
+      max,
+      value,
+      defaultValue,
+      onValueChange,
+      'aria-invalid': ariaInvalid,
+      ...restProps
+    } = props,
+    [uncontrolledValue, setUncontrolledValue] = React.useState<number | undefined>(() => {
+      if (typeof defaultValue === 'number') {
+        return defaultValue
+      }
 
-  const [uncontrolledValue, setUncontrolledValue] = React.useState<number | null>(() => {
-    if (typeof defaultValue === 'number') {
-      return defaultValue
+      return undefined
+    }),
+    currentValue = getCurrentValue(value, uncontrolledValue),
+    isOutOfRange =
+      typeof currentValue === 'number' &&
+      ((typeof min === 'number' && currentValue < min) ||
+        (typeof max === 'number' && currentValue > max)),
+    mergedAriaInvalid = Boolean(ariaInvalid || isOutOfRange),
+    handleValueChange: NumberFieldTypesProps['onValueChange'] = (...args) => {
+      const [nextValue] = args
+
+      if (typeof value !== 'number' && value !== null) {
+        setUncontrolledValue(nextValue ?? undefined)
+      }
+
+      onValueChange?.(...args)
+    },
+    getButtonSize = () => {
+      switch (size) {
+        case 'small': {
+          return 'iconSmall'
+        }
+        case 'medium': {
+          return 'iconMedium'
+        }
+        case 'large': {
+          return 'iconLarge'
+        }
+        default: {
+          return 'iconMedium'
+        }
+      }
     }
-
-    return null
-  })
-
-  const currentValue = typeof value === 'number' || value === null ? value : uncontrolledValue
-
-  const isOutOfRange =
-    typeof currentValue === 'number' &&
-    ((typeof min === 'number' && currentValue < min) ||
-      (typeof max === 'number' && currentValue > max))
-
-  const mergedAriaInvalid = Boolean(ariaInvalid || isOutOfRange)
-
-  const handleValueChange: NumberFieldTypesProps['onValueChange'] = (...args) => {
-    const [nextValue] = args
-
-    if (typeof value !== 'number' && value !== null) {
-      setUncontrolledValue(nextValue)
-    }
-
-    onValueChange?.(...args)
-  }
-
-  const getButtonSize = () => {
-    switch (size) {
-      case 'small':
-        return 'iconSmall'
-      case 'medium':
-        return 'iconMedium'
-      case 'large':
-        return 'iconLarge'
-      default:
-        return 'iconMedium'
-    }
-  }
 
   return (
     <BaseNumberField.Root
-      className={cn(numberFieldVariants({ size, variant, className }))}
+      className={cn(numberFieldVariants({ className, size, variant }))}
       ref={ref}
       aria-invalid={mergedAriaInvalid}
-      data-invalid={mergedAriaInvalid ? '' : undefined}
+      data-invalid={getInvalidAttribute(mergedAriaInvalid)}
       defaultValue={defaultValue}
       id={id}
       max={max}
@@ -84,7 +103,7 @@ export const NumberField = ({
       {...restProps}
     >
       {label && (
-        <BaseNumberField.ScrubArea className={'cursor-ew-resize'}>
+        <BaseNumberField.ScrubArea className="cursor-ew-resize">
           <label className="cursor-ew-resize style-text-default--1" htmlFor={id}>
             {label}
           </label>
@@ -99,17 +118,17 @@ export const NumberField = ({
             <Button
               {...stepperProps}
               tone="error"
-              variant={'ghost'}
+              variant="ghost"
               size={getButtonSize()}
-              className={'shrink-0 rounded-r-none'}
+              className="shrink-0 rounded-r-none"
             >
               <MinusIcon weight="bold" />
             </Button>
           )}
         />
         <BaseNumberField.Input
-          aria-label={label ? undefined : ariaLabel}
-          disabled={disableInput}
+          aria-label={getInputLabel(label)}
+          disabled={disabledInput}
           className={cn('w-full text-center focus:outline-none', children && 'text-right')}
         />
         {children && (
@@ -129,9 +148,9 @@ export const NumberField = ({
             <Button
               {...stepperProps}
               tone="success"
-              variant={'ghost'}
+              variant="ghost"
               size={getButtonSize()}
-              className={'shrink-0 rounded-l-none'}
+              className="shrink-0 rounded-l-none"
             >
               <PlusIcon weight="bold" />
             </Button>
@@ -158,3 +177,5 @@ function CursorGrowIcon(props: React.ComponentProps<'svg'>) {
     </svg>
   )
 }
+
+export { NumberField }

@@ -1,9 +1,10 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
+
 import { cn } from '@/utils/cn'
 
 import type { SelectListProps } from './select.types'
 
-export const SelectList = ({ className, children, ref, ...props }: SelectListProps) => {
+export function SelectList({ className, ref, ...props }: SelectListProps) {
   return (
     <BaseSelect.List
       className={cn(
@@ -12,8 +13,6 @@ export const SelectList = ({ className, children, ref, ...props }: SelectListPro
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseSelect.List>
+    />
   )
 }

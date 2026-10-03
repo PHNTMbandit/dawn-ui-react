@@ -1,12 +1,12 @@
-import { Avatar as AvatarBase } from './avatar'
+import { Avatar as AvatarRoot } from './avatar'
 import { AvatarBadge } from './avatar-badge'
 import { AvatarFallback } from './avatar-fallback'
 import { AvatarImage } from './avatar-image'
 
-export const Avatar = Object.assign(AvatarBase, {
+const Avatar = Object.assign(AvatarRoot, {
+  Badge: AvatarBadge,
   Fallback: AvatarFallback,
   Image: AvatarImage,
-  Badge: AvatarBadge,
 })
 
 export type {
@@ -18,3 +18,5 @@ export type {
 export { AvatarFallback } from './avatar-fallback'
 export { AvatarImage } from './avatar-image'
 export { AvatarBadge } from './avatar-badge'
+
+export { Avatar }

@@ -1,4 +1,4 @@
-import { Autocomplete as AutocompleteBase } from './autocomplete'
+import { Autocomplete as AutocompleteRoot } from './autocomplete'
 import { AutocompleteCollection } from './autocomplete-collection'
 import { AutocompleteContent } from './autocomplete-content'
 import { AutocompleteGridContent } from './autocomplete-grid-content'
@@ -13,7 +13,7 @@ import { AutocompleteRow } from './autocomplete-row'
 import { AutocompleteStatus } from './autocomplete-status'
 import { AutocompleteTrigger } from './autocomplete-trigger'
 
-export const Autocomplete = Object.assign(AutocompleteBase, {
+const Autocomplete = Object.assign(AutocompleteRoot, {
   Collection: AutocompleteCollection,
   Content: AutocompleteContent,
   GridContent: AutocompleteGridContent,
@@ -58,3 +58,5 @@ export { AutocompleteItem } from './autocomplete-item'
 export { AutocompleteRow } from './autocomplete-row'
 export { AutocompleteStatus } from './autocomplete-status'
 export { AutocompleteTrigger } from './autocomplete-trigger'
+
+export { Autocomplete }

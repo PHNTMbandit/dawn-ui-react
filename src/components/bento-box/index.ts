@@ -1,4 +1,4 @@
-import { BentoBox as BentoBoxBase } from './bento-box'
+import { BentoBox as BentoBoxRoot } from './bento-box'
 import { BentoBoxAction } from './bento-box-action'
 import { BentoBoxContent } from './bento-box-content'
 import { BentoBoxDescription } from './bento-box-description'
@@ -6,7 +6,7 @@ import { BentoBoxFooter } from './bento-box-footer'
 import { BentoBoxHeader } from './bento-box-header'
 import { BentoBoxTitle } from './bento-box-title'
 
-export const BentoBox = Object.assign(BentoBoxBase, {
+const BentoBox = Object.assign(BentoBoxRoot, {
   Action: BentoBoxAction,
   Content: BentoBoxContent,
   Description: BentoBoxDescription,
@@ -31,3 +31,5 @@ export { BentoBoxDescription } from './bento-box-description'
 export { BentoBoxFooter } from './bento-box-footer'
 export { BentoBoxHeader } from './bento-box-header'
 export { BentoBoxTitle } from './bento-box-title'
+
+export { BentoBox }

@@ -1,146 +1,145 @@
-import z from 'zod'
-import { MenuTrigger } from '../menu'
+import type { Column, RowData, TableFeature, TableFeatures } from '@tanstack/react-table'
+import type { VariantProps } from 'class-variance-authority'
+import { z } from 'zod'
 
 import type { BadgeProps } from '../badge'
 import type { Button } from '../button'
 import type { Checkbox } from '../checkbox'
 import type { inputVariants } from '../input/input.types'
-import type { features } from './table-context'
+import type { MenuTrigger } from '../menu'
+import type { features } from './table-feature-context'
 import type { Table_ViewMode, TableOptions_ViewMode, TableState_ViewMode } from './table.utils'
-import type { Column, RowData, TableFeature, TableFeatures } from '@tanstack/react-table'
-import type { VariantProps } from 'class-variance-authority'
 
-export type TableFirstPageProps = React.ComponentProps<typeof Button>
-export type TableFooterProps = React.ComponentProps<'tfoot'>
-export type TableHeaderProps = React.ComponentProps<'thead'>
-export type TableLastPageProps = React.ComponentProps<typeof Button>
-export type TablePaginationProps = React.ComponentProps<'div'> & {
+type TableFirstPageProps = React.ComponentProps<typeof Button>
+type TableFooterProps = React.ComponentProps<'tfoot'>
+type TableHeaderProps = React.ComponentProps<'thead'>
+type TableLastPageProps = React.ComponentProps<typeof Button>
+type TablePaginationProps = React.ComponentProps<'div'> & {
   truncateFrom?: number
   truncateTo?: number
 }
-export type TableNextPageProps = React.ComponentProps<typeof Button>
-export type TableResultsProps = Omit<React.ComponentProps<'div'>, 'children'> & {
+type TableNextPageProps = React.ComponentProps<typeof Button>
+type TableResultsProps = Omit<React.ComponentProps<'div'>, 'children'> & {
   children: (start: number, end: number, totalRows: number) => React.ReactElement
 }
-export type TablePreviousPageProps = React.ComponentProps<typeof Button>
-export type TableRefreshProps = React.ComponentProps<typeof Button>
-export type TableSearchProps = React.ComponentProps<'input'> & VariantProps<typeof inputVariants>
-export type TableColumnToggleProps = React.ComponentProps<typeof MenuTrigger>
-export type TableRowProps = React.ComponentProps<'tr'>
-export type TableBodyProps = React.ComponentProps<'tbody'> & {
+type TablePreviousPageProps = React.ComponentProps<typeof Button>
+type TableRefreshProps = React.ComponentProps<typeof Button>
+type TableSearchProps = React.ComponentProps<'input'> & VariantProps<typeof inputVariants>
+type TableColumnToggleProps = React.ComponentProps<typeof MenuTrigger>
+type TableRowProps = React.ComponentProps<'tr'>
+type TableBodyProps = React.ComponentProps<'tbody'> & {
   showDivider?: boolean
 }
-export type TableNavProps = React.ComponentProps<'div'> & {
+type TableNavProps = React.ComponentProps<'div'> & {
   sticky?: boolean
 }
-export type TableContentProps = React.ComponentProps<'div'>
-export type TablePagingProps = React.ComponentProps<'div'> & {
+type TableContentProps = React.ComponentProps<'div'>
+type TablePagingProps = React.ComponentProps<'div'> & {
   min?: number
   max?: number
 }
-export type TableContainerProps = React.ComponentProps<'div'>
-export type TableToolbarProps = React.ComponentProps<'div'> & {
+type TableContainerProps = React.ComponentProps<'div'>
+type TableToolbarProps = React.ComponentProps<'div'> & {
   sticky?: boolean
 }
-export type TableViewModeToggleProps = Omit<React.ComponentProps<typeof Button>, 'children'> & {
+type TableViewModeToggleProps = Omit<React.ComponentProps<typeof Button>, 'children'> & {
   children: (isGridView: boolean) => React.ReactNode
 }
-export type TableFilterMenuProps = React.ComponentProps<'button'>
-export type TableFilterListProps = React.ComponentProps<'ul'>
-export type TableDateFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
-  column: Column<typeof features, TData, unknown>
+type TableFilterMenuProps = React.ComponentProps<'button'>
+type TableFilterListProps = React.ComponentProps<'div'>
+type TableDateFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
+  column: Column<typeof features, TData>
 }
-export type TableDateFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
-  column: Column<typeof features, TData, unknown>
+type TableDateFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
+  column: Column<typeof features, TData>
 }
-export type TableStringFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
-  column: Column<typeof features, TData, unknown>
+type TableStringFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
+  column: Column<typeof features, TData>
 }
-export type TableStringFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
-  column: Column<typeof features, TData, unknown>
+type TableStringFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
+  column: Column<typeof features, TData>
 }
-export type TableNumberFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
-  column: Column<typeof features, TData, unknown>
+type TableNumberFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
+  column: Column<typeof features, TData>
 }
-export type TableNumberFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
-  column: Column<typeof features, TData, unknown>
+type TableNumberFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
+  column: Column<typeof features, TData>
 }
-export type TableSelectFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
-  column: Column<typeof features, TData, unknown>
+type TableSelectFilterFormProps<TData extends RowData> = React.ComponentProps<'form'> & {
+  column: Column<typeof features, TData>
 }
-export type TableSelectFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
-  column: Column<typeof features, TData, unknown>
+type TableSelectFilterChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
+  column: Column<typeof features, TData>
 }
-export type TableSelectFilterOption = string | number | boolean
-export type TableSelectFilterValue = TableSelectFilterOption[]
+type TableSelectFilterOption = string | number | boolean
+type TableSelectFilterValue = TableSelectFilterOption[]
 
-export type TableSortChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
-  column: Column<typeof features, TData, unknown>
+type TableSortChipProps<TData extends RowData> = React.ComponentProps<'button'> & {
+  column: Column<typeof features, TData>
 }
 
-export type TableSortMenuProps = React.ComponentProps<typeof MenuTrigger>
-export type TableChangeViewProps = React.ComponentProps<typeof Button>
-export type TableCheckboxCellProps = React.ComponentProps<typeof Checkbox>
-export type TableSelectHeaderProps = React.ComponentProps<typeof Checkbox>
-export type TableTextCellProps = React.ComponentProps<'span'>
-export type TableDateCellProps = React.ComponentProps<'span'>
-export type TableNumberCellProps = React.ComponentProps<'span'>
-export type TableImageCellProps = React.ComponentProps<'img'>
-export type TableViewportProps = React.ComponentProps<'table'>
-export type TableSortListProps = React.ComponentProps<'ul'>
-export type TableBadgeCellProps = Omit<BadgeProps, 'tone'> & {
+type TableSortMenuProps = React.ComponentProps<typeof MenuTrigger>
+type TableChangeViewProps = React.ComponentProps<typeof Button>
+type TableCheckboxCellProps = React.ComponentProps<typeof Checkbox>
+type TableSelectHeaderProps = React.ComponentProps<typeof Checkbox>
+type TableTextCellProps = React.ComponentProps<'span'>
+type TableDateCellProps = React.ComponentProps<'span'>
+type TableNumberCellProps = React.ComponentProps<'span'>
+type TableImageCellProps = React.ComponentProps<'img'>
+type TableViewportProps = React.ComponentProps<'table'>
+type TableSortListProps = React.ComponentProps<'div'>
+type TableBadgeCellProps = Omit<BadgeProps, 'tone'> & {
   tone?: BadgeProps['tone'] | ((value: string) => BadgeProps['tone'])
 }
 
-export const stringFilterOperators = [
-  'equals',
-  'notEquals',
-  'contains',
-  'notContains',
-  'startsWith',
-  'endsWith',
-] as const
+const stringFilterOperators = [
+    'equals',
+    'notEquals',
+    'contains',
+    'notContains',
+    'startsWith',
+    'endsWith',
+  ] as const,
+  numberFilterOperators = ['equals', 'notEquals', 'greaterThan', 'lessThan', 'between'] as const,
+  dateFilterOperators = ['equals', 'notEquals', 'greaterThan', 'lessThan', 'between'] as const,
+  defaultFilterOperatorLabels = {
+    between: 'Is between',
+    contains: 'Contains',
+    endsWith: 'Ends with',
+    equals: 'Is',
+    greaterThan: 'Is greater than',
+    lessThan: 'Is less than',
+    notContains: 'Does not contain',
+    notEquals: 'Is not',
+    startsWith: 'Starts with',
+  } satisfies Record<FilterOperator, string>,
+  dateFilterSchema = z.object({
+    filterOperator: z.enum(dateFilterOperators),
+    filterValueFrom: z.union([z.literal(''), z.iso.date()]),
+    filterValueTo: z.union([z.literal(''), z.iso.date()]),
+  }),
+  stringFilterSchema = z.object({
+    filterOperator: z.enum(stringFilterOperators),
+    filterValue: z.string(),
+  }),
+  numberFilterSchema = z.object({
+    filterOperator: z.enum(numberFilterOperators),
+    filterValueFrom: z.string(),
+    filterValueTo: z.string(),
+  })
 
-export const numberFilterOperators = [
-  'equals',
-  'notEquals',
-  'greaterThan',
-  'lessThan',
-  'between',
-] as const
+type DateFilterOperator = (typeof dateFilterOperators)[number]
+type StringFilterOperator = (typeof stringFilterOperators)[number]
+type NumberFilterOperator = (typeof numberFilterOperators)[number]
+type FilterOperator = StringFilterOperator | NumberFilterOperator
 
-export const dateFilterOperators = [
-  'equals',
-  'notEquals',
-  'greaterThan',
-  'lessThan',
-  'between',
-] as const
+type ViewMode = 'list' | 'grid'
 
-export type DateFilterOperator = (typeof dateFilterOperators)[number]
-export type StringFilterOperator = (typeof stringFilterOperators)[number]
-export type NumberFilterOperator = (typeof numberFilterOperators)[number]
-export type FilterOperator = StringFilterOperator | NumberFilterOperator
-
-export const defaultFilterOperatorLabels = {
-  equals: 'Is',
-  notEquals: 'Is not',
-  contains: 'Contains',
-  notContains: 'Does not contain',
-  startsWith: 'Starts with',
-  endsWith: 'Ends with',
-  greaterThan: 'Is greater than',
-  lessThan: 'Is less than',
-  between: 'Is between',
-} satisfies Record<FilterOperator, string>
-
-export type ViewMode = 'list' | 'grid'
-
-export interface TableColumnMeta {
+interface TableColumnMeta {
   filterVariant?: 'range' | 'select' | 'date' | 'string' | 'number'
 }
 
-export interface TableMeta {
+interface TableMeta {
   translations?: {
     filterOperatorLabels?: Partial<Record<FilterOperator, string>>
     buttonLabels?: {
@@ -151,23 +150,6 @@ export interface TableMeta {
     }
   }
 }
-
-export const dateFilterSchema = z.object({
-  filterOperator: z.enum(dateFilterOperators),
-  filterValueFrom: z.union([z.literal(''), z.iso.date()]),
-  filterValueTo: z.union([z.literal(''), z.iso.date()]),
-})
-
-export const stringFilterSchema = z.object({
-  filterOperator: z.enum(stringFilterOperators),
-  filterValue: z.string(),
-})
-
-export const numberFilterSchema = z.object({
-  filterOperator: z.enum(numberFilterOperators),
-  filterValueFrom: z.string(),
-  filterValueTo: z.string(),
-})
 
 declare module '@tanstack/react-table' {
   interface Plugins {
@@ -185,4 +167,64 @@ declare module '@tanstack/react-table' {
   interface Table_FeatureMap<TFeatures extends TableFeatures, TData extends RowData> {
     viewModePlugin: Table_ViewMode
   }
+}
+
+export {
+  dateFilterOperators,
+  dateFilterSchema,
+  defaultFilterOperatorLabels,
+  numberFilterOperators,
+  numberFilterSchema,
+  stringFilterOperators,
+  stringFilterSchema,
+  type DateFilterOperator,
+  type FilterOperator,
+  type NumberFilterOperator,
+  type StringFilterOperator,
+  type TableBadgeCellProps,
+  type TableBodyProps,
+  type TableChangeViewProps,
+  type TableCheckboxCellProps,
+  type TableColumnMeta,
+  type TableColumnToggleProps,
+  type TableContainerProps,
+  type TableContentProps,
+  type TableDateCellProps,
+  type TableDateFilterChipProps,
+  type TableDateFilterFormProps,
+  type TableFilterListProps,
+  type TableFilterMenuProps,
+  type TableFirstPageProps,
+  type TableFooterProps,
+  type TableHeaderProps,
+  type TableImageCellProps,
+  type TableLastPageProps,
+  type TableNavProps,
+  type TableNextPageProps,
+  type TableNumberCellProps,
+  type TableNumberFilterChipProps,
+  type TableNumberFilterFormProps,
+  type TablePaginationProps,
+  type TablePagingProps,
+  type TablePreviousPageProps,
+  type TableRefreshProps,
+  type TableResultsProps,
+  type TableRowProps,
+  type TableSearchProps,
+  type TableSelectFilterChipProps,
+  type TableSelectFilterFormProps,
+  type TableSelectFilterOption,
+  type TableSelectFilterValue,
+  type TableSelectHeaderProps,
+  type TableSortChipProps,
+  type TableSortListProps,
+  type TableSortMenuProps,
+  type TableStringFilterChipProps,
+  type TableStringFilterFormProps,
+  type TableTextCellProps,
+  type TableToolbarProps,
+  type TableViewportProps,
+  type TableViewModeToggleProps,
+  type TableMeta,
+  type ViewMode,
 }
