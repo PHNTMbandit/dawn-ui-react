@@ -1,3 +1,11 @@
+# [1.0.0-rc.4](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2026-10-03)
+
+
+### Features
+
+* migrate to vp ([ed5d13f](https://github.com/PHNTMbandit/dawn-ui-react/commit/ed5d13fbde4b60ab69cdb42aa3f0473b51a0a0d5))
+* **progress:** add label, title and description components ([9e93775](https://github.com/PHNTMbandit/dawn-ui-react/commit/9e937759804e4aecfeb963a0dbeeb750e3ffafba))
+
 # [1.0.0-rc.3](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2026-09-29)
 
 
