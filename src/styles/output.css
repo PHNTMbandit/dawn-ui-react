@@ -8,7 +8,6 @@
     --container-5xl: 64rem;
     --font-weight-light: 300;
     --font-weight-medium: 500;
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --animate-spin: spin 1s linear infinite;
@@ -1098,20 +1097,11 @@
   .flex-1 {
     flex: 1;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink-0 {
     flex-shrink: 0;
   }
-  .flex-grow {
-    flex-grow: 1;
-  }
   .grow {
     flex-grow: 1;
-  }
-  .border-collapse {
-    border-collapse: collapse;
   }
   .origin-\(--transform-origin\) {
     transform-origin: var(--transform-origin);
@@ -1693,9 +1683,6 @@
   .object-cover {
     object-fit: cover;
   }
-  .p-0 {
-    padding: var(--spacing-0);
-  }
   .p-0\! {
     padding: var(--spacing-0) !important;
   }
@@ -1984,9 +1971,6 @@
   .text-balance {
     text-wrap: balance;
   }
-  .text-wrap {
-    text-wrap: wrap;
-  }
   .break-keep {
     word-break: keep-all;
   }
@@ -2190,9 +2174,6 @@
   }
   .shadow-xs {
     box-shadow: var(--shadow-xs) var(--dawn-shadow);
-  }
-  .ring-brand-border-strong {
-    --tw-ring-color: var(--color-brand-border-strong);
   }
   .ring-brand-border-strong\/20 {
     --tw-ring-color: var(--color-brand-border-strong);
@@ -4173,12 +4154,6 @@
   .data-\[active\=true\]\:text-warning-on-container[data-active="true"] {
     color: var(--color-warning-on-container);
   }
-  .data-\[disabled\]\:cursor-not-allowed[data-disabled] {
-    cursor: not-allowed;
-  }
-  .data-\[disabled\]\:opacity-50[data-disabled] {
-    opacity: 50%;
-  }
   .data-\[disabled\=true\]\:cursor-not-allowed[data-disabled="true"] {
     cursor: not-allowed;
   }
@@ -4190,34 +4165,6 @@
   }
   .data-\[orientation\=vertical\]\:h-full[data-orientation="vertical"] {
     height: 100%;
-  }
-  .data-\[highlighted\]\:data-\[popup-open\]\:before\:bg-accent-container[data-highlighted][data-popup-open]::before {
-    content: var(--tw-content);
-    background-color: var(--color-accent-container);
-  }
-  .data-\[highlighted\]\:data-\[popup-open\]\:before\:bg-brand-container[data-highlighted][data-popup-open]::before {
-    content: var(--tw-content);
-    background-color: var(--color-brand-container);
-  }
-  .data-\[highlighted\]\:data-\[popup-open\]\:before\:bg-error-container[data-highlighted][data-popup-open]::before {
-    content: var(--tw-content);
-    background-color: var(--color-error-container);
-  }
-  .data-\[highlighted\]\:data-\[popup-open\]\:before\:bg-info-container[data-highlighted][data-popup-open]::before {
-    content: var(--tw-content);
-    background-color: var(--color-info-container);
-  }
-  .data-\[highlighted\]\:data-\[popup-open\]\:before\:bg-neutral-container-high[data-highlighted][data-popup-open]::before {
-    content: var(--tw-content);
-    background-color: var(--color-neutral-container-high);
-  }
-  .data-\[highlighted\]\:data-\[popup-open\]\:before\:bg-success-container[data-highlighted][data-popup-open]::before {
-    content: var(--tw-content);
-    background-color: var(--color-success-container);
-  }
-  .data-\[highlighted\]\:data-\[popup-open\]\:before\:bg-warning-container[data-highlighted][data-popup-open]::before {
-    content: var(--tw-content);
-    background-color: var(--color-warning-container);
   }
   .data-\[side\=bottom\]\:-top-3xs[data-side="bottom"] {
     top: calc(var(--spacing-3xs) * -1);
@@ -5178,17 +5125,8 @@
   .\[\&_\[role\=\"group\"\]\]\:h-xl [role="group"] {
     height: var(--spacing-xl);
   }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-2xl [role="group"] {
-    border-radius: var(--radius-2xl);
-  }
   .\[\&_\[role\=\"group\"\]\]\:rounded-full [role="group"] {
     border-radius: var(--radius-full);
-  }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-lg [role="group"] {
-    border-radius: var(--radius-lg);
-  }
-  .\[\&_\[role\=\"group\"\]\]\:rounded-xl [role="group"] {
-    border-radius: var(--radius-xl);
   }
   .\[\&_\[role\=\"group\"\]\]\:bg-neutral-container [role="group"] {
     background-color: var(--color-neutral-container);
@@ -5557,12 +5495,6 @@
   .data-invalid\:\[\&_input\]\:caret-error-border-strong[data-invalid] input {
     caret-color: var(--color-error-border-strong);
   }
-  .data-\[invalid\]\:\[\&_input\]\:text-error-on-container[data-invalid] input {
-    color: var(--color-error-on-container);
-  }
-  .data-\[invalid\]\:\[\&_input\]\:caret-error-border-strong[data-invalid] input {
-    caret-color: var(--color-error-border-strong);
-  }
   .\[\&_span\]\:style-text-default--1 span {
     font-family: var(--font-body);
     font-weight: 500;
@@ -5662,13 +5594,6 @@
   }
   .\[\&\:has\(\[data-chips\]\:not\(\:empty\)\)\]\:rounded-xl:has([data-chips]:not(:empty)) {
     border-radius: var(--radius-xl);
-  }
-  .\[\&\:has\(svg\)\]\:size-md:has(svg) {
-    width: var(--spacing-md);
-    height: var(--spacing-md);
-  }
-  .\[\&\:has\(svg\)\]\:p-0:has(svg) {
-    padding: var(--spacing-0);
   }
   :is(.\*\*\:\[\[role\=presentation\]\]\:bottom-\[-3px\] *):is([role=presentation]) {
     bottom: -3px;

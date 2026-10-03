@@ -1,5 +1,6 @@
 import { CheckIcon } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Fragment } from 'react'
 
 import { Progress } from './index'
 
@@ -26,12 +27,16 @@ const STEP_ITEMS = [
   }) => (
     <Progress className="w-[300px]" currentIndex={currentIndex}>
       {STEP_ITEMS.map((item, index) => (
-        <div key={item.title} className="contents">
-          <Progress.Indicator description={item.description} title={item.title}>
-            {withIcons && index + 1 < currentIndex ? <CheckIcon weight="bold" /> : index + 1}
+        <Fragment key={item.title}>
+          <Progress.Indicator>
+            <Progress.Label>
+              {withIcons && index + 1 < currentIndex ? <CheckIcon weight="bold" /> : index + 1}
+            </Progress.Label>
+            <Progress.Title>{item.title}</Progress.Title>
+            <Progress.Description>{item.description}</Progress.Description>
           </Progress.Indicator>
-          {index < STEP_ITEMS.length - 1 ? <Progress.Bar /> : null}
-        </div>
+          {index + 1 < STEP_ITEMS.length && <Progress.Bar />}
+        </Fragment>
       ))}
     </Progress>
   )
@@ -99,10 +104,6 @@ export const WithCompletionIcons: Story = {
 }
 
 export const IndicatorText: IndicatorStory = {
-  args: {
-    description: 'Complete your profile details',
-    title: 'Profile',
-  },
   name: 'Primitive / Indicator Text',
   parameters: {
     docs: {
@@ -115,10 +116,6 @@ export const IndicatorText: IndicatorStory = {
 }
 
 export const IndicatorIcon: IndicatorStory = {
-  args: {
-    description: 'Step completed successfully',
-    title: 'Verified',
-  },
   name: 'Primitive / Indicator Icon',
   parameters: {
     docs: {
@@ -147,5 +144,30 @@ export const Bar: BarStory = {
     <div className="w-3xl">
       <Progress.Bar {...args} />
     </div>
+  ),
+}
+
+export const Manual: Story = {
+  name: 'State / Manual Control',
+  render: (args) => (
+    <Progress className="w-[300px]" {...args}>
+      <Progress.Indicator>
+        <Progress.Label>1</Progress.Label>
+        <Progress.Title>Step 1</Progress.Title>
+        <Progress.Description>Description for step 1</Progress.Description>
+      </Progress.Indicator>
+      <Progress.Bar />
+      <Progress.Indicator>
+        <Progress.Label>2</Progress.Label>
+        <Progress.Title>Step 2</Progress.Title>
+        <Progress.Description>Description for step 2</Progress.Description>
+      </Progress.Indicator>
+      <Progress.Bar />
+      <Progress.Indicator>
+        <Progress.Label>3</Progress.Label>
+        <Progress.Title>Step 3</Progress.Title>
+        <Progress.Description>Description for step 3</Progress.Description>
+      </Progress.Indicator>
+    </Progress>
   ),
 }
