@@ -162,10 +162,10 @@ export default defineConfig({
     },
   },
   pack: {
-    deps: { onlyBundle: [] },
     dts: true,
     entry: ['src/index.ts'],
     format: ['esm'],
+    sourcemap: true,
   },
   plugins: lazyPlugins(() => [react({ compiler: true }), tailwindcss()]),
   resolve: {

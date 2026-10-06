@@ -29,7 +29,7 @@
   "sideEffects": false,
   "exports": {
     ".": "./dist/index.mjs",
-    "./styles.css": "./dist/styles.css"
+    "./styles": "./dist/styles.css"
   },
   "publishConfig": {
     "access": "public"
@@ -128,5 +128,5 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "packageManager": "pnpm@12.8.1"
+  "packageManager": "pnpm@12.9.1"
 }
