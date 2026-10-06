@@ -11,7 +11,7 @@ export function SidebarContent({ className, children, ref, ...props }: SidebarCo
   return (
     <BaseScrollArea.Root
       className={cn(
-        'mb-auto min-h-0 flex-1 overflow-hidden rounded-xl transition-all duration-300 ease-in-out',
+        'min-h-0 flex-1 overflow-hidden rounded-xl transition-all duration-300 ease-in-out',
         !open && 'w-fit self-center',
         className,
       )}

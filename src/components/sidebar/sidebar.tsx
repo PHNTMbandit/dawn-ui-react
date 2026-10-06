@@ -114,7 +114,7 @@ export function Sidebar({
   return (
     <div
       className={cn(
-        'sticky left-[0px] flex h-full shrink-0 flex-col justify-between overflow-hidden border-border bg-surface transition-[width,transform] duration-300 ease-in-out',
+        'sticky left-[0px] flex h-full max-h-dvh min-h-0 shrink-0 flex-col overflow-hidden border-border bg-surface transition-[width,transform] duration-300 ease-in-out',
         className,
         tone === 'primary' && 'bg-surface-background',
         tone === 'secondary' && 'bg-surface',

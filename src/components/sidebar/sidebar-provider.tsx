@@ -84,7 +84,7 @@ function SidebarProvider({
     >
       <div
         className={cn(
-          'relative h-dvh w-full',
+          'relative size-full min-h-0',
           side === 'left' && 'flex flex-row',
           side === 'right' && 'flex flex-row-reverse',
           className,
