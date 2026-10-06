@@ -3,6 +3,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@source ".";
+
 @theme static {
   --color-*: initial;
   --color-white: var(--dawn-white);
