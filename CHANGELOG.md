@@ -1,3 +1,16 @@
+# [1.0.0-rc.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2026-10-06)
+
+
+### Bug Fixes
+
+* **sidebar-provider:** fix height ([ecefacd](https://github.com/PHNTMbandit/dawn-ui-react/commit/ecefacda4acb0b86eced9f71eff6f789c4217fd0))
+* **sidebar:** fix footer not sticking ([71032ed](https://github.com/PHNTMbandit/dawn-ui-react/commit/71032edde74e41196d8eb489e6e44cf9c761d014))
+
+
+### Features
+
+* add chart component ([42b4698](https://github.com/PHNTMbandit/dawn-ui-react/commit/42b4698dcb5b92359968d30f80417e627763cc56))
+
 # [1.0.0-rc.4](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2026-10-03)
 
 
