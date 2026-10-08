@@ -1,3 +1,10 @@
+# [1.0.0-rc.6](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2026-10-08)
+
+
+### Features
+
+* add calendar component ([e8a0777](https://github.com/PHNTMbandit/dawn-ui-react/commit/e8a077702cc2bb7fa283842143b94c0f1d4e8394))
+
 # [1.0.0-rc.5](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2026-10-06)
 
 
