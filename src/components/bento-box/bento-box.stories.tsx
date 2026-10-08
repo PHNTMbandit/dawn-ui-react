@@ -196,12 +196,14 @@ export const FeatureHighlight: Story = {
               <path d="M13 10V3L4 14h7v7l9-11h-7z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
+        </BentoBox.Header>
+        <BentoBox.Content>
           <BentoBox.Title>Lightning-fast deploys</BentoBox.Title>
           <BentoBox.Description>
             Push to your main branch and we build, test, and ship to a global edge network in
             seconds — no config required.
           </BentoBox.Description>
-        </BentoBox.Header>
+        </BentoBox.Content>
         <BentoBox.Footer>
           <Button variant="soft" tone="brand" size="small" className="self-start">
             Learn more
@@ -359,6 +361,58 @@ export const Fill: Story = {
           alt="Random scenic picture"
           className="size-full object-cover"
         />
+      </BentoBox>
+    </div>
+  ),
+}
+
+export const Elevations: Story = {
+  name: 'Elevations',
+  render: (args) => (
+    <div className="flex flex-col gap-lg">
+      <BentoBox {...args} elevation="none">
+        <BentoBox.Header>
+          <BentoBox.Title>None Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="low">
+        <BentoBox.Header>
+          <BentoBox.Title>Low Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="medium">
+        <BentoBox.Header>
+          <BentoBox.Title>Medium Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="high">
+        <BentoBox.Header>
+          <BentoBox.Title>High Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="veryHigh">
+        <BentoBox.Header>
+          <BentoBox.Title>Very High Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
       </BentoBox>
     </div>
   ),
