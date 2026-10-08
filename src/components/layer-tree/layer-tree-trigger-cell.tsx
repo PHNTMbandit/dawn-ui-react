@@ -1,69 +1,78 @@
 import { useDraggable, useDroppable } from '@dnd-kit/react'
 import React from 'react'
-import { useLayerTree } from './layer-tree'
-import { useCellContext } from './layer-tree-context'
+
 import { cn } from '@/utils/cn'
 
+import { useCellContext } from './layer-tree-context'
+import { useLayerTree } from './layer-tree.types'
 import type { LayerTreeTriggerCellProps } from './layer-tree.types'
 
-export const LayerTreeTriggerCell = ({
+export function LayerTreeTriggerCell({
   className,
   children,
   dndDisabled,
   onClick,
   ...props
-}: LayerTreeTriggerCellProps) => {
-  const cell = useCellContext<string>()
-  const { draggingNodeId } = useLayerTree()
-  const row = cell.row
-  const hasChildren = row.getCanExpand()
-  const { ref: draggableRef, isDragging } = useDraggable({
-    id: row.id,
-    data: {
-      isFolder: hasChildren,
-      nodeId: row.id,
-    },
-    disabled: dndDisabled,
-  })
-  const { ref: droppableRef, isDropTarget } = useDroppable({
-    id: `folder:${row.id}`,
-    data: {
-      folderId: row.id,
-      nodeId: row.id,
-      isFolder: hasChildren,
-    },
-    disabled: dndDisabled || !hasChildren,
-  })
-
-  const setNodeRef = React.useCallback(
-    (element: Element | null) => {
+}: LayerTreeTriggerCellProps) {
+  const cell = useCellContext<string>(),
+    { draggingNodeId } = useLayerTree(),
+    { row } = cell,
+    hasChildren = row.getCanExpand(),
+    isSelected = row.getIsSelected(),
+    { ref: draggableRef, isDragging } = useDraggable({
+      data: {
+        isFolder: hasChildren,
+        nodeId: row.id,
+      },
+      disabled: dndDisabled,
+      id: row.id,
+    }),
+    { ref: droppableRef, isDropTarget } = useDroppable({
+      data: {
+        folderId: row.id,
+        isFolder: hasChildren,
+        nodeId: row.id,
+      },
+      disabled: dndDisabled || !hasChildren,
+      id: `folder:${row.id}`,
+    }),
+    setNodeRef = (element: Element | null) => {
       draggableRef(element)
       droppableRef(element)
     },
-    [draggableRef, droppableRef],
-  )
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onClick?.(event)
-    if (event.defaultPrevented) return
-    if (hasChildren) {
-      row.toggleExpanded()
-      return
-    }
-    if (!row.getCanSelect()) return
-    if (!event.shiftKey) cell.table.resetRowSelection()
-    row.getToggleSelectedHandler()({ target: { checked: true }, shiftKey: event.shiftKey })
-  }
-
-  const isAncestorDragging = React.useMemo(() => {
-    if (!draggingNodeId) return false
-    let parent = row.getParentRow()
-    while (parent) {
-      if (parent.id === draggingNodeId) return true
-      parent = parent.getParentRow()
-    }
-    return false
-  }, [draggingNodeId, row])
+    selectRow = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (!row.getCanSelect()) {
+        return
+      }
+      if (!event.shiftKey) {
+        cell.table.resetRowSelection()
+      }
+      row.getToggleSelectedHandler()({ shiftKey: event.shiftKey, target: { checked: true } })
+    },
+    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      onClick?.(event)
+      if (event.defaultPrevented) {
+        return
+      }
+      if (hasChildren) {
+        row.toggleExpanded()
+        return
+      }
+      selectRow(event)
+    },
+    isAncestorDragging = (() => {
+      if (!draggingNodeId) {
+        return false
+      }
+      let parent = row.getParentRow()
+      while (parent) {
+        if (parent.id === draggingNodeId) {
+          return true
+        }
+        parent = parent.getParentRow()
+      }
+      return false
+    })()
 
   return (
     <button
@@ -74,9 +83,8 @@ export const LayerTreeTriggerCell = ({
         hasChildren &&
           isDropTarget &&
           'bg-success-container text-success-on-container ring ring-success-border',
-        row.getIsSelected()
-          ? 'bg-neutral-default text-neutral-on-default'
-          : 'hover:bg-neutral-container hover:text-neutral-on-container',
+        isSelected && 'bg-neutral-default text-neutral-on-default',
+        !isSelected && 'hover:bg-neutral-container hover:text-neutral-on-container',
         (isDragging || isAncestorDragging) && 'opacity-60',
         className,
       )}

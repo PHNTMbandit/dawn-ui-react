@@ -1,40 +1,20 @@
 import { SpinnerGapIcon, XIcon } from '@phosphor-icons/react'
-import React from 'react'
-import { Button } from '../button'
-import { Input } from '../input'
-import { Meter } from './meter'
-import { MeterFooter } from './meter-footer'
-import { MeterHeader } from './meter-header'
-import { MeterIndicator } from './meter-indicator'
-import { MeterLabel } from './meter-label'
-import { MeterSubtitle } from './meter-subtitle'
-import { MeterTrack } from './meter-track'
-import { MeterValue } from './meter-value'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const ORIENTATIONS = ['vertical', 'horizontal'] as const
-const SIZES = ['small', 'medium', 'large'] as const
-const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
+import { Button } from '../button'
+import { Meter } from './index'
+
+const ORIENTATIONS = ['vertical', 'horizontal'] as const,
+  SIZES = ['small', 'medium', 'large'] as const,
+  TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
 
 export default {
-  title: 'Components/Meter',
-  component: Meter,
-  subcomponents: {
-    MeterHeader,
-    MeterFooter,
-    MeterIndicator,
-    MeterLabel,
-    MeterTrack,
-    MeterValue,
-    MeterSubtitle,
-  },
   argTypes: {
-    value: {
-      control: { type: 'number', min: 0, max: 100, step: 1 },
-      description: 'Current progress value displayed by the meter.',
+    max: {
+      control: { type: 'number' },
+      description: 'Upper bound used when calculating value percentage.',
       table: {
-        defaultValue: { summary: '25' },
+        defaultValue: { summary: '100' },
       },
     },
     min: {
@@ -44,69 +24,80 @@ export default {
         defaultValue: { summary: '0' },
       },
     },
-    max: {
-      control: { type: 'number' },
-      description: 'Upper bound used when calculating value percentage.',
-      table: {
-        defaultValue: { summary: '100' },
-      },
-    },
     orientation: {
       control: { type: 'select' },
-      options: ORIENTATIONS,
       description: 'Layout direction of meter content and track.',
+      options: ORIENTATIONS,
       table: {
         defaultValue: { summary: 'vertical' },
       },
     },
     size: {
       control: { type: 'select' },
-      options: SIZES,
       description: 'Visual thickness of the meter track.',
+      options: SIZES,
       table: {
         defaultValue: { summary: 'medium' },
       },
     },
     tone: {
       control: { type: 'select' },
-      options: TONES,
       description: 'Semantic color of the meter indicator.',
+      options: TONES,
       table: {
         defaultValue: { summary: 'brand' },
       },
     },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A flexible progress indicator for completion, capacity, and health-style values.',
-      description: {
-        component:
-          'The Meter component visualizes bounded values such as upload progress, quota usage, battery levels, and background task completion. It supports vertical and horizontal layouts, three track sizes (`small`, `medium`, `large`), and semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`). Compose it with `MeterHeader`, `MeterLabel`, and `MeterValue` to build informative status UIs.',
+    value: {
+      control: { max: 100, min: 0, step: 1, type: 'number' },
+      description: 'Current progress value displayed by the meter.',
+      table: {
+        defaultValue: { summary: '25' },
       },
     },
   },
   args: {
-    value: 25,
+    max: 100,
+    min: 0,
     orientation: 'vertical',
     size: 'medium',
     tone: 'brand',
-    min: 0,
-    max: 100,
+    value: 25,
+  },
+  component: Meter,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Meter component visualizes bounded values such as upload progress, quota usage, battery levels, and background task completion. It supports vertical and horizontal layouts, three track sizes (`small`, `medium`, `large`), and semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`). Compose it with `MeterHeader`, `MeterLabel`, and `MeterValue` to build informative status UIs.',
+      },
+      subtitle: 'A flexible progress indicator for completion, capacity, and health-style values.',
+    },
   },
   render: (args) => (
     <Meter className="w-[500px]" {...args}>
-      <MeterHeader>
-        <MeterLabel>Progress</MeterLabel>
-      </MeterHeader>
-      <MeterTrack>
-        <MeterIndicator />
-      </MeterTrack>
-      <MeterFooter>
-        <MeterSubtitle>Uploading file...</MeterSubtitle>
-        <MeterValue />
-      </MeterFooter>
+      <Meter.Header>
+        <Meter.Label>Progress</Meter.Label>
+      </Meter.Header>
+      <Meter.Track>
+        <Meter.Indicator />
+      </Meter.Track>
+      <Meter.Footer>
+        <Meter.Subtitle>Uploading file...</Meter.Subtitle>
+        <Meter.Value />
+      </Meter.Footer>
     </Meter>
   ),
+  subcomponents: {
+    MeterFooter: Meter.Footer,
+    MeterHeader: Meter.Header,
+    MeterIndicator: Meter.Indicator,
+    MeterLabel: Meter.Label,
+    MeterSubtitle: Meter.Subtitle,
+    MeterTrack: Meter.Track,
+    MeterValue: Meter.Value,
+  },
+  title: 'Components/Meter',
 } satisfies Meta<typeof Meter>
 
 type Story = StoryObj<typeof Meter>
@@ -123,10 +114,10 @@ export const Playground: Story = {
 }
 
 export const Vertical: Story = {
-  name: 'Orientation / Vertical',
   args: {
     orientation: 'vertical',
   },
+  name: 'Orientation / Vertical',
   parameters: {
     docs: {
       description: {
@@ -137,28 +128,10 @@ export const Vertical: Story = {
 }
 
 export const Horizontal: Story = {
-  name: 'Orientation / Horizontal',
   args: {
     orientation: 'horizontal',
   },
-  render: (args) => (
-    <div className="flex w-[500px] items-center gap-sm">
-      <Meter className="w-full" {...args}>
-        <MeterLabel>
-          Progress
-          <SpinnerGapIcon className="animate-spin" />
-        </MeterLabel>
-        <MeterSubtitle>Uploading file...</MeterSubtitle>
-        <MeterTrack>
-          <MeterIndicator />
-        </MeterTrack>
-        <MeterValue />
-      </Meter>
-      <Button aria-label="Cancel upload" size={'iconSmall'} tone="error" variant="ghost">
-        <XIcon weight="bold" />
-      </Button>
-    </div>
-  ),
+  name: 'Orientation / Horizontal',
   parameters: {
     docs: {
       description: {
@@ -167,32 +140,28 @@ export const Horizontal: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="flex w-[500px] items-center gap-xs">
+      <Meter className="flex-1" {...args}>
+        <Meter.Label>
+          Progress
+          <SpinnerGapIcon className="animate-spin" />
+        </Meter.Label>
+        <Meter.Subtitle>Uploading file...</Meter.Subtitle>
+        <Meter.Track>
+          <Meter.Indicator />
+        </Meter.Track>
+        <Meter.Value />
+      </Meter>
+      <Button aria-label="Cancel upload" size={'iconSmall'} tone="error" variant="ghost">
+        <XIcon weight="bold" />
+      </Button>
+    </div>
+  ),
 }
 
 export const Downloading: Story = {
   name: 'Composition / Downloading',
-  render: (args) => (
-    <div className="flex w-[500px] flex-col gap-sm">
-      <Meter className="w-full" {...args}>
-        <MeterHeader>
-          <MeterLabel>
-            <SpinnerGapIcon className="animate-spin" />
-            Downloading File...
-          </MeterLabel>
-        </MeterHeader>
-        <MeterTrack>
-          <MeterIndicator />
-        </MeterTrack>
-        <MeterFooter>
-          <MeterSubtitle>Estimated time remaining: 2 minutes</MeterSubtitle>
-          <MeterValue />
-        </MeterFooter>
-      </Meter>
-      <Button tone="error" className={'w-full'} size={'small'}>
-        <XIcon weight="bold" /> Cancel
-      </Button>
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -200,27 +169,32 @@ export const Downloading: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="flex w-[500px] flex-col gap-xs">
+      <Meter {...args}>
+        <Meter.Header>
+          <Meter.Label>
+            <SpinnerGapIcon className="animate-spin" />
+            Downloading File...
+          </Meter.Label>
+        </Meter.Header>
+        <Meter.Track>
+          <Meter.Indicator />
+        </Meter.Track>
+        <Meter.Footer>
+          <Meter.Subtitle>Estimated time remaining: 2 minutes</Meter.Subtitle>
+          <Meter.Value />
+        </Meter.Footer>
+      </Meter>
+      <Button tone="error" className={'w-full'} size={'small'}>
+        <XIcon weight="bold" /> Cancel
+      </Button>
+    </div>
+  ),
 }
 
 export const AllSizes: Story = {
   name: 'Composition / All Sizes',
-  render: () => (
-    <div className="flex w-[500px] flex-col gap-md">
-      {SIZES.map((size) => (
-        <Meter key={size} orientation="vertical" size={size} tone="brand" value={56}>
-          <MeterHeader>
-            <MeterLabel className="capitalize">{size}</MeterLabel>
-          </MeterHeader>
-          <MeterTrack>
-            <MeterIndicator />
-          </MeterTrack>
-          <MeterFooter>
-            <MeterValue />
-          </MeterFooter>
-        </Meter>
-      ))}
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -228,28 +202,27 @@ export const AllSizes: Story = {
       },
     },
   },
-}
-
-export const AllTones: Story = {
-  name: 'Composition / All Tones',
   render: () => (
-    <div className="flex w-[500px] flex-col gap-sm">
-      {TONES.map((tone) => (
-        <Meter key={tone} orientation="vertical" size="medium" tone={tone} value={62}>
-          <MeterHeader>
-            <MeterLabel className="capitalize">{tone}</MeterLabel>
-          </MeterHeader>
-          <MeterTrack>
-            <MeterIndicator />
-          </MeterTrack>
-          <MeterFooter>
-            <MeterSubtitle>Status: {tone}</MeterSubtitle>
-            <MeterValue />
-          </MeterFooter>
+    <div className="flex w-[500px] flex-col gap-md">
+      {SIZES.map((size) => (
+        <Meter key={size} orientation="vertical" size={size} tone="brand" value={56}>
+          <Meter.Header>
+            <Meter.Label className="capitalize">{size}</Meter.Label>
+          </Meter.Header>
+          <Meter.Track>
+            <Meter.Indicator />
+          </Meter.Track>
+          <Meter.Footer>
+            <Meter.Value />
+          </Meter.Footer>
         </Meter>
       ))}
     </div>
   ),
+}
+
+export const AllTones: Story = {
+  name: 'Composition / All Tones',
   parameters: {
     docs: {
       description: {
@@ -257,42 +230,22 @@ export const AllTones: Story = {
       },
     },
   },
-}
-
-export const Animation: Story = {
-  name: 'Composition / Animation',
-  render: () => {
-    const [value, setValue] = React.useState(0)
-
-    return (
-      <div className="flex w-[500px] flex-col gap-md">
-        <Input
-          aria-label="Progress value"
-          max={100}
-          value={value}
-          onChange={(e) => setValue(Number(e.target.value))}
-          type="number"
-        />
-        <Meter orientation="vertical" size="medium" tone="brand" value={value}>
-          <MeterHeader>
-            <MeterLabel>Animated Progress</MeterLabel>
-          </MeterHeader>
-          <MeterTrack>
-            <MeterIndicator />
-          </MeterTrack>
-          <MeterFooter>
-            <MeterSubtitle>Uploading file...</MeterSubtitle>
-            <MeterValue />
-          </MeterFooter>
+  render: () => (
+    <div className="flex w-[500px] flex-col gap-sm">
+      {TONES.map((tone) => (
+        <Meter key={tone} orientation="vertical" size="medium" tone={tone} value={62}>
+          <Meter.Header>
+            <Meter.Label className="capitalize">{tone}</Meter.Label>
+          </Meter.Header>
+          <Meter.Track>
+            <Meter.Indicator />
+          </Meter.Track>
+          <Meter.Footer>
+            <Meter.Subtitle>Status: {tone}</Meter.Subtitle>
+            <Meter.Value />
+          </Meter.Footer>
         </Meter>
-      </div>
-    )
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Demonstrates smooth animated transitions when the `value` prop changes over time.',
-      },
-    },
-  },
+      ))}
+    </div>
+  ),
 }

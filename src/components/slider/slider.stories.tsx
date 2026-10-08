@@ -1,50 +1,50 @@
-import { Slider } from './slider'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Slider } from './index'
+
 export default {
-  title: 'Components/Slider',
-  component: Slider,
-  parameters: {
-    subtitle: 'A component for selecting a value from a range.',
-    description: {
-      component:
-        'The Slider component allows users to select a value from a continuous or discrete range by dragging a thumb along a track. It is commonly used in forms and settings where users need to adjust values such as volume, brightness, or other numerical inputs. The Slider can be customized with different sizes, tones, and step values to fit various design needs.',
-    },
-  },
   argTypes: {
-    step: {
-      control: { type: 'number' },
-      description: 'Step increment for slider movement',
-      table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '1' },
-      },
+    className: {
+      table: { disable: true },
     },
     defaultValue: {
       control: false,
       description: 'Initial value(s) of the slider',
       table: {
-        type: { summary: 'number | number[]' },
         defaultValue: { summary: 'undefined' },
+        type: { summary: 'number | number[]' },
       },
     },
-    className: {
-      table: { disable: true },
+    step: {
+      control: { type: 'number' },
+      description: 'Step increment for slider movement',
+      table: {
+        defaultValue: { summary: '1' },
+        type: { summary: 'number' },
+      },
     },
   },
   args: {
     defaultValue: 50,
-    step: 1,
-    min: 0,
     max: 100,
+    min: 0,
+    step: 1,
   },
+  component: Slider,
+  parameters: {
+    description: {
+      component:
+        'The Slider component allows users to select a value from a continuous or discrete range by dragging a thumb along a track. It is commonly used in forms and settings where users need to adjust values such as volume, brightness, or other numerical inputs. The Slider can be customized with different sizes, tones, and step values to fit various design needs.',
+    },
+    subtitle: 'A component for selecting a value from a range.',
+  },
+  title: 'Components/Slider',
 } satisfies Meta<typeof Slider>
 
 type Story = StoryObj<typeof Slider>
 
 export const Playground: Story = {
-  render: (args) => <Slider aria-label="Value" className={'w-[200px]'} {...args} />,
+  render: (args) => <Slider className="w-[200px]" {...args} />,
 }
 
 /**
@@ -59,7 +59,7 @@ export const CompositionPriceRange: Story = {
           Choose your ideal price range
         </p>
       </div>
-      <Slider aria-label="Price range" defaultValue={[250, 750]} min={0} max={1000} step={10} />
+      <Slider defaultValue={[250, 750]} min={0} max={1000} step={10} />
       <div className="flex justify-between text-on-surface-variant">
         <span className="style-text-default--1">Min: $250</span>
         <span className="style-text-default--1">Max: $750</span>

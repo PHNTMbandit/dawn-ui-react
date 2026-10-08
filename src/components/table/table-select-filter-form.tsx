@@ -1,5 +1,9 @@
 import { CaretUpDownIcon } from '@phosphor-icons/react'
+import type { RowData } from '@tanstack/react-table'
 import { useState } from 'react'
+
+import { cn } from '@/utils/cn'
+
 import { Button } from '../button'
 import { Form, FormFooter } from '../form'
 import {
@@ -12,41 +16,47 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../select'
-import { useTableContext } from './table-context'
-import { cn } from '@/utils/cn'
-
+import { useTableContext } from './table-feature-context'
 import type {
   TableSelectFilterFormProps,
   TableSelectFilterOption,
   TableSelectFilterValue,
 } from './table.types'
-import type { RowData } from '@tanstack/react-table'
 
-const isSelectFilterOption = (value: unknown): value is TableSelectFilterOption =>
-  typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
+const EMPTY_FILTER_COUNT = 0,
+  isSelectFilterOption = (value: unknown): value is TableSelectFilterOption =>
+    typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean',
+  isSelectFilterValue = (value: unknown): value is TableSelectFilterValue =>
+    Array.isArray(value) && value.every(isSelectFilterOption),
+  getSelectValueLabel = (value: unknown): string => {
+    if (isSelectFilterValue(value)) {
+      return value.map(String).join(', ')
+    }
+    return 'Select values'
+  }
 
-const isSelectFilterValue = (value: unknown): value is TableSelectFilterValue =>
-  Array.isArray(value) && value.every(isSelectFilterOption)
-
-export const TableSelectFilterForm = <TData extends RowData>({
+export function TableSelectFilterForm<TData extends RowData>({
   column,
   className,
   children,
   ref,
   ...props
-}: TableSelectFilterFormProps<TData>) => {
-  const table = useTableContext()
-  const currentFilter = column.getFilterValue()
-  const buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
-    reset: 'Reset',
-    apply: 'Apply',
-  }
-  const [filterValue, setFilterValue] = useState<TableSelectFilterValue>(
-    isSelectFilterValue(currentFilter) ? currentFilter : [],
-  )
-  const options = Array.from(column.getFacetedUniqueValues().keys())
-    .filter(isSelectFilterOption)
-    .sort((left, right) => String(left).localeCompare(String(right)))
+}: TableSelectFilterFormProps<TData>) {
+  const table = useTableContext(),
+    currentFilter = column.getFilterValue(),
+    buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
+      apply: 'Apply',
+      reset: 'Reset',
+    },
+    [filterValue, setFilterValue] = useState<TableSelectFilterValue>(() => {
+      if (isSelectFilterValue(currentFilter)) {
+        return currentFilter
+      }
+      return []
+    }),
+    options = [...column.getFacetedUniqueValues().keys()]
+      .filter(isSelectFilterOption)
+      .toSorted((left, right) => String(left).localeCompare(String(right)))
 
   return (
     <Form
@@ -59,7 +69,7 @@ export const TableSelectFilterForm = <TData extends RowData>({
         event.preventDefault()
         event.stopPropagation()
 
-        if (filterValue.length > 0) {
+        if (filterValue.length > EMPTY_FILTER_COUNT) {
           column.setFilterValue(filterValue)
         }
       }}
@@ -78,9 +88,7 @@ export const TableSelectFilterForm = <TData extends RowData>({
       >
         <SelectTrigger aria-label={`${column.id} filter value`} variant="secondary">
           <SelectValue placeholder="Select values">
-            {(value) =>
-              isSelectFilterValue(value) ? value.map(String).join(', ') : 'Select values'
-            }
+            {(value) => getSelectValueLabel(value)}
           </SelectValue>
           <SelectIcon>
             <CaretUpDownIcon weight="bold" />
@@ -100,7 +108,11 @@ export const TableSelectFilterForm = <TData extends RowData>({
         <Button className="w-full" tone="neutral" type="reset" variant="outline">
           {buttonLabels.reset}
         </Button>
-        <Button className="w-full" disabled={filterValue.length === 0} type="submit">
+        <Button
+          className="w-full"
+          disabled={filterValue.length === EMPTY_FILTER_COUNT}
+          type="submit"
+        >
           {buttonLabels.apply}
         </Button>
       </FormFooter>

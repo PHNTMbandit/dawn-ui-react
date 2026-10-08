@@ -1,6 +1,6 @@
 import React from 'react'
 
-type Device = {
+interface Device {
   name: 'mobile' | 'tablet' | 'desktop'
   query: string
 }
@@ -11,16 +11,20 @@ const devices: Device[] = [
   { name: 'desktop', query: '(min-width: 1024px)' },
 ]
 
-export const useMediaQuery = (deviceName: Device['name']) => {
-  const device = devices.find((d) => d.name === deviceName)!
-  const [matches, setMatches] = React.useState(() =>
-    typeof window !== 'undefined' ? window.matchMedia(device.query).matches : false,
-  )
+function getInitialMatch(query: string): boolean {
+  if (typeof globalThis.matchMedia !== 'function') {
+    return false
+  }
+  return globalThis.matchMedia(query).matches
+}
+
+export function useMediaQuery(deviceName: Device['name']) {
+  const device = devices.find((candidate) => candidate.name === deviceName)!,
+    [matches, setMatches] = React.useState(() => getInitialMatch(device.query))
 
   React.useEffect(() => {
-    const media = window.matchMedia(device.query)
-
-    const update = () => setMatches(media.matches)
+    const media = globalThis.matchMedia(device.query),
+      update = () => setMatches(media.matches)
 
     update()
 

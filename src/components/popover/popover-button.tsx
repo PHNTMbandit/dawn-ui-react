@@ -1,16 +1,16 @@
-import { Button } from '../button'
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
 import type { PopoverButtonProps } from './popover.types'
 
-export const PopoverButton = ({
+export function PopoverButton({
   variant,
   tone,
   className,
   children,
   ref,
   ...props
-}: PopoverButtonProps) => {
+}: PopoverButtonProps) {
   if (variant === 'ghost' && tone === 'neutral') {
     return (
       <Button

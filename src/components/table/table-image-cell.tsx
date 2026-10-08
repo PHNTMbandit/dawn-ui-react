@@ -1,9 +1,9 @@
-import { useCellContext } from './table-context'
 import { cn } from '@/utils/cn'
 
+import { useCellContext } from './table-feature-context'
 import type { TableImageCellProps } from './table.types'
 
-export const TableImageCell = ({ className, ref, ...props }: TableImageCellProps) => {
+export function TableImageCell({ className, ref, ...props }: TableImageCellProps) {
   const cell = useCellContext<string>()
 
   return (

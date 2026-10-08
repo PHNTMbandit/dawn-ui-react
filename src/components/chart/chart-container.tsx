@@ -1,20 +1,20 @@
 import React from 'react'
+
 import { cn } from '@/utils/cn'
 
-import type { ChartContainerContextProps, ChartContainerProps } from './chart.types'
+import { ChartContainerContext } from './chart.types'
+import type { ChartContainerProps } from './chart.types'
 
-export const ChartContainerContext = React.createContext<ChartContainerContextProps | null>(null)
-
-export const ChartContainer = ({
+export function ChartContainer({
   id,
   config,
   className,
   children,
   ref,
   ...props
-}: ChartContainerProps) => {
-  const uniqueId = React.useId()
-  const chartId = `chart-${id ?? uniqueId.replace(/:/g, '')}`
+}: ChartContainerProps) {
+  const uniqueId = React.useId(),
+    chartId = `chart-${id ?? uniqueId.replace(/:/g, '')}`
 
   return (
     <ChartContainerContext.Provider value={{ config }}>
@@ -32,14 +32,4 @@ export const ChartContainer = ({
       </div>
     </ChartContainerContext.Provider>
   )
-}
-
-export const useChart = () => {
-  const context = React.useContext(ChartContainerContext)
-
-  if (!context) {
-    throw new Error('useChart must be used within a ChartContainerProvider')
-  }
-
-  return context
 }

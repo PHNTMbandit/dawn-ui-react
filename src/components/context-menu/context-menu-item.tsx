@@ -1,14 +1,17 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
-import { contextMenuItemVariants, type ContextMenuItemProps } from './context-menu.types'
+
 import { cn } from '@/utils/cn'
 
-export const ContextMenuItem = ({
+import { contextMenuItemVariants } from './context-menu.types'
+import type { ContextMenuItemProps } from './context-menu.types'
+
+export function ContextMenuItem({
   className,
   tone,
   children,
   ref,
   ...props
-}: ContextMenuItemProps) => {
+}: ContextMenuItemProps) {
   return (
     <BaseContextMenu.Item
       className={cn(contextMenuItemVariants({ tone }), className)}

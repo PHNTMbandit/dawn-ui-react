@@ -1,25 +1,30 @@
 import { EyeClosedIcon, EyeIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { useCellContext, useTableContext } from './layer-tree-context'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useCellContext, useTableContext } from './layer-tree-context'
 import type { LayerTreeVisibilityCellProps } from './layer-tree.types'
 
-export const LayerTreeVisibilityCell = ({
+export function LayerTreeVisibilityCell({
   className,
   children,
   ref,
   ...props
-}: LayerTreeVisibilityCellProps) => {
-  const cell = useCellContext<boolean>()
-  const table = useTableContext()
-  const row = cell.row
-  const leafRows = row.getLeafRows()
-  const rows = leafRows.length > 0 ? leafRows : [row]
+}: LayerTreeVisibilityCellProps) {
+  const cell = useCellContext<boolean>(),
+    table = useTableContext(),
+    { row } = cell,
+    rows = row.getLeafRows(),
+    handleClick = (isVisible: boolean) => {
+      const next = !isVisible
+      for (const leafRow of rows) {
+        leafRow.toggleVisibility(next)
+      }
+    }
 
-  const handleClick = (isVisible: boolean) => {
-    const next = !isVisible
-    for (const leafRow of rows) leafRow.toggleVisibility(next)
+  if (!rows.length) {
+    rows.push(row)
   }
 
   return (
@@ -29,17 +34,18 @@ export const LayerTreeVisibilityCell = ({
 
         return (
           <Button
-            aria-label={isVisible ? 'Hide layer' : 'Show layer'}
+            aria-label="Toggle layer visibility"
             size="iconSmall"
             tone="neutral"
-            variant={'ghost'}
+            variant="ghost"
             onClick={() => handleClick(isVisible)}
             className={cn('', className)}
             ref={ref}
             {...props}
           >
             {children}
-            {isVisible ? <EyeIcon /> : <EyeClosedIcon />}
+            {isVisible && <EyeIcon weight="bold" />}
+            {!isVisible && <EyeClosedIcon weight="bold" />}
           </Button>
         )
       }}

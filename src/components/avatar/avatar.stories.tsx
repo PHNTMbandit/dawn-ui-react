@@ -1,3 +1,4 @@
+import type { ImageLoadingStatus } from '@base-ui/react/avatar'
 import {
   BellIcon,
   CheckIcon,
@@ -6,113 +7,111 @@ import {
   PlusIcon,
   WarningIcon,
 } from '@phosphor-icons/react'
-import { useState } from 'react'
-import { Button } from '../button'
-import { Avatar } from './avatar'
-import { AvatarBadge } from './avatar-badge'
-import { AvatarFallback } from './avatar-fallback'
-import { AvatarImage } from './avatar-image'
-
-import type { ImageLoadingStatus } from '@base-ui/react/avatar'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
 
-const SIZES = ['small', 'medium', 'large'] as const
-const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
-const POSITIONS = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'] as const
+import { Button } from '../button'
+import { Avatar } from './index'
+
+const SIZES = ['small', 'medium', 'large'] as const,
+  TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const,
+  POSITIONS = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'] as const
 
 type AvatarSize = (typeof SIZES)[number]
 type BadgeTone = (typeof TONES)[number]
 type BadgePosition = (typeof POSITIONS)[number]
 
 const SAMPLE_USERS = [
-  {
-    name: 'Sophia Turner',
-    initials: 'ST',
-    image: 'https://github.com/shadcn.png',
-  },
-  {
-    name: 'Marcus Lee',
-    initials: 'ML',
-    image: 'https://i.pravatar.cc/128?img=12',
-  },
-  {
-    name: 'Nina Patel',
-    initials: 'NP',
-    image: 'https://i.pravatar.cc/128?img=32',
-  },
-] as const
-
-const BADGE_ICONS = {
-  brand: <CrownIcon weight="bold" />,
-  accent: <BellIcon weight="bold" />,
-  neutral: <DotOutlineIcon weight="fill" />,
-  error: <WarningIcon weight="bold" />,
-  info: <BellIcon weight="bold" />,
-  success: <CheckIcon weight="bold" />,
-  warning: <WarningIcon weight="bold" />,
-} satisfies Record<BadgeTone, React.ReactNode>
-
-const AvatarTemplate = ({
-  size = 'medium',
-  withFallback = false,
-  showBadge = false,
-  badgeTone = 'success',
-  badgePosition = 'bottomRight',
-  badgeIcon = false,
-}: {
-  size?: AvatarSize
-  withFallback?: boolean
-  showBadge?: boolean
-  badgeTone?: BadgeTone
-  badgePosition?: BadgePosition
-  badgeIcon?: boolean
-}) => (
-  <Avatar size={size}>
-    {withFallback ? (
-      <AvatarFallback>ST</AvatarFallback>
-    ) : (
-      <AvatarImage alt="Sophia Turner" src={SAMPLE_USERS[0].image} />
-    )}
-    {showBadge ? (
-      <AvatarBadge position={badgePosition} tone={badgeTone}>
-        {badgeIcon ? BADGE_ICONS[badgeTone] : null}
-      </AvatarBadge>
-    ) : null}
-  </Avatar>
-)
+    {
+      image: 'https://github.com/shadcn.png',
+      initials: 'ST',
+      name: 'Sophia Turner',
+    },
+    {
+      image: 'https://i.pravatar.cc/128?img=12',
+      initials: 'ML',
+      name: 'Marcus Lee',
+    },
+    {
+      image: 'https://i.pravatar.cc/128?img=32',
+      initials: 'NP',
+      name: 'Nina Patel',
+    },
+  ] as const,
+  BADGE_ICONS = {
+    accent: <BellIcon weight="bold" />,
+    brand: <CrownIcon weight="bold" />,
+    error: <WarningIcon weight="bold" />,
+    info: <BellIcon weight="bold" />,
+    neutral: <DotOutlineIcon weight="fill" />,
+    success: <CheckIcon weight="bold" />,
+    warning: <WarningIcon weight="bold" />,
+  } satisfies Record<BadgeTone, React.ReactNode>,
+  AvatarTemplate = ({
+    size = 'medium',
+    withFallback = false,
+    showBadge = false,
+    badgeTone = 'success',
+    badgePosition = 'bottomRight',
+    badgeIcon = false,
+  }: {
+    size?: AvatarSize
+    withFallback?: boolean
+    showBadge?: boolean
+    badgeTone?: BadgeTone
+    badgePosition?: BadgePosition
+    badgeIcon?: boolean
+  }) => (
+    <Avatar size={size}>
+      {withFallback ? (
+        <Avatar.Fallback>ST</Avatar.Fallback>
+      ) : (
+        <Avatar.Image alt="Sophia Turner" src={SAMPLE_USERS[0].image} />
+      )}
+      {showBadge ? (
+        <Avatar.Badge position={badgePosition} tone={badgeTone}>
+          {badgeIcon ? BADGE_ICONS[badgeTone] : null}
+        </Avatar.Badge>
+      ) : null}
+    </Avatar>
+  )
 
 export default {
-  title: 'Components/Avatar',
-  component: Avatar,
-  subcomponents: { AvatarImage, AvatarFallback, AvatarBadge },
   argTypes: {
     size: {
-      options: SIZES,
       control: { type: 'select' },
       description: 'Controls the avatar dimensions and fallback text size.',
+      options: SIZES,
       table: {
         defaultValue: { summary: 'medium' },
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      subtitle:
-        'A circular user representation that supports images, initials, and presence badges.',
-      description: {
-        component:
-          'The Avatar component visually represents a person, team member, or entity. It supports three sizes (`small`, `medium`, `large`), image and fallback rendering, and optional status badges with configurable tone and position. Use it in navigation, comments, messaging interfaces, member lists, and activity feeds.',
       },
     },
   },
   args: {
     size: 'medium',
   },
+  component: Avatar,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Avatar component visually represents a person, team member, or entity. It supports three sizes (`small`, `medium`, `large`), image and fallback rendering, and optional status badges with configurable tone and position. Use it in navigation, comments, messaging interfaces, member lists, and activity feeds.',
+      },
+      subtitle:
+        'A circular user representation that supports images, initials, and presence badges.',
+    },
+  },
   render: (args) => (
     <Avatar {...args}>
-      <AvatarImage src={'https://github.com/shadcn.png'} />
+      <Avatar.Image src={'https://github.com/shadcn.png'} />
     </Avatar>
   ),
+  subcomponents: {
+    AvatarBadge: Avatar.Badge,
+    AvatarFallback: Avatar.Fallback,
+    AvatarImage: Avatar.Image,
+  },
+  title: 'Components/Avatar',
 } satisfies Meta<typeof Avatar>
 
 type Story = StoryObj<typeof Avatar>
@@ -129,10 +128,10 @@ export const Playground: Story = {
 }
 
 export const Small: Story = {
-  name: 'Size / Small',
   args: {
     size: 'small',
   },
+  name: 'Size / Small',
   parameters: {
     docs: {
       description: {
@@ -143,10 +142,10 @@ export const Small: Story = {
 }
 
 export const Medium: Story = {
-  name: 'Size / Medium',
   args: {
     size: 'medium',
   },
+  name: 'Size / Medium',
   parameters: {
     docs: {
       description: {
@@ -156,10 +155,10 @@ export const Medium: Story = {
   },
 }
 export const Large: Story = {
-  name: 'Size / Large',
   args: {
     size: 'large',
   },
+  name: 'Size / Large',
   parameters: {
     docs: {
       description: {
@@ -171,7 +170,6 @@ export const Large: Story = {
 
 export const WithFallback: Story = {
   name: 'State / Fallback',
-  render: (args) => <AvatarTemplate size={args.size as AvatarSize} withFallback />,
   parameters: {
     docs: {
       description: {
@@ -179,35 +177,34 @@ export const WithFallback: Story = {
       },
     },
   },
+  render: (args) => <AvatarTemplate size={args.size as AvatarSize} withFallback />,
 }
 
-const largeImage = (cacheBuster: number) => `https://picsum.photos/2400/2400?v=${cacheBuster}`
+const largeImage = (cacheBuster: number) => `https://picsum.photos/2400/2400?v=${cacheBuster}`,
+  SkeletonLoadingTemplate = ({ size = 'large' }: { size?: AvatarSize }) => {
+    const [reloadKey, setReloadKey] = useState(0),
+      [_status, setStatus] = useState<ImageLoadingStatus>('loading')
 
-const SkeletonLoadingTemplate = ({ size = 'large' }: { size?: AvatarSize }) => {
-  const [reloadKey, setReloadKey] = useState(0)
-  const [_status, setStatus] = useState<ImageLoadingStatus>('loading')
+    return (
+      <div className="flex flex-col items-center gap-md">
+        <Avatar size={size}>
+          <Avatar.Image key={reloadKey} alt={SAMPLE_USERS[0].name} src={largeImage(reloadKey)} />
+        </Avatar>
 
-  return (
-    <div className="flex flex-col items-center gap-md">
-      <Avatar size={size}>
-        <AvatarImage key={reloadKey} alt={SAMPLE_USERS[0].name} src={largeImage(reloadKey)} />
-      </Avatar>
-
-      <Button
-        onClick={() => {
-          setStatus('loading')
-          setReloadKey((key) => key + 1)
-        }}
-      >
-        Reload image
-      </Button>
-    </div>
-  )
-}
+        <Button
+          onClick={() => {
+            setStatus('loading')
+            setReloadKey((key) => key + 1)
+          }}
+        >
+          Reload image
+        </Button>
+      </div>
+    )
+  }
 
 export const SkeletonLoading: Story = {
   name: 'State / Skeleton Loading',
-  render: (args) => <SkeletonLoadingTemplate size={(args.size as AvatarSize) ?? 'large'} />,
   parameters: {
     docs: {
       description: {
@@ -216,24 +213,33 @@ export const SkeletonLoading: Story = {
       },
     },
   },
+  render: (args) => <SkeletonLoadingTemplate size={(args.size as AvatarSize) ?? 'large'} />,
 }
 
-type BadgeStory = StoryObj<typeof AvatarBadge>
+type BadgeStory = StoryObj<typeof Avatar.Badge>
 
 export const Badge: BadgeStory = {
-  name: 'Badge / Dot',
-  args: {
-    tone: 'success',
-    position: 'bottomRight',
-  },
   argTypes: {
-    tone: {
-      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
-      control: { type: 'select' },
-    },
     position: {
-      options: ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'],
       control: { type: 'select' },
+      options: ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'],
+    },
+    tone: {
+      control: { type: 'select' },
+      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
+    },
+  },
+  args: {
+    position: 'bottomRight',
+    tone: 'success',
+  },
+  name: 'Badge / Dot',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A simple presence/status dot applied to the avatar using tone and position options.',
+      },
     },
   },
   render: (args) => (
@@ -243,40 +249,24 @@ export const Badge: BadgeStory = {
       showBadge
     />
   ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'A simple presence/status dot applied to the avatar using tone and position options.',
-      },
-    },
-  },
 }
 
 export const BadgeWithIcon: BadgeStory = {
-  name: 'Badge / Icon',
-  args: {
-    tone: 'neutral',
-    position: 'bottomRight',
-  },
   argTypes: {
-    tone: {
-      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
-      control: { type: 'select' },
-    },
     position: {
-      options: ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'],
       control: { type: 'select' },
+      options: ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'],
+    },
+    tone: {
+      control: { type: 'select' },
+      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
     },
   },
-  render: (args) => (
-    <Avatar size="medium">
-      <AvatarImage alt="Sophia Turner" src={SAMPLE_USERS[0].image} />
-      <AvatarBadge position={args.position as BadgePosition} tone={args.tone as BadgeTone}>
-        <PlusIcon weight="bold" />
-      </AvatarBadge>
-    </Avatar>
-  ),
+  args: {
+    position: 'bottomRight',
+    tone: 'neutral',
+  },
+  name: 'Badge / Icon',
   parameters: {
     docs: {
       description: {
@@ -284,10 +274,25 @@ export const BadgeWithIcon: BadgeStory = {
       },
     },
   },
+  render: (args) => (
+    <Avatar size="medium">
+      <Avatar.Image alt="Sophia Turner" src={SAMPLE_USERS[0].image} />
+      <Avatar.Badge position={args.position as BadgePosition} tone={args.tone as BadgeTone}>
+        <PlusIcon weight="bold" />
+      </Avatar.Badge>
+    </Avatar>
+  ),
 }
 
 export const AllSizes: Story = {
   name: 'Composition / All Sizes',
+  parameters: {
+    docs: {
+      description: {
+        story: 'All supported sizes displayed together for quick visual comparison.',
+      },
+    },
+  },
   render: () => (
     <div className="flex items-end gap-md">
       {SIZES.map((size) => (
@@ -298,17 +303,18 @@ export const AllSizes: Story = {
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'All supported sizes displayed together for quick visual comparison.',
-      },
-    },
-  },
 }
 
 export const AllBadgeTones: BadgeStory = {
   name: 'Composition / Badge Tones',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'All badge tones shown on the same avatar so status colors can be compared at a glance.',
+      },
+    },
+  },
   render: () => (
     <div className="flex flex-wrap gap-md">
       {TONES.map((tone) => (
@@ -319,18 +325,17 @@ export const AllBadgeTones: BadgeStory = {
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'All badge tones shown on the same avatar so status colors can be compared at a glance.',
-      },
-    },
-  },
 }
 
 export const BadgePositions: BadgeStory = {
   name: 'Composition / Badge Positions',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Badge placement options for adapting presence indicators to different layouts.',
+      },
+    },
+  },
   render: () => (
     <div className="flex flex-wrap gap-md">
       {POSITIONS.map((position) => (
@@ -341,33 +346,10 @@ export const BadgePositions: BadgeStory = {
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Badge placement options for adapting presence indicators to different layouts.',
-      },
-    },
-  },
 }
 
 export const TeamStack: Story = {
   name: 'Composition / Team Stack',
-  render: () => (
-    <div className="flex items-center">
-      {SAMPLE_USERS.map((user, index) => (
-        <div key={user.name} className={index === 0 ? '' : '-ml-xs'}>
-          <Avatar className="outline-2 outline-surface-background" size="medium">
-            <AvatarImage alt={user.name} src={user.image} />
-          </Avatar>
-        </div>
-      ))}
-      <div className="-ml-xs">
-        <Avatar size="medium">
-          <AvatarFallback>+4</AvatarFallback>
-        </Avatar>
-      </div>
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -376,4 +358,20 @@ export const TeamStack: Story = {
       },
     },
   },
+  render: () => (
+    <div className="flex items-center">
+      {SAMPLE_USERS.map((user, index) => (
+        <div key={user.name} className={index === 0 ? '' : '-ml-xs'}>
+          <Avatar className="outline-2 outline-surface-background" size="medium">
+            <Avatar.Image alt={user.name} src={user.image} />
+          </Avatar>
+        </div>
+      ))}
+      <div className="-ml-xs">
+        <Avatar size="medium">
+          <Avatar.Fallback>+4</Avatar.Fallback>
+        </Avatar>
+      </div>
+    </div>
+  ),
 }

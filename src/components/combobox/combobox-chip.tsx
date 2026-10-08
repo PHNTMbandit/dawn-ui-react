@@ -1,11 +1,12 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { XIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
 import type { ComboboxChipProps } from './combobox.types'
 
-export const ComboboxChip = ({ className, children, ref, ...props }: ComboboxChipProps) => {
+export function ComboboxChip({ className, children, ref, ...props }: ComboboxChipProps) {
   return (
     <BaseCombobox.Chip
       className={cn(
@@ -18,8 +19,14 @@ export const ComboboxChip = ({ className, children, ref, ...props }: ComboboxChi
       {children}
       <BaseCombobox.ChipRemove
         aria-label="Remove"
-        render={(e) => (
-          <Button {...e} variant={'ghost'} tone="error" size="iconExtraSmall">
+        render={(innerProps) => (
+          <Button
+            aria-label="Remove"
+            onClick={() => innerProps.onClick}
+            variant="ghost"
+            tone="error"
+            size="iconExtraSmall"
+          >
             <XIcon className="size-sm" weight="bold" />
           </Button>
         )}

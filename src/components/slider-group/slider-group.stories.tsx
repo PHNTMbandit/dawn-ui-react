@@ -1,30 +1,24 @@
 import { SpeakerHighIcon, SpeakerLowIcon } from '@phosphor-icons/react'
-import { Slider } from '../slider'
-import { SliderDescription } from './slider-description'
-import { SliderGroup } from './slider-group'
-import { SliderGroupSlider } from './slider-group-slider'
-import { SliderIcon } from './slider-icon'
-import { SliderInput } from './slider-input'
-import { SliderLabel } from './slider-label'
-import { SliderValue } from './slider-value'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Slider } from '../slider'
+import { SliderGroup } from './index'
+
 const RANGES = {
-  single: 50,
   double: [25, 75],
+  single: 50,
 }
 
 export default {
-  title: 'Components/Slider Group',
   component: SliderGroup,
   parameters: {
-    subtitle: 'Groups a slider with labels, icons, a value readout and a number input.',
     description: {
       component:
         'SliderGroup owns the shared value and configuration for a slider and its companions. Use SliderGroupSlider (instead of the standalone Slider) when SliderInput or SliderValue must stay in sync with the slider; SliderLabel, SliderDescription and SliderIcon provide layout and context.',
     },
+    subtitle: 'Groups a slider with labels, icons, a value readout and a number input.',
   },
+  title: 'Components/Slider Group',
 } satisfies Meta<typeof SliderGroup>
 
 type Story = StoryObj<typeof SliderGroup>
@@ -32,17 +26,16 @@ type Story = StoryObj<typeof SliderGroup>
 export const VerticalOrientation: Story = {
   render: () => (
     <SliderGroup className="h-[240px] w-fit">
-      <SliderLabel>Vertical Slider</SliderLabel>
+      <SliderGroup.Label>Vertical Slider</SliderGroup.Label>
       <Slider
-        aria-label="Vertical Slider"
         defaultValue={50}
         min={0}
         max={100}
         step={1}
         orientation="vertical"
-        className={'h-[200px]'}
+        className="h-[200px]"
       />
-      <SliderDescription>This slider is oriented vertically.</SliderDescription>
+      <SliderGroup.Description>This slider is oriented vertically.</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -53,9 +46,9 @@ export const VerticalOrientation: Story = {
 export const RangeValue: Story = {
   render: () => (
     <SliderGroup className="w-[320px]">
-      <SliderLabel>Price Range</SliderLabel>
-      <Slider aria-label="Price Range" defaultValue={RANGES.double} min={0} max={1000} step={10} />
-      <SliderDescription>Select your budget range</SliderDescription>
+      <SliderGroup.Label>Price Range</SliderGroup.Label>
+      <Slider defaultValue={RANGES.double} min={0} max={1000} step={10} />
+      <SliderGroup.Description>Select your budget range</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -66,9 +59,9 @@ export const RangeValue: Story = {
 export const BehaviorWithLabels: Story = {
   render: () => (
     <SliderGroup className="w-[320px]">
-      <SliderLabel>Temperature</SliderLabel>
-      <Slider aria-label="Temperature" defaultValue={20} min={-10} max={50} step={1} />
-      <SliderDescription>Adjust the temperature in Celsius</SliderDescription>
+      <SliderGroup.Label>Temperature</SliderGroup.Label>
+      <Slider defaultValue={20} min={-10} max={50} step={1} />
+      <SliderGroup.Description>Adjust the temperature in Celsius</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -79,9 +72,9 @@ export const BehaviorWithLabels: Story = {
 export const BehaviorDiscreteSteps: Story = {
   render: () => (
     <SliderGroup className="w-[320px]">
-      <SliderLabel>Priority Level</SliderLabel>
-      <Slider aria-label="Priority Level" defaultValue={5} min={1} max={10} step={1} />
-      <SliderDescription>Select priority from 1 to 10</SliderDescription>
+      <SliderGroup.Label>Priority Level</SliderGroup.Label>
+      <Slider defaultValue={5} min={1} max={10} step={1} />
+      <SliderGroup.Description>Select priority from 1 to 10</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -92,15 +85,15 @@ export const BehaviorDiscreteSteps: Story = {
 export const CompositionVolumeControl: Story = {
   render: () => (
     <SliderGroup className="w-[200px]">
-      <SliderLabel>Volume</SliderLabel>
-      <SliderIcon>
+      <SliderGroup.Label>Volume</SliderGroup.Label>
+      <SliderGroup.Icon>
         <SpeakerLowIcon />
-      </SliderIcon>
-      <Slider aria-label="Volume" defaultValue={60} min={0} max={100} step={1} />
-      <SliderIcon>
+      </SliderGroup.Icon>
+      <Slider defaultValue={60} min={0} max={100} step={1} />
+      <SliderGroup.Icon>
         <SpeakerHighIcon />
-      </SliderIcon>
-      <SliderDescription>Adjust the volume level</SliderDescription>
+      </SliderGroup.Icon>
+      <SliderGroup.Description>Adjust the volume level</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -113,16 +106,16 @@ export const CompositionImageSettings: Story = {
     <div className="w-full max-w-md space-y-lg rounded-lg border border-surface-3 p-md">
       <h3 className="style-text-strong-1">Image Settings</h3>
       <SliderGroup>
-        <SliderLabel>Brightness</SliderLabel>
-        <Slider aria-label="Brightness" defaultValue={50} min={0} max={100} step={1} />
+        <SliderGroup.Label>Brightness</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Contrast</SliderLabel>
-        <Slider aria-label="Contrast" defaultValue={50} min={0} max={100} step={1} />
+        <SliderGroup.Label>Contrast</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Saturation</SliderLabel>
-        <Slider aria-label="Saturation" defaultValue={100} min={0} max={200} step={10} />
+        <SliderGroup.Label>Saturation</SliderGroup.Label>
+        <Slider defaultValue={100} min={0} max={200} step={10} />
       </SliderGroup>
     </div>
   ),
@@ -133,60 +126,32 @@ export const Tones: Story = {
     <div className="w-[500px] space-y-lg">
       <h3 className="style-text-strong-1">Slider Tones</h3>
       <SliderGroup>
-        <SliderLabel>Brand Tone</SliderLabel>
-        <Slider aria-label="Brand Tone" defaultValue={50} min={0} max={100} step={1} tone="brand" />
+        <SliderGroup.Label>Brand Tone</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} tone="brand" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Accent Tone</SliderLabel>
-        <Slider
-          aria-label="Accent Tone"
-          defaultValue={50}
-          min={0}
-          max={100}
-          step={1}
-          tone="accent"
-        />
+        <SliderGroup.Label>Accent Tone</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} tone="accent" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Neutral Tone</SliderLabel>
-        <Slider
-          aria-label="Neutral Tone"
-          defaultValue={50}
-          min={0}
-          max={100}
-          step={1}
-          tone="neutral"
-        />
+        <SliderGroup.Label>Neutral Tone</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} tone="neutral" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Error Tone</SliderLabel>
-        <Slider aria-label="Error Tone" defaultValue={50} min={0} max={100} step={1} tone="error" />
+        <SliderGroup.Label>Error Tone</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} tone="error" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Info Tone</SliderLabel>
-        <Slider aria-label="Info Tone" defaultValue={50} min={0} max={100} step={1} tone="info" />
+        <SliderGroup.Label>Info Tone</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} tone="info" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Success Tone</SliderLabel>
-        <Slider
-          aria-label="Success Tone"
-          defaultValue={50}
-          min={0}
-          max={100}
-          step={1}
-          tone="success"
-        />
+        <SliderGroup.Label>Success Tone</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} tone="success" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Warning Tone</SliderLabel>
-        <Slider
-          aria-label="Warning Tone"
-          defaultValue={50}
-          min={0}
-          max={100}
-          step={1}
-          tone="warning"
-        />
+        <SliderGroup.Label>Warning Tone</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} tone="warning" />
       </SliderGroup>
     </div>
   ),
@@ -197,23 +162,16 @@ export const Sizes: Story = {
     <div className="w-[500px] space-y-lg">
       <h3 className="style-text-strong-1">Slider Sizes</h3>
       <SliderGroup>
-        <SliderLabel>Small Size</SliderLabel>
-        <Slider aria-label="Small Size" defaultValue={50} min={0} max={100} step={1} size="small" />
+        <SliderGroup.Label>Small Size</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} size="small" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Medium Size</SliderLabel>
-        <Slider
-          aria-label="Medium Size"
-          defaultValue={50}
-          min={0}
-          max={100}
-          step={1}
-          size="medium"
-        />
+        <SliderGroup.Label>Medium Size</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} size="medium" />
       </SliderGroup>
       <SliderGroup>
-        <SliderLabel>Large Size</SliderLabel>
-        <Slider aria-label="Large Size" defaultValue={50} min={0} max={100} step={1} size="large" />
+        <SliderGroup.Label>Large Size</SliderGroup.Label>
+        <Slider defaultValue={50} min={0} max={100} step={1} size="large" />
       </SliderGroup>
     </div>
   ),
@@ -222,16 +180,9 @@ export const Sizes: Story = {
 export const HideThumb: Story = {
   render: () => (
     <SliderGroup className="w-[320px]">
-      <SliderLabel>Hidden Thumb</SliderLabel>
-      <Slider
-        aria-label="Hidden Thumb"
-        defaultValue={50}
-        min={0}
-        max={100}
-        step={1}
-        showThumbOnHover={false}
-      />
-      <SliderDescription>The thumb is hidden until hover</SliderDescription>
+      <SliderGroup.Label>Hidden Thumb</SliderGroup.Label>
+      <Slider defaultValue={50} min={0} max={100} step={1} showThumbOnHover={false} />
+      <SliderGroup.Description>The thumb is hidden until hover</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -239,16 +190,9 @@ export const HideThumb: Story = {
 export const HideTrack: Story = {
   render: () => (
     <SliderGroup className="w-[320px]">
-      <SliderLabel>Hidden Track</SliderLabel>
-      <Slider
-        aria-label="Hidden Track"
-        defaultValue={50}
-        min={0}
-        max={100}
-        step={1}
-        showIndicator={false}
-      />
-      <SliderDescription>The track is hidden</SliderDescription>
+      <SliderGroup.Label>Hidden Track</SliderGroup.Label>
+      <Slider defaultValue={50} min={0} max={100} step={1} showIndicator={false} />
+      <SliderGroup.Description>The track is hidden</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -256,10 +200,10 @@ export const HideTrack: Story = {
 export const ShowValue: Story = {
   render: () => (
     <SliderGroup className="w-[320px]" defaultValue={50}>
-      <SliderLabel>Show Value</SliderLabel>
-      <SliderGroupSlider aria-label="Show Value" min={0} max={100} step={1} showTooltip={false} />
-      <SliderValue />
-      <SliderDescription>The current value is displayed</SliderDescription>
+      <SliderGroup.Label>Show Value</SliderGroup.Label>
+      <SliderGroup.Slider min={0} max={100} step={1} showTooltip={false} />
+      <SliderGroup.Value />
+      <SliderGroup.Description>The current value is displayed</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -267,10 +211,10 @@ export const ShowValue: Story = {
 export const WithInput: Story = {
   render: () => (
     <SliderGroup className="w-[320px]" defaultValue={50}>
-      <SliderLabel>Volume</SliderLabel>
-      <SliderGroupSlider aria-label="Volume" min={0} max={100} step={1} />
-      <SliderInput size="small" />
-      <SliderDescription>Drag the slider or type a value</SliderDescription>
+      <SliderGroup.Label>Volume</SliderGroup.Label>
+      <SliderGroup.Slider min={0} max={100} step={1} />
+      <SliderGroup.Input size="small" />
+      <SliderGroup.Description>Drag the slider or type a value</SliderGroup.Description>
     </SliderGroup>
   ),
 }
@@ -278,17 +222,17 @@ export const WithInput: Story = {
 export const Everything: Story = {
   render: () => (
     <SliderGroup className="w-[320px]" defaultValue={50}>
-      <SliderLabel>Everything</SliderLabel>
-      <SliderIcon>
+      <SliderGroup.Label>Everything</SliderGroup.Label>
+      <SliderGroup.Icon>
         <SpeakerLowIcon />
-      </SliderIcon>
-      <SliderGroupSlider aria-label="Everything" min={0} max={100} step={1} showTooltip={false} />
-      <SliderIcon>
+      </SliderGroup.Icon>
+      <SliderGroup.Slider min={0} max={100} step={1} showTooltip={false} />
+      <SliderGroup.Icon>
         <SpeakerHighIcon />
-      </SliderIcon>
-      <SliderValue />
-      <SliderInput size="small" />
-      <SliderDescription>All features combined</SliderDescription>
+      </SliderGroup.Icon>
+      <SliderGroup.Value />
+      <SliderGroup.Input size="small" />
+      <SliderGroup.Description>All features combined</SliderGroup.Description>
     </SliderGroup>
   ),
 }

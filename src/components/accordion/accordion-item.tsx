@@ -1,22 +1,16 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
-import { type AccordionItemProps, accordionItemVariants } from './accordion.types'
+
 import { cn } from '@/utils/cn'
 
-export const AccordionItem = ({
-  size,
-  tone,
-  className,
-  children,
-  ref,
-  ...props
-}: AccordionItemProps) => {
+import { accordionItemVariants } from './accordion.types'
+import type { AccordionItemProps } from './accordion.types'
+
+export function AccordionItem({ size, tone, className, ref, ...props }: AccordionItemProps) {
   return (
     <BaseAccordion.Item
-      className={cn(accordionItemVariants({ className, tone, size }))}
+      className={cn(accordionItemVariants({ className, size, tone }))}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseAccordion.Item>
+    />
   )
 }

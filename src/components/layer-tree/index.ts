@@ -1,11 +1,11 @@
 export {
   createAppColumnHelper as createLayerTreeColumnHelper,
-  features as layerTreeFeatures,
   useAppTable as useLayerTreeTable,
   useCellContext as useLayerTreeCellContext,
   useHeaderContext as useLayerTreeHeaderContext,
   useTableContext as useLayerTreeContext,
-} from './layer-tree-context'
+} from './layer-tree-table'
+export { features as layerTreeFeatures } from './layer-tree-context'
 export type {
   LayerTreeBodyProps,
   LayerTreeColumnMeta,

@@ -1,14 +1,15 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
+
 import { cn } from '@/utils/cn'
 
 import type { AutocompleteInputGroupInputProps } from './autocomplete.types'
 
-export const AutocompleteInputGroupInput = ({
+export function AutocompleteInputGroupInput({
   placeholder,
   className,
   ref,
   ...props
-}: AutocompleteInputGroupInputProps) => {
+}: AutocompleteInputGroupInputProps) {
   return (
     <BaseAutocomplete.Input
       placeholder={placeholder}

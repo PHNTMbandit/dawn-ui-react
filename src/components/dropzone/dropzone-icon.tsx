@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { DropzoneIconProps } from './dropzone.types'
 
-export const DropzoneIcon = ({ className, children, ref, ...props }: DropzoneIconProps) => {
+export function DropzoneIcon({ className, ref, ...props }: DropzoneIconProps) {
   return (
     <div
       className={cn(
@@ -11,8 +11,6 @@ export const DropzoneIcon = ({ className, children, ref, ...props }: DropzoneIco
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

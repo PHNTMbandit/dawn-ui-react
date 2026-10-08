@@ -1,4 +1,8 @@
 import { FunnelIcon } from '@phosphor-icons/react'
+import type { RowData } from '@tanstack/react-table'
+
+import { cn } from '@/utils/cn'
+
 import { Button } from '../button'
 import {
   Popover,
@@ -9,20 +13,18 @@ import {
   PopoverTrigger,
 } from '../popover'
 import { TableSelectFilterForm } from './table-select-filter-form'
-import { cn } from '@/utils/cn'
-
 import type { TableSelectFilterChipProps, TableSelectFilterValue } from './table.types'
-import type { RowData } from '@tanstack/react-table'
+import { asFilterValue, getColumnHeaderLabel } from './table.utils'
 
-export const TableSelectFilterChip = <TData extends RowData>({
+export function TableSelectFilterChip<TData extends RowData>({
   column,
   className,
   children,
   ref,
   ...props
-}: TableSelectFilterChipProps<TData>) => {
-  const columnFilter = column.getFilterValue() as TableSelectFilterValue
-  const header = (column.columnDef.header as string) || column.id
+}: TableSelectFilterChipProps<TData>) {
+  const columnFilter = asFilterValue<TableSelectFilterValue>(column.getFilterValue()),
+    header = getColumnHeaderLabel(column)
 
   return (
     <Popover>

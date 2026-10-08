@@ -1,4 +1,32 @@
-export { Menu } from './menu'
+import { Menu as MenuRoot } from './menu'
+import { MenuCheckboxItem } from './menu-checkbox-item'
+import { MenuGroup } from './menu-group'
+import { MenuGroupLabel } from './menu-group-label'
+import { MenuItem } from './menu-item'
+import { MenuPopup } from './menu-popup'
+import { MenuRadioGroup } from './menu-radio-group'
+import { MenuRadioItem } from './menu-radio-item'
+import { MenuSeparator } from './menu-separator'
+import { MenuShortcut } from './menu-shortcut'
+import { MenuSubmenu } from './menu-submenu'
+import { MenuSubmenuTrigger } from './menu-submenu-trigger'
+import { MenuTrigger } from './menu-trigger'
+
+const Menu = Object.assign(MenuRoot, {
+  CheckboxItem: MenuCheckboxItem,
+  Group: MenuGroup,
+  GroupLabel: MenuGroupLabel,
+  Item: MenuItem,
+  Popup: MenuPopup,
+  RadioGroup: MenuRadioGroup,
+  RadioItem: MenuRadioItem,
+  Separator: MenuSeparator,
+  Shortcut: MenuShortcut,
+  Submenu: MenuSubmenu,
+  SubmenuTrigger: MenuSubmenuTrigger,
+  Trigger: MenuTrigger,
+})
+
 export type {
   MenuCheckboxItemProps,
   MenuGroupLabelProps,
@@ -26,3 +54,5 @@ export { MenuShortcut } from './menu-shortcut'
 export { MenuSubmenu } from './menu-submenu'
 export { MenuSubmenuTrigger } from './menu-submenu-trigger'
 export { MenuTrigger } from './menu-trigger'
+
+export { Menu }

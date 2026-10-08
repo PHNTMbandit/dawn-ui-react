@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { MeterSubtitleProps } from './meter.types'
 
-export const MeterSubtitle = ({ className, children, ref, ...props }: MeterSubtitleProps) => {
+export function MeterSubtitle({ className, ref, ...props }: MeterSubtitleProps) {
   return (
     <span
       className={cn(
@@ -11,8 +11,6 @@ export const MeterSubtitle = ({ className, children, ref, ...props }: MeterSubti
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </span>
+    />
   )
 }

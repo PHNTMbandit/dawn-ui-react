@@ -1,14 +1,10 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
+
 import { cn } from '@/utils/cn'
 
 import type { AutocompleteGroupProps } from './autocomplete.types'
 
-export const AutocompleteGroupLabel = ({
-  className,
-  children,
-  ref,
-  ...props
-}: AutocompleteGroupProps) => {
+export function AutocompleteGroupLabel({ className, ref, ...props }: AutocompleteGroupProps) {
   return (
     <BaseAutocomplete.GroupLabel
       className={cn(
@@ -17,8 +13,6 @@ export const AutocompleteGroupLabel = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseAutocomplete.GroupLabel>
+    />
   )
 }

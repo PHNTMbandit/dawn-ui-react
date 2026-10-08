@@ -1,9 +1,10 @@
 import { Meter as BaseMeter } from '@base-ui/react'
+
 import { cn } from '@/utils/cn'
 
 import type { MeterLabelProps } from './meter.types'
 
-export const MeterLabel = ({ className, children, ref, ...props }: MeterLabelProps) => {
+export function MeterLabel({ className, ref, ...props }: MeterLabelProps) {
   return (
     <BaseMeter.Label
       className={cn(
@@ -12,8 +13,6 @@ export const MeterLabel = ({ className, children, ref, ...props }: MeterLabelPro
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseMeter.Label>
+    />
   )
 }

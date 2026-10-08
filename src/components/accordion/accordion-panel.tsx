@@ -1,9 +1,10 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
+
 import { cn } from '@/utils/cn'
 
 import type { AccordionPanelProps } from './accordion.types'
 
-export const AccordionPanel = ({ className, children, ref, ...props }: AccordionPanelProps) => {
+export function AccordionPanel({ className, children, ref, ...props }: AccordionPanelProps) {
   return (
     <BaseAccordion.Panel
       className={cn(

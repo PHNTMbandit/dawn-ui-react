@@ -1,16 +1,14 @@
 import React from 'react'
+
 import { cn } from '@/utils/cn'
 
 import type { ChartTooltipContentProps } from './chart.types'
 
-const ChartTooltipContentContext = React.createContext<ChartTooltipContentProps | null>(null)
+const ChartTooltipContentContext = React.createContext<ChartTooltipContentProps | undefined>(
+  undefined,
+)
 
-export const ChartTooltipContent = ({
-  className,
-  children,
-  ref,
-  ...props
-}: ChartTooltipContentProps) => {
+function ChartTooltipContent({ className, children, ref, ...props }: ChartTooltipContentProps) {
   return (
     <ChartTooltipContentContext.Provider value={props}>
       <div
@@ -24,7 +22,7 @@ export const ChartTooltipContent = ({
   )
 }
 
-export const useChartTooltipContent = () => {
+function useChartTooltipContent() {
   const context = React.useContext(ChartTooltipContentContext)
 
   if (!context) {
@@ -33,3 +31,5 @@ export const useChartTooltipContent = () => {
 
   return context
 }
+
+export { ChartTooltipContent, useChartTooltipContent }

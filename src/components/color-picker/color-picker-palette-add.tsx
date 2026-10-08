@@ -1,23 +1,24 @@
 import { PlusIcon } from '@phosphor-icons/react'
-import { useColorPicker } from './color-picker'
+
 import { cn } from '@/utils/cn'
 
+import { useColorPicker } from './color-picker'
 import type { ColorPickerPaletteAddProps } from './color-picker.types'
 
-export const ColorPickerPaletteAdd = ({
+export function ColorPickerPaletteAdd({
   className,
   children,
   ref,
   ...props
-}: ColorPickerPaletteAddProps) => {
-  const { color, addPaletteColor } = useColorPicker()
-
-  const handleClick = () => {
-    addPaletteColor(color)
-  }
+}: ColorPickerPaletteAddProps) {
+  const { color, addPaletteColor } = useColorPicker(),
+    handleClick = () => {
+      addPaletteColor(color)
+    }
 
   return (
     <button
+      type="button"
       aria-label="Add current color to palette"
       onClick={handleClick}
       className={cn(

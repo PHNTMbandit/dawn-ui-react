@@ -1,46 +1,45 @@
-import React from 'react'
-import { useChart } from './chart-container'
+import { cn } from '@/utils/cn'
+
 import { ChartLegendIcon } from './chart-legend-icon'
 import { ChartLegendIndicator } from './chart-legend-indicator'
 import { ChartLegendLabel } from './chart-legend-label'
-import { getPayloadConfigFromPayload } from './chart.utils'
-import { cn } from '@/utils/cn'
-
+import { ChartLegendPayloadContext } from './chart.types'
 import type { ChartLegendContentProps } from './chart.types'
+import { getPayloadConfigFromPayload, useChart } from './chart.utils'
 
-const ChartLegendPayloadContext = React.createContext<{
-  label?: string
-  color?: string
-  icon?: React.ComponentType
-} | null>(null)
-
-export const ChartLegendContent = ({
+export function ChartLegendContent({
   payload,
   verticalAlign = 'bottom',
   className,
   children,
   ref,
   ...props
-}: ChartLegendContentProps) => {
+}: ChartLegendContentProps) {
   const { config } = useChart()
 
   return (
     <div
       className={cn(
         'flex items-center justify-center gap-lg',
-        verticalAlign === 'top' ? 'mb-md' : 'mt-md',
+        verticalAlign === 'top' && 'mb-md',
+        verticalAlign === 'bottom' && 'mt-md',
         className,
       )}
       ref={ref}
       {...props}
     >
-      {payload?.map((entry, index) => {
-        const key = typeof entry.dataKey === 'string' ? entry.dataKey : 'value'
-        const payloadConfig = getPayloadConfigFromPayload(config, entry, key)
+      {payload?.map((entry) => {
+        let payloadKey = 'value'
+
+        if (typeof entry.dataKey === 'string') {
+          payloadKey = entry.dataKey
+        }
+
+        const payloadConfig = getPayloadConfigFromPayload(config, entry, payloadKey)
 
         return (
           <ChartLegendPayloadContext.Provider
-            key={`payload-${index}`}
+            key={String(entry.dataKey ?? entry.value)}
             value={{
               color: payloadConfig?.color,
               icon: payloadConfig?.icon,
@@ -48,7 +47,8 @@ export const ChartLegendContent = ({
             }}
           >
             <div className="flex items-center gap-2xs">
-              {payloadConfig?.icon ? <ChartLegendIcon /> : <ChartLegendIndicator />}
+              {payloadConfig?.icon && <ChartLegendIcon />}
+              {!payloadConfig?.icon && <ChartLegendIndicator />}
               <ChartLegendLabel />
               {children}
             </div>
@@ -57,14 +57,4 @@ export const ChartLegendContent = ({
       })}
     </div>
   )
-}
-
-export const useChartLegendPayload = () => {
-  const context = React.useContext(ChartLegendPayloadContext)
-
-  if (!context) {
-    throw new Error('useChartLegendPayload must be used within a ChartLegendPayloadProvider')
-  }
-
-  return context
 }

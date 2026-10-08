@@ -1,205 +1,189 @@
 import { BowlFoodIcon, CaretUpDownIcon } from '@phosphor-icons/react'
-import { Select } from './select'
-import { SelectDescription } from './select-description'
-import { SelectGroup } from './select-group'
-import { SelectGroupLabel } from './select-group-label'
-import { SelectIcon } from './select-icon'
-import { SelectItem } from './select-item'
-import { SelectList } from './select-list'
-import { SelectPopup } from './select-popup'
-import { SelectTitle } from './select-title'
-import { SelectTrigger } from './select-trigger'
-import { SelectValue } from './select-value'
-
-import type { SelectProps, SelectTriggerProps } from './select.types'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
 
-const VARIANTS = ['primary', 'secondary', 'ghost'] as const
-const SIZES = ['small', 'medium', 'large'] as const
+import { Select } from './index'
+import type { SelectProps, SelectTriggerProps } from './select.types'
+
+const VARIANTS = ['primary', 'secondary', 'ghost'] as const,
+  SIZES = ['small', 'medium', 'large'] as const
 
 type SelectVariant = NonNullable<SelectTriggerProps['variant']>
 type SelectSize = NonNullable<SelectTriggerProps['size']>
-type SelectStoryArgs = Omit<SelectProps, 'defaultValue'> & {
+type SelectStoryArgs = Omit<SelectProps<string>, 'defaultValue'> & {
   defaultValue?: string | string[]
   variant?: SelectVariant
   size?: SelectSize
 }
 
 const apples = [
-  { label: 'Gala', value: 'gala' },
-  { label: 'Fuji', value: 'fuji' },
-  { label: 'Honeycrisp', value: 'honeycrisp' },
-  { label: 'Granny Smith', value: 'granny-smith' },
-  { label: 'Pink Lady', value: 'pink-lady' },
-  { label: 'Red Delicious', value: 'red-delicious' },
-  { label: 'Golden Delicious', value: 'golden-delicious' },
-  { label: 'Braeburn', value: 'braeburn' },
-  { label: 'McIntosh', value: 'mcintosh' },
-  { label: 'Cortland', value: 'cortland' },
-  { label: 'Empire', value: 'empire' },
-]
-
-const groupedProduce = [
-  {
-    value: 'Fruits',
-    items: [
-      { value: 'apple', label: 'Apple' },
-      { value: 'banana', label: 'Banana' },
-      { value: 'mango', label: 'Mango' },
-      { value: 'kiwi', label: 'Kiwi' },
-      { value: 'grape', label: 'Grape' },
-      { value: 'orange', label: 'Orange' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'watermelon', label: 'Watermelon' },
-    ],
-  },
-  {
-    value: 'Vegetables',
-    items: [
-      { value: 'broccoli', label: 'Broccoli' },
-      { value: 'carrot', label: 'Carrot' },
-      { value: 'cauliflower', label: 'Cauliflower' },
-      { value: 'cucumber', label: 'Cucumber' },
-      { value: 'kale', label: 'Kale' },
-      { value: 'pepper', label: 'Bell pepper' },
-      { value: 'spinach', label: 'Spinach' },
-      { value: 'zucchini', label: 'Zucchini' },
-    ],
-  },
-]
-
-const AppleSelect = ({
-  defaultValue,
-  multiple = false,
-  variant = 'primary',
-  size = 'medium',
-  placeholder = 'Select an apple',
-  disabled = false,
-}: {
-  defaultValue?: string | string[]
-  multiple?: boolean
-  variant?: SelectVariant
-  size?: SelectSize
-  placeholder?: string
-  disabled?: boolean
-}) => (
-  <Select defaultValue={defaultValue} multiple={multiple} disabled={disabled}>
-    <SelectTrigger aria-label={placeholder} variant={variant} size={size}>
-      <SelectValue placeholder={placeholder}>
-        {(value: keyof typeof apples) => (
-          <>
-            <BowlFoodIcon />
-            {apples.find((apple) => apple.value === value)?.label || placeholder}
-          </>
-        )}
-      </SelectValue>
-      <SelectIcon>
-        <CaretUpDownIcon weight="bold" />
-      </SelectIcon>
-    </SelectTrigger>
-    <SelectPopup alignItemWithTrigger={false} sideOffset={8}>
-      <SelectList>
-        {apples.map(({ label, value }) => (
-          <SelectItem key={label} value={value}>
-            <SelectTitle>
+    { label: 'Gala', value: 'gala' },
+    { label: 'Fuji', value: 'fuji' },
+    { label: 'Honeycrisp', value: 'honeycrisp' },
+    { label: 'Granny Smith', value: 'granny-smith' },
+    { label: 'Pink Lady', value: 'pink-lady' },
+    { label: 'Red Delicious', value: 'red-delicious' },
+    { label: 'Golden Delicious', value: 'golden-delicious' },
+    { label: 'Braeburn', value: 'braeburn' },
+    { label: 'McIntosh', value: 'mcintosh' },
+    { label: 'Cortland', value: 'cortland' },
+    { label: 'Empire', value: 'empire' },
+  ],
+  groupedProduce = [
+    {
+      items: [
+        { value: 'apple', label: 'Apple' },
+        { value: 'banana', label: 'Banana' },
+        { value: 'mango', label: 'Mango' },
+        { value: 'kiwi', label: 'Kiwi' },
+        { value: 'grape', label: 'Grape' },
+        { value: 'orange', label: 'Orange' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'watermelon', label: 'Watermelon' },
+      ],
+      value: 'Fruits',
+    },
+    {
+      items: [
+        { value: 'broccoli', label: 'Broccoli' },
+        { value: 'carrot', label: 'Carrot' },
+        { value: 'cauliflower', label: 'Cauliflower' },
+        { value: 'cucumber', label: 'Cucumber' },
+        { value: 'kale', label: 'Kale' },
+        { value: 'pepper', label: 'Bell pepper' },
+        { value: 'spinach', label: 'Spinach' },
+        { value: 'zucchini', label: 'Zucchini' },
+      ],
+      value: 'Vegetables',
+    },
+  ],
+  AppleSelect = ({
+    defaultValue,
+    multiple = false,
+    variant = 'primary',
+    size = 'medium',
+    placeholder = 'Select an apple',
+    disabled = false,
+  }: {
+    defaultValue?: string | string[]
+    multiple?: boolean
+    variant?: SelectVariant
+    size?: SelectSize
+    placeholder?: string
+    disabled?: boolean
+  }) => (
+    <Select defaultValue={defaultValue} multiple={multiple} disabled={disabled}>
+      <Select.Trigger aria-label={placeholder} variant={variant} size={size}>
+        <Select.Value placeholder={placeholder}>
+          {(value: keyof typeof apples) => (
+            <>
               <BowlFoodIcon />
-              {label}
-            </SelectTitle>
-          </SelectItem>
-        ))}
-      </SelectList>
-    </SelectPopup>
-  </Select>
-)
-
-const GroupedProduceSelect = ({ multiple = false }: { multiple?: boolean }) => (
-  <Select multiple={multiple}>
-    <SelectTrigger aria-label="Select produce">
-      <SelectValue placeholder="Select produce" />
-      <SelectIcon>
-        <CaretUpDownIcon weight="bold" />
-      </SelectIcon>
-    </SelectTrigger>
-    <SelectPopup alignItemWithTrigger={false} sideOffset={8}>
-      <SelectList>
-        {groupedProduce.map((group) => (
-          <SelectGroup key={group.value}>
-            <SelectGroupLabel>{group.value}</SelectGroupLabel>
-            {group.items.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
-                <SelectTitle>{item.label}</SelectTitle>
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        ))}
-      </SelectList>
-    </SelectPopup>
-  </Select>
-)
-
-const applesWithDescription = [
-  { label: 'Gala', value: 'gala', description: 'Mild and sweet with a crisp bite' },
-  { label: 'Fuji', value: 'fuji', description: 'Extra sweet and juicy, great for snacking' },
-  {
-    label: 'Honeycrisp',
-    value: 'honeycrisp',
-    description: 'Explosively crisp with balanced tartness',
-  },
-  { label: 'Granny Smith', value: 'granny-smith', description: 'Tart and firm, ideal for baking' },
-  { label: 'Pink Lady', value: 'pink-lady', description: 'Sweet-tart with a refreshing finish' },
-  {
-    label: 'Red Delicious',
-    value: 'red-delicious',
-    description: 'Mellow, sweet, and classically crunchy',
-  },
-]
-
-const AppleDescriptionSelect = ({
-  multiple = false,
-  placeholder = 'Select an apple',
-}: {
-  multiple?: boolean
-  placeholder?: string
-}) => (
-  <Select multiple={multiple}>
-    <SelectTrigger aria-label={placeholder}>
-      <SelectValue placeholder={placeholder}>
-        {(value: string) => (
-          <>
-            <BowlFoodIcon />
-            {applesWithDescription.find((apple) => apple.value === value)?.label || placeholder}
-          </>
-        )}
-      </SelectValue>
-      <SelectIcon>
-        <CaretUpDownIcon weight="bold" />
-      </SelectIcon>
-    </SelectTrigger>
-    <SelectPopup alignItemWithTrigger={false} sideOffset={8}>
-      <SelectList>
-        {applesWithDescription.map(({ label, value, description }) => (
-          <SelectItem key={value} value={value}>
-            <SelectTitle>{label}</SelectTitle>
-            <SelectDescription>{description}</SelectDescription>
-          </SelectItem>
-        ))}
-      </SelectList>
-    </SelectPopup>
-  </Select>
-)
+              {apples.find((apple) => apple.value === value)?.label || placeholder}
+            </>
+          )}
+        </Select.Value>
+        <Select.Icon>
+          <CaretUpDownIcon weight="bold" />
+        </Select.Icon>
+      </Select.Trigger>
+      <Select.Popup alignItemWithTrigger={false} sideOffset={8}>
+        <Select.List>
+          {apples.map(({ label, value }) => (
+            <Select.Item key={label} value={value}>
+              <Select.Title>
+                <BowlFoodIcon />
+                {label}
+              </Select.Title>
+            </Select.Item>
+          ))}
+        </Select.List>
+      </Select.Popup>
+    </Select>
+  ),
+  GroupedProduceSelect = ({ multiple = false }: { multiple?: boolean }) => (
+    <Select multiple={multiple}>
+      <Select.Trigger aria-label="Select produce">
+        <Select.Value placeholder="Select produce" />
+        <Select.Icon>
+          <CaretUpDownIcon weight="bold" />
+        </Select.Icon>
+      </Select.Trigger>
+      <Select.Popup alignItemWithTrigger={false} sideOffset={8}>
+        <Select.List>
+          {groupedProduce.map((group) => (
+            <Select.Group key={group.value}>
+              <Select.GroupLabel>{group.value}</Select.GroupLabel>
+              {group.items.map((item) => (
+                <Select.Item key={item.value} value={item.value}>
+                  <Select.Title>{item.label}</Select.Title>
+                </Select.Item>
+              ))}
+            </Select.Group>
+          ))}
+        </Select.List>
+      </Select.Popup>
+    </Select>
+  ),
+  applesWithDescription = [
+    { description: 'Mild and sweet with a crisp bite', label: 'Gala', value: 'gala' },
+    { description: 'Extra sweet and juicy, great for snacking', label: 'Fuji', value: 'fuji' },
+    {
+      description: 'Explosively crisp with balanced tartness',
+      label: 'Honeycrisp',
+      value: 'honeycrisp',
+    },
+    {
+      description: 'Tart and firm, ideal for baking',
+      label: 'Granny Smith',
+      value: 'granny-smith',
+    },
+    { description: 'Sweet-tart with a refreshing finish', label: 'Pink Lady', value: 'pink-lady' },
+    {
+      description: 'Mellow, sweet, and classically crunchy',
+      label: 'Red Delicious',
+      value: 'red-delicious',
+    },
+  ],
+  AppleDescriptionSelect = ({
+    multiple = false,
+    placeholder = 'Select an apple',
+  }: {
+    multiple?: boolean
+    placeholder?: string
+  }) => (
+    <Select multiple={multiple}>
+      <Select.Trigger aria-label={placeholder}>
+        <Select.Value placeholder={placeholder}>
+          {(value: string) => (
+            <>
+              <BowlFoodIcon />
+              {applesWithDescription.find((apple) => apple.value === value)?.label || placeholder}
+            </>
+          )}
+        </Select.Value>
+        <Select.Icon>
+          <CaretUpDownIcon weight="bold" />
+        </Select.Icon>
+      </Select.Trigger>
+      <Select.Popup alignItemWithTrigger={false} sideOffset={8}>
+        <Select.List>
+          {applesWithDescription.map(({ label, value, description }) => (
+            <Select.Item key={value} value={value}>
+              <Select.Title>{label}</Select.Title>
+              <Select.Description>{description}</Select.Description>
+            </Select.Item>
+          ))}
+        </Select.List>
+      </Select.Popup>
+    </Select>
+  )
 
 export default {
-  title: 'Components/Select',
-  component: Select,
-  subcomponents: {
-    SelectIcon,
-    SelectItem,
-    SelectList,
-    SelectPopup,
-    SelectTrigger,
-    SelectValue,
-  },
   argTypes: {
+    defaultValue: {
+      control: 'object',
+      description: 'Initial selected value or values for uncontrolled selects.',
+    },
     multiple: {
       control: 'boolean',
       description: 'Allows selecting more than one option from the list.',
@@ -207,38 +191,35 @@ export default {
         defaultValue: { summary: '' },
       },
     },
-    variant: {
-      control: 'radio',
-      options: VARIANTS,
-      description: 'Controls the trigger visual style.',
-      table: {
-        defaultValue: { summary: 'default' },
-      },
-    },
     size: {
       control: 'radio',
-      options: SIZES,
       description: 'Controls the trigger height and spacing.',
+      options: SIZES,
       table: {
         defaultValue: { summary: 'medium' },
       },
     },
-    defaultValue: {
-      control: 'object',
-      description: 'Initial selected value or values for uncontrolled selects.',
-    },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A composed selection control for choosing one or more options from a popup list.',
-      description: {
-        component:
-          'The Select component presents a controlled or uncontrolled choice list inside a popup. It supports single and multiple selection, grouped options, trigger variants (`default`, `secondary`), trigger sizes (`small`, `medium`, `large`), custom trigger/value composition, and scrollable lists for longer datasets.',
+    variant: {
+      control: 'radio',
+      description: 'Controls the trigger visual style.',
+      options: VARIANTS,
+      table: {
+        defaultValue: { summary: 'default' },
       },
     },
   },
   args: {
     multiple: false,
+  },
+  component: AppleSelect,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Select component presents a controlled or uncontrolled choice list inside a popup. It supports single and multiple selection, grouped options, trigger variants (`default`, `secondary`), trigger sizes (`small`, `medium`, `large`), custom trigger/value composition, and scrollable lists for longer datasets.',
+      },
+      subtitle: 'A composed selection control for choosing one or more options from a popup list.',
+    },
   },
   render: (args) => {
     const { defaultValue, multiple, variant, size } = args
@@ -247,6 +228,15 @@ export default {
       <AppleSelect defaultValue={defaultValue} multiple={multiple} variant={variant} size={size} />
     )
   },
+  subcomponents: {
+    SelectIcon: Select.Icon,
+    SelectItem: Select.Item,
+    SelectList: Select.List,
+    SelectPopup: Select.Popup,
+    SelectTrigger: Select.Trigger,
+    SelectValue: Select.Value,
+  },
+  title: 'Components/Select',
 } satisfies Meta<SelectStoryArgs>
 
 type Story = StoryObj<SelectStoryArgs>
@@ -276,9 +266,6 @@ export const Default: Story = {
 
 export const Multiple: Story = {
   name: 'Selection / Multiple',
-  args: {
-    multiple: true,
-  },
   parameters: {
     docs: {
       description: {
@@ -400,10 +387,10 @@ export const WithItemDescription: Story = {
 }
 
 export const WithDefaultValue: Story = {
-  name: 'State / Default Value',
   args: {
     defaultValue: 'honeycrisp',
   },
+  name: 'State / Default Value',
   parameters: {
     docs: {
       description: {
@@ -414,11 +401,10 @@ export const WithDefaultValue: Story = {
 }
 
 export const WithDefaultMultipleValues: Story = {
-  name: 'State / Default Multiple Values',
   args: {
-    multiple: true,
     defaultValue: ['fuji', 'pink-lady'],
   },
+  name: 'State / Default Multiple Values',
   parameters: {
     docs: {
       description: {
@@ -439,4 +425,57 @@ export const Disabled: Story = {
     },
   },
   render: () => <AppleSelect variant="primary" size="medium" defaultValue="fuji" disabled />,
+}
+
+export const WithOnValueChange: Story = {
+  name: 'State / Controlled onValueChange',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Controlled usage that demonstrates type safety: typing `Select<string>` makes the `onValueChange` value a `string | null`, so `setSelected` and the rendered label are fully inferred without casts.',
+      },
+    },
+  },
+  render: () => {
+    const [selected, setSelected] = useState<string | null>('gala')
+
+    return (
+      <div className="flex flex-col gap-sm">
+        <Select<string>
+          value={selected}
+          onValueChange={(value) => {
+            setSelected(value)
+          }}
+        >
+          <Select.Trigger aria-label="Select an apple">
+            <Select.Value placeholder="Select an apple">
+              {(value: string) => (
+                <>
+                  <BowlFoodIcon />
+                  {apples.find((apple) => apple.value === value)?.label || 'Select an apple'}
+                </>
+              )}
+            </Select.Value>
+            <Select.Icon>
+              <CaretUpDownIcon weight="bold" />
+            </Select.Icon>
+          </Select.Trigger>
+          <Select.Popup alignItemWithTrigger={false} sideOffset={8}>
+            <Select.List>
+              {apples.map(({ label, value }) => (
+                <Select.Item key={label} value={value}>
+                  <Select.Title>
+                    <BowlFoodIcon />
+                    {label}
+                  </Select.Title>
+                </Select.Item>
+              ))}
+            </Select.List>
+          </Select.Popup>
+        </Select>
+        <p className="style-text-default-0">Selected value: {selected ?? 'none'}</p>
+      </div>
+    )
+  },
 }

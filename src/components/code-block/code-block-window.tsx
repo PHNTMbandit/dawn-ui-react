@@ -1,9 +1,9 @@
-import { useCodeBlock } from './code-block'
 import { cn } from '@/utils/cn'
 
+import { useCodeBlock } from './code-block'
 import type { CodeBlockWindowProps } from './code-block.types'
 
-export const CodeBlockWindow = ({ className, children, ref, ...props }: CodeBlockWindowProps) => {
+export function CodeBlockWindow({ className, children, ref, ...props }: CodeBlockWindowProps) {
   const { currentValue } = useCodeBlock()
 
   return (

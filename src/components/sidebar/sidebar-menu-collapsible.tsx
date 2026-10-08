@@ -1,29 +1,28 @@
 import { Children, isValidElement } from 'react'
+import type { ReactNode } from 'react'
+
+import { cn } from '@/utils/cn'
+
 import { Collapsible } from '../collapsible'
 import { Popover } from '../popover'
 import { useSidebar } from './sidebar-provider'
-import { cn } from '@/utils/cn'
-
 import type { SidebarMenuCollapsibleProps } from './sidebar.types'
-import type { ReactNode } from 'react'
 
 const hasActiveDescendant = (children: ReactNode): boolean =>
   Children.toArray(children).some((child) => {
-    if (!isValidElement(child)) {
+    if (!isValidElement<{ isActive?: boolean; children?: ReactNode }>(child)) {
       return false
     }
 
-    const props = child.props as { isActive?: boolean; children?: ReactNode }
-
-    return props.isActive === true || hasActiveDescendant(props.children)
+    return child.props.isActive === true || hasActiveDescendant(child.props.children)
   })
 
-export const SidebarMenuCollapsible = ({
+export function SidebarMenuCollapsible({
   className,
   children,
   ref,
   ...props
-}: SidebarMenuCollapsibleProps) => {
+}: SidebarMenuCollapsibleProps) {
   const { open } = useSidebar()
 
   if (!open) {

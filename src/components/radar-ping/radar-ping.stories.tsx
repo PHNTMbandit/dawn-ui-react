@@ -1,30 +1,16 @@
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { Button } from '../button'
 import { RadarPing } from './radar-ping'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
-const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
-const SIZES = ['small', 'medium', 'large'] as const
+const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const,
+  SIZES = ['small', 'medium', 'large'] as const
 
 export default {
-  title: 'Components/Radar Ping',
-  component: RadarPing,
   argTypes: {
-    tone: {
-      control: { type: 'select' },
-      options: TONES,
-      description: 'Semantic color applied to the dot and its pulsing animation.',
-      table: {
-        defaultValue: { summary: 'brand' },
-      },
-    },
-    size: {
-      control: { type: 'select' },
-      options: SIZES,
-      description: 'Controls the badge dot, text size, and offset from its anchor element.',
-      table: {
-        defaultValue: { summary: 'medium' },
-      },
+    children: {
+      control: 'text',
+      description: 'Optional count or label rendered inside the dot (e.g. notification count).',
     },
     hidePing: {
       control: 'boolean',
@@ -33,24 +19,37 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
-    children: {
-      control: 'text',
-      description: 'Optional count or label rendered inside the dot (e.g. notification count).',
+    size: {
+      control: { type: 'select' },
+      description: 'Controls the badge dot, text size, and offset from its anchor element.',
+      options: SIZES,
+      table: {
+        defaultValue: { summary: 'medium' },
+      },
     },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'An animated dot badge for drawing attention to notifications and new content.',
-      description: {
-        component:
-          'The RadarPing renders an absolutely-positioned pulsing dot anchored to the top-right corner of its relative container. It is well-suited for notification badges, unread indicators, and live-status signals. Use `tone` to communicate semantic intent, `size` to align with the parent element, `hidePing` to suppress the animation, and `children` to display a numeric count inside the dot.',
+    tone: {
+      control: { type: 'select' },
+      description: 'Semantic color applied to the dot and its pulsing animation.',
+      options: TONES,
+      table: {
+        defaultValue: { summary: 'brand' },
       },
     },
   },
   args: {
     hidePing: false,
-    tone: 'brand',
     size: 'medium',
+    tone: 'brand',
+  },
+  component: RadarPing,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The RadarPing renders an absolutely-positioned pulsing dot anchored to the top-right corner of its relative container. It is well-suited for notification badges, unread indicators, and live-status signals. Use `tone` to communicate semantic intent, `size` to align with the parent element, `hidePing` to suppress the animation, and `children` to display a numeric count inside the dot.',
+      },
+      subtitle: 'An animated dot badge for drawing attention to notifications and new content.',
+    },
   },
   render: (args) => (
     <div className="relative inline-flex">
@@ -60,6 +59,7 @@ export default {
       <RadarPing {...args} />
     </div>
   ),
+  title: 'Components/Radar Ping',
 } satisfies Meta<typeof RadarPing>
 
 type Story = StoryObj<typeof RadarPing>
@@ -75,43 +75,50 @@ export const Playground: Story = {
 }
 
 export const Brand: Story = {
-  name: 'Tone / Brand',
   args: { tone: 'brand' },
+  name: 'Tone / Brand',
 }
 
 export const Accent: Story = {
-  name: 'Tone / Accent',
   args: { tone: 'accent' },
+  name: 'Tone / Accent',
 }
 
 export const Neutral: Story = {
-  name: 'Tone / Neutral',
   args: { tone: 'neutral' },
+  name: 'Tone / Neutral',
 }
 
-// biome-ignore lint/suspicious/noShadowRestrictedNames: story name
+// Biome-ignore lint/suspicious/noShadowRestrictedNames: story name
 export const Error: Story = {
-  name: 'Tone / Error',
   args: { tone: 'error' },
+  name: 'Tone / Error',
 }
 
 export const Info: Story = {
-  name: 'Tone / Info',
   args: { tone: 'info' },
+  name: 'Tone / Info',
 }
 
 export const Success: Story = {
-  name: 'Tone / Success',
   args: { tone: 'success' },
+  name: 'Tone / Success',
 }
 
 export const Warning: Story = {
-  name: 'Tone / Warning',
   args: { tone: 'warning' },
+  name: 'Tone / Warning',
 }
 
 export const AllTones: Story = {
   name: 'Composition / All Tones',
+  parameters: {
+    docs: {
+      description: {
+        story: 'All semantic tones shown together for quick visual comparison.',
+      },
+    },
+  },
   render: () => (
     <div className="flex flex-wrap items-center gap-lg">
       {TONES.map((tone) => (
@@ -127,17 +134,17 @@ export const AllTones: Story = {
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'All semantic tones shown together for quick visual comparison.',
-      },
-    },
-  },
 }
 
 export const AllSizes: Story = {
   name: 'Composition / All Sizes',
+  parameters: {
+    docs: {
+      description: {
+        story: 'All sizes side-by-side with matching button scale for alignment reference.',
+      },
+    },
+  },
   render: () => (
     <div className="flex items-end gap-lg">
       {SIZES.map((size) => (
@@ -153,17 +160,17 @@ export const AllSizes: Story = {
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'All sizes side-by-side with matching button scale for alignment reference.',
-      },
-    },
-  },
 }
 
 export const WithCount: Story = {
   name: 'Composition / With Count',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Numeric count inside the dot, shown across all sizes for layout reference.',
+      },
+    },
+  },
   render: () => (
     <div className="flex items-end gap-lg">
       {SIZES.map((size) => (
@@ -181,20 +188,13 @@ export const WithCount: Story = {
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Numeric count inside the dot, shown across all sizes for layout reference.',
-      },
-    },
-  },
 }
 
 export const StaticDot: Story = {
-  name: 'State / Static Dot',
   args: {
     hidePing: true,
   },
+  name: 'State / Static Dot',
   parameters: {
     docs: {
       description: {

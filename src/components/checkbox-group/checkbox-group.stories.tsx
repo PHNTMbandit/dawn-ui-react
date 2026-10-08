@@ -1,8 +1,8 @@
-import React from 'react'
-import { Checkbox } from '../checkbox/checkbox'
-import { CheckboxGroup } from './checkbox-group'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import React from 'react'
+
+import { Checkbox } from '../checkbox'
+import { CheckboxGroup } from './index'
 
 const NOTIFICATION_OPTIONS = [
   { id: 'comments', label: 'Comments', value: 'comments' },
@@ -11,9 +11,11 @@ const NOTIFICATION_OPTIONS = [
 ] as const
 
 export default {
-  title: 'Components/Checkbox Group',
-  component: CheckboxGroup,
   argTypes: {
+    allValues: {
+      control: 'object',
+      description: 'Optional list of all child values used for parent or indeterminate patterns.',
+    },
     defaultValue: {
       control: 'object',
       description: 'Initial selected values for uncontrolled groups.',
@@ -21,23 +23,20 @@ export default {
         defaultValue: { summary: '[]' },
       },
     },
-    allValues: {
-      control: 'object',
-      description: 'Optional list of all child values used for parent or indeterminate patterns.',
-    },
   },
+  args: {
+    defaultValue: [],
+  },
+  component: CheckboxGroup,
   parameters: {
     docs: {
-      subtitle:
-        'A group of checkbox components that allows users to select multiple options from a set.',
       description: {
         component:
           'Checkbox Group manages shared selection state for multiple checkbox items. It is useful for preference panels, filters, and nested permission editors, and supports advanced patterns such as parent checkboxes and indeterminate sub-groups via `allValues`, `value`, and `onValueChange`. Child checkboxes can use either `elevated` or `inSurface` variants depending on container density.',
       },
+      subtitle:
+        'A group of checkbox components that allows users to select multiple options from a set.',
     },
-  },
-  args: {
-    defaultValue: [],
   },
   render: (args) => (
     <CheckboxGroup {...args}>
@@ -46,6 +45,7 @@ export default {
       <Checkbox id="option3" label="Option 3" value="option3" />
     </CheckboxGroup>
   ),
+  title: 'Components/Checkbox Group',
 } satisfies Meta<typeof CheckboxGroup>
 
 type Story = StoryObj<typeof CheckboxGroup>
@@ -80,10 +80,10 @@ export const Elevated: Story = {
 }
 
 export const WithElevatedSelection: Story = {
-  name: 'Composition / Elevated Selection',
   args: {
     defaultValue: ['mentions', 'announcements'],
   },
+  name: 'Composition / Elevated Selection',
   parameters: {
     docs: {
       description: {
@@ -125,10 +125,10 @@ export const InSurface: Story = {
 }
 
 export const WithInSurfaceSelection: Story = {
-  name: 'Composition / In Surface Selection',
   args: {
     defaultValue: ['mentions', 'announcements'],
   },
+  name: 'Composition / In Surface Selection',
   parameters: {
     docs: {
       description: {
@@ -162,11 +162,11 @@ export const Nested: Story = {
     },
   },
   render: (args) => {
-    const id = React.useId()
-    const [mainValue, setMainValue] = React.useState<string[]>([])
-    const [managementValue, setManagementValue] = React.useState<string[]>([])
-    const mainPermissions = ['view-dashboard', 'manage-users', 'access-reports']
-    const userManagementPermissions = ['create-user', 'edit-user', 'delete-user', 'assign-roles']
+    const id = React.useId(),
+      [mainValue, setMainValue] = React.useState<string[]>([]),
+      [managementValue, setManagementValue] = React.useState<string[]>([]),
+      mainPermissions = ['view-dashboard', 'manage-users', 'access-reports'],
+      userManagementPermissions = ['create-user', 'edit-user', 'delete-user', 'assign-roles']
 
     return (
       <CheckboxGroup
@@ -200,7 +200,7 @@ export const Nested: Story = {
           allValues={userManagementPermissions}
           onValueChange={(value) => {
             if (value.length === userManagementPermissions.length) {
-              setMainValue((prev) => Array.from(new Set([...prev, 'manage-users'])))
+              setMainValue((prev) => [...new Set([...prev, 'manage-users'])])
             } else {
               setMainValue((prev) => prev.filter((v) => v !== 'manage-users'))
             }

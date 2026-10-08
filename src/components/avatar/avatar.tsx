@@ -1,8 +1,11 @@
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
-import { avatarVariants, type AvatarProps } from './avatar.types'
+
 import { cn } from '@/utils/cn'
 
-export const Avatar = ({ size = 'medium', className, children, ref, ...props }: AvatarProps) => {
+import { avatarVariants } from './avatar.types'
+import type { AvatarProps } from './avatar.types'
+
+export function Avatar({ size = 'medium', className, ref, ...props }: AvatarProps) {
   return (
     <BaseAvatar.Root
       className={cn(avatarVariants({ className, size }))}
@@ -10,8 +13,6 @@ export const Avatar = ({ size = 'medium', className, children, ref, ...props }: 
       data-slot="avatar"
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseAvatar.Root>
+    />
   )
 }

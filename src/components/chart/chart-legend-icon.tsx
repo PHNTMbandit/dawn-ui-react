@@ -1,15 +1,15 @@
-import { useChartLegendPayload } from './chart-legend-content'
 import { cn } from '@/utils/cn'
 
 import type { ChartLegendIconProps } from './chart.types'
+import { useChartLegendPayload } from './chart.utils'
 
-export const ChartLegendIcon = ({ className, children, ref, ...props }: ChartLegendIconProps) => {
+export function ChartLegendIcon({ className, children, ref, ...props }: ChartLegendIconProps) {
   const { icon: Icon, color } = useChartLegendPayload()
 
   return (
     <div
       style={{
-        color: color,
+        color,
       }}
       className={cn('shrink-0 [&>svg]:size-xs', className)}
       ref={ref}

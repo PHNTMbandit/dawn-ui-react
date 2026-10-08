@@ -1,10 +1,9 @@
 import { Checkbox } from '../checkbox'
 import { useFieldContext } from '../form/form-contexts'
 import { Label } from '../label'
-
 import type { FieldCheckboxProps } from './field.types'
 
-export const FieldCheckbox = ({ ...props }: FieldCheckboxProps) => {
+export function FieldCheckbox({ ...props }: FieldCheckboxProps) {
   const field = useFieldContext<boolean>()
 
   return (
@@ -13,7 +12,7 @@ export const FieldCheckbox = ({ ...props }: FieldCheckboxProps) => {
         checked={field.state.value}
         id={field.name}
         name={field.name}
-        onCheckedChange={(checked) => field.handleChange(checked === true)}
+        onCheckedChange={(checked) => field.handleChange(checked)}
         {...props}
       />
       {props.label && <Label htmlFor={field.name}>{props.label}</Label>}

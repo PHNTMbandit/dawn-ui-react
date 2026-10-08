@@ -1,15 +1,11 @@
-import { Badge } from '../badge'
-import { useSidebar } from './sidebar-provider'
 import { cn } from '@/utils/cn'
 
+import { Badge } from '../badge'
+import { useSidebar } from './sidebar-provider'
 import type { SidebarMenuBadgeProps } from './sidebar.types'
 
-export const SidebarMenuBadge = ({ className, children, ref, ...props }: SidebarMenuBadgeProps) => {
+export function SidebarMenuBadge({ className, ref, ...props }: SidebarMenuBadgeProps) {
   const { open } = useSidebar()
 
-  return (
-    <Badge className={cn(!open && 'hidden', className)} ref={ref} {...props}>
-      {children}
-    </Badge>
-  )
+  return <Badge className={cn(!open && 'hidden', className)} ref={ref} {...props} />
 }

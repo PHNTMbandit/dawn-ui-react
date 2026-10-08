@@ -1,18 +1,13 @@
-import { Checkbox } from '../checkbox'
-import { useCellContext, useTableContext } from './table-context'
 import { cn } from '@/utils/cn'
 
+import { Checkbox } from '../checkbox'
+import { useCellContext, useTableContext } from './table-feature-context'
 import type { TableCheckboxCellProps } from './table.types'
 
-export const TableCheckboxCell = ({
-  className,
-  children,
-  ref,
-  ...props
-}: TableCheckboxCellProps) => {
-  const cell = useCellContext()
-  const table = useTableContext()
-  const row = cell.row
+export function TableCheckboxCell({ className, ref, ...props }: TableCheckboxCellProps) {
+  const cell = useCellContext(),
+    table = useTableContext(),
+    { row } = cell
 
   return (
     <table.Subscribe selector={(state) => state.rowSelection}>
@@ -28,9 +23,7 @@ export const TableCheckboxCell = ({
           className={cn('', className)}
           ref={ref}
           {...props}
-        >
-          {children}
-        </Checkbox>
+        />
       )}
     </table.Subscribe>
   )

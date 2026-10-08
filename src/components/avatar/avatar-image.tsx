@@ -1,25 +1,26 @@
-import { Avatar as BaseAvatar, type ImageLoadingStatus } from '@base-ui/react/avatar'
+import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
+import type { ImageLoadingStatus } from '@base-ui/react/avatar'
 import React from 'react'
-import { Skeleton } from '../skeleton'
+
 import { cn } from '@/utils/cn'
 
+import { Skeleton } from '../skeleton'
 import type { AvatarImageProps } from './avatar.types'
 
-export const AvatarImage = ({ className, ref, ...props }: AvatarImageProps) => {
+export function AvatarImage({ className, ref, ...props }: AvatarImageProps) {
   const [status, setStatus] = React.useState<ImageLoadingStatus>('loading')
 
+  if (status === 'loading') {
+    return <Skeleton className="absolute inset-0 size-full rounded-full" />
+  }
+
   return (
-    <>
-      {status === 'loading' ? (
-        <Skeleton className="absolute inset-0 size-full rounded-full" />
-      ) : null}
-      <BaseAvatar.Image
-        onLoadingStatusChange={setStatus}
-        className={cn('size-full rounded-full object-cover', className)}
-        data-slot="avatar-image"
-        ref={ref}
-        {...props}
-      />
-    </>
+    <BaseAvatar.Image
+      onLoadingStatusChange={setStatus}
+      className={cn('size-full rounded-full object-cover', className)}
+      data-slot="avatar-image"
+      ref={ref}
+      {...props}
+    />
   )
 }

@@ -1,6 +1,7 @@
-import { type LabelProps, labelVariants } from './label.types'
+import { labelVariants } from './label.types'
+import type { LabelProps } from './label.types'
 
-export const Label = ({ className, children, ref, size, ...props }: LabelProps) => {
+export function Label({ className, ref, size, ...props }: LabelProps) {
   return (
     <label
       className={labelVariants({ className, size })}
@@ -8,8 +9,6 @@ export const Label = ({ className, children, ref, size, ...props }: LabelProps) 
       htmlFor={props.htmlFor}
       ref={ref}
       {...props}
-    >
-      {children}
-    </label>
+    />
   )
 }

@@ -3,8 +3,6 @@ import {
   metaHelper,
   rowExpandingFeature,
   tableFeatures,
-} from '@tanstack/react-table'
-import {
   columnFacetingFeature,
   columnFilteringFeature,
   columnSizingFeature,
@@ -14,7 +12,7 @@ import {
   createFilteredRowModel,
   createPaginatedRowModel,
   createSortedRowModel,
-  createTableHook,
+  createTableHookContexts,
   filterFn_arrHas,
   filterFn_arrIncludes,
   filterFn_arrIncludesAll,
@@ -42,99 +40,66 @@ import {
   sortFn_datetime,
   sortFn_text,
 } from '@tanstack/react-table'
-import { LayerTree } from './layer-tree'
-import { LayerTreeBody } from './layer-tree-body'
-import { LayerTreeExpandAll } from './layer-tree-expand-all'
-import { LayerTreeFooter } from './layer-tree-footer'
-import { LayerTreeIconCell } from './layer-tree-icon-cell'
-import { LayerTreeLockedAll } from './layer-tree-locked-all'
-import { LayerTreeLockedCell } from './layer-tree-locked-cell'
-import { LayerTreeNodeIcon } from './layer-tree-node-icon'
-import { LayerTreeRow } from './layer-tree-row'
-import { LayerTreeSearch } from './layer-tree-search'
-import { LayerTreeSort } from './layer-tree-sort'
-import { LayerTreeTextCell } from './layer-tree-text-cell'
-import { LayerTreeTriggerCell } from './layer-tree-trigger-cell'
-import { rowLockedFeature, rowVisibilityFeature } from './layer-tree-utils'
-import { LayerTreeVisibilityAll } from './layer-tree-visibility-all'
-import { LayerTreeVisibilityCell } from './layer-tree-visibility-cell'
 
+import { rowLockedFeature, rowVisibilityFeature } from './layer-tree-utils'
 import type { LayerTreeColumnMeta, LayerTreeTableMeta } from './layer-tree.types'
 
-export const features = tableFeatures({
-  columnFacetingFeature,
-  columnFilteringFeature,
-  columnSizingFeature,
-  columnVisibilityFeature,
-  globalFilteringFeature,
-  rowExpandingFeature,
-  rowLockedFeature,
-  rowPaginationFeature,
-  rowSelectionFeature,
-  rowSortingFeature,
-  rowVisibilityFeature,
-  expandedRowModel: createExpandedRowModel(),
-  filteredRowModel: createFilteredRowModel(),
-  facetedRowModel: createFacetedRowModel(),
-  facetedUniqueValues: createFacetedUniqueValues(),
-  paginatedRowModel: createPaginatedRowModel(),
-  sortedRowModel: createSortedRowModel(),
-  columnMeta: metaHelper<LayerTreeColumnMeta>(),
-  tableMeta: metaHelper<LayerTreeTableMeta>(),
-  filterFns: {
-    includesString: filterFn_includesString,
-    includesStringSensitive: filterFn_includesStringSensitive,
-    startsWith: filterFn_startsWith,
-    endsWith: filterFn_endsWith,
-    equalsString: filterFn_equalsString,
-    equalsStringSensitive: filterFn_equalsStringSensitive,
-    equals: filterFn_equals,
-    weakEquals: filterFn_weakEquals,
-    empty: filterFn_empty,
-    notEmpty: filterFn_notEmpty,
-    arrIncludes: filterFn_arrIncludes,
-    arrIncludesAll: filterFn_arrIncludesAll,
-    arrIncludesSome: filterFn_arrIncludesSome,
-    arrHas: filterFn_arrHas,
-    inNumberRange: filterFn_inNumberRange,
-    inDateRange: filterFn_inDateRange,
-    between: filterFn_between,
-    betweenInclusive: filterFn_betweenInclusive,
-  },
-  sortFns: {
-    alphanumeric: sortFn_alphanumeric,
-    text: sortFn_text,
-    datetime: sortFn_datetime,
-    basic: sortFn_basic,
-  },
-})
+const features = tableFeatures({
+    columnFacetingFeature,
+    columnFilteringFeature,
+    columnMeta: metaHelper<LayerTreeColumnMeta>(),
+    columnSizingFeature,
+    columnVisibilityFeature,
+    expandedRowModel: createExpandedRowModel(),
+    facetedRowModel: createFacetedRowModel(),
+    facetedUniqueValues: createFacetedUniqueValues(),
+    filterFns: {
+      arrHas: filterFn_arrHas,
+      arrIncludes: filterFn_arrIncludes,
+      arrIncludesAll: filterFn_arrIncludesAll,
+      arrIncludesSome: filterFn_arrIncludesSome,
+      between: filterFn_between,
+      betweenInclusive: filterFn_betweenInclusive,
+      empty: filterFn_empty,
+      endsWith: filterFn_endsWith,
+      equals: filterFn_equals,
+      equalsString: filterFn_equalsString,
+      equalsStringSensitive: filterFn_equalsStringSensitive,
+      inDateRange: filterFn_inDateRange,
+      inNumberRange: filterFn_inNumberRange,
+      includesString: filterFn_includesString,
+      includesStringSensitive: filterFn_includesStringSensitive,
+      notEmpty: filterFn_notEmpty,
+      startsWith: filterFn_startsWith,
+      weakEquals: filterFn_weakEquals,
+    },
+    filteredRowModel: createFilteredRowModel(),
+    globalFilteringFeature,
+    paginatedRowModel: createPaginatedRowModel(),
+    rowExpandingFeature,
+    rowLockedFeature,
+    rowPaginationFeature,
+    rowSelectionFeature,
+    rowSortingFeature,
+    rowVisibilityFeature,
+    sortFns: {
+      alphanumeric: sortFn_alphanumeric,
+      basic: sortFn_basic,
+      datetime: sortFn_datetime,
+      text: sortFn_text,
+    },
+    sortedRowModel: createSortedRowModel(),
+    tableMeta: metaHelper<LayerTreeTableMeta>(),
+  }),
+  { tableContext, cellContext, headerContext, useTableContext, useCellContext, useHeaderContext } =
+    createTableHookContexts<typeof features>()
 
-export const {
-  createAppColumnHelper,
-  useAppTable,
-  useTableContext,
+export {
+  cellContext,
+  features,
+  headerContext,
+  tableContext,
   useCellContext,
   useHeaderContext,
-} = createTableHook({
-  features,
-  tableComponents: {
-    LayerTree,
-    LayerTreeBody,
-    LayerTreeExpandAll,
-    LayerTreeFooter,
-    LayerTreeLockedAll,
-    LayerTreeRow,
-    LayerTreeSearch,
-    LayerTreeSort,
-    LayerTreeVisibilityAll,
-  },
-  cellComponents: {
-    LayerTreeIconCell,
-    LayerTreeLockedCell,
-    LayerTreeNodeIcon,
-    LayerTreeTextCell,
-    LayerTreeTriggerCell,
-    LayerTreeVisibilityCell,
-  },
-  headerComponents: {},
-})
+  useTableContext,
+}

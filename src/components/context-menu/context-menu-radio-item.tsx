@@ -1,15 +1,16 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import { CheckIcon } from '@phosphor-icons/react'
+
 import { cn } from '@/utils/cn'
 
 import type { ContextMenuRadioItemProps } from './context-menu.types'
 
-export const ContextMenuRadioItem = ({
+export function ContextMenuRadioItem({
   className,
   children,
   ref,
   ...props
-}: ContextMenuRadioItemProps) => {
+}: ContextMenuRadioItemProps) {
   return (
     <BaseContextMenu.RadioItem
       className={cn(

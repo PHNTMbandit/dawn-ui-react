@@ -2,13 +2,13 @@ import { cn } from '@/utils/cn'
 
 import type { ChartLinearGradientProps } from './chart.types'
 
-export const ChartLinearGradient = ({
+export function ChartLinearGradient({
   gradients,
   className,
   children,
   ref,
   ...props
-}: ChartLinearGradientProps) => {
+}: ChartLinearGradientProps) {
   return (
     <defs className={cn('', className)} ref={ref} {...props}>
       {gradients.map((gradient) => (

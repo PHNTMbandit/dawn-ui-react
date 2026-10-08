@@ -1,4 +1,5 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
 
 import type { Checkbox } from '../checkbox'
 import type { Input } from '../input'
@@ -10,41 +11,61 @@ import type { Switch } from '../switch'
 import type { TextArea } from '../text-area'
 import type { Toggle } from '../toggle'
 
-export type FieldDescriptionProps = React.ComponentProps<'p'>
-export type FieldErrorProps = React.ComponentProps<'ul'>
-export type FieldInputGroupProps = React.ComponentProps<typeof InputGroup>
-export type FieldInputGroupInputProps = React.ComponentProps<typeof InputGroupInput>
-export type FieldInputProps = React.ComponentProps<typeof Input>
-export type FieldLabelProps = React.ComponentProps<'div'> &
+type FieldDescriptionProps = React.ComponentProps<'p'>
+type FieldErrorProps = React.ComponentProps<'ul'>
+type FieldInputGroupProps = React.ComponentProps<typeof InputGroup>
+type FieldInputGroupInputProps = React.ComponentProps<typeof InputGroupInput>
+type FieldInputProps = React.ComponentProps<typeof Input>
+type FieldLabelProps = React.ComponentProps<'div'> &
   VariantProps<typeof fieldLabelVariants> & {
     showRequired?: boolean
   }
-export type FieldSelectProps = React.ComponentProps<typeof Select>
-export type FieldSliderProps = React.ComponentProps<typeof Slider>
-export type FieldTextAreaProps = React.ComponentProps<typeof TextArea>
-export type FieldCheckboxProps = React.ComponentProps<typeof Checkbox>
-export type FieldRadioProps = React.ComponentProps<typeof Radio>
-export type FieldRadioGroupProps = React.ComponentProps<typeof RadioGroup>
-export type FieldSwitchProps = React.ComponentProps<typeof Switch>
-export type FieldToggleProps = React.ComponentProps<typeof Toggle>
-export type FieldProps = React.ComponentProps<'div'>
-export type FieldSetProps = React.ComponentProps<'div'>
-export type FieldRowProps = React.ComponentProps<'div'>
+type FieldSelectProps = React.ComponentProps<typeof Select>
+type FieldSliderProps = React.ComponentProps<typeof Slider>
+type FieldTextAreaProps = React.ComponentProps<typeof TextArea>
+type FieldCheckboxProps = React.ComponentProps<typeof Checkbox>
+type FieldRadioProps = React.ComponentProps<typeof Radio>
+type FieldRadioGroupProps = React.ComponentProps<typeof RadioGroup>
+type FieldSwitchProps = React.ComponentProps<typeof Switch>
+type FieldToggleProps = React.ComponentProps<typeof Toggle>
+type FieldProps = React.ComponentProps<'div'>
+type FieldSetProps = React.ComponentProps<'div'>
+type FieldRowProps = React.ComponentProps<'div'>
 
 export const fieldLabelVariants = cva('whitespace-nowrap', {
+  defaultVariants: {
+    size: 'medium',
+    variant: 'primary',
+  },
   variants: {
     size: {
-      small: 'style-text-default--1',
-      medium: 'style-text-default-0',
       large: 'style-text-default-1',
+      medium: 'style-text-default-0',
+      small: 'style-text-default--1',
     },
     variant: {
       primary: 'text-on-surface',
       secondary: 'text-on-surface-variant',
     },
   },
-  defaultVariants: {
-    size: 'medium',
-    variant: 'primary',
-  },
 })
+
+export type {
+  FieldDescriptionProps,
+  FieldErrorProps,
+  FieldInputGroupProps,
+  FieldInputGroupInputProps,
+  FieldInputProps,
+  FieldLabelProps,
+  FieldSelectProps,
+  FieldSliderProps,
+  FieldTextAreaProps,
+  FieldCheckboxProps,
+  FieldRadioProps,
+  FieldRadioGroupProps,
+  FieldSwitchProps,
+  FieldToggleProps,
+  FieldProps,
+  FieldSetProps,
+  FieldRowProps,
+}

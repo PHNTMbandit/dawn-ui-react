@@ -1,22 +1,35 @@
 import { Slider as BaseSlider } from '@base-ui/react'
-import { colorChannelSliderVariants } from './color-channel-slider.types'
+
 import { cn } from '@/utils/cn'
 
+import { colorChannelSliderVariants } from './color-channel-slider.types'
 import type { ColorChannelSliderProps } from './color-channel-slider.types'
 
-export const ColorChannelSlider = ({
+const PRIMARY_THUMB_INDEX = 0
+
+export function ColorChannelSlider({
   size,
   trackStyle,
   className,
   children,
+  'aria-label': ariaLabel = 'Color value',
   ref,
   ...props
-}: ColorChannelSliderProps) => {
+}: ColorChannelSliderProps) {
   const hasTransparency = trackStyle.some(
-    (color: string) => color.includes('rgba') || color.includes('hsla') || color.includes('/'),
-  )
-
-  const { 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, ...rootProps } = props
+      (color: string) => color.includes('rgba') || color.includes('hsla') || color.includes('/'),
+    ),
+    baseGradient = `linear-gradient(to right, ${trackStyle.join(', ')})`,
+    checkerboard =
+      'linear-gradient(45deg, #d4d4d8 25%, transparent 25%, transparent 75%, #d4d4d8 75%, #d4d4d8)'
+  let backgroundImage = baseGradient,
+    backgroundPosition = 'auto',
+    backgroundSize = 'auto'
+  if (hasTransparency) {
+    backgroundImage = [baseGradient, checkerboard, checkerboard].join(', ')
+    backgroundPosition = '0 0, 0 0, 5px 5px'
+    backgroundSize = '100% 100%, 10px 10px, 10px 10px'
+  }
 
   return (
     <BaseSlider.Root
@@ -24,35 +37,24 @@ export const ColorChannelSlider = ({
       data-slot="slider-root"
       thumbAlignment="edge"
       ref={ref}
-      {...rootProps}
+      {...props}
     >
-      <BaseSlider.Control
-        className={
-          'shrink-0 hover:cursor-pointer data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full'
-        }
-      >
+      <BaseSlider.Control className="shrink-0 hover:cursor-pointer data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full">
         <BaseSlider.Track
           data-slot="slider-track"
           className={cn('relative size-full rounded-full')}
           style={{
-            backgroundImage: hasTransparency
-              ? [
-                  `linear-gradient(to right, ${trackStyle.join(', ')})`,
-                  'linear-gradient(45deg, #d4d4d8 25%, transparent 25%, transparent 75%, #d4d4d8 75%, #d4d4d8)',
-                  'linear-gradient(45deg, #d4d4d8 25%, transparent 25%, transparent 75%, #d4d4d8 75%, #d4d4d8)',
-                ].join(', ')
-              : `linear-gradient(to right, ${trackStyle.join(', ')})`,
-            backgroundSize: hasTransparency ? '100% 100%, 10px 10px, 10px 10px' : 'auto',
-            backgroundPosition: hasTransparency ? '0 0, 0 0, 5px 5px' : 'auto',
             backgroundColor: '#ffffff',
+            backgroundImage,
+            backgroundPosition,
+            backgroundSize,
           }}
         >
           {children}
-          <BaseSlider.Indicator data-slot="slider-indicator" className={'rounded-full'} />
+          <BaseSlider.Indicator data-slot="slider-indicator" className="rounded-full" />
           <BaseSlider.Thumb
-            aria-label={ariaLabel}
-            aria-labelledby={ariaLabelledby}
             data-slot="slider-thumb"
+            aria-label={ariaLabel}
             className={cn(
               'absolute aspect-square rounded-full border-white shadow-xs transition-[width,height,opacity] data-dragging:cursor-grabbing hover:[&:not([data-dragging])]:cursor-pointer',
             )}
@@ -61,7 +63,7 @@ export const ColorChannelSlider = ({
                 {...thumbProps}
                 style={{
                   ...thumbProps.style,
-                  backgroundColor: trackStyle[state.values[0]],
+                  backgroundColor: trackStyle[state.values[PRIMARY_THUMB_INDEX]],
                 }}
               />
             )}

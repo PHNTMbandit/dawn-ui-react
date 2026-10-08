@@ -1,18 +1,13 @@
-import { inputVariants } from '../input/input.types'
 import { cn } from '@/utils/cn'
 
+import { inputVariants } from '../input/input.types'
 import type { AutocompleteInputGroupProps } from './autocomplete.types'
 
-export const AutocompleteInputGroup = ({
+export function AutocompleteInputGroup({
   variant,
   className,
-  children,
   ref,
   ...props
-}: AutocompleteInputGroupProps) => {
-  return (
-    <div className={cn(inputVariants({ variant }), className)} ref={ref} {...props}>
-      {children}
-    </div>
-  )
+}: AutocompleteInputGroupProps) {
+  return <div className={cn(inputVariants({ variant }), className)} ref={ref} {...props} />
 }

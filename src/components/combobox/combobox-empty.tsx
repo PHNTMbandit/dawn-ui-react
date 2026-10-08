@@ -1,7 +1,9 @@
-import { Combobox as BaseCombobox, type ComboboxEmptyProps } from '@base-ui/react/combobox'
+import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
+import type { ComboboxEmptyProps } from '@base-ui/react/combobox'
+
 import { cn } from '@/utils/cn'
 
-export const ComboboxEmpty = ({ className, children, ref, ...props }: ComboboxEmptyProps) => {
+export function ComboboxEmpty({ className, ref, ...props }: ComboboxEmptyProps) {
   return (
     <BaseCombobox.Empty
       className={cn(
@@ -10,8 +12,6 @@ export const ComboboxEmpty = ({ className, children, ref, ...props }: ComboboxEm
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseCombobox.Empty>
+    />
   )
 }

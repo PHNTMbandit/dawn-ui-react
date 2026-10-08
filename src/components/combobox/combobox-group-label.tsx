@@ -1,14 +1,10 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
+
 import { cn } from '@/utils/cn'
 
 import type { ComboboxGroupLabelProps } from './combobox.types'
 
-export const ComboboxGroupLabel = ({
-  className,
-  children,
-  ref,
-  ...props
-}: ComboboxGroupLabelProps) => {
+export function ComboboxGroupLabel({ className, ref, ...props }: ComboboxGroupLabelProps) {
   return (
     <BaseCombobox.GroupLabel
       className={cn(
@@ -17,8 +13,6 @@ export const ComboboxGroupLabel = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseCombobox.GroupLabel>
+    />
   )
 }

@@ -1,17 +1,30 @@
-import { useTableContext } from './table-context'
-
+import { useTableContext } from './table-feature-context'
 import type { TableResultsProps } from './table.types'
-import type * as React from 'react'
 
-export const TableResults = ({ children }: TableResultsProps) => {
-  const table = useTableContext()
+const EMPTY_ROW_COUNT = 0,
+  PAGE_NUMBER_OFFSET = 1
 
-  const pageIndex = table.state.pagination.pageIndex
-  const pageSize = table.state.pagination.pageSize
-  const totalRows = table.getFilteredRowModel().rows.length
+function getPageStart(totalRows: number, pageIndex: number, pageSize: number): number {
+  if (totalRows === EMPTY_ROW_COUNT) {
+    return EMPTY_ROW_COUNT
+  }
+  return pageIndex * pageSize + PAGE_NUMBER_OFFSET
+}
 
-  const start = totalRows === 0 ? 0 : pageIndex * pageSize + 1
-  const end = totalRows === 0 ? 0 : Math.min(start + pageSize - 1, totalRows)
+function getPageEnd(start: number, pageSize: number, totalRows: number): number {
+  if (totalRows === EMPTY_ROW_COUNT) {
+    return EMPTY_ROW_COUNT
+  }
+  return Math.min(start + pageSize - PAGE_NUMBER_OFFSET, totalRows)
+}
 
-  return children(start, end, totalRows) as React.ReactElement
+export function TableResults({ children }: TableResultsProps) {
+  const table = useTableContext(),
+    { pageIndex } = table.state.pagination,
+    { pageSize } = table.state.pagination,
+    totalRows = table.getFilteredRowModel().rows.length,
+    start = getPageStart(totalRows, pageIndex, pageSize),
+    end = getPageEnd(start, pageSize, totalRows)
+
+  return children(start, end, totalRows)
 }

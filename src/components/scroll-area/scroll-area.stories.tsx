@@ -1,24 +1,22 @@
-import { ScrollArea } from './scroll-area'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const ORIENTATIONS = ['vertical', 'horizontal'] as const
+import { ScrollArea } from './index'
 
-const ARTICLE_PARAGRAPHS = [
-  'Product teams often need dense content in constrained spaces. Scroll areas keep the layout compact while still exposing long-form details when needed.',
-  'This example demonstrates a vertical viewport that keeps surrounding UI fixed while body copy remains fully accessible through native scrolling.',
-  'Use scroll areas in cards, side panels, activity feeds, and settings pages where available height is intentionally limited.',
-  'For accessibility and discoverability, keep enough visible context and ensure focusable children remain keyboard reachable inside the viewport.',
-] as const
-
-const CHAT_MESSAGES = [
-  { user: 'Mila', text: 'Can we review the component docs before release?' },
-  { user: 'Noah', text: 'I pushed updates for keyboard navigation and focus states.' },
-  { user: 'Ava', text: 'Great. I will verify empty states and long-content behavior next.' },
-  { user: 'Liam', text: 'Please include guidance on horizontal usage for media galleries.' },
-  { user: 'Emma', text: 'On it. I will add examples for both orientations.' },
-  { user: 'Kai', text: 'Thanks. That should make onboarding easier for new contributors.' },
-] as const
+const ORIENTATIONS = ['vertical', 'horizontal'] as const,
+  ARTICLE_PARAGRAPHS = [
+    'Product teams often need dense content in constrained spaces. Scroll areas keep the layout compact while still exposing long-form details when needed.',
+    'This example demonstrates a vertical viewport that keeps surrounding UI fixed while body copy remains fully accessible through native scrolling.',
+    'Use scroll areas in cards, side panels, activity feeds, and settings pages where available height is intentionally limited.',
+    'For accessibility and discoverability, keep enough visible context and ensure focusable children remain keyboard reachable inside the viewport.',
+  ] as const,
+  CHAT_MESSAGES = [
+    { text: 'Can we review the component docs before release?', user: 'Mila' },
+    { text: 'I pushed updates for keyboard navigation and focus states.', user: 'Noah' },
+    { text: 'Great. I will verify empty states and long-content behavior next.', user: 'Ava' },
+    { text: 'Please include guidance on horizontal usage for media galleries.', user: 'Liam' },
+    { text: 'On it. I will add examples for both orientations.', user: 'Emma' },
+    { text: 'Thanks. That should make onboarding easier for new contributors.', user: 'Kai' },
+  ] as const
 
 interface Artwork {
   artist: string
@@ -26,138 +24,113 @@ interface Artwork {
 }
 
 const works: Artwork[] = [
-  {
-    artist: 'Ornella Binni',
-    art: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80',
-  },
-  {
-    artist: 'Tom Byrom',
-    art: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80',
-  },
-  {
-    artist: 'Vladimir Malyavko',
-    art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80',
-  },
-  {
-    artist: 'Ornella Binni',
-    art: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80',
-  },
-  {
-    artist: 'Tom Byrom',
-    art: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80',
-  },
-  {
-    artist: 'Vladimir Malyavko',
-    art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80',
-  },
-]
-
-const VerticalTemplate = ({
-  orientation,
-  defaultHeight,
-  variant,
-}: {
-  defaultHeight?: number
-  orientation: 'vertical' | 'horizontal' | undefined | null
-  variant: 'default' | 'ghost' | 'outline' | undefined | null
-}) => (
-  <ScrollArea
-    className="w-[400px]"
-    defaultHeight={defaultHeight}
-    orientation={orientation}
-    variant={variant}
-  >
-    <div className="space-y-sm px-2xs">
-      <h4 className="style-text-strong--1 text-on-surface">Scrollable Article</h4>
-      {ARTICLE_PARAGRAPHS.map((paragraph, index) => (
-        <p key={paragraph} className="style-text-default--1 text-on-surface-variant">
-          {index + 1}. {paragraph}
-        </p>
-      ))}
-    </div>
-  </ScrollArea>
-)
-
-const HorizontalTemplate = ({
-  orientation,
-  defaultHeight,
-  variant,
-}: {
-  orientation: 'vertical' | 'horizontal' | undefined | null
-  defaultHeight?: number
-  variant: 'default' | 'ghost' | 'outline' | undefined | null
-}) => (
-  <div className="h-[220px] w-[640px]">
-    <ScrollArea defaultHeight={defaultHeight} orientation={orientation} variant={variant}>
-      {works.map((artwork, index) => (
-        <figure className="shrink-0" key={`${artwork.artist}-${index}`}>
-          <div className="overflow-hidden rounded-md">
-            <img
-              alt={artwork.artist}
-              className="aspect-3/4 size-fit object-cover"
-              height={400}
-              src={artwork.art}
-              width={300}
-            />
-          </div>
-          <figcaption className="pt-xs style-text-default--2 text-on-surface-variant">
-            Photo by <span className="text-on-surface">{artwork.artist}</span>
-          </figcaption>
-        </figure>
-      ))}
+    {
+      art: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80',
+      artist: 'Ornella Binni',
+    },
+    {
+      art: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80',
+      artist: 'Tom Byrom',
+    },
+    {
+      art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80',
+      artist: 'Vladimir Malyavko',
+    },
+    {
+      art: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80',
+      artist: 'Ornella Binni',
+    },
+    {
+      art: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80',
+      artist: 'Tom Byrom',
+    },
+    {
+      art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80',
+      artist: 'Vladimir Malyavko',
+    },
+  ],
+  VerticalTemplate = ({
+    orientation,
+    variant,
+  }: {
+    orientation: 'vertical' | 'horizontal' | undefined | null
+    variant: 'default' | 'ghost' | 'outline' | undefined | null
+  }) => (
+    <ScrollArea className="h-[100px] w-[400px]" orientation={orientation} variant={variant}>
+      <div className="space-y-sm px-2xs">
+        <h4 className="style-text-strong--1 text-on-surface">Scrollable Article</h4>
+        {ARTICLE_PARAGRAPHS.map((paragraph, index) => (
+          <p key={paragraph} className="style-text-default--1 text-on-surface-variant">
+            {index + 1}. {paragraph}
+          </p>
+        ))}
+      </div>
     </ScrollArea>
-  </div>
-)
+  ),
+  HorizontalTemplate = ({
+    orientation,
+    variant,
+  }: {
+    orientation: 'vertical' | 'horizontal' | undefined | null
+    variant: 'default' | 'ghost' | 'outline' | undefined | null
+  }) => (
+    <div className="h-[220px] w-[640px]">
+      <ScrollArea orientation={orientation} variant={variant}>
+        {works.map((artwork, index) => (
+          <figure className="shrink-0" key={`${artwork.artist}-${index}`}>
+            <div className="overflow-hidden rounded-md">
+              <img
+                alt={artwork.artist}
+                className="aspect-3/4 size-fit object-cover"
+                height={400}
+                src={artwork.art}
+                width={300}
+              />
+            </div>
+            <figcaption className="pt-xs style-text-default--2 text-on-surface-variant">
+              Photo by <span className="text-on-surface">{artwork.artist}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </ScrollArea>
+    </div>
+  )
 
 export default {
-  title: 'Components/Scroll Area',
-  component: ScrollArea,
   argTypes: {
     orientation: {
       control: { type: 'select' },
-      options: ORIENTATIONS,
       description: 'Sets scroll direction and scrollbar axis.',
+      options: ORIENTATIONS,
       table: {
         defaultValue: { summary: 'vertical' },
       },
     },
-    defaultHeight: {
-      control: { type: 'number', min: 120, max: 640, step: 10 },
-      description: 'Viewport height in pixels when orientation is vertical.',
-      table: {
-        defaultValue: { summary: '200' },
-      },
-    },
     variant: {
       control: { type: 'select' },
+      description: 'Applies a preset combination of background, borders, and viewport padding.',
       options: ['default', 'ghost', 'outline'],
-      description: 'Visual style variants that adjust background and scrollbar chrome.',
       table: {
         defaultValue: { summary: 'default' },
       },
     },
   },
+  args: {
+    orientation: 'vertical',
+    variant: 'default',
+  },
+  component: ScrollArea,
   parameters: {
     docs: {
-      subtitle: 'A styled viewport for overflowing content with custom scroll behavior and chrome.',
       description: {
         component:
           'ScrollArea provides a polished container for content that exceeds its visible bounds. It supports vertical and horizontal orientation, styled scrollbars, and subtle edge gradients that hint at additional content. Use it for article sections, chat logs, media rails, activity lists, and any constrained layout where native overflow would feel too raw.',
       },
+      subtitle: 'A styled viewport for overflowing content with custom scroll behavior and chrome.',
     },
   },
-  args: {
-    orientation: 'vertical',
-    defaultHeight: 200,
-    variant: 'default',
-  },
-  render: (args) => (
-    <VerticalTemplate
-      defaultHeight={args.defaultHeight}
-      orientation={args.orientation}
-      variant={args.variant}
-    />
-  ),
+  render: (args) => <VerticalTemplate orientation={args.orientation} variant={args.variant} />,
+  title: 'Components/Scroll Area',
 } satisfies Meta<typeof ScrollArea>
 
 type Story = StoryObj<typeof ScrollArea>
@@ -166,7 +139,7 @@ export const Playground: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Use controls to switch orientation and tune vertical viewport height.',
+        story: 'Use controls to switch orientation.',
       },
     },
   },
@@ -177,32 +150,27 @@ export const VerticalArticle: Story = {
 }
 
 export const Horizontal: Story = {
-  name: 'Orientation / Horizontal Gallery',
   args: {
     orientation: 'horizontal',
-    defaultHeight: 150,
   },
-  render: (args) => (
-    <HorizontalTemplate
-      defaultHeight={args.defaultHeight}
-      orientation={args.orientation}
-      variant={args.variant}
-    />
-  ),
+  name: 'Orientation / Horizontal Gallery',
+  render: (args) => <HorizontalTemplate orientation={args.orientation} variant={args.variant} />,
 }
 
 export const ChatFeed: Story = {
-  name: 'Composition / Chat Feed',
   args: {
     orientation: 'vertical',
-    defaultHeight: 260,
+  },
+  name: 'Composition / Chat Feed',
+  parameters: {
+    docs: {
+      description: {
+        story: 'A realistic message list where content grows over time inside a fixed-height area.',
+      },
+    },
   },
   render: (args) => (
-    <ScrollArea
-      className="w-[420px]"
-      defaultHeight={args.defaultHeight}
-      orientation={args.orientation}
-    >
+    <ScrollArea className="w-[420px]" orientation={args.orientation}>
       <div className="space-y-xs">
         {CHAT_MESSAGES.map((message) => (
           <div key={`${message.user}-${message.text}`} className="rounded-lg bg-surface p-xs">
@@ -213,32 +181,25 @@ export const ChatFeed: Story = {
       </div>
     </ScrollArea>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'A realistic message list where content grows over time inside a fixed-height area.',
-      },
-    },
-  },
 }
 
 export const DefaultVariant: Story = {
-  name: 'Variant / Default',
   args: {
     variant: 'default',
   },
+  name: 'Variant / Default',
 }
 
 export const GhostVariant: Story = {
-  name: 'Variant / Ghost',
   args: {
     variant: 'ghost',
   },
+  name: 'Variant / Ghost',
 }
 
 export const OutlineVariant: Story = {
-  name: 'Variant / Outline',
   args: {
     variant: 'outline',
   },
+  name: 'Variant / Outline',
 }

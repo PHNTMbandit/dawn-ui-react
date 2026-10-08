@@ -1,14 +1,13 @@
-import { useSliderGroupContext } from './slider-group-context'
 import { cn } from '@/utils/cn'
 
+import { getPrimaryValue, useSliderGroupContext } from './slider-group-context'
 import type { SliderValueProps } from './slider-group.types'
 
-export const SliderValue = ({ className, children, ref, ...props }: SliderValueProps) => {
+export function SliderValue({ className, children, ref, ...props }: SliderValueProps) {
   const group = useSliderGroupContext()
-  if (!group) return null
-
-  const { value, min } = group
-  const current = value?.[0] ?? min
+  if (!group) {
+    return undefined
+  }
 
   return (
     <span
@@ -18,7 +17,7 @@ export const SliderValue = ({ className, children, ref, ...props }: SliderValueP
       {...props}
     >
       {children}
-      {current}
+      {getPrimaryValue(group.value, group.min)}
     </span>
   )
 }

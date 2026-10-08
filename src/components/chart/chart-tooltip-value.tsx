@@ -1,14 +1,9 @@
-import { useChartTooltipPayload } from './chart-tooltip-payload'
 import { cn } from '@/utils/cn'
 
+import { useChartTooltipPayload } from './chart-tooltip-payload'
 import type { ChartTooltipValueProps } from './chart.types'
 
-export const ChartTooltipValue = ({
-  className,
-  children,
-  ref,
-  ...props
-}: ChartTooltipValueProps) => {
+export function ChartTooltipValue({ className, children, ref, ...props }: ChartTooltipValueProps) {
   const { value } = useChartTooltipPayload()
 
   return (

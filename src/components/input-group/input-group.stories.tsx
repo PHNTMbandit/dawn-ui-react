@@ -5,31 +5,14 @@ import {
   TagIcon,
   XIcon,
 } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { Kbd } from '../kbd'
-import { InputGroup } from './input-group'
-import { InputGroupAddon } from './input-group-addon'
-import { InputGroupInput } from './input-group-input'
-import { InputGroupSeparator } from './input-group-separator'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Button } from '../button'
+import { Kbd } from '../kbd'
+import { InputGroup } from './index'
+
 export default {
-  title: 'Components/Input Group',
-  component: InputGroup,
-  subcomponents: {
-    InputGroupAddon,
-    InputGroupInput,
-  },
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'secondary'],
-      description: 'Applies the same surface variant styles as the base Input component.',
-      table: {
-        defaultValue: { summary: 'primary' },
-      },
-    },
     'aria-invalid': {
       control: 'boolean',
       description: 'Marks the group as invalid to trigger error state styling.',
@@ -37,19 +20,33 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
+    variant: {
+      control: 'select',
+      description: 'Applies the same surface variant styles as the base Input component.',
+      options: ['primary', 'secondary'],
+      table: {
+        defaultValue: { summary: 'primary' },
+      },
+    },
   },
   args: {
     variant: 'primary',
   },
+  component: InputGroup,
   parameters: {
     docs: {
-      subtitle: 'A composed input container with leading/trailing addons and shared state styling.',
       description: {
         component:
           'Input Group combines one editable input with optional addons (icons, text labels, shortcuts, spinners, and buttons) into a single cohesive control. It supports the same variants as Input (`primary`, `secondary`) and responds to invalid state using `aria-invalid`.',
       },
+      subtitle: 'A composed input container with leading/trailing addons and shared state styling.',
     },
   },
+  subcomponents: {
+    InputGroupAddon: InputGroup.Addon,
+    InputGroupInput: InputGroup.Input,
+  },
+  title: 'Components/Input Group',
 } satisfies Meta<typeof InputGroup>
 
 type Story = StoryObj<typeof InputGroup>
@@ -66,22 +63,22 @@ export const Playground: Story = {
   },
   render: (args) => (
     <InputGroup {...args}>
-      <InputGroupAddon>
+      <InputGroup.Addon>
         <MagnifyingGlassIcon weight="bold" />
-      </InputGroupAddon>
-      <InputGroupInput placeholder="Search projects" />
-      <InputGroupAddon>
+      </InputGroup.Addon>
+      <InputGroup.Input placeholder="Search projects" />
+      <InputGroup.Addon>
         <CheckIcon weight="bold" />
-      </InputGroupAddon>
+      </InputGroup.Addon>
     </InputGroup>
   ),
 }
 
 export const Primary: Story = {
-  name: 'Variant / Primary',
   args: {
     variant: 'primary',
   },
+  name: 'Variant / Primary',
   parameters: {
     docs: {
       description: {
@@ -91,19 +88,19 @@ export const Primary: Story = {
   },
   render: (args) => (
     <InputGroup {...args}>
-      <InputGroupAddon>
+      <InputGroup.Addon>
         <TagIcon weight="bold" />
-      </InputGroupAddon>
-      <InputGroupInput placeholder="Campaign name" />
+      </InputGroup.Addon>
+      <InputGroup.Input placeholder="Campaign name" />
     </InputGroup>
   ),
 }
 
 export const Secondary: Story = {
-  name: 'Variant / Secondary',
   args: {
     variant: 'secondary',
   },
+  name: 'Variant / Secondary',
   parameters: {
     docs: {
       description: {
@@ -113,10 +110,10 @@ export const Secondary: Story = {
   },
   render: (args) => (
     <InputGroup {...args}>
-      <InputGroupAddon>
+      <InputGroup.Addon>
         <MagnifyingGlassIcon weight="bold" />
-      </InputGroupAddon>
-      <InputGroupInput placeholder="Search by keyword" />
+      </InputGroup.Addon>
+      <InputGroup.Input placeholder="Search by keyword" />
     </InputGroup>
   ),
 }
@@ -125,13 +122,13 @@ export const IconAddons: Story = {
   name: 'Addon / Icon',
   render: (args) => (
     <InputGroup {...args}>
-      <InputGroupAddon>
+      <InputGroup.Addon>
         <MagnifyingGlassIcon weight="bold" />
-      </InputGroupAddon>
-      <InputGroupInput placeholder="Search users" />
-      <InputGroupAddon size={'large'}>
+      </InputGroup.Addon>
+      <InputGroup.Input placeholder="Search users" />
+      <InputGroup.Addon size="large">
         <CheckIcon weight="bold" />
-      </InputGroupAddon>
+      </InputGroup.Addon>
     </InputGroup>
   ),
 }
@@ -140,9 +137,9 @@ export const TextAddons: Story = {
   name: 'Addon / Text',
   render: (args) => (
     <InputGroup {...args}>
-      <InputGroupAddon>$</InputGroupAddon>
-      <InputGroupInput placeholder="0.00" type="number" />
-      <InputGroupAddon size="small">AUD</InputGroupAddon>
+      <InputGroup.Addon>$</InputGroup.Addon>
+      <InputGroup.Input placeholder="0.00" type="number" />
+      <InputGroup.Addon size="small">AUD</InputGroup.Addon>
     </InputGroup>
   ),
 }
@@ -151,12 +148,12 @@ export const ButtonAddon: Story = {
   name: 'Addon / Button',
   render: (args) => (
     <InputGroup {...args}>
-      <InputGroupInput placeholder="Invite by email" type="email" />
-      <InputGroupAddon>
+      <InputGroup.Input placeholder="Invite by email" type="email" />
+      <InputGroup.Addon>
         <Button size="small" tone="neutral" variant="outline">
           Send
         </Button>
-      </InputGroupAddon>
+      </InputGroup.Addon>
     </InputGroup>
   ),
 }
@@ -165,25 +162,16 @@ export const KeyboardHint: Story = {
   name: 'Addon / Keyboard Hint',
   render: (args) => (
     <InputGroup {...args}>
-      <InputGroupInput placeholder="Search across workspace" />
-      <InputGroupAddon>
+      <InputGroup.Input placeholder="Search across workspace" />
+      <InputGroup.Addon>
         <Kbd>⌘ K</Kbd>
-      </InputGroupAddon>
+      </InputGroup.Addon>
     </InputGroup>
   ),
 }
 
 export const LoadingState: Story = {
   name: 'State / Loading',
-  render: (args) => (
-    <InputGroup {...args}>
-      <InputGroupInput placeholder="Saving changes..." value="Project Atlas" />
-      <InputGroupAddon>
-        Saving
-        <CircleNotchIcon className="size-sm animate-spin" weight="bold" />
-      </InputGroupAddon>
-    </InputGroup>
-  ),
   parameters: {
     docs: {
       description: {
@@ -191,18 +179,19 @@ export const LoadingState: Story = {
       },
     },
   },
+  render: (args) => (
+    <InputGroup {...args}>
+      <InputGroup.Input placeholder="Saving changes..." value="Project Atlas" />
+      <InputGroup.Addon>
+        Saving
+        <CircleNotchIcon className="size-sm animate-spin" weight="bold" />
+      </InputGroup.Addon>
+    </InputGroup>
+  ),
 }
 
 export const InvalidState: Story = {
   name: 'State / Invalid',
-  render: (args) => (
-    <InputGroup {...args} aria-invalid>
-      <InputGroupInput defaultValue="invalid@email" placeholder="Enter email" type="email" />
-      <InputGroupAddon>
-        <XIcon weight="bold" />
-      </InputGroupAddon>
-    </InputGroup>
-  ),
   parameters: {
     docs: {
       description: {
@@ -210,23 +199,18 @@ export const InvalidState: Story = {
       },
     },
   },
+  render: (args) => (
+    <InputGroup {...args} aria-invalid>
+      <InputGroup.Input defaultValue="invalid@email" placeholder="Enter email" type="email" />
+      <InputGroup.Addon>
+        <XIcon weight="bold" />
+      </InputGroup.Addon>
+    </InputGroup>
+  ),
 }
 
 export const SearchBar: Story = {
   name: 'Composition / Search Bar',
-  render: (args) => (
-    <div className="w-[480px]">
-      <InputGroup {...args} variant="secondary">
-        <InputGroupAddon>
-          <MagnifyingGlassIcon weight="bold" />
-        </InputGroupAddon>
-        <InputGroupInput placeholder="Search projects, files, and users" />
-        <InputGroupAddon>
-          <Kbd>⌘ F</Kbd>
-        </InputGroupAddon>
-      </InputGroup>
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -234,19 +218,23 @@ export const SearchBar: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="w-[480px]">
+      <InputGroup {...args} variant="secondary">
+        <InputGroup.Addon>
+          <MagnifyingGlassIcon weight="bold" />
+        </InputGroup.Addon>
+        <InputGroup.Input placeholder="Search projects, files, and users" />
+        <InputGroup.Addon>
+          <Kbd>⌘ F</Kbd>
+        </InputGroup.Addon>
+      </InputGroup>
+    </div>
+  ),
 }
 
 export const CurrencyInput: Story = {
   name: 'Composition / Currency Input',
-  render: (args) => (
-    <div className="w-[320px]">
-      <InputGroup {...args}>
-        <InputGroupAddon>$</InputGroupAddon>
-        <InputGroupInput defaultValue="1250" inputMode="decimal" type="number" placeholder="0.00" />
-        <InputGroupAddon>AUD</InputGroupAddon>
-      </InputGroup>
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -254,25 +242,24 @@ export const CurrencyInput: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="w-[320px]">
+      <InputGroup {...args}>
+        <InputGroup.Addon>$</InputGroup.Addon>
+        <InputGroup.Input
+          defaultValue="1250"
+          inputMode="decimal"
+          type="number"
+          placeholder="0.00"
+        />
+        <InputGroup.Addon>AUD</InputGroup.Addon>
+      </InputGroup>
+    </div>
+  ),
 }
 
 export const MultiInput: Story = {
   name: 'Composition / Multi-Input',
-  render: (args) => (
-    <div className="w-[480px]">
-      <InputGroup {...args} variant="secondary">
-        <InputGroupAddon>
-          <TagIcon weight="bold" />
-        </InputGroupAddon>
-        <InputGroupInput placeholder="Campaign name" />
-        <InputGroupSeparator orientation="vertical" />
-        <InputGroupAddon>
-          <TagIcon weight="bold" />
-        </InputGroupAddon>
-        <InputGroupInput placeholder="Campaign name" />
-      </InputGroup>
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -280,17 +267,25 @@ export const MultiInput: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="w-[480px]">
+      <InputGroup {...args} variant="secondary">
+        <InputGroup.Addon>
+          <TagIcon weight="bold" />
+        </InputGroup.Addon>
+        <InputGroup.Input placeholder="Campaign name" />
+        <InputGroup.Separator orientation="vertical" />
+        <InputGroup.Addon>
+          <TagIcon weight="bold" />
+        </InputGroup.Addon>
+        <InputGroup.Input placeholder="Campaign name" />
+      </InputGroup>
+    </div>
+  ),
 }
 
 export const Color: Story = {
   name: 'Composition / Color Input',
-  render: (args) => (
-    <div className="w-[480px]">
-      <InputGroup {...args}>
-        <InputGroupInput type="color" />
-      </InputGroup>
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -298,4 +293,11 @@ export const Color: Story = {
       },
     },
   },
+  render: (args) => (
+    <div className="w-[480px]">
+      <InputGroup {...args}>
+        <InputGroup.Input type="color" />
+      </InputGroup>
+    </div>
+  ),
 }

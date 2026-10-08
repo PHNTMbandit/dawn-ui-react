@@ -1,46 +1,44 @@
-import { Toast as BaseToast, type ToastManagerAddOptions } from '@base-ui/react/toast'
+import { Toast as BaseToast } from '@base-ui/react/toast'
+import type { ToastManagerAddOptions } from '@base-ui/react/toast'
+import type { Icon } from '@phosphor-icons/react'
 
 import type { ToastVariant } from './toast.types'
-import type { Icon } from '@phosphor-icons/react'
 
 type ToastAddOptions = ToastManagerAddOptions<object> & {
   icon?: Icon
   variant?: ToastVariant
 }
 
-export const createToastManager = () => {
-  const manager = BaseToast.createToastManager()
+const createToastManager = () => {
+    const manager = BaseToast.createToastManager(),
+      add = (options: ToastAddOptions) =>
+        manager.add({
+          ...options,
+          data: {
+            ...options.data,
+            icon: options.icon,
+            variant: options.variant,
+          },
+        })
 
-  const add = (options: ToastAddOptions) => {
-    return manager.add({
-      ...options,
-      data: {
-        ...options.data,
-        icon: options.icon,
-        variant: options.variant,
-      },
-    })
+    return {
+      ...manager,
+      add,
+    }
+  },
+  useToastManager = () => {
+    const toast = BaseToast.useToastManager(),
+      add = (options: ToastAddOptions) =>
+        toast.add({
+          ...options,
+          data: {
+            ...options.data,
+            icon: options.icon,
+            variant: options.variant,
+          },
+        })
+
+    return { add, toasts: toast.toasts }
   }
 
-  return {
-    ...manager,
-    add,
-  }
-}
-
-export const useToastManager = () => {
-  const toast = BaseToast.useToastManager()
-
-  const add = (options: ToastAddOptions) => {
-    return toast.add({
-      ...options,
-      data: {
-        ...options.data,
-        icon: options.icon,
-        variant: options.variant,
-      },
-    })
-  }
-
-  return { add, toasts: toast.toasts }
-}
+export { createToastManager, useToastManager }

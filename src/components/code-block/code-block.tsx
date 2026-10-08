@@ -1,34 +1,26 @@
 import React from 'react'
+
 import { cn } from '@/utils/cn'
 
 import type { CodeBlockProps, CodeBlockProviderState, CodeBlockValue } from './code-block.types'
 
 const CodeBlockContext = React.createContext<CodeBlockProviderState | undefined>(undefined)
 
-export const CodeBlock = ({
-  items,
-  defaultValue,
-  className,
-  children,
-  ref,
-  ...props
-}: CodeBlockProps) => {
+function CodeBlock({ items, defaultValue, className, ref, ...props }: CodeBlockProps) {
   const [currentValue, setCurrentValue] = React.useState<CodeBlockValue>(defaultValue)
 
   return (
-    <CodeBlockContext.Provider value={{ currentValue, setCurrentValue, items }}>
+    <CodeBlockContext.Provider value={{ currentValue, items, setCurrentValue }}>
       <div
         className={cn('flex flex-col rounded-xl border border-border bg-surface', className)}
         ref={ref}
         {...props}
-      >
-        {children}
-      </div>
+      />
     </CodeBlockContext.Provider>
   )
 }
 
-export const useCodeBlock = () => {
+function useCodeBlock() {
   const context = React.useContext(CodeBlockContext)
 
   if (!context) {
@@ -37,3 +29,5 @@ export const useCodeBlock = () => {
 
   return context
 }
+
+export { CodeBlock, useCodeBlock }

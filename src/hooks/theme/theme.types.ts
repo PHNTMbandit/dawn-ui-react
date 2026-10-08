@@ -1,20 +1,22 @@
 import type { Icon } from '@phosphor-icons/react'
 
-export type ThemeValue = 'light' | 'dark' | 'system'
+type ThemeValue = 'light' | 'dark' | 'system'
 
-export type Theme = {
+interface Theme {
   value: ThemeValue
   label: string
   icon: Icon
 }
 
-export type ThemeProviderState = {
+interface ThemeProviderState {
   theme: ThemeValue
   setTheme: (theme: ThemeValue) => void
 }
 
-export type ThemeProviderProps = {
+interface ThemeProviderProps {
   children: React.ReactNode
   defaultTheme?: ThemeValue
   storageKey?: string
 }
+
+export type { ThemeValue, Theme, ThemeProviderState, ThemeProviderProps }

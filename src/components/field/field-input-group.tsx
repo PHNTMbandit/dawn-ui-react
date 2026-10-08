@@ -1,13 +1,17 @@
-import { useFieldContext } from '../form/form-contexts'
-import { InputGroup } from '../input-group'
 import { cn } from '@/utils/cn'
 
+import { useFieldContext } from '../form/form-contexts'
+import { InputGroup } from '../input-group'
 import type { FieldInputGroupProps } from './field.types'
 
-export const FieldInputGroup = ({ className, children, ref, ...props }: FieldInputGroupProps) => {
-  const field = useFieldContext<string>()
-  const isInvalid =
-    field.state.meta.isTouched && field.state.meta.errors.length > 0 && !field.state.meta.isValid
+const NO_ERRORS = 0
+
+export function FieldInputGroup({ className, ref, ...props }: FieldInputGroupProps) {
+  const field = useFieldContext<string>(),
+    isInvalid =
+      field.state.meta.isTouched &&
+      field.state.meta.errors.length > NO_ERRORS &&
+      !field.state.meta.isValid
 
   return (
     <InputGroup
@@ -16,8 +20,6 @@ export const FieldInputGroup = ({ className, children, ref, ...props }: FieldInp
       id={field.name}
       ref={ref}
       {...props}
-    >
-      {children}
-    </InputGroup>
+    />
   )
 }

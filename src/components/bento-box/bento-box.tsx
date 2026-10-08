@@ -1,21 +1,15 @@
-import { bentoBoxVariants, type BentoBoxProps } from './bento-box.types'
 import { cn } from '@/utils/cn'
 
-export const BentoBox = ({
-  size = 'medium',
-  className,
-  children,
-  ref,
-  ...props
-}: BentoBoxProps) => {
+import { bentoBoxVariants } from './bento-box.types'
+import type { BentoBoxProps } from './bento-box.types'
+
+export function BentoBox({ fill, size, className, ref, ...props }: BentoBoxProps) {
   return (
     <div
       data-size={size}
-      className={cn(bentoBoxVariants({ size, className }))}
+      className={cn(bentoBoxVariants({ className, fill, size }))}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

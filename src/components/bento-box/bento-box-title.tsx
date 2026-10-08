@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { BentoBoxTitleProps } from './bento-box.types'
 
-export const BentoBoxTitle = ({ className, children, ref, ...props }: BentoBoxTitleProps) => {
+export function BentoBoxTitle({ className, ref, ...props }: BentoBoxTitleProps) {
   return (
     <span
       className={cn(
@@ -11,8 +11,6 @@ export const BentoBoxTitle = ({ className, children, ref, ...props }: BentoBoxTi
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </span>
+    />
   )
 }
