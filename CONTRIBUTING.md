@@ -4,7 +4,7 @@ Thanks for helping improve Dawn UI React. This project is a React and TypeScript
 
 ## Development Setup
 
-This project uses Vite+ (`vp`) for package installation and its frontend toolchain.
+This project uses Vite+ (`vp`) as its unified toolchain for package installation and frontend development. Use `vp` commands for dependency installation, development, and validation. See the README for npm, pnpm, Yarn, and Bun commands to install the published library in consumer projects.
 
 ```sh
 vp install
@@ -16,7 +16,8 @@ Before opening a pull request, run the focused checks for your change and the fu
 ```sh
 vp check
 vp test
-pnpm run build
+vp run build
+vp run build-storybook
 ```
 
 `vp check` runs formatting, lint, and type checks. `vp test` runs the Vitest and Storybook test suite. Use `vp run <script>` to invoke a script from `package.json` when needed.
@@ -46,6 +47,10 @@ feat(button): add loading state
 fix(select): preserve controlled value
 docs(calendar): add usage examples
 ```
+
+## Support the Project
+
+Code contributions are not the only way to help. If Dawn UI React is useful to you or your team, you can [sponsor its ongoing development on GitHub](https://github.com/sponsors/PHNTMbandit). Sponsorship helps support maintenance, accessibility, documentation, testing, and future component work; it is entirely optional.
 
 ## Component Guidelines
 
