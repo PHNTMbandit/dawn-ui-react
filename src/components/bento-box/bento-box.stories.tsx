@@ -196,12 +196,14 @@ export const FeatureHighlight: Story = {
               <path d="M13 10V3L4 14h7v7l9-11h-7z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
+        </BentoBox.Header>
+        <BentoBox.Content>
           <BentoBox.Title>Lightning-fast deploys</BentoBox.Title>
           <BentoBox.Description>
             Push to your main branch and we build, test, and ship to a global edge network in
             seconds — no config required.
           </BentoBox.Description>
-        </BentoBox.Header>
+        </BentoBox.Content>
         <BentoBox.Footer>
           <Button variant="soft" tone="brand" size="small" className="self-start">
             Learn more
