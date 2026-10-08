@@ -363,3 +363,55 @@ export const Fill: Story = {
     </div>
   ),
 }
+
+export const Elevations: Story = {
+  name: 'Elevations',
+  render: (args) => (
+    <div className="flex flex-col gap-lg">
+      <BentoBox {...args} elevation="none">
+        <BentoBox.Header>
+          <BentoBox.Title>None Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="low">
+        <BentoBox.Header>
+          <BentoBox.Title>Low Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="medium">
+        <BentoBox.Header>
+          <BentoBox.Title>Medium Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="high">
+        <BentoBox.Header>
+          <BentoBox.Title>High Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+
+      <BentoBox {...args} elevation="veryHigh">
+        <BentoBox.Header>
+          <BentoBox.Title>Very High Elevation</BentoBox.Title>
+        </BentoBox.Header>
+        <BentoBox.Content>
+          <p>Content goes here.</p>
+        </BentoBox.Content>
+      </BentoBox>
+    </div>
+  ),
+}

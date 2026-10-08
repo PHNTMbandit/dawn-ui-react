@@ -61,7 +61,7 @@ export const CustomErrors: Story = {
     return (
       <Form action={() => form.handleSubmit()} className="w-[400px]">
         <form.AppForm>
-          <form.FormErrors />
+          <form.FormErrors>Form Errors</form.FormErrors>
           <form.AppField name="username">
             {(field) => (
               <Field>

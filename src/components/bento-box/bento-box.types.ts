@@ -2,21 +2,29 @@ import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
 
 const bentoBoxVariants = cva(
-  'group/box flex size-full min-h-0 flex-col overflow-hidden bg-surface',
+  'group/box flex size-full min-h-0 flex-col overflow-hidden border border-border bg-surface',
   {
     defaultVariants: {
+      elevation: 'medium',
       fill: false,
       size: 'medium',
     },
     variants: {
+      elevation: {
+        high: 'shadow-sm',
+        low: 'shadow-2xs',
+        medium: 'shadow-xs',
+        none: '',
+        veryHigh: 'shadow-md',
+      },
       fill: {
         false: '',
         true: 'p-0!',
       },
       size: {
-        large: 'gap-md rounded-3xl p-md shadow-sm',
-        medium: 'gap-sm rounded-2xl p-sm shadow-xs',
-        small: 'gap-xs rounded-xl p-xs shadow-2xs',
+        large: 'gap-md rounded-3xl p-md',
+        medium: 'gap-sm rounded-2xl p-sm',
+        small: 'gap-xs rounded-xl p-xs',
       },
     },
   },
