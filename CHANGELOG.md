@@ -1,4 +1,4 @@
-# [1.0.0-beta.7](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2026-10-08)
+# [1.0.0-alpha.46](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2026-10-08)
 
 
 ### Bug Fixes
