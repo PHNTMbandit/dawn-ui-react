@@ -1,3 +1,10 @@
+# [1.0.0-rc.7](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2026-10-08)
+
+
+### Features
+
+* enhance FormErrors component with title and improved list styling ([8c0cbfd](https://github.com/PHNTMbandit/dawn-ui-react/commit/8c0cbfdd453cef416c69b14a39a958ea16c04792))
+
 # [1.0.0-alpha.46](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2026-10-08)
 
 
