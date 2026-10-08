@@ -1,17 +1,36 @@
 import { HeartIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { Toggle } from '../toggle/toggle'
 import { ToggleGroup } from './toggle-group'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 export default {
-  title: 'Components/Toggle Group',
-  component: ToggleGroup,
-  parameters: {
-    subtitle: 'A group of toggle buttons for single or multiple selections.',
-    description: {
-      component:
-        'Toggle Group organizes related toggles into one control. It supports single selection by default and multiple selections when enabled.',
+  argTypes: {
+    multiple: {
+      control: 'boolean',
+      description: 'Allow selecting multiple toggles at once.',
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' },
+      },
+    },
+    size: {
+      control: 'select',
+      description: 'Size of the toggle group and its toggles.',
+      options: ['small', 'medium', 'large'],
+      table: {
+        defaultValue: { summary: 'medium' },
+        type: { summary: 'string' },
+      },
+    },
+    variant: {
+      control: 'select',
+      description: 'Visual style of the toggle group.',
+      options: ['default', 'ghost'],
+      table: {
+        defaultValue: { summary: 'default' },
+        type: { summary: 'string' },
+      },
     },
   },
   args: {
@@ -19,33 +38,13 @@ export default {
     size: 'medium',
     variant: 'default',
   },
-  argTypes: {
-    multiple: {
-      control: 'boolean',
-      description: 'Allow selecting multiple toggles at once.',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+  component: ToggleGroup,
+  parameters: {
+    description: {
+      component:
+        'Toggle Group organizes related toggles into one control. It supports single selection by default and multiple selections when enabled.',
     },
-    size: {
-      control: 'select',
-      options: ['small', 'medium', 'large'],
-      description: 'Size of the toggle group and its toggles.',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'medium' },
-      },
-    },
-    variant: {
-      control: 'select',
-      options: ['default', 'ghost'],
-      description: 'Visual style of the toggle group.',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'default' },
-      },
-    },
+    subtitle: 'A group of toggle buttons for single or multiple selections.',
   },
   render: (args) => (
     <div className="w-[500px]">
@@ -69,6 +68,7 @@ export default {
       </ToggleGroup>
     </div>
   ),
+  title: 'Components/Toggle Group',
 } satisfies Meta<typeof ToggleGroup>
 
 type Story = StoryObj<typeof ToggleGroup>
@@ -129,21 +129,21 @@ export const CompositionAutoSizing: Story = {
           Small size (Toggles inherit from group)
         </p>
         <ToggleGroup size="small" multiple>
-          <Toggle aria-label="Favorite" tone="brand">
+          <Toggle aria-label="Brand option" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Bookmark" tone="accent">
+          <Toggle aria-label="Accent option" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Star" tone="info">
+          <Toggle aria-label="Info option" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -156,21 +156,21 @@ export const CompositionAutoSizing: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Medium size (default)</p>
         <ToggleGroup size="medium" multiple>
-          <Toggle aria-label="Favorite" tone="brand">
+          <Toggle aria-label="Brand option" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Bookmark" tone="accent">
+          <Toggle aria-label="Accent option" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Star" tone="info">
+          <Toggle aria-label="Info option" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -183,21 +183,21 @@ export const CompositionAutoSizing: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Large size</p>
         <ToggleGroup size="large" multiple>
-          <Toggle aria-label="Favorite" tone="brand">
+          <Toggle aria-label="Brand option" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Bookmark" tone="accent">
+          <Toggle aria-label="Accent option" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Star" tone="info">
+          <Toggle aria-label="Info option" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -218,21 +218,21 @@ export const GhostVariant: Story = {
           Small size (Toggles inherit from group)
         </p>
         <ToggleGroup size="small" variant="ghost" multiple>
-          <Toggle aria-label="Favorite" tone="brand">
+          <Toggle aria-label="Brand option" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Bookmark" tone="accent">
+          <Toggle aria-label="Accent option" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Star" tone="info">
+          <Toggle aria-label="Info option" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -245,21 +245,21 @@ export const GhostVariant: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Medium size (default)</p>
         <ToggleGroup size="medium" variant="ghost" multiple>
-          <Toggle aria-label="Favorite" tone="brand">
+          <Toggle aria-label="Brand option" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Bookmark" tone="accent">
+          <Toggle aria-label="Accent option" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Star" tone="info">
+          <Toggle aria-label="Info option" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
@@ -272,21 +272,21 @@ export const GhostVariant: Story = {
       <div className="space-y-xs">
         <p className="style-text-default--1 text-on-surface-variant">Large size</p>
         <ToggleGroup size="large" variant="ghost" multiple>
-          <Toggle aria-label="Favorite" tone="brand">
+          <Toggle aria-label="Brand option" tone="brand">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Bookmark" tone="accent">
+          <Toggle aria-label="Accent option" tone="accent">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />
               </>
             )}
           </Toggle>
-          <Toggle aria-label="Star" tone="info">
+          <Toggle aria-label="Info option" tone="info">
             {({ pressed }) => (
               <>
                 <HeartIcon weight={pressed ? 'fill' : 'bold'} />

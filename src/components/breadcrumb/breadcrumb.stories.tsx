@@ -1,46 +1,42 @@
 import { BookIcon, HouseIcon } from '@phosphor-icons/react'
-import { Breadcrumb } from './breadcrumb'
-import { BreadcrumbEllipsis } from './breadcrumb-ellipsis'
-import { BreadcrumbItem } from './breadcrumb-item'
-import { BreadcrumbLink } from './breadcrumb-link'
-import { BreadcrumbSeparator } from './breadcrumb-separator'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+import { Breadcrumb } from './index'
 
 const DefaultTrail = () => (
   <Breadcrumb aria-label="Breadcrumb">
-    <BreadcrumbLink>
+    <Breadcrumb.Link>
       <HouseIcon weight="bold" />
       Home
-    </BreadcrumbLink>
-    <BreadcrumbSeparator />
-    <BreadcrumbLink>
+    </Breadcrumb.Link>
+    <Breadcrumb.Separator />
+    <Breadcrumb.Link>
       <BookIcon weight="bold" />
       Documentation
-    </BreadcrumbLink>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>Buttons</BreadcrumbItem>
+    </Breadcrumb.Link>
+    <Breadcrumb.Separator />
+    <Breadcrumb.Item>Buttons</Breadcrumb.Item>
   </Breadcrumb>
 )
 
 export default {
-  title: 'Components/Breadcrumb',
   component: Breadcrumb,
-  subcomponents: {
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbEllipsis,
-    BreadcrumbSeparator,
-  },
   parameters: {
     docs: {
-      subtitle: 'Displays a breadcrumb navigation component.',
       description: {
         component:
           'The Breadcrumb component communicates the current location within a hierarchy of pages or views. It is composed from small primitives for links, separators, collapsed states, and the current page item, making it flexible enough for full navigation trails and compact collapsed paths.',
       },
+      subtitle: 'Displays a breadcrumb navigation component.',
     },
   },
+  subcomponents: {
+    BreadcrumbEllipsis: Breadcrumb.Ellipsis,
+    BreadcrumbItem: Breadcrumb.Item,
+    BreadcrumbLink: Breadcrumb.Link,
+    BreadcrumbSeparator: Breadcrumb.Separator,
+  },
+  title: 'Components/Breadcrumb',
 } satisfies Meta<typeof Breadcrumb>
 
 type Story = StoryObj<typeof Breadcrumb>
@@ -69,17 +65,17 @@ export const Default: Story = {
   },
   render: (args) => (
     <Breadcrumb {...args} aria-label="Breadcrumb">
-      <BreadcrumbLink>
+      <Breadcrumb.Link>
         <HouseIcon weight="bold" />
         Home
-      </BreadcrumbLink>
-      <BreadcrumbSeparator />
-      <BreadcrumbLink>
+      </Breadcrumb.Link>
+      <Breadcrumb.Separator />
+      <Breadcrumb.Link>
         <BookIcon weight="bold" />
         Documentation
-      </BreadcrumbLink>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>Buttons</BreadcrumbItem>
+      </Breadcrumb.Link>
+      <Breadcrumb.Separator />
+      <Breadcrumb.Item>Buttons</Breadcrumb.Item>
     </Breadcrumb>
   ),
 }
@@ -95,16 +91,16 @@ export const CollapsedPath: Story = {
   },
   render: () => (
     <Breadcrumb aria-label="Collapsed breadcrumb">
-      <BreadcrumbLink>
+      <Breadcrumb.Link>
         <HouseIcon weight="bold" />
         Home
-      </BreadcrumbLink>
-      <BreadcrumbSeparator />
-      <BreadcrumbEllipsis />
-      <BreadcrumbSeparator />
-      <BreadcrumbLink>Documentation</BreadcrumbLink>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>Button Group</BreadcrumbItem>
+      </Breadcrumb.Link>
+      <Breadcrumb.Separator />
+      <Breadcrumb.Ellipsis />
+      <Breadcrumb.Separator />
+      <Breadcrumb.Link>Documentation</Breadcrumb.Link>
+      <Breadcrumb.Separator />
+      <Breadcrumb.Item>Button Group</Breadcrumb.Item>
     </Breadcrumb>
   ),
 }
@@ -120,17 +116,17 @@ export const IconFirstLink: Story = {
   },
   render: () => (
     <Breadcrumb aria-label="Breadcrumb with icons">
-      <BreadcrumbLink>
+      <Breadcrumb.Link>
         <HouseIcon weight="bold" />
         Dashboard
-      </BreadcrumbLink>
-      <BreadcrumbSeparator />
-      <BreadcrumbLink>
+      </Breadcrumb.Link>
+      <Breadcrumb.Separator />
+      <Breadcrumb.Link>
         <BookIcon weight="bold" />
         Components
-      </BreadcrumbLink>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+      </Breadcrumb.Link>
+      <Breadcrumb.Separator />
+      <Breadcrumb.Item>Breadcrumb</Breadcrumb.Item>
     </Breadcrumb>
   ),
 }
@@ -146,10 +142,10 @@ export const Item: Story = {
     },
   },
   render: () => (
-    <BreadcrumbItem>
+    <Breadcrumb.Item>
       <HouseIcon weight="bold" />
       Home
-    </BreadcrumbItem>
+    </Breadcrumb.Item>
   ),
 }
 
@@ -163,10 +159,10 @@ export const Link: Story = {
     },
   },
   render: () => (
-    <BreadcrumbLink>
+    <Breadcrumb.Link>
       <BookIcon weight="bold" />
       Documentation
-    </BreadcrumbLink>
+    </Breadcrumb.Link>
   ),
 }
 
@@ -179,7 +175,7 @@ export const Ellipsis: Story = {
       },
     },
   },
-  render: () => <BreadcrumbEllipsis />,
+  render: () => <Breadcrumb.Ellipsis />,
 }
 
 export const Separator: Story = {
@@ -191,5 +187,5 @@ export const Separator: Story = {
       },
     },
   },
-  render: () => <BreadcrumbSeparator />,
+  render: () => <Breadcrumb.Separator />,
 }

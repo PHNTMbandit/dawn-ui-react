@@ -1,17 +1,18 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react'
-import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
-import { useTableContext } from './layer-tree-context'
+
 import { cn } from '@/utils/cn'
 
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../input-group'
+import { useTableContext } from './layer-tree-context'
 import type { LayerTreeSearchProps } from './layer-tree.types'
 
-export const LayerTreeSearch = ({
+export function LayerTreeSearch({
   placeholder,
   className,
   children,
   ref,
   ...props
-}: LayerTreeSearchProps) => {
+}: LayerTreeSearchProps) {
   const table = useTableContext()
 
   return (

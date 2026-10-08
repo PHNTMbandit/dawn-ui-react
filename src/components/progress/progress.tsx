@@ -1,31 +1,32 @@
 import { useId } from 'react'
+
 import { cn } from '@/utils/cn'
 
 import type { ProgressProps } from './progress.types'
 
-export const Progress = ({ currentIndex, className, children, ref, ...props }: ProgressProps) => {
-  const uid = useId().replace(/:/g, '')
-  const scope = `progress-${uid}`
-  const current = currentIndex
+const CURRENT_CHILD_DECREMENT = 1,
+  CURRENT_CHILD_INCREMENT = 2
+
+export function Progress({ currentIndex, className, ref, ...props }: ProgressProps) {
+  const uid = useId().replace(/:/g, ''),
+    scope = `progress-${uid}`,
+    current = currentIndex * CURRENT_CHILD_INCREMENT - CURRENT_CHILD_DECREMENT
 
   return (
     <>
       <style>
         {`
-      .${scope} > :nth-child(${current}) [data-slot='progress-indicator'] {
+		  .${scope} > :nth-child(${current}) > :first-child {
 			background-color: var(--color-accent-container);
 			border: 1px solid var(--color-accent-border-strong);
 			color: var(--color-accent-on-container);
 		  }
-      .${scope} > :nth-child(-n+${current - 1}) [data-slot='progress-indicator'] {
+		  .${scope} > :nth-child(-n+${current - CURRENT_CHILD_DECREMENT}) > :first-child {
 			background-color: var(--color-accent-default);
 			border: none;
 			color: var(--color-accent-on-default);
 			box-shadow: none;
 		  }
-      .${scope} > :nth-child(-n+${current - 1}) [data-slot='progress-bar'] {
-      background-color: var(--color-accent-default);
-      }
 		`}
       </style>
 
@@ -33,9 +34,7 @@ export const Progress = ({ currentIndex, className, children, ref, ...props }: P
         className={cn('flex w-full items-center justify-center gap-2xs', scope, className)}
         ref={ref}
         {...props}
-      >
-        {children}
-      </div>
+      />
     </>
   )
 }

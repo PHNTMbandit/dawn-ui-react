@@ -1,24 +1,10 @@
 import { SpinnerGapIcon } from '@phosphor-icons/react'
-import React from 'react'
-import { Combobox } from './combobox'
-import { ComboboxChip } from './combobox-chip'
-import { ComboboxChips } from './combobox-chips'
-import { ComboboxCollection } from './combobox-collection'
-import { ComboboxEmpty } from './combobox-empty'
-import { ComboboxGroup } from './combobox-group'
-import { ComboboxGroupLabel } from './combobox-group-label'
-import { ComboboxInput } from './combobox-input'
-import { ComboboxItem } from './combobox-item'
-import { ComboboxList } from './combobox-list'
-import { ComboboxPopup } from './combobox-popup'
-import { ComboboxStatus } from './combobox-status'
-import { ComboboxTrigger } from './combobox-trigger'
-import { ComboboxValue } from './combobox-value'
-import { ComboboxVirtualizedList } from './combobox-virtualized-list'
-import { useFilter } from './combobox.types'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { Virtualizer } from '@tanstack/react-virtual'
+import React from 'react'
+
+import { useFilter } from './combobox.types'
+import { Combobox } from './index'
 
 interface Fruit {
   label: string
@@ -80,452 +66,452 @@ interface Country {
 }
 
 const countries: Country[] = [
-  { code: 'af', value: 'afghanistan', label: 'Afghanistan', continent: 'Asia' },
-  { code: 'al', value: 'albania', label: 'Albania', continent: 'Europe' },
-  { code: 'dz', value: 'algeria', label: 'Algeria', continent: 'Africa' },
-  { code: 'ad', value: 'andorra', label: 'Andorra', continent: 'Europe' },
-  { code: 'ao', value: 'angola', label: 'Angola', continent: 'Africa' },
+  { code: 'af', continent: 'Asia', label: 'Afghanistan', value: 'afghanistan' },
+  { code: 'al', continent: 'Europe', label: 'Albania', value: 'albania' },
+  { code: 'dz', continent: 'Africa', label: 'Algeria', value: 'algeria' },
+  { code: 'ad', continent: 'Europe', label: 'Andorra', value: 'andorra' },
+  { code: 'ao', continent: 'Africa', label: 'Angola', value: 'angola' },
   {
     code: 'ar',
-    value: 'argentina',
-    label: 'Argentina',
     continent: 'South America',
+    label: 'Argentina',
+    value: 'argentina',
   },
-  { code: 'am', value: 'armenia', label: 'Armenia', continent: 'Asia' },
-  { code: 'au', value: 'australia', label: 'Australia', continent: 'Oceania' },
-  { code: 'at', value: 'austria', label: 'Austria', continent: 'Europe' },
-  { code: 'az', value: 'azerbaijan', label: 'Azerbaijan', continent: 'Asia' },
+  { code: 'am', continent: 'Asia', label: 'Armenia', value: 'armenia' },
+  { code: 'au', continent: 'Oceania', label: 'Australia', value: 'australia' },
+  { code: 'at', continent: 'Europe', label: 'Austria', value: 'austria' },
+  { code: 'az', continent: 'Asia', label: 'Azerbaijan', value: 'azerbaijan' },
   {
     code: 'bs',
-    value: 'bahamas',
-    label: 'Bahamas',
     continent: 'North America',
+    label: 'Bahamas',
+    value: 'bahamas',
   },
-  { code: 'bh', value: 'bahrain', label: 'Bahrain', continent: 'Asia' },
-  { code: 'bd', value: 'bangladesh', label: 'Bangladesh', continent: 'Asia' },
+  { code: 'bh', continent: 'Asia', label: 'Bahrain', value: 'bahrain' },
+  { code: 'bd', continent: 'Asia', label: 'Bangladesh', value: 'bangladesh' },
   {
     code: 'bb',
-    value: 'barbados',
-    label: 'Barbados',
     continent: 'North America',
+    label: 'Barbados',
+    value: 'barbados',
   },
-  { code: 'by', value: 'belarus', label: 'Belarus', continent: 'Europe' },
-  { code: 'be', value: 'belgium', label: 'Belgium', continent: 'Europe' },
-  { code: 'bz', value: 'belize', label: 'Belize', continent: 'North America' },
-  { code: 'bj', value: 'benin', label: 'Benin', continent: 'Africa' },
-  { code: 'bt', value: 'bhutan', label: 'Bhutan', continent: 'Asia' },
+  { code: 'by', continent: 'Europe', label: 'Belarus', value: 'belarus' },
+  { code: 'be', continent: 'Europe', label: 'Belgium', value: 'belgium' },
+  { code: 'bz', continent: 'North America', label: 'Belize', value: 'belize' },
+  { code: 'bj', continent: 'Africa', label: 'Benin', value: 'benin' },
+  { code: 'bt', continent: 'Asia', label: 'Bhutan', value: 'bhutan' },
   {
     code: 'bo',
-    value: 'bolivia',
-    label: 'Bolivia',
     continent: 'South America',
+    label: 'Bolivia',
+    value: 'bolivia',
   },
   {
     code: 'ba',
-    value: 'bosnia-and-herzegovina',
-    label: 'Bosnia and Herzegovina',
     continent: 'Europe',
+    label: 'Bosnia and Herzegovina',
+    value: 'bosnia-and-herzegovina',
   },
-  { code: 'bw', value: 'botswana', label: 'Botswana', continent: 'Africa' },
-  { code: 'br', value: 'brazil', label: 'Brazil', continent: 'South America' },
-  { code: 'bn', value: 'brunei', label: 'Brunei', continent: 'Asia' },
-  { code: 'bg', value: 'bulgaria', label: 'Bulgaria', continent: 'Europe' },
+  { code: 'bw', continent: 'Africa', label: 'Botswana', value: 'botswana' },
+  { code: 'br', continent: 'South America', label: 'Brazil', value: 'brazil' },
+  { code: 'bn', continent: 'Asia', label: 'Brunei', value: 'brunei' },
+  { code: 'bg', continent: 'Europe', label: 'Bulgaria', value: 'bulgaria' },
   {
     code: 'bf',
-    value: 'burkina-faso',
-    label: 'Burkina Faso',
     continent: 'Africa',
+    label: 'Burkina Faso',
+    value: 'burkina-faso',
   },
-  { code: 'bi', value: 'burundi', label: 'Burundi', continent: 'Africa' },
-  { code: 'kh', value: 'cambodia', label: 'Cambodia', continent: 'Asia' },
-  { code: 'cm', value: 'cameroon', label: 'Cameroon', continent: 'Africa' },
-  { code: 'ca', value: 'canada', label: 'Canada', continent: 'North America' },
-  { code: 'cv', value: 'cape-verde', label: 'Cape Verde', continent: 'Africa' },
+  { code: 'bi', continent: 'Africa', label: 'Burundi', value: 'burundi' },
+  { code: 'kh', continent: 'Asia', label: 'Cambodia', value: 'cambodia' },
+  { code: 'cm', continent: 'Africa', label: 'Cameroon', value: 'cameroon' },
+  { code: 'ca', continent: 'North America', label: 'Canada', value: 'canada' },
+  { code: 'cv', continent: 'Africa', label: 'Cape Verde', value: 'cape-verde' },
   {
     code: 'cf',
-    value: 'central-african-republic',
-    label: 'Central African Republic',
     continent: 'Africa',
+    label: 'Central African Republic',
+    value: 'central-african-republic',
   },
-  { code: 'td', value: 'chad', label: 'Chad', continent: 'Africa' },
-  { code: 'cl', value: 'chile', label: 'Chile', continent: 'South America' },
-  { code: 'cn', value: 'china', label: 'China', continent: 'Asia' },
+  { code: 'td', continent: 'Africa', label: 'Chad', value: 'chad' },
+  { code: 'cl', continent: 'South America', label: 'Chile', value: 'chile' },
+  { code: 'cn', continent: 'Asia', label: 'China', value: 'china' },
   {
     code: 'co',
-    value: 'colombia',
-    label: 'Colombia',
     continent: 'South America',
+    label: 'Colombia',
+    value: 'colombia',
   },
-  { code: 'km', value: 'comoros', label: 'Comoros', continent: 'Africa' },
-  { code: 'cg', value: 'congo', label: 'Congo', continent: 'Africa' },
+  { code: 'km', continent: 'Africa', label: 'Comoros', value: 'comoros' },
+  { code: 'cg', continent: 'Africa', label: 'Congo', value: 'congo' },
   {
     code: 'cr',
-    value: 'costa-rica',
-    label: 'Costa Rica',
     continent: 'North America',
+    label: 'Costa Rica',
+    value: 'costa-rica',
   },
-  { code: 'hr', value: 'croatia', label: 'Croatia', continent: 'Europe' },
-  { code: 'cu', value: 'cuba', label: 'Cuba', continent: 'North America' },
-  { code: 'cy', value: 'cyprus', label: 'Cyprus', continent: 'Asia' },
+  { code: 'hr', continent: 'Europe', label: 'Croatia', value: 'croatia' },
+  { code: 'cu', continent: 'North America', label: 'Cuba', value: 'cuba' },
+  { code: 'cy', continent: 'Asia', label: 'Cyprus', value: 'cyprus' },
   {
     code: 'cz',
-    value: 'czech-republic',
-    label: 'Czech Republic',
     continent: 'Europe',
+    label: 'Czech Republic',
+    value: 'czech-republic',
   },
-  { code: 'dk', value: 'denmark', label: 'Denmark', continent: 'Europe' },
-  { code: 'dj', value: 'djibouti', label: 'Djibouti', continent: 'Africa' },
+  { code: 'dk', continent: 'Europe', label: 'Denmark', value: 'denmark' },
+  { code: 'dj', continent: 'Africa', label: 'Djibouti', value: 'djibouti' },
   {
     code: 'dm',
-    value: 'dominica',
-    label: 'Dominica',
     continent: 'North America',
+    label: 'Dominica',
+    value: 'dominica',
   },
   {
     code: 'do',
-    value: 'dominican-republic',
-    label: 'Dominican Republic',
     continent: 'North America',
+    label: 'Dominican Republic',
+    value: 'dominican-republic',
   },
   {
     code: 'ec',
-    value: 'ecuador',
-    label: 'Ecuador',
     continent: 'South America',
+    label: 'Ecuador',
+    value: 'ecuador',
   },
-  { code: 'eg', value: 'egypt', label: 'Egypt', continent: 'Africa' },
+  { code: 'eg', continent: 'Africa', label: 'Egypt', value: 'egypt' },
   {
     code: 'sv',
-    value: 'el-salvador',
-    label: 'El Salvador',
     continent: 'North America',
+    label: 'El Salvador',
+    value: 'el-salvador',
   },
   {
     code: 'gq',
-    value: 'equatorial-guinea',
-    label: 'Equatorial Guinea',
     continent: 'Africa',
+    label: 'Equatorial Guinea',
+    value: 'equatorial-guinea',
   },
-  { code: 'er', value: 'eritrea', label: 'Eritrea', continent: 'Africa' },
-  { code: 'ee', value: 'estonia', label: 'Estonia', continent: 'Europe' },
-  { code: 'et', value: 'ethiopia', label: 'Ethiopia', continent: 'Africa' },
-  { code: 'fj', value: 'fiji', label: 'Fiji', continent: 'Oceania' },
-  { code: 'fi', value: 'finland', label: 'Finland', continent: 'Europe' },
-  { code: 'fr', value: 'france', label: 'France', continent: 'Europe' },
-  { code: 'ga', value: 'gabon', label: 'Gabon', continent: 'Africa' },
-  { code: 'gm', value: 'gambia', label: 'Gambia', continent: 'Africa' },
-  { code: 'ge', value: 'georgia', label: 'Georgia', continent: 'Asia' },
-  { code: 'de', value: 'germany', label: 'Germany', continent: 'Europe' },
-  { code: 'gh', value: 'ghana', label: 'Ghana', continent: 'Africa' },
-  { code: 'gr', value: 'greece', label: 'Greece', continent: 'Europe' },
+  { code: 'er', continent: 'Africa', label: 'Eritrea', value: 'eritrea' },
+  { code: 'ee', continent: 'Europe', label: 'Estonia', value: 'estonia' },
+  { code: 'et', continent: 'Africa', label: 'Ethiopia', value: 'ethiopia' },
+  { code: 'fj', continent: 'Oceania', label: 'Fiji', value: 'fiji' },
+  { code: 'fi', continent: 'Europe', label: 'Finland', value: 'finland' },
+  { code: 'fr', continent: 'Europe', label: 'France', value: 'france' },
+  { code: 'ga', continent: 'Africa', label: 'Gabon', value: 'gabon' },
+  { code: 'gm', continent: 'Africa', label: 'Gambia', value: 'gambia' },
+  { code: 'ge', continent: 'Asia', label: 'Georgia', value: 'georgia' },
+  { code: 'de', continent: 'Europe', label: 'Germany', value: 'germany' },
+  { code: 'gh', continent: 'Africa', label: 'Ghana', value: 'ghana' },
+  { code: 'gr', continent: 'Europe', label: 'Greece', value: 'greece' },
   {
     code: 'gd',
-    value: 'grenada',
-    label: 'Grenada',
     continent: 'North America',
+    label: 'Grenada',
+    value: 'grenada',
   },
   {
     code: 'gt',
-    value: 'guatemala',
-    label: 'Guatemala',
     continent: 'North America',
+    label: 'Guatemala',
+    value: 'guatemala',
   },
-  { code: 'gn', value: 'guinea', label: 'Guinea', continent: 'Africa' },
+  { code: 'gn', continent: 'Africa', label: 'Guinea', value: 'guinea' },
   {
     code: 'gw',
-    value: 'guinea-bissau',
-    label: 'Guinea-Bissau',
     continent: 'Africa',
+    label: 'Guinea-Bissau',
+    value: 'guinea-bissau',
   },
-  { code: 'gy', value: 'guyana', label: 'Guyana', continent: 'South America' },
-  { code: 'ht', value: 'haiti', label: 'Haiti', continent: 'North America' },
+  { code: 'gy', continent: 'South America', label: 'Guyana', value: 'guyana' },
+  { code: 'ht', continent: 'North America', label: 'Haiti', value: 'haiti' },
   {
     code: 'hn',
-    value: 'honduras',
-    label: 'Honduras',
     continent: 'North America',
+    label: 'Honduras',
+    value: 'honduras',
   },
-  { code: 'hu', value: 'hungary', label: 'Hungary', continent: 'Europe' },
-  { code: 'is', value: 'iceland', label: 'Iceland', continent: 'Europe' },
-  { code: 'in', value: 'india', label: 'India', continent: 'Asia' },
-  { code: 'id', value: 'indonesia', label: 'Indonesia', continent: 'Asia' },
-  { code: 'ir', value: 'iran', label: 'Iran', continent: 'Asia' },
-  { code: 'iq', value: 'iraq', label: 'Iraq', continent: 'Asia' },
-  { code: 'ie', value: 'ireland', label: 'Ireland', continent: 'Europe' },
-  { code: 'il', value: 'israel', label: 'Israel', continent: 'Asia' },
-  { code: 'it', value: 'italy', label: 'Italy', continent: 'Europe' },
+  { code: 'hu', continent: 'Europe', label: 'Hungary', value: 'hungary' },
+  { code: 'is', continent: 'Europe', label: 'Iceland', value: 'iceland' },
+  { code: 'in', continent: 'Asia', label: 'India', value: 'india' },
+  { code: 'id', continent: 'Asia', label: 'Indonesia', value: 'indonesia' },
+  { code: 'ir', continent: 'Asia', label: 'Iran', value: 'iran' },
+  { code: 'iq', continent: 'Asia', label: 'Iraq', value: 'iraq' },
+  { code: 'ie', continent: 'Europe', label: 'Ireland', value: 'ireland' },
+  { code: 'il', continent: 'Asia', label: 'Israel', value: 'israel' },
+  { code: 'it', continent: 'Europe', label: 'Italy', value: 'italy' },
   {
     code: 'jm',
-    value: 'jamaica',
-    label: 'Jamaica',
     continent: 'North America',
+    label: 'Jamaica',
+    value: 'jamaica',
   },
-  { code: 'jp', value: 'japan', label: 'Japan', continent: 'Asia' },
-  { code: 'jo', value: 'jordan', label: 'Jordan', continent: 'Asia' },
-  { code: 'kz', value: 'kazakhstan', label: 'Kazakhstan', continent: 'Asia' },
-  { code: 'ke', value: 'kenya', label: 'Kenya', continent: 'Africa' },
-  { code: 'kw', value: 'kuwait', label: 'Kuwait', continent: 'Asia' },
-  { code: 'kg', value: 'kyrgyzstan', label: 'Kyrgyzstan', continent: 'Asia' },
-  { code: 'la', value: 'laos', label: 'Laos', continent: 'Asia' },
-  { code: 'lv', value: 'latvia', label: 'Latvia', continent: 'Europe' },
-  { code: 'lb', value: 'lebanon', label: 'Lebanon', continent: 'Asia' },
-  { code: 'ls', value: 'lesotho', label: 'Lesotho', continent: 'Africa' },
-  { code: 'lr', value: 'liberia', label: 'Liberia', continent: 'Africa' },
-  { code: 'ly', value: 'libya', label: 'Libya', continent: 'Africa' },
+  { code: 'jp', continent: 'Asia', label: 'Japan', value: 'japan' },
+  { code: 'jo', continent: 'Asia', label: 'Jordan', value: 'jordan' },
+  { code: 'kz', continent: 'Asia', label: 'Kazakhstan', value: 'kazakhstan' },
+  { code: 'ke', continent: 'Africa', label: 'Kenya', value: 'kenya' },
+  { code: 'kw', continent: 'Asia', label: 'Kuwait', value: 'kuwait' },
+  { code: 'kg', continent: 'Asia', label: 'Kyrgyzstan', value: 'kyrgyzstan' },
+  { code: 'la', continent: 'Asia', label: 'Laos', value: 'laos' },
+  { code: 'lv', continent: 'Europe', label: 'Latvia', value: 'latvia' },
+  { code: 'lb', continent: 'Asia', label: 'Lebanon', value: 'lebanon' },
+  { code: 'ls', continent: 'Africa', label: 'Lesotho', value: 'lesotho' },
+  { code: 'lr', continent: 'Africa', label: 'Liberia', value: 'liberia' },
+  { code: 'ly', continent: 'Africa', label: 'Libya', value: 'libya' },
   {
     code: 'li',
-    value: 'liechtenstein',
-    label: 'Liechtenstein',
     continent: 'Europe',
+    label: 'Liechtenstein',
+    value: 'liechtenstein',
   },
-  { code: 'lt', value: 'lithuania', label: 'Lithuania', continent: 'Europe' },
-  { code: 'lu', value: 'luxembourg', label: 'Luxembourg', continent: 'Europe' },
-  { code: 'mg', value: 'madagascar', label: 'Madagascar', continent: 'Africa' },
-  { code: 'mw', value: 'malawi', label: 'Malawi', continent: 'Africa' },
-  { code: 'my', value: 'malaysia', label: 'Malaysia', continent: 'Asia' },
-  { code: 'mv', value: 'maldives', label: 'Maldives', continent: 'Asia' },
-  { code: 'ml', value: 'mali', label: 'Mali', continent: 'Africa' },
-  { code: 'mt', value: 'malta', label: 'Malta', continent: 'Europe' },
+  { code: 'lt', continent: 'Europe', label: 'Lithuania', value: 'lithuania' },
+  { code: 'lu', continent: 'Europe', label: 'Luxembourg', value: 'luxembourg' },
+  { code: 'mg', continent: 'Africa', label: 'Madagascar', value: 'madagascar' },
+  { code: 'mw', continent: 'Africa', label: 'Malawi', value: 'malawi' },
+  { code: 'my', continent: 'Asia', label: 'Malaysia', value: 'malaysia' },
+  { code: 'mv', continent: 'Asia', label: 'Maldives', value: 'maldives' },
+  { code: 'ml', continent: 'Africa', label: 'Mali', value: 'mali' },
+  { code: 'mt', continent: 'Europe', label: 'Malta', value: 'malta' },
   {
     code: 'mh',
-    value: 'marshall-islands',
-    label: 'Marshall Islands',
     continent: 'Oceania',
+    label: 'Marshall Islands',
+    value: 'marshall-islands',
   },
-  { code: 'mr', value: 'mauritania', label: 'Mauritania', continent: 'Africa' },
-  { code: 'mu', value: 'mauritius', label: 'Mauritius', continent: 'Africa' },
-  { code: 'mx', value: 'mexico', label: 'Mexico', continent: 'North America' },
+  { code: 'mr', continent: 'Africa', label: 'Mauritania', value: 'mauritania' },
+  { code: 'mu', continent: 'Africa', label: 'Mauritius', value: 'mauritius' },
+  { code: 'mx', continent: 'North America', label: 'Mexico', value: 'mexico' },
   {
     code: 'fm',
-    value: 'micronesia',
-    label: 'Micronesia',
     continent: 'Oceania',
+    label: 'Micronesia',
+    value: 'micronesia',
   },
-  { code: 'md', value: 'moldova', label: 'Moldova', continent: 'Europe' },
-  { code: 'mc', value: 'monaco', label: 'Monaco', continent: 'Europe' },
-  { code: 'mn', value: 'mongolia', label: 'Mongolia', continent: 'Asia' },
-  { code: 'me', value: 'montenegro', label: 'Montenegro', continent: 'Europe' },
-  { code: 'ma', value: 'morocco', label: 'Morocco', continent: 'Africa' },
-  { code: 'mz', value: 'mozambique', label: 'Mozambique', continent: 'Africa' },
-  { code: 'mm', value: 'myanmar', label: 'Myanmar', continent: 'Asia' },
-  { code: 'na', value: 'namibia', label: 'Namibia', continent: 'Africa' },
-  { code: 'nr', value: 'nauru', label: 'Nauru', continent: 'Oceania' },
-  { code: 'np', value: 'nepal', label: 'Nepal', continent: 'Asia' },
+  { code: 'md', continent: 'Europe', label: 'Moldova', value: 'moldova' },
+  { code: 'mc', continent: 'Europe', label: 'Monaco', value: 'monaco' },
+  { code: 'mn', continent: 'Asia', label: 'Mongolia', value: 'mongolia' },
+  { code: 'me', continent: 'Europe', label: 'Montenegro', value: 'montenegro' },
+  { code: 'ma', continent: 'Africa', label: 'Morocco', value: 'morocco' },
+  { code: 'mz', continent: 'Africa', label: 'Mozambique', value: 'mozambique' },
+  { code: 'mm', continent: 'Asia', label: 'Myanmar', value: 'myanmar' },
+  { code: 'na', continent: 'Africa', label: 'Namibia', value: 'namibia' },
+  { code: 'nr', continent: 'Oceania', label: 'Nauru', value: 'nauru' },
+  { code: 'np', continent: 'Asia', label: 'Nepal', value: 'nepal' },
   {
     code: 'nl',
-    value: 'netherlands',
-    label: 'Netherlands',
     continent: 'Europe',
+    label: 'Netherlands',
+    value: 'netherlands',
   },
   {
     code: 'nz',
-    value: 'new-zealand',
-    label: 'New Zealand',
     continent: 'Oceania',
+    label: 'New Zealand',
+    value: 'new-zealand',
   },
   {
     code: 'ni',
-    value: 'nicaragua',
-    label: 'Nicaragua',
     continent: 'North America',
+    label: 'Nicaragua',
+    value: 'nicaragua',
   },
-  { code: 'ne', value: 'niger', label: 'Niger', continent: 'Africa' },
-  { code: 'ng', value: 'nigeria', label: 'Nigeria', continent: 'Africa' },
-  { code: 'kp', value: 'north-korea', label: 'North Korea', continent: 'Asia' },
+  { code: 'ne', continent: 'Africa', label: 'Niger', value: 'niger' },
+  { code: 'ng', continent: 'Africa', label: 'Nigeria', value: 'nigeria' },
+  { code: 'kp', continent: 'Asia', label: 'North Korea', value: 'north-korea' },
   {
     code: 'mk',
-    value: 'north-macedonia',
-    label: 'North Macedonia',
     continent: 'Europe',
+    label: 'North Macedonia',
+    value: 'north-macedonia',
   },
-  { code: 'no', value: 'norway', label: 'Norway', continent: 'Europe' },
-  { code: 'om', value: 'oman', label: 'Oman', continent: 'Asia' },
-  { code: 'pk', value: 'pakistan', label: 'Pakistan', continent: 'Asia' },
-  { code: 'pw', value: 'palau', label: 'Palau', continent: 'Oceania' },
-  { code: 'ps', value: 'palestine', label: 'Palestine', continent: 'Asia' },
-  { code: 'pa', value: 'panama', label: 'Panama', continent: 'North America' },
+  { code: 'no', continent: 'Europe', label: 'Norway', value: 'norway' },
+  { code: 'om', continent: 'Asia', label: 'Oman', value: 'oman' },
+  { code: 'pk', continent: 'Asia', label: 'Pakistan', value: 'pakistan' },
+  { code: 'pw', continent: 'Oceania', label: 'Palau', value: 'palau' },
+  { code: 'ps', continent: 'Asia', label: 'Palestine', value: 'palestine' },
+  { code: 'pa', continent: 'North America', label: 'Panama', value: 'panama' },
   {
     code: 'pg',
-    value: 'papua-new-guinea',
-    label: 'Papua New Guinea',
     continent: 'Oceania',
+    label: 'Papua New Guinea',
+    value: 'papua-new-guinea',
   },
   {
     code: 'py',
-    value: 'paraguay',
-    label: 'Paraguay',
     continent: 'South America',
+    label: 'Paraguay',
+    value: 'paraguay',
   },
-  { code: 'pe', value: 'peru', label: 'Peru', continent: 'South America' },
-  { code: 'ph', value: 'philippines', label: 'Philippines', continent: 'Asia' },
-  { code: 'pl', value: 'poland', label: 'Poland', continent: 'Europe' },
-  { code: 'pt', value: 'portugal', label: 'Portugal', continent: 'Europe' },
-  { code: 'qa', value: 'qatar', label: 'Qatar', continent: 'Asia' },
-  { code: 'ro', value: 'romania', label: 'Romania', continent: 'Europe' },
-  { code: 'ru', value: 'russia', label: 'Russia', continent: 'Europe' },
-  { code: 'rw', value: 'rwanda', label: 'Rwanda', continent: 'Africa' },
-  { code: 'ws', value: 'samoa', label: 'Samoa', continent: 'Oceania' },
-  { code: 'sm', value: 'san-marino', label: 'San Marino', continent: 'Europe' },
+  { code: 'pe', continent: 'South America', label: 'Peru', value: 'peru' },
+  { code: 'ph', continent: 'Asia', label: 'Philippines', value: 'philippines' },
+  { code: 'pl', continent: 'Europe', label: 'Poland', value: 'poland' },
+  { code: 'pt', continent: 'Europe', label: 'Portugal', value: 'portugal' },
+  { code: 'qa', continent: 'Asia', label: 'Qatar', value: 'qatar' },
+  { code: 'ro', continent: 'Europe', label: 'Romania', value: 'romania' },
+  { code: 'ru', continent: 'Europe', label: 'Russia', value: 'russia' },
+  { code: 'rw', continent: 'Africa', label: 'Rwanda', value: 'rwanda' },
+  { code: 'ws', continent: 'Oceania', label: 'Samoa', value: 'samoa' },
+  { code: 'sm', continent: 'Europe', label: 'San Marino', value: 'san-marino' },
   {
     code: 'sa',
-    value: 'saudi-arabia',
-    label: 'Saudi Arabia',
     continent: 'Asia',
+    label: 'Saudi Arabia',
+    value: 'saudi-arabia',
   },
-  { code: 'sn', value: 'senegal', label: 'Senegal', continent: 'Africa' },
-  { code: 'rs', value: 'serbia', label: 'Serbia', continent: 'Europe' },
-  { code: 'sc', value: 'seychelles', label: 'Seychelles', continent: 'Africa' },
+  { code: 'sn', continent: 'Africa', label: 'Senegal', value: 'senegal' },
+  { code: 'rs', continent: 'Europe', label: 'Serbia', value: 'serbia' },
+  { code: 'sc', continent: 'Africa', label: 'Seychelles', value: 'seychelles' },
   {
     code: 'sl',
-    value: 'sierra-leone',
-    label: 'Sierra Leone',
     continent: 'Africa',
+    label: 'Sierra Leone',
+    value: 'sierra-leone',
   },
-  { code: 'sg', value: 'singapore', label: 'Singapore', continent: 'Asia' },
-  { code: 'sk', value: 'slovakia', label: 'Slovakia', continent: 'Europe' },
-  { code: 'si', value: 'slovenia', label: 'Slovenia', continent: 'Europe' },
+  { code: 'sg', continent: 'Asia', label: 'Singapore', value: 'singapore' },
+  { code: 'sk', continent: 'Europe', label: 'Slovakia', value: 'slovakia' },
+  { code: 'si', continent: 'Europe', label: 'Slovenia', value: 'slovenia' },
   {
     code: 'sb',
-    value: 'solomon-islands',
-    label: 'Solomon Islands',
     continent: 'Oceania',
+    label: 'Solomon Islands',
+    value: 'solomon-islands',
   },
-  { code: 'so', value: 'somalia', label: 'Somalia', continent: 'Africa' },
+  { code: 'so', continent: 'Africa', label: 'Somalia', value: 'somalia' },
   {
     code: 'za',
-    value: 'south-africa',
-    label: 'South Africa',
     continent: 'Africa',
+    label: 'South Africa',
+    value: 'south-africa',
   },
-  { code: 'kr', value: 'south-korea', label: 'South Korea', continent: 'Asia' },
+  { code: 'kr', continent: 'Asia', label: 'South Korea', value: 'south-korea' },
   {
     code: 'ss',
-    value: 'south-sudan',
-    label: 'South Sudan',
     continent: 'Africa',
+    label: 'South Sudan',
+    value: 'south-sudan',
   },
-  { code: 'es', value: 'spain', label: 'Spain', continent: 'Europe' },
-  { code: 'lk', value: 'sri-lanka', label: 'Sri Lanka', continent: 'Asia' },
-  { code: 'sd', value: 'sudan', label: 'Sudan', continent: 'Africa' },
+  { code: 'es', continent: 'Europe', label: 'Spain', value: 'spain' },
+  { code: 'lk', continent: 'Asia', label: 'Sri Lanka', value: 'sri-lanka' },
+  { code: 'sd', continent: 'Africa', label: 'Sudan', value: 'sudan' },
   {
     code: 'sr',
-    value: 'suriname',
-    label: 'Suriname',
     continent: 'South America',
+    label: 'Suriname',
+    value: 'suriname',
   },
-  { code: 'se', value: 'sweden', label: 'Sweden', continent: 'Europe' },
+  { code: 'se', continent: 'Europe', label: 'Sweden', value: 'sweden' },
   {
     code: 'ch',
-    value: 'switzerland',
-    label: 'Switzerland',
     continent: 'Europe',
+    label: 'Switzerland',
+    value: 'switzerland',
   },
-  { code: 'sy', value: 'syria', label: 'Syria', continent: 'Asia' },
-  { code: 'tw', value: 'taiwan', label: 'Taiwan', continent: 'Asia' },
-  { code: 'tj', value: 'tajikistan', label: 'Tajikistan', continent: 'Asia' },
-  { code: 'tz', value: 'tanzania', label: 'Tanzania', continent: 'Africa' },
-  { code: 'th', value: 'thailand', label: 'Thailand', continent: 'Asia' },
-  { code: 'tl', value: 'timor-leste', label: 'Timor-Leste', continent: 'Asia' },
-  { code: 'tg', value: 'togo', label: 'Togo', continent: 'Africa' },
-  { code: 'to', value: 'tonga', label: 'Tonga', continent: 'Oceania' },
+  { code: 'sy', continent: 'Asia', label: 'Syria', value: 'syria' },
+  { code: 'tw', continent: 'Asia', label: 'Taiwan', value: 'taiwan' },
+  { code: 'tj', continent: 'Asia', label: 'Tajikistan', value: 'tajikistan' },
+  { code: 'tz', continent: 'Africa', label: 'Tanzania', value: 'tanzania' },
+  { code: 'th', continent: 'Asia', label: 'Thailand', value: 'thailand' },
+  { code: 'tl', continent: 'Asia', label: 'Timor-Leste', value: 'timor-leste' },
+  { code: 'tg', continent: 'Africa', label: 'Togo', value: 'togo' },
+  { code: 'to', continent: 'Oceania', label: 'Tonga', value: 'tonga' },
   {
     code: 'tt',
-    value: 'trinidad-and-tobago',
-    label: 'Trinidad and Tobago',
     continent: 'North America',
+    label: 'Trinidad and Tobago',
+    value: 'trinidad-and-tobago',
   },
-  { code: 'tn', value: 'tunisia', label: 'Tunisia', continent: 'Africa' },
-  { code: 'tr', value: 'turkey', label: 'Turkey', continent: 'Asia' },
+  { code: 'tn', continent: 'Africa', label: 'Tunisia', value: 'tunisia' },
+  { code: 'tr', continent: 'Asia', label: 'Turkey', value: 'turkey' },
   {
     code: 'tm',
-    value: 'turkmenistan',
-    label: 'Turkmenistan',
     continent: 'Asia',
+    label: 'Turkmenistan',
+    value: 'turkmenistan',
   },
-  { code: 'tv', value: 'tuvalu', label: 'Tuvalu', continent: 'Oceania' },
-  { code: 'ug', value: 'uganda', label: 'Uganda', continent: 'Africa' },
-  { code: 'ua', value: 'ukraine', label: 'Ukraine', continent: 'Europe' },
+  { code: 'tv', continent: 'Oceania', label: 'Tuvalu', value: 'tuvalu' },
+  { code: 'ug', continent: 'Africa', label: 'Uganda', value: 'uganda' },
+  { code: 'ua', continent: 'Europe', label: 'Ukraine', value: 'ukraine' },
   {
     code: 'ae',
-    value: 'united-arab-emirates',
-    label: 'United Arab Emirates',
     continent: 'Asia',
+    label: 'United Arab Emirates',
+    value: 'united-arab-emirates',
   },
   {
     code: 'gb',
-    value: 'united-kingdom',
-    label: 'United Kingdom',
     continent: 'Europe',
+    label: 'United Kingdom',
+    value: 'united-kingdom',
   },
   {
     code: 'us',
-    value: 'united-states',
-    label: 'United States',
     continent: 'North America',
+    label: 'United States',
+    value: 'united-states',
   },
   {
     code: 'uy',
-    value: 'uruguay',
-    label: 'Uruguay',
     continent: 'South America',
+    label: 'Uruguay',
+    value: 'uruguay',
   },
-  { code: 'uz', value: 'uzbekistan', label: 'Uzbekistan', continent: 'Asia' },
-  { code: 'vu', value: 'vanuatu', label: 'Vanuatu', continent: 'Oceania' },
+  { code: 'uz', continent: 'Asia', label: 'Uzbekistan', value: 'uzbekistan' },
+  { code: 'vu', continent: 'Oceania', label: 'Vanuatu', value: 'vanuatu' },
   {
     code: 'va',
-    value: 'vatican-city',
-    label: 'Vatican City',
     continent: 'Europe',
+    label: 'Vatican City',
+    value: 'vatican-city',
   },
   {
     code: 've',
-    value: 'venezuela',
-    label: 'Venezuela',
     continent: 'South America',
+    label: 'Venezuela',
+    value: 'venezuela',
   },
-  { code: 'vn', value: 'vietnam', label: 'Vietnam', continent: 'Asia' },
-  { code: 'ye', value: 'yemen', label: 'Yemen', continent: 'Asia' },
-  { code: 'zm', value: 'zambia', label: 'Zambia', continent: 'Africa' },
-  { code: 'zw', value: 'zimbabwe', label: 'Zimbabwe', continent: 'Africa' },
+  { code: 'vn', continent: 'Asia', label: 'Vietnam', value: 'vietnam' },
+  { code: 'ye', continent: 'Asia', label: 'Yemen', value: 'yemen' },
+  { code: 'zm', continent: 'Africa', label: 'Zambia', value: 'zambia' },
+  { code: 'zw', continent: 'Africa', label: 'Zimbabwe', value: 'zimbabwe' },
 ]
 
 export default {
-  title: 'Components/Combobox',
-  component: Combobox,
-  subcomponents: {
-    ComboboxEmpty,
-    ComboboxInput,
-    ComboboxItem,
-    ComboboxList,
-    ComboboxPopup,
+  args: {
+    items: fruits,
   },
+  component: Combobox,
   parameters: {
     docs: {
-      subtitle: 'A Combobox component for selecting options from a dropdown list.',
       description: {
         component:
           'The Combobox component allows users to select an option from a dropdown list. It provides a user-friendly interface for selecting options, with support for keyboard navigation and accessibility features. The Combobox can be used in various contexts, such as forms, filters, and search inputs.',
       },
+      subtitle: 'A Combobox component for selecting options from a dropdown list.',
     },
-  },
-  args: {
-    items: fruits,
   },
   render: (args) => (
     <Combobox {...args}>
-      <ComboboxInput placeholder="Select an option" />
-      <ComboboxPopup>
-        <ComboboxEmpty>No options found</ComboboxEmpty>
-        <ComboboxList>
+      <Combobox.Input placeholder="Select an option" />
+      <Combobox.Popup>
+        <Combobox.Empty>No options found</Combobox.Empty>
+        <Combobox.List>
           {(item: Fruit) => (
-            <ComboboxItem key={item.value} value={item}>
+            <Combobox.Item key={item.value} value={item}>
               {item.label}
-            </ComboboxItem>
+            </Combobox.Item>
           )}
-        </ComboboxList>
-      </ComboboxPopup>
+        </Combobox.List>
+      </Combobox.Popup>
     </Combobox>
   ),
+  subcomponents: {
+    Empty: Combobox.Empty,
+    Input: Combobox.Input,
+    Item: Combobox.Item,
+    List: Combobox.List,
+    Popup: Combobox.Popup,
+  },
+  title: 'Components/Combobox',
 } as Meta<typeof Combobox>
 
 type Story = StoryObj<typeof Combobox>
@@ -539,31 +525,31 @@ export const MultipleSelection: Story = {
   },
   render: (args) => (
     <Combobox {...args}>
-      <ComboboxInput className={'max-w-[300px]'} placeholder={'e.g. Typescript'}>
-        <ComboboxChips>
-          <ComboboxValue>
+      <Combobox.Input className="max-w-[300px]" placeholder="e.g. Typescript">
+        <Combobox.Chips>
+          <Combobox.Value>
             {(value: ProgrammingLanguage[]) => (
-              <React.Fragment>
+              <>
                 {value.map((lang) => (
-                  <ComboboxChip aria-label={lang.value} key={lang.id}>
+                  <Combobox.Chip aria-label={lang.value} key={lang.id}>
                     {lang.value}
-                  </ComboboxChip>
+                  </Combobox.Chip>
                 ))}
-              </React.Fragment>
+              </>
             )}
-          </ComboboxValue>
-        </ComboboxChips>
-      </ComboboxInput>
-      <ComboboxPopup>
-        <ComboboxEmpty>No options found</ComboboxEmpty>
-        <ComboboxList>
+          </Combobox.Value>
+        </Combobox.Chips>
+      </Combobox.Input>
+      <Combobox.Popup>
+        <Combobox.Empty>No options found</Combobox.Empty>
+        <Combobox.List>
           {(lang: ProgrammingLanguage) => (
-            <ComboboxItem key={lang.id} value={lang}>
+            <Combobox.Item key={lang.id} value={lang}>
               {lang.value}
-            </ComboboxItem>
+            </Combobox.Item>
           )}
-        </ComboboxList>
-      </ComboboxPopup>
+        </Combobox.List>
+      </Combobox.Popup>
     </Combobox>
   ),
 }
@@ -574,18 +560,18 @@ export const InputInsidePopup: Story = {
   },
   render: (args) => (
     <Combobox {...args}>
-      <ComboboxTrigger placeholder="Select a country" />
-      <ComboboxPopup align="start" sideOffset={4}>
-        <ComboboxInput inline />
-        <ComboboxEmpty>No options found</ComboboxEmpty>
-        <ComboboxList>
+      <Combobox.Trigger placeholder="Select a country" />
+      <Combobox.Popup align="start" sideOffset={4}>
+        <Combobox.Input inline />
+        <Combobox.Empty>No options found</Combobox.Empty>
+        <Combobox.List>
           {(country: Country) => (
-            <ComboboxItem key={country.code} value={country}>
+            <Combobox.Item key={country.code} value={country}>
               {country.label}
-            </ComboboxItem>
+            </Combobox.Item>
           )}
-        </ComboboxList>
-      </ComboboxPopup>
+        </Combobox.List>
+      </Combobox.Popup>
     </Combobox>
   ),
 }
@@ -602,22 +588,22 @@ interface ProduceGroup {
 }
 
 const produceData: Produce[] = [
-  { id: 'fruit-apple', label: 'Apple', group: 'Fruits' },
-  { id: 'fruit-banana', label: 'Banana', group: 'Fruits' },
-  { id: 'fruit-mango', label: 'Mango', group: 'Fruits' },
-  { id: 'fruit-kiwi', label: 'Kiwi', group: 'Fruits' },
-  { id: 'fruit-grape', label: 'Grape', group: 'Fruits' },
-  { id: 'fruit-orange', label: 'Orange', group: 'Fruits' },
-  { id: 'fruit-strawberry', label: 'Strawberry', group: 'Fruits' },
-  { id: 'fruit-watermelon', label: 'Watermelon', group: 'Fruits' },
-  { id: 'veg-broccoli', label: 'Broccoli', group: 'Vegetables' },
-  { id: 'veg-carrot', label: 'Carrot', group: 'Vegetables' },
-  { id: 'veg-cauliflower', label: 'Cauliflower', group: 'Vegetables' },
-  { id: 'veg-cucumber', label: 'Cucumber', group: 'Vegetables' },
-  { id: 'veg-kale', label: 'Kale', group: 'Vegetables' },
-  { id: 'veg-pepper', label: 'Bell pepper', group: 'Vegetables' },
-  { id: 'veg-spinach', label: 'Spinach', group: 'Vegetables' },
-  { id: 'veg-zucchini', label: 'Zucchini', group: 'Vegetables' },
+  { group: 'Fruits', id: 'fruit-apple', label: 'Apple' },
+  { group: 'Fruits', id: 'fruit-banana', label: 'Banana' },
+  { group: 'Fruits', id: 'fruit-mango', label: 'Mango' },
+  { group: 'Fruits', id: 'fruit-kiwi', label: 'Kiwi' },
+  { group: 'Fruits', id: 'fruit-grape', label: 'Grape' },
+  { group: 'Fruits', id: 'fruit-orange', label: 'Orange' },
+  { group: 'Fruits', id: 'fruit-strawberry', label: 'Strawberry' },
+  { group: 'Fruits', id: 'fruit-watermelon', label: 'Watermelon' },
+  { group: 'Vegetables', id: 'veg-broccoli', label: 'Broccoli' },
+  { group: 'Vegetables', id: 'veg-carrot', label: 'Carrot' },
+  { group: 'Vegetables', id: 'veg-cauliflower', label: 'Cauliflower' },
+  { group: 'Vegetables', id: 'veg-cucumber', label: 'Cucumber' },
+  { group: 'Vegetables', id: 'veg-kale', label: 'Kale' },
+  { group: 'Vegetables', id: 'veg-pepper', label: 'Bell pepper' },
+  { group: 'Vegetables', id: 'veg-spinach', label: 'Spinach' },
+  { group: 'Vegetables', id: 'veg-zucchini', label: 'Zucchini' },
 ]
 
 function groupProduce(items: Produce[]): ProduceGroup[] {
@@ -629,7 +615,7 @@ function groupProduce(items: Produce[]): ProduceGroup[] {
     groups[item.group].push(item)
   })
   const order = ['Fruits', 'Vegetables']
-  return order.map((value) => ({ value, items: groups[value] ?? [] }))
+  return order.map((value) => ({ items: groups[value] ?? [], value }))
 }
 
 const groupedProduce: ProduceGroup[] = groupProduce(produceData)
@@ -640,24 +626,24 @@ export const GroupedOptions: Story = {
   },
   render: (args) => (
     <Combobox {...args}>
-      <ComboboxInput placeholder="Select a produce" />
-      <ComboboxPopup>
-        <ComboboxEmpty>No options found</ComboboxEmpty>
-        <ComboboxList>
+      <Combobox.Input placeholder="Select a produce" />
+      <Combobox.Popup>
+        <Combobox.Empty>No options found</Combobox.Empty>
+        <Combobox.List>
           {(group: ProduceGroup) => (
-            <ComboboxGroup items={group.items} key={group.value}>
-              <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
-              <ComboboxCollection>
+            <Combobox.Group items={group.items} key={group.value}>
+              <Combobox.GroupLabel>{group.value}</Combobox.GroupLabel>
+              <Combobox.Collection>
                 {(item: Produce) => (
-                  <ComboboxItem key={item.id} value={item}>
+                  <Combobox.Item key={item.id} value={item}>
                     {item.label}
-                  </ComboboxItem>
+                  </Combobox.Item>
                 )}
-              </ComboboxCollection>
-            </ComboboxGroup>
+              </Combobox.Collection>
+            </Combobox.Group>
           )}
-        </ComboboxList>
-      </ComboboxPopup>
+        </Combobox.List>
+      </Combobox.Popup>
     </Combobox>
   ),
 }
@@ -672,88 +658,88 @@ interface DirectoryUser {
 
 const allUsers: DirectoryUser[] = [
   {
+    email: 'leslie.alexander@example.com',
     id: 'leslie-alexander',
     name: 'Leslie Alexander',
-    username: 'leslie',
-    email: 'leslie.alexander@example.com',
     title: 'Product Manager',
+    username: 'leslie',
   },
   {
+    email: 'kathryn.murphy@example.com',
     id: 'kathryn-murphy',
     name: 'Kathryn Murphy',
-    username: 'kathryn',
-    email: 'kathryn.murphy@example.com',
     title: 'Marketing Lead',
+    username: 'kathryn',
   },
   {
+    email: 'courtney.henry@example.com',
     id: 'courtney-henry',
     name: 'Courtney Henry',
-    username: 'courtney',
-    email: 'courtney.henry@example.com',
     title: 'Design Systems',
+    username: 'courtney',
   },
   {
+    email: 'michael.foster@example.com',
     id: 'michael-foster',
     name: 'Michael Foster',
-    username: 'michael',
-    email: 'michael.foster@example.com',
     title: 'Engineering Manager',
+    username: 'michael',
   },
   {
+    email: 'lindsay.walton@example.com',
     id: 'lindsay-walton',
     name: 'Lindsay Walton',
-    username: 'lindsay',
-    email: 'lindsay.walton@example.com',
     title: 'Product Designer',
+    username: 'lindsay',
   },
   {
+    email: 'tom.cook@example.com',
     id: 'tom-cook',
     name: 'Tom Cook',
-    username: 'tom',
-    email: 'tom.cook@example.com',
     title: 'Frontend Engineer',
+    username: 'tom',
   },
   {
+    email: 'whitney.francis@example.com',
     id: 'whitney-francis',
     name: 'Whitney Francis',
-    username: 'whitney',
-    email: 'whitney.francis@example.com',
     title: 'Customer Success',
+    username: 'whitney',
   },
   {
+    email: 'jacob.jones@example.com',
     id: 'jacob-jones',
     name: 'Jacob Jones',
-    username: 'jacob',
-    email: 'jacob.jones@example.com',
     title: 'Security Engineer',
+    username: 'jacob',
   },
   {
+    email: 'arlene.mccoy@example.com',
     id: 'arlene-mccoy',
     name: 'Arlene McCoy',
-    username: 'arlene',
-    email: 'arlene.mccoy@example.com',
     title: 'Data Analyst',
+    username: 'arlene',
   },
   {
+    email: 'marvin.mckinney@example.com',
     id: 'marvin-mckinney',
     name: 'Marvin McKinney',
-    username: 'marvin',
-    email: 'marvin.mckinney@example.com',
     title: 'QA Specialist',
+    username: 'marvin',
   },
   {
+    email: 'eleanor.pena@example.com',
     id: 'eleanor-pena',
     name: 'Eleanor Pena',
-    username: 'eleanor',
-    email: 'eleanor.pena@example.com',
     title: 'Operations',
+    username: 'eleanor',
   },
   {
+    email: 'jerome.bell@example.com',
     id: 'jerome-bell',
     name: 'Jerome Bell',
-    username: 'jerome',
-    email: 'jerome.bell@example.com',
     title: 'DevOps Engineer',
+    username: 'jerome',
   },
 ]
 
@@ -769,47 +755,42 @@ async function searchUsers(
   // Simulate occasional network errors (1% chance)
   if (Math.random() < 0.01 || query === 'will_error') {
     return {
-      users: [],
       error: 'Failed to fetch people. Please try again.',
+      users: [],
     }
   }
 
-  const users = allUsers.filter((user) => {
-    return (
+  const users = allUsers.filter(
+    (user) =>
       filter(user.name, query) ||
       filter(user.username, query) ||
       filter(user.email, query) ||
-      filter(user.title, query)
-    )
-  })
+      filter(user.title, query),
+  )
 
   return {
-    users,
     error: null,
+    users,
   }
 }
 
 export const AsyncLoading: Story = {
   render: (args) => {
-    const [searchResults, setSearchResults] = React.useState<DirectoryUser[]>([])
-    const [selectedValue, setSelectedValue] = React.useState<DirectoryUser | null>(null)
-    const [searchValue, setSearchValue] = React.useState('')
-    const [error, setError] = React.useState<string | null>(null)
-    const [isPending, startTransition] = React.useTransition()
+    const [searchResults, setSearchResults] = React.useState<DirectoryUser[]>([]),
+      [selectedValue, setSelectedValue] = React.useState<DirectoryUser | null>(null),
+      [searchValue, setSearchValue] = React.useState(''),
+      [error, setError] = React.useState<string | null>(null),
+      [isPending, startTransition] = React.useTransition(),
+      { contains } = useFilter(),
+      abortControllerRef = React.useRef<AbortController | null>(null),
+      trimmedSearchValue = searchValue.trim(),
+      items = React.useMemo(() => {
+        if (!selectedValue || searchResults.some((user) => user.id === selectedValue.id)) {
+          return searchResults
+        }
 
-    const { contains } = useFilter()
-
-    const abortControllerRef = React.useRef<AbortController | null>(null)
-
-    const trimmedSearchValue = searchValue.trim()
-
-    const items = React.useMemo(() => {
-      if (!selectedValue || searchResults.some((user) => user.id === selectedValue.id)) {
-        return searchResults
-      }
-
-      return [...searchResults, selectedValue]
-    }, [searchResults, selectedValue])
+        return [...searchResults, selectedValue]
+      }, [searchResults, selectedValue])
 
     function getStatus() {
       if (isPending) {
@@ -892,13 +873,13 @@ export const AsyncLoading: Story = {
           setError(null)
         }}
       >
-        <ComboboxInput placeholder="e.g. Michael" />
-        <ComboboxPopup>
-          <ComboboxStatus>{getStatus()}</ComboboxStatus>
-          <ComboboxEmpty>{getEmptyMessage()}</ComboboxEmpty>
-          <ComboboxList>
+        <Combobox.Input placeholder="e.g. Michael" />
+        <Combobox.Popup>
+          <Combobox.Status>{getStatus()}</Combobox.Status>
+          <Combobox.Empty>{getEmptyMessage()}</Combobox.Empty>
+          <Combobox.List>
             {(user: DirectoryUser) => (
-              <ComboboxItem key={user.id} value={user}>
+              <Combobox.Item key={user.id} value={user}>
                 <div className="flex flex-col gap-3xs">
                   <div className="text-[0.95rem] font-medium">{user.name}</div>
                   <div className="flex flex-wrap gap-2xs text-[0.8125rem] text-on-surface-variant">
@@ -907,13 +888,59 @@ export const AsyncLoading: Story = {
                   </div>
                   <div className="text-xs opacity-80">{user.email}</div>
                 </div>
-              </ComboboxItem>
+              </Combobox.Item>
             )}
-          </ComboboxList>
-        </ComboboxPopup>
+          </Combobox.List>
+        </Combobox.Popup>
       </Combobox>
     )
   },
+}
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex flex-col items-start gap-xs">
+      <Combobox {...args}>
+        <Combobox.Input placeholder="Small size" size="small" />
+        <Combobox.Popup>
+          <Combobox.Empty>No options found</Combobox.Empty>
+          <Combobox.List>
+            {(item: Fruit) => (
+              <Combobox.Item key={item.value} value={item}>
+                {item.label}
+              </Combobox.Item>
+            )}
+          </Combobox.List>
+        </Combobox.Popup>
+      </Combobox>
+      <Combobox {...args}>
+        <Combobox.Input placeholder="Medium size (default)" size="medium" />
+        <Combobox.Popup>
+          <Combobox.Empty>No options found</Combobox.Empty>
+          <Combobox.List>
+            {(item: Fruit) => (
+              <Combobox.Item key={item.value} value={item}>
+                {item.label}
+              </Combobox.Item>
+            )}
+          </Combobox.List>
+        </Combobox.Popup>
+      </Combobox>
+      <Combobox {...args}>
+        <Combobox.Input placeholder="Large size" size="large" />
+        <Combobox.Popup>
+          <Combobox.Empty>No options found</Combobox.Empty>
+          <Combobox.List>
+            {(item: Fruit) => (
+              <Combobox.Item key={item.value} value={item}>
+                {item.label}
+              </Combobox.Item>
+            )}
+          </Combobox.List>
+        </Combobox.Popup>
+      </Combobox>
+    </div>
+  ),
 }
 
 export const Virtualized: Story = {
@@ -921,8 +948,8 @@ export const Virtualized: Story = {
     items: countries,
   },
   render: (args) => {
-    const [open, setOpen] = React.useState(false)
-    const virtualizerRef = React.useRef<Virtualizer<HTMLDivElement, HTMLDivElement> | null>(null)
+    const [open, setOpen] = React.useState(false),
+      virtualizerRef = React.useRef<Virtualizer<HTMLDivElement, HTMLDivElement> | null>(null)
 
     return (
       <Combobox
@@ -938,9 +965,9 @@ export const Virtualized: Story = {
             return
           }
 
-          const isStart = index === 0
-          const isEnd = index === virtualizer.options.count - 1
-          const shouldScroll = reason === 'none' || (reason === 'keyboard' && (isStart || isEnd))
+          const isStart = index === 0,
+            isEnd = index === virtualizer.options.count - 1,
+            shouldScroll = reason === 'none' || (reason === 'keyboard' && (isStart || isEnd))
 
           if (shouldScroll) {
             queueMicrotask(() => {
@@ -949,13 +976,13 @@ export const Virtualized: Story = {
           }
         }}
       >
-        <ComboboxInput placeholder="Select a country" />
-        <ComboboxPopup align="start" sideOffset={4}>
-          <ComboboxEmpty>No options found</ComboboxEmpty>
-          <ComboboxVirtualizedList estimateSize={195} open={open} virtualizerRef={virtualizerRef}>
+        <Combobox.Input placeholder="Select a country" />
+        <Combobox.Popup align="start" sideOffset={16}>
+          <Combobox.Empty>No options found</Combobox.Empty>
+          <Combobox.VirtualizedList estimateSize={195} open={open} virtualizerRef={virtualizerRef}>
             {(country: Country) => <>{country.label}</>}
-          </ComboboxVirtualizedList>
-        </ComboboxPopup>
+          </Combobox.VirtualizedList>
+        </Combobox.Popup>
       </Combobox>
     )
   },

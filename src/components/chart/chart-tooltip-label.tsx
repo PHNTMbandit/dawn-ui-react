@@ -1,14 +1,9 @@
-import { useChartTooltipContent } from './chart-tooltip-content'
 import { cn } from '@/utils/cn'
 
+import { useChartTooltipContent } from './chart-tooltip-content'
 import type { ChartTooltipLabelProps } from './chart.types'
 
-export const ChartTooltipLabel = ({
-  className,
-  children,
-  ref,
-  ...props
-}: ChartTooltipLabelProps) => {
+export function ChartTooltipLabel({ className, children, ref, ...props }: ChartTooltipLabelProps) {
   const { label } = useChartTooltipContent()
 
   return (

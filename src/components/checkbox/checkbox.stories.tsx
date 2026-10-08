@@ -1,19 +1,13 @@
-import { expect, waitFor } from 'storybook/test'
-import { Checkbox } from './checkbox'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { expect, waitFor } from 'storybook/test'
+
+import { Checkbox } from './index'
 
 export default {
-  title: 'Components/Checkbox',
-  component: Checkbox,
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['elevated', 'inSurface'],
-      description: 'Visual variant of the checkbox.',
-      table: {
-        defaultValue: { summary: 'elevated' },
-      },
+    checked: {
+      control: 'boolean',
+      description: 'Controlled checked state for the checkbox root.',
     },
 
     disabled: {
@@ -23,34 +17,43 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
-    checked: {
-      control: 'boolean',
-      description: 'Controlled checked state for the checkbox root.',
-    },
+
     indeterminate: {
       control: 'boolean',
       description: 'Displays the indeterminate indicator for partial selection states.',
     },
+
     label: {
       control: 'text',
       description: 'Optional label associated through the checkbox id.',
     },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A checkbox component for selecting options.',
-      description: {
-        component:
-          'The Checkbox component supports binary and partial selection states for forms, filters, and settings. It pairs a styled checkbox control with an optional external label, supports disabled and indeterminate states, and provides two visual variants: `elevated` (default) and `inSurface`.',
+
+    variant: {
+      control: 'select',
+      description: 'Visual variant of the checkbox.',
+      options: ['elevated', 'inSurface'],
+      table: {
+        defaultValue: { summary: 'elevated' },
       },
     },
   },
   args: {
-    variant: 'elevated',
     disabled: false,
     label: 'Accept Terms and Conditions',
+    variant: 'elevated',
+  },
+  component: Checkbox,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Checkbox component supports binary and partial selection states for forms, filters, and settings. It pairs a styled checkbox control with an optional external label, supports disabled and indeterminate states, and provides two visual variants: `elevated` (default) and `inSurface`.',
+      },
+      subtitle: 'A checkbox component for selecting options.',
+    },
   },
   render: (args) => <Checkbox {...args} id="checkbox" />,
+  title: 'Components/Checkbox',
 } satisfies Meta<typeof Checkbox>
 
 type Story = StoryObj<typeof Checkbox>
@@ -100,11 +103,11 @@ export const Default: Story = {
 }
 
 export const ElevatedVariant: Story = {
-  name: 'Variant / Elevated',
   args: {
-    variant: 'elevated',
     label: 'Elevated checkbox',
+    variant: 'elevated',
   },
+  name: 'Variant / Elevated',
   parameters: {
     docs: {
       description: {
@@ -115,11 +118,11 @@ export const ElevatedVariant: Story = {
 }
 
 export const InSurfaceVariant: Story = {
-  name: 'Variant / In Surface',
   args: {
-    variant: 'inSurface',
     label: 'In surface checkbox',
+    variant: 'inSurface',
   },
+  name: 'Variant / In Surface',
   parameters: {
     docs: {
       description: {
@@ -130,11 +133,11 @@ export const InSurfaceVariant: Story = {
 }
 
 export const Checked: Story = {
-  name: 'State / Checked',
   args: {
     checked: true,
     label: 'Receive product updates',
   },
+  name: 'State / Checked',
   parameters: {
     docs: {
       description: {
@@ -145,11 +148,11 @@ export const Checked: Story = {
 }
 
 export const Indeterminate: Story = {
-  name: 'State / Indeterminate',
   args: {
     indeterminate: true,
     label: 'Select all team members',
   },
+  name: 'State / Indeterminate',
   parameters: {
     docs: {
       description: {
@@ -160,11 +163,11 @@ export const Indeterminate: Story = {
 }
 
 export const Disabled: Story = {
-  name: 'State / Disabled',
   args: {
     disabled: true,
     label: 'Billing access restricted by admin',
   },
+  name: 'State / Disabled',
   parameters: {
     docs: {
       description: {
@@ -175,11 +178,11 @@ export const Disabled: Story = {
 }
 
 export const WithoutLabel: Story = {
-  name: 'Composition / Without Label',
   args: {
-    label: undefined,
     'aria-label': 'Toggle standalone checkbox',
+    label: undefined,
   },
+  name: 'Composition / Without Label',
   parameters: {
     docs: {
       description: {

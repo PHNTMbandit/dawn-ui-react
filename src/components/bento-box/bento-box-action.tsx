@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { BentoBoxActionProps } from './bento-box.types'
 
-export const BentoBoxAction = ({ className, children, ref, ...props }: BentoBoxActionProps) => {
+export function BentoBoxAction({ className, ref, ...props }: BentoBoxActionProps) {
   return (
     <div
       className={cn(
@@ -11,8 +11,6 @@ export const BentoBoxAction = ({ className, children, ref, ...props }: BentoBoxA
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

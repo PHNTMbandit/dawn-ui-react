@@ -1,14 +1,10 @@
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react'
+
 import { cn } from '@/utils/cn'
 
 import type { NavigationMenuContentProps } from './navigation-menu.types'
 
-export const NavigationMenuContent = ({
-  className,
-  children,
-  ref,
-  ...props
-}: NavigationMenuContentProps) => {
+export function NavigationMenuContent({ className, ref, ...props }: NavigationMenuContentProps) {
   return (
     <BaseNavigationMenu.Content
       className={cn(
@@ -17,8 +13,6 @@ export const NavigationMenuContent = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseNavigationMenu.Content>
+    />
   )
 }

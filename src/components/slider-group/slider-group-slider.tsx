@@ -1,42 +1,74 @@
 import React from 'react'
+
 import { Slider } from '../slider'
 import { useSliderGroupContext, useStableNumberArray } from './slider-group-context'
+import type { SliderGroupContextValue, SliderGroupSliderProps } from './slider-group.types'
 
-import type { SliderGroupSliderProps } from './slider-group.types'
+const MIN_DEFAULT = 0,
+  MAX_DEFAULT = 100,
+  STEP_DEFAULT = 1
+
+function toSingleNumber(input: number | readonly number[] | undefined): number | undefined {
+  if (typeof input === 'number') {
+    return input
+  }
+  return undefined
+}
+
+function toNumberArray(next: number | readonly number[]): number[] {
+  if (typeof next === 'number') {
+    return [next]
+  }
+  return [...next]
+}
+
+function resolveInitialValue(
+  defaultValue: SliderGroupSliderProps['defaultValue'],
+  value: SliderGroupSliderProps['value'],
+  min: number,
+): number[] {
+  if (Array.isArray(defaultValue)) {
+    return [...defaultValue]
+  }
+  return [toSingleNumber(value) ?? toSingleNumber(defaultValue) ?? min]
+}
+
+function getGroupValue(
+  group: SliderGroupContextValue | undefined,
+  fallback: number[],
+): number[] | undefined {
+  if (!group) {
+    return undefined
+  }
+  return group.value ?? fallback
+}
 
 // The group-bound Slider: it reads/writes the shared value from SliderGroup and
-// publishes its min/max/step so siblings (SliderInput, SliderValue) stay in sync.
-export const SliderGroupSlider = ({
-  min = 0,
-  max = 100,
-  step = 1,
+// Publishes its min/max/step so siblings (SliderInput, SliderValue) stay in sync.
+export function SliderGroupSlider({
+  min = MIN_DEFAULT,
+  max = MAX_DEFAULT,
+  step = STEP_DEFAULT,
   defaultValue,
   value,
   onValueChange,
   ...props
-}: SliderGroupSliderProps) => {
-  const group = useSliderGroupContext()
+}: SliderGroupSliderProps) {
+  const group = useSliderGroupContext(),
+    groupValue = useStableNumberArray(
+      getGroupValue(group, resolveInitialValue(defaultValue, value, min)),
+    ),
+    handleValueChange = (
+      ...args: Parameters<NonNullable<SliderGroupSliderProps['onValueChange']>>
+    ) => {
+      const [next] = args
+      group?.setValue(toNumberArray(next))
+      onValueChange?.(...args)
+    }
 
   React.useEffect(() => {
-    group?.registerConfig({ min, max, step, defaultValue })
+    group?.registerConfig({ defaultValue, max, min, step })
   }, [group, min, max, step, defaultValue])
-
-  const groupValue = useStableNumberArray(
-    group
-      ? (group.value ??
-          (Array.isArray(defaultValue)
-            ? [...defaultValue]
-            : [(value as number) ?? (defaultValue as number) ?? min]))
-      : undefined,
-  )
-
-  const handleValueChange = (
-    ...args: Parameters<NonNullable<SliderGroupSliderProps['onValueChange']>>
-  ) => {
-    const next = args[0]
-    group?.setValue(Array.isArray(next) ? [...next] : [next])
-    onValueChange?.(...args)
-  }
 
   return (
     <Slider

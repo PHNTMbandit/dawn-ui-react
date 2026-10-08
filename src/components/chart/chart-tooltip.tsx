@@ -1,7 +1,7 @@
-import * as RechartsPrimitive from 'recharts'
+import { Tooltip } from 'recharts'
 
 import type { ChartTooltipProps } from './chart.types'
 
-export const ChartTooltip = ({ content, ...props }: ChartTooltipProps) => {
-  return <RechartsPrimitive.Tooltip content={content} {...props} />
+export function ChartTooltip({ content, ...props }: ChartTooltipProps) {
+  return <Tooltip content={content} {...props} />
 }

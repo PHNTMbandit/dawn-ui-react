@@ -1,13 +1,17 @@
-import { useFieldContext } from '../form/form-contexts'
-import { Input } from '../input'
 import { cn } from '@/utils/cn'
 
+import { useFieldContext } from '../form/form-contexts'
+import { Input } from '../input'
 import type { FieldInputProps } from './field.types'
 
-export const FieldInput = ({ className, children, ref, ...props }: FieldInputProps) => {
-  const field = useFieldContext<string>()
-  const isInvalid =
-    field.state.meta.isTouched && field.state.meta.errors.length > 0 && !field.state.meta.isValid
+const NO_ERRORS = 0
+
+export function FieldInput({ className, ref, ...props }: FieldInputProps) {
+  const field = useFieldContext<string>(),
+    isInvalid =
+      field.state.meta.isTouched &&
+      field.state.meta.errors.length > NO_ERRORS &&
+      !field.state.meta.isValid
 
   return (
     <Input
@@ -15,12 +19,10 @@ export const FieldInput = ({ className, children, ref, ...props }: FieldInputPro
       className={cn('', className)}
       id={field.name}
       name={field.name}
-      onChange={(e) => field.handleChange(e.target.value)}
+      onChange={(event) => field.handleChange(event.target.value)}
       ref={ref}
       value={field.state.value}
       {...props}
-    >
-      {children}
-    </Input>
+    />
   )
 }

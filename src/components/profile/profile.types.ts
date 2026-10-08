@@ -1,9 +1,17 @@
 import type { ComponentProps } from 'react'
 
-export type ProfileProps = ComponentProps<'div'>
-export type ProfileContentProps = React.ComponentProps<'div'> & {
+type ProfileProps = ComponentProps<'div'>
+type ProfileContentProps = React.ComponentProps<'div'> & {
   compact?: boolean
 }
-export type ProfileActionProps = React.ComponentProps<'div'>
-export type ProfileNameProps = React.ComponentProps<'span'>
-export type ProfileSubnameProps = React.ComponentProps<'span'>
+type ProfileActionProps = React.ComponentProps<'div'>
+type ProfileNameProps = React.ComponentProps<'span'>
+type ProfileSubnameProps = React.ComponentProps<'span'>
+
+export type {
+  ProfileProps,
+  ProfileContentProps,
+  ProfileActionProps,
+  ProfileNameProps,
+  ProfileSubnameProps,
+}

@@ -1,16 +1,20 @@
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
+
 import { cn } from '@/utils/cn'
 
 import type { TooltipContentProps } from './tooltip.types'
 
-export const TooltipContent = ({
+const DEFAULT_ALIGN_OFFSET = 0,
+  DEFAULT_SIDE_OFFSET = 5
+
+export function TooltipContent({
   side = 'top',
-  alignOffset = 0,
-  sideOffset = 5,
+  alignOffset = DEFAULT_ALIGN_OFFSET,
+  sideOffset = DEFAULT_SIDE_OFFSET,
   className,
   children,
   ...props
-}: TooltipContentProps) => {
+}: TooltipContentProps) {
   return (
     <BaseTooltip.Portal>
       <BaseTooltip.Positioner side={side} alignOffset={alignOffset} sideOffset={sideOffset}>
@@ -21,9 +25,6 @@ export const TooltipContent = ({
           )}
           {...props}
         >
-          {/* <BaseTooltip.Arrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
-            <CaretUpIcon className="fill-surface-container" weight="fill" />
-          </BaseTooltip.Arrow> */}
           {children}
         </BaseTooltip.Popup>
       </BaseTooltip.Positioner>

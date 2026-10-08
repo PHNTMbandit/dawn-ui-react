@@ -1,5 +1,13 @@
-export type BreadcrumbProps = React.ComponentProps<'nav'>
-export type BreadcrumbItemProps = React.ComponentProps<'div'>
-export type BreadcrumbLinkProps = React.ComponentProps<'div'>
-export type BreadcrumbEllipsisProps = React.ComponentProps<'div'>
-export type BreadcrumbSeparatorProps = React.ComponentProps<'div'>
+type BreadcrumbProps = React.ComponentProps<'nav'>
+type BreadcrumbItemProps = React.ComponentProps<'div'>
+type BreadcrumbLinkProps = React.ComponentProps<'div'>
+type BreadcrumbEllipsisProps = React.ComponentProps<'div'>
+type BreadcrumbSeparatorProps = React.ComponentProps<'div'>
+
+export type {
+  BreadcrumbProps,
+  BreadcrumbItemProps,
+  BreadcrumbLinkProps,
+  BreadcrumbEllipsisProps,
+  BreadcrumbSeparatorProps,
+}

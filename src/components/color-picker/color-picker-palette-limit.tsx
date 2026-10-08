@@ -1,33 +1,31 @@
-import { useColorPicker } from './color-picker'
 import { cn } from '@/utils/cn'
 
+import { useColorPicker } from './color-picker'
 import type { ColorPickerPaletteLimitProps } from './color-picker.types'
 
-export const ColorPickerPaletteLimit = ({
+export function ColorPickerPaletteLimit({
   className,
   children,
   ref,
   ...props
-}: ColorPickerPaletteLimitProps) => {
-  const { palette, paletteLimit } = useColorPicker()
-  const isAtLimit = paletteLimit && palette.length >= paletteLimit
-
-  if (!paletteLimit) {
-    return null
-  }
+}: ColorPickerPaletteLimitProps) {
+  const { palette, paletteLimit } = useColorPicker(),
+    isAtLimit = paletteLimit && palette.length >= paletteLimit
 
   return (
-    <span
-      className={cn(
-        'style-text-prose--2',
-        isAtLimit ? 'text-error-default' : 'text-on-surface-variant',
-        className,
-      )}
-      ref={ref}
-      {...props}
-    >
-      {children}
-      {palette.length} / {paletteLimit}
-    </span>
+    Boolean(paletteLimit) && (
+      <span
+        className={cn(
+          'style-text-prose--2 text-on-surface-variant',
+          isAtLimit && 'text-error-default',
+          className,
+        )}
+        ref={ref}
+        {...props}
+      >
+        {children}
+        {palette.length} / {paletteLimit}
+      </span>
+    )
   )
 }

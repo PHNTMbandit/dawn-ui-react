@@ -1,12 +1,12 @@
 export { defaultFilterOperatorLabels } from './table.types'
 export {
   createAppColumnHelper,
-  features,
   useAppTable,
   useCellContext,
   useHeaderContext,
   useTableContext,
 } from './table-context'
+export { features } from './table-feature-context'
 export type {
   TableBadgeCellProps,
   TableBodyProps,

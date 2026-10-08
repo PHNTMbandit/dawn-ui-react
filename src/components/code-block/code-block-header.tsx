@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 type CodeBlockHeaderProps = React.ComponentProps<'div'>
 
-export const CodeBlockHeader = ({ className, children, ref, ...props }: CodeBlockHeaderProps) => {
+export function CodeBlockHeader({ className, ref, ...props }: CodeBlockHeaderProps) {
   return (
     <div
       className={cn(
@@ -11,8 +11,6 @@ export const CodeBlockHeader = ({ className, children, ref, ...props }: CodeBloc
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

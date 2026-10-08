@@ -1,21 +1,21 @@
+import { cn } from '@/utils/cn'
+
 import { CollapsiblePanel } from '../collapsible'
 import { PopoverContent, PopoverPanel } from '../popover'
 import { useSidebar } from './sidebar-provider'
-import { cn } from '@/utils/cn'
-
 import type { SidebarMenuCollapsiblePanelProps } from './sidebar.types'
 
-export const SidebarMenuCollapsiblePanel = ({
+export function SidebarMenuCollapsiblePanel({
   className,
   children,
   ref,
   ...props
-}: SidebarMenuCollapsiblePanelProps) => {
+}: SidebarMenuCollapsiblePanelProps) {
   const { open } = useSidebar()
 
   if (!open) {
     return (
-      <PopoverPanel elevation={'low'} side="right" className={'w-fit p-[0.5rem_0.5rem]'}>
+      <PopoverPanel side="right" className="w-fit bg-surface p-[0.5rem_0.5rem]">
         <PopoverContent className="flex gap-3xs">{children}</PopoverContent>
       </PopoverPanel>
     )

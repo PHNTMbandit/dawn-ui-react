@@ -1,11 +1,23 @@
-import { Drawer as BaseDrawer } from '@base-ui/react'
+import type { Drawer as BaseDrawer } from '@base-ui/react'
 
-export type DrawerProps = BaseDrawer.Root.Props
-export type DrawerProviderProps = BaseDrawer.Provider.Props
-export type DrawerTriggerProps = BaseDrawer.Trigger.Props
-export type DrawerPopupProps = BaseDrawer.Popup.Props
-export type DrawerContentProps = BaseDrawer.Content.Props
-export type DrawerTitleProps = BaseDrawer.Title.Props
-export type DrawerDescriptionProps = BaseDrawer.Description.Props
-export type DrawerCloseProps = BaseDrawer.Close.Props
-export type DrawerHeaderProps = React.ComponentProps<'div'>
+type DrawerProps = BaseDrawer.Root.Props
+type DrawerProviderProps = BaseDrawer.Provider.Props
+type DrawerTriggerProps = BaseDrawer.Trigger.Props
+type DrawerPopupProps = BaseDrawer.Popup.Props
+type DrawerContentProps = BaseDrawer.Content.Props
+type DrawerTitleProps = BaseDrawer.Title.Props
+type DrawerDescriptionProps = BaseDrawer.Description.Props
+type DrawerCloseProps = BaseDrawer.Close.Props
+type DrawerHeaderProps = React.ComponentProps<'div'>
+
+export type {
+  DrawerProps,
+  DrawerProviderProps,
+  DrawerTriggerProps,
+  DrawerPopupProps,
+  DrawerContentProps,
+  DrawerTitleProps,
+  DrawerDescriptionProps,
+  DrawerCloseProps,
+  DrawerHeaderProps,
+}

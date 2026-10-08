@@ -1,26 +1,27 @@
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import chroma from 'chroma-js'
 import { useEffect, useState } from 'react'
+
 import { Button } from '../button'
 import { Separator } from '../separator'
-import { ColorPicker } from './color-picker'
-import { ColorPickerArea } from './color-picker-area'
-import { ColorPickerGroup } from './color-picker-group'
-import { ColorPickerHueSlider } from './color-picker-hue-slider'
-import { ColorPickerInput } from './color-picker-input'
-import { ColorPickerLabel } from './color-picker-label'
-import { ColorPickerLightnessSlider } from './color-picker-lightness-slider'
-import { ColorPickerPaletteAdd } from './color-picker-palette-add'
-import { ColorPickerPaletteLimit } from './color-picker-palette-limit'
-import { ColorPickerPaletteList } from './color-picker-palette-list'
-import { ColorPickerRow } from './color-picker-row'
-import { ColorPickerTransparencySlider } from './color-picker-transparency-slider'
-import { ColorPickerValueType } from './color-picker-value-type'
-
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import { ColorPicker } from './index'
 
 export default {
-  title: 'Components/Color Picker',
-  component: ColorPicker,
+  argTypes: {
+    defaultColor: {
+      control: 'color',
+    },
+    defaultPalette: {
+      control: 'object',
+    },
+    paletteLimit: {
+      control: 'number',
+    },
+    variant: {
+      control: 'select',
+      options: ['elevated', 'outline', 'ghost'],
+    },
+  },
   args: {
     defaultColor: '#ff0000',
     defaultPalette: [
@@ -53,21 +54,8 @@ export default {
     paletteLimit: 10,
     variant: 'elevated',
   },
-  argTypes: {
-    defaultColor: {
-      control: 'color',
-    },
-    defaultPalette: {
-      control: 'object',
-    },
-    paletteLimit: {
-      control: 'number',
-    },
-    variant: {
-      control: 'select',
-      options: ['elevated', 'outline', 'ghost'],
-    },
-  },
+  component: ColorPicker,
+  title: 'Components/Color Picker',
 } satisfies Meta<typeof ColorPicker>
 
 type Story = StoryObj<typeof ColorPicker>
@@ -79,26 +67,26 @@ export const Playground: Story = {
 
   render: (args) => (
     <ColorPicker {...args} className="w-[400px]" onValueChange={(value) => console.log(value)}>
-      <ColorPickerArea />
-      <ColorPickerGroup>
-        <ColorPickerHueSlider />
-        <ColorPickerTransparencySlider />
-        <ColorPickerLightnessSlider />
-        <ColorPickerRow>
-          <ColorPickerValueType />
-          <ColorPickerInput />
-        </ColorPickerRow>
-      </ColorPickerGroup>
+      <ColorPicker.Area />
+      <ColorPicker.Group>
+        <ColorPicker.HueSlider />
+        <ColorPicker.TransparencySlider />
+        <ColorPicker.LightnessSlider />
+        <ColorPicker.Row>
+          <ColorPicker.ValueType />
+          <ColorPicker.Input />
+        </ColorPicker.Row>
+      </ColorPicker.Group>
       <Separator />
-      <ColorPickerGroup>
-        <ColorPickerRow>
-          <ColorPickerLabel>Saved</ColorPickerLabel>
-          <ColorPickerPaletteLimit />
-        </ColorPickerRow>
-        <ColorPickerPaletteList>
-          <ColorPickerPaletteAdd />
-        </ColorPickerPaletteList>
-      </ColorPickerGroup>
+      <ColorPicker.Group>
+        <ColorPicker.Row>
+          <ColorPicker.Label>Saved</ColorPicker.Label>
+          <ColorPicker.PaletteLimit />
+        </ColorPicker.Row>
+        <ColorPicker.PaletteList>
+          <ColorPicker.PaletteAdd />
+        </ColorPicker.PaletteList>
+      </ColorPicker.Group>
     </ColorPicker>
   ),
 }
@@ -107,37 +95,37 @@ export const Variants: Story = {
   render: (args) => (
     <div className="flex gap-md">
       <ColorPicker {...args} variant="elevated" className="w-[300px]">
-        <ColorPickerArea />
-        <ColorPickerGroup>
-          <ColorPickerHueSlider />
-          <ColorPickerTransparencySlider />
-          <ColorPickerRow>
-            <ColorPickerValueType />
-            <ColorPickerInput />
-          </ColorPickerRow>
-        </ColorPickerGroup>
+        <ColorPicker.Area />
+        <ColorPicker.Group>
+          <ColorPicker.HueSlider />
+          <ColorPicker.TransparencySlider />
+          <ColorPicker.Row>
+            <ColorPicker.ValueType />
+            <ColorPicker.Input />
+          </ColorPicker.Row>
+        </ColorPicker.Group>
       </ColorPicker>
       <ColorPicker {...args} variant="outline" className="w-[300px]">
-        <ColorPickerArea />
-        <ColorPickerGroup>
-          <ColorPickerHueSlider />
-          <ColorPickerTransparencySlider />
-          <ColorPickerRow>
-            <ColorPickerValueType />
-            <ColorPickerInput />
-          </ColorPickerRow>
-        </ColorPickerGroup>
+        <ColorPicker.Area />
+        <ColorPicker.Group>
+          <ColorPicker.HueSlider />
+          <ColorPicker.TransparencySlider />
+          <ColorPicker.Row>
+            <ColorPicker.ValueType />
+            <ColorPicker.Input />
+          </ColorPicker.Row>
+        </ColorPicker.Group>
       </ColorPicker>
       <ColorPicker {...args} variant="ghost" className="w-[300px]">
-        <ColorPickerArea />
-        <ColorPickerGroup>
-          <ColorPickerHueSlider />
-          <ColorPickerTransparencySlider />
-          <ColorPickerRow>
-            <ColorPickerValueType />
-            <ColorPickerInput />
-          </ColorPickerRow>
-        </ColorPickerGroup>
+        <ColorPicker.Area />
+        <ColorPicker.Group>
+          <ColorPicker.HueSlider />
+          <ColorPicker.TransparencySlider />
+          <ColorPicker.Row>
+            <ColorPicker.ValueType />
+            <ColorPicker.Input />
+          </ColorPicker.Row>
+        </ColorPicker.Group>
       </ColorPicker>
     </div>
   ),
@@ -146,22 +134,22 @@ export const Variants: Story = {
 export const Minimal: Story = {
   render: (args) => (
     <ColorPicker {...args} className="w-[300px]">
-      <ColorPickerGroup>
-        <ColorPickerHueSlider />
-        <ColorPickerTransparencySlider />
-        <ColorPickerInput showPopover>
-          <ColorPickerArea className="aspect-video" />
-        </ColorPickerInput>
-      </ColorPickerGroup>
+      <ColorPicker.Group>
+        <ColorPicker.HueSlider />
+        <ColorPicker.TransparencySlider />
+        <ColorPicker.Input showPopover>
+          <ColorPicker.Area className="aspect-video" />
+        </ColorPicker.Input>
+      </ColorPicker.Group>
     </ColorPicker>
   ),
 }
 
 export const Controlled: Story = {
   render: function ControlledStory(args) {
-    const initialColor = args.defaultColor ?? '#ff0000'
-    const [committedColor, setCommittedColor] = useState<string>(initialColor)
-    const [pendingColor, setPendingColor] = useState<string | undefined>(initialColor)
+    const initialColor = args.defaultColor ?? '#ff0000',
+      [committedColor, setCommittedColor] = useState<string>(initialColor),
+      [pendingColor, setPendingColor] = useState<string | undefined>(initialColor)
 
     useEffect(() => {
       setCommittedColor(initialColor)
@@ -180,20 +168,20 @@ export const Controlled: Story = {
       <div className="flex flex-col items-start gap-sm">
         <ColorPicker
           {...args}
-          defaultValueType={'hex'}
+          defaultValueType="hex"
           value={pendingColor}
           onValueChange={(value) => setPendingColor(value)}
           className="w-[600px]"
         >
-          <ColorPickerArea />
-          <ColorPickerGroup>
-            <ColorPickerHueSlider />
-            <ColorPickerTransparencySlider />
-            <ColorPickerRow>
-              <ColorPickerValueType />
-              <ColorPickerInput />
-            </ColorPickerRow>
-          </ColorPickerGroup>
+          <ColorPicker.Area />
+          <ColorPicker.Group>
+            <ColorPicker.HueSlider />
+            <ColorPicker.TransparencySlider />
+            <ColorPicker.Row>
+              <ColorPicker.ValueType />
+              <ColorPicker.Input />
+            </ColorPicker.Row>
+          </ColorPicker.Group>
         </ColorPicker>
         <Button
           variant="outline"
@@ -221,15 +209,15 @@ export const Controlled: Story = {
 
 export const InputOnly: Story = {
   render: (args) => (
-    <ColorPicker {...args} className="w-[300px]" variant={'ghost'}>
-      <ColorPickerInput variant={'primary'} showPopover showTransparencyField={false}>
-        <ColorPickerArea className="aspect-video" />
-        <ColorPickerGroup>
-          <ColorPickerHueSlider />
-          <ColorPickerTransparencySlider />
-          <ColorPickerInput />
-        </ColorPickerGroup>
-      </ColorPickerInput>
+    <ColorPicker {...args} className="w-[300px]" variant="ghost">
+      <ColorPicker.Input variant="primary" showPopover showTransparencyField={false}>
+        <ColorPicker.Area className="aspect-video" />
+        <ColorPicker.Group>
+          <ColorPicker.HueSlider />
+          <ColorPicker.TransparencySlider />
+          <ColorPicker.Input />
+        </ColorPicker.Group>
+      </ColorPicker.Input>
     </ColorPicker>
   ),
 }
@@ -247,25 +235,25 @@ export const ControlledPalette: Story = {
           paletteLimit={10}
           className="w-[300px]"
         >
-          <ColorPickerArea />
-          <ColorPickerGroup>
-            <ColorPickerHueSlider />
-            <ColorPickerTransparencySlider />
-            <ColorPickerRow>
-              <ColorPickerValueType />
-              <ColorPickerInput />
-            </ColorPickerRow>
-          </ColorPickerGroup>
+          <ColorPicker.Area />
+          <ColorPicker.Group>
+            <ColorPicker.HueSlider />
+            <ColorPicker.TransparencySlider />
+            <ColorPicker.Row>
+              <ColorPicker.ValueType />
+              <ColorPicker.Input />
+            </ColorPicker.Row>
+          </ColorPicker.Group>
           <Separator />
-          <ColorPickerGroup>
-            <ColorPickerRow>
-              <ColorPickerLabel>Saved</ColorPickerLabel>
-              <ColorPickerPaletteLimit />
-            </ColorPickerRow>
-            <ColorPickerPaletteList>
-              <ColorPickerPaletteAdd />
-            </ColorPickerPaletteList>
-          </ColorPickerGroup>
+          <ColorPicker.Group>
+            <ColorPicker.Row>
+              <ColorPicker.Label>Saved</ColorPicker.Label>
+              <ColorPicker.PaletteLimit />
+            </ColorPicker.Row>
+            <ColorPicker.PaletteList>
+              <ColorPicker.PaletteAdd />
+            </ColorPicker.PaletteList>
+          </ColorPicker.Group>
         </ColorPicker>
         <div className="flex w-[300px] gap-xs">
           <Button variant="outline" className="flex-1" onClick={() => setPalette([])}>

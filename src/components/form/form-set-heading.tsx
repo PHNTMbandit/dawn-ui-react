@@ -1,16 +1,8 @@
-import { formSetHeadingVariants, type FormSetHeadingProps } from './form.types'
 import { cn } from '@/utils/cn'
 
-export const FormSetHeading = ({
-  size,
-  className,
-  children,
-  ref,
-  ...props
-}: FormSetHeadingProps) => {
-  return (
-    <span className={cn(formSetHeadingVariants({ size, className }))} ref={ref} {...props}>
-      {children}
-    </span>
-  )
+import { formSetHeadingVariants } from './form.types'
+import type { FormSetHeadingProps } from './form.types'
+
+export function FormSetHeading({ size, className, ref, ...props }: FormSetHeadingProps) {
+  return <span className={cn(formSetHeadingVariants({ className, size }))} ref={ref} {...props} />
 }

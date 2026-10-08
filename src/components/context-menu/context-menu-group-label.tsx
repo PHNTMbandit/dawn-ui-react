@@ -1,14 +1,10 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
+
 import { cn } from '@/utils/cn'
 
 import type { ContextMenuGroupLabelProps } from './context-menu.types'
 
-export const ContextMenuGroupLabel = ({
-  className,
-  children,
-  ref,
-  ...props
-}: ContextMenuGroupLabelProps) => {
+export function ContextMenuGroupLabel({ className, ref, ...props }: ContextMenuGroupLabelProps) {
   return (
     <BaseContextMenu.GroupLabel
       className={cn(
@@ -17,8 +13,6 @@ export const ContextMenuGroupLabel = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </BaseContextMenu.GroupLabel>
+    />
   )
 }

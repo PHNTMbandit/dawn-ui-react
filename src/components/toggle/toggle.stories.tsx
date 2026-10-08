@@ -1,46 +1,45 @@
 import { HeartIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { ToggleGroup } from '../toggle-group/toggle-group'
 import { Toggle } from './toggle'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 export default {
-  title: 'Components/Toggle',
-  component: Toggle,
-  parameters: {
-    subtitle: 'A component for toggling between two states.',
-    description: {
-      component:
-        'The Toggle component allows users to switch between two states, such as on and off. It supports text and icon-only variants, multiple visual sizes, and semantic tones.',
+  argTypes: {
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the toggle interaction.',
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' },
+      },
+    },
+    size: {
+      control: { type: 'select' },
+      description: 'Size and layout of the toggle.',
+      options: ['small', 'medium', 'large', 'iconSmall', 'iconMedium', 'iconLarge'],
+    },
+    tone: {
+      control: { type: 'select' },
+      description: 'The tone of the toggle, which determines its color scheme.',
+      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
+      table: {
+        defaultValue: { summary: 'brand' },
+        type: { summary: 'brand | accent | neutral | error | info | success | warning' },
+      },
     },
   },
   args: {
     size: 'medium',
     tone: 'brand',
   },
-  argTypes: {
-    size: {
-      description: 'Size and layout of the toggle.',
-      options: ['small', 'medium', 'large', 'iconSmall', 'iconMedium', 'iconLarge'],
-      control: { type: 'select' },
+  component: Toggle,
+  parameters: {
+    description: {
+      component:
+        'The Toggle component allows users to switch between two states, such as on and off. It supports text and icon-only variants, multiple visual sizes, and semantic tones.',
     },
-    tone: {
-      options: ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'],
-      control: { type: 'select' },
-      description: 'The tone of the toggle, which determines its color scheme.',
-      table: {
-        type: { summary: 'brand | accent | neutral | error | info | success | warning' },
-        defaultValue: { summary: 'brand' },
-      },
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disables the toggle interaction.',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
+    subtitle: 'A component for toggling between two states.',
   },
   render: (args) => (
     <div className="flex w-[500px] items-center">
@@ -54,6 +53,7 @@ export default {
       </Toggle>
     </div>
   ),
+  title: 'Components/Toggle',
 } satisfies Meta<typeof Toggle>
 
 type Story = StoryObj<typeof Toggle>

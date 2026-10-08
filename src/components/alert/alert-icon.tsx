@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { AlertIconProps } from './alert.types'
 
-export const AlertIcon = ({ className, children, ref, ...props }: AlertIconProps) => {
+export function AlertIcon({ className, ref, ...props }: AlertIconProps) {
   return (
     <div
       data-slot="alert-icon"
@@ -12,8 +12,6 @@ export const AlertIcon = ({ className, children, ref, ...props }: AlertIconProps
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

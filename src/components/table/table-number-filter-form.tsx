@@ -1,52 +1,57 @@
-import { Radio, useTableContext } from '..'
+import type { RowData } from '@tanstack/react-table'
+
+import { cn } from '@/utils/cn'
+
 import { Field } from '../field'
 import { Form, useAppForm } from '../form'
+import { Radio } from '../radio-group'
+import { useTableContext } from './table-feature-context'
 import {
   defaultFilterOperatorLabels,
   numberFilterOperators,
   numberFilterSchema,
-  type TableNumberFilterFormProps,
 } from './table.types'
-import { cn } from '@/utils/cn'
-
+import type { TableNumberFilterFormProps } from './table.types'
+import { asFilterValue } from './table.utils'
 import type { NumberFilterValue } from './table.utils'
-import type { RowData } from '@tanstack/react-table'
 
-export const TableNumberFilterForm = <TData extends RowData>({
+const FROM_VALUE_INDEX = 0,
+  TO_VALUE_INDEX = 1
+
+export function TableNumberFilterForm<TData extends RowData>({
   column,
   className,
   children,
   ref,
   ...props
-}: TableNumberFilterFormProps<TData>) => {
-  const table = useTableContext()
-  const filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels
-  const buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
-    reset: 'Reset',
-    apply: 'Apply',
-  }
-  const currentFilter = column.getFilterValue() as NumberFilterValue | undefined
-  const form = useAppForm({
-    defaultValues: {
-      filterOperator: currentFilter?.operator ?? 'equals',
-      filterValueFrom: currentFilter?.number[0] ?? '',
-      filterValueTo: currentFilter?.number[1] ?? '',
+}: TableNumberFilterFormProps<TData>) {
+  const table = useTableContext(),
+    filterOperatorLabels = table.options.meta?.translations?.filterOperatorLabels,
+    buttonLabels = table.options.meta?.translations?.buttonLabels ?? {
+      apply: 'Apply',
+      reset: 'Reset',
     },
-    validators: {
-      onSubmit: numberFilterSchema,
-    },
-    onSubmit: ({ value }) => {
-      column.setFilterValue({
-        operator: value.filterOperator,
-        number: [value.filterValueFrom, value.filterValueTo],
-      } satisfies NumberFilterValue)
-    },
-  })
-
-  const onReset = () => {
-    column.setFilterValue(undefined)
-    form.reset({ filterOperator: 'equals', filterValueFrom: '', filterValueTo: '' })
-  }
+    currentFilter = asFilterValue<NumberFilterValue | undefined>(column.getFilterValue()),
+    form = useAppForm({
+      defaultValues: {
+        filterOperator: currentFilter?.operator ?? 'equals',
+        filterValueFrom: currentFilter?.number[FROM_VALUE_INDEX] ?? '',
+        filterValueTo: currentFilter?.number[TO_VALUE_INDEX] ?? '',
+      },
+      onSubmit: ({ value }) => {
+        column.setFilterValue({
+          number: [value.filterValueFrom, value.filterValueTo],
+          operator: value.filterOperator,
+        } satisfies NumberFilterValue)
+      },
+      validators: {
+        onSubmit: numberFilterSchema,
+      },
+    }),
+    onReset = () => {
+      column.setFilterValue(undefined)
+      form.reset({ filterOperator: 'equals', filterValueFrom: '', filterValueTo: '' })
+    }
 
   return (
     <Form

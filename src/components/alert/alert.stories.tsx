@@ -5,152 +5,148 @@ import {
   WarningIcon,
   XCircleIcon,
 } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { Alert } from './alert'
-import { AlertAction } from './alert-action'
-import { AlertDescription } from './alert-description'
-import { AlertIcon } from './alert-icon'
-import { AlertTitle } from './alert-title'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Button } from '../button'
+import { Alert } from './index'
+
 const TONE_ICONS = {
-  brand: <InfoIcon weight="duotone" />,
-  accent: <ShieldWarningIcon weight="duotone" />,
-  neutral: <InfoIcon weight="duotone" />,
-  error: <XCircleIcon weight="duotone" />,
-  info: <InfoIcon weight="duotone" />,
-  success: <CheckCircleIcon weight="duotone" />,
-  warning: <WarningIcon weight="duotone" />,
-}
-
-const TONE_CONTENT: Record<
-  string,
-  { title: string; description: string; actionLabel?: string; usage: string }
-> = {
-  brand: {
-    title: 'New brand guidelines available',
-    description: 'Your team has updated the brand style guide. Review the changes to stay aligned.',
-    actionLabel: 'Review',
-    usage: 'Primary brand announcements',
+    accent: <ShieldWarningIcon weight="duotone" />,
+    brand: <InfoIcon weight="duotone" />,
+    error: <XCircleIcon weight="duotone" />,
+    info: <InfoIcon weight="duotone" />,
+    neutral: <InfoIcon weight="duotone" />,
+    success: <CheckCircleIcon weight="duotone" />,
+    warning: <WarningIcon weight="duotone" />,
   },
-  accent: {
-    title: 'Feature highlight',
-    description: 'Check out the newly released feature that can help you work more efficiently.',
-    actionLabel: 'Explore',
-    usage: 'Promotional or feature announcements',
+  TONE_CONTENT: Record<
+    string,
+    { title: string; description: string; actionLabel?: string; usage: string }
+  > = {
+    accent: {
+      actionLabel: 'Explore',
+      description: 'Check out the newly released feature that can help you work more efficiently.',
+      title: 'Feature highlight',
+      usage: 'Promotional or feature announcements',
+    },
+    brand: {
+      actionLabel: 'Review',
+      description:
+        'Your team has updated the brand style guide. Review the changes to stay aligned.',
+      title: 'New brand guidelines available',
+      usage: 'Primary brand announcements',
+    },
+    error: {
+      actionLabel: 'Update Now',
+      description:
+        'Your password will expire in 3 days. Update it now to maintain access to your account.',
+      title: 'Critical action required',
+      usage: 'Error states and critical issues',
+    },
+    info: {
+      actionLabel: 'Learn More',
+      description:
+        'Learn more about the new features available in this release. See release notes for details.',
+      title: 'Information',
+      usage: 'Supplementary guidance and tips',
+    },
+    neutral: {
+      description:
+        'A background maintenance window is scheduled for this weekend. Plan accordingly.',
+      title: 'System notification',
+      usage: 'General system or administrative info',
+    },
+    success: {
+      actionLabel: 'Undo',
+      description:
+        'Your profile has been updated and all changes are now live across your account.',
+      title: 'Changes saved successfully',
+      usage: 'Confirms completed actions or successful states',
+    },
+    warning: {
+      actionLabel: 'Delete',
+      description:
+        'This action cannot be undone. Deleting this item will remove it permanently from your workspace.',
+      title: 'Proceed with caution',
+      usage: 'Alerts that require user attention before proceeding',
+    },
   },
-  neutral: {
-    title: 'System notification',
-    description: 'A background maintenance window is scheduled for this weekend. Plan accordingly.',
-    usage: 'General system or administrative info',
-  },
-  error: {
-    title: 'Critical action required',
-    description:
-      'Your password will expire in 3 days. Update it now to maintain access to your account.',
-    actionLabel: 'Update Now',
-    usage: 'Error states and critical issues',
-  },
-  info: {
-    title: 'Information',
-    description:
-      'Learn more about the new features available in this release. See release notes for details.',
-    actionLabel: 'Learn More',
-    usage: 'Supplementary guidance and tips',
-  },
-  success: {
-    title: 'Changes saved successfully',
-    description: 'Your profile has been updated and all changes are now live across your account.',
-    actionLabel: 'Undo',
-    usage: 'Confirms completed actions or successful states',
-  },
-  warning: {
-    title: 'Proceed with caution',
-    description:
-      'This action cannot be undone. Deleting this item will remove it permanently from your workspace.',
-    actionLabel: 'Delete',
-    usage: 'Alerts that require user attention before proceeding',
-  },
-}
-
-const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
+  TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
 
 type Tone = (typeof TONES)[number]
 
 const SingleAlert = ({
-  tone = 'brand',
-  withAction = false,
-}: {
-  tone?: Tone
-  withAction?: boolean
-}) => {
-  const { title, description, actionLabel } = TONE_CONTENT[tone]
-  return (
-    <Alert tone={tone} className="max-w-[70vh]">
-      <AlertIcon>{TONE_ICONS[tone]}</AlertIcon>
-      <AlertTitle>{title}</AlertTitle>
-      <AlertDescription>
-        {description} {description}
-      </AlertDescription>
-      {withAction && actionLabel && (
-        <AlertAction>
-          <Button tone={tone} size="small">
-            {actionLabel}
-          </Button>
-        </AlertAction>
-      )}
-    </Alert>
+    tone = 'brand',
+    withAction = false,
+  }: {
+    tone?: Tone
+    withAction?: boolean
+  }) => {
+    const { title, description, actionLabel } = TONE_CONTENT[tone]
+    return (
+      <Alert tone={tone} className="max-w-[70vh]">
+        <Alert.Icon>{TONE_ICONS[tone]}</Alert.Icon>
+        <Alert.Title>{title}</Alert.Title>
+        <Alert.Description>
+          {description} {description}
+        </Alert.Description>
+        {withAction && actionLabel && (
+          <Alert.Action>
+            <Button tone={tone} size="small">
+              {actionLabel}
+            </Button>
+          </Alert.Action>
+        )}
+      </Alert>
+    )
+  },
+  AllTonesAlerts = ({ withAction = false }: { withAction?: boolean }) => (
+    <div className="flex flex-col gap-sm">
+      {TONES.map((tone) => (
+        <SingleAlert key={tone} tone={tone} withAction={withAction} />
+      ))}
+    </div>
   )
-}
-
-const AllTonesAlerts = ({ withAction = false }: { withAction?: boolean }) => (
-  <div className="flex flex-col gap-sm">
-    {TONES.map((tone) => (
-      <SingleAlert key={tone} tone={tone} withAction={withAction} />
-    ))}
-  </div>
-)
 
 export default {
-  title: 'Components/Alert',
-  component: Alert,
-  subcomponents: {
-    AlertTitle,
-    AlertDescription,
-    AlertActions: AlertAction,
-  },
   argTypes: {
     tone: {
       control: 'select',
-      options: TONES,
       description: 'Sets the semantic tone and styling of the alert.',
+      options: TONES,
       table: {
         defaultValue: { summary: 'brand' },
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A prominent container that captures attention with contextual messaging.',
-      description: {
-        component:
-          'The Alert component is a specialized container for displaying time-sensitive or important messages. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) and can optionally include a leading icon and action buttons via the `AlertActions` slot.',
       },
     },
   },
   args: {
     tone: 'brand',
   },
+  component: Alert,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Alert component is a specialized container for displaying time-sensitive or important messages. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) and can optionally include a leading icon and action buttons via the `AlertActions` slot.',
+      },
+      subtitle: 'A prominent container that captures attention with contextual messaging.',
+    },
+  },
   render: (args) => (
     <Alert {...args}>
-      <AlertIcon>{TONE_ICONS[args.tone as Tone]}</AlertIcon>
-      <AlertTitle>Alert title</AlertTitle>
-      <AlertDescription>
+      <Alert.Icon>{TONE_ICONS[args.tone as Tone]}</Alert.Icon>
+      <Alert.Title>Alert title</Alert.Title>
+      <Alert.Description>
         A meaningful description of the alert and any required action.
-      </AlertDescription>
+      </Alert.Description>
     </Alert>
   ),
+  subcomponents: {
+    AlertActions: Alert.Action,
+    AlertDescription: Alert.Description,
+    AlertTitle: Alert.Title,
+  },
+  title: 'Components/Alert',
 } satisfies Meta<typeof Alert>
 
 type Story = StoryObj<typeof Alert>
@@ -171,6 +167,7 @@ export const Playground: Story = {
 // ─── Tones ───────────────────────────────────────────────────────────────────
 
 export const Brand: Story = {
+  args: { tone: 'brand' },
   name: 'Tone / Brand',
   parameters: {
     docs: {
@@ -179,33 +176,33 @@ export const Brand: Story = {
       },
     },
   },
-  args: { tone: 'brand' },
   render: (args) => <SingleAlert {...args} tone="brand" />,
 }
 
 export const Accent: Story = {
+  args: { tone: 'accent' },
   name: 'Tone / Accent',
   parameters: {
     docs: {
       description: { story: 'Highlights secondary or promotional content with emphasis.' },
     },
   },
-  args: { tone: 'accent' },
   render: (args) => <SingleAlert {...args} tone="accent" />,
 }
 
 export const Neutral: Story = {
+  args: { tone: 'neutral' },
   name: 'Tone / Neutral',
   parameters: {
     docs: {
       description: { story: 'Neutral tone for general, non-critical system messages.' },
     },
   },
-  args: { tone: 'neutral' },
   render: (args) => <SingleAlert {...args} tone="neutral" />,
 }
 
 export const Error: Story = {
+  args: { tone: 'error' },
   name: 'Tone / Error',
   parameters: {
     docs: {
@@ -214,40 +211,39 @@ export const Error: Story = {
       },
     },
   },
-  args: { tone: 'error' },
   render: (args) => <SingleAlert {...args} tone="error" withAction />,
 }
 
 export const Info: Story = {
+  args: { tone: 'info' },
   name: 'Tone / Info',
   parameters: {
     docs: {
       description: { story: 'Informational tone for tips, guidance, and supplementary details.' },
     },
   },
-  args: { tone: 'info' },
   render: (args) => <SingleAlert {...args} tone="info" withAction />,
 }
 
 export const Success: Story = {
+  args: { tone: 'success' },
   name: 'Tone / Success',
   parameters: {
     docs: {
       description: { story: 'Confirms successful completion of an action or positive state.' },
     },
   },
-  args: { tone: 'success' },
   render: (args) => <SingleAlert {...args} tone="success" withAction />,
 }
 
 export const Warning: Story = {
+  args: { tone: 'warning' },
   name: 'Tone / Warning',
   parameters: {
     docs: {
       description: { story: 'Alerts the user to proceed cautiously or review before confirming.' },
     },
   },
-  args: { tone: 'warning' },
   render: (args) => <SingleAlert {...args} tone="warning" />,
 }
 
@@ -360,10 +356,10 @@ export const WithoutDescription: Story = {
   render: () => (
     <div className="flex flex-col gap-sm">
       <Alert>
-        <AlertIcon>
+        <Alert.Icon>
           <WarningIcon />
-        </AlertIcon>
-        <AlertTitle>This is an example of a brand alert without an description.</AlertTitle>
+        </Alert.Icon>
+        <Alert.Title>This is an example of a brand alert without an description.</Alert.Title>
       </Alert>
     </div>
   ),
@@ -381,11 +377,11 @@ export const ActionWithNoIcon: Story = {
   render: () => (
     <div className="flex flex-col gap-sm">
       <Alert>
-        <AlertTitle>This is an example of an alert with an action but no icon.</AlertTitle>
-        <AlertDescription>This alert has an action but no icon.</AlertDescription>
-        <AlertAction>
+        <Alert.Title>This is an example of an alert with an action but no icon.</Alert.Title>
+        <Alert.Description>This alert has an action but no icon.</Alert.Description>
+        <Alert.Action>
           <Button size="small">Action</Button>
-        </AlertAction>
+        </Alert.Action>
       </Alert>
     </div>
   ),

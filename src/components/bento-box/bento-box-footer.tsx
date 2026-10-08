@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { BentoBoxFooterProps } from './bento-box.types'
 
-export const BentoBoxFooter = ({ className, children, ref, ...props }: BentoBoxFooterProps) => {
+export function BentoBoxFooter({ className, ref, ...props }: BentoBoxFooterProps) {
   return (
     <div
       className={cn(
@@ -11,8 +11,6 @@ export const BentoBoxFooter = ({ className, children, ref, ...props }: BentoBoxF
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

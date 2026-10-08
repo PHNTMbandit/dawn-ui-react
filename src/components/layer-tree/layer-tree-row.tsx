@@ -1,10 +1,20 @@
-import { useTableContext } from './layer-tree-context'
 import { cn } from '@/utils/cn'
 
+import { useTableContext } from './layer-tree-context'
+import type { useTableContext as useRegisteredTableContext } from './layer-tree-table'
 import type { LayerTreeRowProps } from './layer-tree.types'
 
-export const LayerTreeRow = ({ rowId, className, children, ref, ...props }: LayerTreeRowProps) => {
-  const table = useTableContext()
+const ROOT_DEPTH = 0,
+  FIRST_CELL_INDEX = 0,
+  ROW_INDENT_PER_LEVEL = 24,
+  EMPTY_LEAF_COUNT = 0,
+  VISIBLE_OPACITY = 1,
+  HIDDEN_OPACITY = 0.5
+
+export function LayerTreeRow({ rowId, className, children, ref, ...props }: LayerTreeRowProps) {
+  // The registered table hook adds AppCell and FlexRender at runtime.
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+  const table = useTableContext() as ReturnType<typeof useRegisteredTableContext>
 
   return (
     <table.Subscribe
@@ -15,35 +25,46 @@ export const LayerTreeRow = ({ rowId, className, children, ref, ...props }: Laye
       })}
     >
       {() => {
-        const row = table.getRowModel().rows.find((r) => r.id === rowId)
-        const indent = (row?.depth ?? 0) * 24
-        const leafRows = row?.getLeafRows() ?? []
-        const isVisible =
-          leafRows.length > 0
-            ? leafRows.some((leaf) => leaf.getIsVisible())
-            : (row?.getIsVisible() ?? true)
+        const row = table.getRowModel().rows.find((candidate) => candidate.id === rowId),
+          indent = (row?.depth ?? ROOT_DEPTH) * ROW_INDENT_PER_LEVEL,
+          leafRows = row?.getLeafRows() ?? []
+        let isVisible = row?.getIsVisible() ?? true
+
+        if (leafRows.length > EMPTY_LEAF_COUNT) {
+          isVisible = leafRows.some((leaf) => leaf.getIsVisible())
+        }
 
         return (
           <div className={cn('flex w-full items-center gap-3xs', className)} ref={ref} {...props}>
             {children}
-            {row?.getVisibleCells().map((cell, index) => {
-              const isFirstCell = index === 0
-              const isFill = cell.column.columnDef.meta?.fill ?? cell.column.id === 'name'
+            {row?.getVisibleCells().map((cell, cellIndex) => {
+              const isFirstCell = cellIndex === FIRST_CELL_INDEX,
+                isFill = cell.column.columnDef.meta?.fill ?? cell.column.id === 'name'
+              let marginLeft: number | undefined = undefined,
+                opacity = HIDDEN_OPACITY
+
+              if (isFirstCell) {
+                marginLeft = indent
+              }
+              if (isVisible) {
+                opacity = VISIBLE_OPACITY
+              }
 
               return (
                 <table.AppCell key={cell.id} cell={cell}>
-                  {(cell) => (
+                  {(renderedCell) => (
                     <div
                       style={{
-                        marginLeft: isFirstCell ? indent : undefined,
-                        opacity: isVisible ? 1 : 0.5,
+                        marginLeft,
+                        opacity,
                       }}
                       className={cn(
                         'flex items-center',
-                        isFill ? 'min-w-0 grow gap-3xs' : 'w-fit shrink-0',
+                        isFill && 'min-w-0 grow gap-3xs',
+                        !isFill && 'w-fit shrink-0',
                       )}
                     >
-                      <table.FlexRender cell={cell} />
+                      <table.FlexRender cell={renderedCell} />
                     </div>
                   )}
                 </table.AppCell>

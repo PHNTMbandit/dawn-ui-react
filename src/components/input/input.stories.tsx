@@ -1,27 +1,9 @@
-import { Input } from './input'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Input } from './input'
+
 export default {
-  title: 'Components/Input',
-  component: Input,
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'secondary'],
-      description: 'Controls the visual surface style of the input.',
-      table: {
-        defaultValue: { summary: 'primary' },
-      },
-    },
-    size: {
-      control: 'select',
-      options: ['small', 'medium', 'large'],
-      description: 'Adjusts the height, padding, and typography of the input.',
-      table: {
-        defaultValue: { summary: 'medium' },
-      },
-    },
     disabled: {
       control: 'boolean',
       description: 'Disables interaction and applies disabled styling.',
@@ -29,32 +11,50 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
+    size: {
+      control: 'select',
+      description: 'Adjusts the height, padding, and typography of the input.',
+      options: ['small', 'medium', 'large'],
+      table: {
+        defaultValue: { summary: 'medium' },
+      },
+    },
     type: {
       control: 'select',
-      options: ['text', 'email', 'password', 'search', 'url', 'tel', 'color'],
       description: 'Native input type.',
+      options: ['text', 'email', 'password', 'search', 'url', 'tel', 'color'],
       table: {
         defaultValue: { summary: 'text' },
       },
     },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'A versatile field for text and color input with built-in validation styling.',
-      description: {
-        component:
-          'The Input component is a foundational form control for entering text and selecting colors. It supports two visual variants (`primary`, `secondary`), built-in invalid styling via `aria-invalid`, and disabled states. Use it as a standalone field or inside higher-level form compositions.',
+    variant: {
+      control: 'select',
+      description: 'Controls the visual surface style of the input.',
+      options: ['primary', 'secondary'],
+      table: {
+        defaultValue: { summary: 'primary' },
       },
     },
   },
   args: {
-    variant: 'primary',
+    disabled: false,
+    placeholder: 'Enter text...',
     size: 'medium',
     type: 'text',
-    placeholder: 'Enter text...',
-    disabled: false,
+    variant: 'primary',
+  },
+  component: Input,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Input component is a foundational form control for entering text and selecting colors. It supports two visual variants (`primary`, `secondary`), built-in invalid styling via `aria-invalid`, and disabled states. Use it as a standalone field or inside higher-level form compositions.',
+      },
+      subtitle: 'A versatile field for text and color input with built-in validation styling.',
+    },
   },
   render: (args: React.ComponentProps<typeof Input>) => <Input {...args} id="input" />,
+  title: 'Components/Input',
 } satisfies Meta<typeof Input>
 
 type Story = StoryObj<typeof Input>
@@ -71,10 +71,10 @@ export const Playground: Story = {
 }
 
 export const Primary: Story = {
-  name: 'Variant / Primary',
   args: {
     variant: 'primary',
   },
+  name: 'Variant / Primary',
   parameters: {
     docs: {
       description: {
@@ -85,10 +85,10 @@ export const Primary: Story = {
 }
 
 export const Secondary: Story = {
-  name: 'Variant / Secondary',
   args: {
     variant: 'secondary',
   },
+  name: 'Variant / Secondary',
   parameters: {
     docs: {
       description: {
@@ -99,10 +99,10 @@ export const Secondary: Story = {
 }
 
 export const Small: Story = {
-  name: 'Size / Small',
   args: {
     size: 'small',
   },
+  name: 'Size / Small',
   parameters: {
     docs: {
       description: {
@@ -113,10 +113,10 @@ export const Small: Story = {
 }
 
 export const Medium: Story = {
-  name: 'Size / Medium',
   args: {
     size: 'medium',
   },
+  name: 'Size / Medium',
   parameters: {
     docs: {
       description: {
@@ -127,10 +127,10 @@ export const Medium: Story = {
 }
 
 export const Large: Story = {
-  name: 'Size / Large',
   args: {
     size: 'large',
   },
+  name: 'Size / Large',
   parameters: {
     docs: {
       description: {
@@ -141,12 +141,12 @@ export const Large: Story = {
 }
 
 export const Disabled: Story = {
-  name: 'State / Disabled',
   args: {
-    variant: 'primary',
     disabled: true,
     placeholder: 'Disabled input',
+    variant: 'primary',
   },
+  name: 'State / Disabled',
   parameters: {
     docs: {
       description: {
@@ -158,6 +158,14 @@ export const Disabled: Story = {
 
 export const Error: Story = {
   name: 'State / Invalid',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Setting `aria-invalid` triggers the component error style. Pair this with validation messaging in your form.',
+      },
+    },
+  },
   render: (args) => (
     <form>
       <Input
@@ -170,21 +178,13 @@ export const Error: Story = {
       />
     </form>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Setting `aria-invalid` triggers the component error style. Pair this with validation messaging in your form.',
-      },
-    },
-  },
 }
 
 export const Color: Story = {
-  name: 'Type / Color Picker',
   args: {
     type: 'color',
   },
+  name: 'Type / Color Picker',
   parameters: {
     docs: {
       description: {
@@ -197,6 +197,13 @@ export const Color: Story = {
 
 export const File: Story = {
   name: 'Type / File',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input configured for file selection with the secondary variant.',
+      },
+    },
+  },
   render: () => (
     <div className="flex w-[720px] flex-col gap-sm">
       <label className="style-text-default-0 text-on-surface" htmlFor="file-upload">
@@ -220,17 +227,17 @@ export const File: Story = {
       />
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Input configured for file selection with the secondary variant.',
-      },
-    },
-  },
 }
 
 export const FormRow: Story = {
   name: 'Composition / Form Row',
+  parameters: {
+    docs: {
+      description: {
+        story: 'A realistic single-field form pattern with label and helper text.',
+      },
+    },
+  },
   render: () => (
     <div className="flex w-[420px] flex-col gap-sm">
       <label className="style-text-default-0 text-on-surface" htmlFor="company-name">
@@ -242,22 +249,10 @@ export const FormRow: Story = {
       </p>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'A realistic single-field form pattern with label and helper text.',
-      },
-    },
-  },
 }
 
 export const SearchField: Story = {
   name: 'Composition / Search Field',
-  render: () => (
-    <div className="w-[420px]">
-      <Input placeholder="Search projects, users, or tags" type="search" variant="secondary" />
-    </div>
-  ),
   parameters: {
     docs: {
       description: {
@@ -265,10 +260,22 @@ export const SearchField: Story = {
       },
     },
   },
+  render: () => (
+    <div className="w-[420px]">
+      <Input placeholder="Search projects, users, or tags" type="search" variant="secondary" />
+    </div>
+  ),
 }
 
 export const PasswordField: Story = {
   name: 'Composition / Password Field',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input configured for password entry with the primary variant.',
+      },
+    },
+  },
   render: () => (
     <div className="flex w-[420px] flex-col gap-sm">
       <label className="style-text-default-0 text-on-surface" htmlFor="password">
@@ -277,17 +284,17 @@ export const PasswordField: Story = {
       <Input id="password" placeholder="Enter your password" type="password" variant="primary" />
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Input configured for password entry with the primary variant.',
-      },
-    },
-  },
 }
 
 export const EmailField: Story = {
   name: 'Composition / Email Field',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input configured for email entry with the primary variant.',
+      },
+    },
+  },
   render: () => (
     <div className="flex w-[420px] flex-col gap-sm">
       <label className="style-text-default-0 text-on-surface" htmlFor="email">
@@ -296,11 +303,4 @@ export const EmailField: Story = {
       <Input id="email" placeholder="Enter your email" type="email" variant="primary" />
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Input configured for email entry with the primary variant.',
-      },
-    },
-  },
 }

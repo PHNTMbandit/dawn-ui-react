@@ -2,7 +2,7 @@
 
 A React component library for building polished product interfaces with composable primitives, Tailwind CSS styling, and accessible interaction patterns.
 
-Dawn UI React is currently in beta. APIs are close to the planned `1.0.0` release, but breaking changes may still happen before the stable release.
+Dawn UI React is currently in release-candidate testing for `1.0.0`. APIs are nearing stability, but breaking changes may still happen before the stable release.
 
 ## Features
 
@@ -11,6 +11,7 @@ Dawn UI React is currently in beta. APIs are close to the planned `1.0.0` releas
 - TypeScript-first exports for components, hooks, and utilities.
 - Storybook coverage for component development and review.
 - Semantic-release powered alpha, beta, release-candidate, and stable channels.
+- Vite+ unified tooling for development, formatting, linting, type checking, and tests.
 
 ## Installation
 
@@ -47,19 +48,20 @@ Dawn UI React includes primitives for accordions, alerts, dialogs, autocomplete,
 ## Development
 
 ```sh
-pnpm install
-pnpm run storybook
+vp install
+vp run storybook
 ```
 
-Useful commands:
+Vite+ provides the `vp` CLI for the project toolchain. Use its built-in commands for checks and tests, and `vp run <script>` to run a script from `package.json`.
 
 ```sh
-pnpm run lint
-pnpm run fmt:check
-pnpm run test
+vp check
+vp test
 pnpm run build
 pnpm run build-storybook
 ```
+
+See the [Vite+ guide](https://viteplus.dev/guide/) for CLI details.
 
 ## Release Channels
 

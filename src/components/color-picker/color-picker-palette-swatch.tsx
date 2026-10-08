@@ -1,30 +1,33 @@
 import chroma from 'chroma-js'
-import { useColorPicker } from './color-picker'
-import { colorPickerSwatchVariants, type ColorPickerPaletteSwatchProps } from './color-picker.types'
-import { cn } from '@/index'
 
-export const ColorPickerPaletteSwatch = ({
+import { cn } from '@/utils/cn'
+
+import { useColorPicker } from './color-picker'
+import { colorPickerSwatchVariants } from './color-picker.types'
+import type { ColorPickerPaletteSwatchProps } from './color-picker.types'
+
+export function ColorPickerPaletteSwatch({
   size,
   color,
   className,
   children,
   ref,
   ...props
-}: ColorPickerPaletteSwatchProps) => {
-  const { setColor } = useColorPicker()
-
-  const handleClick = () => {
-    setColor(chroma(color))
-  }
+}: ColorPickerPaletteSwatchProps) {
+  const { setColor } = useColorPicker(),
+    handleClick = () => {
+      setColor(chroma(color))
+    }
 
   return (
     <button
-      aria-label={typeof color === 'string' ? `Select color ${color}` : 'Select color'}
+      type="button"
+      aria-label={`Select color ${color}`}
       onClick={handleClick}
       className={cn(colorPickerSwatchVariants({ size }), className)}
       ref={ref}
       style={{
-        color: color,
+        color,
       }}
       {...props}
     >

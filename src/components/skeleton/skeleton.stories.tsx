@@ -1,37 +1,37 @@
-import { Skeleton } from './skeleton'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Skeleton } from './skeleton'
+
 export default {
-  title: 'Components/Skeleton',
-  component: Skeleton,
-  parameters: {
-    subtitle: 'A component for displaying loading skeletons.',
-    description: {
-      component:
-        'The Skeleton component is used to display placeholder loading skeletons while content is being fetched or loaded. It provides a visual indication to users that data is being loaded, enhancing the user experience during wait times.',
-    },
-  },
   argTypes: {
+    children: {
+      description: 'Nested content (rarely used for basic skeletons)',
+      table: {
+        defaultValue: { summary: 'undefined' },
+        type: { summary: 'ReactNode' },
+      },
+    },
     className: {
       control: 'text',
       description: 'Custom CSS classes to style the skeleton',
       table: {
-        type: { summary: 'string' },
         defaultValue: { summary: ' rounded-lg' },
-      },
-    },
-    children: {
-      description: 'Nested content (rarely used for basic skeletons)',
-      table: {
-        type: { summary: 'ReactNode' },
-        defaultValue: { summary: 'undefined' },
+        type: { summary: 'string' },
       },
     },
   },
   args: {
     className: 'w-3xl h-2xl rounded-lg',
   },
+  component: Skeleton,
+  parameters: {
+    description: {
+      component:
+        'The Skeleton component is used to display placeholder loading skeletons while content is being fetched or loaded. It provides a visual indication to users that data is being loaded, enhancing the user experience during wait times.',
+    },
+    subtitle: 'A component for displaying loading skeletons.',
+  },
+  title: 'Components/Skeleton',
 } satisfies Meta<typeof Skeleton>
 
 type Story = StoryObj<typeof Skeleton>

@@ -1,9 +1,9 @@
-import { useDropzone } from './dropzone'
 import { cn } from '@/utils/cn'
 
 import type { DropzoneFormatsProps } from './dropzone.types'
+import { useDropzone } from './dropzone.utils'
 
-export const DropzoneFormats = ({ className, children, ref, ...props }: DropzoneFormatsProps) => {
+export function DropzoneFormats({ className, children, ref, ...props }: DropzoneFormatsProps) {
   const { acceptedFileTypes } = useDropzone()
 
   return (

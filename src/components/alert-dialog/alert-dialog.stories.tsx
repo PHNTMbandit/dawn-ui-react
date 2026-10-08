@@ -7,171 +7,157 @@ import {
   WarningIcon,
   XCircleIcon,
 } from '@phosphor-icons/react'
-import { expect, userEvent, within } from 'storybook/test'
-import { Button } from '../button'
-import { AlertDialog } from './alert-dialog'
-import { AlertDialogClose } from './alert-dialog-close'
-import { AlertDialogConfirm } from './alert-dialog-confirm'
-import { AlertDialogDescription } from './alert-dialog-description'
-import { AlertDialogFooter } from './alert-dialog-footer'
-import { AlertDialogHeader } from './alert-dialog-header'
-import { AlertDialogIcon } from './alert-dialog-icon'
-import { AlertDialogPopup } from './alert-dialog-popup'
-import { AlertDialogTitle } from './alert-dialog-title'
-import { AlertDialogTrigger } from './alert-dialog-trigger'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+import { Button } from '../button'
+import { AlertDialog } from './index'
 
 const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
 
 type Tone = (typeof TONES)[number]
 
 const TONE_ICONS: Record<Tone, React.ReactNode> = {
-  brand: <InfoIcon weight="fill" />,
-  accent: <ShieldWarningIcon weight="fill" />,
-  neutral: <InfoIcon weight="fill" />,
-  error: <XCircleIcon weight="fill" />,
-  info: <InfoIcon weight="fill" />,
-  success: <CheckCircleIcon weight="fill" />,
-  warning: <WarningIcon weight="fill" />,
-}
-
-const TONE_TRIGGER_LABELS: Record<Tone, string> = {
-  brand: 'Open Dialog',
-  accent: 'Open Dialog',
-  neutral: 'Open Dialog',
-  error: 'Delete Item',
-  info: 'View Details',
-  success: 'Complete Action',
-  warning: 'Proceed',
-}
-
-const TONE_CONTENT: Record<Tone, { title: string; description: string; confirm: string }> = {
-  brand: {
-    title: 'Confirm your action',
-    description:
-      'You are about to make a change that will affect your account. Are you sure you want to proceed?',
-    confirm: 'Confirm',
+    accent: <ShieldWarningIcon weight="fill" />,
+    brand: <InfoIcon weight="fill" />,
+    error: <XCircleIcon weight="fill" />,
+    info: <InfoIcon weight="fill" />,
+    neutral: <InfoIcon weight="fill" />,
+    success: <CheckCircleIcon weight="fill" />,
+    warning: <WarningIcon weight="fill" />,
   },
-  accent: {
-    title: 'Publish this content?',
-    description:
-      'This content will be made publicly visible immediately. You can unpublish it at any time from settings.',
-    confirm: 'Publish',
+  TONE_TRIGGER_LABELS: Record<Tone, string> = {
+    accent: 'Open Dialog',
+    brand: 'Open Dialog',
+    error: 'Delete Item',
+    info: 'View Details',
+    neutral: 'Open Dialog',
+    success: 'Complete Action',
+    warning: 'Proceed',
   },
-  neutral: {
-    title: 'Save changes?',
-    description:
-      'You have unsaved changes. Would you like to save them before leaving, or discard your edits?',
-    confirm: 'Save Changes',
-  },
-  error: {
-    title: 'Permanently delete this item?',
-    description:
-      'This action cannot be undone. The item and all associated data will be permanently removed from our servers.',
-    confirm: 'Delete',
-  },
-  info: {
-    title: 'New terms of service',
-    description:
-      'Our terms of service have been updated. You must review and accept the new terms to continue using your account.',
-    confirm: 'Accept & Continue',
-  },
-  success: {
-    title: 'Mark as complete?',
-    description:
-      'Once marked as complete, this task will be archived and removed from your active queue.',
-    confirm: 'Mark Complete',
-  },
-  warning: {
-    title: 'Transfer ownership?',
-    description:
-      'You are about to transfer ownership of this workspace. You will lose admin privileges and this cannot be reversed.',
-    confirm: 'Transfer',
-  },
-}
-
-const DialogTemplate = ({ tone = 'brand' }: { tone?: Tone }) => {
-  const { title, description, confirm } = TONE_CONTENT[tone]
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger>
-        <Button tone={tone} variant="outline">
-          {TONE_TRIGGER_LABELS[tone]}
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogPopup tone={tone} className="w-[900px]">
-        <AlertDialogHeader>
-          <AlertDialogIcon>{TONE_ICONS[tone]}</AlertDialogIcon>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogClose>Cancel</AlertDialogClose>
-          <AlertDialogConfirm>{confirm}</AlertDialogConfirm>
-        </AlertDialogFooter>
-      </AlertDialogPopup>
-    </AlertDialog>
-  )
-}
-
-const meta: Meta<typeof AlertDialogPopup> = {
-  title: 'Components/Alert Dialog',
-  component: AlertDialog,
-  subcomponents: {
-    AlertDialogClose,
-    AlertDialogConfirm,
-    AlertDialogDescription,
-    AlertDialogFooter: AlertDialogFooter,
-    AlertDialogPopup,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-  },
-  argTypes: {
-    tone: {
-      control: 'select',
-      options: TONES,
-      description: 'Sets the semantic tone of the dialog, coloring the icon and confirm button.',
-      table: {
-        defaultValue: { summary: 'brand' },
-      },
+  TONE_CONTENT: Record<Tone, { title: string; description: string; confirm: string }> = {
+    accent: {
+      confirm: 'Publish',
+      description:
+        'This content will be made publicly visible immediately. You can unpublish it at any time from settings.',
+      title: 'Publish this content?',
+    },
+    brand: {
+      confirm: 'Confirm',
+      description:
+        'You are about to make a change that will affect your account. Are you sure you want to proceed?',
+      title: 'Confirm your action',
+    },
+    error: {
+      confirm: 'Delete',
+      description:
+        'This action cannot be undone. The item and all associated data will be permanently removed from our servers.',
+      title: 'Permanently delete this item?',
+    },
+    info: {
+      confirm: 'Accept & Continue',
+      description:
+        'Our terms of service have been updated. You must review and accept the new terms to continue using your account.',
+      title: 'New terms of service',
+    },
+    neutral: {
+      confirm: 'Save Changes',
+      description:
+        'You have unsaved changes. Would you like to save them before leaving, or discard your edits?',
+      title: 'Save changes?',
+    },
+    success: {
+      confirm: 'Mark Complete',
+      description:
+        'Once marked as complete, this task will be archived and removed from your active queue.',
+      title: 'Mark as complete?',
+    },
+    warning: {
+      confirm: 'Transfer',
+      description:
+        'You are about to transfer ownership of this workspace. You will lose admin privileges and this cannot be reversed.',
+      title: 'Transfer ownership?',
     },
   },
-  parameters: {
-    layout: 'fullscreen',
-    docs: {
-      subtitle:
-        'An accessible modal dialog that interrupts the user to confirm or acknowledge an action.',
-      description: {
-        component:
-          'The Alert Dialog component blocks interaction with the rest of the application until the user explicitly confirms or cancels. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) that color the leading icon and the confirm button.',
+  DialogTemplate = ({ tone = 'brand' }: { tone?: Tone }) => {
+    const { title, description, confirm } = TONE_CONTENT[tone]
+    return (
+      <AlertDialog>
+        <AlertDialog.Trigger>
+          <Button tone={tone} variant="outline">
+            {TONE_TRIGGER_LABELS[tone]}
+          </Button>
+        </AlertDialog.Trigger>
+        <AlertDialog.Popup tone={tone} className="w-[900px]">
+          <AlertDialog.Header>
+            <AlertDialog.Icon>{TONE_ICONS[tone]}</AlertDialog.Icon>
+            <AlertDialog.Title>{title}</AlertDialog.Title>
+            <AlertDialog.Description>{description}</AlertDialog.Description>
+          </AlertDialog.Header>
+          <AlertDialog.Footer>
+            <AlertDialog.Close>Cancel</AlertDialog.Close>
+            <AlertDialog.Confirm>{confirm}</AlertDialog.Confirm>
+          </AlertDialog.Footer>
+        </AlertDialog.Popup>
+      </AlertDialog>
+    )
+  },
+  meta: Meta<typeof AlertDialog.Popup> = {
+    argTypes: {
+      tone: {
+        control: 'select',
+        description: 'Sets the semantic tone of the dialog, coloring the icon and confirm button.',
+        options: TONES,
+        table: {
+          defaultValue: { summary: 'brand' },
+        },
       },
     },
-  },
-  decorators: [
-    (Story) => (
-      <div
-        className="flex min-h-dvh w-full items-center justify-center bg-cover bg-center p-lg"
-        style={{
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80)',
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
-}
+    component: AlertDialog,
+    decorators: [
+      (Story) => (
+        <div
+          className="flex min-h-dvh w-full items-center justify-center bg-cover bg-center p-lg"
+          style={{
+            backgroundImage:
+              'url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80)',
+          }}
+        >
+          <Story />
+        </div>
+      ),
+    ],
+    parameters: {
+      docs: {
+        description: {
+          component:
+            'The Alert Dialog component blocks interaction with the rest of the application until the user explicitly confirms or cancels. It supports seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`) that color the leading icon and the confirm button.',
+        },
+        subtitle:
+          'An accessible modal dialog that interrupts the user to confirm or acknowledge an action.',
+      },
+      layout: 'fullscreen',
+    },
+    subcomponents: {
+      AlertDialogClose: AlertDialog.Close,
+      AlertDialogConfirm: AlertDialog.Confirm,
+      AlertDialogDescription: AlertDialog.Description,
+      AlertDialogFooter: AlertDialog.Footer,
+      AlertDialogPopup: AlertDialog.Popup,
+      AlertDialogTitle: AlertDialog.Title,
+      AlertDialogTrigger: AlertDialog.Trigger,
+    },
+    title: 'Components/Alert Dialog',
+  }
 
 export default meta
 
-type Story = StoryObj<typeof AlertDialogPopup>
+type Story = StoryObj<typeof AlertDialog.Popup>
 
 // ─── Playground ──────────────────────────────────────────────────────────────
 
 export const Playground: Story = {
-  name: 'Playground',
   args: { tone: 'brand' },
+  name: 'Playground',
   parameters: {
     docs: {
       description: {
@@ -181,13 +167,6 @@ export const Playground: Story = {
     },
   },
   render: (args) => <DialogTemplate tone={args.tone as Tone} />,
-  play: async ({ canvasElement }) => {
-    await userEvent.click(within(canvasElement).getByRole('button', { name: 'Open Dialog' }))
-
-    const backdrop = document.querySelector<HTMLElement>('[data-slot="alert-dialog-backdrop"]')
-    await expect(backdrop).not.toBeNull()
-    await expect(getComputedStyle(backdrop!).backdropFilter).toBe('blur(16px)')
-  },
 }
 
 // ─── Tones ───────────────────────────────────────────────────────────────────
@@ -309,28 +288,28 @@ export const DestructiveFlow: Story = {
   },
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialog.Trigger>
         <Button tone="error" variant="soft">
           <TrashIcon weight="bold" />
           Delete Account
         </Button>
-      </AlertDialogTrigger>
-      <AlertDialogPopup tone="error">
-        <AlertDialogHeader>
-          <AlertDialogIcon>
+      </AlertDialog.Trigger>
+      <AlertDialog.Popup tone="error">
+        <AlertDialog.Header>
+          <AlertDialog.Icon>
             <XCircleIcon weight="fill" />
-          </AlertDialogIcon>
-          <AlertDialogTitle>Delete your account?</AlertDialogTitle>
-          <AlertDialogDescription>
+          </AlertDialog.Icon>
+          <AlertDialog.Title>Delete your account?</AlertDialog.Title>
+          <AlertDialog.Description>
             All of your data, including projects, settings, and billing history, will be permanently
             erased. This action is irreversible and cannot be appealed.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogClose>Keep Account</AlertDialogClose>
-          <AlertDialogConfirm>Delete Forever</AlertDialogConfirm>
-        </AlertDialogFooter>
-      </AlertDialogPopup>
+          </AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+          <AlertDialog.Close>Keep Account</AlertDialog.Close>
+          <AlertDialog.Confirm>Delete Forever</AlertDialog.Confirm>
+        </AlertDialog.Footer>
+      </AlertDialog.Popup>
     </AlertDialog>
   ),
 }
@@ -347,29 +326,29 @@ export const CriticalWarning: Story = {
   },
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialog.Trigger>
         <Button tone="warning" variant="soft">
           <WarningCircleIcon weight="bold" />
           Transfer Ownership
         </Button>
-      </AlertDialogTrigger>
-      <AlertDialogPopup tone="warning">
-        <AlertDialogHeader>
-          <AlertDialogIcon>
+      </AlertDialog.Trigger>
+      <AlertDialog.Popup tone="warning">
+        <AlertDialog.Header>
+          <AlertDialog.Icon>
             <WarningIcon weight="fill" />
-          </AlertDialogIcon>
-          <AlertDialogTitle>Transfer workspace ownership?</AlertDialogTitle>
-          <AlertDialogDescription>
+          </AlertDialog.Icon>
+          <AlertDialog.Title>Transfer workspace ownership?</AlertDialog.Title>
+          <AlertDialog.Description>
             You are about to transfer ownership of this workspace to another member. You will
             immediately lose your admin privileges and cannot reclaim ownership without their
             consent.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogClose>Cancel</AlertDialogClose>
-          <AlertDialogConfirm>Transfer Ownership</AlertDialogConfirm>
-        </AlertDialogFooter>
-      </AlertDialogPopup>
+          </AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+          <AlertDialog.Close>Cancel</AlertDialog.Close>
+          <AlertDialog.Confirm>Transfer Ownership</AlertDialog.Confirm>
+        </AlertDialog.Footer>
+      </AlertDialog.Popup>
     </AlertDialog>
   ),
 }

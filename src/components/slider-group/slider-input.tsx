@@ -1,25 +1,26 @@
-import { Input } from '../input'
-import { useSliderGroupContext } from './slider-group-context'
 import { cn } from '@/utils/cn'
 
+import { Input } from '../input'
+import { getPrimaryValue, useSliderGroupContext, withPrimaryValue } from './slider-group-context'
 import type { SliderInputProps } from './slider-group.types'
 
-export const SliderInput = ({ className, ref, ...props }: SliderInputProps) => {
-  const group = useSliderGroupContext()
-  if (!group) return null
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value))
+}
 
-  const { value, setValue, min, max, step } = group
-  const current = value?.[0] ?? min
+export function SliderInput({ className, ref, ...props }: SliderInputProps) {
+  const group = useSliderGroupContext(),
+    handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+      const raw = event.target.value,
+        parsed = Number(raw)
+      if (raw === '' || Number.isNaN(parsed) || !group) {
+        return
+      }
+      group.setValue(withPrimaryValue(group.value, clamp(parsed, group.min, group.max)))
+    }
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const raw = event.target.value
-    if (raw === '') return
-    const parsed = Number(raw)
-    if (Number.isNaN(parsed)) return
-    const clamped = Math.min(max, Math.max(min, parsed))
-    const next = value ? [...value] : [clamped]
-    next[0] = clamped
-    setValue(next)
+  if (!group) {
+    return undefined
   }
 
   return (
@@ -30,10 +31,10 @@ export const SliderInput = ({ className, ref, ...props }: SliderInputProps) => {
       ref={ref}
       {...props}
       type="number"
-      min={min}
-      max={max}
-      step={step}
-      value={current}
+      min={group.min}
+      max={group.max}
+      step={group.step}
+      value={getPrimaryValue(group.value, group.min)}
       onChange={handleChange}
     />
   )

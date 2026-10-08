@@ -1,15 +1,15 @@
-import { useChartTooltipPayload } from './chart-tooltip-payload'
 import { cn } from '@/utils/cn'
 
+import { useChartTooltipPayload } from './chart-tooltip-payload'
 import type { ChartTooltipIndicatorProps } from './chart.types'
 
-export const ChartTooltipIndicator = ({
+export function ChartTooltipIndicator({
   shape = 'circle',
   className,
   children,
   ref,
   ...props
-}: ChartTooltipIndicatorProps) => {
+}: ChartTooltipIndicatorProps) {
   const { color } = useChartTooltipPayload()
 
   return (
@@ -23,7 +23,7 @@ export const ChartTooltipIndicator = ({
           clipPath:
             'polygon(50% 0%, 61.8% 35.4%, 98.5% 35.4%, 69.1% 57.1%, 80.9% 92.5%, 50% 70.7%, 19.1% 92.5%, 30.9% 57.1%, 1.5% 35.4%, 38.2% 35.4%)',
         }),
-        ...(shape === 'line' && { maxHeight: '100%', width: '3px', borderRadius: '1.5px' }),
+        ...(shape === 'line' && { borderRadius: '1.5px', maxHeight: '100%', width: '3px' }),
       }}
       className={cn('size-xs', className)}
       ref={ref}

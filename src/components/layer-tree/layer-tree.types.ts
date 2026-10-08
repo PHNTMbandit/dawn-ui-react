@@ -1,7 +1,3 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import { InputGroup } from '../input-group'
-
-import type { Button } from '../button'
 import type {
   OnChangeFn,
   Row,
@@ -10,7 +6,12 @@ import type {
   TableFeatures,
   Updater,
 } from '@tanstack/react-table'
-import type React from 'react'
+import { cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
+import React from 'react'
+
+import type { Button } from '../button'
+import type { InputGroup } from '../input-group'
 
 declare module '@tanstack/react-table' {
   interface Plugins {
@@ -39,54 +40,65 @@ declare module '@tanstack/react-table' {
   }
 }
 
-export type LayerTreeProps = React.ComponentProps<'div'> & {
+type LayerTreeProps = React.ComponentProps<'div'> & {
   onDNDStart?: (event: { nodeId: string }) => void
   onDNDEnd?: (event: { sourceNodeId: string; targetNodeId: string }) => void
 }
 
-export type LayerTreeBodyProps = React.ComponentProps<'div'>
-export type LayerTreeRowProps = React.ComponentProps<'div'> & {
+type LayerTreeBodyProps = React.ComponentProps<'div'>
+type LayerTreeRowProps = React.ComponentProps<'div'> & {
   rowId: string
 }
 
-export type LayerTreeTriggerCellProps = React.ComponentProps<'button'> & {
+type LayerTreeTriggerCellProps = React.ComponentProps<'button'> & {
   dndDisabled?: boolean
 }
-export type LayerTreeSearchProps = React.ComponentProps<typeof InputGroup> & {
+type LayerTreeSearchProps = React.ComponentProps<typeof InputGroup> & {
   placeholder?: string
 }
-export type LayerTreeExpandAllProps = React.ComponentProps<typeof Button>
-export type LayerTreeFooterProps = React.ComponentProps<'div'>
-export type LayerTreeSortProps = React.ComponentProps<'button'>
-export type LayerTreeIconCellProps = React.ComponentProps<'div'>
-export type LayerTreeLockedCellProps = React.ComponentProps<typeof Button>
-export type LayerTreeLockedAllProps = React.ComponentProps<typeof Button>
-export type LayerTreeVisibilityCellProps = React.ComponentProps<typeof Button>
-export type LayerTreeVisibilityAllProps = React.ComponentProps<typeof Button>
-export type LayerTreeNodeIconProps = React.ComponentProps<'div'> & {
+type LayerTreeExpandAllProps = React.ComponentProps<typeof Button>
+type LayerTreeFooterProps = React.ComponentProps<'div'>
+type LayerTreeSortProps = React.ComponentProps<'button'>
+type LayerTreeIconCellProps = React.ComponentProps<'div'>
+type LayerTreeLockedCellProps = React.ComponentProps<typeof Button>
+type LayerTreeLockedAllProps = React.ComponentProps<typeof Button>
+type LayerTreeVisibilityCellProps = React.ComponentProps<typeof Button>
+type LayerTreeVisibilityAllProps = React.ComponentProps<typeof Button>
+type LayerTreeNodeIconProps = React.ComponentProps<'div'> & {
   icon: React.ElementType
 }
-export type LayerTreeTextCellProps = React.ComponentProps<'span'> &
+type LayerTreeTextCellProps = React.ComponentProps<'span'> &
   VariantProps<typeof layerTreeTextCellVariants>
 
-export const layerTreeTextCellVariants = cva('min-w-0 grow truncate px-2xs', {
-  variants: {
-    size: {
-      small: 'style-text-default--1',
-      medium: 'style-text-default-0',
-      large: 'style-text-default-1',
+const layerTreeTextCellVariants = cva('min-w-0 grow truncate px-2xs', {
+    defaultVariants: {
+      size: 'medium',
     },
-  },
-  defaultVariants: {
-    size: 'medium',
-  },
-})
+    variants: {
+      size: {
+        large: 'style-text-default-1',
+        medium: 'style-text-default-0',
+        small: 'style-text-default--1',
+      },
+    },
+  }),
+  // oxlint-disable-next-line unicorn/no-null
+  LayerTreeContext = React.createContext<LayerTreeContextType | null>(null),
+  useLayerTree = () => {
+    const context = React.useContext<LayerTreeContextType | null>(LayerTreeContext)
 
-export interface LayerTreeColumnMeta {
+    if (!context) {
+      throw new Error('useLayerTree must be used within a LayerTreeProvider')
+    }
+
+    return context
+  }
+
+interface LayerTreeColumnMeta {
   fill?: boolean
 }
 
-export interface LayerTreeTableMeta {
+interface LayerTreeTableMeta {
   translations?: {
     buttonLabels?: {
       ascending?: string
@@ -95,50 +107,86 @@ export interface LayerTreeTableMeta {
   }
 }
 
-export type RowVisibilityState = Record<string, boolean>
+type RowVisibilityState = Record<string, boolean>
 
-export interface LayerTreeState_RowVisibility {
+interface LayerTreeState_RowVisibility {
   rowVisibility: RowVisibilityState
 }
 
-export interface LayerTreeOptions_RowVisibility<TData extends RowData = RowData> {
+interface LayerTreeOptions_RowVisibility<TData extends RowData = RowData> {
   enableRowVisibility?: boolean
   onRowVisibilityChange?: OnChangeFn<RowVisibilityState>
   getRowVisible?: (row: Row<TableFeatures, TData>) => boolean
 }
 
-export interface LayerTreeTable_RowVisibility {
+interface LayerTreeTable_RowVisibility {
   setRowVisibility: (updater: Updater<RowVisibilityState>) => void
   resetRowVisibility: () => void
   toggleAllRowsVisible: (value?: boolean) => void
   getIsAllRowsVisible: () => boolean
 }
 
-export interface LayerTreeRow_RowVisibility {
+interface LayerTreeRow_RowVisibility {
   getIsVisible: () => boolean
   toggleVisibility: (value?: boolean) => void
 }
 
-export type RowLockedState = Record<string, boolean>
+type RowLockedState = Record<string, boolean>
 
-export interface LayerTreeState_RowLocked {
+interface LayerTreeState_RowLocked {
   rowLocked: RowLockedState
 }
 
-export interface LayerTreeOptions_RowLocked<TData extends RowData = RowData> {
+interface LayerTreeOptions_RowLocked<TData extends RowData = RowData> {
   enableRowLocked?: boolean
   onRowLockedChange?: OnChangeFn<RowLockedState>
   getRowLocked?: (row: Row<TableFeatures, TData>) => boolean
 }
 
-export interface LayerTreeTable_RowLocked {
+interface LayerTreeTable_RowLocked {
   setRowLocked: (updater: Updater<RowLockedState>) => void
   resetRowLocked: () => void
   toggleAllRowsLocked: (value?: boolean) => void
   getIsAllRowsLocked: () => boolean
 }
 
-export interface LayerTreeRow_RowLocked {
+interface LayerTreeRow_RowLocked {
   getIsLocked: () => boolean
   toggleLocked: (value?: boolean) => void
+}
+
+type LayerTreeContextType = LayerTreeProps & {
+  draggingNodeId: string | null
+}
+
+export { LayerTreeContext, layerTreeTextCellVariants, useLayerTree }
+export type {
+  RowLockedState,
+  RowVisibilityState,
+  LayerTreeContextType,
+  LayerTreeState_RowVisibility,
+  LayerTreeOptions_RowVisibility,
+  LayerTreeTable_RowVisibility,
+  LayerTreeRow_RowVisibility,
+  LayerTreeState_RowLocked,
+  LayerTreeOptions_RowLocked,
+  LayerTreeTable_RowLocked,
+  LayerTreeRow_RowLocked,
+  LayerTreeTableMeta,
+  LayerTreeColumnMeta,
+  LayerTreeProps,
+  LayerTreeBodyProps,
+  LayerTreeRowProps,
+  LayerTreeTriggerCellProps,
+  LayerTreeSearchProps,
+  LayerTreeFooterProps,
+  LayerTreeSortProps,
+  LayerTreeIconCellProps,
+  LayerTreeLockedCellProps,
+  LayerTreeLockedAllProps,
+  LayerTreeVisibilityCellProps,
+  LayerTreeVisibilityAllProps,
+  LayerTreeNodeIconProps,
+  LayerTreeTextCellProps,
+  LayerTreeExpandAllProps,
 }

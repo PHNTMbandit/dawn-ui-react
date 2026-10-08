@@ -1,51 +1,44 @@
+// oxlint-disable unicorn/no-null
 import { Feedback } from '@dnd-kit/dom'
-import {
-  DragDropProvider,
-  DragOverlay,
-  type DragEndEvent,
-  type DragStartEvent,
-} from '@dnd-kit/react'
+import { DragDropProvider, DragOverlay } from '@dnd-kit/react'
+import type { DragEndEvent, DragStartEvent } from '@dnd-kit/react'
 import React from 'react'
-import { Badge } from '../badge'
-import { useTableContext } from './layer-tree-context'
+
 import { cn } from '@/utils/cn'
 
+import { Badge } from '../badge'
+import { useTableContext } from './layer-tree-context'
+import { LayerTreeContext } from './layer-tree.types'
 import type { LayerTreeProps } from './layer-tree.types'
 
-type LayerTreeContextType = LayerTreeProps & {
-  draggingNodeId: string | null
-}
+const PARENT_ROW_COUNT = 1
 
-const LayerTreeContext = React.createContext<LayerTreeContextType | null>(null)
-
-export const LayerTree = ({
+export function LayerTree({
   onDNDStart: onDragStart,
   onDNDEnd: onDragEnd,
   className,
   children,
   ref,
   ...props
-}: LayerTreeProps) => {
-  const table = useTableContext()
-  const [draggingNodeId, setDraggingNodeId] = React.useState<string | null>(null)
-
-  const handleDragStart = ({ operation: { source } }: DragStartEvent) => {
-    setDraggingNodeId(source?.data.nodeId ?? null)
-    if (onDragStart) {
-      onDragStart({ nodeId: source?.data.nodeId ?? '' })
+}: LayerTreeProps) {
+  const table = useTableContext(),
+    [draggingNodeId, setDraggingNodeId] = React.useState<string | null>(null),
+    handleDragStart = ({ operation: { source } }: DragStartEvent) => {
+      setDraggingNodeId(source?.data.nodeId ?? null)
+      if (onDragStart) {
+        onDragStart({ nodeId: source?.data.nodeId ?? '' })
+      }
+    },
+    handleDragEnd = ({ operation: { source, target } }: DragEndEvent) => {
+      setDraggingNodeId(null)
+      if (onDragEnd) {
+        const targetNodeId = target?.data.folderId ?? target?.data.nodeId ?? null
+        onDragEnd({
+          sourceNodeId: source?.data.nodeId ?? '',
+          targetNodeId,
+        })
+      }
     }
-  }
-
-  const handleDragEnd = ({ operation: { source, target } }: DragEndEvent) => {
-    setDraggingNodeId(null)
-    if (onDragEnd) {
-      const targetNodeId = target?.data.folderId ?? target?.data.nodeId ?? null
-      onDragEnd({
-        sourceNodeId: source?.data.nodeId ?? '',
-        targetNodeId,
-      })
-    }
-  }
 
   return (
     <DragDropProvider
@@ -55,10 +48,10 @@ export const LayerTree = ({
     >
       <LayerTreeContext.Provider
         value={{
-          className,
           children,
-          ref,
+          className,
           draggingNodeId,
+          ref,
           ...props,
         }}
       >
@@ -72,8 +65,8 @@ export const LayerTree = ({
                 )}
               >
                 {table.getRow(String(source.id)).renderValue('name') ?? source.id}
-                <Badge className="absolute -top-xs -right-xs" size={'iconSmall'} tone="neutral">
-                  {table.getRow(String(source.id))?.subRows.length + 1}
+                <Badge className="absolute -top-xs -right-xs" size="iconSmall" tone="neutral">
+                  {table.getRow(String(source.id))?.subRows.length + PARENT_ROW_COUNT}
                 </Badge>
               </div>
             )}
@@ -84,12 +77,4 @@ export const LayerTree = ({
   )
 }
 
-export const useLayerTree = () => {
-  const context = React.useContext<LayerTreeContextType | null>(LayerTreeContext)
-
-  if (!context) {
-    throw new Error('useLayerTree must be used within a LayerTreeProvider')
-  }
-
-  return context
-}
+export { useLayerTree } from './layer-tree.types'

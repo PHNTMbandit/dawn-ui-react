@@ -2,12 +2,7 @@ import { cn } from '@/utils/cn'
 
 import type { AlertDialogHeaderProps } from './alert-dialog.types'
 
-export const AlertDialogHeader = ({
-  className,
-  children,
-  ref,
-  ...props
-}: AlertDialogHeaderProps) => {
+export function AlertDialogHeader({ className, ref, ...props }: AlertDialogHeaderProps) {
   return (
     <div
       className={cn(
@@ -16,8 +11,6 @@ export const AlertDialogHeader = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }

@@ -1,25 +1,30 @@
 import { LockSimpleIcon, LockSimpleOpenIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { useCellContext, useTableContext } from './layer-tree-context'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useCellContext, useTableContext } from './layer-tree-context'
 import type { LayerTreeLockedCellProps } from './layer-tree.types'
 
-export const LayerTreeLockedCell = ({
+export function LayerTreeLockedCell({
   className,
   children,
   ref,
   ...props
-}: LayerTreeLockedCellProps) => {
-  const cell = useCellContext<boolean>()
-  const table = useTableContext()
-  const row = cell.row
-  const leafRows = row.getLeafRows()
-  const rows = leafRows.length > 0 ? leafRows : [row]
+}: LayerTreeLockedCellProps) {
+  const cell = useCellContext<boolean>(),
+    table = useTableContext(),
+    { row } = cell,
+    rows = row.getLeafRows(),
+    handleClick = (isLocked: boolean) => {
+      const next = !isLocked
+      for (const leafRow of rows) {
+        leafRow.toggleLocked(next)
+      }
+    }
 
-  const handleClick = (isLocked: boolean) => {
-    const next = !isLocked
-    for (const leafRow of rows) leafRow.toggleLocked(next)
+  if (!rows.length) {
+    rows.push(row)
   }
 
   return (
@@ -29,17 +34,18 @@ export const LayerTreeLockedCell = ({
 
         return (
           <Button
-            aria-label={isLocked ? 'Unlock layer' : 'Lock layer'}
+            aria-label="Toggle layer lock"
             size="iconSmall"
             tone="neutral"
-            variant={'ghost'}
+            variant="ghost"
             onClick={() => handleClick(isLocked)}
             className={cn('', className)}
             ref={ref}
             {...props}
           >
             {children}
-            {isLocked ? <LockSimpleIcon weight="fill" /> : <LockSimpleOpenIcon weight="bold" />}
+            {isLocked && <LockSimpleIcon weight="fill" />}
+            {!isLocked && <LockSimpleOpenIcon weight="bold" />}
           </Button>
         )
       }}

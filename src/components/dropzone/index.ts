@@ -1,3 +1,42 @@
+import { Dropzone as DropzoneRoot } from './dropzone'
+import { DropzoneActions } from './dropzone-actions'
+import { DropzoneClear } from './dropzone-clear'
+import { DropzoneConfirm } from './dropzone-confirm'
+import { DropzoneContainer } from './dropzone-container'
+import { DropzoneError } from './dropzone-error'
+import { DropzoneFileLimit } from './dropzone-file-limit'
+import { DropzoneFileSizeLimit } from './dropzone-file-size-limit'
+import { DropzoneFiles } from './dropzone-files'
+import { DropzoneFilesHeader } from './dropzone-files-header'
+import { DropzoneFilesList } from './dropzone-files-list'
+import { DropzoneFilesTitle } from './dropzone-files-title'
+import { DropzoneFormats } from './dropzone-formats'
+import { DropzoneHeading } from './dropzone-heading'
+import { DropzoneIcon } from './dropzone-icon'
+import { DropzoneInfo } from './dropzone-info'
+import { DropzoneSubtitle } from './dropzone-subtitle'
+import { DropzoneTrigger } from './dropzone-trigger'
+
+const Dropzone = Object.assign(DropzoneRoot, {
+  Actions: DropzoneActions,
+  Clear: DropzoneClear,
+  Confirm: DropzoneConfirm,
+  Container: DropzoneContainer,
+  Error: DropzoneError,
+  FileLimit: DropzoneFileLimit,
+  FileSizeLimit: DropzoneFileSizeLimit,
+  Files: DropzoneFiles,
+  FilesHeader: DropzoneFilesHeader,
+  FilesList: DropzoneFilesList,
+  FilesTitle: DropzoneFilesTitle,
+  Formats: DropzoneFormats,
+  Heading: DropzoneHeading,
+  Icon: DropzoneIcon,
+  Info: DropzoneInfo,
+  Subtitle: DropzoneSubtitle,
+  Trigger: DropzoneTrigger,
+})
+
 export type {
   DropzoneProps,
   DropzoneContainerProps,
@@ -18,7 +57,6 @@ export type {
   DropzoneTriggerProps,
   DropzoneInfoProps,
 } from './dropzone.types'
-export { Dropzone } from './dropzone'
 export { DropzoneContainer } from './dropzone-container'
 export { DropzoneError } from './dropzone-error'
 export { DropzoneFilesList as DropzoneFileList } from './dropzone-files-list'
@@ -35,3 +73,5 @@ export { DropzoneFilesTitle } from './dropzone-files-title'
 export { DropzoneActions } from './dropzone-actions'
 export { DropzoneConfirm } from './dropzone-confirm'
 export { DropzoneClear } from './dropzone-clear'
+
+export { Dropzone }

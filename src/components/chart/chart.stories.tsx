@@ -1,7 +1,12 @@
 import { TrendDownIcon, TrendUpIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import React from 'react'
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, LabelList, AreaChart, Area } from 'recharts'
+
+import { TabsTab } from '@/index'
+
 import { Tabs, TabsIndicator, TabsList } from '../tabs'
+import type { TabsTabValue } from '../tabs/tabs.types'
 import { ChartContainer } from './chart-container'
 import { ChartLegend } from './chart-legend'
 import { ChartLegendContent } from './chart-legend-content'
@@ -14,11 +19,7 @@ import { ChartTooltipLabel } from './chart-tooltip-label'
 import { ChartTooltipName } from './chart-tooltip-name'
 import { ChartTooltipPayload } from './chart-tooltip-payload'
 import { ChartTooltipValue } from './chart-tooltip-value'
-import { TabsTab } from '@/index'
-
-import type { TabsTabValue } from '../tabs/tabs.types'
 import type { ChartConfig } from './chart.types'
-import type { Meta, StoryObj } from '@storybook/react-vite'
 
 type MyData = {
   month: string

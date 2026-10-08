@@ -1,19 +1,8 @@
-import { inputVariants } from '../input/input.types'
 import { cn } from '@/utils/cn'
 
+import { inputVariants } from '../input/input.types'
 import type { InputGroupProps } from './input-group.types'
 
-export const InputGroup = ({
-  variant,
-  size,
-  className,
-  children,
-  ref,
-  ...props
-}: InputGroupProps) => {
-  return (
-    <div className={cn(inputVariants({ variant, size }), className)} ref={ref} {...props}>
-      {children}
-    </div>
-  )
+export function InputGroup({ variant, size, className, ref, ...props }: InputGroupProps) {
+  return <div className={cn(inputVariants({ size, variant }), className)} ref={ref} {...props} />
 }

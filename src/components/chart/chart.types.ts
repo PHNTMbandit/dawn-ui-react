@@ -1,8 +1,23 @@
-import * as RechartsPrimitive from 'recharts'
+import React from 'react'
+import type {
+  TooltipProps as RechartsTooltipProps,
+  TooltipContentProps as RechartsTooltipContentProps,
+  LegendProps as RechartsLegendProps,
+  DefaultLegendContentProps as RechartsDefaultLegendContentProps,
+} from 'recharts'
 
-const THEMES = { light: '', dark: '.dark' } as const
+const THEMES = { dark: '.dark', light: '' } as const,
+  ChartContainerContext = React.createContext<ChartContainerContextProps | undefined>(undefined),
+  ChartLegendPayloadContext = React.createContext<
+    | {
+        label?: string
+        color?: string
+        icon?: React.ComponentType
+      }
+    | undefined
+  >(undefined)
 
-export type ChartConfig = Record<
+type ChartConfig = Record<
   string,
   {
     label?: string
@@ -13,38 +28,58 @@ export type ChartConfig = Record<
   )
 >
 
-export type ChartContainerContextProps = {
+interface ChartContainerContextProps {
   config: ChartConfig
 }
 
-export type ChartContainerProps = React.ComponentProps<'div'> & {
+type ChartContainerProps = React.ComponentProps<'div'> & {
   config: ChartConfig
   initialDimension?: { width: number; height: number }
 }
 
-export type ChartTooltipProps = RechartsPrimitive.TooltipProps
-export type ChartTooltipContentProps = React.ComponentProps<'div'> &
-  Partial<RechartsPrimitive.TooltipContentProps>
-export type ChartLegendProps = RechartsPrimitive.LegendProps
-export type ChartLegendContentProps = React.ComponentProps<'div'> &
-  RechartsPrimitive.DefaultLegendContentProps
-export type ChartTooltipLabelProps = React.ComponentProps<'p'>
-export type ChartTooltipNameProps = React.ComponentProps<'p'>
-export type ChartTooltipPayloadProps = React.ComponentProps<'div'>
-export type ChartLegendPayloadProps = React.ComponentProps<'div'>
-export type ChartTooltipIndicatorProps = React.ComponentProps<'div'> & {
+type ChartTooltipProps = RechartsTooltipProps
+type ChartTooltipContentProps = React.ComponentProps<'div'> & Partial<RechartsTooltipContentProps>
+type ChartLegendProps = RechartsLegendProps
+type ChartLegendContentProps = React.ComponentProps<'div'> & RechartsDefaultLegendContentProps
+type ChartTooltipLabelProps = React.ComponentProps<'p'>
+type ChartTooltipNameProps = React.ComponentProps<'p'>
+type ChartTooltipPayloadProps = React.ComponentProps<'div'>
+type ChartLegendPayloadProps = React.ComponentProps<'div'>
+type ChartTooltipIndicatorProps = React.ComponentProps<'div'> & {
   shape?: 'circle' | 'square' | 'diamond' | 'triangle' | 'wye' | 'line'
 }
-export type ChartLinearGradientProps = React.ComponentProps<'defs'> & {
+type ChartLinearGradientProps = React.ComponentProps<'defs'> & {
   gradients: {
     id: string
     stopColor: string
   }[]
 }
-export type ChartTooltipIconProps = React.ComponentProps<'div'>
-export type ChartLegendIconProps = React.ComponentProps<'div'>
-export type ChartLegendLabelProps = React.ComponentProps<'p'>
-export type ChartLegendIndicatorProps = React.ComponentProps<'div'> & {
+type ChartTooltipIconProps = React.ComponentProps<'div'>
+type ChartLegendIconProps = React.ComponentProps<'div'>
+type ChartLegendLabelProps = React.ComponentProps<'p'>
+type ChartLegendIndicatorProps = React.ComponentProps<'div'> & {
   shape?: 'circle' | 'square' | 'diamond' | 'triangle' | 'wye' | 'line'
 }
-export type ChartTooltipValueProps = React.ComponentProps<'p'>
+type ChartTooltipValueProps = React.ComponentProps<'p'>
+
+export type {
+  ChartConfig,
+  ChartContainerContextProps,
+  ChartContainerProps,
+  ChartTooltipProps,
+  ChartTooltipContentProps,
+  ChartLegendProps,
+  ChartLegendContentProps,
+  ChartTooltipLabelProps,
+  ChartTooltipNameProps,
+  ChartTooltipPayloadProps,
+  ChartLegendPayloadProps,
+  ChartTooltipIndicatorProps,
+  ChartLinearGradientProps,
+  ChartTooltipIconProps,
+  ChartLegendIconProps,
+  ChartLegendLabelProps,
+  ChartLegendIndicatorProps,
+  ChartTooltipValueProps,
+}
+export { ChartContainerContext, ChartLegendPayloadContext }

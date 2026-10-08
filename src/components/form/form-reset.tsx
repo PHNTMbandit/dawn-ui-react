@@ -1,15 +1,14 @@
-import { Button } from '../button'
-import { useFormContext } from './form-contexts'
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useFormContext } from './form-contexts'
 import type { FormResetProps } from './form.types'
 
-export const FormReset = ({ className, children, ref, ...props }: FormResetProps) => {
-  const form = useFormContext()
-
-  const handleClick = () => {
-    form.reset()
-  }
+export function FormReset({ className, ref, ...props }: FormResetProps) {
+  const form = useFormContext(),
+    handleClick = () => {
+      form.reset()
+    }
 
   return (
     <form.Subscribe selector={(state) => state}>
@@ -19,11 +18,11 @@ export const FormReset = ({ className, children, ref, ...props }: FormResetProps
           disabled={!state.values}
           onClick={handleClick}
           ref={ref}
+          variant="outline"
+          tone="neutral"
           type="reset"
           {...props}
-        >
-          {children}
-        </Button>
+        />
       )}
     </form.Subscribe>
   )

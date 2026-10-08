@@ -6,81 +6,69 @@ import {
   ScissorsIcon,
   TrashIcon,
 } from '@phosphor-icons/react'
-import { Kbd } from '../kbd'
-import { KbdGroup } from '../kbd/kbd-group'
-import { ContextMenu } from './context-menu'
-import { ContextMenuCheckboxItem } from './context-menu-checkbox-item'
-import { ContextMenuGroup } from './context-menu-group'
-import { ContextMenuGroupLabel } from './context-menu-group-label'
-import { ContextMenuItem } from './context-menu-item'
-import { ContextMenuPopup } from './context-menu-popup'
-import { ContextMenuRadioGroup } from './context-menu-radio-group'
-import { ContextMenuRadioItem } from './context-menu-radio-item'
-import { ContextMenuSeparator } from './context-menu-separator'
-import { ContextMenuShortcut } from './context-menu-shortcut'
-import { ContextMenuSubmenu } from './context-menu-submenu'
-import { ContextMenuSubmenuTrigger } from './context-menu-submenu-trigger'
-import { ContextMenuTrigger } from './context-menu-trigger'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Kbd } from '../kbd'
+import { KbdGroup } from '../kbd/kbd-group'
+import { ContextMenu } from './index'
+
 const TriggerSurface = ({ label = 'Right Click Me' }: { label?: string }) => (
-  <ContextMenuTrigger>
+  <ContextMenu.Trigger>
     <div className="flex h-3xl w-[320px] items-center justify-center rounded-xl border border-border bg-surface-2 text-on-surface shadow-2xs">
       {label}
     </div>
-  </ContextMenuTrigger>
+  </ContextMenu.Trigger>
 )
 
 export default {
-  title: 'Components/Context Menu',
   component: ContextMenu,
-  subcomponents: {
-    ContextMenuTrigger,
-    ContextMenuPopup,
-    ContextMenuItem,
-    ContextMenuSeparator,
-    ContextMenuCheckboxItem,
-    ContextMenuRadioItem,
-    ContextMenuGroup,
-    ContextMenuGroupLabel,
-    ContextMenuShortcut,
-    ContextMenuSubmenu,
-    ContextMenuSubmenuTrigger,
-  },
   parameters: {
     docs: {
-      subtitle: 'A secondary-action menu revealed by right-click or equivalent context gesture.',
       description: {
         component:
           'The Context Menu component exposes contextual actions tied to a specific surface or selection. It supports standard items, destructive actions, grouped sections, checkbox and radio controls, shortcuts, and nested submenus.',
       },
+      subtitle: 'A secondary-action menu revealed by right-click or equivalent context gesture.',
     },
   },
   render: (args) => (
     <ContextMenu {...args}>
       <TriggerSurface />
-      <ContextMenuPopup>
-        <ContextMenuItem>
+      <ContextMenu.Popup>
+        <ContextMenu.Item>
           <CopyIcon weight="bold" /> Copy
-        </ContextMenuItem>
-        <ContextMenuItem>
+        </ContextMenu.Item>
+        <ContextMenu.Item>
           <ClipboardIcon weight="bold" /> Paste
-        </ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem>
+        </ContextMenu.Item>
+        <ContextMenu.Separator />
+        <ContextMenu.Item>
           <ScissorsIcon weight="bold" /> Cut
-        </ContextMenuItem>
-        <ContextMenuSubmenu>
-          <ContextMenuSubmenuTrigger>More Actions</ContextMenuSubmenuTrigger>
-          <ContextMenuPopup>
-            <ContextMenuItem>Select Duplicates</ContextMenuItem>
-            <ContextMenuItem tone="error">Delete Selection</ContextMenuItem>
-          </ContextMenuPopup>
-        </ContextMenuSubmenu>
-      </ContextMenuPopup>
+        </ContextMenu.Item>
+        <ContextMenu.Submenu>
+          <ContextMenu.SubmenuTrigger>More Actions</ContextMenu.SubmenuTrigger>
+          <ContextMenu.Popup>
+            <ContextMenu.Item>Select Duplicates</ContextMenu.Item>
+            <ContextMenu.Item tone="error">Delete Selection</ContextMenu.Item>
+          </ContextMenu.Popup>
+        </ContextMenu.Submenu>
+      </ContextMenu.Popup>
     </ContextMenu>
   ),
+  subcomponents: {
+    ContextMenuCheckboxItem: ContextMenu.CheckboxItem,
+    ContextMenuGroup: ContextMenu.Group,
+    ContextMenuGroupLabel: ContextMenu.GroupLabel,
+    ContextMenuItem: ContextMenu.Item,
+    ContextMenuPopup: ContextMenu.Popup,
+    ContextMenuRadioItem: ContextMenu.RadioItem,
+    ContextMenuSeparator: ContextMenu.Separator,
+    ContextMenuShortcut: ContextMenu.Shortcut,
+    ContextMenuSubmenu: ContextMenu.Submenu,
+    ContextMenuSubmenuTrigger: ContextMenu.SubmenuTrigger,
+    ContextMenuTrigger: ContextMenu.Trigger,
+  },
+  title: 'Components/Context Menu',
 } satisfies Meta<typeof ContextMenu>
 
 type Story = StoryObj<typeof ContextMenu>
@@ -113,24 +101,24 @@ export const Icons: Story = {
   render: (args) => (
     <ContextMenu {...args}>
       <TriggerSurface />
-      <ContextMenuPopup>
-        <ContextMenuItem>
+      <ContextMenu.Popup>
+        <ContextMenu.Item>
           <CopyIcon weight="bold" /> Copy
-        </ContextMenuItem>
-        <ContextMenuItem>
+        </ContextMenu.Item>
+        <ContextMenu.Item>
           <ClipboardIcon weight="bold" /> Paste
-        </ContextMenuItem>
-        <ContextMenuItem>
+        </ContextMenu.Item>
+        <ContextMenu.Item>
           <ScissorsIcon weight="bold" /> Cut
-        </ContextMenuItem>
-        <ContextMenuItem>
+        </ContextMenu.Item>
+        <ContextMenu.Item>
           <CardsIcon weight="bold" /> Select All
-        </ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem tone="error">
+        </ContextMenu.Item>
+        <ContextMenu.Separator />
+        <ContextMenu.Item tone="error">
           <TrashIcon weight="bold" /> Delete
-        </ContextMenuItem>
-      </ContextMenuPopup>
+        </ContextMenu.Item>
+      </ContextMenu.Popup>
     </ContextMenu>
   ),
 }
@@ -148,64 +136,64 @@ export const Shortcuts: Story = {
   render: (args) => (
     <ContextMenu {...args}>
       <TriggerSurface />
-      <ContextMenuPopup>
-        <ContextMenuItem>
+      <ContextMenu.Popup>
+        <ContextMenu.Item>
           <CopyIcon weight="bold" /> Copy
-          <ContextMenuShortcut>
+          <ContextMenu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>C</Kbd>
             </KbdGroup>
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
+          </ContextMenu.Shortcut>
+        </ContextMenu.Item>
+        <ContextMenu.Item>
           <ClipboardIcon weight="bold" /> Paste
-          <ContextMenuShortcut>
+          <ContextMenu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>V</Kbd>
             </KbdGroup>
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
+          </ContextMenu.Shortcut>
+        </ContextMenu.Item>
+        <ContextMenu.Item>
           <ScissorsIcon weight="bold" /> Cut
-          <ContextMenuShortcut>
+          <ContextMenu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>X</Kbd>
             </KbdGroup>
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
+          </ContextMenu.Shortcut>
+        </ContextMenu.Item>
+        <ContextMenu.Item>
           <CardsIcon weight="bold" /> Select All
-          <ContextMenuShortcut>
+          <ContextMenu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>A</Kbd>
             </KbdGroup>
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem tone="error">
+          </ContextMenu.Shortcut>
+        </ContextMenu.Item>
+        <ContextMenu.Separator />
+        <ContextMenu.Item tone="error">
           <TrashIcon weight="bold" /> Delete
-          <ContextMenuShortcut>
+          <ContextMenu.Shortcut>
             <KbdGroup>
               <Kbd>
                 <CommandIcon />
               </Kbd>
               <Kbd>⌫</Kbd>
             </KbdGroup>
-          </ContextMenuShortcut>
-        </ContextMenuItem>
-      </ContextMenuPopup>
+          </ContextMenu.Shortcut>
+        </ContextMenu.Item>
+      </ContextMenu.Popup>
     </ContextMenu>
   ),
 }
@@ -222,19 +210,19 @@ export const Groups: Story = {
   render: (args) => (
     <ContextMenu {...args}>
       <TriggerSurface />
-      <ContextMenuPopup>
-        <ContextMenuGroup>
-          <ContextMenuGroupLabel>Group 1</ContextMenuGroupLabel>
-          <ContextMenuItem>Option 1</ContextMenuItem>
-          <ContextMenuItem>Option 2</ContextMenuItem>
-        </ContextMenuGroup>
-        <ContextMenuSeparator />
-        <ContextMenuGroup>
-          <ContextMenuGroupLabel>Group 2</ContextMenuGroupLabel>
-          <ContextMenuItem>Option 3</ContextMenuItem>
-          <ContextMenuItem>Option 4</ContextMenuItem>
-        </ContextMenuGroup>
-      </ContextMenuPopup>
+      <ContextMenu.Popup>
+        <ContextMenu.Group>
+          <ContextMenu.GroupLabel>Group 1</ContextMenu.GroupLabel>
+          <ContextMenu.Item>Option 1</ContextMenu.Item>
+          <ContextMenu.Item>Option 2</ContextMenu.Item>
+        </ContextMenu.Group>
+        <ContextMenu.Separator />
+        <ContextMenu.Group>
+          <ContextMenu.GroupLabel>Group 2</ContextMenu.GroupLabel>
+          <ContextMenu.Item>Option 3</ContextMenu.Item>
+          <ContextMenu.Item>Option 4</ContextMenu.Item>
+        </ContextMenu.Group>
+      </ContextMenu.Popup>
     </ContextMenu>
   ),
 }
@@ -252,20 +240,20 @@ export const RadioAndCheckboxItems: Story = {
   render: (args) => (
     <ContextMenu {...args}>
       <TriggerSurface />
-      <ContextMenuPopup>
-        <ContextMenuGroup>
-          <ContextMenuGroupLabel>Checkbox Group</ContextMenuGroupLabel>
-          <ContextMenuCheckboxItem>Checkbox Item</ContextMenuCheckboxItem>
-        </ContextMenuGroup>
-        <ContextMenuSeparator />
-        <ContextMenuGroup>
-          <ContextMenuGroupLabel>Radio Group</ContextMenuGroupLabel>
-          <ContextMenuRadioGroup>
-            <ContextMenuRadioItem value="option1">Radio Option 1</ContextMenuRadioItem>
-            <ContextMenuRadioItem value="option2">Radio Option 2</ContextMenuRadioItem>
-          </ContextMenuRadioGroup>
-        </ContextMenuGroup>
-      </ContextMenuPopup>
+      <ContextMenu.Popup>
+        <ContextMenu.Group>
+          <ContextMenu.GroupLabel>Checkbox Group</ContextMenu.GroupLabel>
+          <ContextMenu.CheckboxItem>Checkbox Item</ContextMenu.CheckboxItem>
+        </ContextMenu.Group>
+        <ContextMenu.Separator />
+        <ContextMenu.Group>
+          <ContextMenu.GroupLabel>Radio Group</ContextMenu.GroupLabel>
+          <ContextMenu.RadioGroup>
+            <ContextMenu.RadioItem value="option1">Radio Option 1</ContextMenu.RadioItem>
+            <ContextMenu.RadioItem value="option2">Radio Option 2</ContextMenu.RadioItem>
+          </ContextMenu.RadioGroup>
+        </ContextMenu.Group>
+      </ContextMenu.Popup>
     </ContextMenu>
   ),
 }
@@ -283,17 +271,17 @@ export const Submenu: Story = {
   render: () => (
     <ContextMenu>
       <TriggerSurface label="Right Click for Nested Actions" />
-      <ContextMenuPopup>
-        <ContextMenuItem>Rename</ContextMenuItem>
-        <ContextMenuItem>Duplicate</ContextMenuItem>
-        <ContextMenuSubmenu>
-          <ContextMenuSubmenuTrigger>Share</ContextMenuSubmenuTrigger>
-          <ContextMenuPopup>
-            <ContextMenuItem>Email Link</ContextMenuItem>
-            <ContextMenuItem>Copy Public URL</ContextMenuItem>
-          </ContextMenuPopup>
-        </ContextMenuSubmenu>
-      </ContextMenuPopup>
+      <ContextMenu.Popup>
+        <ContextMenu.Item>Rename</ContextMenu.Item>
+        <ContextMenu.Item>Duplicate</ContextMenu.Item>
+        <ContextMenu.Submenu>
+          <ContextMenu.SubmenuTrigger>Share</ContextMenu.SubmenuTrigger>
+          <ContextMenu.Popup>
+            <ContextMenu.Item>Email Link</ContextMenu.Item>
+            <ContextMenu.Item>Copy Public URL</ContextMenu.Item>
+          </ContextMenu.Popup>
+        </ContextMenu.Submenu>
+      </ContextMenu.Popup>
     </ContextMenu>
   ),
 }

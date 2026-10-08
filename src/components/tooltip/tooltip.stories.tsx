@@ -1,21 +1,19 @@
-import { Button } from '../button'
-import { Tooltip } from './tooltip'
-import { TooltipContent } from './tooltip-context'
-import { TooltipTrigger } from './tooltip-trigger'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { Button } from '../button'
+import { Tooltip } from './index'
+
 export default {
-  title: 'Components/Tooltip',
   component: Tooltip,
-  subcomponents: { TooltipContent, TooltipTrigger },
   parameters: {
-    subtitle: 'Tooltips display informative text when users hover over, focus, or tap an element.',
     description: {
       component:
         'Tooltip provides contextual hints without adding permanent UI clutter. These stories show placement, offset configuration, and common composition patterns.',
     },
+    subtitle: 'Tooltips display informative text when users hover over, focus, or tap an element.',
   },
+  subcomponents: { TooltipContent: Tooltip.Content, TooltipTrigger: Tooltip.Trigger },
+  title: 'Components/Tooltip',
 } satisfies Meta<typeof Tooltip>
 
 type Story = StoryObj<typeof Tooltip>
@@ -24,10 +22,10 @@ export const Playground: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger>
-          <span className="hover:cursor-pointer hover:underline">Hover me</span>
-        </TooltipTrigger>
-        <TooltipContent>Tooltip</TooltipContent>
+        <Tooltip.Trigger className="hover:cursor-pointer hover:underline">
+          <Button>Hover me</Button>
+        </Tooltip.Trigger>
+        <Tooltip.Content>Tooltip</Tooltip.Content>
       </Tooltip>
     </div>
   ),
@@ -37,10 +35,10 @@ export const PositionTop: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger>
-          <span className="hover:cursor-pointer hover:underline">Top tooltip</span>
-        </TooltipTrigger>
-        <TooltipContent side="top">Shown above trigger</TooltipContent>
+        <Tooltip.Trigger className="hover:cursor-pointer hover:underline">
+          <Button>Top tooltip</Button>
+        </Tooltip.Trigger>
+        <Tooltip.Content side="top">Shown above trigger</Tooltip.Content>
       </Tooltip>
     </div>
   ),
@@ -50,10 +48,10 @@ export const PositionRight: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger>
-          <span className="hover:cursor-pointer hover:underline">Right tooltip</span>
-        </TooltipTrigger>
-        <TooltipContent side="right">Shown on the right</TooltipContent>
+        <Tooltip.Trigger className="hover:cursor-pointer hover:underline">
+          <Button>Right tooltip</Button>
+        </Tooltip.Trigger>
+        <Tooltip.Content side="right">Shown on the right</Tooltip.Content>
       </Tooltip>
     </div>
   ),
@@ -63,12 +61,12 @@ export const BehaviorWithOffset: Story = {
   render: (args) => (
     <div className="flex w-[500px] items-center justify-center py-xl">
       <Tooltip {...args}>
-        <TooltipTrigger>
-          <span className="hover:cursor-pointer hover:underline">Offset tooltip</span>
-        </TooltipTrigger>
-        <TooltipContent side="bottom" sideOffset={12} alignOffset={8}>
+        <Tooltip.Trigger className="hover:cursor-pointer hover:underline">
+          <Button>Tooltip with offsets</Button>
+        </Tooltip.Trigger>
+        <Tooltip.Content side="bottom" sideOffset={12} alignOffset={8}>
           Increased side and align offsets
-        </TooltipContent>
+        </Tooltip.Content>
       </Tooltip>
     </div>
   ),
@@ -80,12 +78,12 @@ export const CompositionIconButtonHelp: Story = {
       <div className="flex items-center justify-between">
         <span className="style-text-default-0">API Key</span>
         <Tooltip {...args}>
-          <TooltipTrigger>
+          <Tooltip.Trigger>
             <Button size="iconSmall" tone="neutral" variant="soft" aria-label="What is this?">
               ?
             </Button>
-          </TooltipTrigger>
-          <TooltipContent side="left">Used to authenticate your requests.</TooltipContent>
+          </Tooltip.Trigger>
+          <Tooltip.Content side="left">Used to authenticate your requests.</Tooltip.Content>
         </Tooltip>
       </div>
     </div>

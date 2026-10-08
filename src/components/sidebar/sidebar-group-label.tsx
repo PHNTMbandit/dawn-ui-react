@@ -1,19 +1,14 @@
-import { useSidebar } from './sidebar-provider'
 import { cn } from '@/utils/cn'
 
+import { useSidebar } from './sidebar-provider'
 import type { SidebarGroupLabelProps } from './sidebar.types'
 
-export const SidebarGroupLabel = ({
-  className,
-  children,
-  ref,
-  ...props
-}: SidebarGroupLabelProps) => {
-  const { open, collapsible } = useSidebar()
-  const showLabel = collapsible === 'none' || open
+export function SidebarGroupLabel({ className, ref, ...props }: SidebarGroupLabelProps) {
+  const { open, collapsible } = useSidebar(),
+    showLabel = collapsible === 'none' || open
 
   if (!showLabel) {
-    return null
+    return undefined
   }
 
   return (
@@ -25,8 +20,6 @@ export const SidebarGroupLabel = ({
       )}
       ref={ref}
       {...props}
-    >
-      {children}
-    </span>
+    />
   )
 }

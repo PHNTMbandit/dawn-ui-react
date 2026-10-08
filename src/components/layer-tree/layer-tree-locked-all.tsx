@@ -1,23 +1,25 @@
 import { LockSimpleIcon, LockSimpleOpenIcon } from '@phosphor-icons/react'
-import { Button } from '../button'
-import { useTableContext } from './layer-tree-context'
+
 import { cn } from '@/utils/cn'
 
+import { Button } from '../button'
+import { useTableContext } from './layer-tree-context'
 import type { LayerTreeLockedAllProps } from './layer-tree.types'
 
-export const LayerTreeLockedAll = ({
+export function LayerTreeLockedAll({
   className,
   children,
   ref,
   ...props
-}: LayerTreeLockedAllProps) => {
-  const table = useTableContext()
-  const allRows = table.getCoreRowModel().flatRows
-
-  const handleClick = (isLocked: boolean) => {
-    const next = !isLocked
-    for (const leafRow of allRows) leafRow.toggleLocked(next)
-  }
+}: LayerTreeLockedAllProps) {
+  const table = useTableContext(),
+    allRows = table.getCoreRowModel().flatRows,
+    handleClick = (isLocked: boolean) => {
+      const next = !isLocked
+      for (const leafRow of allRows) {
+        leafRow.toggleLocked(next)
+      }
+    }
 
   return (
     <table.Subscribe selector={(state) => state.rowLocked}>
@@ -26,17 +28,18 @@ export const LayerTreeLockedAll = ({
 
         return (
           <Button
-            aria-label={isLocked ? 'Unlock all layers' : 'Lock all layers'}
+            aria-label="Toggle all layers lock"
             size="iconSmall"
             tone="neutral"
-            variant={'ghost'}
+            variant="ghost"
             onClick={() => handleClick(isLocked)}
             className={cn('', className)}
             ref={ref}
             {...props}
           >
             {children}
-            {isLocked ? <LockSimpleIcon weight="fill" /> : <LockSimpleOpenIcon weight="bold" />}
+            {isLocked && <LockSimpleIcon weight="fill" />}
+            {!isLocked && <LockSimpleOpenIcon weight="bold" />}
           </Button>
         )
       }}

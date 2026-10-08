@@ -1,16 +1,22 @@
-import { useChart } from './chart-container'
-import { useChartTooltipPayload } from './chart-tooltip-payload'
-import { getPayloadConfigFromPayload } from './chart.utils'
 import { cn } from '@/utils/cn'
 
+import { useChartTooltipPayload } from './chart-tooltip-payload'
 import type { ChartTooltipIconProps } from './chart.types'
+import { getPayloadConfigFromPayload, useChart } from './chart.utils'
 
-export const ChartTooltipIcon = ({ className, children, ref, ...props }: ChartTooltipIconProps) => {
-  const { config } = useChart()
-  const payload = useChartTooltipPayload()
-  const key = typeof payload.dataKey === 'string' ? payload.dataKey : 'value'
-  const payloadConfig = getPayloadConfigFromPayload(config, payload, key)
-  const Icon = payloadConfig?.icon
+function resolveConfigKey(dataKey: unknown): string {
+  if (typeof dataKey === 'string') {
+    return dataKey
+  }
+
+  return 'value'
+}
+
+export function ChartTooltipIcon({ className, children, ref, ...props }: ChartTooltipIconProps) {
+  const { config } = useChart(),
+    payload = useChartTooltipPayload(),
+    payloadConfig = getPayloadConfigFromPayload(config, payload, resolveConfigKey(payload.dataKey)),
+    Icon = payloadConfig?.icon
 
   return (
     <div

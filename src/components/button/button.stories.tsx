@@ -1,117 +1,95 @@
 import { ArrowRightIcon, DownloadSimpleIcon, PlusIcon } from '@phosphor-icons/react'
-import { Button } from './button'
-
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
-const VARIANTS = ['fill', 'outline', 'ghost', 'soft', 'elevated', 'link'] as const
-const SIZES = [
-  'large',
-  'iconLarge',
-  'medium',
-  'iconMedium',
-  'small',
-  'iconSmall',
-  'extraSmall',
-  'iconExtraSmall',
-] as const
+import { Button } from './button'
+
+const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const,
+  VARIANTS = ['fill', 'outline', 'ghost', 'soft', 'elevated', 'link'] as const,
+  SIZES = [
+    'large',
+    'iconLarge',
+    'medium',
+    'iconMedium',
+    'small',
+    'iconSmall',
+    'extraSmall',
+    'iconExtraSmall',
+  ] as const
 
 type Tone = (typeof TONES)[number]
 type Variant = (typeof VARIANTS)[number]
 type Size = (typeof SIZES)[number]
 
 const TONE_LABELS: Record<Tone, string> = {
-  brand: 'Create project',
-  accent: 'Explore feature',
-  neutral: 'View details',
-  error: 'Delete item',
-  info: 'Learn more',
-  success: 'Save changes',
-  warning: 'Review action',
-}
+    accent: 'Explore feature',
+    brand: 'Create project',
+    error: 'Delete item',
+    info: 'Learn more',
+    neutral: 'View details',
+    success: 'Save changes',
+    warning: 'Review action',
+  },
+  TONE_DESCRIPTIONS: Record<Tone, string> = {
+    accent: 'Secondary highlighted action for promoted or supporting workflows.',
+    brand: 'Primary brand action used for the most important action on the page.',
+    error: 'Destructive action such as delete, remove, or revoke.',
+    info: 'Informational action leading to more context or guidance.',
+    neutral: 'General-purpose action with lower semantic weight.',
+    success: 'Positive completion action such as save, confirm, or apply.',
+    warning: 'High-attention action where the user should pause before proceeding.',
+  },
+  ButtonPreview = ({
+    tone = 'brand',
+    variant = 'fill',
+    size = 'medium',
+  }: {
+    tone?: Tone
+    variant?: Variant
+    size?: Size
+  }) => {
+    const iconOnly = size.startsWith('icon')
 
-const TONE_DESCRIPTIONS: Record<Tone, string> = {
-  brand: 'Primary brand action used for the most important action on the page.',
-  accent: 'Secondary highlighted action for promoted or supporting workflows.',
-  neutral: 'General-purpose action with lower semantic weight.',
-  error: 'Destructive action such as delete, remove, or revoke.',
-  info: 'Informational action leading to more context or guidance.',
-  success: 'Positive completion action such as save, confirm, or apply.',
-  warning: 'High-attention action where the user should pause before proceeding.',
-}
-
-const ButtonPreview = ({
-  tone = 'brand',
-  variant = 'fill',
-  size = 'medium',
-}: {
-  tone?: Tone
-  variant?: Variant
-  size?: Size
-}) => {
-  const iconOnly = size.startsWith('icon')
-
-  return (
-    <Button aria-label={iconOnly ? 'Add' : undefined} size={size} tone={tone} variant={variant}>
-      <PlusIcon weight="bold" />
-      {iconOnly ? null : TONE_LABELS[tone]}
-    </Button>
+    return (
+      <Button
+        aria-label={iconOnly ? TONE_LABELS[tone] : undefined}
+        size={size}
+        tone={tone}
+        variant={variant}
+      >
+        <PlusIcon weight="bold" />
+        {iconOnly ? null : TONE_LABELS[tone]}
+      </Button>
+    )
+  },
+  VariantShowcase = ({ variant = 'fill' }: { variant?: Variant }) => (
+    <div className="flex flex-wrap gap-sm">
+      {TONES.map((tone) => (
+        <ButtonPreview key={tone} tone={tone} variant={variant} />
+      ))}
+    </div>
+  ),
+  TextSizesPreview = () => (
+    <div className="flex flex-wrap items-center gap-sm">
+      <ButtonPreview size="large" />
+      <ButtonPreview size="medium" />
+      <ButtonPreview size="small" />
+      <ButtonPreview size="extraSmall" />
+    </div>
+  ),
+  IconSizesPreview = () => (
+    <div className="flex flex-wrap items-center gap-sm">
+      <ButtonPreview size="iconLarge" />
+      <ButtonPreview size="iconMedium" />
+      <ButtonPreview size="iconSmall" />
+      <ButtonPreview size="iconExtraSmall" />
+    </div>
   )
-}
-
-const VariantShowcase = ({ variant = 'fill' }: { variant?: Variant }) => (
-  <div className="flex flex-wrap gap-sm">
-    {TONES.map((tone) => (
-      <ButtonPreview key={tone} tone={tone} variant={variant} />
-    ))}
-  </div>
-)
-
-const TextSizesPreview = () => (
-  <div className="flex flex-wrap items-center gap-sm">
-    <ButtonPreview size="large" />
-    <ButtonPreview size="medium" />
-    <ButtonPreview size="small" />
-    <ButtonPreview size="extraSmall" />
-  </div>
-)
-
-const IconSizesPreview = () => (
-  <div className="flex flex-wrap items-center gap-sm">
-    <ButtonPreview size="iconLarge" />
-    <ButtonPreview size="iconMedium" />
-    <ButtonPreview size="iconSmall" />
-    <ButtonPreview size="iconExtraSmall" />
-  </div>
-)
 
 export default {
-  title: 'Components/Button',
-  component: Button,
   argTypes: {
-    variant: {
-      control: 'radio',
-      options: VARIANTS,
-      description: 'Controls the visual treatment of the button.',
-      table: {
-        defaultValue: { summary: 'fill' },
-      },
-    },
-    tone: {
-      control: 'select',
-      options: TONES,
-      description: 'Applies the semantic color tone for the action.',
-      table: {
-        defaultValue: { summary: 'brand' },
-      },
-    },
-    size: {
-      control: 'radio',
-      options: SIZES,
-      description: 'Controls the button height, padding, and icon size.',
-      table: {
-        defaultValue: { summary: 'medium' },
-      },
+    children: {
+      control: 'text',
+      description: 'Button label. Ignored for icon-only sizes in the default preview.',
     },
     disabled: {
       control: 'boolean',
@@ -120,26 +98,47 @@ export default {
         defaultValue: { summary: 'false' },
       },
     },
-    children: {
-      control: 'text',
-      description: 'Button label. Ignored for icon-only sizes in the default preview.',
+    size: {
+      control: 'radio',
+      description: 'Controls the button height, padding, and icon size.',
+      options: SIZES,
+      table: {
+        defaultValue: { summary: 'medium' },
+      },
     },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'Displays a button or a component that looks like a button.',
-      description: {
-        component:
-          'The Button component is the primary action trigger across the interface. It supports six visual variants (`fill`, `outline`, `ghost`, `soft`, `elevated`, `link`), seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`), and paired text or icon-only sizes for a broad range of use cases.',
+    tone: {
+      control: 'select',
+      description: 'Applies the semantic color tone for the action.',
+      options: TONES,
+      table: {
+        defaultValue: { summary: 'brand' },
+      },
+    },
+    variant: {
+      control: 'radio',
+      description: 'Controls the visual treatment of the button.',
+      options: VARIANTS,
+      table: {
+        defaultValue: { summary: 'fill' },
       },
     },
   },
   args: {
     children: 'Create project',
-    size: 'medium',
-    variant: 'fill',
-    tone: 'brand',
     disabled: false,
+    size: 'medium',
+    tone: 'brand',
+    variant: 'fill',
+  },
+  component: Button,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Button component is the primary action trigger across the interface. It supports six visual variants (`fill`, `outline`, `ghost`, `soft`, `elevated`, `link`), seven semantic tones (`brand`, `accent`, `neutral`, `error`, `info`, `success`, `warning`), and paired text or icon-only sizes for a broad range of use cases.',
+      },
+      subtitle: 'Displays a button or a component that looks like a button.',
+    },
   },
   render: (args) => (
     <Button {...args}>
@@ -147,6 +146,7 @@ export default {
       {args.children}
     </Button>
   ),
+  title: 'Components/Button',
 } satisfies Meta<typeof Button>
 
 type Story = StoryObj<typeof Button>
@@ -163,10 +163,10 @@ export const Playground: Story = {
 }
 
 export const Brand: Story = {
-  name: 'Tone / Brand',
   args: {
     tone: 'brand',
   },
+  name: 'Tone / Brand',
   parameters: {
     docs: {
       description: {
@@ -177,10 +177,10 @@ export const Brand: Story = {
 }
 
 export const Accent: Story = {
-  name: 'Tone / Accent',
   args: {
     tone: 'accent',
   },
+  name: 'Tone / Accent',
   parameters: {
     docs: {
       description: {
@@ -191,10 +191,10 @@ export const Accent: Story = {
 }
 
 export const Neutral: Story = {
-  name: 'Tone / Neutral',
   args: {
     tone: 'neutral',
   },
+  name: 'Tone / Neutral',
   parameters: {
     docs: {
       description: {
@@ -204,12 +204,12 @@ export const Neutral: Story = {
   },
 }
 
-// biome-ignore lint/suspicious/noShadowRestrictedNames: This is a story name
+// Biome-ignore lint/suspicious/noShadowRestrictedNames: This is a story name
 export const Error: Story = {
-  name: 'Tone / Error',
   args: {
     tone: 'error',
   },
+  name: 'Tone / Error',
   parameters: {
     docs: {
       description: {
@@ -220,10 +220,10 @@ export const Error: Story = {
 }
 
 export const Info: Story = {
-  name: 'Tone / Info',
   args: {
     tone: 'info',
   },
+  name: 'Tone / Info',
   parameters: {
     docs: {
       description: {
@@ -234,10 +234,10 @@ export const Info: Story = {
 }
 
 export const Success: Story = {
-  name: 'Tone / Success',
   args: {
     tone: 'success',
   },
+  name: 'Tone / Success',
   parameters: {
     docs: {
       description: {
@@ -248,10 +248,10 @@ export const Success: Story = {
 }
 
 export const Warning: Story = {
-  name: 'Tone / Warning',
   args: {
     tone: 'warning',
   },
+  name: 'Tone / Warning',
   parameters: {
     docs: {
       description: {
@@ -262,10 +262,10 @@ export const Warning: Story = {
 }
 
 export const Fill: Story = {
-  name: 'Variant / Fill',
   args: {
     variant: 'fill',
   },
+  name: 'Variant / Fill',
   parameters: {
     docs: {
       description: {
@@ -277,10 +277,10 @@ export const Fill: Story = {
 }
 
 export const Outline: Story = {
-  name: 'Variant / Outline',
   args: {
     variant: 'outline',
   },
+  name: 'Variant / Outline',
   parameters: {
     docs: {
       description: {
@@ -292,10 +292,10 @@ export const Outline: Story = {
 }
 
 export const Ghost: Story = {
-  name: 'Variant / Ghost',
   args: {
     variant: 'ghost',
   },
+  name: 'Variant / Ghost',
   parameters: {
     docs: {
       description: {
@@ -307,10 +307,10 @@ export const Ghost: Story = {
 }
 
 export const Soft: Story = {
-  name: 'Variant / Soft',
   args: {
     variant: 'soft',
   },
+  name: 'Variant / Soft',
   parameters: {
     docs: {
       description: {
@@ -323,10 +323,10 @@ export const Soft: Story = {
 }
 
 export const Elevated: Story = {
-  name: 'Variant / Elevated',
   args: {
     variant: 'elevated',
   },
+  name: 'Variant / Elevated',
   parameters: {
     docs: {
       description: {
@@ -338,10 +338,10 @@ export const Elevated: Story = {
 }
 
 export const Link: Story = {
-  name: 'Variant / Link',
   args: {
     variant: 'link',
   },
+  name: 'Variant / Link',
   parameters: {
     docs: {
       description: {
@@ -353,31 +353,31 @@ export const Link: Story = {
 }
 
 export const Small: Story = {
-  name: 'Size / Small',
   args: {
     size: 'small',
   },
+  name: 'Size / Small',
 }
 
 export const Medium: Story = {
-  name: 'Size / Medium',
   args: {
     size: 'medium',
   },
+  name: 'Size / Medium',
 }
 
 export const Large: Story = {
-  name: 'Size / Large',
   args: {
     size: 'large',
   },
+  name: 'Size / Large',
 }
 
 export const IconSmall: Story = {
-  name: 'Size / Icon Small',
   args: {
     size: 'iconSmall',
   },
+  name: 'Size / Icon Small',
   render: (args) => (
     <Button {...args} aria-label="Add item">
       <PlusIcon weight="bold" />
@@ -386,10 +386,10 @@ export const IconSmall: Story = {
 }
 
 export const IconMedium: Story = {
-  name: 'Size / Icon Medium',
   args: {
     size: 'iconMedium',
   },
+  name: 'Size / Icon Medium',
   render: (args) => (
     <Button {...args} aria-label="Add item">
       <PlusIcon weight="bold" />
@@ -398,10 +398,10 @@ export const IconMedium: Story = {
 }
 
 export const IconLarge: Story = {
-  name: 'Size / Icon Large',
   args: {
     size: 'iconLarge',
   },
+  name: 'Size / Icon Large',
   render: (args) => (
     <Button {...args} aria-label="Add item">
       <PlusIcon weight="bold" />
@@ -410,12 +410,12 @@ export const IconLarge: Story = {
 }
 
 export const Disabled: Story = {
-  name: 'State / Disabled',
   args: {
     disabled: true,
     tone: 'neutral',
     variant: 'outline',
   },
+  name: 'State / Disabled',
   parameters: {
     docs: {
       description: {

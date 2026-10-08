@@ -1,14 +1,14 @@
-import { useDropzone } from './dropzone'
 import { cn } from '@/utils/cn'
 
 import type { DropzoneFileSizeLimitProps } from './dropzone.types'
+import { useDropzone } from './dropzone.utils'
 
-export const DropzoneFileSizeLimit = ({
+export function DropzoneFileSizeLimit({
   className,
   children,
   ref,
   ...props
-}: DropzoneFileSizeLimitProps) => {
+}: DropzoneFileSizeLimitProps) {
   const { maxFileSize } = useDropzone()
 
   return (

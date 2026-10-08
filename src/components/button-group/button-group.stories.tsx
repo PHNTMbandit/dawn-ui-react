@@ -1,121 +1,118 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { Button } from '../button/button'
 import { Input } from '../input/index'
 import { ButtonGroup } from './button-group'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
-const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const
-const VARIANTS = ['fill', 'outline', 'ghost', 'soft', 'elevated'] as const
-const SIZES = [
-  'large',
-  'iconLarge',
-  'medium',
-  'iconMedium',
-  'small',
-  'iconSmall',
-  'extraSmall',
-  'iconExtraSmall',
-] as const
+const TONES = ['brand', 'accent', 'neutral', 'error', 'info', 'success', 'warning'] as const,
+  VARIANTS = ['fill', 'outline', 'ghost', 'soft', 'elevated'] as const,
+  SIZES = [
+    'large',
+    'iconLarge',
+    'medium',
+    'iconMedium',
+    'small',
+    'iconSmall',
+    'extraSmall',
+    'iconExtraSmall',
+  ] as const
 
 type Tone = (typeof TONES)[number]
 
 const TONE_DESCRIPTIONS: Record<Tone, string> = {
-  brand: 'Default tone for primary grouped actions and segmented controls.',
-  accent: 'Highlighted grouped action set for promoted or secondary emphasis.',
-  neutral: 'General-purpose grouping with minimal semantic emphasis.',
-  error: 'Destructive grouped actions such as bulk delete or revoke flows.',
-  info: 'Informational action cluster for filters, views, or utilities.',
-  success: 'Positive grouped actions such as save or confirm options.',
-  warning: 'Attention-grabbing grouped actions where choices need more care.',
-}
-
-const ThreeButtons = () => (
-  <>
-    <Button>Button 1</Button>
-    <Button>Button 2</Button>
-    <Button>Button 3</Button>
-  </>
-)
-
-const TwoIconButtons = () => (
-  <>
-    <Button aria-label="Increase">
-      <PlusIcon weight="bold" />
-    </Button>
-    <Button aria-label="Decrease">
-      <MinusIcon weight="bold" />
-    </Button>
-  </>
-)
-
-const VariantShowcase = ({ variant = 'fill' }: { variant?: (typeof VARIANTS)[number] }) => (
-  <div className="flex flex-col gap-sm">
-    {TONES.map((tone) => (
-      <ButtonGroup key={tone} tone={tone} variant={variant}>
-        <ThreeButtons />
-      </ButtonGroup>
-    ))}
-  </div>
-)
+    accent: 'Highlighted grouped action set for promoted or secondary emphasis.',
+    brand: 'Default tone for primary grouped actions and segmented controls.',
+    error: 'Destructive grouped actions such as bulk delete or revoke flows.',
+    info: 'Informational action cluster for filters, views, or utilities.',
+    neutral: 'General-purpose grouping with minimal semantic emphasis.',
+    success: 'Positive grouped actions such as save or confirm options.',
+    warning: 'Attention-grabbing grouped actions where choices need more care.',
+  },
+  ThreeButtons = () => (
+    <>
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+      <Button>Button 3</Button>
+    </>
+  ),
+  TwoIconButtons = () => (
+    <>
+      <Button aria-label="Increase">
+        <PlusIcon weight="bold" />
+      </Button>
+      <Button aria-label="Decrease">
+        <MinusIcon weight="bold" />
+      </Button>
+    </>
+  ),
+  VariantShowcase = ({ variant = 'fill' }: { variant?: (typeof VARIANTS)[number] }) => (
+    <div className="flex flex-col gap-sm">
+      {TONES.map((tone) => (
+        <ButtonGroup key={tone} tone={tone} variant={variant}>
+          <ThreeButtons />
+        </ButtonGroup>
+      ))}
+    </div>
+  )
 
 export default {
-  title: 'Components/Button Group',
-  component: ButtonGroup,
   argTypes: {
-    variant: {
-      control: 'radio',
-      options: VARIANTS,
-      description: 'Controls the shared visual style of the grouped buttons.',
-      table: {
-        defaultValue: { summary: 'fill' },
-      },
-    },
-    tone: {
-      control: 'select',
-      options: TONES,
-      description: 'Applies a semantic tone across the entire group.',
-      table: {
-        defaultValue: { summary: 'brand' },
-      },
-    },
-    size: {
-      control: 'radio',
-      options: SIZES,
-      description: 'Controls child button height, padding, and icon sizing.',
-      table: {
-        defaultValue: { summary: 'medium' },
-      },
-    },
     orientation: {
       control: 'radio',
-      options: ['horizontal', 'vertical'],
       description: 'Lays out the group horizontally or vertically.',
+      options: ['horizontal', 'vertical'],
       table: {
         defaultValue: { summary: 'horizontal' },
       },
     },
-  },
-  parameters: {
-    docs: {
-      subtitle: 'Groups related actions into a single connected control.',
-      description: {
-        component:
-          'The Button Group component combines related buttons into one cohesive unit. It supports multiple variants, tones, sizes, and orientations to fit different interaction patterns such as segmented controls, toolbars, and compact action groups.',
+    size: {
+      control: 'radio',
+      description: 'Controls child button height, padding, and icon sizing.',
+      options: SIZES,
+      table: {
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    tone: {
+      control: 'select',
+      description: 'Applies a semantic tone across the entire group.',
+      options: TONES,
+      table: {
+        defaultValue: { summary: 'brand' },
+      },
+    },
+    variant: {
+      control: 'radio',
+      description: 'Controls the shared visual style of the grouped buttons.',
+      options: VARIANTS,
+      table: {
+        defaultValue: { summary: 'fill' },
       },
     },
   },
   args: {
-    variant: 'fill',
-    tone: 'brand',
-    size: 'medium',
     orientation: 'horizontal',
+    size: 'medium',
+    tone: 'brand',
+    variant: 'fill',
+  },
+  component: ButtonGroup,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Button Group component combines related buttons into one cohesive unit. It supports multiple variants, tones, sizes, and orientations to fit different interaction patterns such as segmented controls, toolbars, and compact action groups.',
+      },
+      subtitle: 'Groups related actions into a single connected control.',
+    },
   },
   render: (args) => (
     <ButtonGroup {...args}>
       <ThreeButtons />
     </ButtonGroup>
   ),
+  title: 'Components/Button Group',
 } satisfies Meta<typeof ButtonGroup>
 
 type Story = StoryObj<typeof ButtonGroup>
@@ -132,10 +129,10 @@ export const Playground: Story = {
 }
 
 export const Brand: Story = {
-  name: 'Tone / Brand',
   args: {
     tone: 'brand',
   },
+  name: 'Tone / Brand',
   parameters: {
     docs: {
       description: {
@@ -146,10 +143,10 @@ export const Brand: Story = {
 }
 
 export const Accent: Story = {
-  name: 'Tone / Accent',
   args: {
     tone: 'accent',
   },
+  name: 'Tone / Accent',
   parameters: {
     docs: {
       description: {
@@ -160,10 +157,10 @@ export const Accent: Story = {
 }
 
 export const Neutral: Story = {
-  name: 'Tone / Neutral',
   args: {
     tone: 'neutral',
   },
+  name: 'Tone / Neutral',
   parameters: {
     docs: {
       description: {
@@ -174,10 +171,10 @@ export const Neutral: Story = {
 }
 
 export const Error: Story = {
-  name: 'Tone / Error',
   args: {
     tone: 'error',
   },
+  name: 'Tone / Error',
   parameters: {
     docs: {
       description: {
@@ -188,10 +185,10 @@ export const Error: Story = {
 }
 
 export const Info: Story = {
-  name: 'Tone / Info',
   args: {
     tone: 'info',
   },
+  name: 'Tone / Info',
   parameters: {
     docs: {
       description: {
@@ -202,10 +199,10 @@ export const Info: Story = {
 }
 
 export const Success: Story = {
-  name: 'Tone / Success',
   args: {
     tone: 'success',
   },
+  name: 'Tone / Success',
   parameters: {
     docs: {
       description: {
@@ -216,10 +213,10 @@ export const Success: Story = {
 }
 
 export const Warning: Story = {
-  name: 'Tone / Warning',
   args: {
     tone: 'warning',
   },
+  name: 'Tone / Warning',
   parameters: {
     docs: {
       description: {
@@ -230,18 +227,17 @@ export const Warning: Story = {
 }
 
 export const Horizontal: Story = {
-  name: 'Orientation / Horizontal',
   args: {
     orientation: 'horizontal',
   },
+  name: 'Orientation / Horizontal',
 }
 
 export const Vertical: Story = {
-  name: 'Orientation / Vertical',
   args: {
     orientation: 'vertical',
-    size: 'iconMedium',
   },
+  name: 'Orientation / Vertical',
   render: (args) => (
     <ButtonGroup {...args}>
       <TwoIconButtons />
@@ -250,42 +246,42 @@ export const Vertical: Story = {
 }
 
 export const Fill: Story = {
-  name: 'Variant / Fill',
   args: {
     variant: 'fill',
   },
+  name: 'Variant / Fill',
   render: () => <VariantShowcase variant="fill" />,
 }
 
 export const Outline: Story = {
-  name: 'Variant / Outline',
   args: {
     variant: 'outline',
   },
+  name: 'Variant / Outline',
   render: () => <VariantShowcase variant="outline" />,
 }
 
 export const Ghost: Story = {
-  name: 'Variant / Ghost',
   args: {
     variant: 'ghost',
   },
+  name: 'Variant / Ghost',
   render: () => <VariantShowcase variant="ghost" />,
 }
 
 export const Soft: Story = {
-  name: 'Variant / Soft',
   args: {
     variant: 'soft',
   },
+  name: 'Variant / Soft',
   render: () => <VariantShowcase variant="soft" />,
 }
 
 export const Elevated: Story = {
-  name: 'Variant / Elevated',
   args: {
     variant: 'elevated',
   },
+  name: 'Variant / Elevated',
   render: () => <VariantShowcase variant="elevated" />,
 }
 
@@ -330,31 +326,31 @@ export const MixedTextIcon: Story = {
 }
 
 export const Small: Story = {
-  name: 'Size / Small',
   args: {
     size: 'small',
   },
+  name: 'Size / Small',
 }
 
 export const Medium: Story = {
-  name: 'Size / Medium',
   args: {
     size: 'medium',
   },
+  name: 'Size / Medium',
 }
 
 export const Large: Story = {
-  name: 'Size / Large',
   args: {
     size: 'large',
   },
+  name: 'Size / Large',
 }
 
 export const IconSmall: Story = {
-  name: 'Size / Icon Small',
   args: {
     size: 'iconSmall',
   },
+  name: 'Size / Icon Small',
   render: (args) => (
     <ButtonGroup {...args}>
       <TwoIconButtons />
@@ -363,10 +359,10 @@ export const IconSmall: Story = {
 }
 
 export const IconMedium: Story = {
-  name: 'Size / Icon Medium',
   args: {
     size: 'iconMedium',
   },
+  name: 'Size / Icon Medium',
   render: (args) => (
     <ButtonGroup {...args}>
       <TwoIconButtons />
@@ -375,10 +371,10 @@ export const IconMedium: Story = {
 }
 
 export const IconLarge: Story = {
-  name: 'Size / Icon Large',
   args: {
     size: 'iconLarge',
   },
+  name: 'Size / Icon Large',
   render: (args) => (
     <ButtonGroup {...args}>
       <TwoIconButtons />

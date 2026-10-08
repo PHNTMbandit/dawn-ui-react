@@ -1,18 +1,18 @@
 import type { Button } from '../button'
 
-export type DropzoneContainerProps = React.ComponentProps<'div'> & {
+type DropzoneContainerProps = React.ComponentProps<'label'> & {
   children?: React.ReactNode
 }
-export type DropzoneErrorProps = React.ComponentProps<'p'>
-export type DropzoneFilesListProps = React.ComponentProps<'ul'>
-export type DropzoneFileSizeLimitProps = React.ComponentProps<'span'>
-export type DropzoneFormatsProps = React.ComponentProps<'span'>
-export type DropzoneHeadingProps = React.ComponentProps<'span'>
-export type DropzoneIconProps = React.ComponentProps<'div'>
-export type DropzoneInfoProps = React.ComponentProps<'div'>
-export type DropzoneSubtitleProps = React.ComponentProps<'span'>
-export type DropzoneTriggerProps = React.ComponentProps<'button'>
-export type DropzoneProps = React.ComponentProps<'input'> & {
+type DropzoneErrorProps = React.ComponentProps<'p'>
+type DropzoneFilesListProps = React.ComponentProps<'ul'>
+type DropzoneFileSizeLimitProps = React.ComponentProps<'span'>
+type DropzoneFormatsProps = React.ComponentProps<'span'>
+type DropzoneHeadingProps = React.ComponentProps<'span'>
+type DropzoneIconProps = React.ComponentProps<'div'>
+type DropzoneInfoProps = React.ComponentProps<'div'>
+type DropzoneSubtitleProps = React.ComponentProps<'span'>
+type DropzoneTriggerProps = React.ComponentProps<'button'>
+type DropzoneProps = React.ComponentProps<'input'> & {
   children?: React.ReactNode
   maxFiles?: number
   maxFileSize?: number
@@ -22,10 +22,50 @@ export type DropzoneProps = React.ComponentProps<'input'> & {
   onConfirm?: (files: File[]) => void
   onUpload?: (file: File, onProgress: (percent: number) => void) => void | Promise<void>
 }
-export type DropzoneFileLimitProps = React.ComponentProps<'span'>
-export type DropzoneFilesProps = React.ComponentProps<'div'>
-export type DropzoneFilesHeaderProps = React.ComponentProps<'div'>
-export type DropzoneFilesTitleProps = React.ComponentProps<'span'>
-export type DropzoneActionsProps = React.ComponentProps<'div'>
-export type DropzoneConfirmProps = React.ComponentProps<typeof Button>
-export type DropzoneClearProps = React.ComponentProps<typeof Button>
+type DropzoneFileLimitProps = React.ComponentProps<'span'>
+type DropzoneFilesProps = React.ComponentProps<'div'>
+type DropzoneFilesHeaderProps = React.ComponentProps<'div'>
+type DropzoneFilesTitleProps = React.ComponentProps<'span'>
+type DropzoneActionsProps = React.ComponentProps<'div'>
+type DropzoneConfirmProps = React.ComponentProps<typeof Button>
+type DropzoneClearProps = React.ComponentProps<typeof Button>
+interface DropzoneContextProps {
+  acceptedFileTypes: string[]
+  fileError: string | undefined
+  fileProgress: Record<string, number>
+  files: File[]
+  handleDragLeave: (event: React.DragEvent<HTMLElement>) => void
+  handleDragOver: (event: React.DragEvent<HTMLElement>) => void
+  handleDrop: (event: React.DragEvent<HTMLElement>) => void
+  handleFiles: (event: React.ChangeEvent<HTMLInputElement>) => void
+  inputRef: React.RefObject<HTMLInputElement | null>
+  isHovering: boolean
+  maxFileSize?: string
+  maxFiles?: number
+  props: React.ComponentProps<'input'>
+  removeFile: (file: File) => void
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>
+  onUpload?: (file: File, onProgress: (percent: number) => void) => void | Promise<void>
+  onConfirm?: (files: File[]) => void
+}
+export type {
+  DropzoneContainerProps,
+  DropzoneErrorProps,
+  DropzoneFilesListProps,
+  DropzoneFileSizeLimitProps,
+  DropzoneFormatsProps,
+  DropzoneHeadingProps,
+  DropzoneIconProps,
+  DropzoneInfoProps,
+  DropzoneSubtitleProps,
+  DropzoneTriggerProps,
+  DropzoneProps,
+  DropzoneFileLimitProps,
+  DropzoneFilesProps,
+  DropzoneFilesHeaderProps,
+  DropzoneFilesTitleProps,
+  DropzoneActionsProps,
+  DropzoneConfirmProps,
+  DropzoneClearProps,
+  DropzoneContextProps,
+}
