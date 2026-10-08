@@ -1,3 +1,21 @@
+# [1.0.0-alpha.46](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2026-10-08)
+
+
+### Bug Fixes
+
+* **sidebar-provider:** fix height ([ecefacd](https://github.com/PHNTMbandit/dawn-ui-react/commit/ecefacda4acb0b86eced9f71eff6f789c4217fd0))
+* **sidebar:** fix footer not sticking ([71032ed](https://github.com/PHNTMbandit/dawn-ui-react/commit/71032edde74e41196d8eb489e6e44cf9c761d014))
+
+
+### Features
+
+* add calendar component ([e8a0777](https://github.com/PHNTMbandit/dawn-ui-react/commit/e8a077702cc2bb7fa283842143b94c0f1d4e8394))
+* add chart component ([42b4698](https://github.com/PHNTMbandit/dawn-ui-react/commit/42b4698dcb5b92359968d30f80417e627763cc56))
+* add compound react components ([b96bce3](https://github.com/PHNTMbandit/dawn-ui-react/commit/b96bce34e907f678b60df9425db09d40d8092765))
+* migrate to vp ([ed5d13f](https://github.com/PHNTMbandit/dawn-ui-react/commit/ed5d13fbde4b60ab69cdb42aa3f0473b51a0a0d5))
+* **progress:** add label, title and description components ([9e93775](https://github.com/PHNTMbandit/dawn-ui-react/commit/9e937759804e4aecfeb963a0dbeeb750e3ffafba))
+* **vite.config:** update dependencies ([2d623ee](https://github.com/PHNTMbandit/dawn-ui-react/commit/2d623ee283e65884382345d49abfb45162a58d0d))
+
 # [1.0.0-rc.6](https://github.com/PHNTMbandit/dawn-ui-react/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2026-10-08)
 
 
