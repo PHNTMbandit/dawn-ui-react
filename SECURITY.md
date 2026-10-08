@@ -2,10 +2,11 @@
 
 ## Supported Versions
 
-Dawn UI React is currently in beta. Security fixes are prioritized for the latest published beta and future stable releases.
+Security fixes are prioritized for the supported release channels listed below.
 
 | Version         | Supported |
 | --------------- | --------- |
+| `1.0.0-rc.x`    | Yes       |
 | `1.0.0-beta.x`  | Yes       |
 | `1.0.0-alpha.x` | No        |
 

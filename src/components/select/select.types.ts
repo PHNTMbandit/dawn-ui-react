@@ -1,6 +1,7 @@
 import type { Select as BaseSelect } from '@base-ui/react/select'
 import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
+import type { ReactNode } from 'react'
 
 const selectVariants = cva(
   'flex items-center justify-between outline outline-transparent transition-all duration-100 hover:cursor-pointer aria-invalid:bg-error-container aria-invalid:text-error-on-container aria-invalid:outline-error-border data-disabled:cursor-not-allowed [&_[data-value]]:min-w-0 [&_[data-value]]:flex-1',
@@ -27,7 +28,39 @@ const selectVariants = cva(
   },
 )
 
-type SelectProps = React.ComponentProps<typeof BaseSelect.Root>
+type SelectChangeEventDetails =
+  NonNullable<React.ComponentProps<typeof BaseSelect.Root>['onValueChange']> extends (
+    value: never,
+    details: infer Details,
+  ) => void
+    ? Details
+    : never
+
+type SelectValue<Value, Multiple extends boolean | undefined> = Multiple extends true
+  ? Value[]
+  : Value
+
+interface SelectProps<Value, Multiple extends boolean | undefined = false> extends Omit<
+  BaseSelect.Root.Props<Value, Multiple>,
+  | 'defaultValue'
+  | 'isItemEqualToValue'
+  | 'items'
+  | 'itemToStringLabel'
+  | 'itemToStringValue'
+  | 'onValueChange'
+  | 'value'
+> {
+  defaultValue?: SelectValue<Value, Multiple> | null
+  isItemEqualToValue?: (itemValue: Value, value: Value) => boolean
+  items?: Record<string, ReactNode> | readonly { label: ReactNode; value: Value }[]
+  itemToStringLabel?: (itemValue: Value) => string
+  itemToStringValue?: (itemValue: Value) => string
+  onValueChange?: (
+    value: SelectValue<Value, Multiple> | (Multiple extends true ? never : null),
+    eventDetails: SelectChangeEventDetails,
+  ) => void
+  value?: SelectValue<Value, Multiple> | null
+}
 type SelectTriggerProps = React.ComponentProps<typeof BaseSelect.Trigger> &
   VariantProps<typeof selectVariants>
 type SelectValueProps = React.ComponentProps<typeof BaseSelect.Value>

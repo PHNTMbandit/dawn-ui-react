@@ -1,5 +1,6 @@
 import { BowlFoodIcon, CaretUpDownIcon } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
 
 import { Select } from './index'
 import type { SelectProps, SelectTriggerProps } from './select.types'
@@ -9,7 +10,7 @@ const VARIANTS = ['primary', 'secondary', 'ghost'] as const,
 
 type SelectVariant = NonNullable<SelectTriggerProps['variant']>
 type SelectSize = NonNullable<SelectTriggerProps['size']>
-type SelectStoryArgs = Omit<SelectProps, 'defaultValue'> & {
+type SelectStoryArgs = Omit<SelectProps<string>, 'defaultValue'> & {
   defaultValue?: string | string[]
   variant?: SelectVariant
   size?: SelectSize
@@ -210,7 +211,7 @@ export default {
   args: {
     multiple: false,
   },
-  component: Select,
+  component: AppleSelect,
   parameters: {
     docs: {
       description: {
@@ -264,9 +265,6 @@ export const Default: Story = {
 }
 
 export const Multiple: Story = {
-  args: {
-    multiple: true,
-  },
   name: 'Selection / Multiple',
   parameters: {
     docs: {
@@ -405,7 +403,6 @@ export const WithDefaultValue: Story = {
 export const WithDefaultMultipleValues: Story = {
   args: {
     defaultValue: ['fuji', 'pink-lady'],
-    multiple: true,
   },
   name: 'State / Default Multiple Values',
   parameters: {
@@ -428,4 +425,57 @@ export const Disabled: Story = {
     },
   },
   render: () => <AppleSelect variant="primary" size="medium" defaultValue="fuji" disabled />,
+}
+
+export const WithOnValueChange: Story = {
+  name: 'State / Controlled onValueChange',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Controlled usage that demonstrates type safety: typing `Select<string>` makes the `onValueChange` value a `string | null`, so `setSelected` and the rendered label are fully inferred without casts.',
+      },
+    },
+  },
+  render: () => {
+    const [selected, setSelected] = useState<string | null>('gala')
+
+    return (
+      <div className="flex flex-col gap-sm">
+        <Select<string>
+          value={selected}
+          onValueChange={(value) => {
+            setSelected(value)
+          }}
+        >
+          <Select.Trigger aria-label="Select an apple">
+            <Select.Value placeholder="Select an apple">
+              {(value: string) => (
+                <>
+                  <BowlFoodIcon />
+                  {apples.find((apple) => apple.value === value)?.label || 'Select an apple'}
+                </>
+              )}
+            </Select.Value>
+            <Select.Icon>
+              <CaretUpDownIcon weight="bold" />
+            </Select.Icon>
+          </Select.Trigger>
+          <Select.Popup alignItemWithTrigger={false} sideOffset={8}>
+            <Select.List>
+              {apples.map(({ label, value }) => (
+                <Select.Item key={label} value={value}>
+                  <Select.Title>
+                    <BowlFoodIcon />
+                    {label}
+                  </Select.Title>
+                </Select.Item>
+              ))}
+            </Select.List>
+          </Select.Popup>
+        </Select>
+        <p className="style-text-default-0">Selected value: {selected ?? 'none'}</p>
+      </div>
+    )
+  },
 }

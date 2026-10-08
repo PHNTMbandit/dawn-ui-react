@@ -4,19 +4,22 @@ Thanks for helping improve Dawn UI React. This project is a React and TypeScript
 
 ## Development Setup
 
+This project uses Vite+ (`vp`) for package installation and its frontend toolchain.
+
 ```sh
-pnpm install
-pnpm run storybook
+vp install
+vp run storybook
 ```
 
 Before opening a pull request, run the focused checks for your change and the full validation suite when practical:
 
 ```sh
-pnpm run lint
-pnpm run fmt:check
-pnpm run test
+vp check
+vp test
 pnpm run build
 ```
+
+`vp check` runs formatting, lint, and type checks. `vp test` runs the Vitest and Storybook test suite. Use `vp run <script>` to invoke a script from `package.json` when needed.
 
 ## Branches and Releases
 
